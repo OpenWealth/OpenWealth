@@ -5,6 +5,7 @@ required:
   - quantity
   - currency
   - movementType
+  - movementDate
   - financialInstrument
   - account
 properties:
@@ -19,6 +20,16 @@ properties:
     maxLength: 35
     example: Fees for Reporting Service
     description: Provides further details on an informative level, which goes beyond the granularity of the movementType.
+  movementDate:
+    title: MovementDate
+    description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank. 
+    allOf:
+      - $ref: '../../../Globals/Types/Date.yaml'
+  valueDate:
+    title: ValueDate
+    description: Date when calculating economic benefit for a cash amount.
+    allOf:
+      - $ref: '../../../Globals/Types/Date.yaml'
   financialInstrument:
     $ref: 'FinancialInstrument.yaml'
   account:
