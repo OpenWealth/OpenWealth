@@ -1,0 +1,7 @@
+title: Rate
+type: object
+properties:
+  rate:
+    type: number
+    example: 0.00125
+    description: Actual decimal rate

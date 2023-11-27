@@ -1,0 +1,21 @@
+headers:
+  Content-Type:
+    schema:
+      type: string
+      description: 'application/problem+json; charset=utf-8 according to RFC7807'
+      example: application/problem+json
+  Content-Language:
+    schema:
+      type: string
+      description: 'Response language - always en'
+      example: en
+  X-Correlation-ID:
+    schema:
+      type: string
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+content:
+  application/problem+json:
+    schema:
+      $ref: 'CommonErrorResponse.yaml'

@@ -1,0 +1,6 @@
+name: cursor
+in: query
+description: An opaque string value used for pagination
+required: false
+schema:
+  type: string
