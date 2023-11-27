@@ -1,0 +1,1693 @@
+openapi: 3.0.0
+info:
+  version: 2.0.3
+  title: Custody Services
+  description: 'This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions. In this version (2.0) only transactions which include effective cash or securities movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.'
+  contact:
+    email: openwealth@synpulse.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/OpenWealthAPI/Custody_Services/2.0.3
+
+    
+paths:
+  /customers:
+    parameters:
+      - $ref: '#/components/parameters/cursor'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns all customers and respective accounts accessible for the logged in user.
+      description: This endpoint returns a highlevel list of customers and the respective accounts accessible for the logged in user. Paging is done based on the customerOverview object, i.e. if limit is set to 1, then 1 customerOverview will be returned per page.
+
+      operationId: getCustomers
+      tags:
+        - customers
+      responses:
+        '200':
+          description: Returns a list with all customers and the respective accounts.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+            nextCursor:
+              $ref: '#/components/headers/nextCursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/customer'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+ 
+  /customers/{customerId}:
+    parameters:
+      - $ref: '#/components/parameters/customerIdParam'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns a specific customers and respective accounts accessible for the logged in user.
+      description: This endpoint returns a single customer and the list of the customer's respective accounts accessible for the logged in user. 
+      operationId: getCustomersByCustomerId
+      tags:
+        - customers
+      responses:
+        '200':
+          description: Returns a the specified customers and the respective accounts.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+                    
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
+  /customers/{customerId}/customer-position-statement:
+    parameters:
+      - $ref: '#/components/parameters/customerIdParam'
+      - $ref: '#/components/parameters/dateParam'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/dateTypeParam'
+      - $ref: '#/components/parameters/cursor'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns a position statement for a specific customer.
+      description: Returns all positions (incl. investment cash accounts) for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
+      operationId: getCustomerPositionStatementByCustomerId
+      tags:
+        - positions
+      responses:
+        '200':
+          description: Position List
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+            nextCursor:
+              $ref: '#/components/headers/nextCursor'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerPositionStatement'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
+  /accounts/{accountId}/account-position-statement:
+    parameters:
+      - $ref: '#/components/parameters/accountIdParam'
+      - $ref: '#/components/parameters/dateParam'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/dateTypeParam'
+      - $ref: '#/components/parameters/cursor'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns the positions statement for a specific account.
+      description: Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
+      operationId: getAccountPositionStatementByAccountId
+      tags:
+        - positions
+      responses:
+        '200':
+          description: Position List
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+            nextCursor:
+              $ref: '#/components/headers/nextCursor'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accountPositionStatement'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
+  /customers/{customerId}/transaction-statement:
+    parameters:
+      - $ref: '#/components/parameters/customerIdParam'
+      - $ref: '#/components/parameters/dateParam'
+      - $ref: '#/components/parameters/dateTypeParam'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/cursor'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns a transactions statement for a specific customer.
+      description: Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+      operationId: getTransactionStatementByCustomerId
+      tags:
+        - transactions
+      responses:
+        '200':
+          description: Returns a transaction list for a specific customer.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+            nextCursor:
+              $ref: '#/components/headers/nextCursor'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transactionStatement'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
+  /accounts/{accountId}/transaction-statement:
+    parameters:
+      - $ref: '#/components/parameters/accountIdParam'
+      - $ref: '#/components/parameters/dateParam'
+      - $ref: '#/components/parameters/dateTypeParam'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/cursor'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns the transactions a specific account.
+      description: Returns the transactions for all positions in a specific account. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+      operationId: getTransactionStatementByAccountId
+      tags:
+        - transactions
+      responses:
+        '200':
+          description: Returns a transactions list for all positions and cash accounts in a specific protfolio.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+            nextCursor:
+              $ref: '#/components/headers/nextCursor'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transactionStatement'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+  
+  /positions/{positionId}/transaction-statement:
+    parameters:
+      - $ref: '#/components/parameters/positionIdParam'
+      - $ref: '#/components/parameters/dateParam'
+      - $ref: '#/components/parameters/dateTypeParam'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/cursor'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns the transactions for a specific position.
+      description: Returns transactions for a specific position. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+      operationId: getTransactionStatementByPositionId
+      tags:
+        - transactions
+      responses:
+        '200':
+          description: Transaction list
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+            nextCursor:
+              $ref: '#/components/headers/nextCursor'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transactionStatement'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '403':
+          $ref: '#/components/responses/standard403'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '405':
+          $ref: '#/components/responses/standard405'
+        '500':
+          $ref: '#/components/responses/standard500'
+        '501':
+          $ref: '#/components/responses/standard501'
+        '503':
+          $ref: '#/components/responses/standard503'
+
+components:
+
+  ###############
+  # Parameters  #
+  ###############
+  
+  parameters:
+    customerIdParam:
+      name: customerId
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 35
+        example: 123123456
+        description: Unique and unambiguous identification used by the bank for the customer.
+    accountIdParam:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 35
+        description: The customer's account identification, this should NOT be an IBAN.
+    dateParam:
+      name: date
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
+        description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
+        example: '2019-12-31'
+    dateTypeParam:
+      name: dateType
+      in: query
+      required: true
+      description: Indicates which type of date is decisive for the data shown.
+      schema:
+        type: string
+        enum:
+          - transactionDate
+          - bookingDate
+          - valueDate
+    positionIdParam:
+      name: positionId
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 35
+        description: Identification for the position given by the bank.
+        example: 1234566-12-1
+    endOfDayParam:
+      name: eodIndicator
+      in: query
+      required: true
+      description: Indicates if the position data is end-of-day (eod) data for the positions. If the parameter is set to false, the most recent data is shown, incl intraday changes on the position if the date is set to today. 
+      schema:
+        type: boolean
+        example: true
+        default: true
+    
+    limit: 
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+    cursor:
+      name: cursor
+      in: query
+      description: An opaque string value used for pagination
+      required: false
+      schema:
+        type: string
+    correlation_in_header:
+      in: header
+      name: X-Correlation-ID
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+      required: true
+      schema:
+        type: string
+
+  ###############
+  # Headers     #
+  ###############
+
+  headers:
+  
+    X-Correlation-ID:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    nextCursor:
+      description: An opaque string value, or an empty string if there are no more results. 
+      required: false
+      schema:
+        type: string
+        
+        
+######################
+# Schemas
+######################
+
+  schemas:
+    statement:
+      type: object
+      required: 
+        - statementDateTime
+        - date
+        - endOfDayIndicator
+      properties:
+        statementDateTime:
+          type: string
+          format: date-time
+          example: 2018-04-13T11:11:11Z
+          description: Date and time of the statement creation (UTC Timestamp). In accordance with ISO 8601. 
+        date:
+          type: object
+          required: 
+           - date
+           - dateType
+          properties:
+            date:
+              type: string
+              format: date
+              example: 2018-04-13
+              description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
+            dateType:
+              type: string
+              example: transactionDate
+              description: Specifies the type of date.
+              enum:
+              - transactionDate
+              - bookingDate
+              - valueDate
+        endOfDayIndicator:
+          type: boolean
+          description: Indicates if the data displayed is end-of-day data. If true, the data is end-of-day data. If false and date is today, current (intraday) data will be displayed.
+          example: true
+          
+    customer:
+      type: object
+      description: Overview of the customer with the respective accounts
+      required: 
+        - customerIdentification
+      properties:
+        customerIdentification:
+          $ref: '#/components/schemas/customerIdentification'
+        customerReferenceCurrency:
+          $ref: '#/components/schemas/currency'
+        accountInformationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/accountInformation'
+            
+        
+
+    customerAccounts:
+      type: object
+      required: 
+        - customerIdentification
+      properties:
+        customerIdentification:
+          $ref: '#/components/schemas/customerIdentification'
+        customerReferenceCurrency:
+          $ref: '#/components/schemas/currency'
+        accountList:
+          type: array
+          items:
+            $ref: '#/components/schemas/account'
+
+    customerIdentification:
+      type: string
+      minLength: 1
+      maxLength: 35
+      example: 123123456
+      description: Unique and unambiguous identification used by the bank for the customer.
+    
+    customerPositionStatement:
+      type: object
+      properties:
+        statement:
+          $ref: '#/components/schemas/statement'
+        customer:
+          $ref: '#/components/schemas/customerAccounts'
+          
+    accountPositionStatement:
+      type: object
+      properties:
+        statement:
+          $ref: '#/components/schemas/statement'
+        account:
+          $ref: '#/components/schemas/account'
+    
+    account:
+      type: object
+      required: 
+        - accountInformation
+        - positionList
+      properties:
+        accountInformation:
+          $ref: '#/components/schemas/accountInformation'
+        externalReference:
+          type: string
+          maxLength: 35
+          example: 987-654-321
+          description: Account reference used by a bank external party, e.g. PMS
+        positionList:
+          type: array
+          description: A list of positions
+          items:
+            $ref: '#/components/schemas/position'
+
+    portfolioInformation:
+      type: object
+      properties: 
+        portfolioIdentification:
+          type: string
+          minLength: 1
+          maxLength: 35
+          example: 876543219
+          description: Unique and unambiguous identification for the portfolio between the portfolio owner and the portfolio servicer
+        portfolioReferenceCurrency:
+          $ref: '#/components/schemas/currency'
+    position:
+      type: object
+      required: 
+        - identification
+        - currency
+        - amountOrUnits
+        - instrumentIdentification
+      properties:
+        identification:
+          type: string
+          maxLength: 35
+          example: 876543219
+          description: Identification for the position given by the bank
+        externalReference:
+          type: string
+          maxLength: 35
+          example: 987-654-321
+          description: Reference used by the external party, e.g. Portfolio Management Systems
+        currency:
+          $ref: '#/components/schemas/currency'
+        amountOrUnits:
+          $ref: '#/components/schemas/amountOrUnits'
+        positionName:
+          type: string
+          maxLength: 80
+          example: Stark Industries Inc.
+          description: Name of the position.
+        priceList:
+          type: array
+          description: List of prices regarding the position incl. valuation in account currency
+          items:
+            $ref: '#/components/schemas/price'
+        safekeepingPlace:
+          type: string
+          pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
+          example: INSECHZZXXX
+          description: 'BIC of the place where the securities are safe-kept, physically or notionally'
+        additionalCustodianInformation:
+          type: string
+          pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
+          example: INSECHZZXXX
+          description: 'Used for special use cases where safekeepingPlace is not suffienct. BIC of the place where the securities are safe-kept, physically or notionally'
+        accruedInterest:
+          $ref: '#/components/schemas/accruedInterest'
+        blockedAmount:
+          $ref: '#/components/schemas/blockedAmount'
+        positionAdditionalDetails:
+          type: string
+          maxLength: 70
+          description: Provides additional information on the position.
+          example: Belongs to contract 129959959
+        financialInstrument:
+          $ref: '#/components/schemas/financialInstrument'
+
+    accruedInterest:
+      type: object
+      required:
+       - creditDebitIndicator
+       - amount
+      properties:
+        amount:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          example: "10.25"
+          description: Absolute interest amount that has accrued in between coupon payment periods
+        currency:
+          $ref: '#/components/schemas/currency'
+        creditDebitIndicator:
+          $ref: '#/components/schemas/creditDebitIndicator'
+        numberOfDaysAccrued:
+          type: integer
+          example: 34
+          description: Number of days used for calculating the accrued interest amount.
+
+    financialInstrumentType:
+      type: string
+      description: Indicates the type of the financial instrument. Must follow the ISO 10962, which is also known as CFI (classification of financial instruments). At least indicate the CFI Category (1st character) and the CFI Group (2nd character). The CFI attributes 1-4 (3rd to 6th character in the string) are optional.
+      pattern: '^[A-Z]{2,6}$'
+      minLength: 2
+      maxLength: 6
+      example: "ESVUFR"
+    
+    blockedAmount:
+      description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
+      type: object
+      required:
+      - amount
+      - creditDebitIndicator
+      properties:
+        amount:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          example: "12000"
+          description: Absolute amount with the same amountType as the position itself.
+        creditDebitIndicator:
+          $ref: '#/components/schemas/creditDebitIndicator'
+    
+    amountOrUnits:
+      type: object
+      required:
+        - amount
+        - type
+        - creditDebitIndicator
+      properties:
+        amount:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          example: "12000"
+          description: Absolute amount
+        type: 
+          type: string
+          description: Specifies the type of the amount
+          example: nominal
+          enum: 
+          - unitsNumber
+          - nominal
+        creditDebitIndicator:
+          $ref: '#/components/schemas/creditDebitIndicator'
+    
+    price:
+      type: object
+      required:
+        - amount
+        - amountType
+        - creditDebitIndicator
+      properties:
+          amount:
+            type: string
+            pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+            maxLength: 22
+            description: Amount of the price
+            example: "100.4"
+          amountType:
+            type: string
+            description: Indicates whether the price amount is depicted as unit price or percentage.
+            example: percentage
+            enum: 
+            - perUnit
+            - percentage
+          creditDebitIndicator:
+            $ref: '#/components/schemas/creditDebitIndicator'
+          positionPriceType:
+            type: string
+            description: Indicates the type of the price.
+            example: costPrice
+            enum: 
+            - dealPrice
+            - marketPrice
+            - costPrice
+          currency:
+            $ref: '#/components/schemas/currency'
+          date:
+            type: string
+            format: date
+            description: Date of the end of day price. Date according to ISO 8601 i.e. YYYY-MM-DD format
+          sourceOfPrice:  
+            type: string
+            maxLength: 70
+            description: Indicates the source of the (market)price
+            example: SIX Swiss Exchange
+          foreignExchangeRateList:
+            type: array
+            items:
+              $ref: '#/components/schemas/foreignExchangeRate'
+          valuation:
+            $ref: '#/components/schemas/valuation'
+          
+    
+    valuation:
+      type: object
+      description: Valuation of the position in account currency. Accrued interests are not included in the valuation. 
+      required:
+        - creditDebitIndicator
+      properties:
+        amount:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          description: Absolute amount of the valuation
+          example: "13104.5"
+        currency:
+          $ref: '#/components/schemas/currency'
+        creditDebitIndicator:
+          $ref: '#/components/schemas/creditDebitIndicator'
+    
+    transaction:
+      type: object
+      required: 
+        - customerIdentification
+        - transactionIdentification
+        - reversalIndicator
+        - dateList
+        - transactionType
+        - transactionSubtype
+      properties:
+        customerIdentification:
+          $ref: '#/components/schemas/customerIdentification'
+        transactionIdentification:
+          type: string
+          maxLength: 35
+          example: 987654321
+          description: Transaction ID given by the bank
+        placeOfTrade:
+          type: object
+          description: Market in which a trade transaction is to be or has been executed.
+          properties:
+            marketIdentificationCode:
+              type: string
+              maxLength: 4
+              description: Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code. Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
+              example: XSWX
+            marketDescription:
+              type: string
+              maxLength: 70
+              description: Description of the market when no Market Identification Code is available.
+              example: OTC
+        reversalIndicator:
+          description: Indicates whether it is the reversal of a previously reported movement.
+          type: boolean
+          default: false
+        reversedTransactionIdentification:
+          type: string
+          maxLength: 35
+          description: States the identification of the transaction that was reversed
+          example: 2134123415
+        dateList:
+          type: array
+          items:
+            type: object
+            required: 
+              - date
+              - dateType
+            properties:
+              date:
+                $ref: '#/components/schemas/date'
+              dateType:
+                type: string
+                description: Type of the date
+                enum: 
+                - effectiveSettlementDate
+                - settlementDate
+                - valueDate
+                - performanceDate
+                - bookingDate
+                - transactionDate
+                example: settlementDate
+        transactionType:
+          $ref: '#/components/schemas/transactionType'
+        transactionSubtype:
+          $ref: '#/components/schemas/transactionSubtype'
+        triggeringFinancialInstrument:
+          $ref: '#/components/schemas/triggeringFinancialInstrument'
+        movementList:
+          type: array
+          description: List of movements belonging to a transaction from a banks perspective
+          items:
+            $ref: '#/components/schemas/movement'
+        postingAmountList:
+          type: array
+          description: List of total amounts of money that is to be/was posted to respective accounts in the account currency.
+          items:
+            $ref: '#/components/schemas/postingAmount'
+ 
+        foreignExchangeRateList:
+          type: array
+          items:
+            $ref: '#/components/schemas/foreignExchangeRate'
+        settlementCurrency:
+            $ref: '#/components/schemas/currency'
+        priceList:
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                type: string
+                pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+                maxLength: 22
+                example: "100.36"
+                description: Price indication
+              amountType:
+                type: string
+                description: Specifies the type of price
+                example: percentage
+                enum:
+                - perUnit
+                - percentage
+              transactionPriceType:
+                type: string
+                description: Describes the type of price stated
+                example: dealPrice
+                enum:
+                - dealPrice
+                - costPrice
+              currency:
+                $ref: '#/components/schemas/currency'
+        transactionAdditionalDetails:
+          type: string
+          maxLength: 70
+          description: Provides additional details on the transaction which can not be included within the structured fields of the message.
+          example: Replaces transaction nr. 12234567489
+
+    transactionType:
+      type: string
+      description: Type of the transaction
+      example: securitiesExchange
+      enum:
+      - securitiesExchange
+      - cash
+      - fees
+      - credit
+      - fx
+      - taxes
+      - corporateActions
+      - fiduciary
+      - moneyMarket
+      - securitiesTransfer
+      - physical
+      - otc
+      - others
+      
+    transactionSubtype:
+      type: string
+      maxLength: 35
+      description: Gives detailed information about the category of a transaction.
+      example: buy
+      enum:
+      - additionalPayment
+      - adjustNotional
+      - assignment
+      - assimilation
+      - bonus
+      - buy
+      - buyBarrier
+      - buyDigital
+      - buyIssue
+      - buyToClose
+      - buyToOpen
+      - capitalIncrease
+      - closeFxForward
+      - closeNDF
+      - conversionBondShare
+      - creditEvent
+      - decrease
+      - deliverSecurityToFund
+      - deliveryFreeOfPayment
+      - deliveryVsPayment
+      - dividendCash
+      - dividendChoice
+      - dividendReinvestment
+      - dividendStock
+      - exercise
+      - exerciseCash
+      - exercisePhysical
+      - expiration
+      - expirationOldSecurity
+      - fees
+      - finalLiquidationPayment
+      - fxSpot
+      - incompleteRights
+      - increase
+      - inflowOutflowDigital
+      - inflowOutflowPhysical
+      - instrumentExchange
+      - interest
+      - internalTransfer
+      - knockIn
+      - knockOut
+      - liquidationPayment
+      - markToMarket
+      - markToMarketCash
+      - merger
+      - netAmount
+      - openFxForward
+      - openNDF
+      - openPayerSwap
+      - openReceiverSwap
+      - openSwapForwardLeg
+      - other
+      - premium
+      - prepayment
+      - publicOffer
+      - receiveFreeOfPayment
+      - receiveFromFund
+      - receiveSecurityFromFund
+      - receiveVsPayment
+      - redemption
+      - redemptionPartial
+      - redemptionPrior
+      - reductionOfNominal
+      - resetPayment
+      - revenue
+      - rightDistribution
+      - sell
+      - sellBarrier
+      - sellDigital
+      - sellToClose
+      - sellToOpen
+      - spinOff
+      - split
+      - subscription
+      - swapSpotLeg
+      - taxCorrections
+      - taxes
+      - transferMetalPhysical
+      - unwind
+      - variationMargin
+
+    movement:
+        type: object
+        description: Describes a single movement/booking/flow within a transaction. Every transaction contains in the minimum one movement.
+        required: 
+          - amountOrUnits
+          - currency
+          - movementType
+        properties:
+          amountOrUnits:
+            $ref: '#/components/schemas/amountOrUnits'
+          currency:
+            $ref: '#/components/schemas/currency'
+          movementType:
+            $ref: '#/components/schemas/movementType'
+          movementTypeAdditionalInformation:
+            type: string
+            maxLength: 35
+            example: "Fees for Reporting Service"
+            description: Provides further details on an informative level, which goes beyond the granularity of the movementType.
+          financialInstrument:
+            $ref: '#/components/schemas/financialInstrument'
+          positionIdentification:
+            type: string
+            maxLength: 35
+            description: Identification for the position given by the bank.
+            example: 1234566-12-1
+          accountDetails:
+            type: object
+            description: Indicates the affected account of this movement
+            properties:
+              accountIdentification:
+                type: string
+                maxLength: 35
+                example: 876543219
+                description: Unique and unambiguous identification for the account
+              accountIdentificationType:
+                type: string
+                description: Indicates the type of the account identification. 
+                example: other
+                enum:
+                - iban
+                - other
+    
+    movementType:
+      type: string
+      description: Describes which kind of movement is reported from a banks perspective.
+      example: security
+      enum: 
+      - security
+      - cash
+      - revenue
+      - stampDuty
+      - withholdingTax
+      - additionalWithholdingTax
+      - coupon
+      - premium
+      - capitalGainTax
+      - financialTransactionTax
+      - otherTaxes
+      - transactionFee
+      - brokerageFee
+      - managementFee
+      - courtage
+      - custodyFee
+      - exchangeFee
+      - thirdPartyFee
+      - otherFee
+      - others
+    
+    financialInstrumentIdentificationType:
+      type: string
+      example: isin
+      description: Type of the instrument ID. isin is prefered
+      enum:
+        - isin
+        - sedol
+        - cusip
+        - ric
+        - tickerSymbol
+        - bloomberg
+        - cta
+        - quick
+        - wertpapier
+        - dutch
+        - valoren
+        - sicovam
+        - belgian
+        - common
+        - otherProprietaryIdentification
+    
+    triggeringFinancialInstrument:
+      type: object
+      description: Security triggering/causing the transaction.
+      properties:
+        identification:
+          type: string
+          maxLength: 35
+          example: US8851601018
+          description: Identification of the instrument
+        type: 
+          $ref: '#/components/schemas/financialInstrumentIdentificationType'
+        name:
+          type: string
+          maxLength: 170
+          description: Name of the financial instrument in free format text.
+          example: N-Akt Thor Industries Inc USD 0.1 nom (977822)
+        currency:
+          $ref: '#/components/schemas/currency'
+        triggeringAmountOrUnits:
+          $ref: '#/components/schemas/amountOrUnits'
+          
+    
+    postingAmount:
+      type: object
+      required:
+       - amount
+       - creditDebitIndicator
+      description: Total amount of money that is to be/was posted to the account in the account currency.
+      properties:
+        amount:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          description: Absolute amount of the transaction
+          example: "13023"
+        currency:
+          $ref: '#/components/schemas/currency'
+        creditDebitIndicator:
+          $ref: '#/components/schemas/creditDebitIndicator'
+        accountInformation:
+          $ref: '#/components/schemas/accountInformation'    
+    
+    accountInformation:
+      type: object
+      required:
+        - accountIdentification
+        - accountType
+        - accountReferenceCurrency
+      properties:
+        accountIdentification:
+          type: string
+          maxLength: 35
+          example: 876543219
+          description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier. 
+        accountType: 
+          type: string
+          description: Indicatates the type of the account. If the account type is cashAccount, no information on the financial instrument is provided in the respective position in the account.
+          enum:
+          - cashAccount
+          - safekeepingAccount
+          - other
+        iban:
+          type: string
+          description: Contains the accounts Internatioinal Banking Account Number (IBAN) for a cashAccount if available.
+          maxLength: 34
+        accountReferenceCurrency:
+          $ref: '#/components/schemas/currency'
+        accountName:
+          type: string
+          maxLength: 70
+          description: Name of the account. It provides an additional means of identification, and is designated by the account servicer in agreement with the account owner.
+          example: "Household account"
+        accountDesignation:
+          type: string
+          maxLength: 70
+          description: Supplementary information on the account. Designated by the account servicer. 
+          example: "Current Account CHF"
+        portfolioInformation:
+         $ref: '#/components/schemas/portfolioInformation'
+
+    financialInstrument:
+      type: object
+      required: 
+        - financialInstrumentIdentification
+      properties:
+        financialInstrumentIdentification:
+          type: object
+          required: 
+            - identification
+            - type
+          properties:
+            identification:
+              type: string
+              maxLength: 35
+              example: CH0012005267
+              description: Instrument identification
+            type:
+              $ref: '#/components/schemas/financialInstrumentIdentificationType'    
+        financialInstrumentName:
+          type: string
+          maxLength: 170
+          example: Novartis AG
+          description: Name of the financial instrument in free format text.
+        financialInstrumentType:
+          $ref: '#/components/schemas/financialInstrumentType'
+        interestList:
+          $ref: '#/components/schemas/interestList'
+        dateList:
+          type: array
+          items:
+            $ref: '#/components/schemas/financialInstrumentDate'
+        optionDetails:
+          type: object
+          properties:
+            optionType:
+              type: string
+              example: call
+              enum: 
+              - call
+              - put
+              description: "Specifies whether it is a Call option (right to purchase a specific underlying asset) or a Put option (right to sell a specific underlying asset)."
+            optionStyle:
+              type: string
+              example: american
+              enum:
+              - american
+              - european
+              - bermudan
+              - asian
+              description: Specifies how an option can be exercised.
+        contractSize:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          example: "100"
+          description: Contract size of the instrument
+        minimumDenomination:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          example: "100000"
+          description: Indicates the minimum denomination of a security.
+        minimumIncrement:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          example: "10000"
+          description: Indicates the minimum tradable increments of a security.
+        hasFactor:
+          type: boolean
+          description: Indicates if there is a factor present for this financial instrument. If this indicator is set to TRUE, but the factor attribute is not present, might indicate, that the factor cannot be delivered or is currently not available.  
+          example: TRUE
+        factor:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          example: "0.85"
+          description: Information regarding the factor.
+        financialInstrumentPriceList:
+          type: array
+          description: Provides information on different prices that are realted to the functionality of the financial instrument.
+          items:
+            $ref: '#/components/schemas/financialInstrumentPrice'
+        inactiveIndicator:
+          type: boolean
+          description: Indicates if the instrument is inactive
+          default: FALSE
+        underlyingList:
+          type: array
+          description: List of underlying instruments
+          items:
+            $ref: '#/components/schemas/financialInstrument'
+        financialInstrumentAttributeAdditionalDetails:
+          type: string
+          maxLength: 70
+          description: Provides additional information about the financial instrument in narrative form.
+          example: Group contract number 129959961
+    
+    financialInstrumentDate:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Indicates the type of date
+          example: issueDate
+          enum:
+          - issueDate
+          - maturityDate
+          - nextCallableDate
+          - exerciseDate
+          - expiryDate
+          - couponDate
+          - floatingRateFixingDate
+          - conversionDate
+          - putableDate
+          - datedDate
+          - firstPaymentDate
+          - nextFactorDate
+        date:
+          $ref: '#/components/schemas/date'
+    
+    interest:
+      type: object
+      properties:
+        rate:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          example: "0.00125"
+          description: Interest rate of the instrument
+        currency:
+          $ref: '#/components/schemas/currency'
+        type:
+          type: string
+          description: Indicates the type of interest
+          example: fixed
+          enum:
+            - fixed
+            - variable
+            - staggered
+        dayCountBasis:
+          $ref: '#/components/schemas/dayCountBasis'
+        paymentDate:
+          type: string
+          format: date
+          example: 2020-04-19
+          description: Date of the next interest payment. Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
+        paymentFrequency:
+          type: string
+          description: Specifies the frequency of an interest payment.
+          example: quarterly
+          enum:
+          - annual
+          - monthly
+          - quarterly
+          - semiAnnual
+          - weekly
+          - atMaturity
+          - other
+          
+    interestList:
+      type: array
+      description: Indicates the interest rate(s) of the instrument
+      items:
+        $ref: '#/components/schemas/interest'
+    
+    dayCountBasis:
+      type: string
+      example: u30_360
+      description: Interest method of the instrument
+      enum:
+      - act_360
+      - act_365
+      - act_actIcma
+      - act_actIsda
+      - act_actAfb
+      - act_365L
+      - bus_252
+      - u30_360
+      - u30E_360Icma
+      - u30E_360Isda
+      - u30E_360
+      - u30U_360
+    
+    financialInstrumentPrice:
+      type: object
+      required:
+        - creditDebitIndicator
+      properties:
+        amount:
+          type: string
+          pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+          maxLength: 22
+          example: "100.9"
+          description: Declares the amount of the indicated price
+        amountType:
+            type: string
+            description: Indicates whether the price amount is depicted as unit price or percentage.
+            example: percentage
+            enum: 
+            - perUnit
+            - percentage
+        creditDebitIndicator:
+          $ref: '#/components/schemas/creditDebitIndicator'
+        currency:
+          $ref: '#/components/schemas/currency'
+        type:
+          $ref: '#/components/schemas/financialInstrumentPriceType'
+    
+    financialInstrumentPriceType:
+      type: string
+      example: strikePrice
+      description: Indicates the type of the price
+      enum:
+      - strike
+      - cap
+      - floor
+      - conversion
+      - exercise
+      - subscription
+      - autocall
+      - barrierLevel
+      - bonusLevel
+      - financingLevel
+      - initialFixing
+      - knockOut
+      - stopLoss
+      - knockIn
+    
+
+    foreignExchangeRate:
+        type: object
+        properties:
+          sourceCurrency:
+            description: Currency of the amount to be converted in a currency conversion.
+            type: string
+            pattern: '[A-Z]{3}'
+            example: 'CHF'
+          rate:
+            type: string
+            pattern: "[0-9]{1,12}([.][0-9]{1,9})?"
+            maxLength: 22
+            example: "1.0963"
+            description: Indicates the rate of a fx transaction for one source currency unit to the target currency. E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
+          targetCurrency:
+            description: Currency into which an amount is to be converted in a currency conversion.
+            type: string
+            pattern: '[A-Z]{3}'
+            example: 'CHF'
+          fxType:
+            type: string
+            description: Defines the type of the indicated fx rate, whether it’s a real (traded) price or a calculatory price. If currencies are effectively exchanged (real fx), than it should be indicated by either 'costPrice' (including fees, tax) or 'dealPrice'(plain fx without fees, tax). If the foreignExchangeRate is provided for calculatory purposes, e.g. for position valuations in another currency than the position itself, then 'calculatory' should be used.
+            example: calculatory
+            enum: 
+            - calculatory
+            - dealPrice
+            - costPrice
+    
+    transactionStatement:
+      type: object
+      properties:
+          statement:
+            $ref: '#/components/schemas/statement'
+          transactions:
+            type: array
+            items:
+              $ref: '#/components/schemas/transaction'
+    
+    creditDebitIndicator:
+      type: string
+      enum: 
+      - credit
+      - debit
+      example: debit
+      description: Specifies if a amount is positive or negative.
+    
+    currency:
+      description: ISO 4217 code
+      type: string
+      pattern: '[A-Z]{3}'
+      example: 'CHF'
+
+    date:
+      type: string
+      format: date
+      description: Date according to ISO 8601 i.e. YYYY-MM-DD format
+      example: '2018-04-13'
+
+
+    # ---- Error Response
+    commonErrorResponse:
+      title: Common Error Response
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/commonErrorType'
+        title:
+          type: string
+          example:
+            This is the general problem description
+        detail:
+          type: string
+          example:
+            Detailed problem description with respect to the current request
+        instance:
+          type: string
+          example:
+            path/to/corresponding/resource
+
+    commonErrorType:
+      title: Common Error Type
+      description: Error Types for commonErrorResponse.
+      type: string
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      example: '/problems/TECHNICAL_ERROR'
+    # ---- End Error Response
+  
+  # ---- Responses - Standard Errors Common Data Model v1.2.2----
+  responses:
+    standard400:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard401:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json     
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard403:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Forbidden - The server understood the request but refuses to authorize it. 
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard404:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard405:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard500:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard501:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Not Implemented - The server does not support the functionality required to fulfill the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard502:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Bad Gateway - The server received an invalid response from the upstream server.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard503:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+      
+    standard504:
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: 'application/problem+json; charset=utf-8 according to RFC7807'
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: 'Response language - always en'
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Gateway Timeout - The server did not get a response in time that it needed in order to complete the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'      
+    
+  # ---- End Responses - Standard Errors
