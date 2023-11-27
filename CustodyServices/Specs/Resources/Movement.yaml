@@ -1,0 +1,34 @@
+title: Movement
+type: object
+description: Describes a single movement/booking/flow within a transaction. Every transaction contains in the minimum one movement.
+required: 
+  - quantity
+  - currency
+  - movementType
+  - financialInstrument
+  - account
+properties:
+  quantity:
+    $ref: '../Types/Quantity.yaml'
+  currency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  movementType:
+    $ref: '../Types/MovementType.yaml'
+  movementTypeAdditionalInformation:
+    type: string
+    maxLength: 35
+    example: Fees for Reporting Service
+    description: Provides further details on an informative level, which goes beyond the granularity of the movementType.
+  financialInstrument:
+    $ref: 'FinancialInstrument.yaml'
+  account:
+    $ref: 'Account.yaml'
+  positionId:
+    type: string
+    maxLength: 35
+    description: Identification for the position given by the bank.
+    example: 1234566-12-1
+  price:
+    $ref: '../Types/Price.yaml'
+  foreignExchangeRate:
+    $ref: '../Types/ForeignExchangeRate.yaml'

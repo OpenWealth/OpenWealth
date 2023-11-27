@@ -1,0 +1,15 @@
+title: MoneyMarket
+description: Money market
+required:
+  - principalAmount
+  - interestRate
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      principalAmount:
+        $ref: '../../Types/PrincipalAmount.yaml'
+      interestRate:
+        $ref: '../../Types/InterestRate.yaml'
+      maturityDate:
+        $ref: '../../Types/MaturityDate.yaml'

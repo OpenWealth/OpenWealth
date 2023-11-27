@@ -1,0 +1,5 @@
+title: ContractSize
+type: number
+example: 100
+description: Contract size of the instrument
+default: 1

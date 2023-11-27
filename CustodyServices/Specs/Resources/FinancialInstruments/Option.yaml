@@ -1,0 +1,39 @@
+title: Option
+description: An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying asset at a predetermined price within a given timeframe
+required:
+  - expiryDate
+  - strikePrice
+  - contractSize
+  - optionType
+  - optionStyle
+  - underlyingFinancialInstrument
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      expiryDate:
+        $ref: '../../Types/ExpiryDate.yaml'
+      strikePrice:
+        $ref: '../../Types/StrikePrice.yaml'
+      exercisePrice:
+        $ref: '../../Types/ExercisePrice.yaml'
+      contractSize:
+        $ref: '../../Types/ContractSize.yaml'
+      optionType:
+        type: string
+        example: call
+        enum: 
+        - call
+        - put
+        description: Specifies whether it is a Call option (right to purchase a specific underlying asset) or a Put option (right to sell a specific underlying asset).
+      optionStyle:
+        type: string
+        example: american
+        enum:
+        - american
+        - european
+        - bermudan
+        - asian
+        description: Specifies how an option can be exercised.
+      underlyingFinancialInstrument:
+        $ref: '../UnderlyingFinancialInstrument.yaml'

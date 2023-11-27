@@ -1,0 +1,17 @@
+title: DayCountBasis
+type: string
+example: u30_360
+description: Interest method of the instrument
+enum:
+- act_360
+- act_365
+- act_actIcma
+- act_actIsda
+- act_actAfb
+- act_365L
+- bus_252
+- u30_360
+- u30E_360Icma
+- u30E_360Isda
+- u30E_360
+- u30U_360

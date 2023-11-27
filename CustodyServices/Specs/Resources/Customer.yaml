@@ -1,0 +1,15 @@
+title: Customer
+type: object
+description: Overview of the customer with the respective accounts
+required: 
+  - customerId
+properties:
+  customerId:
+    type: string
+    description: Unique and unambiguous identification used by the bank for the customer.
+  customerReferenceCurrency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  accountList:
+    type: array
+    items:
+      $ref: 'Account.yaml'

@@ -1,0 +1,12 @@
+title: Credit
+description: Credit
+required:
+  - principalAmount
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      principalAmount:
+        $ref: '../../Types/PrinciapalAmount.yaml'
+      underlyingFinancialInstrument:
+        $ref: '../UnderlyingFinancialInstrument.yaml'

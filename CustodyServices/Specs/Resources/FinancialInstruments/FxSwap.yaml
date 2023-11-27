@@ -1,0 +1,37 @@
+title: FxSwap
+definition: A foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency for interest payments on a loan made in another currency.
+required:
+  - amountPaid
+  - amountReceived
+  - maturityDate
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      nearAmountPaid:
+        title: NearAmountPaid
+        description: Amount paid at the earlier part of an FX swap
+        allOf:
+          - $ref: '../../Types/CurrencyAmount.yaml'
+      nearAmountReceived:
+        title: NearAmountReceived
+        description: Amount received at the earlier part of an FX swap
+        allOf:
+          - $ref: '../../Types/CurrencyAmount.yaml'
+      farAmountPaid:
+        title: FarAmountPaid
+        description: Amount paid at the maturity of an FX swap
+        allOf:
+          - $ref: '../../Types/CurrencyAmount.yaml'
+      farAmountReceived:
+        title: FarAmountReceived
+        description: Amount received at the maturity of an FX swap
+        allOf:
+          - $ref: '../../Types/CurrencyAmount.yaml'
+      maturityDate:
+        $ref: '../../Types/MaturityDate.yaml'
+      nearMaturityDate:
+        title: NearMaturityDate
+        description: Date of the settlement of the near leg
+        allOf:
+          - $ref: '../../Types/MaturityDate.yaml'

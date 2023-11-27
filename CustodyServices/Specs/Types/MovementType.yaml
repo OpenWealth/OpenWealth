@@ -1,0 +1,25 @@
+title: MovementType
+type: string
+description: Describes which kind of movement is reported from a banks perspective.
+example: security
+enum: 
+- security
+- cash
+- revenue
+- stampDuty
+- withholdingTax
+- additionalWithholdingTax
+- coupon
+- premium
+- capitalGainTax
+- financialTransactionTax
+- otherTaxes
+- transactionFee
+- brokerageFee
+- managementFee
+- courtage
+- custodyFee
+- exchangeFee
+- thirdPartyFee
+- otherFee
+- others

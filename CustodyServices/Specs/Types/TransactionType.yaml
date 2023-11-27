@@ -1,0 +1,18 @@
+title: TransactionType
+type: string
+description: Type of the transaction
+example: securitiesExchange
+enum:
+- securitiesExchange
+- cash
+- fees
+- credit
+- fx
+- taxes
+- corporateActions
+- fiduciary
+- moneyMarket
+- securitiesTransfer
+- physical
+- otc
+- others

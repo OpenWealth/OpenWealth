@@ -1,0 +1,4 @@
+title: Other
+type: object
+allOf:
+- $ref: 'FinancialInstrumentBase.yaml'

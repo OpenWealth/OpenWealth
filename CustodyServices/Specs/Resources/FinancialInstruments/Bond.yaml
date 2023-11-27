@@ -1,0 +1,29 @@
+title: Bond
+description: Bond
+required: 
+  - maturityDate
+  - interestRate
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      interestRate:
+        $ref: '../../Types/InterestRate.yaml'
+      maturityDate:
+        $ref: '../../Types/MaturityDate.yaml'
+      nextInterestPaymentDate:
+        $ref: '../../Types/NextInterestPaymentDate.yaml'
+      issueDate:
+        $ref: '../../Types/IssueDate.yaml'
+      conversionPrice:
+        $ref: '../../Types/ConversionPrice.yaml'
+      currencyOfDenomination:
+        $ref: '../../../../Globals/Types/Currency.yaml'
+      minimumDenomination:
+        type: number
+        example: 10000
+        description: Indicates the minimum denomination of a security.
+      minimumIncrement:
+        type: number
+        example: 1000
+        description: Indicates the minimum tradable increments of a security.

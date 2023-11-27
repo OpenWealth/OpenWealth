@@ -1,0 +1,31 @@
+title: Identification
+type: object
+required: 
+  - identifier
+  - type
+properties:
+  identifier:
+    type: string
+    maxLength: 35
+    example: CH0012005267
+    description: Identification value
+  type:
+    type: string
+    example: isin
+    description: Type of the identifier
+    enum:
+      - isin
+      - sedol
+      - cusip
+      - ric
+      - tickerSymbol
+      - bloomberg
+      - cta
+      - quick
+      - wertpapier
+      - dutch
+      - valoren
+      - sicovam
+      - belgian
+      - common
+      - otherProprietaryIdentification

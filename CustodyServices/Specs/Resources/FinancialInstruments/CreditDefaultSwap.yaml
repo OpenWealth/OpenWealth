@@ -1,0 +1,14 @@
+title: CreditDefaultSwap
+description: A derivative product which serves as a form of insurance against the default of an underlying borrower or debt instrument
+required:
+  - principalAmount
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      principalAmount:
+        $ref: '../../Types/PrincipalAmount.yaml'
+      maturityDate:
+        $ref: '../../Types/MaturityDate.yaml'
+      underlyingFinancialInstrument:
+        $ref: '../UnderlyingFinancialInstrument.yaml'

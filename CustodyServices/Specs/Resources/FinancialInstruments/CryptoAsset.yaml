@@ -1,0 +1,4 @@
+title: CryptoAsset
+type: Crypto asset
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'

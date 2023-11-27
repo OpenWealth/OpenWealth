@@ -1,0 +1,7 @@
+title: CreditDebitIndicator
+type: string
+enum: 
+- credit
+- debit
+example: debit
+description: Specifies if a amount is positive or negative.
