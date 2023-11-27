@@ -7,11 +7,9 @@ description: Total amount of money that is to be/was posted to the account in th
 properties:
   amount:
     type: number
-    description: Absolute amount of the transaction
+    description: Signed amount of the cash transaction
     example: 13023
   currency:
     $ref: '../../../Globals/Types/Currency.yaml'
-  creditDebitIndicator:
-    $ref: '../Types/CreditDebitIndicator.yaml'
   account:
     $ref: 'Account.yaml'
