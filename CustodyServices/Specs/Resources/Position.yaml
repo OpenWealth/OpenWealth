@@ -2,9 +2,10 @@ title: Position
 type: object
 required: 
   - positionId
-  - quantity
+  - positionDate
   - financialInstrument
   - account
+  - quantity
   - valuation
 properties:
   positionId:
@@ -28,6 +29,8 @@ properties:
     $ref: 'Account.yaml'
   quantity:
     $ref: '../Types/Quantity.yaml'
+  valuation:
+    $ref: '../Types/Valuation.yaml'
   positionName:
     type: string
     maxLength: 80
@@ -43,8 +46,6 @@ properties:
     $ref: '../Types/Price.yaml'
   costForeignExchangeRate:
     $ref: '../Types/ForeignExchangeRate.yaml'
-  valuation:
-    $ref: '../Types/Valuation.yaml'
   safekeepingPlace:
     type: string
     pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'

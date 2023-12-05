@@ -1,6 +1,8 @@
 title: Valuation
 type: object
 description: Detailed information about the valuation of a position
+required:
+- value
 properties:
   value:
     $ref: 'CurrencyAmount.yaml'
