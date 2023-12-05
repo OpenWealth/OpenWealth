@@ -65,7 +65,7 @@ properties:
     allOf:
       - $ref: '../Types/Quantity.yaml'
       - description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
-  positionAdditionalDetails:
+  additionalDetails:
     type: string
     maxLength: 70
     description: Provides additional information on the position.

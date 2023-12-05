@@ -436,17 +436,17 @@ components:
             - cashAccount
             - safekeepingAccount
             - other
-        iban:
-          type: string
-          description: Contains the accounts Internatioinal Banking Account Number (IBAN) for a cashAccount if available.
-          maxLength: 34
-        referenceCurrency:
-          $ref: '#/components/schemas/Currency'
         name:
           type: string
           maxLength: 70
           description: Name of the account. It provides an additional means of identification, and is designated by the account servicer in agreement with the account owner.
           example: Household account
+        referenceCurrency:
+          $ref: '#/components/schemas/Currency'
+        iban:
+          type: string
+          description: Contains the accounts Internatioinal Banking Account Number (IBAN) for a cashAccount if available.
+          maxLength: 34
         designation:
           type: string
           maxLength: 70
@@ -464,7 +464,7 @@ components:
         customerId:
           type: string
           description: Unique and unambiguous identification used by the bank for the customer.
-        customerReferenceCurrency:
+        referenceCurrency:
           $ref: '#/components/schemas/Currency'
         accountList:
           type: array
@@ -547,6 +547,32 @@ components:
       format: date
       pattern: \d{4}-\d{2}-\d{2}
       example: '2018-04-13'
+    FinancialInstrumentType:
+      title: FinancialInstrumentType
+      type: string
+      description: Type of the financial instrument
+      example: equity
+      enum:
+        - cash
+        - bond
+        - equity
+        - fund
+        - index
+        - commodity
+        - option
+        - future
+        - fxForward
+        - fxSwap
+        - mortgage
+        - fixedLoan
+        - fixedDeposit
+        - callableLoan
+        - callableDeposit
+        - interestSwap
+        - totalReturnSwap
+        - creditDefaultSwap
+        - cryptoAsset
+        - other
     Identification:
       title: FinancialInstrumentIdentification
       type: object
@@ -576,32 +602,6 @@ components:
             - belgian
             - common
             - otherProprietaryIdentification
-    FinancialInstrumentType:
-      title: FinancialInstrumentType
-      type: string
-      description: Type of the financial instrument
-      example: equity
-      enum:
-        - cash
-        - bond
-        - equity
-        - fund
-        - index
-        - commodity
-        - option
-        - future
-        - fxForward
-        - fxSwap
-        - mortgage
-        - fixedLoan
-        - fixedDeposit
-        - callableLoan
-        - callableDeposit
-        - interestSwap
-        - totalReturnSwap
-        - creditDefaultSwap
-        - cryptoAsset
-        - other
     CfiCode:
       title: CFICode
       type: string
@@ -614,25 +614,24 @@ components:
       title: FinancialInstrumentBase
       type: object
       required:
+        - financialInstrumentType
         - name
-        - type
-        - financialInstrumentIdentification
       properties:
-        identificationList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identification'
+        financialInstrumentType:
+          $ref: '#/components/schemas/FinancialInstrumentType'
         name:
           type: string
           maxLength: 170
           example: Novartis AG
           description: Name of the financial instrument in free format text.
-        type:
-          $ref: '#/components/schemas/FinancialInstrumentType'
         isin:
           type: string
           pattern: ^[A-Z]{2}[A-Z0-9]{9}[0-9]$
           example: CH1234567890
+        identificationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identification'
         cfiCode:
           $ref: '#/components/schemas/CfiCode'
         currencyOfDenomination:
@@ -649,7 +648,7 @@ components:
           type: boolean
           description: Indicates if the instrument is inactive
           default: false
-        financialInstrumentAttributeAdditionalDetails:
+        additionalDetails:
           type: string
           maxLength: 70
           description: Provides additional information about the financial instrument in narrative form.
@@ -934,12 +933,12 @@ components:
           properties:
             expiryDate:
               $ref: '#/components/schemas/ExpiryDate'
-            exercisePrice:
-              $ref: '#/components/schemas/ExercisePrice'
             contractSize:
               $ref: '#/components/schemas/ContractSize'
             underlyingFinancialInstrument:
               $ref: '#/components/schemas/UnderlyingFinancialInstrument'
+            exercisePrice:
+              $ref: '#/components/schemas/ExercisePrice'
     CurrencyAmount:
       title: CurrencyAmount
       type: object
@@ -979,7 +978,7 @@ components:
               $ref: '#/components/schemas/MaturityDate'
     FxSwap:
       title: FxSwap
-      definition: A foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency for interest payments on a loan made in another currency.
+      description: A foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency for interest payments on a loan made in another currency.
       required:
         - amountPaid
         - amountReceived
@@ -1110,7 +1109,7 @@ components:
               $ref: '#/components/schemas/UnderlyingFinancialInstrument'
     CryptoAsset:
       title: CryptoAsset
-      type: Crypto asset
+      description: Crypto Asset
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
     Other:
@@ -1275,7 +1274,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Quantity'
             - description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
-        positionAdditionalDetails:
+        additionalDetails:
           type: string
           maxLength: 70
           description: Provides additional information on the position.
@@ -1451,6 +1450,7 @@ components:
         - security
         - cash
         - revenue
+        - accruedInterest
         - stampDuty
         - withholdingTax
         - additionalWithholdingTax
@@ -1473,38 +1473,32 @@ components:
       type: object
       description: Describes a single movement/booking/flow within a transaction. Every transaction contains in the minimum one movement.
       required:
-        - quantity
-        - currency
         - movementType
         - movementDate
         - financialInstrument
         - account
+        - quantity
       properties:
-        quantity:
-          $ref: '#/components/schemas/Quantity'
-        currency:
-          $ref: '#/components/schemas/Currency'
         movementType:
           $ref: '#/components/schemas/MovementType'
-        movementTypeAdditionalInformation:
-          type: string
-          maxLength: 35
-          example: Fees for Reporting Service
-          description: Provides further details on an informative level, which goes beyond the granularity of the movementType.
         movementDate:
           title: MovementDate
           description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank.
-          allOf:
-            - $ref: '#/components/schemas/Date'
-        valueDate:
-          title: ValueDate
-          description: Date when calculating economic benefit for a cash amount.
           allOf:
             - $ref: '#/components/schemas/Date'
         financialInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
         account:
           $ref: '#/components/schemas/Account'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        valueDate:
+          title: ValueDate
+          description: Date when calculating economic benefit for a cash amount.
+          allOf:
+            - $ref: '#/components/schemas/Date'
         positionId:
           type: string
           maxLength: 35
@@ -1514,12 +1508,18 @@ components:
           $ref: '#/components/schemas/Price'
         foreignExchangeRate:
           $ref: '#/components/schemas/ForeignExchangeRate'
+        movementTypeAdditionalInformation:
+          type: string
+          maxLength: 35
+          example: Fees for Reporting Service
+          description: Provides further details on an informative level, which goes beyond the granularity of the movementType.
     PostingAmount:
       title: PostingAmount
       type: object
       required:
         - amount
-        - creditDebitIndicator
+        - currency
+        - account
       description: Total amount of money that is to be/was posted to the account in the account currency.
       properties:
         amount:
@@ -1534,21 +1534,34 @@ components:
       title: Transaction
       type: object
       required:
-        - customerId
         - transactionId
-        - reversalIndicator
-        - dateList
         - transactionType
         - transactionSubtype
+        - transactionDate
+        - customerId
+        - reversalIndicator
       properties:
-        customerId:
-          type: string
-          description: Unique and unambiguous identification used by the bank for the customer.
+        transactionType:
+          $ref: '#/components/schemas/TransactionType'
+        transactionSubtype:
+          $ref: '#/components/schemas/TransactionSubtype'
         transactionId:
           type: string
           maxLength: 35
           example: 987654321
           description: Transaction ID given by the bank
+        transactionDate:
+          title: TransactionDate
+          description: Date of transaction entity
+          allOf:
+            - $ref: '#/components/schemas/Date'
+        customerId:
+          type: string
+          description: Unique and unambiguous identification used by the bank for the customer.
+        reversalIndicator:
+          description: Indicates whether it is the reversal of a previously reported movement.
+          type: boolean
+          default: false
         placeOfTrade:
           type: object
           description: Market in which a trade transaction is to be or has been executed.
@@ -1563,20 +1576,11 @@ components:
               maxLength: 70
               description: Description of the market when no Market Identification Code is available.
               example: OTC
-        reversalIndicator:
-          description: Indicates whether it is the reversal of a previously reported movement.
-          type: boolean
-          default: false
         reversedtransactionId:
           type: string
           maxLength: 35
           description: States the identification of the transaction that was reversed
           example: 2134123415
-        transactionDate:
-          title: TransactionDate
-          description: Date of transaction entity
-          allOf:
-            - $ref: '#/components/schemas/Date'
         tradeDate:
           title: tradeDate
           description: Specifies the date/time on which the trade was executed.
@@ -1587,10 +1591,6 @@ components:
           description: Date and time at which the securities are to be delivered or received.
           allOf:
             - $ref: '#/components/schemas/Date'
-        transactionType:
-          $ref: '#/components/schemas/TransactionType'
-        transactionSubtype:
-          $ref: '#/components/schemas/TransactionSubtype'
         triggeringFinancialInstrument:
           $ref: '#/components/schemas/TriggeringFinancialInstrument'
         movementList:

@@ -19,7 +19,7 @@ npm i -g @redocly/cli@latest
 Bundle a specification with this command
 
 ```console
-redocly bundle specification.yaml --ext yaml --output specificationBundled.yaml
+redocly bundle api-spec.yaml --ext yaml --output api-spec-bundled.yaml
 ```
 
 where 'specification.yaml' is the OAS source file and 'specificationBundled.yaml' denotes the bundled output file in YAML format.

@@ -2,38 +2,32 @@ title: Movement
 type: object
 description: Describes a single movement/booking/flow within a transaction. Every transaction contains in the minimum one movement.
 required: 
-  - quantity
-  - currency
-  - movementType
-  - movementDate
-  - financialInstrument
-  - account
+- movementType
+- movementDate
+- financialInstrument
+- account
+- quantity
 properties:
-  quantity:
-    $ref: '../Types/Quantity.yaml'
-  currency:
-    $ref: '../../../Globals/Types/Currency.yaml'
   movementType:
     $ref: '../Types/MovementType.yaml'
-  movementTypeAdditionalInformation:
-    type: string
-    maxLength: 35
-    example: Fees for Reporting Service
-    description: Provides further details on an informative level, which goes beyond the granularity of the movementType.
   movementDate:
     title: MovementDate
     description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank. 
-    allOf:
-      - $ref: '../../../Globals/Types/Date.yaml'
-  valueDate:
-    title: ValueDate
-    description: Date when calculating economic benefit for a cash amount.
     allOf:
       - $ref: '../../../Globals/Types/Date.yaml'
   financialInstrument:
     $ref: 'FinancialInstrument.yaml'
   account:
     $ref: 'Account.yaml'
+  quantity:
+    $ref: '../Types/Quantity.yaml'
+  currency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  valueDate:
+    title: ValueDate
+    description: Date when calculating economic benefit for a cash amount.
+    allOf:
+      - $ref: '../../../Globals/Types/Date.yaml'
   positionId:
     type: string
     maxLength: 35
@@ -43,3 +37,8 @@ properties:
     $ref: '../Types/Price.yaml'
   foreignExchangeRate:
     $ref: '../Types/ForeignExchangeRate.yaml'
+  movementTypeAdditionalInformation:
+    type: string
+    maxLength: 35
+    example: Fees for Reporting Service
+    description: Provides further details on an informative level, which goes beyond the granularity of the movementType.

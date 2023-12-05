@@ -1,21 +1,34 @@
 title: Transaction
 type: object
 required: 
-  - customerId
   - transactionId
-  - reversalIndicator
-  - dateList
   - transactionType
   - transactionSubtype
+  - transactionDate
+  - customerId
+  - reversalIndicator
 properties:
-  customerId:
-    type: string
-    description: Unique and unambiguous identification used by the bank for the customer.
+  transactionType:
+    $ref: '../Types/TransactionType.yaml'
+  transactionSubtype:
+    $ref: '../Types/TransactionSubtype.yaml'
   transactionId:
     type: string
     maxLength: 35
     example: 987654321
     description: Transaction ID given by the bank
+  transactionDate:
+    title: TransactionDate
+    description: Date of transaction entity
+    allOf:
+      - $ref: '../../../Globals/Types/Date.yaml'
+  customerId:
+    type: string
+    description: Unique and unambiguous identification used by the bank for the customer.
+  reversalIndicator:
+    description: Indicates whether it is the reversal of a previously reported movement.
+    type: boolean
+    default: false
   placeOfTrade:
     type: object
     description: Market in which a trade transaction is to be or has been executed.
@@ -30,20 +43,11 @@ properties:
         maxLength: 70
         description: Description of the market when no Market Identification Code is available.
         example: OTC
-  reversalIndicator:
-    description: Indicates whether it is the reversal of a previously reported movement.
-    type: boolean
-    default: false
   reversedtransactionId:
     type: string
     maxLength: 35
     description: States the identification of the transaction that was reversed
     example: 2134123415
-  transactionDate:
-    title: TransactionDate
-    description: Date of transaction entity
-    allOf:
-      - $ref: '../../../Globals/Types/Date.yaml'
   tradeDate:
     title: tradeDate
     description: Specifies the date/time on which the trade was executed.
@@ -54,10 +58,6 @@ properties:
     description: Date and time at which the securities are to be delivered or received.
     allOf:
       - $ref: '../../../Globals/Types/Date.yaml'
-  transactionType:
-    $ref: '../Types/TransactionType.yaml'
-  transactionSubtype:
-    $ref: '../Types/TransactionSubtype.yaml'
   triggeringFinancialInstrument:
     $ref: 'TriggeringFinancialInstrument.yaml'
   movementList:
