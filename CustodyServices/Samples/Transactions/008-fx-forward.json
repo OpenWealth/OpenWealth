@@ -37,7 +37,7 @@
         "quantityType": "unit"
       },
       "currency": "USD",
-      "positionId": "8"
+      "positionId": "008"
     },
     {
       "movementType": "security",
@@ -70,33 +70,34 @@
         "quantityType": "unit"
       },
       "currency": "USD",
-      "positionId": "4"
+      "positionId": "008"
     },
     {
       "movementType": "cash",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "financialInstrumentType": "cash",
-        "name": "Swiss francs",
+        "name": "US Dollar",
         "identificationList": [
           {
-            "identifier": "CHF",
+            "identifier": "USD",
             "type": "currency"
           }
         ],
-        "currencyOfDenomination": "CHF"
+        "currencyOfDenomination": "USD"
       },
       "account": {
         "accountId": "1234-56",
         "accountType": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121214"
       },
       "quantity": {
-        "value": -100000,
+        "value": -200000,
         "quantityType": "unit"
       },
-      "currency": "CHF",
-      "valueDate": "2023-06-29"
+      "currency": "USD",
+      "valueDate": "2023-06-29",
+      "positionId": "0002"
     },
     {
       "movementType": "cash",
@@ -115,33 +116,34 @@
       "account": {
         "accountId": "1234-57",
         "accountType": "cashAccount",
-        "iban": "CH121212121212121213"
+        "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": 101001.15,
+        "value": 170000,
         "quantityType": "nominal"
       },
-      "currency": "EUR",
-      "valueDate": "2023-06-29"
+      "currency": "CHF",
+      "valueDate": "2023-06-29",
+      "positionId": "0000"
     }
   ],
   "postingAmounts": [
     {
-      "amount": -100000,
-      "currency": "CHF",
+      "amount": -200000,
+      "currency": "USD",
       "account": {
         "accountId": "1234-56",
         "accountType": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121214"
       }
     },
     {
-      "amount": 101001.15,
-      "currency": "EUR",
+      "amount": 170000,
+      "currency": "CHF",
       "account": {
         "accountId": "1234-57",
         "accountType": "cashAccount",
-        "iban": "CH121212121212121213"
+        "iban": "CH121212121212121212"
       }
     }
   ]

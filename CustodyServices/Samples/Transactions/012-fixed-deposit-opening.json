@@ -38,7 +38,7 @@
         "quantityType": "unit"
       },
       "currency": "USD",
-      "positionId": "12"
+      "positionId": "012"
     },
     {
       "movementType": "cash",
@@ -66,7 +66,7 @@
       },
       "currency": "USD",
       "valueDate": "2022-12-31",
-      "positionId": "4"
+      "positionId": "0002"
     }
   ],
   "postingAmounts": [

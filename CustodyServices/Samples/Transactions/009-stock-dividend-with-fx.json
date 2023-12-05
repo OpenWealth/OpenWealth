@@ -36,6 +36,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-05-31",
+      "positionId": "0000",
       "foreignExchangeRate": {
         "rate": 0.9,
         "sourceCurrency": "USD",
@@ -67,6 +68,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-05-31",
+      "positionId": "0000",
       "foreignExchangeRate": {
         "rate": 0.9,
         "sourceCurrency": "USD",

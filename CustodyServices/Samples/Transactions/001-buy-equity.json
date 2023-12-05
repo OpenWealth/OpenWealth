@@ -30,7 +30,7 @@
         "quantityType": "unit"
       },
       "currency": "CHF",
-      "positionId": "1",
+      "positionId": "001",
       "price": {
         "priceType": "actual",
         "value": 10,
@@ -62,7 +62,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2"
+      "positionId": "0000"
     },
     {
       "movementType": "brokerageFee",
@@ -89,7 +89,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2"
+      "positionId": "0000"
     },
     {
       "movementType": "stampDuty",
@@ -116,7 +116,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2"
+      "positionId": "0000"
     }
   ],
   "postingAmounts": [

@@ -39,7 +39,7 @@
         "accountId": "123456-1",
         "accountType": "safekeepingAccount"
       },
-      "positionId": "4",
+      "positionId": "003",
       "price": {
         "priceType": "percentage",
         "value": 90.00
@@ -70,7 +70,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2"
+      "positionId": "0000"
     },
     {
       "movementType": "accruedInterest",
@@ -97,7 +97,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2"
+      "positionId": "0000"
     },
     {
       "movementType": "brokerageFee",
@@ -124,7 +124,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2"
+      "positionId": "0000"
     },
     {
       "movementType": "stampDuty",
@@ -151,7 +151,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2"
+      "positionId": "0000"
     }
   ],
   "postingAmounts": [

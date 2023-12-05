@@ -12,7 +12,7 @@
   },
   "movementList": [
     {
-      "movementType": "coupon",
+      "movementType": "revenue",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "financialInstrumentType": "cash",
@@ -35,7 +35,8 @@
         "quantityType": "unit"
       },
       "currency": "CHF",
-      "valueDate": "2023-06-28"
+      "valueDate": "2023-06-28",
+      "positionId": "0000"
     },
     {
       "movementType": "withholdingTax",
@@ -61,7 +62,8 @@
         "quantityType": "unit"
       },
       "currency": "CHF",
-      "valueDate": "2023-06-28"
+      "valueDate": "2023-06-28",
+      "positionId": "0000"
     }
   ],
   "postingAmounts": [

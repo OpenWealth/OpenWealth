@@ -10,7 +10,6 @@ enum:
 - stampDuty
 - withholdingTax
 - additionalWithholdingTax
-- coupon
 - premium
 - capitalGainTax
 - financialTransactionTax

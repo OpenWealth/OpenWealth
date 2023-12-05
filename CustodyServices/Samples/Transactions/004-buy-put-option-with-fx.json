@@ -39,7 +39,7 @@
         "quantityType": "unit"
       },
       "currency": "USD",
-      "positionId": "4",
+      "positionId": "004",
       "price": {
         "priceType": "actual",
         "value": 30.00,
@@ -71,7 +71,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2",
+      "positionId": "0000",
       "foreignExchangeRate": {
         "rate": 0.9,
         "sourceCurrency": "USD",
@@ -103,7 +103,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2",
+      "positionId": "0000",
       "foreignExchangeRate": {
         "rate": 0.9,
         "sourceCurrency": "USD",
@@ -135,7 +135,7 @@
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "2",
+      "positionId": "0000",
       "foreignExchangeRate": {
         "rate": 0.9,
         "sourceCurrency": "USD",
