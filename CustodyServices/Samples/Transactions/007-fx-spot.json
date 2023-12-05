@@ -1,0 +1,82 @@
+{
+  "transactionId": "0000008",
+  "transactionType": "fx",
+  "transactionSubtype": "fxSpot",
+  "transactionDate": "2023-01-05",
+  "customerId": "123456",
+  "reversalIndicator": false,
+  "movementList": [
+    {
+      "movementType": "cash",
+      "movementDate": "2023-01-05",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "currency"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "value": -100000,
+        "quantityType": "unit"
+      },
+      "currency": "CHF",
+      "valueDate": "2023-01-07"
+    },
+    {
+      "movementType": "cash",
+      "movementDate": "2023-01-05",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "currency"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-57",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121213"
+      },
+      "quantity": {
+        "value": 101001.15,
+        "quantityType": "nominal"
+      },
+      "currency": "EUR",
+      "valueDate": "2023-01-07"
+    }
+  ],
+  "postingAmounts": [
+    {
+      "amount": -100000,
+      "currency": "CHF",
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      }
+    },
+    {
+      "amount": 101001.15,
+      "currency": "EUR",
+      "account": {
+        "accountId": "1234-57",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121213"
+      }
+    }
+  ]
+}

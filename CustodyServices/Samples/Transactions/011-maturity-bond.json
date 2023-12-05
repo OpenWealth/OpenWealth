@@ -1,0 +1,70 @@
+{
+  "transactionId": "00000011",
+  "transactionDate": "2023-06-27",
+  "transactionType": "corporateActions",
+  "transactionSubtype": "redemption",
+  "customerId": "123456",
+  "reversalIndicator": false,
+  "triggeringFinancialInstrument": {
+    "type": "bond",
+    "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
+    "isin": "CH0344958688"
+  },
+  "movementList": [
+    {
+      "movementType": "coupon",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "financialInstrumentType": "bond",
+        "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
+        "isin": "CH0344958688"
+      },
+      "account": {
+        "accountId": "123456-1",
+        "accountType": "safekeepingAccount"
+      },
+      "quantity": {
+        "value": -200000,
+        "quantityType": "faceAmount"
+      },
+      "currency": "CHF"
+    },
+    {
+      "movementType": "cash",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "currency"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "value": 200000,
+        "quantityType": "unit"
+      },
+      "currency": "CHF",
+      "valueDate": "2023-06-28"
+    }
+  ],
+  "postingAmounts": [
+    {
+      "amount": 200000,
+      "currency": "CHF",
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      }
+    }
+  ]
+}
