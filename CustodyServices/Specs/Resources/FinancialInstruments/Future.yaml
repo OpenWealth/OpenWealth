@@ -10,9 +10,9 @@ allOf:
     properties:
       expiryDate:
         $ref: '../../Types/ExpiryDate.yaml'
-      exercisePrice:
-        $ref: '../../Types/ExercisePrice.yaml'
       contractSize:
         $ref: '../../Types/ContractSize.yaml'
       underlyingFinancialInstrument:
         $ref: '../UnderlyingFinancialInstrument.yaml'
+      exercisePrice:
+        $ref: '../../Types/ExercisePrice.yaml'

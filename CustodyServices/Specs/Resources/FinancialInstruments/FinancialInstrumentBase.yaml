@@ -1,25 +1,24 @@
 title: FinancialInstrumentBase
 type: object
 required:
+  - financialInstrumentType
   - name
-  - type
-  - financialInstrumentIdentification
 properties:
-  identificationList:
-    type: array
-    items:
-      $ref: 'Identification.yaml'
+  financialInstrumentType:
+    $ref: '../../Types/FinancialInstrumentType.yaml'
   name:
     type: string
     maxLength: 170
     example: Novartis AG
     description: Name of the financial instrument in free format text.
-  type:
-    $ref: '../../Types/FinancialInstrumentType.yaml'
   isin:
     type: string
     pattern: '^[A-Z]{2}[A-Z0-9]{9}[0-9]$'
     example: CH1234567890
+  identificationList:
+    type: array
+    items:
+      $ref: 'Identification.yaml'
   cfiCode:
     $ref: '../../Types/CfiCode.yaml'
   currencyOfDenomination:
@@ -36,7 +35,7 @@ properties:
     type: boolean
     description: Indicates if the instrument is inactive
     default: false
-  financialInstrumentAttributeAdditionalDetails:
+  additionalDetails:
     type: string
     maxLength: 70
     description: Provides additional information about the financial instrument in narrative form.
