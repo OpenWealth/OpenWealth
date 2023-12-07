@@ -883,14 +883,11 @@ components:
           maxLength: 170
           example: Novartis AG
           description: Name of the financial instrument in free format text.
-        isin:
-          type: string
-          pattern: ^[A-Z]{2}[A-Z0-9]{9}[0-9]$
-          example: CH1234567890
         identificationList:
           type: array
           items:
             $ref: '#/components/schemas/Identification'
+          minItems: 1
         cfiCode:
           $ref: '#/components/schemas/CfiCode'
         currencyOfDenomination:
