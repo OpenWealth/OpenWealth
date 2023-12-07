@@ -19,11 +19,11 @@
           }
         ],
         "amountPaid": {
-          "value": 200000,
+          "amount": 200000,
           "currency": "USD"
         },
         "amountReceived": {
-          "value": 170000,
+          "amount": 170000,
           "currency": "USD"
         },
         "maturityDate": "2023-06-27"
@@ -52,11 +52,11 @@
           }
         ],
         "amountPaid": {
-          "value": 200000,
+          "amount": 200000,
           "currency": "USD"
         },
         "amountReceived": {
-          "value": 170000,
+          "amount": 170000,
           "currency": "USD"
         },
         "maturityDate": "2023-06-27"
@@ -66,8 +66,8 @@
         "accountType": "safekeepingAccount"
       },
       "quantity": {
-        "value": -1,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -1
       },
       "currency": "USD",
       "positionId": "008"
@@ -80,8 +80,8 @@
         "name": "US Dollar",
         "identificationList": [
           {
-            "identifier": "USD",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "USD"
           }
         ],
         "currencyOfDenomination": "USD"
@@ -92,8 +92,8 @@
         "iban": "CH121212121212121214"
       },
       "quantity": {
-        "value": -200000,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -200000
       },
       "currency": "USD",
       "valueDate": "2023-06-29",
@@ -107,8 +107,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -119,8 +119,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": 170000,
-        "quantityType": "nominal"
+        "quantityType": "unit",
+        "value": 170000
       },
       "currency": "CHF",
       "valueDate": "2023-06-29",

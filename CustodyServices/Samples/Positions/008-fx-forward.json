@@ -1,0 +1,51 @@
+{
+  "positionId": "008",
+  "positionDate": "2023-01-04",
+  "externalReference": "22222225",
+  "financialInstrument": {
+    "financialInstrumentType": "fxForward",
+    "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+    "identificationList": [
+      {
+        "identifier": "fxForwardRef111",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "amountPaid": {
+      "amount": 200000,
+      "currency": "USD"
+    },
+    "amountReceived": {
+      "amount": 170000,
+      "currency": "USD"
+    },
+    "maturityDate": "2023-06-27"
+  },
+  "account": {
+    "accountId": "123456-1",
+    "accountType": "safekeepingAccount"
+  },
+  "quantity": {
+    "quantityType": "unit",
+    "value": 1
+  },
+  "valuation": {
+    "valueInPositionCurrency": {
+      "amount": 11111.10,
+      "currency": "USD"
+    },
+    "valueInReferenceCurrency": {
+      "amount": 10000,
+      "currency": "CHF"
+    },
+    "foreignExchangeRate": {
+      "rate": 0.9,
+      "sourceCurrency": "USD",
+      "targetCurrency": "CHF",
+      "rateDate": "2023-01-04"
+    }
+  },
+  "positionName": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+  "currency": "USD",
+  "safekeepingPlace": "INSECHZZXXX"
+}

@@ -1,0 +1,43 @@
+{
+  "positionId": "001",
+  "positionDate": "2022-12-31",
+  "financialInstrument": {
+    "financialInstrumentType": "equity",
+    "name": "CREDIT SUISSE GROUP AG",
+    "identificationList": [
+      {
+        "identifier": "CH0012138530",
+        "type": "isin"
+      }
+    ],
+    "currencyOfDenomination": "CHF"
+  },
+  "account": {
+    "accountId": "123456-1",
+    "accountType": "safekeepingAccount"
+  },
+  "quantity": {
+    "value": 1000,
+    "quantityType": "unit"
+  },
+  "price": {
+    "priceType": "actual",
+    "value": 10,
+    "currency": "CHF",
+    "priceDate": "2022-12-31",
+    "sourceOfPrice": "CreditSuisse"
+  },
+  "valuation": {
+    "valueInPositionCurrency": {
+      "amount": 10000,
+      "currency": "CHF"
+    },
+    "valueInReferenceCurrency": {
+      "amount": 10000,
+      "currency": "CHF"
+    }
+  },
+  "positionName": "CREDIT SUISSE GROUP AG",
+  "currency": "CHF",
+  "safekeepingPlace": "INSECHZZXXX"
+}

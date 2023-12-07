@@ -13,17 +13,19 @@
       "movementType": "security",
       "movementDate": "2023-01-04",
       "quantity": {
-        "value": 200000,
-        "quantityType": "faceAmount"
+        "quantityType": "faceAmount",
+        "value": 200000
       },
       "currency": "CHF",
       "financialInstrument": {
         "financialInstrumentType": "bond",
         "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
-        "identificationList": {
-          "identifier": "CH0344958688",
-          "type": "isin"
-        },
+        "identificationList": [
+          {
+            "identifierType": "isin",
+            "identifier": "CH0344958688"
+          }
+        ],
         "interestRate": {
           "rate": 0.005,
           "type": "fixed",
@@ -42,7 +44,7 @@
       "positionId": "003",
       "price": {
         "priceType": "percentage",
-        "value": 90.00
+        "amount": 90.00
       }
     },
     {
@@ -53,8 +55,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -65,8 +67,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -180000,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -180000
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
@@ -80,8 +82,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -92,8 +94,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -500,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -500
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
@@ -107,8 +109,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -119,8 +121,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -130,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -130
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
@@ -134,8 +136,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -146,8 +148,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -135,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -135
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",

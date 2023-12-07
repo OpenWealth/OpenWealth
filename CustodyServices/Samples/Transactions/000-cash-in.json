@@ -14,8 +14,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"

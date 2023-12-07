@@ -8,7 +8,12 @@
   "triggeringFinancialInstrument": {
     "type": "bond",
     "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
-    "isin": "CH0344958688"
+    "identificationList": [
+      {
+        "identifierType": "isin",
+        "identifier": "CH0344958688"
+      }
+    ]
   },
   "movementList": [
     {
@@ -19,8 +24,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -31,8 +36,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": 1000,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": 1000
       },
       "currency": "CHF",
       "valueDate": "2023-06-28",
@@ -46,8 +51,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -58,8 +63,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -335,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -335
       },
       "currency": "CHF",
       "valueDate": "2023-06-28",

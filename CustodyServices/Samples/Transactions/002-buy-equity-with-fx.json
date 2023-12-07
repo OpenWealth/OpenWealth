@@ -15,21 +15,26 @@
       "financialInstrument": {
         "financialInstrumentType": "equity",
         "name": "Apple Inc.",
-        "isin": "US0378331005"
+        "identificationList": [
+          {
+            "identifierType": "isin",
+            "identifier": "US0378331005"
+          }
+        ]
       },
       "account": {
         "accountId": "123456-1",
         "accountType": "safekeepingAccount"
       },
       "quantity": {
-        "value": 40,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": 40
       },
       "currency": "USD",
       "positionId": "002",
       "price": {
         "priceType": "actual",
-        "value": 150,
+        "value": 150.00,
         "currency": "USD"
       }
     },
@@ -41,8 +46,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -53,8 +58,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -5100,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -5100
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
@@ -73,8 +78,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -85,8 +90,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -200.25,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -200.25
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
@@ -105,8 +110,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -117,8 +122,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -150.75,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -150.75
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",

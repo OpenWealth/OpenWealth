@@ -8,7 +8,12 @@
   "triggeringFinancialInstrument": {
     "type": "equity",
     "name": "Apple Inc.",
-    "isin": "US0378331005"
+    "identificationList": [
+      {
+        "identifierType": "isin",
+        "identifier": "US0378331005"
+      }
+    ]
   },
   "movementList": [
     {
@@ -19,8 +24,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -31,8 +36,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": 270,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": 270
       },
       "currency": "CHF",
       "valueDate": "2023-05-31",
@@ -51,8 +56,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -63,8 +68,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -90,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -90
       },
       "currency": "CHF",
       "valueDate": "2023-05-31",

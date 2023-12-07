@@ -19,7 +19,7 @@
           }
         ],
         "principalAmount": {
-          "value": 100000
+          "amount": 100000
         },
         "interestRate": {
           "type": "fixed",
@@ -48,8 +48,8 @@
         "name": "US Dollars",
         "identificationList": [
           {
-            "identifier": "USD",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "USD"
           }
         ],
         "currencyOfDenomination": "USD"

@@ -14,8 +14,8 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifier": "CHF",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "CHF"
           }
         ],
         "currencyOfDenomination": "CHF"
@@ -26,8 +26,8 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "value": -100000,
-        "quantityType": "unit"
+        "quantityType": "unit",
+        "value": -100000
       },
       "currency": "CHF",
       "valueDate": "2023-01-07",
@@ -41,8 +41,8 @@
         "name": "Euro",
         "identificationList": [
           {
-            "identifier": "EUR",
-            "type": "currency"
+            "identifierType": "iso3",
+            "identifier": "EUR"
           }
         ],
         "currencyOfDenomination": "EUR"
@@ -53,8 +53,8 @@
         "iban": "CH121212121212121213"
       },
       "quantity": {
-        "value": 101001.15,
-        "quantityType": "nominal"
+        "quantityType": "unit",
+        "value": 101001.15
       },
       "currency": "EUR",
       "valueDate": "2023-01-07",

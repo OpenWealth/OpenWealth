@@ -1,0 +1,38 @@
+{
+  "positionId": "000",
+  "positionDate": "2022-12-31",
+  "externalReference": "3456345",
+  "financialInstrument": {
+    "financialInstrumentType": "cash",
+    "name": "Swiss francs",
+    "identificationList": [
+      {
+        "identifier": "CHF",
+        "type": "currency"
+      }
+    ],
+    "currencyOfDenomination": "CHF"
+  },
+  "account": {
+    "accountId": "1234-56",
+    "accountType": "cashAccount",
+    "iban": "CH121212121212121212"
+  },
+  "quantity": {
+    "value": 500000,
+    "quantityType": "unit"
+  },
+  "valuation": {
+    "valueInPositionCurrency": {
+      "amount": 500000,
+      "currency": "CHF"
+    },
+    "valueInReferenceCurrency": {
+      "amount": 500000,
+      "currency": "CHF"
+    }
+  },
+  "positionName": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
+  "currency": "CHF",
+  "safekeepingPlace": "INSECHZZXXX"
+}

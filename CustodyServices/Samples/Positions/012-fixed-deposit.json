@@ -1,0 +1,47 @@
+{
+  "positionId": "012",
+  "positionDate": "2022-12-31",
+  "externalReference": "222222654",
+  "financialInstrument": {
+    "financialInstrumentType": "fixedDeposit",
+    "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
+    "identificationList": [
+      {
+        "identifier": "fixedDepositContract1",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "principalAmount": {
+      "amount": 100000,
+      "currency": "USD"
+    },
+    "maturityDate": "2023-06-27"
+  },
+  "account": {
+    "accountId": "123456-1",
+    "accountType": "safekeepingAccount"
+  },
+  "quantity": {
+    "quantityType": "unit",
+    "value": 1
+  },
+  "valuation": {
+    "valueInPositionCurrency": {
+      "amount": 100000,
+      "currency": "USD"
+    },
+    "valueInReferenceCurrency": {
+      "amount": 90000,
+      "currency": "CHF"
+    },
+    "foreignExchangeRate": {
+      "rate": 0.9,
+      "sourceCurrency": "USD",
+      "targetCurrency": "CHF",
+      "rateDate": "2022-12-31"
+    }
+  },
+  "positionName": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
+  "currency": "CHF",
+  "safekeepingPlace": "INSECHZZXXX"
+}
