@@ -5,9 +5,7 @@ allOf:
   - $ref: "../../../Globals/Types/Rate.yaml"
   - type: object
     properties:
-      currency:
-        $ref: "../../../Globals/Types/Currency.yaml"
-      type:
+      interestRateType:
         type: string
         description: Indicates the type of interest
         example: fixed

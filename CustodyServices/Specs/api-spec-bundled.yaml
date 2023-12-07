@@ -948,9 +948,7 @@ components:
         - $ref: '#/components/schemas/Rate'
         - type: object
           properties:
-            currency:
-              $ref: '#/components/schemas/Currency'
-            type:
+            interestRateType:
               type: string
               description: Indicates the type of interest
               example: fixed
