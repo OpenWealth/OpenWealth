@@ -94,7 +94,6 @@ paths:
       - $ref: '#/components/parameters/CustomerId'
       - $ref: '#/components/parameters/Date'
       - $ref: '#/components/parameters/endOfDayParam'
-      - $ref: '#/components/parameters/dateTypeParam'
       - $ref: '#/components/parameters/Cursor'
       - $ref: '#/components/parameters/Limit'
       - $ref: '#/components/parameters/CorrelationInHeader'
@@ -137,7 +136,6 @@ paths:
       - $ref: '#/components/parameters/AccountId'
       - $ref: '#/components/parameters/Date'
       - $ref: '#/components/parameters/endOfDayParam'
-      - $ref: '#/components/parameters/dateTypeParam'
       - $ref: '#/components/parameters/Cursor'
       - $ref: '#/components/parameters/Limit'
       - $ref: '#/components/parameters/CorrelationInHeader'
@@ -159,6 +157,90 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountPositionStatement'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /accounts/{accountId}/positions:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/Cursor'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/CorrelationInHeader'
+    get:
+      summary: Returns the positions for a specific account.
+      description: Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
+      operationId: getAccountPositionByAccountId
+      tags:
+        - positions
+      responses:
+        '200':
+          description: Position List
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+            nextCursor:
+              $ref: '#/components/headers/NextCursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /accounts/{accountId}/positions/{positionId}:
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/PositionId'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/CorrelationInHeader'
+    get:
+      summary: Returns a positions by id for a specific account.
+      description: Returns a positions for a specific account.
+      operationId: getAccountPositionById
+      tags:
+        - positions
+      responses:
+        '200':
+          description: Position
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+            nextCursor:
+              $ref: '#/components/headers/NextCursor'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -304,6 +386,90 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
+  /customers/{customerId}/transactions:
+    parameters:
+      - $ref: '#/components/parameters/CustomerId'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/dateTypeParam'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/Cursor'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/CorrelationInHeader'
+    get:
+      summary: Returns a transactions for a specific customer.
+      description: Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+      operationId: getTransactionByCustomerId
+      tags:
+        - transactions
+      responses:
+        '200':
+          description: Returns a transaction list for a specific customer.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+            nextCursor:
+              $ref: '#/components/headers/NextCursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/transactions/{transactionId}:
+    parameters:
+      - $ref: '#/components/parameters/CustomerId'
+      - $ref: '#/components/parameters/TransactionId'
+      - $ref: '#/components/parameters/CorrelationInHeader'
+    get:
+      summary: Returns a transaction for a specific customer.
+      description: Returns a transaction instance by id.
+      operationId: getTransactionByTransactionId
+      tags:
+        - transactions
+      responses:
+        '200':
+          description: Returns a transaction list for a specific customer.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+            nextCursor:
+              $ref: '#/components/headers/NextCursor'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
 components:
   parameters:
     dateTypeParam:
@@ -385,6 +551,15 @@ components:
         maxLength: 35
         description: Identification for the position given by the bank.
         example: 1234566-12-1
+    TransactionId:
+      name: transactionId
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 35
+        description: Identification for the transaction given by the bank.
+        example: 1234566-12-7
   headers:
     XCorrelationId:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
