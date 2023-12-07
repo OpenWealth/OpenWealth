@@ -1,6 +1,6 @@
 title: Position
 type: object
-required: 
+required:
   - positionId
   - positionDate
   - financialInstrument
@@ -17,54 +17,49 @@ properties:
     title: PositionDate
     description: Date at which the position was valuated.
     allOf:
-      - $ref: '../../../Globals/Types/Date.yaml'
-  externalReference:
-    type: string
-    maxLength: 35
-    example: 987-654-321
-    description: Reference used by the external party, e.g. Portfolio Management Systems
+      - $ref: "../../../Globals/Types/Date.yaml"
   financialInstrument:
-    $ref: 'FinancialInstrument.yaml'
+    $ref: "FinancialInstrument.yaml"
   account:
-    $ref: 'Account.yaml'
+    $ref: "Account.yaml"
   quantity:
-    $ref: '../Types/Quantity.yaml'
+    $ref: "../Types/Quantity.yaml"
   valuation:
-    $ref: '../Types/Valuation.yaml'
+    $ref: "../Types/Valuation.yaml"
   positionName:
     type: string
     maxLength: 80
     example: Stark Industries Inc.
     description: Name of the position.
   currency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: "../../../Globals/Types/Currency.yaml"
   price:
-    $ref: '../Types/ValuationPrice.yaml'
+    $ref: "../Types/ValuationPrice.yaml"
   foreignExchangeRate:
-    $ref: '../Types/valuationForeignExchangeRate.yaml'
+    $ref: "../Types/valuationForeignExchangeRate.yaml"
   costPrice:
-    $ref: '../Types/Price.yaml'
+    $ref: "../Types/Price.yaml"
   costForeignExchangeRate:
-    $ref: '../Types/ForeignExchangeRate.yaml'
+    $ref: "../Types/ForeignExchangeRate.yaml"
   safekeepingPlace:
     type: string
-    pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
+    pattern: "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
     example: INSECHZZXXX
-    description: 'BIC of the place where the securities are safe-kept, physically or notionally'
+    description: "BIC of the place where the securities are safe-kept, physically or notionally"
   additionalCustodianInformation:
     type: string
-    pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
+    pattern: "[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"
     example: INSECHZZXXX
-    description: 'Used for special use cases where safekeepingPlace is not suffienct. BIC of the place where the securities are safe-kept, physically or notionally'
+    description: "Used for special use cases where safekeepingPlace is not suffienct. BIC of the place where the securities are safe-kept, physically or notionally"
   accruedInterest:
-    $ref: '../Types/CurrencyAmount.yaml'
+    $ref: "../Types/CurrencyAmount.yaml"
   numberOfDaysAccrued:
     type: integer
     example: 34
     description: Number of days used for calculating the accrued interest amount.
   blockedQuantity:
     allOf:
-      - $ref: '../Types/Quantity.yaml'
+      - $ref: "../Types/Quantity.yaml"
       - description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
   additionalDetails:
     type: string

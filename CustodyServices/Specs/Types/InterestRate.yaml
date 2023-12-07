@@ -2,11 +2,11 @@ title: InterestRate
 type: object
 description: Per annum ratio of interest received or paid to the principal amount of the contract for a specific period of time.
 allOf:
-  - $ref: '../../../Globals/Types/Rate.yaml'
+  - $ref: "../../../Globals/Types/Rate.yaml"
   - type: object
     properties:
       currency:
-        $ref: '../../../Globals/Types/Currency.yaml'
+        $ref: "../../../Globals/Types/Currency.yaml"
       type:
         type: string
         description: Indicates the type of interest
@@ -16,20 +16,20 @@ allOf:
           - variable
           - staggered
       dayCountBasis:
-        $ref: 'dayCountBasis.yaml'
+        $ref: "dayCountBasis.yaml"
       paymentDate:
         allOf:
-          - $ref: '../../../Globals/Types/Date.yaml'
+          - $ref: "../../../Globals/Types/Date.yaml"
           - description: Date of the next interest payment.
       paymentFrequency:
         type: string
         description: Specifies the frequency of an interest payment.
         example: quarterly
         enum:
-        - annual
-        - monthly
-        - quarterly
-        - semiAnnual
-        - weekly
-        - atMaturity
-        - other
+          - annual
+          - monthly
+          - quarterly
+          - semiAnnual
+          - weekly
+          - atMaturity
+          - other

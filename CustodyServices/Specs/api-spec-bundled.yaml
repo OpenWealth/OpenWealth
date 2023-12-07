@@ -947,7 +947,7 @@ components:
         - value
         - currency
       properties:
-        value:
+        amount:
           type: number
           example: 12000
           description: Signed amount
@@ -1137,21 +1137,6 @@ components:
           type: number
           example: 12000
           description: Signed decimal number
-    ValuationPrice:
-      title: ValuationPrice
-      allOf:
-        - $ref: '#/components/schemas/Price'
-        - type: object
-          properties:
-            priceDate:
-              description: Date of the price.
-              allOf:
-                - $ref: '#/components/schemas/Date'
-            sourceOfPrice:
-              type: string
-              maxLength: 70
-              description: Indicates the source of the (market)price
-              example: SIX Swiss Exchange
     ForeignExchangeRate:
       title: ForeignExchangeRate
       type: object
@@ -1163,21 +1148,6 @@ components:
               $ref: '#/components/schemas/Currency'
             targetCurrency:
               $ref: '#/components/schemas/Currency'
-    valuationForeignExchangeRate:
-      title: ValuationForeignExchangeRate
-      allOf:
-        - $ref: '#/components/schemas/ForeignExchangeRate'
-        - type: object
-          properties:
-            rateDate:
-              description: Date of rate.
-              allOf:
-                - $ref: '#/components/schemas/Date'
-            sourceOfRate:
-              type: string
-              maxLength: 70
-              description: Indicates the source of the (market) price
-              example: Reuters 4 o'clock
     ValuationForeignExchangeRate:
       title: ValuationForeignExchangeRate
       allOf:
@@ -1197,8 +1167,10 @@ components:
       title: Valuation
       type: object
       description: Detailed information about the valuation of a position
+      required:
+        - value
       properties:
-        value:
+        valueInPositionCurrency:
           $ref: '#/components/schemas/CurrencyAmount'
         valueInReferenceCurrency:
           $ref: '#/components/schemas/CurrencyAmount'
@@ -1206,14 +1178,45 @@ components:
           $ref: '#/components/schemas/ValuationForeignExchangeRate'
         valuationDate:
           $ref: '#/components/schemas/Date'
+    ValuationPrice:
+      title: ValuationPrice
+      allOf:
+        - $ref: '#/components/schemas/Price'
+        - type: object
+          properties:
+            priceDate:
+              description: Date of the price.
+              allOf:
+                - $ref: '#/components/schemas/Date'
+            sourceOfPrice:
+              type: string
+              maxLength: 70
+              description: Indicates the source of the (market)price
+              example: SIX Swiss Exchange
+    valuationForeignExchangeRate:
+      title: ValuationForeignExchangeRate
+      allOf:
+        - $ref: '#/components/schemas/ForeignExchangeRate'
+        - type: object
+          properties:
+            rateDate:
+              description: Date of rate.
+              allOf:
+                - $ref: '#/components/schemas/Date'
+            sourceOfRate:
+              type: string
+              maxLength: 70
+              description: Indicates the source of the (market) price
+              example: Reuters 4 o'clock
     Position:
       title: Position
       type: object
       required:
         - positionId
-        - quantity
+        - positionDate
         - financialInstrument
         - account
+        - quantity
         - valuation
       properties:
         positionId:
@@ -1226,17 +1229,14 @@ components:
           description: Date at which the position was valuated.
           allOf:
             - $ref: '#/components/schemas/Date'
-        externalReference:
-          type: string
-          maxLength: 35
-          example: 987-654-321
-          description: Reference used by the external party, e.g. Portfolio Management Systems
         financialInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
         account:
           $ref: '#/components/schemas/Account'
         quantity:
           $ref: '#/components/schemas/Quantity'
+        valuation:
+          $ref: '#/components/schemas/Valuation'
         positionName:
           type: string
           maxLength: 80
@@ -1252,8 +1252,6 @@ components:
           $ref: '#/components/schemas/Price'
         costForeignExchangeRate:
           $ref: '#/components/schemas/ForeignExchangeRate'
-        valuation:
-          $ref: '#/components/schemas/Valuation'
         safekeepingPlace:
           type: string
           pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
@@ -1367,6 +1365,7 @@ components:
         - closeFxForward
         - closeNDF
         - conversionBondShare
+        - coupon
         - creditEvent
         - decrease
         - deliverSecurityToFund
@@ -1454,7 +1453,6 @@ components:
         - stampDuty
         - withholdingTax
         - additionalWithholdingTax
-        - coupon
         - premium
         - capitalGainTax
         - financialTransactionTax
