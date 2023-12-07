@@ -1,0 +1,85 @@
+{
+  "transactionId": "0000010",
+  "transactionDate": "2023-06-27",
+  "transactionType": "corporateActions",
+  "transactionSubtype": "coupon",
+  "customerId": "123456",
+  "reversalIndicator": false,
+  "triggeringFinancialInstrument": {
+    "type": "bond",
+    "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
+    "identificationList": [
+      {
+        "identifierType": "isin",
+        "identifier": "CH0344958688"
+      }
+    ]
+  },
+  "movementList": [
+    {
+      "movementType": "revenue",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": 1000
+      },
+      "currency": "CHF",
+      "valueDate": "2023-06-28",
+      "positionId": "0000"
+    },
+    {
+      "movementType": "withholdingTax",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": -335
+      },
+      "currency": "CHF",
+      "valueDate": "2023-06-28",
+      "positionId": "0000"
+    }
+  ],
+  "postingAmounts": [
+    {
+      "amount": 665,
+      "currency": "CHF",
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      }
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "transactionId": "0000009",
+  "transactionDate": "2023-05-31",
+  "transactionType": "corporateActions",
+  "transactionSubtype": "dividendCash",
+  "customerId": "123456",
+  "reversalIndicator": false,
+  "triggeringFinancialInstrument": {
+    "type": "equity",
+    "name": "Apple Inc.",
+    "identificationList": [
+      {
+        "identifierType": "isin",
+        "identifier": "US0378331005"
+      }
+    ]
+  },
+  "movementList": [
+    {
+      "movementType": "revenue",
+      "movementDate": "2023-05-31",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": 270
+      },
+      "currency": "CHF",
+      "valueDate": "2023-05-31",
+      "positionId": "0000",
+      "foreignExchangeRate": {
+        "rate": 0.9,
+        "sourceCurrency": "USD",
+        "targetCurrency": "CHF"
+      }
+    },
+    {
+      "movementType": "withholdingTax",
+      "movementDate": "2023-05-31",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": -90
+      },
+      "currency": "CHF",
+      "valueDate": "2023-05-31",
+      "positionId": "0000",
+      "foreignExchangeRate": {
+        "rate": 0.9,
+        "sourceCurrency": "USD",
+        "targetCurrency": "CHF"
+      }
+    }
+  ],
+  "postingAmounts": [
+    {
+      "amount": 180,
+      "currency": "CHF",
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      }
+    }
+  ]
+}

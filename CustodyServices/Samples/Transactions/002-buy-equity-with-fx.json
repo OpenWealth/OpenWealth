@@ -1,12 +1,12 @@
 {
-  "transactionId": "0000002",
+  "transactionId": "0000003",
   "transactionDate": "2023-01-04",
   "transactionType": "securitiesExchange",
   "transactionSubtype": "buy",
-  "reversalIndicator": false,
   "customerId": "123456",
+  "reversalIndicator": false,
   "placeOfTrade": {
-    "marketIdentificationCode": "XSWX"
+    "marketIdentificationCode": "XNYS"
   },
   "movementList": [
     {
@@ -14,14 +14,13 @@
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "financialInstrumentType": "equity",
-        "name": "CREDIT SUISSE GROUP AG",
+        "name": "Apple Inc.",
         "identificationList": [
           {
             "identifierType": "isin",
-            "identifier": "CH0012138530"
+            "identifier": "US0378331005"
           }
-        ],
-        "currencyOfDenomination": "CHF"
+        ]
       },
       "account": {
         "accountId": "123456-1",
@@ -29,14 +28,14 @@
       },
       "quantity": {
         "quantityType": "unit",
-        "value": 1000
+        "value": 40
       },
-      "currency": "CHF",
-      "positionId": "001",
+      "currency": "USD",
+      "positionId": "002",
       "price": {
         "priceType": "actual",
-        "value": 10,
-        "currency": "CHF"
+        "value": 150.00,
+        "currency": "USD"
       }
     },
     {
@@ -60,14 +59,19 @@
       },
       "quantity": {
         "quantityType": "unit",
-        "value": -100000
+        "value": -5100
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "foreignExchangeRate": {
+        "rate": 0.85,
+        "sourceCurrency": "USD",
+        "targetCurrency": "CHF"
+      }
     },
     {
-      "movementType": "brokerageFee",
+      "movementType": "brokerageFeeDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "financialInstrumentType": "cash",
@@ -87,11 +91,16 @@
       },
       "quantity": {
         "quantityType": "unit",
-        "value": -397.75
+        "value": -200.25
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "foreignExchangeRate": {
+        "rate": 0.85,
+        "sourceCurrency": "USD",
+        "targetCurrency": "CHF"
+      }
     },
     {
       "movementType": "stampDuty",
@@ -114,16 +123,21 @@
       },
       "quantity": {
         "quantityType": "unit",
-        "value": -75
+        "value": -150.75
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "foreignExchangeRate": {
+        "rate": 0.85,
+        "sourceCurrency": "USD",
+        "targetCurrency": "CHF"
+      }
     }
   ],
   "postingAmounts": [
     {
-      "amount": -100472.75,
+      "amount": -5451.00,
       "currency": "CHF",
       "account": {
         "accountId": "1234-56",

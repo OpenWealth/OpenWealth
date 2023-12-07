@@ -5,7 +5,7 @@ required:
   - value
   - currency
 properties:
-  value:
+  amount:
     type: number
     example: 12000
     description: Signed amount

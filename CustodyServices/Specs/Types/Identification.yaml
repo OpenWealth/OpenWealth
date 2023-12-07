@@ -1,15 +1,10 @@
 title: Identification
 type: object
 required: 
+  - identifierType
   - identifier
-  - type
 properties:
-  identifier:
-    type: string
-    maxLength: 35
-    example: CH0012005267
-    description: Identification value
-  type:
+  identifierType:
     type: string
     example: isin
     description: Type of the identifier
@@ -28,4 +23,10 @@ properties:
       - sicovam
       - belgian
       - common
+      - iso3
       - otherProprietaryIdentification
+  identifier:
+    type: string
+    maxLength: 35
+    example: CH0012005267
+    description: Identification value

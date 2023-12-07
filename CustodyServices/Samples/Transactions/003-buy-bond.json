@@ -1,10 +1,10 @@
 {
-  "transactionId": "0000002",
+  "transactionId": "0000004",
   "transactionDate": "2023-01-04",
   "transactionType": "securitiesExchange",
   "transactionSubtype": "buy",
-  "reversalIndicator": false,
   "customerId": "123456",
+  "reversalIndicator": false,
   "placeOfTrade": {
     "marketIdentificationCode": "XSWX"
   },
@@ -12,31 +12,39 @@
     {
       "movementType": "security",
       "movementDate": "2023-01-04",
+      "quantity": {
+        "quantityType": "faceAmount",
+        "value": 200000
+      },
+      "currency": "CHF",
       "financialInstrument": {
-        "financialInstrumentType": "equity",
-        "name": "CREDIT SUISSE GROUP AG",
+        "financialInstrumentType": "bond",
+        "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
         "identificationList": [
           {
             "identifierType": "isin",
-            "identifier": "CH0012138530"
+            "identifier": "CH0344958688"
           }
         ],
-        "currencyOfDenomination": "CHF"
+        "interestRate": {
+          "rate": 0.005,
+          "type": "fixed",
+          "dayCountBasis": "act_360",
+          "paymentDate": "2023-06-27",
+          "paymentFrequency": "annual"
+        },
+        "maturityDate": "2032-06-27",
+        "currencyOfDenomination": "CHF",
+        "minimumDenomination": 1000
       },
       "account": {
         "accountId": "123456-1",
         "accountType": "safekeepingAccount"
       },
-      "quantity": {
-        "quantityType": "unit",
-        "value": 1000
-      },
-      "currency": "CHF",
-      "positionId": "001",
+      "positionId": "003",
       "price": {
-        "priceType": "actual",
-        "value": 10,
-        "currency": "CHF"
+        "priceType": "percentage",
+        "amount": 90.00
       }
     },
     {
@@ -60,7 +68,34 @@
       },
       "quantity": {
         "quantityType": "unit",
-        "value": -100000
+        "value": -180000
+      },
+      "currency": "CHF",
+      "valueDate": "2023-01-04",
+      "positionId": "0000"
+    },
+    {
+      "movementType": "accruedInterest",
+      "movementDate": "2023-01-04",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": -500
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
@@ -87,7 +122,7 @@
       },
       "quantity": {
         "quantityType": "unit",
-        "value": -397.75
+        "value": -130
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
@@ -114,7 +149,7 @@
       },
       "quantity": {
         "quantityType": "unit",
-        "value": -75
+        "value": -135
       },
       "currency": "CHF",
       "valueDate": "2023-01-04",
@@ -123,7 +158,7 @@
   ],
   "postingAmounts": [
     {
-      "amount": -100472.75,
+      "amount": -180765.00,
       "currency": "CHF",
       "account": {
         "accountId": "1234-56",

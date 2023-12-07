@@ -1,0 +1,51 @@
+{
+  "positionId": "003",
+  "positionDate": "2023-01-04",
+  "financialInstrument": {
+    "financialInstrumentType": "bond",
+    "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
+    "identificationList": [
+      {
+        "identifierType": "isin",
+        "identifier": "CH0344958688"
+      }
+    ],
+    "interestRate": {
+      "rate": 0.005,
+      "type": "fixed",
+      "dayCountBasis": "act_360",
+      "paymentDate": "2023-06-27",
+      "paymentFrequency": "annual"
+    },
+    "maturityDate": "2032-06-27",
+    "currencyOfDenomination": "CHF",
+    "minimumDenomination": 1000
+  },
+  "account": {
+    "accountId": "123456-1",
+    "accountType": "safekeepingAccount"
+  },
+  "quantity": {
+    "value": 200000,
+    "quantityType": "faceAmount"
+  },
+  "price": {
+    "priceType": "percentage",
+    "value": 90,
+    "priceDate": "2023-01-04",
+    "sourceOfPrice": "CreditSuisse"
+  },
+  "valuation": {
+    "valueInPositionCurrency": {
+      "amount": 180000,
+      "currency": "CHF"
+    },
+    "valueInReferenceCurrency": {
+      "amount": 180000,
+      "currency": "CHF"
+    }
+  },
+  "positionName": "Schweizerische Eidgenossenschaft 0,5% 18/32",
+  "currency": "CHF",
+  "safekeepingPlace": "INSECHZZXXX"
+}

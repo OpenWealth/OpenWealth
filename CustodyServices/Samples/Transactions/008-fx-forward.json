@@ -1,0 +1,150 @@
+{
+  "transactionId": "0000008",
+  "transactionType": "fx",
+  "transactionSubtype": "fxForward",
+  "transactionDate": "2023-01-04",
+  "customerId": "123456",
+  "reversalIndicator": false,
+  "movementList": [
+    {
+      "movementType": "security",
+      "movementDate": "2023-01-04",
+      "financialInstrument": {
+        "financialInstrumentType": "fxForward",
+        "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+        "identificationList": [
+          {
+            "identifier": "fxForwardRef111",
+            "type": "otherProprietaryIdentification"
+          }
+        ],
+        "amountPaid": {
+          "amount": 200000,
+          "currency": "USD"
+        },
+        "amountReceived": {
+          "amount": 170000,
+          "currency": "USD"
+        },
+        "maturityDate": "2023-06-27"
+      },
+      "account": {
+        "accountId": "123456-1",
+        "accountType": "safekeepingAccount"
+      },
+      "quantity": {
+        "value": 1,
+        "quantityType": "unit"
+      },
+      "currency": "USD",
+      "positionId": "008"
+    },
+    {
+      "movementType": "security",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "financialInstrumentType": "fxForward",
+        "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+        "identificationList": [
+          {
+            "identifier": "fxForwardRef111",
+            "type": "otherProprietaryIdentification"
+          }
+        ],
+        "amountPaid": {
+          "amount": 200000,
+          "currency": "USD"
+        },
+        "amountReceived": {
+          "amount": 170000,
+          "currency": "USD"
+        },
+        "maturityDate": "2023-06-27"
+      },
+      "account": {
+        "accountId": "123456-1",
+        "accountType": "safekeepingAccount"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": -1
+      },
+      "currency": "USD",
+      "positionId": "008"
+    },
+    {
+      "movementType": "cash",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "US Dollar",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "USD"
+          }
+        ],
+        "currencyOfDenomination": "USD"
+      },
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121214"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": -200000
+      },
+      "currency": "USD",
+      "valueDate": "2023-06-29",
+      "positionId": "0002"
+    },
+    {
+      "movementType": "cash",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-57",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": 170000
+      },
+      "currency": "CHF",
+      "valueDate": "2023-06-29",
+      "positionId": "0000"
+    }
+  ],
+  "postingAmounts": [
+    {
+      "amount": -200000,
+      "currency": "USD",
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121214"
+      }
+    },
+    {
+      "amount": 170000,
+      "currency": "CHF",
+      "account": {
+        "accountId": "1234-57",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      }
+    }
+  ]
+}

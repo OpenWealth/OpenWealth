@@ -1,42 +1,42 @@
 {
-  "customerId": "123456",
   "transactionId": "0000001",
-  "reversalIndicator": false,
-  "transactionDate": "2022-12-31",
   "transactionType": "cash",
   "transactionSubtype": "inflowOutflowDigital",
+  "transactionDate": "2022-12-31",
+  "customerId": "123456",
+  "reversalIndicator": false,
   "movementList": [
     {
-      "positionId": "1234",
-      "movementDate": "2022-12-31",
-      "valueDate": "2022-12-31",
-      "quantity": {
-        "value": 500000,
-        "quantityType": "nominal"
-      },
       "movementType": "cash",
+      "movementDate": "2022-12-31",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
       "account": {
         "accountId": "1234-56",
         "accountType": "cashAccount",
         "iban": "CH121212121212121212"
       },
-      "financialInstrument": {
-        "name": "Swiss francs",
-        "identificationList": [
-          {
-            "identifier": "CHF",
-            "type": "currency"
-          }
-        ],
-        "currencyOfDenomination": "CHF"
-      }
+      "quantity": {
+        "value": 500000,
+        "quantityType": "unit"
+      },
+      "valueDate": "2022-12-31",
+      "positionId": "0000"
     }
   ],
   "postingAmounts": [
     {
-      "amount": "500000",
+      "amount": 500000,
       "currency": "CHF",
-      "creditDebitIndicator": "credit",
       "account": {
         "accountId": "1234-56",
         "accountType": "cashAccount",

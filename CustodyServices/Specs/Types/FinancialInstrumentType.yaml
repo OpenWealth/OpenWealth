@@ -3,23 +3,23 @@ type: string
 description: Type of the financial instrument
 example: equity
 enum:
-- cash
-- bond
-- equity
-- fund
-- index
-- commodity
-- option
-- future
-- fxForward
-- fxSwap
-- mortgage
-- fixedLoan
-- fixedDeposit
-- callableLoan
-- callableDeposit
-- interestSwap
-- totalReturnSwap
-- creditDefaultSwap
-- cryptoAsset
-- other
+  - cash
+  - bond
+  - equity
+  - fund
+  - index
+  - commodity
+  - option
+  - future
+  - fxForward
+  - fxSwap
+  - mortgage
+  - fixedLoan
+  - fixedDeposit
+  - callableLoan
+  - callableDeposit
+  - interestSwap
+  - totalReturnSwap
+  - creditDefaultSwap
+  - cryptoAsset
+  - other

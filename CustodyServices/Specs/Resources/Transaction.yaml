@@ -1,6 +1,6 @@
 title: Transaction
 type: object
-required: 
+required:
   - transactionId
   - transactionType
   - transactionSubtype
@@ -9,9 +9,9 @@ required:
   - reversalIndicator
 properties:
   transactionType:
-    $ref: '../Types/TransactionType.yaml'
+    $ref: "../Types/TransactionType.yaml"
   transactionSubtype:
-    $ref: '../Types/TransactionSubtype.yaml'
+    $ref: "../Types/TransactionSubtype.yaml"
   transactionId:
     type: string
     maxLength: 35
@@ -21,7 +21,7 @@ properties:
     title: TransactionDate
     description: Date of transaction entity
     allOf:
-      - $ref: '../../../Globals/Types/Date.yaml'
+      - $ref: "../../../Globals/Types/Date.yaml"
   customerId:
     type: string
     description: Unique and unambiguous identification used by the bank for the customer.
@@ -52,26 +52,26 @@ properties:
     title: tradeDate
     description: Specifies the date/time on which the trade was executed.
     allOf:
-      - $ref: '../../../Globals/Types/Date.yaml'
+      - $ref: "../../../Globals/Types/Date.yaml"
   settlementDate:
     title: SettlementDate
     description: Date and time at which the securities are to be delivered or received.
     allOf:
-      - $ref: '../../../Globals/Types/Date.yaml'
+      - $ref: "../../../Globals/Types/Date.yaml"
   triggeringFinancialInstrument:
-    $ref: 'TriggeringFinancialInstrument.yaml'
+    $ref: "TriggeringFinancialInstrument.yaml"
   movementList:
     type: array
     description: List of movements belonging to a transaction from a banks perspective
     items:
-      $ref: 'Movement.yaml'
+      $ref: "Movement.yaml"
   postingAmountList:
     type: array
     description: List of total amounts of money that is to be/was posted to respective accounts in the account currency.
     items:
-      $ref: 'PostingAmount.yaml'
+      $ref: "PostingAmount.yaml"
   settlementCurrency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: "../../../Globals/Types/Currency.yaml"
   transactionAdditionalDetails:
     type: string
     maxLength: 70

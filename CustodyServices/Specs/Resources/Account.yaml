@@ -9,21 +9,21 @@ properties:
     type: string
     maxLength: 35
     example: 876543219
-    description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier. 
-  accountType: 
+    description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
+  accountType:
     type: string
     description: Indicatates the type of the account. If the account type is cashAccount, no information on the financial instrument is provided in the respective position in the account.
     enum:
-    - cashAccount
-    - safekeepingAccount
-    - other
+      - cashAccount
+      - safekeepingAccount
+      - other
   name:
     type: string
     maxLength: 70
     description: Name of the account. It provides an additional means of identification, and is designated by the account servicer in agreement with the account owner.
     example: Household account
   referenceCurrency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: "../../../Globals/Types/Currency.yaml"
   iban:
     type: string
     description: Contains the accounts Internatioinal Banking Account Number (IBAN) for a cashAccount if available.
@@ -31,7 +31,7 @@ properties:
   designation:
     type: string
     maxLength: 70
-    description: Supplementary information on the account. Designated by the account servicer. 
+    description: Supplementary information on the account. Designated by the account servicer.
     example: Current Account CHF
   portfolioInformation:
-    $ref: 'PortfolioInformation.yaml'
+    $ref: "PortfolioInformation.yaml"

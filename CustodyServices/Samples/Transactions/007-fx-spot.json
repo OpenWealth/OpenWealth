@@ -1,0 +1,84 @@
+{
+  "transactionId": "0000008",
+  "transactionType": "fx",
+  "transactionSubtype": "fxSpot",
+  "transactionDate": "2023-01-05",
+  "customerId": "123456",
+  "reversalIndicator": false,
+  "movementList": [
+    {
+      "movementType": "cash",
+      "movementDate": "2023-01-05",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": -100000
+      },
+      "currency": "CHF",
+      "valueDate": "2023-01-07",
+      "positionId": "0000"
+    },
+    {
+      "movementType": "cash",
+      "movementDate": "2023-01-05",
+      "financialInstrument": {
+        "financialInstrumentType": "cash",
+        "name": "Euro",
+        "identificationList": [
+          {
+            "identifierType": "iso3",
+            "identifier": "EUR"
+          }
+        ],
+        "currencyOfDenomination": "EUR"
+      },
+      "account": {
+        "accountId": "1234-57",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121213"
+      },
+      "quantity": {
+        "quantityType": "unit",
+        "value": 101001.15
+      },
+      "currency": "EUR",
+      "valueDate": "2023-01-07",
+      "positionId": "0001"
+    }
+  ],
+  "postingAmounts": [
+    {
+      "amount": -100000,
+      "currency": "CHF",
+      "account": {
+        "accountId": "1234-56",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121212"
+      }
+    },
+    {
+      "amount": 101001.15,
+      "currency": "EUR",
+      "account": {
+        "accountId": "1234-57",
+        "accountType": "cashAccount",
+        "iban": "CH121212121212121213"
+      }
+    }
+  ]
+}
