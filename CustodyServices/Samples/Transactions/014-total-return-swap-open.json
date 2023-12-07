@@ -1,0 +1,55 @@
+{
+  "customerId": "123456",
+  "transactionId": "00000014",
+  "transactionDate": "2022-12-31",
+  "transactionType": "Swap",
+  "transactionSubtype": "openTotalReturnSwap",
+  "reversalIndicator": false,
+  "movementList": [
+    {
+      "movementType": "security",
+      "movementDate": "2022-12-31",
+      "financialInstrument": {
+        "financialInstrumentType": "totalReturnSwap",
+        "identificationList": [
+          {
+            "identifier": "swapContract2",
+            "type": "otherProprietaryIdentification"
+          }
+        ],
+        "name": "Total return swap",
+        "principalAmount": 100000,
+        "currencyOfDenomination": "CHF",
+        "expiryDate": "2023-06-27",
+        "interestRatePaid": {
+          "interestRateType": "fixedInterestRate",
+          "rate": 1.2,
+          "dayCountBasis": "act_360",
+          "paymentDate": "2023-06-27",
+          "paymentFrequency": "atMaturity"
+        },
+        "undelyingFinancialInstrument": {
+          "type": "equity",
+          "name": "Apple Inc.",
+          "identificationList": [
+            {
+              "identifierType": "isin",
+              "identifier": "US0378331005"
+            }
+          ]
+        }
+      },
+      "account": {
+        "accountId": "123456-1",
+        "accountType": "safekeepingAccount"
+      },
+      "quantity": {
+        "value": 1,
+        "quantityType": "unit"
+      },
+      "currency": "CHF",
+      "positionId": "014"
+    }
+  ],
+  "postingAmounts": []
+}
