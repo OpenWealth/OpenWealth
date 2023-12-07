@@ -1,7 +1,6 @@
 {
   "positionId": "000",
   "positionDate": "2022-12-31",
-  "externalReference": "3456345",
   "financialInstrument": {
     "financialInstrumentType": "cash",
     "name": "Swiss francs",
