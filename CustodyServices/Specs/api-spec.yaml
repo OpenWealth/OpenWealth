@@ -136,6 +136,92 @@ paths:
         "503":
           $ref: "../../Globals/Responses/503.yaml"
 
+  /customers/{customerId}/positions:
+    parameters:
+      - $ref: "../../Globals/Params/CustomerId.yaml"
+      - $ref: "../../Globals/Params/Date.yaml"
+      - $ref: "#/components/parameters/endOfDayParam"
+      - $ref: "../../Globals/Params/Cursor.yaml"
+      - $ref: "../../Globals/Params/Limit.yaml"
+      - $ref: "../../Globals/Params/CorrelationInHeader.yaml"
+    get:
+      summary: Returns the positions for a specific customer.
+      description: Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
+      operationId: getCustomerPositionByCustomerId
+      tags:
+        - positions
+      responses:
+        "200":
+          description: Position List
+          headers:
+            X-Correlation-ID:
+              $ref: "../../Globals/Headers/XCorrelationId.yaml"
+            nextCursor:
+              $ref: "../../Globals/Headers/NextCursor.yaml"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "Resources/Position.yaml"
+        "400":
+          $ref: "../../Globals/Responses/400.yaml"
+        "401":
+          $ref: "../../Globals/Responses/401.yaml"
+        "403":
+          $ref: "../../Globals/Responses/403.yaml"
+        "404":
+          $ref: "../../Globals/Responses/404.yaml"
+        "405":
+          $ref: "../../Globals/Responses/405.yaml"
+        "500":
+          $ref: "../../Globals/Responses/500.yaml"
+        "501":
+          $ref: "../../Globals/Responses/501.yaml"
+        "503":
+          $ref: "../../Globals/Responses/503.yaml"
+
+  /customers/{customerId}/positions/{positionId}:
+    parameters:
+      - $ref: "../../Globals/Params/CustomerId.yaml"
+      - $ref: "../../Globals/Params/PositionId.yaml"
+      - $ref: "#/components/parameters/endOfDayParam"
+      - $ref: "../../Globals/Params/CorrelationInHeader.yaml"
+    get:
+      summary: Returns a positions by id for a specific customer.
+      description: Returns a positions for a specific customer.
+      operationId: getCustomerPositionById
+      tags:
+        - positions
+      responses:
+        "200":
+          description: Position
+          headers:
+            X-Correlation-ID:
+              $ref: "../../Globals/Headers/XCorrelationId.yaml"
+            nextCursor:
+              $ref: "../../Globals/Headers/NextCursor.yaml"
+          content:
+            application/json:
+              schema:
+                $ref: "Resources/Position.yaml"
+        "400":
+          $ref: "../../Globals/Responses/400.yaml"
+        "401":
+          $ref: "../../Globals/Responses/401.yaml"
+        "403":
+          $ref: "../../Globals/Responses/403.yaml"
+        "404":
+          $ref: "../../Globals/Responses/404.yaml"
+        "405":
+          $ref: "../../Globals/Responses/405.yaml"
+        "500":
+          $ref: "../../Globals/Responses/500.yaml"
+        "501":
+          $ref: "../../Globals/Responses/501.yaml"
+        "503":
+          $ref: "../../Globals/Responses/503.yaml"
+
   /accounts/{accountId}/account-position-statement:
     parameters:
       - $ref: "../../Globals/Params/AccountId.yaml"

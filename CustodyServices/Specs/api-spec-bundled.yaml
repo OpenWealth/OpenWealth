@@ -131,6 +131,90 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
+  /customers/{customerId}/positions:
+    parameters:
+      - $ref: '#/components/parameters/CustomerId'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/Cursor'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/CorrelationInHeader'
+    get:
+      summary: Returns the positions for a specific customer.
+      description: Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
+      operationId: getCustomerPositionByCustomerId
+      tags:
+        - positions
+      responses:
+        '200':
+          description: Position List
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+            nextCursor:
+              $ref: '#/components/headers/NextCursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/positions/{positionId}:
+    parameters:
+      - $ref: '#/components/parameters/CustomerId'
+      - $ref: '#/components/parameters/PositionId'
+      - $ref: '#/components/parameters/endOfDayParam'
+      - $ref: '#/components/parameters/CorrelationInHeader'
+    get:
+      summary: Returns a positions by id for a specific customer.
+      description: Returns a positions for a specific customer.
+      operationId: getCustomerPositionById
+      tags:
+        - positions
+      responses:
+        '200':
+          description: Position
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+            nextCursor:
+              $ref: '#/components/headers/NextCursor'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
   /accounts/{accountId}/account-position-statement:
     parameters:
       - $ref: '#/components/parameters/AccountId'
@@ -534,14 +618,6 @@ components:
         format: date
         description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
         example: '2019-12-31'
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      schema:
-        type: string
-        maxLength: 35
-        description: The customer's account identification, this should NOT be an IBAN.
     PositionId:
       name: positionId
       in: path
@@ -551,6 +627,14 @@ components:
         maxLength: 35
         description: Identification for the position given by the bank.
         example: 1234566-12-1
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 35
+        description: The customer's account identification, this should NOT be an IBAN.
     TransactionId:
       name: transactionId
       in: path
