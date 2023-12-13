@@ -1,0 +1,15 @@
+required:
+  - requestedAllocation
+type: object
+description: Extended details regarding the allocations including validity of the allocation and billing details.
+properties:
+  requestedAllocation:
+    $ref: 'requestedAllocation.yaml'
+  allocationCancellationReasonList:
+    items:
+      $ref: 'allocationCancellationReason.yaml'
+  remainingAllocation:
+    $ref: 'remainingAllocation.yaml'
+  completeAllocationList:
+    items:
+      $ref: 'completeAllocation.yaml'

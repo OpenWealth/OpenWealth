@@ -1,0 +1,6 @@
+type: string
+enum:
+  - credit
+  - debit
+example: debit
+description: Specifies if the amount is a debit (negative) or credit (positive) amount.

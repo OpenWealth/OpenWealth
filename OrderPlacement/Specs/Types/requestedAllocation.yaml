@@ -1,0 +1,18 @@
+type: object
+required:
+  - accounts
+  - clientAllocationIdentification
+  - amount
+properties:
+  accounts:
+    $ref: '../Resources/account.yaml'
+  clientAllocationIdentification:
+    type: string
+    description: Unambiguous identifier for the individual allocation of the bulk order, as assigned by the instructing party.
+    example: 321321321
+  amount:
+    type: string
+    pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+    maxLength: 22
+    description: Quantity to be allocated to specific safekeeping account
+    example: 100

@@ -1,0 +1,21 @@
+type: string
+description: Shows in which stage of its life cycle an order is.
+enum:
+  - acknowledged
+  - accepted
+  - customerRelease
+  - placed
+  - partiallyFilled
+  - filled
+  - executed
+  - cancelled
+  - partiallyCancelled
+  - marketCancelled
+  - pendingCancel
+  - rejected
+  - partiallyRejected
+  - marketRejected
+  - expired
+  - partiallyExpired
+  - marketExpired
+example: partiallyFilled

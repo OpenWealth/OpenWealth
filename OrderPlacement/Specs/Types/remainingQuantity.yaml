@@ -1,0 +1,5 @@
+type: string
+pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+maxLength: 22
+description: Quantity open for further execution. If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
+example: 20

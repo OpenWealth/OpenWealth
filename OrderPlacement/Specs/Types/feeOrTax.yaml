@@ -1,0 +1,28 @@
+type: object
+properties:
+  feeType:
+    type: string
+    description: Indicates the type of fee/tax
+    enum:
+      - stampDuty
+      - withholdingTax
+      - capitalGainTax
+      - financialTransactionTax
+      - otherTaxes
+      - transactionFee
+      - brokerageFee
+      - managementFee
+      - courtage
+      - custodyFee
+      - exchangeFee
+      - thirdPartyFee
+      - otherFee
+      - others
+  amount:
+    $ref: 'amount.yaml'
+  currency:
+    $ref: '../../../Globals/Types/currency.yaml'
+  creditDebitIndicator:
+    $ref: 'creditDebitIndicator.yaml'
+  foreignExchangeRate:
+    $ref: 'foreignExchangeRate.yaml'
