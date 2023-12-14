@@ -10,7 +10,6 @@ The documentation covers these topics:
 - [Business objects and data entities](Docs/EntityModel.md)
 - [Use cases and examples](##use-cases-and-examples)
 
-
 ## Overview and scope
 
 As a first step OpenWealth has decided to support the exchange of data out of the view of an external asset manager (EAM) or alike in the sense of enhancing the ways the EAMs technology provider (i.e. Portfolio Management Solutions) query data. The custody services API provides a set of read only services for portfolio, account, position and transaction information. An EAM is typically authorized on a set of customers of a custodian bank with a power of attorney on a subset of accounts (safekeeping & cash accounts).
@@ -19,12 +18,12 @@ The technology provider will access the APIs with the EAM access token and first
 ## Quick start
 
 TBD
+
 - How to use the OpenAPI spec
 - What is contained in the specs
 - How to implement the spec
 - Positions API
 - Transactions API
-
 
 ## Use cases and examples
 
@@ -48,12 +47,12 @@ A good way to get familiar with the needs of a securities accounting is to look 
 - Maturity of Swiss Govern Bond
 - Final coupon Swiss Govern Bond
 - Purchase of Mutual Fund with Bond payback
-- Partial sell of Apple stock 
+- Partial sell of Apple stock
 - Deposit of 200.000 CHF fixed term, maturity date fixed
 - Interest-paid deposit on a monthly basis
 - Maturity of the deposit, including last interest
-- Callable loan, with limit of 500000 CHF, initial of 200.000 CHF 
-- Loan increase of 100.000 CHF 
+- Callable loan, with limit of 500000 CHF, initial of 200.000 CHF
+- Loan increase of 100.000 CHF
 - Decrease by 200.000 CHF
 - Final settlement of 100.000CHF, closing of the loan, final interest payment
 - Management fee

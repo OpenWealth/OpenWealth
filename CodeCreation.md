@@ -8,7 +8,7 @@ In the following we will cover a few helpful tools
 
 The Open Wealth repository consists of a number of components separated into files, such as schema definition for types, resources and responses.
 In order to create a single bundled file containing all references ther is a simple bundeling CLI available here:
-https://redocly.com/docs/cli/guides/
+<https://redocly.com/docs/cli/guides/>
 
 Install the CLI with this command (npm):
 
@@ -27,13 +27,14 @@ where 'specification.yaml' is the OAS source file and 'specificationBundled.yaml
 ## API Server/Client creation
 
 The following project supports the creation of a code basis in various languages for OpenWealth providers (Server) and OpenWealth consumers (clients). This typically consists of an auto-generated object oriented class design of the OAS as well as code for serving and consuming requests.
-https://openapi-generator.tech/
+<https://openapi-generator.tech/>
 
 Installation (npm)
 
 ```console
 npm install @openapitools/openapi-generator-cli -g
 ```
+
 Examle of creating an AspNetCore server:
 
 ```console
@@ -41,6 +42,3 @@ openapi-generator-cli generate -i specification.yaml -g aspnetcore -o OpenWealth
 ```
 
 where 'specification.yaml' is the OAS spec file. There are a number of parameters such as targetFramework, naming conventions etc that can be added to the command.
-
-
-
