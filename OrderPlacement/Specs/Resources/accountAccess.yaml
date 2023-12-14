@@ -1,0 +1,13 @@
+type: object
+required:
+  - account
+  - accessType
+properties:
+  account:
+    $ref: 'account.yaml'
+  accessType:
+    type: string
+    description: Indicates what type of access the requestor has for the specified account.
+    enum:
+      - read
+      - write

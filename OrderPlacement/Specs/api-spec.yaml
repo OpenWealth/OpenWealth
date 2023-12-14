@@ -1,0 +1,244 @@
+openapi: 3.0.0
+info:
+  version: 2.0.8
+  title: Order Placement API
+  description: This API is used to place orders and check on the order status.
+  contact:
+    email: openwealth@synpulse.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/OpenWealthAPI/OrderPlacement/2.0.8
+
+paths:
+  /orders:
+    parameters:
+      - $ref: '#/components/parameters/correlation_in_header'
+    post:
+      summary: Posts a new order.
+      description: Posts a new order.
+      operationId: postOrder
+      tags:
+        - orderplacement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'Resources/requestedOrder.yaml'
+      responses:
+        '202':
+          description: Order accepted for further processing.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+          content:
+            application/json:
+              schema:
+                $ref: 'Resources/order.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+    get:
+      summary: Returns a list of open security orders.
+      description: Returns all open orders to which the user of the API has access to. Paging is done based on the order object, i.e. if limit is set to 1, then 1 order will be returned per page.
+      operationId: getOrders
+      tags:
+        - orderstatus
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Order list.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+            X-nextCursor:
+              $ref: '../../Globals/Headers/NextCursor.yaml'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'Resources/order.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+
+  /orders/{clientOrderId}:
+    parameters:
+      - name: clientOrderId
+        in: path
+        required: true
+        description: The security order id. This Id corresponds with the clientOrderIdentification.
+        schema:
+          type: string
+          maxLength: 20
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns a single security order.
+      description: Returns a specific security order.
+      operationId: getOrderByClientOrderId
+      tags:
+        - orderstatus
+      responses:
+        '200':
+          description: Receive a specific order with the corresponding allocations and status.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+          content:
+            application/json:
+              schema:
+                $ref: 'Resources/order.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+
+    delete:
+      summary: Cancellation of a specific order.
+      description: Places the cancellation request for a specific order.
+      operationId: deleteOrderByClientOrderId
+      tags:
+        - orderplacement
+      responses:
+        '202':
+          description: Order cancellation received for further processing.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+          content:
+            application/json:
+              schema:
+                $ref: 'Resources/order.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+
+  /accountaccesses:
+    parameters:
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns list of accounts the requestor has access to.
+      description: Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
+      operationId: getAccountAccesses
+      tags:
+        - accountaccess
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Returns list of accounts the requestor has access to.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: 'Resources/accountAccess.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+
+components:
+  ###############
+  # Parameters  #
+  ###############
+
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+    #        maximum: 100
+    #        default: 20
+    cursor:
+      name: cursor
+      in: query
+      description: An opaque string value used for pagination
+      required: false
+      schema:
+        type: string
+    correlation_in_header:
+      in: header
+      name: X-Correlation-ID
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+      required: true
+      schema:
+        type: string

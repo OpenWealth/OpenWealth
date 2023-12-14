@@ -1,0 +1,7 @@
+type: object
+description: Provides an overview of what quantity has already been allocated to the allocation and what quantity is still outstanding.
+properties:
+  executedQuantity:
+    $ref: 'executedQuantity.yaml'
+  remainingQuantity:
+    $ref: 'remainingQuantity.yaml'

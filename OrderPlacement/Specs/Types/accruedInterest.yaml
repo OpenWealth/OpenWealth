@@ -1,0 +1,15 @@
+type: object
+properties:
+  numberDaysAccrued:
+    type: number
+    format: integer
+    example: 28
+    description: Specifies the number of days used for calculating the accrued interest amount.
+  amount:
+    $ref: 'amount.yaml'
+  currency:
+    $ref: '../../../Globals/Types/currency.yaml'
+  creditDebitIndicator:
+    $ref: 'creditDebitIndicator.yaml'
+  foreignExchangeRate:
+    $ref: 'foreignExchangeRate.yaml'

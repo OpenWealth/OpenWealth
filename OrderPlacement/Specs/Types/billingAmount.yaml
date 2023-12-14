@@ -1,0 +1,19 @@
+type: object
+properties:
+  type:
+    type: string
+    description: Indicates the type of billing amount.
+    example: grossTradeAmount
+    enum:
+      - grossTradeAmount
+      - grossSettlementAmount
+      - netSettlementAmount
+      - netBillingAmount
+  amount:
+    $ref: 'amount.yaml'
+  currency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  creditDebitIndicator:
+    $ref: 'creditDebitIndicator.yaml'
+  foreignExchangeRate:
+    $ref: 'foreignExchangeRate.yaml'

@@ -1,0 +1,76 @@
+required:
+  - side
+  - orderQuantity
+  - financialInstrumentDetails
+  - currency
+  - executionType
+  - timeInForce
+  - numberOfAllocations
+type: object
+properties:
+  side:
+    type: string
+    description: Side taken by a party on an order.
+    example: buy
+    enum:
+      - buy
+      - sell
+  orderQuantity:
+    $ref: '../Types/orderQuantity.yaml'
+  displayQuantity:
+    $ref: '../Types/amount.yaml'
+  numberOfAllocations:
+    type: number
+    format: integer
+    example: 5
+    description: Indicates number of orders to be combined for average pricing and allocation.
+  financialInstrumentDetails:
+    $ref: '../Types/financialInstrumentDetails.yaml'
+  placeOfTrade:
+    $ref: '../Types/placeOfTrade.yaml'
+  currency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  executionType:
+    type: string
+    description: Type of the execution of the order
+    example: limit
+    enum:
+      - market
+      - limit
+      - stop
+      - stopLimit
+  limitPrice:
+    type: string
+    pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+    maxLength: 22
+    description: Limit price per unit of quantity (e.g. per share)
+    example: 12.50
+  stopPrice:
+    type: string
+    pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+    maxLength: 22
+    description: Stop price per unit of quantity (e.g. per share)
+    example: 10.05
+  timeInForce:
+    type: string
+    description: Specifies how long the order remains in effect.
+    example: day
+    enum:
+      - day
+      - goodTillCancel
+      - atTheOpening
+      - immediateOrCancel
+      - fillOrKill
+      - goodTillCrossing
+      - goodTillDate
+      - atTheClose
+      - goodThroughCrossing
+      - atCrossing
+      - goodForTime
+      - goodForAuction
+      - goodForMonth
+  expiryDateTime:
+    type: string
+    format: date-time
+    example: 2018-04-13T11:11:11Z
+    description: Date and time of the order expiration (UTC Timestamp). In accordance with ISO 8601.
