@@ -1,0 +1,7 @@
+type: object
+properties:
+  counterparty:
+    type: string
+    maxLength: 70
+    description: Name of recurring counterparties
+    example: ABC Muster AG; Hans Müller; Beispielhaft AG

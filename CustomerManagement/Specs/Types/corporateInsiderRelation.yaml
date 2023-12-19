@@ -1,0 +1,20 @@
+type: object
+required:
+  - corporateInsiderAssociation
+properties:
+  corporateInsiderAssociation:
+    type: boolean
+    description: Is this person an associate to a Corporate Insider?
+    example: TRUE
+  relation:
+    type: string
+    maxLength: 70
+    description: Nature/Type of relationship with Corporate Insider
+    example: Brother Mr. Andrew Miller is CIO at Swiss Insurance Company
+  companyName:
+    type: string
+    maxLength: 140
+  position:
+    $ref: 'position.yaml'
+  isin:
+    $ref: 'isin.yaml'

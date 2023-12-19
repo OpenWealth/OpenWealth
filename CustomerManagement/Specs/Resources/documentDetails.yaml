@@ -1,0 +1,10 @@
+allOf:
+  - $ref: 'document.yaml'
+type: object
+required:
+  - enclosure
+properties:
+  enclosure:
+    type: string
+    format: byte
+    description: Content of the document binary coded (base64-encoded file contents)

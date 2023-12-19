@@ -1,0 +1,4 @@
+type: string
+maxLength: 70
+description: Period of time e.g. a job was held / a company owned
+example: 15.05.2011 - 05.02.2020

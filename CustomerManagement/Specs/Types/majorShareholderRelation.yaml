@@ -1,0 +1,20 @@
+type: object
+required:
+  - majorShareholderAssociation
+properties:
+  majorShareholderAssociation:
+    type: boolean
+    description: Is this person an associate to a Major Shareholder?
+    example: TRUE
+  relation:
+    type: string
+    maxLength: 70
+    description: Nature/Type of relationship with major shareholder and name of major shareholder
+    example: Father (Mr. Andreas Miller) is a major shareholder at Swiss Insurance Company
+  companyName:
+    type: string
+    maxLength: 140
+  position:
+    $ref: 'position.yaml'
+  isin:
+    $ref: 'isin.yaml'

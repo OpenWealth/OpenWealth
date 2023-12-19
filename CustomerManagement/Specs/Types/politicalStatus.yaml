@@ -1,0 +1,29 @@
+type: object
+required:
+  - pepStatus
+  - pepAssociations
+properties:
+  pepStatus:
+    type: boolean
+    description: Is this person a PEP?
+    example: true
+  pepFunction:
+    type: string
+    maxLength: 70
+    description: PEP Function of the person
+    example: Member of the national council of Switzerland
+  pepAssociations:
+    type: boolean
+    description: Is this person associated to a PEP?
+    example: false
+  pepRelation:
+    type: string
+    maxLength: 70
+    description: Name and function of the PEP the person is associated to.
+    example: Chelsea Muster is the daughter of Anna Beispiel who is a member of the national council of Germany.
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'
+  sanctions:
+    type: boolean
+    description: Is the person subject to sanctions / on any sanction list?
+    example: false

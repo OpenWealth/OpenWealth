@@ -1,0 +1,15 @@
+oneOf:
+  - $ref: 'incomeFromEmployment.yaml'
+  - $ref: 'incomeFromBusinessOwnership.yaml'
+  - $ref: 'saleOfCompany.yaml'
+  - $ref: 'saleOfNonFinancialAssets.yaml'
+  - $ref: 'lifeInsurance.yaml'
+  - $ref: 'pensionAssets.yaml'
+  - $ref: 'inheritance.yaml'
+  - $ref: 'gift.yaml'
+  - $ref: 'loan.yaml'
+  - $ref: 'saleOfFinancialAssets.yaml'
+  - $ref: 'capitalGains.yaml'
+  - $ref: 'otherSource.yaml'
+discriminator:
+  propertyName: sourceType

@@ -1,0 +1,23 @@
+type: object
+allOf:
+  - $ref: 'personBase.yaml'
+required:
+  - personAssociationName
+  - personAssociationType
+properties:
+  personAssociationName:
+    type: string
+    minLength: 1
+    maxLength: 70
+    description: Name of the association object
+    example: Anthony Stark a/o Piper Potts
+  personAssociationType:
+    type: string
+    enum:
+      - compteJoint
+      - jointHeirs
+      - unregisteredPartnership
+      - limitedPartnership
+      - collectiveProprietorship
+    description: Type of association
+    example: compteJoint

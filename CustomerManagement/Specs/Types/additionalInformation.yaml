@@ -1,0 +1,4 @@
+type: string
+maxLength: 2500
+description: Free text field to provide additional information
+example: This is additional information.

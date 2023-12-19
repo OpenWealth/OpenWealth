@@ -1,0 +1,16 @@
+type: object
+required:
+  - source
+  - amount
+  - currency
+properties:
+  source:
+    $ref: 'source.yaml'
+  amount:
+    $ref: 'amount.yaml'
+  currency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  originsOfAssetsList:
+    type: array
+    items:
+      $ref: 'country.yaml'

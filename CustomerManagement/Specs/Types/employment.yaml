@@ -1,0 +1,23 @@
+type: object
+description: Provides information about the employment status and the employment itself (e.g. company)
+required:
+  - employmentStatus
+properties:
+  employmentStatus:
+    type: string
+    enum:
+      - employed
+      - selfEmployed
+      - retired
+      - student
+      - unemployed
+      - firmOwner
+      - privateEquityInvestor
+      - professionalInvestor
+      - other
+    description: Status of employment
+    example: retired
+  employmentDetailsList:
+    type: array
+    items:
+      $ref: 'employmentDetails.yaml'
