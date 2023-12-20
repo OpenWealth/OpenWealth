@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 2.0.8
+  version: 2.1.0
   title: Order Placement API
   description: This API is used to place orders and check on the order status.
   contact:
@@ -9,8 +9,8 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/OpenWealthAPI/OrderPlacement/2.0.8
+  - description: Your servers url
+    url: url
 paths:
   /orders:
     parameters:
@@ -204,6 +204,196 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
+  /event-subscriptions:
+    post:
+      summary: Subscribe to Events
+      description: Allows TPP to subscribe to specific events for the API.
+      operationId: postEventSubscription
+      tags:
+        - event-notification-subscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/eventSubscription'
+      responses:
+        '201':
+          description: Subscription created.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    get:
+      summary: View Subscriptions
+      description: Allows TPP to view the event subscriptions.
+      operationId: getEventSubscriptions
+      tags:
+        - event-notification-subscription
+      responses:
+        '200':
+          description: Event Subscription read.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/eventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+  /event-subscriptions/{eventSubscriptionId}:
+    parameters:
+      - name: eventSubscriptionId
+        in: path
+        description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 40
+    get:
+      summary: View Subscription
+      description: Allows TPP to view the event subscription.
+      operationId: getEventSubscriptionByEventSubscriptionId
+      tags:
+        - event-notification-subscription
+      responses:
+        '200':
+          description: Event Subscription read.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    put:
+      summary: Change event subscription
+      description: Changes event subscription.
+      operationId: changeEventSubscriptionByEventSubscriptionId
+      tags:
+        - event-notification-subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/eventSubscription'
+      responses:
+        '200':
+          description: Event subscription changed
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    delete:
+      summary: Delete event subscription
+      description: Deletes event subscriptions
+      operationId: deleteEventSubscriptionsByEventSubscriptionId
+      tags:
+        - event-notification-subscription
+      responses:
+        '202':
+          description: Delete event subscription
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
 components:
   parameters:
     limit:
@@ -872,6 +1062,7 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
+        - /problems/CONFLICT
       example: /problems/TECHNICAL_ERROR
     CommonErrorResponse:
       title: CommonErrorResponse
@@ -931,6 +1122,50 @@ components:
           enum:
             - read
             - write
+    eventType:
+      description: Event type the subscription should apply to.
+      type: string
+      enum:
+        - Order:Acknowledged
+        - Order:Accepted
+        - Order:Customer_Release
+        - Order:Placed
+        - Order:Partially_Filled
+        - Order:Filled
+        - Order:Executed
+        - Order:Cancelled
+        - Order:Partially_Cancelled
+        - Order:Market_Cancelled
+        - Order:Pending_Cancel
+        - Order:Rejected
+        - Order:Partially_Rejected
+        - Order:Market_Rejected
+        - Order:Expired
+        - Order:Partially_Expired
+        - Order:Market_Expired
+      example: Order:Rejected
+    eventSubscription:
+      type: object
+      required:
+        - eventSubscriptionId
+      properties:
+        eventSubscriptionId:
+          description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
+          type: string
+          minLength: 1
+          maxLength: 40
+          readOnly: true
+          example: 3v3n7subscr1p710n
+        callbackUrl:
+          description: Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL to send event notifications to.
+          type: string
+          format: uri
+          example: https://examplecallbackuri.com
+        eventTypes:
+          description: Array of event types the subscription applies to.
+          type: array
+          items:
+            $ref: '#/components/schemas/eventType'
   responses:
     '400':
       headers:
@@ -1104,6 +1339,28 @@ components:
             description: Client defined ID from request to correlates HTTP requests between a client and server.
             example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '504':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Gateway Timeout - The server did not get a response in time that it needed in order to complete the request.
       content:
         application/problem+json:
           schema:
