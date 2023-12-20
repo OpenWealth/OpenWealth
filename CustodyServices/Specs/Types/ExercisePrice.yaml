@@ -1,4 +1,4 @@
 title: ExercisePrice
 description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
 allOf:
-  - $ref: 'Price.yaml'
+  - $ref: 'price.yaml'

@@ -6,20 +6,20 @@ required:
   - interestRateReceived
   - maturityDate
 allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
+  - $ref: 'financialInstrumentBase.yaml'
   - type: object
     properties:
       principalAmount:
-        $ref: '../../Types/PrincipalAmount.yaml'
+        $ref: '../../Types/principalAmount.yaml'
       interestRatePaid:
         title: InterestRatePaid
         description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.
         allOf:
-          - $ref: '../../Types/InterestRate.yaml'
+          - $ref: '../../Types/interestRate.yaml'
       interestRateReceived:
         title: InterestRateReceived
         description: Per annum ratio of interest received to the principal amount of the financial instrument for a specific period of time.
         allOf:
-          - $ref: '../../Types/InterestRate.yaml'
+          - $ref: '../../Types/interestRate.yaml'
       maturityDate:
-        $ref: '../../Types/MaturityDate.yaml'
+        $ref: '../../Types/maturityDate.yaml'

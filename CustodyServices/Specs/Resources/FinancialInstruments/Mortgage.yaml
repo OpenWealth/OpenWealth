@@ -4,10 +4,10 @@ required:
   - principalAmount
   - interestRate
 allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
+  - $ref: 'financialInstrumentBase.yaml'
   - type: object
     properties:
       principalAmount:
-        $ref: '../../Types/PrincipalAmount.yaml'
+        $ref: '../../Types/principalAmount.yaml'
       interestRate:
-        $ref: '../../Types/InterestRate.yaml'
+        $ref: '../../Types/interestRate.yaml'

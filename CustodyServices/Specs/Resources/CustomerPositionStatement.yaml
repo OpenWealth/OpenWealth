@@ -2,6 +2,6 @@ title: CustomerPositionStatement
 type: object
 properties:
   statement:
-    $ref: 'Statement.yaml'
+    $ref: 'statement.yaml'
   customer:
-    $ref: 'CustomerAccountDetails.yaml'
+    $ref: 'customerAccountDetails.yaml'

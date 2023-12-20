@@ -1,4 +1,4 @@
 title: ConversionPrice
 description: Price of one target security in the conversion.
 allOf:
-  - $ref: 'Price.yaml'
+  - $ref: 'price.yaml'

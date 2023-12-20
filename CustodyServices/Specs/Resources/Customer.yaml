@@ -8,8 +8,8 @@ properties:
     type: string
     description: Unique and unambiguous identification used by the bank for the customer.
   referenceCurrency:
-    $ref: "../../../Globals/Types/Currency.yaml"
+    $ref: '../../../Globals/Types/currency.yaml'
   accountList:
     type: array
     items:
-      $ref: "Account.yaml"
+      $ref: 'account.yaml'

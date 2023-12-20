@@ -2,6 +2,6 @@ title: AccountPositionStatement
 type: object
 properties:
   statement:
-    $ref: "Statement.yaml"
+    $ref: 'statement.yaml'
   accountDetails:
-    $ref: "AccountDetails.yaml"
+    $ref: 'accountDetails.yaml'

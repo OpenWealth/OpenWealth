@@ -5,12 +5,12 @@ required:
   - interestRate
   - underlyingFinancialInstrument
 allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
+  - $ref: 'financialInstrumentBase.yaml'
   - type: object
     properties:
       principalAmount:
-        $ref: '../../Types/PrincipalAmount.yaml'
+        $ref: '../../Types/principalAmount.yaml'
       maturityDate:
-        $ref: '../../Types/MaturityDate.yaml'
+        $ref: '../../Types/maturityDate.yaml'
       underlyingFinancialInstrument:
-        $ref: '../UnderlyingFinancialInstrument.yaml'
+        $ref: '../underlyingFinancialInstrument.yaml'

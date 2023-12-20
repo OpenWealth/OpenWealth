@@ -1,6 +1,6 @@
 title: CustomerAccountDetails
 type: object
-required: 
+required:
   - customerId
 allOf:
   - $ref: 'Customer.yaml'
@@ -9,4 +9,4 @@ allOf:
       accountDetailsList:
         type: array
         items:
-          $ref: 'AccountDetails.yaml'
+          $ref: 'accountDetails.yaml'

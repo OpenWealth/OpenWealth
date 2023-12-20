@@ -1,4 +1,4 @@
 title: NextInterestPaymentDate
 description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
 allOf:
-  - $ref: "../../../Globals/Types/Date.yaml"
+  - $ref: '../../../Globals/Types/date.yaml'

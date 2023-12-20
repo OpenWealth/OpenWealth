@@ -1,4 +1,4 @@
 title: Index
 description: A financial index produces a numeric score based on inputs such as a variety of asset prices.
 allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
+  - $ref: 'financialInstrumentBase.yaml'
