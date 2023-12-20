@@ -1,0 +1,3246 @@
+openapi: 3.0.0
+info:
+  version: 2.0.6
+  title: Customer Management API
+  description: This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems / CRMs). It facilitates the connection of CRMs to custody banks to automate customer onboarding and lifecycle management (Static Data, KYC & Documents). It enables the user to create, modify and consume customer data at/from custody banks. This version of the API is focused solely on natural persons. The management of companies, complex structures as well as products is currently not part of the scope of this API version.
+  contact:
+    email: openwealth@synpulse.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/OpenWealthAPI/CustomerManagement/2.0.6
+paths:
+  /customers:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Returns a list of customers.
+      description: Returns a list of customers. A customer is an object which holds a contract with a (custody-)bank. Paging is done based on the customer object, i.e. if limit is set to 1, then 1 customer will be returned per page.
+      operationId: getCustomers
+      tags:
+        - customer
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+            nextCursor:
+              $ref: '#/components/headers/NextCursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/customer'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customer-details:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Opening of a new customer.
+      description: Request to open a new customer relationship at the (custody-)bank including all relevant information. A customer is an object which holds a contract with a (custody-)bank.
+      operationId: postCustomer
+      tags:
+        - customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerDetails'
+      responses:
+        '202':
+          description: Accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerIdResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}:
+    parameters:
+      - $ref: '#/components/parameters/customerId'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns a specific customer.
+      description: Returns a customer record of a specific customer.
+      operationId: getCustomerByCustomerId
+      tags:
+        - customer
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/customer-details:
+    parameters:
+      - $ref: '#/components/parameters/customerId'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns a full record of a specific customer.
+      description: Returns a full customer record of a specific customer including details.
+      operationId: getCustomerDetailsByCustomerId
+      tags:
+        - customer
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/persons:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/customerId'
+      summary: Returns a list with persons associated with a specific customer.
+      description: Returns all person records associated with a specific customer. Paging is done based on the person object, i.e. if limit is set to 1, then 1 person will be returned per page.
+      operationId: getPersons
+      tags:
+        - person
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+            nextCursor:
+              $ref: '#/components/headers/NextCursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/person'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/person-details:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/customerId'
+      summary: Creates a new person object.
+      description: Request to open a new person object associated with a specific customer at the (custody-)bank including all relevant information.
+      operationId: postPerson
+      tags:
+        - person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/personDetails'
+      responses:
+        '202':
+          description: Accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/personIdResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/persons/{personId}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Returns a specific person.
+      description: Returns a person record of a specific person.
+      operationId: getPersonByPersonId
+      tags:
+        - person
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/person'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/person-details/{personId}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Returns a full record of a specific person.
+      description: Returns a person record of a specific person including details.
+      operationId: getPersonDetailsByPersonId
+      tags:
+        - person
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/personDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/persons/{personId}/contacts:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Returns the contact information of a specific customer.
+      description: Returns a list of contact details (e.g. phone numbers) of a specific person associated with a specific customer. Paging is done based on the contact object, i.e. if limit is set to 1, then 1 contact will be returned per page.
+      operationId: getContactDetailsByCustomerId
+      tags:
+        - contact
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/contact'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Creates a new contact detail for a specific customer.
+      description: Request to create a new contact detail for a specific customer at the (custody-)bank.
+      operationId: postContactDetailsByCustomerId
+      tags:
+        - contact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contact'
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/persons/{personId}/contacts/{contactId}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/contactId'
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Returns a specific contact detail.
+      description: Returns a specific contact detail of a specific customer.
+      operationId: getContactDetailsByContactDetailID
+      tags:
+        - contact
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      parameters:
+        - $ref: '#/components/parameters/contactId'
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Updates specific field(s) of a specific contact detail.
+      description: Updates specific field(s) of a specific contact detail.
+      operationId: putContactDetailByContactDetailId
+      tags:
+        - contact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contact'
+      responses:
+        '202':
+          description: Accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    delete:
+      parameters:
+        - $ref: '#/components/parameters/contactId'
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Deletes a specific contact detail.
+      description: Deletion of a specific contact detail.
+      operationId: deleteContactDetailsByContactDetailID
+      tags:
+        - contact
+      responses:
+        '202':
+          description: Accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/persons/{personId}/addresses:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Returns a list of addresses of a specific customer.
+      description: Returns a list of addresses of a specific person associated with a specific customer. Paging is done based on the address object, i.e. if limit is set to 1, then 1 address will be returned per page.
+      operationId: getAddressByCustomerId
+      tags:
+        - address
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/address'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Creates a new address object.
+      description: Request to create a new address object for a specific customer at the (custody-)bank.
+      operationId: postAddressByCustomerId
+      tags:
+        - address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/address'
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addressResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/persons/{personId}/addresses/{addressId}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/addressId'
+      summary: Returns a specific address of a specific customer.
+      description: Returns a specific address record of a specific customer.
+      operationId: getAddressByAddressId
+      tags:
+        - address
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/address'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/addressId'
+      summary: Update of an existing address.
+      description: Updates an existing address of a specific customer.
+      operationId: putAddressByCustomerId
+      tags:
+        - address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/address'
+      responses:
+        '202':
+          description: Accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/documents:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Returns a list of documents of a specific customer.
+      description: Returns a list of documents of a specific customer without the actual document content. Paging is done based on the document object, i.e. if limit is set to 1, then 1 document will be returned per page.
+      operationId: getDocumentsByCustomerId
+      tags:
+        - documents
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/document'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/document-details:
+    post:
+      parameters:
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Creates a new document.
+      description: Request to create a new document for a specific customer at the (custody-)bank.
+      operationId: postDocumentByCustomerId
+      tags:
+        - documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/documentDetails'
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/documentResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/documents/{documentId}:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/documentId'
+      summary: Returns a specific document for a specific customer.
+      description: Returns a specific document of a specific customer without the actual document content.
+      operationId: getDocumentByDocumentId
+      tags:
+        - documents
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/document'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/documents/{documentId}/document-details:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/documentId'
+      summary: Returns a specific document of a specific customer including details.
+      description: Returns a specific document of a specific customer including details.
+      operationId: getDocumentDetailsByDocumentId
+      tags:
+        - documents
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/documentDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/persons/{personId}/kyc:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Returns the kyc of a specific customer.
+      description: Returns the know-your-customer record of a specific person associated with a specific customer.
+      operationId: getKycByCustomerId
+      tags:
+        - kyc
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/kyc'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      parameters:
+        - $ref: '#/components/parameters/personId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      summary: Creates a new kyc object.
+      description: Request to create a new kyc object for a specific customer at the (custody-)bank.
+      operationId: postKyc
+      tags:
+        - kyc
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/kyc'
+      responses:
+        '202':
+          description: Accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/kycResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /prospect-precheck:
+    parameters:
+      - $ref: '#/components/parameters/correlation_in_header'
+    post:
+      summary: Conducts a pre-check at the custody bank.
+      description: Conduct a pre-check to validate if the prospect might be accepted as customer by the custody bank based on base parametes like domicile / nationality etc.
+      operationId: postProspect
+      tags:
+        - pre-check
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/prospect'
+      responses:
+        '202':
+          description: Accepted.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/prospectId'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /prospect-precheck/{temporaryId}:
+    parameters:
+      - $ref: '#/components/parameters/temporaryId'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns result of pre-check.
+      description: Returns the status of the pre-check for a specific prospect.
+      operationId: getPreCheck
+      tags:
+        - pre-check
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/prospectResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /status/{temporaryId}:
+    parameters:
+      - $ref: '#/components/parameters/temporaryId'
+      - $ref: '#/components/parameters/correlation_in_header'
+    get:
+      summary: Returns the status of a request.
+      description: Returns the current status of a request (e.g. current status of a customer opening request in the onboarding process).
+      operationId: getStatusByTemporaryId
+      tags:
+        - status
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/XCorrelationId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/status'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+components:
+  parameters:
+    temporaryId:
+      name: temporaryId
+      in: path
+      required: true
+      description: ID (e.g. customer / prospect / person / order) to get a status update on the order
+      schema:
+        type: string
+    customerId:
+      name: customerId
+      in: path
+      required: true
+      description: Customer ID
+      schema:
+        type: string
+    personId:
+      name: personId
+      in: path
+      required: true
+      description: Person ID
+      schema:
+        type: string
+    contactId:
+      name: contactId
+      in: path
+      required: true
+      description: Contact detail ID
+      schema:
+        type: string
+    addressId:
+      name: addressId
+      in: path
+      required: true
+      description: Address ID
+      schema:
+        type: string
+    documentId:
+      name: documentId
+      in: path
+      required: true
+      description: Document ID
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+    cursor:
+      name: cursor
+      in: query
+      description: An opaque string value used for pagination
+      required: false
+      schema:
+        type: string
+    correlation_in_header:
+      in: header
+      name: X-Correlation-ID
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+      required: true
+      schema:
+        type: string
+  schemas:
+    customerIdResponse:
+      type: object
+      description: Response consisting of an ID (e.g. Customer / Prospect / Order ID) so that status updates regarding the customer onboarding can be obtained.
+      required:
+        - temporaryId
+      properties:
+        temporaryId:
+          $ref: '#/components/schemas/temporaryId'
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+    personIdResponse:
+      type: object
+      description: Response consisting of an ID (Person / Prospect / Order ID) so that status updates regarding the opening of a person can be obtained.
+      required:
+        - temporaryId
+      properties:
+        temporaryId:
+          $ref: '#/components/schemas/temporaryId'
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+    contactResponse:
+      type: object
+      properties:
+        contactId:
+          type: string
+    documentResponse:
+      type: object
+      properties:
+        documentId:
+          type: string
+    addressResponse:
+      type: object
+      properties:
+        addressId:
+          type: string
+    kycResponse:
+      type: object
+      description: Response consisting of an ID (e.g. Customer / KYC ID) so that status updates regarding the creation of a new KYC can be obtained.
+      required:
+        - temporaryId
+      properties:
+        temporaryId:
+          $ref: '#/components/schemas/temporaryId'
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+    status:
+      type: object
+      description: Status of an order inlcuding the order ID and the status of the order.
+      required:
+        - temporaryId
+        - currentStatus
+      properties:
+        temporaryId:
+          $ref: '#/components/schemas/temporaryId'
+        currentStatus:
+          type: string
+          enum:
+            - open
+            - inProgress
+            - rejected
+            - done
+          description: Current status of an order (e.g.customer onboarding to get an update if a customer object already has been opened or not).
+          example: done
+        permanentId:
+          $ref: '#/components/schemas/permanentId'
+    temporaryId:
+      type: string
+      minLength: 1
+      maxLength: 35
+      description: Some kind of ID (Customer/Person/Prospect/Order/Task ID) so that a status update can be obtained (e.g. customer onboarding).
+      example: 2130040
+    permanentId:
+      type: string
+      minLength: 1
+      maxLength: 35
+      description: Some kind of permanent ID (Customer/Person/Prospect etc.) so that an object can be identified.
+      example: 23000454
+    prospectId:
+      type: object
+      properties:
+        temporaryId:
+          $ref: '#/components/schemas/temporaryId'
+    prospectResponse:
+      type: object
+      required:
+        - temporaryId
+        - response
+      properties:
+        temporaryId:
+          $ref: '#/components/schemas/temporaryId'
+        response:
+          type: string
+          enum:
+            - open
+            - denied
+            - accepted
+            - pleaseContactBankAdvisor
+          description: Result of the conducted prospect pre-check. The result is in no way binding and may change during the process.
+          example: accepted
+    externalReference:
+      type: string
+      maxLength: 35
+      description: External customer/person ID
+      example: 123-456-787
+    Currency:
+      type: string
+      description: ISO 4217 code
+      pattern: '[A-Z]{3}'
+      example: CHF
+    Date:
+      type: string
+      format: date
+      pattern: \d{4}-\d{2}-\d{2}
+      example: '2018-04-13'
+    language:
+      type: string
+      pattern: '[A-Z]{2}'
+      description: 2-letter ISO 639-1 Language Code
+      example: EN
+    customer:
+      type: object
+      required:
+        - customerId
+        - name
+      properties:
+        customerId:
+          type: string
+          minLength: 1
+          maxLength: 35
+          readOnly: true
+          description: Unique customer ID assigned by the custody bank
+          example: 987654321
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+        name:
+          type: string
+          maxLength: 140
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+          description: Status of the customer relationship
+          example: active
+        referenceCurrency:
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          $ref: '#/components/schemas/Date'
+        language:
+          $ref: '#/components/schemas/language'
+        customerSegment:
+          type: string
+          maxLength: 35
+          description: Customer segment of the customer at the custody bank (e.g. UHNWI Switzerland)
+          example: CLIENT FIM, EAM-MODELL
+          readOnly: true
+        bankAdvisor:
+          type: string
+          maxLength: 35
+          description: Indicates the instruction/full name of the bank advisor on the side of the custody bank.
+          example: Anna Beispiel PC8-AB
+          readOnly: true
+        bankDeputyAdvisor:
+          type: string
+          maxLength: 35
+          description: Indicates the instruction/full name of the bank deputy advisor on the side of the custody bank.
+          example: Max Muster PC8-MM
+          readOnly: true
+        bankPreviousAdvisor:
+          type: string
+          maxLength: 35
+          description: Indicates the instruction/full name of the previous bank advisor on the side of the custody bank.
+          example: Peter Vergangenheit PC5-PV
+          readOnly: true
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for CommonErrorResponse.
+      type: string
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      example: /problems/TECHNICAL_ERROR
+    CommonErrorResponse:
+      title: CommonErrorResponse
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
+          type: string
+          example: This is the general problem description
+        detail:
+          type: string
+          example: Detailed problem description with respect to the current request
+        instance:
+          type: string
+          example: path/to/corresponding/resource
+    relation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Indicates the kind of relation the person has to this customer relationship.
+          example: accountOwner
+          enum:
+            - beneficialOwner
+            - externalAssetManagerFirm
+            - externalAssetManagerEmployee
+            - accountOwner
+            - registeredOwner
+            - authorisedSignatoryIndividual
+            - beneficiary
+            - authorisedSignatoryCollective
+            - ownerParentalAuthority
+            - other
+        cardinality:
+          type: string
+          description: Defines the level of rights of the authorised signatory and indicates if the person has the right to sign individually or collectively (in twos, etc.)
+          example: individually
+          enum:
+            - individually
+            - inTwos
+            - inThrees
+            - fourway
+        override:
+          type: string
+          description: Field to indicate the customer to person relation type. Field shall only be used if the relation type is not part of the ENUM of the attribute "relation" hence in exceptional cases (in case of relation type "other").
+          example: Fiduciary
+    country:
+      type: string
+      pattern: '[A-Z]{2}'
+      description: 2-Letter ISO 3166-2 Country Code
+      example: CH
+    personBase:
+      type: object
+      required:
+        - personId
+        - language
+        - personType
+        - countryOfDomicile
+      properties:
+        personId:
+          type: string
+          minLength: 1
+          maxLength: 35
+          description: Unique person ID assigned by the custody bank
+          example: 123-456-214
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+        language:
+          $ref: '#/components/schemas/language'
+        countryOfDomicile:
+          $ref: '#/components/schemas/country'
+        openingDate:
+          $ref: '#/components/schemas/Date'
+        taxDomicileList:
+          type: array
+          items:
+            $ref: '#/components/schemas/country'
+        personType:
+          type: string
+          enum:
+            - naturalPerson
+            - legalPerson
+            - personAssociation
+          example: naturalPerson
+          description: Indicates the person type (e.g. Natural Person) of the person object
+    tin:
+      type: object
+      properties:
+        tinNumber:
+          type: string
+          maxLength: 35
+          example: 123-12-1234
+          description: Taxpayer identification number / National ID
+        country:
+          $ref: '#/components/schemas/country'
+    naturalPerson:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/personBase'
+      required:
+        - givenName
+        - lastName
+        - nationalityList
+        - dateOfBirth
+      properties:
+        givenName:
+          type: string
+          maxLength: 35
+          example: Anthony
+          description: Given name of the person. The primary name according to the passport should be indicated in that field and no abbreviations/common names (Dan instead of Daniel etc.) used.
+        middleName:
+          type: string
+          maxLength: 35
+          example: Edward
+          description: Middle name of the person. The middle name according to the passport should be indicated in that field and no abbreviations/common names (Dan instead of Daniel etc.) used.
+        lastName:
+          type: string
+          maxLength: 35
+          example: Stark
+          description: Last name(s) of the person. The last name(s) according to the passport should be indicated in that field (hyphenated and spaced names as well).
+        title:
+          type: string
+          maxLength: 35
+          example: PhD
+          description: Official title of the person
+        dateOfBirth:
+          $ref: '#/components/schemas/Date'
+        dateOfMarriage:
+          $ref: '#/components/schemas/Date'
+        dateOfDeath:
+          $ref: '#/components/schemas/Date'
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+            - divers
+          example: male
+          description: Gender of the person
+        nationalityList:
+          type: array
+          description: Country/Countries where a person was born or is legally accepted as belonging to the country. The first country in the list represents the main nationality.
+          items:
+            $ref: '#/components/schemas/country'
+        civilStatus:
+          type: string
+          enum:
+            - divorced
+            - legallyDivorced
+            - married
+            - separated
+            - single
+            - stableUnion
+            - widow
+          example: married
+          description: Civil status of the person
+        tinList:
+          type: array
+          description: List with tax identification numbers of a person
+          items:
+            $ref: '#/components/schemas/tin'
+        countryOfBirth:
+          $ref: '#/components/schemas/country'
+    legalPerson:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/personBase'
+      required:
+        - organisationName
+        - legalForm
+        - LEI
+        - domicilaryCompany
+      properties:
+        organisationName:
+          type: string
+          minLength: 1
+          maxLength: 35
+          description: Name by which the organisation is known and which is usually used to identify that organisation.
+          example: Stark Industries
+        legalForm:
+          type: string
+          maxLength: 35
+          description: Legal form of the company.
+          example: AG
+        LEI:
+          type: string
+          maxLength: 35
+          example: 529900UVM8LC55IFAA52
+          description: Legal entity identifier. The LEI code is a twenty-digit alphanumeric company identifier that is established as an international standard for companies in the financial market. Each LEI code is assigned once and enables worldwide assignment to a specific company.
+          pattern: '[A-Z0-9]{18,18}[0-9]{2,2}'
+        domicilaryCompany:
+          type: boolean
+          description: Indicates whether the company is a domiciliary company
+          example: false
+    personAssociation:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/personBase'
+      required:
+        - personAssociationName
+        - personAssociationType
+      properties:
+        personAssociationName:
+          type: string
+          minLength: 1
+          maxLength: 70
+          description: Name of the association object
+          example: Anthony Stark a/o Piper Potts
+        personAssociationType:
+          type: string
+          enum:
+            - compteJoint
+            - jointHeirs
+            - unregisteredPartnership
+            - limitedPartnership
+            - collectiveProprietorship
+          description: Type of association
+          example: compteJoint
+    person:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/naturalPerson'
+        - $ref: '#/components/schemas/legalPerson'
+        - $ref: '#/components/schemas/personAssociation'
+      discriminator:
+        propertyName: personType
+    person2personRelation:
+      type: object
+      required:
+        - relation
+      properties:
+        relation:
+          type: string
+          description: Type of relation between two persons
+          example: isParentOf
+          enum:
+            - isParentOf
+            - isPartnerOf
+            - isChildOf
+            - isRelatedTo
+            - isSpouseOf
+            - isRegisteredPartnerOf
+            - isGuardianshipOf
+            - hasGuardianship
+            - isEmployeeOf
+            - isEmployerOf
+            - isIntermediaryOf
+            - hasIntermediary
+            - isFiduciaryOf
+            - hasFiduciary
+            - isHeirOf
+            - other
+        relationOverride:
+          type: string
+          description: Field indicates the person to person relation type. It shall only be used if the relation type is not part of the ENUM of the attribute "relation" hence in exceptional cases (in case of relation type "other").
+          example: Is uncle of
+        relatedPerson:
+          $ref: '#/components/schemas/person'
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+    salutationDetails:
+      type: object
+      properties:
+        receptionRestriction:
+          type: string
+          maxLength: 35
+          description: Reception restrictions for the physical delivery of postal items
+          example: confidential
+        title:
+          type: string
+          maxLength: 35
+          description: Additional information that follows a person's name, e.g. qualifications/titles such as Doctor of Philosophy (PhD).
+          example: PhD
+        salutation:
+          type: string
+          enum:
+            - ms
+            - mrs
+            - mr
+            - msAndMr
+            - mrsAndMr
+            - mrAndMs
+            - mrAndMrs
+            - sirOrMadam
+            - heirsOf
+            - ladies
+            - sirs
+            - ladiesAndGentlemen
+            - family
+            - siblings
+            - communityOfHeirs
+            - other
+          description: Salutation of the person
+          example: Ms
+        salutationOverride:
+          type: string
+          maxLength: 35
+          description: Field to indicate the salutation. It shall only be used if the salutation type is not part of the ENUM of the attribute "salutation" hence in exceptional cases (in case of salutation "other"). If the salutation is not listed in the ENUM of the attribute salutation then this field can be used.
+          example: Your Highness
+        organisationName:
+          type: string
+          maxLength: 70
+          description: Name by which the organisation is known and which is usually used to identify that organisation.
+          example: Stark Industries
+        givenName:
+          type: string
+          maxLength: 35
+          description: First name of the person
+          example: Chelsea
+        lastName:
+          type: string
+          maxLength: 35
+          description: Last name of the person
+          example: Muster
+        careOf:
+          type: string
+          maxLength: 35
+          description: When the individual resides at another person's address, the name of the other person.
+          example: c/o Hans Muster
+        toTheAttentionOf:
+          type: string
+          maxLength: 35
+          description: When the mail should be distributed to a specific person within a company.
+          example: Anna Beispiel
+    physicalAddress:
+      type: object
+      required:
+        - streetName
+        - postCode
+        - townName
+        - country
+      properties:
+        department:
+          type: string
+          maxLength: 35
+          description: Identification of a division of a large organsiation or building
+          example: HR
+        streetName:
+          type: string
+          maxLength: 35
+          description: Name of the street or thoroughfare
+          example: Wall Street
+        buildingNumber:
+          type: string
+          maxLength: 35
+          description: Number that identifies the position of the building on a street
+          example: 118
+        buildingName:
+          type: string
+          maxLength: 35
+          description: Name of the building or house
+          example: New York Stock Exchange
+        floor:
+          type: string
+          maxLength: 35
+          description: Floor or story within a building
+          example: 15
+        postBox:
+          type: string
+          maxLength: 35
+          description: Numbered box in a post office, assigned to a person or organisation, where letters are kept until called for.
+          example: PO Box 12
+        room:
+          type: string
+          maxLength: 35
+          description: Building room number
+          example: 2.15
+        postCode:
+          type: string
+          maxLength: 35
+          description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail
+          example: 8001
+        townName:
+          type: string
+          maxLength: 35
+          description: Name of the town or city
+          example: New York
+        townLocationName:
+          type: string
+          maxLength: 35
+          description: Specific location name within the town
+          example: Financial District
+        districtName:
+          type: string
+          maxLength: 35
+          description: Identifies a subdivision within a country sub-division
+          example: Manhattan
+        countrySubDivision:
+          type: string
+          maxLength: 35
+          description: Identifies a subdivision of a country such as state, region, county
+          example: New York
+        country:
+          $ref: '#/components/schemas/country'
+    address:
+      type: object
+      required:
+        - addressId
+        - isDomicile
+        - language
+        - isMailingAddress
+        - physicalAddress
+      properties:
+        addressId:
+          type: string
+          minLength: 1
+          maxLength: 35
+          readOnly: true
+          description: Unique address ID assigned by the custody bank
+          example: 12345678
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+        addressName:
+          type: string
+          description: Name of the address object
+          example: Mustergasse 15, 8001 Zürich, Schweiz
+        isDomicile:
+          type: boolean
+        language:
+          type: boolean
+        isMailingAddress:
+          type: boolean
+        salutationDetails:
+          $ref: '#/components/schemas/salutationDetails'
+        physicalAddress:
+          $ref: '#/components/schemas/physicalAddress'
+    contact:
+      type: object
+      required:
+        - contactId
+        - medium
+        - content
+      properties:
+        contactId:
+          type: string
+          readOnly: true
+          minLength: 1
+          maxLength: 35
+          description: Identification of contact detail provided by financial institution.
+          example: 123987
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+        medium:
+          type: string
+          enum:
+            - email
+            - phone
+            - fax
+            - mobile
+            - website
+            - socialMedia
+            - others
+          description: Medium for contacting the customer
+          example: phone
+        mediumType:
+          type: string
+          enum:
+            - private
+            - business
+          description: Specifies the type of contact details
+          example: private
+        content:
+          type: string
+          maxLength: 70
+          description: Content of the contact detail, e.g. phone number, email-address, URL
+          example: 41998887766
+        priority:
+          type: string
+          maxLength: 70
+          description: Field to indicate the priority of the contact detail; e.g. preferred/main contact detail.
+          example: Preferred phone number during summer
+        additionalInformation:
+          type: string
+          description: Used to indicate additional information regarding the contact detail.
+          example: Fixed line home Sidney Australia
+    additionalInformation:
+      type: string
+      maxLength: 2500
+      description: Free text field to provide additional information
+      example: This is additional information.
+    amount:
+      type: integer
+      description: Amount
+      example: 2457000
+    recurringCounterparty:
+      type: object
+      properties:
+        counterparty:
+          type: string
+          maxLength: 70
+          description: Name of recurring counterparties
+          example: ABC Muster AG; Hans Müller; Beispielhaft AG
+    initialAmount:
+      type: object
+      required:
+        - amount
+        - currency
+        - originsOfAssetsList
+        - domicileOfBank
+        - nameOfBank
+      properties:
+        amount:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        originsOfAssetsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/country'
+        originOfAssetsDetails:
+          type: string
+          maxLength: 1500
+          description: Description origin of assets - how were these assets generated/acquired?
+          example: Ms. Anna Beispiel was the CEO of Muster AG for 15 years in London. The assets are savings from her time as CEO of Muster AG.
+        nameOfBank:
+          type: string
+          maxLength: 140
+        domicileOfBank:
+          $ref: '#/components/schemas/country'
+        physicalTransfer:
+          type: boolean
+          description: Transfer of amount by cash deposit or physical delivery of securities/precious metals
+          example: true
+        electronicTransfer:
+          type: boolean
+          description: Transfer of amount/securities/precious metals by electronic transfer
+          example: true
+        samePerson:
+          type: boolean
+          description: Assets are transferred by same person/beneficial owner as the account/beneficial owner of the customer relationship
+          example: false
+        thirdPartyName:
+          type: string
+          maxLength: 70
+          description: In case the assets do not originate from the same person/BO - Name of the third party who transfers the assets.
+          example: Mr. Max Beispiel
+        thirdPartyRelationship:
+          type: string
+          maxLength: 70
+          description: Relationship of that third party to account/beneficial owner
+          example: Mr. Beispiel is the father of the beneficial owner Anna Beispiel
+        thirdPartyReason:
+          type: string
+          maxLength: 500
+          description: Reasons for transfer of assets from a third party.
+          example: Gift from the father of the customer which is transferred to the new account.
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    expectedFundFlow:
+      type: object
+      required:
+        - amount
+        - currency
+        - type
+      properties:
+        amount:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        type:
+          type: string
+          enum:
+            - inflow
+            - outflow
+          description: Type of account movement
+          example: inflow
+        counterparty:
+          type: string
+          maxLength: 70
+          description: Name of the sender/receiver of the assets
+          example: Muster AG
+        purpose:
+          type: string
+          maxLength: 150
+          description: Purpose for the transfer
+          example: Monthly salary payment
+        frequency:
+          type: string
+          maxLength: 35
+          description: Frequency of payment/transfer
+          example: Monthly
+        originsOfAssetsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/country'
+        nameOfBank:
+          type: string
+          maxLength: 140
+        domicileOfBank:
+          $ref: '#/components/schemas/country'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    fundFlows:
+      type: object
+      required:
+        - amountExpectedInflows
+        - currencyExpectedInflows
+        - initialAmountList
+      properties:
+        amountExpectedInflows:
+          $ref: '#/components/schemas/amount'
+        currencyExpectedInflows:
+          $ref: '#/components/schemas/Currency'
+        amountPlannedTotalAssets:
+          $ref: '#/components/schemas/amount'
+        currencyPlannedTotalAssets:
+          $ref: '#/components/schemas/Currency'
+        amountExpectedTurnover:
+          $ref: '#/components/schemas/amount'
+        currencyExpectedTurnover:
+          $ref: '#/components/schemas/Currency'
+        numberOfInflows:
+          description: Number of expected annual inflows
+          type: integer
+          example: 15
+        numberOfOutflows:
+          description: Number of expected annual outflows
+          type: integer
+          example: 15
+        recurringCounterpartyList:
+          type: array
+          items:
+            $ref: '#/components/schemas/recurringCounterparty'
+        initialAmountList:
+          type: array
+          items:
+            $ref: '#/components/schemas/initialAmount'
+        expectedFundFlowList:
+          type: array
+          items:
+            $ref: '#/components/schemas/expectedFundFlow'
+    sourceBase:
+      type: object
+      properties:
+        sourceType:
+          type: string
+          enum:
+            - incomeFromEmployment
+            - incomeFromBusinessOwnership
+            - saleOfCompany
+            - saleOfNonFinancialAssets
+            - lifeInsurance
+            - pensionAssets
+            - inheritance
+            - gift
+            - loan
+            - saleOfFinancialAssets
+            - capitalGains
+            - otherSource
+          description: Original source of assets
+          example: saleOfCompany
+    position:
+      type: string
+      maxLength: 35
+      description: Function/position which the person helds at the company.
+      example: CEO
+    period:
+      type: string
+      maxLength: 70
+      description: Period of time e.g. a job was held / a company owned
+      example: 15.05.2011 - 05.02.2020
+    incomeFromEmployment:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      required:
+        - companyName
+        - roleOrPosition
+      properties:
+        companyName:
+          type: string
+          maxLength: 140
+        companyDomicile:
+          $ref: '#/components/schemas/country'
+        companyBusinessActivity:
+          type: string
+          maxLength: 250
+          description: Description of the business activity of the company and industry (e.g. NOGA Code)
+          example: The Beispiel AG trades with commodities (mainly crude oil). Noga Code "661200".
+        companyNumberOfEmployees:
+          type: integer
+          description: Number of employees of company.
+          example: 5145
+        companyAnnualTurnover:
+          $ref: '#/components/schemas/amount'
+        currencyAnnualTurnover:
+          $ref: '#/components/schemas/Currency'
+        companyAnnualProfit:
+          $ref: '#/components/schemas/amount'
+        currencyAnnualProfit:
+          $ref: '#/components/schemas/Currency'
+        roleOrPosition:
+          $ref: '#/components/schemas/position'
+        period:
+          $ref: '#/components/schemas/period'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    year:
+      type: string
+      pattern: '[0-9]{4}'
+      description: Year
+      example: 1995
+    incomeFromBusinessOwnership:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      type: object
+      required:
+        - companyName
+      properties:
+        companyName:
+          type: string
+          maxLength: 140
+        companyDomicile:
+          $ref: '#/components/schemas/country'
+        companyBusinessActivity:
+          type: string
+          maxLength: 250
+          description: Description of the business activity of the company and industry (e.g. NOGA Code)
+          example: The Beispiel AG trades with commodities (mainly crude oil). Noga Code "661200".
+        companyNumberOfEmployees:
+          type: integer
+          description: Number of employees of company.
+          example: 5145
+        companyAnnualTurnover:
+          $ref: '#/components/schemas/amount'
+        currencyAnnualTurnover:
+          $ref: '#/components/schemas/Currency'
+        companyAnnualProfit:
+          $ref: '#/components/schemas/amount'
+        currencyAnnualProfit:
+          $ref: '#/components/schemas/Currency'
+        startCapitalOrigin:
+          type: string
+          maxLength: 250
+          description: Origin of start capital in case of business ownership / acquisition
+          example: Capital gains on bitcoins were used to found the company.
+        companyFoundingYear:
+          $ref: '#/components/schemas/year'
+        shareholdingInPercent:
+          type: integer
+          description: Percentage of shareholding in the company
+          example: 25
+        namesOfOtherShareholders:
+          type: string
+          description: Names of other shareholders of that company
+          example: David Beispiel, Charlotte Meyer, Benjamin Müller
+        period:
+          $ref: '#/components/schemas/period'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    saleOfCompany:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      required:
+        - companyName
+      properties:
+        companyName:
+          type: string
+          maxLength: 140
+        companyDomicile:
+          $ref: '#/components/schemas/country'
+        companyBusinessActivity:
+          type: string
+          maxLength: 250
+          description: Description of the business activity of the company and industry (e.g. NOGA Code)
+          example: The Beispiel AG trades with commodities (mainly crude oil). Noga Code "661200".
+        companyNumberOfEmployees:
+          type: integer
+          description: Number of employees of company.
+          example: 5145
+        companyAnnualTurnover:
+          $ref: '#/components/schemas/amount'
+        currencyAnnualTurnover:
+          $ref: '#/components/schemas/Currency'
+        companyAnnualProfit:
+          $ref: '#/components/schemas/amount'
+        currencyAnnualProfit:
+          $ref: '#/components/schemas/Currency'
+        startCapitalOrigin:
+          type: string
+          maxLength: 250
+          description: Origin of start capital in case of business ownership / acquisition
+          example: Capital gains on bitcoins were used to found the company.
+        companyFoundingYear:
+          $ref: '#/components/schemas/year'
+        shareholdingInPercent:
+          type: integer
+          description: Percentage of shareholding in the company
+          example: 25
+        namesOfOtherShareholders:
+          type: string
+          description: Names of other shareholders of that company
+          example: David Beispiel, Charlotte Meyer, Benjamin Müller
+        dateOfSale:
+          $ref: '#/components/schemas/Date'
+        buyer:
+          type: string
+          maxLength: 250
+          description: Buyer of the company
+          example: InvestFirm AG
+        period:
+          $ref: '#/components/schemas/period'
+        roleOrPosition:
+          type: string
+          maxLength: 70
+          description: Role / position which the person helds at the company.
+          example: Board of Directors
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    saleOfNonFinancialAssets:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      required:
+        - details
+      properties:
+        details:
+          type: string
+          maxLength: 250
+          description: Description of asset
+          example: House in Davos with 5 rooms and 2 bathrooms.
+        dateOfAcquisition:
+          $ref: '#/components/schemas/Date'
+        initialValue:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        dateOfSale:
+          $ref: '#/components/schemas/Date'
+        buyer:
+          type: string
+          maxLength: 250
+          description: Buyer of the asset
+          example: Ms Anna Beispiel from Zurich.
+        methodOfSaleOfAsset:
+          type: string
+          maxLength: 125
+          description: Method of sale of asset (e.g. sale of plane via auction in London)
+          example: Sold in an acution via ABC Broker in London
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    lifeInsurance:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      properties:
+        type:
+          type: string
+          maxLength: 125
+          description: Details about the life insurance
+          example: Life insurance was remitted as a one-time payment
+        provider:
+          type: string
+          maxLength: 35
+          description: Name of the provider
+          example: Swiss Insurance Company
+        dateOfReception:
+          $ref: '#/components/schemas/Date'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    pensionAssets:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      properties:
+        type:
+          type: string
+          maxLength: 125
+          description: Type of pension e.g. monthly payment
+          example: Monthly pension payment
+        provider:
+          type: string
+          maxLength: 35
+          description: Name of the pension provider
+          example: BVK
+        dateOfRetirement:
+          $ref: '#/components/schemas/Date'
+        lastEmployer:
+          type: string
+          maxLength: 140
+        dateOfReception:
+          $ref: '#/components/schemas/Date'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    inheritance:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      required:
+        - nameOfTestator
+        - relationToTestator
+        - originOfAssetsOfTestator
+      properties:
+        nameOfTestator:
+          type: string
+          maxLength: 140
+        relationToTestator:
+          type: string
+          maxLength: 35
+          description: Relation of the person to the testator
+          example: Mr Mark Muster was the father of Mr Hans Muster.
+        originOfAssetsOfTestator:
+          type: string
+          maxLength: 250
+          description: Original origin of the assets of the testator - how was the wealth generated?
+          example: Mark Muster was CEO of bank ABC in Dubai from 1997-2010.
+        natureOfAssets:
+          type: string
+          maxLength: 250
+          description: Nature of the assets received
+          example: Cash, Stocks and a property in Davos
+        dateOfReception:
+          $ref: '#/components/schemas/Date'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    gift:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      required:
+        - nameOfGiftor
+        - relationToGiftor
+        - originOfAssetsOfGiftor
+      properties:
+        nameOfGiftor:
+          type: string
+          maxLength: 140
+        relationToGiftor:
+          type: string
+          maxLength: 35
+          description: Relation of the person to the giftor
+          example: Anna Muster is a good friend.
+        originOfAssetsOfGiftor:
+          type: string
+          maxLength: 2500
+          description: Original origin of the assets of the giftor - how was the wealth generated?
+          example: Anna Muster was CEO of a large bank in London from 1997-2005.
+        natureOfAssets:
+          type: string
+          maxLength: 250
+          description: Nature of the assets received
+          example: Cash
+        dateOfReception:
+          $ref: '#/components/schemas/Date'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    loan:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      required:
+        - nameOfLendor
+        - relationToLendor
+        - originOfAssetsOfLendor
+      properties:
+        nameOfLendor:
+          type: string
+          maxLength: 140
+        relationToLendor:
+          type: string
+          maxLength: 35
+          description: Relation of the person to the lendor
+          example: Mr Meier is the business partner of Mr Muster.
+        originOfAssetsOfLendor:
+          type: string
+          maxLength: 2500
+          description: Original origin of the assets of the lendor - how was the wealth generated?
+          example: Mr Max Meier is the CEO and founder of the firm XYZ AG.
+        natureOfAssets:
+          type: string
+          maxLength: 250
+          description: Nature of the assets received
+          example: Cash
+        dateOfReception:
+          $ref: '#/components/schemas/Date'
+        purposeOfLoan:
+          type: string
+          maxLength: 250
+          description: Purpose of loan
+          example: The loan will be used to buy a motor boat.
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    saleOfFinancialAssets:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      required:
+        - details
+      properties:
+        details:
+          type: string
+          maxLength: 250
+          description: Description of assets which were sold
+          example: Bitcoins
+        acquisitionOfAsset:
+          type: string
+          maxLength: 250
+          description: Origin of acquisition of asset  - When and how were the assets bought?
+          example: Bitcoins were bought in 2014 with savings from employment
+        dateOfAcquisition:
+          $ref: '#/components/schemas/Date'
+        nameBankOrBroker:
+          type: string
+          maxLength: 35
+          description: Name of the bank/broker over which the assets were sold.
+          example: Coinbase
+        initialValue:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        dateOfSale:
+          $ref: '#/components/schemas/Date'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    capitalGains:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      required:
+        - details
+      properties:
+        details:
+          type: string
+          maxLength: 250
+          description: Description of assets
+          example: Bitcoins
+        acquisitionOfAsset:
+          type: string
+          maxLength: 250
+          description: Origin of acquisition of asset  - When and how were the assets bought?
+          example: Bitcoins were bought in 2014 with savings from employment
+        dateOfAcquisition:
+          $ref: '#/components/schemas/Date'
+        initialValue:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    otherSource:
+      allOf:
+        - $ref: '#/components/schemas/sourceBase'
+      required:
+        - additionalInformation
+      properties:
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    source:
+      oneOf:
+        - $ref: '#/components/schemas/incomeFromEmployment'
+        - $ref: '#/components/schemas/incomeFromBusinessOwnership'
+        - $ref: '#/components/schemas/saleOfCompany'
+        - $ref: '#/components/schemas/saleOfNonFinancialAssets'
+        - $ref: '#/components/schemas/lifeInsurance'
+        - $ref: '#/components/schemas/pensionAssets'
+        - $ref: '#/components/schemas/inheritance'
+        - $ref: '#/components/schemas/gift'
+        - $ref: '#/components/schemas/loan'
+        - $ref: '#/components/schemas/saleOfFinancialAssets'
+        - $ref: '#/components/schemas/capitalGains'
+        - $ref: '#/components/schemas/otherSource'
+      discriminator:
+        propertyName: sourceType
+    sourceOfWealth:
+      type: object
+      required:
+        - source
+        - amount
+        - currency
+      properties:
+        source:
+          $ref: '#/components/schemas/source'
+        amount:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        originsOfAssetsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/country'
+    furtherDetailsAsset:
+      type: object
+      description: List of attributes to provide detailed information about the asset e.g. the domicile of a specific property when asset type is realEstate or the name of the company if the asset type is companyShareholdings.
+      properties:
+        nameOfBank:
+          type: string
+          maxLength: 140
+        domicileOfBank:
+          $ref: '#/components/schemas/country'
+        typeOfProperty:
+          type: string
+          enum:
+            - apartment
+            - house
+            - building
+            - vacationHome
+            - land
+            - other
+          description: Indicates the type of property
+          example: house
+        usageOfProperty:
+          type: string
+          enum:
+            - privatelyUsed
+            - commerciallyUsed
+            - mixedUsage
+          description: Usage of the property
+          example: privatelyUsed
+        placeOfProperty:
+          type: string
+          maxLength: 35
+          description: Place of the property
+          example: Laax
+        countryOfProperty:
+          $ref: '#/components/schemas/country'
+        nameOfCompany:
+          type: string
+          maxLength: 140
+        shareholdingsInPercent:
+          type: integer
+          description: Percentage of shareholding in the company
+          example: 25
+        typeOfNon-tradableAsset:
+          type: string
+          enum:
+            - art
+            - cars
+            - planes
+            - boats
+            - jewelries
+            - wine
+            - others
+          description: Type of non-tradable assets
+          example: cars
+        additonalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    assetAllocation:
+      type: object
+      required:
+        - type
+        - amount
+        - currency
+      properties:
+        type:
+          type: string
+          enum:
+            - tradableFinancialAssets
+            - realEstate
+            - pensionAssets
+            - companyShareholdings
+            - nonTradableFinancialAssets
+            - other
+          description: Indicates the type of the asset
+          example: realEstate
+        amount:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        percentageOfAllocation:
+          type: string
+          maxLength: 35
+          description: '% of total asset allocation'
+          example: 12%
+        furtherDetailsAsset:
+          $ref: '#/components/schemas/furtherDetailsAsset'
+    totalWealth:
+      type: object
+      required:
+        - amountTotalNetAssets
+        - currency
+        - referenceYear
+      properties:
+        amountTotalNetAssets:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        referenceYear:
+          $ref: '#/components/schemas/year'
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+        assetAllocationList:
+          type: array
+          description: Asset Allocation of customer
+          items:
+            $ref: '#/components/schemas/assetAllocation'
+    sourceOfIncome:
+      type: object
+      required:
+        - type
+        - amount
+        - currency
+      properties:
+        type:
+          type: string
+          enum:
+            - salaryOrBonuses
+            - incomeFromFinancialAssets
+            - incomeFromRealEstate
+            - dividendsFromShareholdings
+            - other
+          description: Type of source of income
+          example: salaryOrBonuses
+        amount:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        industry:
+          type: string
+          maxLength: 35
+          description: Industry of employment/source of income
+          example: Financial Services
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    totalIncome:
+      type: object
+      required:
+        - amountYearlyIncome
+        - currency
+        - referenceYear
+      properties:
+        amountYearlyIncome:
+          $ref: '#/components/schemas/amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        referenceYear:
+          $ref: '#/components/schemas/year'
+        additonalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+        sourceOfIncomeList:
+          type: array
+          items:
+            $ref: '#/components/schemas/sourceOfIncome'
+    employmentDetails:
+      type: object
+      required:
+        - companyName
+        - roleOrPosition
+      properties:
+        companyName:
+          type: string
+          maxLength: 140
+        companyDomicile:
+          $ref: '#/components/schemas/country'
+        companyCountriesOfBusinessList:
+          type: array
+          items:
+            $ref: '#/components/schemas/country'
+        companyDetail:
+          type: string
+          maxLength: 250
+          description: Description of the business activity of the company and industry (e.g. NOGA Code)
+          example: The Beispiel AG trades with commodities (mainly crude oil). Noga Code "661200".
+        companyNumberOfEmployees:
+          type: integer
+          description: Number of employees of company.
+          example: 5145
+        companyAnnualTurnover:
+          $ref: '#/components/schemas/amount'
+        currencyAnnualTurnover:
+          $ref: '#/components/schemas/Currency'
+        industry:
+          type: string
+          maxLength: 35
+          description: Industry of the company / NOGA code of company
+          example: Financial Services
+        roleOrPosition:
+          $ref: '#/components/schemas/position'
+        profession:
+          type: string
+          maxLength: 35
+          description: Profession
+          example: Economist
+        domicile:
+          $ref: '#/components/schemas/country'
+        shareholdingInPercent:
+          type: integer
+          description: Percentage of shareholding in the company
+          example: 25
+        period:
+          $ref: '#/components/schemas/period'
+        yearOfRetirement:
+          $ref: '#/components/schemas/year'
+        sharedholderSinceYear:
+          $ref: '#/components/schemas/year'
+        mandate:
+          type: string
+          maxLength: 70
+          description: Description of mandate e.g. Member of the Board of Directors; holder of a political or charitable mandate
+          example: Member of the Board of the OpenWealth Association
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    employment:
+      type: object
+      description: Provides information about the employment status and the employment itself (e.g. company)
+      required:
+        - employmentStatus
+      properties:
+        employmentStatus:
+          type: string
+          enum:
+            - employed
+            - selfEmployed
+            - retired
+            - student
+            - unemployed
+            - firmOwner
+            - privateEquityInvestor
+            - professionalInvestor
+            - other
+          description: Status of employment
+          example: retired
+        employmentDetailsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/employmentDetails'
+    education:
+      type: object
+      required:
+        - highestDiploma
+      properties:
+        highestDiploma:
+          type: string
+          maxLength: 35
+          description: Highest degree of education
+          example: Master of Science
+        graduationYear:
+          $ref: '#/components/schemas/year'
+        institute:
+          type: string
+          maxLength: 35
+          description: Institute at which graduation took place
+          example: University of Berlin
+        studyProgramme:
+          type: string
+          maxLength: 35
+          description: Field of study
+          example: Economics
+    isin:
+      type: string
+      description: ISIN of company
+      example: CH0014852781
+    corporateInsiderPerson:
+      type: object
+      description: Provides indications if a person might be a corporate insider.
+      required:
+        - corporateInsiderStatus
+      properties:
+        corporateInsiderStatus:
+          type: boolean
+          description: Is this person a corporate Insider?
+          example: true
+        companyName:
+          type: string
+          maxLength: 140
+        position:
+          $ref: '#/components/schemas/position'
+        isin:
+          $ref: '#/components/schemas/isin'
+    corporateInsiderRelation:
+      type: object
+      required:
+        - corporateInsiderAssociation
+      properties:
+        corporateInsiderAssociation:
+          type: boolean
+          description: Is this person an associate to a Corporate Insider?
+          example: true
+        relation:
+          type: string
+          maxLength: 70
+          description: Nature/Type of relationship with Corporate Insider
+          example: Brother Mr. Andrew Miller is CIO at Swiss Insurance Company
+        companyName:
+          type: string
+          maxLength: 140
+        position:
+          $ref: '#/components/schemas/position'
+        isin:
+          $ref: '#/components/schemas/isin'
+    majorShareholder:
+      type: object
+      required:
+        - majorShareholderStatus
+      properties:
+        majorShareholderStatus:
+          type: boolean
+          description: Is this person a major shareholder?
+          example: true
+        companyName:
+          type: string
+          maxLength: 140
+        shareOfOwnership:
+          type: integer
+          description: Percentage of shareholding in the company
+          example: 25
+        isin:
+          $ref: '#/components/schemas/isin'
+    majorShareholderRelation:
+      type: object
+      required:
+        - majorShareholderAssociation
+      properties:
+        majorShareholderAssociation:
+          type: boolean
+          description: Is this person an associate to a Major Shareholder?
+          example: true
+        relation:
+          type: string
+          maxLength: 70
+          description: Nature/Type of relationship with major shareholder and name of major shareholder
+          example: Father (Mr. Andreas Miller) is a major shareholder at Swiss Insurance Company
+        companyName:
+          type: string
+          maxLength: 140
+        position:
+          $ref: '#/components/schemas/position'
+        isin:
+          $ref: '#/components/schemas/isin'
+    politicalStatus:
+      type: object
+      required:
+        - pepStatus
+        - pepAssociations
+      properties:
+        pepStatus:
+          type: boolean
+          description: Is this person a PEP?
+          example: true
+        pepFunction:
+          type: string
+          maxLength: 70
+          description: PEP Function of the person
+          example: Member of the national council of Switzerland
+        pepAssociations:
+          type: boolean
+          description: Is this person associated to a PEP?
+          example: false
+        pepRelation:
+          type: string
+          maxLength: 70
+          description: Name and function of the PEP the person is associated to.
+          example: Chelsea Muster is the daughter of Anna Beispiel who is a member of the national council of Germany.
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+        sanctions:
+          type: boolean
+          description: Is the person subject to sanctions / on any sanction list?
+          example: false
+    fatca:
+      type: object
+      required:
+        - status
+        - domicile
+        - birthplace
+        - greenCard
+        - substantialPresenceTest
+      properties:
+        status:
+          type: boolean
+          description: Is the person a US person?
+          example: false
+        domicile:
+          type: boolean
+          description: Is the person currently in the United States?
+          example: false
+        birthplace:
+          type: boolean
+          description: Was the person born in the United States or a U.S. territory?
+          example: false
+        greenCard:
+          type: boolean
+          description: Is the person a holder of an active U.S. Green Card?
+          example: false
+        substantialPresenceTest:
+          type: boolean
+          description: Is the person considered a U.S. resident for tax purposes due to substantial presence test?
+          example: false
+        otherReasons:
+          type: boolean
+          description: Free text field for further details on FATCA status
+          example: false
+    externalAssetManager:
+      type: object
+      required:
+        - eamCustomer
+      properties:
+        eamCustomer:
+          type: boolean
+          description: Is the customer an EAM customer?
+          example: true
+        eamName:
+          type: string
+          maxLength: 140
+        eamDomicile:
+          $ref: '#/components/schemas/country'
+        eamEmployee:
+          type: string
+          maxLength: 140
+        eamRelation:
+          type: boolean
+          description: Has the EAM met the customer personally?
+          example: true
+        eamRelationInitiation:
+          type: string
+          maxLength: 70
+          description: How was the relationship between EAM and customer formed?
+        eamRelationPeriod:
+          $ref: '#/components/schemas/period'
+    furtherDetails:
+      type: object
+      properties:
+        familyMembers:
+          type: string
+          maxLength: 1000
+          description: Information on family members and related persons.
+          example: Anna Andrews is married with Mark Andrews. They have two children.
+        additionalInformation:
+          $ref: '#/components/schemas/additionalInformation'
+    kyc:
+      type: object
+      required:
+        - purposeOfRelationship
+        - soleBeneficialOwner
+        - fundFlows
+        - sourceOfWealthList
+        - totalWealth
+        - totalIncome
+        - employment
+        - politicalStatus
+        - fatca
+      properties:
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+        purposeOfRelationship:
+          type: string
+          description: Description of purpose of relationship e.g. Asset Management by EAM
+          example: Investments, Payments and asset management by EAM
+        additionalInformationRelationship:
+          $ref: '#/components/schemas/additionalInformation'
+        soleBeneficialOwner:
+          type: boolean
+          description: Is the person the sole beneficial owner of this customer relationship?
+          example: true
+        fundFlows:
+          $ref: '#/components/schemas/fundFlows'
+        sourceOfWealthList:
+          type: array
+          items:
+            $ref: '#/components/schemas/sourceOfWealth'
+        totalWealth:
+          $ref: '#/components/schemas/totalWealth'
+        totalIncome:
+          $ref: '#/components/schemas/totalIncome'
+        employment:
+          $ref: '#/components/schemas/employment'
+        education:
+          $ref: '#/components/schemas/education'
+        corporateInsiderPersonList:
+          type: array
+          items:
+            $ref: '#/components/schemas/corporateInsiderPerson'
+        corporateInsiderRelationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/corporateInsiderRelation'
+        majorShareholderPersonList:
+          type: array
+          items:
+            $ref: '#/components/schemas/majorShareholder'
+        majorShareholderRelationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/majorShareholderRelation'
+        politicalStatus:
+          $ref: '#/components/schemas/politicalStatus'
+        fatca:
+          $ref: '#/components/schemas/fatca'
+        externalAssetManager:
+          $ref: '#/components/schemas/externalAssetManager'
+        furtherDetails:
+          $ref: '#/components/schemas/furtherDetails'
+    personDetails:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/person'
+      required:
+        - addressList
+        - contactList
+        - kycList
+      properties:
+        person2personRelationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/person2personRelation'
+        addressList:
+          type: array
+          description: List of addresses associated with this person
+          items:
+            $ref: '#/components/schemas/address'
+        contactList:
+          type: array
+          description: List of contact details associated with this person
+          items:
+            $ref: '#/components/schemas/contact'
+        kycList:
+          type: array
+          description: KYC information belonging to this person & customer relationship
+          items:
+            $ref: '#/components/schemas/kyc'
+    person2customerRelation:
+      type: object
+      required:
+        - relationList
+        - personDetails
+      properties:
+        relationList:
+          type: array
+          description: List of relations the person has to this customer relationship.
+          items:
+            $ref: '#/components/schemas/relation'
+        personDetails:
+          $ref: '#/components/schemas/personDetails'
+    digitalSignature:
+      type: object
+      properties:
+        party:
+          type: string
+          maxLength: 70
+          description: Identification of party
+        signature:
+          type: string
+          description: external scheme
+    document:
+      type: object
+      required:
+        - documentId
+        - mimeType
+      properties:
+        externalReference:
+          $ref: '#/components/schemas/externalReference'
+        documentId:
+          type: string
+          minLength: 1
+          maxLength: 35
+          readOnly: true
+          description: Unique document ID assigned by the custody bank
+          example: 654321
+        typeCategory:
+          type: string
+          enum:
+            - identification
+            - basicDocuments
+            - products
+            - taxDocuments
+            - regulatoryDocuments
+            - clientCorrespondence
+            - other
+          description: Indicates the document category. The document category and type shall help to classify the document.
+          example: identification - e.g. document types like id, passport, driver license belong to this category.
+        type:
+          type: string
+          enum:
+            - id
+            - passport
+            - identityCard
+            - residencePermit
+            - studentCard
+            - confirmationOfDomicile
+            - driverLicense
+            - basicContract
+            - powerOfAttorney
+            - declarationOfSolidarity
+            - termsAndConditions
+            - eamClientProfile
+            - eamPowerOfAttorney
+            - declarationOfConsent
+            - startOfBusinessRelationship
+            - ebankingContract
+            - formA
+            - formR
+            - formI
+            - selfDisclosureTaxClarification
+            - usWaiverAndCertification
+            - formW8ben
+            - formW9
+            - mailingInstructions
+            - specialShippingInstruction
+            - changeOfAdress
+            - other
+          description: Indicates the specific document type e.g. Passport, ebanking contract, Form A etc.
+          example: ebankingContract
+        typeOverride:
+          type: string
+          maxLength: 70
+          description: Indicates the specific document type. Attribute shall only be used if the document type is not already part of the ENUM of the attribute "type" hence in exceptional cases (in case of document type "other").
+          example: Tax statement
+        status:
+          type: string
+          maxLength: 35
+          description: Status of document handling - Indicates current status of a document.
+          example: created
+        documentTypeId:
+          type: string
+          maxLength: 35
+          description: Unique document type ID
+          example: US101 - e.g. as document type ID for the document type formW9
+        issueDate:
+          $ref: '#/components/schemas/Date'
+        languageCode:
+          $ref: '#/components/schemas/language'
+        mimeType:
+          type: string
+          description: A media type (also known as a Multipurpose Internet Mail Extensions or MIME type) indicates the nature and format of a document, file, or assortment of bytes.
+          example: image/png
+        fileName:
+          type: string
+          maxLength: 140
+        digitalSignature:
+          $ref: '#/components/schemas/digitalSignature'
+    documentDetails:
+      allOf:
+        - $ref: '#/components/schemas/document'
+      type: object
+      required:
+        - enclosure
+      properties:
+        enclosure:
+          type: string
+          format: byte
+          description: Content of the document binary coded (base64-encoded file contents)
+    customerDetails:
+      allOf:
+        - $ref: '#/components/schemas/customer'
+      type: object
+      required:
+        - person2customerRelationList
+      properties:
+        person2customerRelationList:
+          type: array
+          items:
+            $ref: '#/components/schemas/person2customerRelation'
+        documentList:
+          type: array
+          description: List of documents belonging to this customer relationship
+          items:
+            $ref: '#/components/schemas/documentDetails'
+    prospect:
+      type: object
+      required:
+        - givenName
+        - lastName
+        - nationalityList
+        - dateOfBirth
+        - domicile
+      properties:
+        givenName:
+          type: string
+          maxLength: 35
+          description: Given name(s) of the person. The primary name(s) according to the passport should be indicated in that field and no abbreviations/common names (Dan instead of Daniel etc.) used.
+          example: Anthony
+        lastName:
+          type: string
+          maxLength: 35
+          description: Last name(s) of the person. The last name(s) according to the passport should be indicated in that field (hyphenated and spaced names as well).
+          example: Stark
+        nationalityList:
+          type: array
+          description: Country/Countries where a person was born or is legally accepted as belonging to the country. The first country in the list represents the main nationality.
+          items:
+            $ref: '#/components/schemas/country'
+        dateOfBirth:
+          $ref: '#/components/schemas/Date'
+        domicile:
+          $ref: '#/components/schemas/country'
+  headers:
+    XCorrelationId:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    NextCursor:
+      description: An opaque string value, or an empty string if there are no more results.
+      required: false
+      schema:
+        type: string
+  responses:
+    '400':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '401':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '403':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Forbidden - The server understood the request but refuses to authorize it.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '404':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '405':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '500':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '501':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Not Implemented - The server does not support the functionality required to fulfill the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '503':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlates HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'

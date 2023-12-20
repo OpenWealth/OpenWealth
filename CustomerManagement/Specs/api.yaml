@@ -1033,7 +1033,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'Types/status.yaml'
+                $ref: '#/components/schemas/status'
         '400':
           $ref: '../../Globals/Responses/400.yaml'
         '401':
@@ -1123,13 +1123,7 @@ components:
       schema:
         type: string
 
-  ######################
-  # Schemas
-  ######################
-
   schemas:
-    ### CUSTOMER ###
-
     customerIdResponse:
       type: object
       description: Response consisting of an ID (e.g. Customer / Prospect / Order ID) so that status updates regarding the customer onboarding can be obtained.
@@ -1137,13 +1131,9 @@ components:
         - temporaryId
       properties:
         temporaryId:
-          type: string
-          minLength: 1
-          maxLength: 35
+          $ref: '#/components/schemas/temporaryId'
         externalReference:
           $ref: 'Types/externalReference.yaml'
-
-    ### PERSON ###
 
     personIdResponse:
       type: object
@@ -1152,9 +1142,7 @@ components:
         - temporaryId
       properties:
         temporaryId:
-          type: string
-          minLength: 1
-          maxLength: 35
+          $ref: '#/components/schemas/temporaryId'
         externalReference:
           $ref: 'Types/externalReference.yaml'
 
@@ -1164,15 +1152,11 @@ components:
         contactId:
           type: string
 
-    ### Documents ###
-
     documentResponse:
       type: object
       properties:
         documentId:
           type: string
-
-    ### Address ###
 
     addressResponse:
       type: object
@@ -1187,11 +1171,37 @@ components:
         - temporaryId
       properties:
         temporaryId:
-          type: string
-          minLength: 1
-          maxLength: 35
+          $ref: '#/components/schemas/temporaryId'
         externalReference:
           $ref: 'Types/externalReference.yaml'
+
+    status:
+      type: object
+      description: Status of an order inlcuding the order ID and the status of the order.
+      required:
+        - temporaryId
+        - currentStatus
+      properties:
+        temporaryId:
+          $ref: '#/components/schemas/temporaryId'
+        currentStatus:
+          type: string
+          enum:
+            - open
+            - inProgress
+            - rejected
+            - done
+          description: Current status of an order (e.g.customer onboarding to get an update if a customer object already has been opened or not).
+          example: done
+        permanentId:
+          $ref: '#/components/schemas/permanentId'
+
+    temporaryId:
+      type: string
+      minLength: 1
+      maxLength: 35
+      description: Some kind of ID (Customer/Person/Prospect/Order/Task ID) so that a status update can be obtained (e.g. customer onboarding).
+      example: 2130040
 
     permanentId:
       type: string
@@ -1204,9 +1214,7 @@ components:
       type: object
       properties:
         temporaryId:
-          type: string
-          minLength: 1
-          maxLength: 35
+          $ref: '#/components/schemas/temporaryId'
 
     prospectResponse:
       type: object
@@ -1215,9 +1223,7 @@ components:
         - response
       properties:
         temporaryId:
-          type: string
-          minLength: 1
-          maxLength: 35
+          $ref: '#/components/schemas/temporaryId'
         response:
           type: string
           enum:
