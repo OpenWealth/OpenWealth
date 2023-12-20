@@ -1,0 +1,9 @@
+type: object
+properties:
+  party:
+    type: string
+    maxLength: 70
+    description: Identification of party
+  signature:
+    type: string
+    description: external scheme

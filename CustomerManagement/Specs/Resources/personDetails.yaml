@@ -1,0 +1,27 @@
+type: object
+allOf:
+  - $ref: 'person.yaml'
+required:
+  - addressList
+  - contactList
+  - kycList
+properties:
+  person2personRelationList:
+    type: array
+    items:
+      $ref: 'person2personRelation.yaml'
+  addressList:
+    type: array
+    description: List of addresses associated with this person
+    items:
+      $ref: 'address.yaml'
+  contactList:
+    type: array
+    description: List of contact details associated with this person
+    items:
+      $ref: 'contact.yaml'
+  kycList:
+    type: array
+    description: KYC information belonging to this person & customer relationship
+    items:
+      $ref: 'kyc.yaml'

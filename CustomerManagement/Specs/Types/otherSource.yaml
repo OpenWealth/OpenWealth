@@ -1,0 +1,7 @@
+allOf:
+  - $ref: 'sourceBase.yaml'
+required:
+  - additionalInformation
+properties:
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'

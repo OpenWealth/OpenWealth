@@ -1,0 +1,22 @@
+type: object
+required:
+  - highestDiploma
+properties:
+  highestDiploma:
+    type: string
+    maxLength: 35
+    description: Highest degree of education
+    example: Master of Science
+  graduationYear:
+    $ref: 'year.yaml'
+    # Year of graduation
+  institute:
+    type: string
+    maxLength: 35
+    description: Institute at which graduation took place
+    example: University of Berlin
+  studyProgramme:
+    type: string
+    maxLength: 35
+    description: Field of study
+    example: Economics

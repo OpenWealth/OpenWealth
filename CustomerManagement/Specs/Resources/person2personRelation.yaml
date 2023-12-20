@@ -1,0 +1,33 @@
+type: object
+required:
+  - relation
+properties:
+  relation:
+    type: string
+    description: Type of relation between two persons
+    example: isParentOf
+    enum:
+      - isParentOf
+      - isPartnerOf
+      - isChildOf
+      - isRelatedTo
+      - isSpouseOf
+      - isRegisteredPartnerOf
+      - isGuardianshipOf
+      - hasGuardianship
+      - isEmployeeOf
+      - isEmployerOf
+      - isIntermediaryOf
+      - hasIntermediary
+      - isFiduciaryOf
+      - hasFiduciary
+      - isHeirOf
+      - other
+  relationOverride:
+    type: string
+    description: Field indicates the person to person relation type. It shall only be used if the relation type is not part of the ENUM of the attribute "relation" hence in exceptional cases (in case of relation type "other").
+    example: Is uncle of
+  relatedPerson:
+    $ref: 'person.yaml'
+  externalReference:
+    $ref: '../Types/externalReference.yaml'

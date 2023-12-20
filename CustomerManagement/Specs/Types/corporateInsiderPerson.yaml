@@ -1,0 +1,16 @@
+type: object
+description: Provides indications if a person might be a corporate insider.
+required:
+  - corporateInsiderStatus
+properties:
+  corporateInsiderStatus:
+    type: boolean
+    description: Is this person a corporate Insider?
+    example: TRUE
+  companyName:
+    type: string
+    maxLength: 140
+  position:
+    $ref: 'position.yaml'
+  isin:
+    $ref: 'isin.yaml'

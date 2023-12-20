@@ -1,0 +1,15 @@
+allOf:
+  - $ref: 'customer.yaml'
+type: object
+required:
+  - person2customerRelationList
+properties:
+  person2customerRelationList:
+    type: array
+    items:
+      $ref: 'person2customerRelation.yaml'
+  documentList:
+    type: array
+    description: List of documents belonging to this customer relationship
+    items:
+      $ref: 'documentDetails.yaml'

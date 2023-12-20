@@ -1,0 +1,32 @@
+type: object
+required:
+  - status
+  - domicile
+  - birthplace
+  - greenCard
+  - substantialPresenceTest
+properties:
+  status:
+    type: boolean
+    description: Is the person a US person?
+    example: false
+  domicile:
+    type: boolean
+    description: Is the person currently in the United States?
+    example: false
+  birthplace:
+    type: boolean
+    description: Was the person born in the United States or a U.S. territory?
+    example: false
+  greenCard:
+    type: boolean
+    description: Is the person a holder of an active U.S. Green Card?
+    example: false
+  substantialPresenceTest:
+    type: boolean
+    description: Is the person considered a U.S. resident for tax purposes due to substantial presence test?
+    example: false
+  otherReasons:
+    type: boolean
+    description: Free text field for further details on FATCA status
+    example: false

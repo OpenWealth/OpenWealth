@@ -1,0 +1,19 @@
+type: object
+properties:
+  sourceType:
+    type: string
+    enum:
+      - incomeFromEmployment
+      - incomeFromBusinessOwnership
+      - saleOfCompany
+      - saleOfNonFinancialAssets
+      - lifeInsurance
+      - pensionAssets
+      - inheritance
+      - gift
+      - loan
+      - saleOfFinancialAssets
+      - capitalGains
+      - otherSource
+    description: Original source of assets
+    example: saleOfCompany

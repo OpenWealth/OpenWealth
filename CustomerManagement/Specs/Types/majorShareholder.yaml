@@ -1,0 +1,17 @@
+type: object
+required:
+  - majorShareholderStatus
+properties:
+  majorShareholderStatus:
+    type: boolean
+    description: Is this person a major shareholder?
+    example: true
+  companyName:
+    type: string
+    maxLength: 140
+  shareOfOwnership:
+    type: integer
+    description: Percentage of shareholding in the company
+    example: 25
+  isin:
+    $ref: 'isin.yaml'

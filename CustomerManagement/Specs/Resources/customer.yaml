@@ -1,0 +1,54 @@
+type: object
+required:
+  - customerId
+  - name
+properties:
+  customerId:
+    type: string
+    minLength: 1
+    maxLength: 35
+    readOnly: True
+    description: Unique customer ID assigned by the custody bank
+    example: 987654321
+  externalReference:
+    $ref: '../Types/externalReference.yaml'
+  name:
+    type: string
+    maxLength: 140
+  status:
+    type: string
+    enum:
+      - active
+      - inactive
+    description: Status of the customer relationship
+    example: active
+  referenceCurrency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  openingDate:
+    $ref: '../../../Globals/Types/Date.yaml'
+  language:
+    $ref: '../Types/language.yaml'
+  customerSegment:
+    type: string
+    maxLength: 35
+    description: Customer segment of the customer at the custody bank (e.g. UHNWI Switzerland)
+    example: CLIENT FIM, EAM-MODELL
+    readOnly: true
+  bankAdvisor:
+    type: string
+    maxLength: 35
+    description: Indicates the instruction/full name of the bank advisor on the side of the custody bank.
+    example: Anna Beispiel PC8-AB
+    readOnly: true
+  bankDeputyAdvisor:
+    type: string
+    maxLength: 35
+    description: Indicates the instruction/full name of the bank deputy advisor on the side of the custody bank.
+    example: Max Muster PC8-MM
+    readOnly: true
+  bankPreviousAdvisor:
+    type: string
+    maxLength: 35
+    description: Indicates the instruction/full name of the previous bank advisor on the side of the custody bank.
+    example: Peter Vergangenheit PC5-PV
+    readOnly: true

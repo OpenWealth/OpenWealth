@@ -1,0 +1,27 @@
+type: object
+required:
+  - type
+  - amount
+  - currency
+properties:
+  type:
+    type: string
+    enum:
+      - salaryOrBonuses
+      - incomeFromFinancialAssets
+      - incomeFromRealEstate
+      - dividendsFromShareholdings
+      - other
+    description: Type of source of income
+    example: salaryOrBonuses
+  amount:
+    $ref: 'amount.yaml'
+  currency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  industry:
+    type: string
+    maxLength: 35
+    description: Industry of employment/source of income
+    example: Financial Services
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'

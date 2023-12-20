@@ -1,0 +1,30 @@
+type: object
+required:
+  - eamCustomer
+properties:
+  eamCustomer:
+    type: boolean
+    description: Is the customer an EAM customer?
+    example: true
+  eamName:
+    type: string
+    maxLength: 140
+    # Name of the EAM
+  eamDomicile:
+    $ref: 'country.yaml'
+    # Domicile of the EAM
+  eamEmployee:
+    type: string
+    maxLength: 140
+    # Name of the employee of the EAM (e.g. Marcus Patterson)
+  eamRelation:
+    type: boolean
+    description: Has the EAM met the customer personally?
+    example: true
+  eamRelationInitiation:
+    type: string
+    maxLength: 70
+    description: How was the relationship between EAM and customer formed?
+  eamRelationPeriod:
+    $ref: 'period.yaml'
+    # How long does the relationship between customer and EAM already exist?

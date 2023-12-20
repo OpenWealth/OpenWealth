@@ -1,0 +1,57 @@
+type: object
+description: List of attributes to provide detailed information about the asset e.g. the domicile of a specific property when asset type is realEstate or the name of the company if the asset type is companyShareholdings.
+properties:
+  nameOfBank:
+    type: string
+    maxLength: 140
+    # Name of the bank where the assets are held if they are tradable financial assets (cash, securities etc.)
+  domicileOfBank:
+    $ref: 'country.yaml'
+    # Domicile of the bank where the assets are held if they are tradable financial assets (cash, securities etc.)
+  typeOfProperty:
+    type: string
+    enum:
+      - apartment
+      - house
+      - building
+      - vacationHome
+      - land
+      - other
+    description: Indicates the type of property
+    example: house
+  usageOfProperty:
+    type: string
+    enum:
+      - privatelyUsed
+      - commerciallyUsed
+      - mixedUsage
+    description: Usage of the property
+    example: privatelyUsed
+  placeOfProperty:
+    type: string
+    maxLength: 35
+    description: Place of the property
+    example: Laax
+  countryOfProperty:
+    $ref: 'country.yaml'
+  nameOfCompany:
+    type: string
+    maxLength: 140
+  shareholdingsInPercent:
+    type: integer
+    description: Percentage of shareholding in the company
+    example: 25
+  typeOfNon-tradableAsset:
+    type: string
+    enum:
+      - art
+      - cars
+      - planes
+      - boats
+      - jewelries
+      - wine
+      - others
+    description: Type of non-tradable assets
+    example: cars
+  additonalInformation:
+    $ref: 'additionalInformation.yaml'

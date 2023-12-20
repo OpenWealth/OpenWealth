@@ -1,0 +1,4 @@
+type: string
+maxLength: 35
+description: External customer/person ID
+example: 123-456-787

@@ -1,0 +1,45 @@
+type: object
+required:
+  - amount
+  - currency
+  - type
+properties:
+  amount:
+    $ref: 'amount.yaml'
+  currency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  type:
+    type: string
+    enum:
+      - inflow
+      - outflow
+    description: Type of account movement
+    example: inflow
+  counterparty:
+    type: string
+    maxLength: 70
+    description: Name of the sender/receiver of the assets
+    example: Muster AG
+  purpose:
+    type: string
+    maxLength: 150
+    description: Purpose for the transfer
+    example: Monthly salary payment
+  frequency:
+    type: string
+    maxLength: 35
+    description: Frequency of payment/transfer
+    example: Monthly
+  originsOfAssetsList:
+    type: array
+    items:
+      $ref: 'country.yaml'
+  nameOfBank:
+    type: string
+    maxLength: 140
+    # Name of the bank of the counterparty
+  domicileOfBank:
+    $ref: 'country.yaml'
+    # Domicile of the bank of the counterparty
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'
