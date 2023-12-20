@@ -1,4 +1,4 @@
 title: UnderlyingFinancialInstrument
 description: Underlying financial instrument
 allOf:
-  - $ref: 'FinancialInstrument.yaml' 
+  - $ref: 'financialInstrument.yaml'

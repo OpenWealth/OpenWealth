@@ -1,4 +1,3 @@
-title: Price
 type: object
 required:
   - amount
@@ -16,4 +15,4 @@ properties:
     example: 12000
     description: Signed decimal number
   currency:
-    $ref: "../../../Globals/Types/Currency.yaml"
+    $ref: '../../../Globals/Types/currency.yaml'

@@ -1,24 +1,24 @@
 title: Bond
 description: Bond
-required: 
+required:
   - maturityDate
   - interestRate
 allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
+  - $ref: 'financialInstrumentBase.yaml'
   - type: object
     properties:
       interestRate:
-        $ref: '../../Types/InterestRate.yaml'
+        $ref: '../../Types/interestRate.yaml'
       maturityDate:
-        $ref: '../../Types/MaturityDate.yaml'
+        $ref: '../../Types/maturityDate.yaml'
       nextInterestPaymentDate:
-        $ref: '../../Types/NextInterestPaymentDate.yaml'
+        $ref: '../../Types/nextInterestPaymentDate.yaml'
       issueDate:
-        $ref: '../../Types/IssueDate.yaml'
+        $ref: '../../Types/issueDate.yaml'
       conversionPrice:
-        $ref: '../../Types/ConversionPrice.yaml'
+        $ref: '../../Types/conversionPrice.yaml'
       currencyOfDenomination:
-        $ref: '../../../../Globals/Types/Currency.yaml'
+        $ref: '../../../../Globals/Types/currency.yaml'
       minimumDenomination:
         type: number
         example: 10000

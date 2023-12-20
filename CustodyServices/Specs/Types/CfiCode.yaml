@@ -4,4 +4,4 @@ description: Indicates the type of the financial instrument. Must follow the ISO
 pattern: '^[A-Z]{2,6}$'
 minLength: 2
 maxLength: 6
-example: "ESVUFR"
+example: ESVUFR

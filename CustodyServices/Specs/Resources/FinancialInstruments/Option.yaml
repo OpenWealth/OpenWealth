@@ -8,32 +8,32 @@ required:
   - optionStyle
   - underlyingFinancialInstrument
 allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
+  - $ref: 'financialInstrumentBase.yaml'
   - type: object
     properties:
       expiryDate:
-        $ref: '../../Types/ExpiryDate.yaml'
+        $ref: '../../Types/expiryDate.yaml'
       strikePrice:
-        $ref: '../../Types/StrikePrice.yaml'
+        $ref: '../../Types/strikePrice.yaml'
       exercisePrice:
-        $ref: '../../Types/ExercisePrice.yaml'
+        $ref: '../../Types/exercisePrice.yaml'
       contractSize:
-        $ref: '../../Types/ContractSize.yaml'
+        $ref: '../../Types/contractSize.yaml'
       optionType:
         type: string
         example: call
-        enum: 
-        - call
-        - put
+        enum:
+          - call
+          - put
         description: Specifies whether it is a Call option (right to purchase a specific underlying asset) or a Put option (right to sell a specific underlying asset).
       optionStyle:
         type: string
         example: american
         enum:
-        - american
-        - european
-        - bermudan
-        - asian
+          - american
+          - european
+          - bermudan
+          - asian
         description: Specifies how an option can be exercised.
       underlyingFinancialInstrument:
-        $ref: '../UnderlyingFinancialInstrument.yaml'
+        $ref: '../underlyingFinancialInstrument.yaml'

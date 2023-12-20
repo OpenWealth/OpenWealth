@@ -5,14 +5,14 @@ required:
   - contractSize
   - underlyingFinancialInstrument
 allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
+  - $ref: 'financialInstrumentBase.yaml'
   - type: object
     properties:
       expiryDate:
-        $ref: '../../Types/ExpiryDate.yaml'
+        $ref: '../../Types/expiryDate.yaml'
       contractSize:
-        $ref: '../../Types/ContractSize.yaml'
+        $ref: '../../Types/contractSize.yaml'
       underlyingFinancialInstrument:
-        $ref: '../UnderlyingFinancialInstrument.yaml'
+        $ref: '../underlyingFinancialInstrument.yaml'
       exercisePrice:
-        $ref: '../../Types/ExercisePrice.yaml'
+        $ref: '../../Types/exercisePrice.yaml'

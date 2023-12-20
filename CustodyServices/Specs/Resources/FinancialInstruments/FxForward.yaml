@@ -5,18 +5,18 @@ required:
   - amountReceived
   - maturityDate
 allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
+  - $ref: 'financialInstrumentBase.yaml'
   - type: object
     properties:
       amountPaid:
         title: AmountPaid
         description: Amount paid at the maturity of a contract (i.e. FX forward)
         allOf:
-          - $ref: '../../Types/CurrencyAmount.yaml'
+          - $ref: '../../Types/currencyAmount.yaml'
       amountReceived:
         title: amountReceived
         description: Amount received at the maturity of a contract (i.e. FX forward)
         allOf:
-          - $ref: '../../Types/CurrencyAmount.yaml'
+          - $ref: '../../Types/currencyAmount.yaml'
       maturityDate:
-        $ref: '../../Types/MaturityDate.yaml'
+        $ref: '../../Types/maturityDate.yaml'

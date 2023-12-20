@@ -1,12 +1,12 @@
 title: ValuationPrice
 allOf:
-  - $ref: "Price.yaml"
+  - $ref: 'Price.yaml'
   - type: object
     properties:
       priceDate:
         description: Date of the price.
         allOf:
-          - $ref: "../../../Globals/Types/Date.yaml"
+          - $ref: '../../../Globals/Types/date.yaml'
       sourceOfPrice:
         type: string
         maxLength: 70

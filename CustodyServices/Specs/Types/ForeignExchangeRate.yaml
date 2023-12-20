@@ -1,10 +1,10 @@
 title: ForeignExchangeRate
 type: object
 allOf:
-  - $ref: "../../../Globals/Types/Rate.yaml"
+  - $ref: '../../../Globals/Types/rate.yaml'
   - type: object
     properties:
       sourceCurrency:
-        $ref: "../../../Globals/Types/Currency.yaml"
+        $ref: '../../../Globals/Types/currency.yaml'
       targetCurrency:
-        $ref: "../../../Globals/Types/Currency.yaml"
+        $ref: '../../../Globals/Types/currency.yaml'

@@ -1,4 +1,3 @@
-title: Currency
 type: string
 description: ISO 4217 code
 pattern: '[A-Z]{3}'

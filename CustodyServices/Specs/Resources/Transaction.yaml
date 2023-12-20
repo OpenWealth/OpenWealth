@@ -9,11 +9,12 @@ required:
   - reversalIndicator
 properties:
   transactionType:
-    $ref: "../Types/TransactionType.yaml"
+    $ref: '../Types/transactionType.yaml'
   transactionSubtype:
-    $ref: "../Types/TransactionSubtype.yaml"
+    $ref: '../Types/transactionSubtype.yaml'
   transactionId:
     type: string
+    readOnly: true
     maxLength: 35
     example: 987654321
     description: Transaction ID given by the bank
@@ -21,7 +22,7 @@ properties:
     title: TransactionDate
     description: Date of transaction entity
     allOf:
-      - $ref: "../../../Globals/Types/Date.yaml"
+      - $ref: '../../../Globals/Types/date.yaml'
   customerId:
     type: string
     description: Unique and unambiguous identification used by the bank for the customer.
@@ -52,26 +53,26 @@ properties:
     title: tradeDate
     description: Specifies the date/time on which the trade was executed.
     allOf:
-      - $ref: "../../../Globals/Types/Date.yaml"
+      - $ref: '../../../Globals/Types/date.yaml'
   settlementDate:
     title: SettlementDate
     description: Date and time at which the securities are to be delivered or received.
     allOf:
-      - $ref: "../../../Globals/Types/Date.yaml"
+      - $ref: '../../../Globals/Types/date.yaml'
   triggeringFinancialInstrument:
-    $ref: "TriggeringFinancialInstrument.yaml"
+    $ref: 'triggeringFinancialInstrument.yaml'
   movementList:
     type: array
     description: List of movements belonging to a transaction from a banks perspective
     items:
-      $ref: "Movement.yaml"
+      $ref: 'movement.yaml'
   postingAmountList:
     type: array
     description: List of total amounts of money that is to be/was posted to respective accounts in the account currency.
     items:
-      $ref: "PostingAmount.yaml"
+      $ref: 'postingAmount.yaml'
   settlementCurrency:
-    $ref: "../../../Globals/Types/Currency.yaml"
+    $ref: '../../../Globals/Types/currency.yaml'
   transactionAdditionalDetails:
     type: string
     maxLength: 70

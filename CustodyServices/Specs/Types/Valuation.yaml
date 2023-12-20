@@ -5,10 +5,10 @@ required:
   - value
 properties:
   valueInPositionCurrency:
-    $ref: "CurrencyAmount.yaml"
+    $ref: 'currencyAmount.yaml'
   valueInReferenceCurrency:
-    $ref: "CurrencyAmount.yaml"
+    $ref: 'currencyAmount.yaml'
   foreignExchangeRate:
-    $ref: "ValuationForeignExchangeRate.yaml"
+    $ref: 'valuationForeignExchangeRate.yaml'
   valuationDate:
-    $ref: "../../../Globals/Types/Date.yaml"
+    $ref: '../../../Globals/Types/date.yaml'

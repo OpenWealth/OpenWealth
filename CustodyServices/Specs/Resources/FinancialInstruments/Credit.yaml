@@ -3,10 +3,10 @@ description: Credit
 required:
   - principalAmount
 allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
+  - $ref: 'financialInstrumentBase.yaml'
   - type: object
     properties:
       principalAmount:
-        $ref: '../../Types/PrinciapalAmount.yaml'
+        $ref: '../../Types/princiapalAmount.yaml'
       underlyingFinancialInstrument:
-        $ref: '../UnderlyingFinancialInstrument.yaml'
+        $ref: '../underlyingFinancialInstrument.yaml'

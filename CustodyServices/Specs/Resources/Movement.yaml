@@ -9,34 +9,34 @@ required:
   - quantity
 properties:
   movementType:
-    $ref: "../Types/MovementType.yaml"
+    $ref: '../Types/movementType.yaml'
   movementDate:
     title: MovementDate
     description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank.
     allOf:
-      - $ref: "../../../Globals/Types/Date.yaml"
+      - $ref: '../../../Globals/Types/date.yaml'
   financialInstrument:
-    $ref: "FinancialInstrument.yaml"
+    $ref: 'financialInstrument.yaml'
   account:
-    $ref: "Account.yaml"
+    $ref: 'account.yaml'
   quantity:
-    $ref: "../Types/Quantity.yaml"
+    $ref: '../Types/quantity.yaml'
   currency:
-    $ref: "../../../Globals/Types/Currency.yaml"
+    $ref: '../../../Globals/Types/currency.yaml'
   valueDate:
     title: ValueDate
     description: Date when calculating economic benefit for a cash amount.
     allOf:
-      - $ref: "../../../Globals/Types/Date.yaml"
+      - $ref: '../../../Globals/Types/date.yaml'
   positionId:
     type: string
     maxLength: 35
     description: Identification for the position given by the bank.
     example: 1234566-12-1
   price:
-    $ref: "../Types/Price.yaml"
+    $ref: '../Types/price.yaml'
   foreignExchangeRate:
-    $ref: "../Types/ForeignExchangeRate.yaml"
+    $ref: '../Types/foreignExchangeRate.yaml'
   movementTypeAdditionalInformation:
     type: string
     maxLength: 35
