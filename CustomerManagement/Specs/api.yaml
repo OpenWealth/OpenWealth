@@ -17,9 +17,9 @@ paths:
   /customers:
     get:
       parameters:
-        - $ref: '#/components/parameters/cursor'
+        - $ref: '../../Globals/Params/Cursor.yaml'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Returns a list of customers.
       description: Returns a list of customers. A customer is an object which holds a contract with a (custody-)bank. Paging is done based on the customer object, i.e. if limit is set to 1, then 1 customer will be returned per page.
       operationId: getCustomers
@@ -59,7 +59,7 @@ paths:
   /customer-details:
     post:
       parameters:
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Opening of a new customer.
       description: Request to open a new customer relationship at the (custody-)bank including all relevant information. A customer is an object which holds a contract with a (custody-)bank.
       operationId: postCustomer
@@ -101,7 +101,7 @@ paths:
   /customers/{customerId}:
     parameters:
       - $ref: '#/components/parameters/customerId'
-      - $ref: '#/components/parameters/correlation_in_header'
+      - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
     get:
       summary: Returns a specific customer.
       description: Returns a customer record of a specific customer.
@@ -138,7 +138,7 @@ paths:
   /customers/{customerId}/customer-details:
     parameters:
       - $ref: '#/components/parameters/customerId'
-      - $ref: '#/components/parameters/correlation_in_header'
+      - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
     get:
       summary: Returns a full record of a specific customer.
       description: Returns a full customer record of a specific customer including details.
@@ -175,9 +175,9 @@ paths:
   /customers/{customerId}/persons:
     get:
       parameters:
-        - $ref: '#/components/parameters/cursor'
+        - $ref: '../../Globals/Params/Cursor.yaml'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
         - $ref: '#/components/parameters/customerId'
       summary: Returns a list with persons associated with a specific customer.
       description: Returns all person records associated with a specific customer. Paging is done based on the person object, i.e. if limit is set to 1, then 1 person will be returned per page.
@@ -218,7 +218,7 @@ paths:
   /customers/{customerId}/person-details:
     post:
       parameters:
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
         - $ref: '#/components/parameters/customerId'
       summary: Creates a new person object.
       description: Request to open a new person object associated with a specific customer at the (custody-)bank including all relevant information.
@@ -263,7 +263,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Returns a specific person.
       description: Returns a person record of a specific person.
       operationId: getPersonByPersonId
@@ -301,7 +301,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Returns a full record of a specific person.
       description: Returns a person record of a specific person including details.
       operationId: getPersonDetailsByPersonId
@@ -339,9 +339,9 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/cursor'
+        - $ref: '../../Globals/Params/Cursor.yaml'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Returns the contact information of a specific customer.
       description: Returns a list of contact details (e.g. phone numbers) of a specific person associated with a specific customer. Paging is done based on the contact object, i.e. if limit is set to 1, then 1 contact will be returned per page.
       operationId: getContactDetailsByCustomerId
@@ -379,7 +379,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Creates a new contact detail for a specific customer.
       description: Request to create a new contact detail for a specific customer at the (custody-)bank.
       operationId: postContactDetailsByCustomerId
@@ -424,7 +424,7 @@ paths:
         - $ref: '#/components/parameters/contactId'
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Returns a specific contact detail.
       description: Returns a specific contact detail of a specific customer.
       operationId: getContactDetailsByContactDetailID
@@ -461,7 +461,7 @@ paths:
         - $ref: '#/components/parameters/contactId'
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Updates specific field(s) of a specific contact detail.
       description: Updates specific field(s) of a specific contact detail.
       operationId: putContactDetailByContactDetailId
@@ -501,7 +501,7 @@ paths:
         - $ref: '#/components/parameters/contactId'
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Deletes a specific contact detail.
       description: Deletion of a specific contact detail.
       operationId: deleteContactDetailsByContactDetailID
@@ -535,9 +535,9 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/cursor'
+        - $ref: '../../Globals/Params/Cursor.yaml'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Returns a list of addresses of a specific customer.
       description: Returns a list of addresses of a specific person associated with a specific customer. Paging is done based on the address object, i.e. if limit is set to 1, then 1 address will be returned per page.
       operationId: getAddressByCustomerId
@@ -576,7 +576,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Creates a new address object.
       description: Request to create a new address object for a specific customer at the (custody-)bank.
       operationId: postAddressByCustomerId
@@ -620,7 +620,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
         - $ref: '#/components/parameters/addressId'
       summary: Returns a specific address of a specific customer.
       description: Returns a specific address record of a specific customer.
@@ -657,7 +657,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
         - $ref: '#/components/parameters/addressId'
       summary: Update of an existing address.
       description: Updates an existing address of a specific customer.
@@ -697,9 +697,9 @@ paths:
     get:
       parameters:
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/cursor'
+        - $ref: '../../Globals/Params/Cursor.yaml'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Returns a list of documents of a specific customer.
       description: Returns a list of documents of a specific customer without the actual document content. Paging is done based on the document object, i.e. if limit is set to 1, then 1 document will be returned per page.
       operationId: getDocumentsByCustomerId
@@ -738,7 +738,7 @@ paths:
     post:
       parameters:
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Creates a new document.
       description: Request to create a new document for a specific customer at the (custody-)bank.
       operationId: postDocumentByCustomerId
@@ -781,7 +781,7 @@ paths:
     get:
       parameters:
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
         - $ref: '#/components/parameters/documentId'
       summary: Returns a specific document for a specific customer.
       description: Returns a specific document of a specific customer without the actual document content.
@@ -819,7 +819,7 @@ paths:
     get:
       parameters:
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
         - $ref: '#/components/parameters/documentId'
       summary: Returns a specific document of a specific customer including details.
       description: Returns a specific document of a specific customer including details.
@@ -858,7 +858,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Returns the kyc of a specific customer.
       description: Returns the know-your-customer record of a specific person associated with a specific customer.
       operationId: getKycByCustomerId
@@ -896,7 +896,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/personId'
         - $ref: '#/components/parameters/customerId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
       summary: Creates a new kyc object.
       description: Request to create a new kyc object for a specific customer at the (custody-)bank.
       operationId: postKyc
@@ -937,7 +937,7 @@ paths:
 
   /prospect-precheck:
     parameters:
-      - $ref: '#/components/parameters/correlation_in_header'
+      - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
     post:
       summary: Conducts a pre-check at the custody bank.
       description: Conduct a pre-check to validate if the prospect might be accepted as customer by the custody bank based on base parametes like domicile / nationality etc.
@@ -980,7 +980,7 @@ paths:
   /prospect-precheck/{temporaryId}:
     parameters:
       - $ref: '#/components/parameters/temporaryId'
-      - $ref: '#/components/parameters/correlation_in_header'
+      - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
     get:
       summary: Returns result of pre-check.
       description: Returns the status of the pre-check for a specific prospect.
@@ -1017,7 +1017,7 @@ paths:
   /status/{temporaryId}:
     parameters:
       - $ref: '#/components/parameters/temporaryId'
-      - $ref: '#/components/parameters/correlation_in_header'
+      - $ref: '../../Globals/Params/CorrelationInHeader.yaml'
     get:
       summary: Returns the status of a request.
       description: Returns the current status of a request (e.g. current status of a customer opening request in the onboarding process).
@@ -1108,20 +1108,6 @@ components:
         type: integer
         format: int32
         minimum: 1
-    cursor:
-      name: cursor
-      in: query
-      description: An opaque string value used for pagination
-      required: false
-      schema:
-        type: string
-    correlation_in_header:
-      in: header
-      name: X-Correlation-ID
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-      required: true
-      schema:
-        type: string
 
   schemas:
     customerIdResponse:
