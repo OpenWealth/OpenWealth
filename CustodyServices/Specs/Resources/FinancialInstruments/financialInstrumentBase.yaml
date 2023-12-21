@@ -14,7 +14,7 @@ properties:
   identificationList:
     type: array
     items:
-      $ref: 'identification.yaml'
+      $ref: '../../Types/financialInstrumentIdentification.yaml'
     minItems: 1
   cfiCode:
     $ref: '../../Types/cfiCode.yaml'
