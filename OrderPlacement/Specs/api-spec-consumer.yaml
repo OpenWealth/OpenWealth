@@ -50,4 +50,4 @@ components:
         identify the callback URL resource.
       required: true
       schema:
-        type: string
+        $ref: 'Types/eventSubscriptionId.yaml'
