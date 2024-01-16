@@ -1,0 +1,53 @@
+description: Notification for the order placement API that is pushed to the TPP.
+type: object
+properties:
+  version:
+    $ref: '../Types/version.yaml'
+  status:
+    description: Status of the requested resource notification
+    type: string
+    enum:
+      - Order:Acknowledged
+      - Order:Accepted
+      - Order:Customer_Release
+      - Order:Placed
+      - Order:Partially_Filled
+      - Order:Filled
+      - Order:Executed
+      - Order:Cancelled
+      - Order:Partially_Cancelled
+      - Order:Market_Cancelled
+      - Order:Pending_Cancel
+      - Order:Rejected
+      - Order:Partially_Rejected
+      - Order:Market_Rejected
+      - Order:Expired
+      - Order:Partially_Expired
+      - Order:Market_Expired
+    example: 'Order:Rejected'
+  reason:
+    description: Reason for the event notification
+    type: string
+    enum:
+      - Order_Updated
+    example: 'Order_Updated' 
+  resourceLink:
+    description: Link to resource that triggered the event notification
+    type: string
+    example: "/api/openwealth/order-placement/v2/orders/abcd1234"
+  created:
+    description: Timestamp - Date and time on which the notification has been created.
+    $ref: '../Types/date-time.yaml'
+  id:
+    description: Identification of the notification
+    $ref: '../Types/notificationId.yaml'
+  predecessorId:
+    description: Identification of the notification that predeceeds this notification
+    $ref: '../Types/notificationId.yaml'
+  executedQuantity:
+    description: Total quantity (e.g. number of shares) filled.
+    $ref: '../Types/executedQuantity.yaml'
+  remainingQuantity:
+    $ref: '../Types/remainingQuantity.yaml'
+  lastQuantity:
+    $ref: '../Types/lastQuantity.yaml'

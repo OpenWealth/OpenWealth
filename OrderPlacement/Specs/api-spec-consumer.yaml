@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  version: 1.0.3
+  title: OpenWealth Order Placement Event Notification API - TPP Endpoint
+  description: API for Receiving Event Notification for OpenWealth APIs
+  contact:
+    email: openwealth@synpulse.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: youropenfinanceservergoeshere.com
+
+paths:
+  /event-notifications:
+    post:
+      summary: Push notification towards TPP
+      description: Push notficiations for subscribed event notifications.
+      operationId: postEventNotification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'Resources/notificationOrderPlacement.yaml'
+              
+      responses:
+        '202':
+          description: Notification is accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+   
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+
+components:
+  ###############
+  # Parameters  #
+  ###############
+
+  parameters:
+    eventSubscriptionId:
+      name: EventSubscriptionId
+      in: path
+      description: >-
+        Unique identification as assigned by the API exposing party to uniquely
+        identify the callback URL resource.
+      required: true
+      schema:
+        type: string
