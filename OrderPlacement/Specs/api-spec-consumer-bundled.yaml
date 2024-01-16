@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.0.3
+  version: 1.0.4
   title: OpenWealth Order Placement Event Notification API - TPP Endpoint
   description: API for Receiving Event Notification for OpenWealth APIs
   contact:
@@ -49,6 +49,50 @@ components:
         - V2
         - V3
       example: V2
+    orderStatus:
+      type: string
+      description: Shows in which stage of its life cycle an order is.
+      enum:
+        - acknowledged
+        - accepted
+        - customerRelease
+        - placed
+        - partiallyFilled
+        - filled
+        - executed
+        - cancelled
+        - partiallyCancelled
+        - marketCancelled
+        - pendingCancel
+        - rejected
+        - partiallyRejected
+        - marketRejected
+        - expired
+        - partiallyExpired
+        - marketExpired
+      example: partiallyFilled
+    notificationReason:
+      description: Reason for the event notification
+      type: string
+      enum:
+        - Order:New
+        - Order:DoneForDay
+        - Order:Cancelled
+        - Order:Pending_Cancel
+        - Order:Stopped
+        - Order:Rejected
+        - Order:Suspended
+        - Order:Pending_New
+        - Order:Expired
+        - Order:Trade
+        - Order:Replaced
+        - Order:Calculated
+        - Order:Restated
+        - Order:Pending_Replace
+        - Order:Trade_Correct
+        - Order:Trade_Cancel
+        - Order:OrderStatus
+      example: Order:Trade
     date-time:
       type: string
       format: date-time
@@ -101,32 +145,9 @@ components:
           $ref: '#/components/schemas/version'
         status:
           description: Status of the requested resource notification
-          type: string
-          enum:
-            - Order:Acknowledged
-            - Order:Accepted
-            - Order:Customer_Release
-            - Order:Placed
-            - Order:Partially_Filled
-            - Order:Filled
-            - Order:Executed
-            - Order:Cancelled
-            - Order:Partially_Cancelled
-            - Order:Market_Cancelled
-            - Order:Pending_Cancel
-            - Order:Rejected
-            - Order:Partially_Rejected
-            - Order:Market_Rejected
-            - Order:Expired
-            - Order:Partially_Expired
-            - Order:Market_Expired
-          example: Order:Rejected
+          $ref: '#/components/schemas/orderStatus'
         reason:
-          description: Reason for the event notification
-          type: string
-          enum:
-            - Order_Updated
-          example: Order_Updated
+          $ref: '#/components/schemas/notificationReason'
         resourceLink:
           description: Link to resource that triggered the event notification
           type: string

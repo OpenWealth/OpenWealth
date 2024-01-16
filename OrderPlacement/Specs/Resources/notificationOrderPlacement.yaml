@@ -1,36 +1,15 @@
 description: Notification for the order placement API that is pushed to the TPP.
 type: object
 properties:
+  eventSubscriptionId:
+    $ref: '../Types/eventSubscriptionId.yaml'
   version:
     $ref: '../Types/version.yaml'
   status:
     description: Status of the requested resource notification
-    type: string
-    enum:
-      - Order:Acknowledged
-      - Order:Accepted
-      - Order:Customer_Release
-      - Order:Placed
-      - Order:Partially_Filled
-      - Order:Filled
-      - Order:Executed
-      - Order:Cancelled
-      - Order:Partially_Cancelled
-      - Order:Market_Cancelled
-      - Order:Pending_Cancel
-      - Order:Rejected
-      - Order:Partially_Rejected
-      - Order:Market_Rejected
-      - Order:Expired
-      - Order:Partially_Expired
-      - Order:Market_Expired
-    example: 'Order:Rejected'
+    $ref: '../Types/orderStatus.yaml'
   reason:
-    description: Reason for the event notification
-    type: string
-    enum:
-      - Order_Updated
-    example: 'Order_Updated' 
+    $ref: '../Types/notificationReason.yaml'
   resourceLink:
     description: Link to resource that triggered the event notification
     type: string

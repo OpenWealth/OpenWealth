@@ -3,14 +3,7 @@ required:
   - eventSubscriptionId
 properties:
   eventSubscriptionId:
-    description: >-
-        Unique identification as assigned by the API exposing party to uniquely
-        identify the callback URL resource.
-    type: string
-    minLength: 1
-    maxLength: 40
-    readOnly: true
-    example: '3v3n7subscr1p710n'
+    $ref: '../Types/eventSubscriptionId.yaml'
   callbackUrl:
     description: >-
       Callback URL for a TPP hosted service. Will be used by API exposing party, in

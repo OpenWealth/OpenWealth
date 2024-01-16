@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 2.1.0
+  version: 2.1.1
   title: Order Placement API
   description: This API is used to place orders and check on the order status.
   contact:
@@ -379,7 +379,7 @@ paths:
       tags:
         - event-notification-subscription
       responses:
-        '202':
+        '204':
           description: Delete event subscription
           headers:
             X-Correlation-ID:
