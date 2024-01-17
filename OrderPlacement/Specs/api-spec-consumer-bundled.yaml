@@ -41,6 +41,12 @@ components:
       schema:
         $ref: '#/components/schemas/eventSubscriptionId'
   schemas:
+    eventSubscriptionId:
+      description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: 3v3n7subscr1p70n
     version:
       description: Indicates to which version of the respective API the notification is belonging to.
       type: string
@@ -107,6 +113,12 @@ components:
       maxLength: 22
       description: Total quantity (e.g. number of shares) filled.
       example: 100
+    averagePrice:
+      type: string
+      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      maxLength: 22
+      description: Calculated average price of all fills on this order.
+      example: 17.8
     remainingQuantity:
       type: string
       pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
@@ -141,6 +153,8 @@ components:
       description: Notification for the order placement API that is pushed to the TPP.
       type: object
       properties:
+        eventSubscriptionId:
+          $ref: '#/components/schemas/eventSubscriptionId'
         version:
           $ref: '#/components/schemas/version'
         status:
@@ -164,7 +178,8 @@ components:
         executedQuantity:
           description: Total quantity (e.g. number of shares) filled.
           $ref: '#/components/schemas/executedQuantity'
-        averagePrice: $ref:'../Types/averagePrice.yaml'
+        averagePrice:
+          $ref: '#/components/schemas/averagePrice'
         remainingQuantity:
           $ref: '#/components/schemas/remainingQuantity'
         dayExecutedQuantity:
@@ -211,12 +226,6 @@ components:
         instance:
           type: string
           example: path/to/corresponding/resource
-    eventSubscriptionId:
-      description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: 3v3n7subscr1p70n
   headers:
     XCorrelationId:
       description: Client defined ID from request to correlates HTTP requests between a client and server.

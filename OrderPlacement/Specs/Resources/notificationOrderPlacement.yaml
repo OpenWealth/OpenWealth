@@ -27,7 +27,7 @@ properties:
     description: Total quantity (e.g. number of shares) filled.
     $ref: '../Types/executedQuantity.yaml'
   averagePrice:
-    $ref:'../Types/averagePrice.yaml'
+    $ref: '../Types/averagePrice.yaml'
   remainingQuantity:
     $ref: '../Types/remainingQuantity.yaml'
   dayExecutedQuantity:
