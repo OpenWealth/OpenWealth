@@ -50,7 +50,7 @@ properties:
     description: States the identification of the transaction that was reversed
     example: 2134123415
   tradeDate:
-    title: tradeDate
+    title: TradeDate
     description: Specifies the date/time on which the trade was executed.
     allOf:
       - $ref: '../../../Globals/Types/date.yaml'

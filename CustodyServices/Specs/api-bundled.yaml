@@ -666,6 +666,7 @@ components:
         type: string
   schemas:
     currency:
+      title: Currency
       type: string
       description: ISO 4217 code
       pattern: '[A-Z]{3}'
@@ -825,6 +826,7 @@ components:
           items:
             $ref: '#/components/schemas/account'
     date:
+      title: Date
       type: string
       format: date
       pattern: \d{4}-\d{2}-\d{2}
@@ -855,7 +857,7 @@ components:
         - creditDefaultSwap
         - cryptoAsset
         - other
-    identification:
+    financialInstrumentIdentification:
       title: FinancialInstrumentIdentification
       type: object
       properties:
@@ -909,7 +911,7 @@ components:
         identificationList:
           type: array
           items:
-            $ref: '#/components/schemas/identification'
+            $ref: '#/components/schemas/financialInstrumentIdentification'
           minItems: 1
         cfiCode:
           $ref: '#/components/schemas/cfiCode'
@@ -938,6 +940,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/financialInstrumentBase'
     rate:
+      title: Rate
       type: object
       properties:
         rate:
@@ -1871,7 +1874,7 @@ components:
           description: States the identification of the transaction that was reversed
           example: 2134123415
         tradeDate:
-          title: tradeDate
+          title: TradeDate
           description: Specifies the date/time on which the trade was executed.
           allOf:
             - $ref: '#/components/schemas/date'
