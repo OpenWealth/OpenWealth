@@ -1,5 +1,5 @@
 {
-  "positionId": "014",
+  "id": "014",
   "positionDate": "2022-12-31",
   "financialInstrument": {
     "type": "interestSwap",
@@ -47,7 +47,7 @@
       "currency": "CHF"
     }
   },
-  "positionName": "Payer interest rate swap, Expiry Date 2023-06-27",
+  "name": "Payer interest rate swap, Expiry Date 2023-06-27",
   "currency": "CHF",
   "safekeepingPlace": "INSECHZZXXX"
 }

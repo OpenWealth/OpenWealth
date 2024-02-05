@@ -1,5 +1,5 @@
 {
-  "positionId": "002",
+  "id": "002",
   "positionDate": "2023-01-04",
   "financialInstrument": {
     "type": "option",
@@ -61,7 +61,7 @@
       "currency": "CHF"
     }
   },
-  "positionName": "Put Option Apple Inc., 185, 2024-06-01",
+  "name": "Put Option Apple Inc., 185, 2024-06-01",
   "currency": "USD",
   "safekeepingPlace": "INSECHZZXXX"
 }

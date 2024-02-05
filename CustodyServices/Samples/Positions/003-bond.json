@@ -1,5 +1,5 @@
 {
-  "positionId": "003",
+  "id": "003",
   "positionDate": "2023-01-04",
   "financialInstrument": {
     "type": "bond",
@@ -45,7 +45,7 @@
       "currency": "CHF"
     }
   },
-  "positionName": "Schweizerische Eidgenossenschaft 0,5% 18/32",
+  "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
   "currency": "CHF",
   "safekeepingPlace": "INSECHZZXXX"
 }

@@ -1,5 +1,5 @@
 {
-  "positionId": "014",
+  "id": "014",
   "positionDate": "2022-12-31",
   "financialInstrument": {
     "type": "totalReturnSwap",
@@ -49,7 +49,7 @@
       "currency": "CHF"
     }
   },
-  "positionName": "Total return swap, Apple Inc., Expiry Date 2023-06-27",
+  "name": "Total return swap, Apple Inc., Expiry Date 2023-06-27",
   "currency": "CHF",
   "safekeepingPlace": "INSECHZZXXX"
 }

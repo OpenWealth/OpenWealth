@@ -1,5 +1,5 @@
 {
-  "positionId": "002",
+  "id": "002",
   "positionDate": "2023-01-04",
   "financialInstrument": {
     "type": "equity",
@@ -43,7 +43,7 @@
       "currency": "CHF"
     }
   },
-  "positionName": "Apple Inc.",
+  "name": "Apple Inc.",
   "currency": "USD",
   "safekeepingPlace": "INSECHZZXXX"
 }

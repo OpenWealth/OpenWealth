@@ -1,5 +1,5 @@
 {
-  "positionId": "012",
+  "id": "012",
   "positionDate": "2022-12-31",
   "financialInstrument": {
     "type": "fixedDeposit",
@@ -40,7 +40,7 @@
       "rateDate": "2022-12-31"
     }
   },
-  "positionName": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
+  "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
   "currency": "CHF",
   "safekeepingPlace": "INSECHZZXXX"
 }

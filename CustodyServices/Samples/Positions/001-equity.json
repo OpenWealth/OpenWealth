@@ -1,5 +1,5 @@
 {
-  "positionId": "001",
+  "id": "001",
   "positionDate": "2022-12-31",
   "financialInstrument": {
     "type": "equity",
@@ -37,7 +37,7 @@
       "currency": "CHF"
     }
   },
-  "positionName": "CREDIT SUISSE GROUP AG",
+  "name": "CREDIT SUISSE GROUP AG",
   "currency": "CHF",
   "safekeepingPlace": "INSECHZZXXX"
 }

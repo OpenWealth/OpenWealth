@@ -1,5 +1,5 @@
 {
-  "positionId": "008",
+  "id": "008",
   "positionDate": "2023-01-04",
   "financialInstrument": {
     "type": "fxForward",
@@ -44,7 +44,7 @@
       "rateDate": "2023-01-04"
     }
   },
-  "positionName": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+  "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
   "currency": "USD",
   "safekeepingPlace": "INSECHZZXXX"
 }
