@@ -1,8 +1,8 @@
 {
-  "transactionId": "00000011",
+  "id": "00000011",
   "transactionDate": "2023-06-27",
-  "transactionType": "corporateActions",
-  "transactionSubtype": "redemption",
+  "type": "corporateActions",
+  "subtype": "redemption",
   "customerId": "123456",
   "reversalIndicator": false,
   "triggeringFinancialInstrument": {

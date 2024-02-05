@@ -1,8 +1,8 @@
 {
-  "transactionId": "0000010",
+  "id": "0000010",
   "transactionDate": "2023-06-27",
-  "transactionType": "corporateActions",
-  "transactionSubtype": "coupon",
+  "type": "corporateActions",
+  "subtype": "coupon",
   "customerId": "123456",
   "reversalIndicator": false,
   "triggeringFinancialInstrument": {

@@ -1,8 +1,8 @@
 {
-  "transactionId": "00000012",
+  "id": "00000012",
   "transactionDate": "2022-12-31",
-  "transactionType": "moneyMarket",
-  "transactionSubtype": "openFixedDeposit",
+  "type": "moneyMarket",
+  "subtype": "openFixedDeposit",
   "customerId": "123456",
   "reversalIndicator": false,
   "movementList": [

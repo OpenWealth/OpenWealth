@@ -1,9 +1,9 @@
 {
   "customerId": "123456",
-  "transactionId": "00000014",
+  "id": "00000014",
   "transactionDate": "2022-12-31",
-  "transactionType": "Swap",
-  "transactionSubtype": "openTotalReturnSwap",
+  "type": "Swap",
+  "subtype": "openTotalReturnSwap",
   "reversalIndicator": false,
   "movementList": [
     {

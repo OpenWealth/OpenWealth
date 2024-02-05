@@ -1,7 +1,7 @@
 {
-  "transactionId": "0000001",
-  "transactionType": "cash",
-  "transactionSubtype": "inflowOutflowDigital",
+  "id": "0000001",
+  "type": "cash",
+  "subtype": "inflowOutflowDigital",
   "transactionDate": "2022-12-31",
   "customerId": "123456",
   "reversalIndicator": false,

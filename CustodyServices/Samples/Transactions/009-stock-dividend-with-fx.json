@@ -1,8 +1,8 @@
 {
-  "transactionId": "0000009",
+  "id": "0000009",
   "transactionDate": "2023-05-31",
-  "transactionType": "corporateActions",
-  "transactionSubtype": "dividendCash",
+  "type": "corporateActions",
+  "subtype": "dividendCash",
   "customerId": "123456",
   "reversalIndicator": false,
   "triggeringFinancialInstrument": {

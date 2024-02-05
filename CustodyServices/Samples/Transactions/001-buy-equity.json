@@ -1,8 +1,8 @@
 {
-  "transactionId": "0000002",
+  "id": "0000002",
   "transactionDate": "2023-01-04",
-  "transactionType": "securitiesExchange",
-  "transactionSubtype": "buy",
+  "type": "securitiesExchange",
+  "subtype": "buy",
   "reversalIndicator": false,
   "customerId": "123456",
   "placeOfTrade": {
