@@ -16,7 +16,7 @@
     },
     "amountReceived": {
       "amount": 170000,
-      "currency": "CHF"
+      "currency": "USD"
     },
     "maturityDate": "2023-06-27"
   },
@@ -30,8 +30,8 @@
   },
   "valuation": {
     "valueInPositionCurrency": {
-      "amount": 10000,
-      "currency": "CHF"
+      "amount": 11111.10,
+      "currency": "USD"
     },
     "valueInReferenceCurrency": {
       "amount": 10000,
@@ -45,6 +45,6 @@
     }
   },
   "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
-  "currency": "CHF",
+  "currency": "USD",
   "safekeepingPlace": "INSECHZZXXX"
 }
