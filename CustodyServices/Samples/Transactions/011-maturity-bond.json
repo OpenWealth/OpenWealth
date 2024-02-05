@@ -20,7 +20,7 @@
       "movementType": "coupon",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "financialInstrumentType": "bond",
+        "type": "bond",
         "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
         "identificationList": [
           {
@@ -44,7 +44,7 @@
       "movementType": "cash",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {

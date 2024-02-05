@@ -10,7 +10,7 @@
       "movementType": "security",
       "movementDate": "2022-12-31",
       "financialInstrument": {
-        "financialInstrumentType": "fixedDeposit",
+        "type": "fixedDeposit",
         "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
         "identificationList": [
           {
@@ -44,7 +44,7 @@
       "movementType": "cash",
       "movementDate": "2022-12-31",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "US Dollars",
         "identificationList": [
           {

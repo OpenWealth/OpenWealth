@@ -2,7 +2,7 @@
   "positionId": "014",
   "positionDate": "2022-12-31",
   "financialInstrument": {
-    "financialInstrumentType": "totalReturnSwap",
+    "type": "totalReturnSwap",
     "name": "Total return swap, Apple Inc., Expiry Date 2023-06-27",
     "identificationList": [
       {

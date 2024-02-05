@@ -2,7 +2,7 @@
   "positionId": "012",
   "positionDate": "2022-12-31",
   "financialInstrument": {
-    "financialInstrumentType": "fixedDeposit",
+    "type": "fixedDeposit",
     "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
     "identificationList": [
       {

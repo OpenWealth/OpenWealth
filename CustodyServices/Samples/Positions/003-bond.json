@@ -2,7 +2,7 @@
   "positionId": "003",
   "positionDate": "2023-01-04",
   "financialInstrument": {
-    "financialInstrumentType": "bond",
+    "type": "bond",
     "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
     "identificationList": [
       {

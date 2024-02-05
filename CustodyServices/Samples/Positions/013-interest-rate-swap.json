@@ -2,7 +2,7 @@
   "positionId": "014",
   "positionDate": "2022-12-31",
   "financialInstrument": {
-    "financialInstrumentType": "interestSwap",
+    "type": "interestSwap",
     "name": "Payer interest rate swap",
     "identificationList": [
       {

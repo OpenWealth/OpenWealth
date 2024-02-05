@@ -2,7 +2,7 @@
   "positionId": "002",
   "positionDate": "2023-01-04",
   "financialInstrument": {
-    "financialInstrumentType": "option",
+    "type": "option",
     "name": "Put Option Apple Inc., 185, 2024-06-01",
     "identificationList": [
       {

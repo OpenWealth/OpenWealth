@@ -2,7 +2,7 @@
   "positionId": "002",
   "positionDate": "2023-01-04",
   "financialInstrument": {
-    "financialInstrumentType": "equity",
+    "type": "equity",
     "name": "Apple Inc.",
     "identificationList": [
       {

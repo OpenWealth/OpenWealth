@@ -13,7 +13,7 @@
       "movementType": "security",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "equity",
+        "type": "equity",
         "name": "CREDIT SUISSE GROUP AG",
         "identificationList": [
           {
@@ -43,7 +43,7 @@
       "movementType": "cash",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -70,7 +70,7 @@
       "movementType": "brokerageFee",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -97,7 +97,7 @@
       "movementType": "stampDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {

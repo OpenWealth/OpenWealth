@@ -1,10 +1,10 @@
 title: FinancialInstrumentBase
 type: object
 required:
-  - financialInstrumentType
+  - type
   - name
 properties:
-  financialInstrumentType:
+  type:
     $ref: '../../Types/financialInstrumentType.yaml'
   name:
     type: string

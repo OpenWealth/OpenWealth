@@ -13,7 +13,7 @@
       "movementType": "security",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "option",
+        "type": "option",
         "name": "Put Option Apple Inc., 185, 2024-06-01",
         "identificationList": [
           {
@@ -60,7 +60,7 @@
       "movementType": "cash",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -92,7 +92,7 @@
       "movementType": "brokerageFeeDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -124,7 +124,7 @@
       "movementType": "stampDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {

@@ -2,7 +2,7 @@
   "positionId": "008",
   "positionDate": "2023-01-04",
   "financialInstrument": {
-    "financialInstrumentType": "fxForward",
+    "type": "fxForward",
     "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
     "identificationList": [
       {

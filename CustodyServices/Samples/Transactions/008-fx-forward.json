@@ -10,7 +10,7 @@
       "movementType": "security",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "fxForward",
+        "type": "fxForward",
         "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
         "identificationList": [
           {
@@ -43,7 +43,7 @@
       "movementType": "security",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "financialInstrumentType": "fxForward",
+        "type": "fxForward",
         "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
         "identificationList": [
           {
@@ -76,7 +76,7 @@
       "movementType": "cash",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "US Dollar",
         "identificationList": [
           {
@@ -103,7 +103,7 @@
       "movementType": "cash",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {

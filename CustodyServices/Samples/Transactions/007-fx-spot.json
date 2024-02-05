@@ -10,7 +10,7 @@
       "movementType": "cash",
       "movementDate": "2023-01-05",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -37,7 +37,7 @@
       "movementType": "cash",
       "movementDate": "2023-01-05",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Euro",
         "identificationList": [
           {

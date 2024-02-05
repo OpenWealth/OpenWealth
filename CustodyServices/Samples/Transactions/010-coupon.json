@@ -20,7 +20,7 @@
       "movementType": "revenue",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -47,7 +47,7 @@
       "movementType": "withholdingTax",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {

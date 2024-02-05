@@ -18,7 +18,7 @@
       },
       "currency": "CHF",
       "financialInstrument": {
-        "financialInstrumentType": "bond",
+        "type": "bond",
         "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
         "identificationList": [
           {
@@ -51,7 +51,7 @@
       "movementType": "cash",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -78,7 +78,7 @@
       "movementType": "accruedInterest",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -105,7 +105,7 @@
       "movementType": "brokerageFee",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -132,7 +132,7 @@
       "movementType": "stampDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {

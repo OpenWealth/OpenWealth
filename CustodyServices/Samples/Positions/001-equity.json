@@ -2,7 +2,7 @@
   "positionId": "001",
   "positionDate": "2022-12-31",
   "financialInstrument": {
-    "financialInstrumentType": "equity",
+    "type": "equity",
     "name": "CREDIT SUISSE GROUP AG",
     "identificationList": [
       {
