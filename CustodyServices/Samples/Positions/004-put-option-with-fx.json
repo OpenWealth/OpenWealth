@@ -30,8 +30,8 @@
     }
   },
   "account": {
-    "accountId": "123456-1",
-    "accountType": "safekeepingAccount"
+    "id": "123456-1",
+    "type": "safekeepingAccount"
   },
   "quantity": {
     "value": 20,

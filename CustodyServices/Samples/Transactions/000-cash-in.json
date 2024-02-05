@@ -21,8 +21,8 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
@@ -38,8 +38,8 @@
       "amount": 500000,
       "currency": "CHF",
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       }
     }

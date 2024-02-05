@@ -29,8 +29,8 @@
         "maturityDate": "2023-06-27"
       },
       "account": {
-        "accountId": "123456-1",
-        "accountType": "safekeepingAccount"
+        "id": "123456-1",
+        "type": "safekeepingAccount"
       },
       "quantity": {
         "value": 1,
@@ -62,8 +62,8 @@
         "maturityDate": "2023-06-27"
       },
       "account": {
-        "accountId": "123456-1",
-        "accountType": "safekeepingAccount"
+        "id": "123456-1",
+        "type": "safekeepingAccount"
       },
       "quantity": {
         "quantityType": "unit",
@@ -87,8 +87,8 @@
         "currencyOfDenomination": "USD"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121214"
       },
       "quantity": {
@@ -114,8 +114,8 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-57",
-        "accountType": "cashAccount",
+        "id": "1234-57",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
@@ -132,8 +132,8 @@
       "amount": -200000,
       "currency": "USD",
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121214"
       }
     },
@@ -141,8 +141,8 @@
       "amount": 170000,
       "currency": "CHF",
       "account": {
-        "accountId": "1234-57",
-        "accountType": "cashAccount",
+        "id": "1234-57",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       }
     }

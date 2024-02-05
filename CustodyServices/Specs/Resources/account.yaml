@@ -1,16 +1,16 @@
 title: Account
 type: object
 required:
-  - accountId
-  - accountType
+  - id
+  - type
   - referenceCurrency
 properties:
-  accountId:
+  id:
     type: string
     maxLength: 35
     example: 876543219
     description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
-  accountType:
+  type:
     type: string
     description: Indicatates the type of the account. If the account type is cashAccount, no information on the financial instrument is provided in the respective position in the account.
     enum:

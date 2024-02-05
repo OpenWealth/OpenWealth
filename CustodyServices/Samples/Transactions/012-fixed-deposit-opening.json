@@ -30,8 +30,8 @@
         }
       },
       "account": {
-        "accountId": "123456-1",
-        "accountType": "safekeepingAccount"
+        "id": "123456-1",
+        "type": "safekeepingAccount"
       },
       "quantity": {
         "value": 1,
@@ -55,8 +55,8 @@
         "currencyOfDenomination": "USD"
       },
       "account": {
-        "accountId": "1234-58",
-        "accountType": "cashAccount",
+        "id": "1234-58",
+        "type": "cashAccount",
         "iban": "CH121212121212121214"
       },
       "quantity": {
@@ -74,8 +74,8 @@
       "amount": -100000,
       "currency": "USD",
       "account": {
-        "accountId": "1234-58",
-        "accountType": "cashAccount",
+        "id": "1234-58",
+        "type": "cashAccount",
         "iban": "CH121212121212121214"
       }
     }

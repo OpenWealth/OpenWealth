@@ -21,8 +21,8 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
@@ -48,8 +48,8 @@
         "currencyOfDenomination": "EUR"
       },
       "account": {
-        "accountId": "1234-57",
-        "accountType": "cashAccount",
+        "id": "1234-57",
+        "type": "cashAccount",
         "iban": "CH121212121212121213"
       },
       "quantity": {
@@ -66,8 +66,8 @@
       "amount": -100000,
       "currency": "CHF",
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       }
     },
@@ -75,8 +75,8 @@
       "amount": 101001.15,
       "currency": "EUR",
       "account": {
-        "accountId": "1234-57",
-        "accountType": "cashAccount",
+        "id": "1234-57",
+        "type": "cashAccount",
         "iban": "CH121212121212121213"
       }
     }
