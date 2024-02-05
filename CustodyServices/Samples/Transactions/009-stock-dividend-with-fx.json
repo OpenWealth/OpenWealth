@@ -17,7 +17,7 @@
   },
   "movementList": [
     {
-      "movementType": "revenue",
+      "type": "revenue",
       "movementDate": "2023-05-31",
       "financialInstrument": {
         "type": "cash",
@@ -39,9 +39,9 @@
         "quantityType": "unit",
         "value": 270
       },
-      "currency": "CHF",
       "valueDate": "2023-05-31",
       "positionId": "0000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "rate": 0.9,
         "sourceCurrency": "USD",
@@ -49,7 +49,7 @@
       }
     },
     {
-      "movementType": "withholdingTax",
+      "type": "withholdingTax",
       "movementDate": "2023-05-31",
       "financialInstrument": {
         "type": "cash",
@@ -71,9 +71,9 @@
         "quantityType": "unit",
         "value": -90
       },
-      "currency": "CHF",
       "valueDate": "2023-05-31",
       "positionId": "0000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "rate": 0.9,
         "sourceCurrency": "USD",

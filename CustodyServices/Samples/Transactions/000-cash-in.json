@@ -7,7 +7,7 @@
   "reversalIndicator": false,
   "movementList": [
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2022-12-31",
       "financialInstrument": {
         "type": "cash",
@@ -30,7 +30,8 @@
         "quantityType": "unit"
       },
       "valueDate": "2022-12-31",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     }
   ],
   "postingAmounts": [

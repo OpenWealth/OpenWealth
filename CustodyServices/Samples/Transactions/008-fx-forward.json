@@ -7,7 +7,7 @@
   "reversalIndicator": false,
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "fxForward",
@@ -36,11 +36,11 @@
         "value": 1,
         "quantityType": "unit"
       },
-      "currency": "USD",
-      "positionId": "008"
+      "positionId": "008",
+      "positionCurrency": "USD"
     },
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "fxForward",
@@ -69,11 +69,11 @@
         "quantityType": "unit",
         "value": -1
       },
-      "currency": "USD",
-      "positionId": "008"
+      "positionId": "008",
+      "positionCurrency": "USD"
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "cash",
@@ -95,12 +95,12 @@
         "quantityType": "unit",
         "value": -200000
       },
-      "currency": "USD",
       "valueDate": "2023-06-29",
-      "positionId": "0002"
+      "positionId": "0002",
+      "positionCurrency": "USD"
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "cash",
@@ -122,9 +122,9 @@
         "quantityType": "unit",
         "value": 170000
       },
-      "currency": "CHF",
       "valueDate": "2023-06-29",
-      "positionId": "0000"
+      "positionId": "0000",
+      "currency": "CHF"
     }
   ],
   "postingAmounts": [

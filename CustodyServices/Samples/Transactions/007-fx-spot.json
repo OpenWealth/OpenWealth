@@ -7,7 +7,7 @@
   "reversalIndicator": false,
   "movementList": [
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-01-05",
       "financialInstrument": {
         "type": "cash",
@@ -29,12 +29,12 @@
         "quantityType": "unit",
         "value": -100000
       },
-      "currency": "CHF",
       "valueDate": "2023-01-07",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-01-05",
       "financialInstrument": {
         "type": "cash",
@@ -56,9 +56,9 @@
         "quantityType": "unit",
         "value": 101001.15
       },
-      "currency": "EUR",
       "valueDate": "2023-01-07",
-      "positionId": "0001"
+      "positionId": "0001",
+      "positionCurrency": "EUR"
     }
   ],
   "postingAmounts": [

@@ -10,13 +10,12 @@
   },
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2023-01-04",
       "quantity": {
         "quantityType": "faceAmount",
         "value": 200000
       },
-      "currency": "CHF",
       "financialInstrument": {
         "type": "bond",
         "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
@@ -42,13 +41,14 @@
         "type": "safekeepingAccount"
       },
       "positionId": "003",
+      "positionCurrency": "CHF",
       "price": {
         "priceType": "percentage",
         "amount": 90.00
       }
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
@@ -70,12 +70,12 @@
         "quantityType": "unit",
         "value": -180000
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "accruedInterest",
+      "type": "accruedInterest",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
@@ -97,12 +97,12 @@
         "quantityType": "unit",
         "value": -500
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "brokerageFee",
+      "type": "brokerageFee",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
@@ -124,12 +124,12 @@
         "quantityType": "unit",
         "value": -130
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "stampDuty",
+      "type": "stampDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
@@ -151,9 +151,9 @@
         "quantityType": "unit",
         "value": -135
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     }
   ],
   "postingAmounts": [

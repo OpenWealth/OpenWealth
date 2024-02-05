@@ -7,7 +7,7 @@
   "reversalIndicator": false,
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2022-12-31",
       "financialInstrument": {
         "type": "fixedDeposit",
@@ -37,11 +37,11 @@
         "value": 1,
         "quantityType": "unit"
       },
-      "currency": "USD",
-      "positionId": "012"
+      "positionId": "012",
+      "positionCurrency": "USD"
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2022-12-31",
       "financialInstrument": {
         "type": "cash",
@@ -64,9 +64,9 @@
         "quantityType": "nominal",
         "creditDebitIndicator": "debit"
       },
-      "currency": "USD",
       "valueDate": "2022-12-31",
-      "positionId": "0002"
+      "positionId": "0002",
+      "positionCurrency": "USD"
     }
   ],
   "postingAmounts": [

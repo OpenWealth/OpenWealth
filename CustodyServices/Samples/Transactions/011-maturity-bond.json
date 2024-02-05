@@ -17,7 +17,7 @@
   },
   "movementList": [
     {
-      "movementType": "coupon",
+      "type": "coupon",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "bond",
@@ -37,11 +37,11 @@
         "quantityType": "faceAmount",
         "value": -200000
       },
-      "currency": "CHF",
-      "positionId": "003"
+      "positionId": "003",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "cash",
@@ -63,9 +63,9 @@
         "quantityType": "unit",
         "value": 200000
       },
-      "currency": "CHF",
       "valueDate": "2023-06-28",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     }
   ],
   "postingAmounts": [

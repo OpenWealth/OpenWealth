@@ -10,7 +10,7 @@
   },
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "equity",
@@ -30,8 +30,8 @@
         "quantityType": "unit",
         "value": 40
       },
-      "currency": "USD",
       "positionId": "002",
+      "positionCurrency": "USD",
       "price": {
         "priceType": "actual",
         "value": 150.00,
@@ -39,7 +39,7 @@
       }
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
@@ -61,9 +61,9 @@
         "quantityType": "unit",
         "value": -5100
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "0000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "rate": 0.85,
         "sourceCurrency": "USD",
@@ -71,7 +71,7 @@
       }
     },
     {
-      "movementType": "brokerageFeeDuty",
+      "type": "brokerageFeeDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
@@ -93,9 +93,9 @@
         "quantityType": "unit",
         "value": -200.25
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "0000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "rate": 0.85,
         "sourceCurrency": "USD",
@@ -103,7 +103,7 @@
       }
     },
     {
-      "movementType": "stampDuty",
+      "type": "stampDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
@@ -125,9 +125,9 @@
         "quantityType": "unit",
         "value": -150.75
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "0000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "rate": 0.85,
         "sourceCurrency": "USD",

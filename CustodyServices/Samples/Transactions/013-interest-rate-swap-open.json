@@ -7,7 +7,7 @@
   "reversalIndicator": false,
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2022-12-31",
       "financialInstrument": {
         "type": "interestSwap",
@@ -45,8 +45,8 @@
         "value": 1,
         "quantityType": "unit"
       },
-      "currency": "CHF",
-      "positionId": "013"
+      "positionId": "013",
+      "positionCurrency": "CHF"
     }
   ],
   "postingAmounts": []

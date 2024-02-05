@@ -7,7 +7,7 @@
   "reversalIndicator": false,
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2022-12-31",
       "financialInstrument": {
         "type": "totalReturnSwap",
@@ -47,8 +47,8 @@
         "value": 1,
         "quantityType": "unit"
       },
-      "currency": "CHF",
-      "positionId": "014"
+      "positionId": "014",
+      "positionCurrency": "CHF"
     }
   ],
   "postingAmounts": []
