@@ -19,10 +19,10 @@ npm i -g @redocly/cli@latest
 Bundle a specification with this command
 
 ```console
-redocly bundle api-spec.yaml --ext yaml --output api-spec-bundled.yaml
+redocly bundle api.yaml --ext yaml --output api-bundled.yaml
 ```
 
-where 'specification.yaml' is the OAS source file and 'specificationBundled.yaml' denotes the bundled output file in YAML format.
+where 'api.yaml' is the OAS source file and 'api-bundled.yaml' denotes the bundled output file in YAML format.
 
 ## API Server/Client creation
 
@@ -38,7 +38,7 @@ npm install @openapitools/openapi-generator-cli -g
 Examle of creating an AspNetCore server:
 
 ```console
-openapi-generator-cli generate -i specification.yaml -g aspnetcore -o OpenWealth --package-name OpenWealth --output build/OpenWealth
+openapi-generator-cli generate -i api-bundled.yaml -g aspnetcore -o OpenWealth --package-name OpenWealth --output build/OpenWealth
 ```
 
-where 'specification.yaml' is the OAS spec file. There are a number of parameters such as targetFramework, naming conventions etc that can be added to the command.
+where 'api-bundled.yaml' is the OAS spec file. There are a number of parameters such as targetFramework, naming conventions etc that can be added to the command.
