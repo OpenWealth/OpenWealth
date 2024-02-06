@@ -241,6 +241,8 @@ paths:
           $ref: '../../Globals/Responses/404.yaml'
         '405':
           $ref: '../../Globals/Responses/405.yaml'
+        '409':
+          $ref: '../../Globals/Responses/409.yaml'
         '500':
           $ref: '../../Globals/Responses/500.yaml'
         '501':
