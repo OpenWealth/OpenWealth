@@ -1,21 +1,13 @@
 description: Event type the subscription should apply to.
 type: string
 enum:
-  - Order:Acknowledged
-  - Order:Accepted
-  - Order:Customer_Release
-  - Order:Placed
-  - Order:Partially_Filled
-  - Order:Filled
-  - Order:Executed
-  - Order:Cancelled
-  - Order:Partially_Cancelled
-  - Order:Market_Cancelled
-  - Order:Pending_Cancel
-  - Order:Rejected
-  - Order:Partially_Rejected
-  - Order:Market_Rejected
-  - Order:Expired
-  - Order:Partially_Expired
-  - Order:Market_Expired
-example: 'Order:Rejected'
+  - order:orderStatusUpdated
+  - order:doneForDay
+  - order:suspended
+  - order:replaced
+  - order:restated
+  - order:pendingReplace
+  - order:tradeCorrect
+  - order:tradeCancel
+  - heartbeat
+example: 'order:orderStatusUpdated' 

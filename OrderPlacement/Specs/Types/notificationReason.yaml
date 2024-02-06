@@ -1,21 +1,13 @@
 description: Reason for the event notification
 type: string
 enum:
-  - Order:New
-  - Order:DoneForDay
-  - Order:Cancelled
-  - Order:Pending_Cancel
-  - Order:Stopped
-  - Order:Rejected
-  - Order:Suspended
-  - Order:Pending_New
-  - Order:Expired
-  - Order:Trade
-  - Order:Replaced
-  - Order:Calculated
-  - Order:Restated
-  - Order:Pending_Replace
-  - Order:Trade_Correct
-  - Order:Trade_Cancel
-  - Order:OrderStatus
-example: 'Order:Trade' 
+  - order:orderStatusUpdated
+  - order:doneForDay
+  - order:suspended
+  - order:replaced
+  - order:restated
+  - order:pendingReplace
+  - order:tradeCorrect
+  - order:tradeCancel
+  - heartbeat
+example: 'order:orderStatusUpdated' 

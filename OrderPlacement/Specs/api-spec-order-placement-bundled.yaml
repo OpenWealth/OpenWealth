@@ -236,6 +236,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -1132,24 +1134,16 @@ components:
       description: Event type the subscription should apply to.
       type: string
       enum:
-        - Order:Acknowledged
-        - Order:Accepted
-        - Order:Customer_Release
-        - Order:Placed
-        - Order:Partially_Filled
-        - Order:Filled
-        - Order:Executed
-        - Order:Cancelled
-        - Order:Partially_Cancelled
-        - Order:Market_Cancelled
-        - Order:Pending_Cancel
-        - Order:Rejected
-        - Order:Partially_Rejected
-        - Order:Market_Rejected
-        - Order:Expired
-        - Order:Partially_Expired
-        - Order:Market_Expired
-      example: Order:Rejected
+        - order:orderStatusUpdated
+        - order:doneForDay
+        - order:suspended
+        - order:replaced
+        - order:restated
+        - order:pendingReplace
+        - order:tradeCorrect
+        - order:tradeCancel
+        - heartbeat
+      example: order:orderStatusUpdated
     eventSubscription:
       type: object
       required:
@@ -1274,6 +1268,28 @@ components:
             description: Client defined ID from request to correlates HTTP requests between a client and server.
             example: f058ebd6-02f7-4d3f-942e-904344e8cde5
       description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '409':
+      headers:
+        Content-Type:
+          schema:
+            type: string
+            description: application/problem+json; charset=utf-8 according to RFC7807
+            example: application/problem+json
+        Content-Language:
+          schema:
+            type: string
+            description: Response language - always en
+            example: en
+        X-Correlation-ID:
+          schema:
+            type: string
+            description: Client defined ID from request to correlate HTTP requests between a client and server.
+            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+      description: Conflict - The request conflicts with the current state of the target resource.
       content:
         application/problem+json:
           schema:
