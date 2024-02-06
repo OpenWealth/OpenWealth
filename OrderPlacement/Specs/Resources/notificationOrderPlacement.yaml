@@ -15,13 +15,13 @@ properties:
     type: string
     example: "/api/openwealth/order-placement/v2/orders/abcd1234"
   created:
-    description: Timestamp - Date and time on which the notification has been created.
+    description: Timestamp - Date and time including timezone on which the notification has been created, according to ISO8601 
     $ref: '../Types/date-time.yaml'
   id:
-    description: Identification of the notification
+    description: Identification (UUID) of this notification.
     $ref: '../Types/notificationId.yaml'
   predecessorId:
-    description: Identification of the notification that predeceeds this notification
+    description: Identification (UUID) of the notification that predeceeds this notification.
     $ref: '../Types/notificationId.yaml'
   executedQuantity:
     description: Total quantity (e.g. number of shares) filled.

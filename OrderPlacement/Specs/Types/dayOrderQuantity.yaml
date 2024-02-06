@@ -1,5 +1,5 @@
 type: string
 pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
 maxLength: 22
-description: For GoodTill(GT) orders the orderQuantity less all quantity (adjusted for stock splits) that traded on previous days. DayOrderQuantity = OrderQuantity - (executedQuantity - dayExecutedQuantity).
+description: The orderQuantity less all quantity (adjusted for stock splits) that traded on previous days. DayOrderQuantity = OrderQuantity - (executedQuantity - dayExecutedQuantity).
 example: 15

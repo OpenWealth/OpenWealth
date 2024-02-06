@@ -23,7 +23,7 @@ paths:
               $ref: '#/components/schemas/notificationOrderPlacement'
       responses:
         '202':
-          description: Notification is accepted
+          description: Notification accepted
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/XCorrelationId'
@@ -51,10 +51,10 @@ components:
       description: Indicates to which version of the respective API the notification is belonging to.
       type: string
       enum:
-        - V1
-        - V2
-        - V3
-      example: V2
+        - v1
+        - v2
+        - v3
+      example: v2
     orderStatus:
       type: string
       description: Shows in which stage of its life cycle an order is.
@@ -81,15 +81,15 @@ components:
       description: Reason for the event notification
       type: string
       enum:
-        - order:orderStatusUpdated
+        - heartbeat
         - order:doneForDay
-        - order:suspended
+        - order:orderStatusUpdated
+        - order:pendingReplace
         - order:replaced
         - order:restated
-        - order:pendingReplace
-        - order:tradeCorrect
+        - order:suspended
         - order:tradeCancel
-        - heartbeat
+        - order:tradeCorrect
       example: order:orderStatusUpdated
     date-time:
       type: string
@@ -121,7 +121,7 @@ components:
       type: string
       pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
       maxLength: 22
-      description: For GT orders the quantity on a GT order that has traded today.
+      description: Quantity on an order that has traded today.
       example: 5
     dayAveragePrice:
       type: string
@@ -159,13 +159,13 @@ components:
           type: string
           example: /api/openwealth/order-placement/v2/orders/abcd1234
         created:
-          description: Timestamp - Date and time on which the notification has been created.
+          description: Timestamp - Date and time including timezone on which the notification has been created, according to ISO8601
           $ref: '#/components/schemas/date-time'
         id:
-          description: Identification of the notification
+          description: Identification (UUID) of this notification.
           $ref: '#/components/schemas/notificationId'
         predecessorId:
-          description: Identification of the notification that predeceeds this notification
+          description: Identification (UUID) of the notification that predeceeds this notification.
           $ref: '#/components/schemas/notificationId'
         executedQuantity:
           description: Total quantity (e.g. number of shares) filled.

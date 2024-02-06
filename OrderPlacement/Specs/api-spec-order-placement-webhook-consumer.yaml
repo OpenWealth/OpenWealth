@@ -26,7 +26,7 @@ paths:
               
       responses:
         '202':
-          description: Notification is accepted
+          description: Notification accepted
           headers:
             X-Correlation-ID:
               $ref: '../../Globals/Headers/XCorrelationId.yaml'

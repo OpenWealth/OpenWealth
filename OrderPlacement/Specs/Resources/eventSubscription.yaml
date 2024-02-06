@@ -13,7 +13,7 @@ properties:
     format: uri
     example: 'https://examplecallbackuri.com'
   eventTypes:
-    description: Array of event types the subscription applies to.
+    description: Array of event types the subscription applies to. An empty list indicates that no notifications are sent.
     type: array
     items:
       $ref: '../Types/eventType.yaml'

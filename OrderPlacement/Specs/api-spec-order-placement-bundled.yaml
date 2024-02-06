@@ -374,7 +374,7 @@ paths:
         - event-notification-subscription
       responses:
         '204':
-          description: Delete event subscription
+          description: Event subscription deleted.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/XCorrelationId'
@@ -957,13 +957,13 @@ components:
       type: string
       pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
       maxLength: 22
-      description: For GoodTill(GT) orders the orderQuantity less all quantity (adjusted for stock splits) that traded on previous days. DayOrderQuantity = OrderQuantity - (executedQuantity - dayExecutedQuantity).
+      description: The orderQuantity less all quantity (adjusted for stock splits) that traded on previous days. DayOrderQuantity = OrderQuantity - (executedQuantity - dayExecutedQuantity).
       example: 15
     dayExecutedQuantity:
       type: string
       pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
       maxLength: 22
-      description: For GT orders the quantity on a GT order that has traded today.
+      description: Quantity on an order that has traded today.
       example: 5
     orderStatusHistory:
       type: object
@@ -1134,15 +1134,15 @@ components:
       description: Event type the subscription should apply to.
       type: string
       enum:
-        - order:orderStatusUpdated
+        - heartbeat
         - order:doneForDay
-        - order:suspended
+        - order:orderStatusUpdated
+        - order:pendingReplace
         - order:replaced
         - order:restated
-        - order:pendingReplace
-        - order:tradeCorrect
+        - order:suspended
         - order:tradeCancel
-        - heartbeat
+        - order:tradeCorrect
       example: order:orderStatusUpdated
     eventSubscription:
       type: object
@@ -1157,7 +1157,7 @@ components:
           format: uri
           example: https://examplecallbackuri.com
         eventTypes:
-          description: Array of event types the subscription applies to.
+          description: Array of event types the subscription applies to. An empty list indicates that no notifications are sent.
           type: array
           items:
             $ref: '#/components/schemas/eventType'

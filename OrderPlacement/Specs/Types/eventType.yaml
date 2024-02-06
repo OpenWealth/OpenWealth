@@ -1,13 +1,13 @@
 description: Event type the subscription should apply to.
 type: string
 enum:
-  - order:orderStatusUpdated
+  - heartbeat
   - order:doneForDay
-  - order:suspended
+  - order:orderStatusUpdated
+  - order:pendingReplace
   - order:replaced
   - order:restated
-  - order:pendingReplace
-  - order:tradeCorrect
+  - order:suspended
   - order:tradeCancel
-  - heartbeat
+  - order:tradeCorrect
 example: 'order:orderStatusUpdated' 

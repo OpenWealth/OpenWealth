@@ -382,7 +382,7 @@ paths:
         - event-notification-subscription
       responses:
         '204':
-          description: Delete event subscription
+          description: Event subscription deleted.
           headers:
             X-Correlation-ID:
               $ref: '../../Globals/Headers/XCorrelationId.yaml'
