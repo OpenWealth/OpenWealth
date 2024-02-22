@@ -5,7 +5,7 @@ required:
   - financialInstrument
   - account
 properties:
-  id:
+  positionId:
     type: string
     maxLength: 35
     example: 876543219
