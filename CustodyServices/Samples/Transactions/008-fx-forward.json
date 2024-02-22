@@ -24,7 +24,7 @@
         },
         "amountReceived": {
           "amount": 170000,
-          "currency": "USD"
+          "currency": "CHF"
         },
         "maturityDate": "2023-06-27"
       },
@@ -36,8 +36,7 @@
         "value": 1,
         "quantityType": "unit"
       },
-      "positionId": "008",
-      "positionCurrency": "USD"
+      "positionId": "008"
     },
     {
       "type": "security",
@@ -69,8 +68,7 @@
         "quantityType": "unit",
         "value": -1
       },
-      "positionId": "008",
-      "positionCurrency": "USD"
+      "positionId": "008"
     },
     {
       "type": "cash",
