@@ -1,20 +1,19 @@
 {
   "id": "0000005",
+  "type": "buy",
   "transactionDate": "2023-01-04",
-  "type": "fx",
-  "subtype": "fxOption",
   "customerId": "123456",
   "reversalIndicator": false,
   "movementList": [
     {
-      "type": "otc",
+      "type": "asset",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "fxOption",
         "name": "FX Option Sell 100'000 CHF at 120'000 USD",
         "identificationList": [
           {
-            "identifierType": "otherProprietaryIdentification",
+            "type": "otherProprietaryIdentification",
             "identifier": "fxOprtionContractRef1"
           }
         ],
@@ -52,7 +51,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],

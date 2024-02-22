@@ -1,8 +1,7 @@
 {
   "id": "0000010",
+  "type": "coupon",
   "transactionDate": "2023-06-27",
-  "type": "corporateActions",
-  "subtype": "coupon",
   "customerId": "123456",
   "reversalIndicator": false,
   "triggeringFinancialInstrument": {
@@ -17,7 +16,7 @@
   },
   "movementList": [
     {
-      "type": "revenue",
+      "type": "cash",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "cash",

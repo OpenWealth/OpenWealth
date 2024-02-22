@@ -1,8 +1,7 @@
 {
   "id": "00000011",
+  "type": "redemption",
   "transactionDate": "2023-06-27",
-  "type": "corporateActions",
-  "subtype": "redemption",
   "customerId": "123456",
   "reversalIndicator": false,
   "triggeringFinancialInstrument": {
@@ -17,14 +16,14 @@
   },
   "movementList": [
     {
-      "type": "coupon",
+      "type": "asset",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "bond",
         "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
         "identificationList": [
           {
-            "identifierType": "isin",
+            "type": "isin",
             "identifier": "CH0344958688"
           }
         ]
@@ -48,7 +47,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
