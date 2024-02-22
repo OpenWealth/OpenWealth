@@ -1,0 +1,25 @@
+title: FxOption
+description: An FX option is a contract that gives the buyer the right, but not the obligation, to buy or sell a certain currency at a specified exchange rate on or before a specified date. For this right, a premium is paid to the seller.
+required:
+  - expiryDateTime
+  - underlyingAmount
+  - counterAmount
+  - premium
+  - optionType
+  - optionStyle
+allOf:
+  - $ref: 'financialInstrumentBase.yaml'
+  - type: object
+    properties:
+      expiryDateTime:
+        $ref: '../../Types/expiryDateTime.yaml'
+      underlyingAmount:
+        $ref: '../../Types/underlyingAmount.yaml'
+      counterAmount:
+        $ref: '../../Types/counterAmount.yaml'
+      premium:
+        $ref: '../../Types/currencyAmount.yaml'
+      optionType:
+        $ref: '../../Types/optionType.yaml'
+      optionStyle:
+        $ref: '../../Types/optionStyle.yaml'
