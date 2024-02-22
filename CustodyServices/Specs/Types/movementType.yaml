@@ -3,23 +3,23 @@ type: string
 description: Describes which kind of movement is reported from a banks perspective.
 example: security
 enum:
-  - security
-  - cash
-  - revenue
   - accruedInterest
-  - stampDuty
-  - withholdingTax
   - additionalWithholdingTax
-  - premium
-  - capitalGainTax
-  - financialTransactionTax
-  - otherTaxes
-  - transactionFee
   - brokerageFee
-  - managementFee
-  - courtage
+  - capitalGainTax
+  - cash
   - custodyFee
+  - courtage
   - exchangeFee
-  - thirdPartyFee
+  - financialTransactionTax
+  - managementFee
+  - otcContract
   - otherFee
   - others
+  - otherTaxes
+  - reinvestmentAmount
+  - security
+  - stampDuty
+  - thirdPartyFee
+  - transactionFee
+  - withholdingTax

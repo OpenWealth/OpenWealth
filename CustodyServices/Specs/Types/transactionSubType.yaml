@@ -16,12 +16,22 @@ enum:
   - buyToClose
   - buyToOpen
   - capitalIncrease
+  - closeCallableLoan
+  - closeCallDeposit
+  - closeCreditDefaultSwap
   - closeFxForward
+  - closeFxSwap
+  - closeFixedDeposit
+  - closeFixedLoan
+  - closeInterestSwap
+  - closeTotalReturnSwap
   - closeNDF
   - conversionBondShare
   - coupon
   - creditEvent
   - decrease
+  - decreaseCallableLoan
+  - decreaseCallDeposit
   - deliverSecurityToFund
   - deliveryFreeOfPayment
   - deliveryVsPayment
@@ -31,6 +41,7 @@ enum:
   - dividendStock
   - exercise
   - exerciseCash
+  - exerciseFxOption
   - exercisePhysical
   - expiration
   - expirationOldSecurity
@@ -39,8 +50,9 @@ enum:
   - fxSpot
   - incompleteRights
   - increase
-  - inflowOutflowDigital
-  - inflowOutflowPhysical
+  - increaseCallableLoan
+  - increaseCallDeposit
+  - inflowCash
   - instrumentExchange
   - interest
   - internalTransfer
@@ -50,13 +62,16 @@ enum:
   - markToMarket
   - markToMarketCash
   - merger
-  - netAmount
+  - openCallableLoan
+  - openCallDeposit
+  - openFixedDeposit
+  - openFixedLoan
   - openFxForward
+  - openFxOption
+  - openFxSwap
   - openNDF
-  - openPayerSwap
-  - openReceiverSwap
-  - openSwapForwardLeg
   - other
+  - outflowCash
   - premium
   - prepayment
   - publicOffer
@@ -69,7 +84,6 @@ enum:
   - redemptionPrior
   - reductionOfNominal
   - resetPayment
-  - revenue
   - rightDistribution
   - sell
   - sellBarrier
@@ -77,11 +91,13 @@ enum:
   - sellToClose
   - sellToOpen
   - spinOff
-  - split
+  - stockSplit
   - subscription
-  - swapSpotLeg
   - taxCorrections
   - taxes
   - transferMetalPhysical
   - unwind
+  - unwindCreditDefaultSwap
+  - unwindInterestSwap
+  - unwindTotalReturnSwap
   - variationMargin
