@@ -688,16 +688,16 @@ components:
       title: Account
       type: object
       required:
-        - accountId
-        - accountType
+        - id
+        - type
         - referenceCurrency
       properties:
-        accountId:
+        id:
           type: string
           maxLength: 35
           example: 876543219
           description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
-        accountType:
+        type:
           type: string
           description: Indicatates the type of the account. If the account type is cashAccount, no information on the financial instrument is provided in the respective position in the account.
           enum:
@@ -727,9 +727,9 @@ components:
       type: object
       description: Overview of the customer with the respective accounts
       required:
-        - customerId
+        - id
       properties:
-        customerId:
+        id:
           type: string
           description: Unique and unambiguous identification used by the bank for the customer.
         referenceCurrency:
@@ -814,9 +814,9 @@ components:
       type: object
       description: Overview of the customer with the respective accounts
       required:
-        - customerId
+        - id
       properties:
-        customerId:
+        id:
           type: string
           description: Unique and unambiguous identification used by the bank for the customer.
         referenceCurrency:
@@ -898,10 +898,10 @@ components:
       title: FinancialInstrumentBase
       type: object
       required:
-        - financialInstrumentType
+        - type
         - name
       properties:
-        financialInstrumentType:
+        type:
           $ref: '#/components/schemas/financialInstrumentType'
         name:
           type: string
@@ -1505,14 +1505,14 @@ components:
       title: Position
       type: object
       required:
-        - positionId
+        - id
         - positionDate
         - financialInstrument
         - account
         - quantity
         - valuation
       properties:
-        positionId:
+        id:
           type: string
           maxLength: 35
           example: 876543219
@@ -1530,7 +1530,7 @@ components:
           $ref: '#/components/schemas/quantity'
         valuation:
           $ref: '#/components/schemas/valuation'
-        positionName:
+        name:
           type: string
           maxLength: 80
           example: Stark Industries Inc.
@@ -1764,13 +1764,13 @@ components:
       type: object
       description: Describes a single movement/booking/flow within a transaction. Every transaction contains in the minimum one movement.
       required:
-        - movementType
+        - type
         - movementDate
         - financialInstrument
         - account
         - quantity
       properties:
-        movementType:
+        type:
           $ref: '#/components/schemas/movementType'
         movementDate:
           title: MovementDate
@@ -1783,18 +1783,18 @@ components:
           $ref: '#/components/schemas/account'
         quantity:
           $ref: '#/components/schemas/quantity'
-        currency:
+        positionId:
+          type: string
+          maxLength: 35
+          description: Identification for the position given by the bank.
+          example: 1234566-12-1
+        positionCurrency:
           $ref: '#/components/schemas/currency'
         valueDate:
           title: ValueDate
           description: Date when calculating economic benefit for a cash amount.
           allOf:
             - $ref: '#/components/schemas/date'
-        positionId:
-          type: string
-          maxLength: 35
-          description: Identification for the position given by the bank.
-          example: 1234566-12-1
         price:
           $ref: '#/components/schemas/price'
         foreignExchangeRate:
@@ -1825,23 +1825,23 @@ components:
       title: Transaction
       type: object
       required:
-        - transactionId
-        - transactionType
+        - id
+        - type
         - transactionSubtype
         - transactionDate
         - customerId
         - reversalIndicator
       properties:
-        transactionType:
-          $ref: '#/components/schemas/transactionType'
-        transactionSubtype:
-          $ref: '#/components/schemas/transactionSubtype'
-        transactionId:
+        id:
           type: string
           readOnly: true
           maxLength: 35
           example: 987654321
           description: Transaction ID given by the bank
+        type:
+          $ref: '#/components/schemas/transactionType'
+        transactionSubtype:
+          $ref: '#/components/schemas/transactionSubtype'
         transactionDate:
           title: TransactionDate
           description: Date of transaction entity
