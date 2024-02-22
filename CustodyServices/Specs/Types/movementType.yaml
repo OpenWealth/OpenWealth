@@ -5,6 +5,7 @@ example: security
 enum:
   - accruedInterest
   - additionalWithholdingTax
+  - asset
   - brokerageFee
   - capitalGainTax
   - cash
@@ -13,12 +14,10 @@ enum:
   - exchangeFee
   - financialTransactionTax
   - managementFee
-  - otcContract
   - otherFee
   - others
-  - otherTaxes
+  - otherTax
   - reinvestmentAmount
-  - security
   - stampDuty
   - thirdPartyFee
   - transactionFee
