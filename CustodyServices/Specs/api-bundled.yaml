@@ -846,6 +846,7 @@ components:
         - option
         - future
         - fxForward
+        - fxOption
         - fxSwap
         - mortgage
         - fixedLoan
@@ -1090,7 +1091,7 @@ components:
         - $ref: '#/components/schemas/financialInstrumentBase'
     expiryDate:
       title: ExpiryDate
-      description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date/time at which it becomes due and has to be repaid.
+      description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
       allOf:
         - $ref: '#/components/schemas/date'
     strikePrice:
@@ -1109,6 +1110,24 @@ components:
       example: 100
       description: Contract size of the instrument
       default: 1
+    optionType:
+      title: OptionType
+      type: string
+      example: call
+      enum:
+        - call
+        - put
+      description: Specifies whether it is a Call option (right to purchase a specific underlying asset) or a Put option (right to sell a specific underlying asset).
+    optionStyle:
+      title: OptionStyle
+      type: string
+      example: american
+      enum:
+        - american
+        - european
+        - bermudan
+        - asian
+      description: Specifies how an option can be exercised.
     financialInstrument:
       title: FinancialInstrument
       type: object
@@ -1181,21 +1200,9 @@ components:
             contractSize:
               $ref: '#/components/schemas/contractSize'
             optionType:
-              type: string
-              example: call
-              enum:
-                - call
-                - put
-              description: Specifies whether it is a Call option (right to purchase a specific underlying asset) or a Put option (right to sell a specific underlying asset).
+              $ref: '#/components/schemas/optionType'
             optionStyle:
-              type: string
-              example: american
-              enum:
-                - american
-                - european
-                - bermudan
-                - asian
-              description: Specifies how an option can be exercised.
+              $ref: '#/components/schemas/optionStyle'
             underlyingFinancialInstrument:
               $ref: '#/components/schemas/underlyingFinancialInstrument'
     future:
