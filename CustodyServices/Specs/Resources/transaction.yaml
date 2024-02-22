@@ -16,8 +16,6 @@ properties:
     description: Transaction ID given by the bank
   type:
     $ref: '../Types/transactionType.yaml'
-  transactionSubtype:
-    $ref: '../Types/transactionSubtype.yaml'
   transactionDate:
     title: TransactionDate
     description: Date of transaction entity
