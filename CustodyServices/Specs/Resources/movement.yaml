@@ -7,6 +7,7 @@ required:
   - financialInstrument
   - account
   - quantity
+  - positionId
 properties:
   type:
     $ref: '../Types/movementType.yaml'
