@@ -825,12 +825,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/account'
-    date:
-      title: Date
-      type: string
-      format: date
-      pattern: \d{4}-\d{2}-\d{2}
-      example: '2018-04-13'
     financialInstrumentType:
       title: FinancialInstrumentType
       type: string
@@ -966,6 +960,12 @@ components:
         - u30E_360Isda
         - u30E_360
         - u30U_360
+    date:
+      title: Date
+      type: string
+      format: date
+      pattern: \d{4}-\d{2}-\d{2}
+      example: '2018-04-13'
     interestRate:
       title: InterestRate
       type: object
@@ -1402,141 +1402,23 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/financialInstrumentBase'
-    quantity:
-      title: Quantity
-      type: object
-      required:
-        - value
-        - type
-      properties:
-        quantityType:
-          type: string
-          description: Specifies the type of the amount
-          example: nominal
-          enum:
-            - unit
-            - faceAmount
-            - amortisedValue
-            - digitalTokenUnit
-        value:
-          type: number
-          example: 12000
-          description: Signed decimal number
-    ForeignExchangeRate:
-      title: ForeignExchangeRate
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/rate'
-        - type: object
-          properties:
-            sourceCurrency:
-              $ref: '#/components/schemas/currency'
-            targetCurrency:
-              $ref: '#/components/schemas/currency'
-    valuationForeignExchangeRate:
-      title: ValuationForeignExchangeRate
-      allOf:
-        - $ref: '#/components/schemas/ForeignExchangeRate'
-        - type: object
-          properties:
-            rateDate:
-              description: Date of rate.
-              allOf:
-                - $ref: '#/components/schemas/date'
-            sourceOfRate:
-              type: string
-              maxLength: 70
-              description: Indicates the source of the (market) price
-              example: Reuters 4 o'clock
-    valuation:
-      title: Valuation
-      type: object
-      description: Detailed information about the valuation of a position
-      required:
-        - value
-      properties:
-        valueInPositionCurrency:
-          $ref: '#/components/schemas/currencyAmount'
-        valueInReferenceCurrency:
-          $ref: '#/components/schemas/currencyAmount'
-        foreignExchangeRate:
-          $ref: '#/components/schemas/valuationForeignExchangeRate'
-        valuationDate:
-          $ref: '#/components/schemas/date'
-    Price:
-      type: object
-      required:
-        - amount
-        - priceType
-      properties:
-        priceType:
-          type: string
-          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
-          example: percentage
-          enum:
-            - actual
-            - percentage
-        value:
-          type: number
-          example: 12000
-          description: Signed decimal number
-        currency:
-          $ref: '#/components/schemas/currency'
-    valuationPrice:
-      title: ValuationPrice
-      allOf:
-        - $ref: '#/components/schemas/Price'
-        - type: object
-          properties:
-            priceDate:
-              description: Date of the price.
-              allOf:
-                - $ref: '#/components/schemas/date'
-            sourceOfPrice:
-              type: string
-              maxLength: 70
-              description: Indicates the source of the (market)price
-              example: SIX Swiss Exchange
-    foreignExchangeRate:
-      title: ForeignExchangeRate
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/rate'
-        - type: object
-          properties:
-            sourceCurrency:
-              $ref: '#/components/schemas/currency'
-            targetCurrency:
-              $ref: '#/components/schemas/currency'
     position:
       title: Position
       type: object
       required:
-        - id
-        - positionDate
+        - positionId
         - financialInstrument
         - account
-        - quantity
-        - valuation
       properties:
-        id:
+        positionId:
           type: string
           maxLength: 35
           example: 876543219
           description: Identification for the position given by the bank
-        positionDate:
-          title: PositionDate
-          description: Date at which the position was valuated.
-          allOf:
-            - $ref: '#/components/schemas/date'
         financialInstrument:
           $ref: '#/components/schemas/financialInstrument'
         account:
           $ref: '#/components/schemas/account'
-        quantity:
-          $ref: '#/components/schemas/quantity'
-        valuation:
-          $ref: '#/components/schemas/valuation'
         name:
           type: string
           maxLength: 80
@@ -1544,14 +1426,6 @@ components:
           description: Name of the position.
         currency:
           $ref: '#/components/schemas/currency'
-        price:
-          $ref: '#/components/schemas/valuationPrice'
-        foreignExchangeRate:
-          $ref: '#/components/schemas/valuationForeignExchangeRate'
-        costPrice:
-          $ref: '#/components/schemas/Price'
-        costForeignExchangeRate:
-          $ref: '#/components/schemas/foreignExchangeRate'
         safekeepingPlace:
           type: string
           pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
@@ -1562,16 +1436,6 @@ components:
           pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
           example: INSECHZZXXX
           description: Used for special use cases where safekeepingPlace is not suffienct. BIC of the place where the securities are safe-kept, physically or notionally
-        accruedInterest:
-          $ref: '#/components/schemas/currencyAmount'
-        numberOfDaysAccrued:
-          type: integer
-          example: 34
-          description: Number of days used for calculating the accrued interest amount.
-        blockedQuantity:
-          allOf:
-            - $ref: '#/components/schemas/quantity'
-            - description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
         additionalDetails:
           type: string
           maxLength: 70
@@ -1731,6 +1595,26 @@ components:
         - transferMetalPhysical
         - unwind
         - variationMargin
+    quantity:
+      title: Quantity
+      type: object
+      required:
+        - value
+        - type
+      properties:
+        quantityType:
+          type: string
+          description: Specifies the type of the amount
+          example: nominal
+          enum:
+            - unit
+            - faceAmount
+            - amortisedValue
+            - digitalTokenUnit
+        value:
+          type: number
+          example: 12000
+          description: Signed decimal number
     triggeringFinancialInstrument:
       title: TriggereingFinancialInstrument
       description: Security triggering/causing the transaction.
@@ -1766,6 +1650,17 @@ components:
         - thirdPartyFee
         - otherFee
         - others
+    foreignExchangeRate:
+      title: ForeignExchangeRate
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/rate'
+        - type: object
+          properties:
+            sourceCurrency:
+              $ref: '#/components/schemas/currency'
+            targetCurrency:
+              $ref: '#/components/schemas/currency'
     movement:
       title: Movement
       type: object
@@ -1776,6 +1671,7 @@ components:
         - financialInstrument
         - account
         - quantity
+        - positionId
       properties:
         type:
           $ref: '#/components/schemas/movementType'
