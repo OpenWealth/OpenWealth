@@ -1635,26 +1635,6 @@ components:
       title: TransactionType
       type: string
       description: Type of the transaction
-      example: securitiesExchange
-      enum:
-        - securitiesExchange
-        - cash
-        - fees
-        - credit
-        - fx
-        - taxes
-        - corporateActions
-        - fiduciary
-        - moneyMarket
-        - securitiesTransfer
-        - physical
-        - otc
-        - others
-    transactionSubtype:
-      title: TransactionSubType
-      type: string
-      maxLength: 35
-      description: Gives detailed information about the category of a transaction.
       example: buy
       enum:
         - additionalPayment
@@ -1669,12 +1649,22 @@ components:
         - buyToClose
         - buyToOpen
         - capitalIncrease
+        - closeCallableLoan
+        - closeCallDeposit
+        - closeCreditDefaultSwap
         - closeFxForward
-        - closeNDF
+        - closeFxSwap
+        - closeFixedDeposit
+        - closeFixedLoan
+        - closeInterestSwap
+        - closeTotalReturnSwap
+        - closeNonDeliverableForward
         - conversionBondShare
         - coupon
         - creditEvent
         - decrease
+        - decreaseCallableLoan
+        - decreaseCallDeposit
         - deliverSecurityToFund
         - deliveryFreeOfPayment
         - deliveryVsPayment
@@ -1692,8 +1682,9 @@ components:
         - fxSpot
         - incompleteRights
         - increase
-        - inflowOutflowDigital
-        - inflowOutflowPhysical
+        - increaseCallableLoan
+        - increaseCallDeposit
+        - inflowCash
         - instrumentExchange
         - interest
         - internalTransfer
@@ -1703,13 +1694,15 @@ components:
         - markToMarket
         - markToMarketCash
         - merger
-        - netAmount
+        - openCallableLoan
+        - openCallDeposit
+        - openFixedDeposit
+        - openFixedLoan
         - openFxForward
-        - openNDF
-        - openPayerSwap
-        - openReceiverSwap
-        - openSwapForwardLeg
+        - openFxSwap
+        - openNonDeliverableForward
         - other
+        - outflowCash
         - premium
         - prepayment
         - publicOffer
@@ -1722,7 +1715,6 @@ components:
         - redemptionPrior
         - reductionOfNominal
         - resetPayment
-        - revenue
         - rightDistribution
         - sell
         - sellBarrier
@@ -1730,9 +1722,8 @@ components:
         - sellToClose
         - sellToOpen
         - spinOff
-        - split
+        - stockSplit
         - subscription
-        - swapSpotLeg
         - taxCorrections
         - taxes
         - transferMetalPhysical
@@ -1753,26 +1744,25 @@ components:
       description: Describes which kind of movement is reported from a banks perspective.
       example: security
       enum:
-        - security
-        - cash
-        - revenue
         - accruedInterest
-        - stampDuty
-        - withholdingTax
         - additionalWithholdingTax
-        - premium
-        - capitalGainTax
-        - financialTransactionTax
-        - otherTaxes
-        - transactionFee
+        - asset
         - brokerageFee
-        - managementFee
-        - courtage
+        - capitalGainTax
+        - cash
         - custodyFee
+        - courtage
         - exchangeFee
-        - thirdPartyFee
+        - financialTransactionTax
+        - managementFee
         - otherFee
         - others
+        - otherTax
+        - reinvestmentAmount
+        - stampDuty
+        - thirdPartyFee
+        - transactionFee
+        - withholdingTax
     movement:
       title: Movement
       type: object
@@ -1855,8 +1845,6 @@ components:
           description: Transaction ID given by the bank
         type:
           $ref: '#/components/schemas/transactionType'
-        transactionSubtype:
-          $ref: '#/components/schemas/transactionSubtype'
         transactionDate:
           title: TransactionDate
           description: Date of transaction entity
