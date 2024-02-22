@@ -163,7 +163,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'Resources/position.yaml'
+                  $ref: 'Resources/valuatedPosition.yaml'
         '400':
           $ref: '../../Globals/Responses/400.yaml'
         '401':
@@ -204,7 +204,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'Resources/position.yaml'
+                $ref: 'Resources/valuatedPosition.yaml'
         '400':
           $ref: '../../Globals/Responses/400.yaml'
         '401':
@@ -292,7 +292,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'Resources/position.yaml'
+                  $ref: 'Resources/valuatedPosition.yaml'
         '400':
           $ref: '../../Globals/Responses/400.yaml'
         '401':
@@ -333,7 +333,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'Resources/position.yaml'
+                $ref: 'Resources/valuatedPosition.yaml'
         '400':
           $ref: '../../Globals/Responses/400.yaml'
         '401':
