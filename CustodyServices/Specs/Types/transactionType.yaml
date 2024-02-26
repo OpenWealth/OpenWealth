@@ -3,6 +3,7 @@ type: string
 description: Type of the transaction
 example: buy
 enum:
+  - accumulation
   - additionalPayment
   - adjustNotional
   - assignment
