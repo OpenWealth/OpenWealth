@@ -1131,7 +1131,7 @@ components:
       maxLength: 40
       example: 3v3n7subscr1p70n
     eventType:
-      description: Event type the subscription should apply to.
+      description: Event type the subscription should apply to AND reason why a notification is sent.
       type: string
       enum:
         - heartbeat

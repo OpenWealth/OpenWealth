@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.0.4
+  version: 1.0.5
   title: OpenWealth Order Placement Event Notification API - TPP Endpoint
   description: API for Receiving Event Notification for OpenWealth APIs
   contact:

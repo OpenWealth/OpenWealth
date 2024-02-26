@@ -5,11 +5,8 @@ properties:
     $ref: '../Types/eventSubscriptionId.yaml'
   version:
     $ref: '../Types/version.yaml'
-  status:
-    description: Status of the requested resource notification
-    $ref: '../Types/orderStatus.yaml'
-  reason:
-    $ref: '../Types/notificationReason.yaml'
+  eventType:
+    $ref: '../Types/eventType.yaml'
   resourceLink:
     description: Link to resource that triggered the event notification
     type: string
@@ -23,6 +20,9 @@ properties:
   predecessorId:
     description: Identification (UUID) of the notification that predeceeds this notification.
     $ref: '../Types/notificationId.yaml'
+  orderStatus:
+    description: Status of the requested resource notification
+    $ref: '../Types/orderStatus.yaml'
   executedQuantity:
     description: Total quantity (e.g. number of shares) filled.
     $ref: '../Types/executedQuantity.yaml'
