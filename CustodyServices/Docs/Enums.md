@@ -1,6 +1,10 @@
 # Enumerations
 
+
+
 ## Transaction types
+
+The enumerations transaction type and movement type are the main classifiers of business events (Geschäftsvorfälle) and their componenets. The transaction type should be used to determine the business event type in the sense that it descripes an event like a purchase, a dividend payment etc that results in changes of wealth holding. These changes or deltas are called movements, such as security moves or cash moves. If a resulting cash move consists of multiple parts sush as taxes, fees and gross amounts each of these will be listed as separate movements. In this case the type of movement further determines the type of this change. The default types for cash movements - 'cash' - and security and contract movements - 'asset' should be used if the transaction type alse determines the type of this particular movement.
 
 | Enum | Description |
 | --- | --- |
@@ -97,3 +101,27 @@
 | transferMetalPhysical | Description |
 | unwind | Description |
 | variationMargin | Variation margin payment on for example a future |
+
+## Movement types
+
+| Enum | Description |
+| --- | --- |
+| accruedInterest | Accrued Interest |
+| additionalWithholdingTax | Additional Withholding Tax |
+| asset | Default type for securities and contracts |
+| brokerageFee | Brokerage Fee |
+| capitalGainTax | Capital Gain Tax |
+| cash | Default type for a cash amount |
+| custodyFee | Custody Fee |
+| courtage | Courtage |
+| exchangeFee | Exchange Fee |
+| financialTransactionTax | Financial Transaction Tax |
+| managementFee | Management Fee |
+| otherFee | Other Fee |
+| other | Other |
+| otherTax | Other Tax |
+| reinvestmentAmount | Reinvestment Amount |
+| stampDuty | Stamp Duty |
+| thirdPartyFee | Third Party Fee |
+| transactionFee | Transaction Fee |
+| withholdingTax | Withholding Tax |
