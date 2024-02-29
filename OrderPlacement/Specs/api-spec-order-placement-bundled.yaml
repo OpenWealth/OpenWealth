@@ -1141,6 +1141,7 @@ components:
         - order:replaced
         - order:restated
         - order:suspended
+        - order:trade
         - order:tradeCancel
         - order:tradeCorrect
       example: order:orderStatusUpdated
