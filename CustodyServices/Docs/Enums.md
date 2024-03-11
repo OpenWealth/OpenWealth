@@ -9,47 +9,52 @@ The enumerations transaction type and movement type are the main classifiers of 
 
 For clarification of content we group the transaction types by business event group and capture the possible movement types per transaction type.
 
-Business event groups:
+**Business event groups:**
 
-- CashTransfer: Inflows and Ourflows (external and internal) of cash
-- SecurityTransfer: Inflows and Outlfows (external and internal) of security
-- SecurityTrade: Exchange trades of securites and securiticed assets
-- FX: Foreign Exchange related transactions
-- MoneyMarket: Over-The-Counter borrowing and lending activities
-- CorporateAction: Events by a company, agreed by the board and authorized by shareholders, that cause material change to the company's securities resulting in movements of cash or securities
-- OtherOTC: Over-The-Counter contracts other than FX and MoneyMarket related
+| Name | Description |
+| --- | --- |
+| CashTransfer | Inflows and Ourflows (external and internal) of cash |
+| SecurityTransfer | Inflows and Outlfows (external and internal) of security |
+| SecurityTrade | Exchange trades of securites and securiticed assets |
+| FX | Foreign Exchange related transactions |
+| MoneyMarket | Over-The-Counter borrowing and lending activities |
+| CorporateAction | Events by a company, agreed by the board and authorized by shareholders, that cause material change to the company's securities resulting in movements of cash or securities |
+| OtherOTC | Over-The-Counter contracts other than FX and MoneyMarket related |
+| PreciousMetal | Transactions related to precious metal |
 
-Transaction type enumeration:
+**Transaction type enumeration:**
+
+*marked transaction types: samples to be collected
 
 | Enum | Description | Business event group | Possible contained movement types |
 | --- | --- | --- | --- |
 | accumulation | Funds related event in which the income (for example accumulation units) that accrues during an accounting period is retained within the fund instead of being paid away to investors. The retained income is nonetheless deemed to have been distributed to investors for tax purposes. | CorporateAction | cash, taxes, reinvestmentAmount|
-| additionalPayment || OtherOTC | cash, fees, taxes |
-| adjustNotional | Adjustment of the principal or notional value of the underlying asset in a contract | OtherOTC | cash, fees, taxes |
-| assignment | The seller's obligation to fullfill the terms of the contract by either selling or buying the underlying security at the exercise price | SecurityTrade ||
-| assimilation | Assimilation refers to the absorption of a new or secondary stock issuance by the public after it has been purchased by the underwriter |||
+| additionalPayment* || OtherOTC | cash, fees, taxes |
+| adjustNotional* | Adjustment of the principal or notional value of the underlying asset in a contract | OtherOTC | cash, fees, taxes |
+| assignment* | The seller's obligation to fullfill the terms of the contract by either selling or buying the underlying security at the exercise price | SecurityTrade ||
+| assimilation* | Assimilation refers to the absorption of a new or secondary stock issuance by the public after it has been purchased by the underwriter |||
 | bonus | Bonus or capitalisation issue. Security holders receive additional assets free of payment from the issuer, in proportion to their holding | CorporateAction | asset |
-| buy | Purchase of a security or financial instrument | SecurityTrade | cash, asset, fees, taxes |
+| buy | Purchase of a security or financial instrument | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
 | buyBarrier | TBD |||
 | buyDigital | TBD |||
 | buyIssue | Buy of a new issue (primary market) | SecurityTrade | cash, asset, fees, taxes |
-| buyToClose | Buy to close involves buying back an asset previously sold short to close out a short position | SecurityTrade | cash, asset, fees, taxes |
-| buyToOpen | TBD this still need? Should be covered by 'buy' || cash, asset, fees, taxes |
+| buyToClose | Buy to close involves buying back an asset previously sold short to close out a short position | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
+| buyToOpen | TBD this still need? Should be covered by 'buy' || cash, asset, accruedInterest, fees, taxes |
 | capitalIncrease | Capital increase | CorporateAction | cash, asset, fees, taxes |
 | closeCallableLoan | Closing of a callable loan | MoneyMarket | cash, accruedInterest|
 | closeCallDeposit | Closing of a callable deposit | MoneyMarket ||
-| closeCreditDefaultSwap | Closing of a credit default swap | OtherOTC | asset |
+| closeCreditDefaultSwap* | Closing of a credit default swap | OtherOTC | asset |
 | closeFxForward | Closing of a foreign exchange forward contract | FX | cash, asset |
 | closeFxSwap | Closing of a foreign exchange swap contract | FX | cash, asset|
 | closeFixedDeposit | Closing of a fixed deposit | MoneyMarket | cash, asset, accruedInterest |
 | closeFixedLoan | Closing of a fixed loan | MoneyMarket | cash, asset, accruedInterest |
-| closeInterestSwap | Closing of an interest swap | OtherOTC | asset, cash, how is P&L paid? |
-| closeTotalReturnSwap | Closing of a total return swap | OtherOTC | asset, cash, how is P&L paid? |
+| closeInterestRateSwap* | Closing of an interest swap | OtherOTC | asset, cash, how is P&L paid? |
+| closeTotalReturnSwap* | Closing of a total return swap | OtherOTC | asset, cash, how is P&L paid? |
 | closeNonDeliverableForward | Closing of a non deliverable forward | OtherOTC | cash, asset, how is P&L paid? |
 | conversionBondShare | Conversion bond into share | CorporateAction | asset, cash |
 | coupon | Interest payment distributed to holders of an interest bearing asset. | CorporateAction | cash, fees, taxes |
-| creditEvent | An occurrence of credit derivative for which the issuer of one or several underlying securities is unable to fulfill its financial obligations (as defined in terms and conditions) | OtherOTC | cash |
-| decrease | TBD |||
+| creditEvent* | An occurrence of credit derivative for which the issuer of one or several underlying securities is unable to fulfill its financial obligations (as defined in terms and conditions) | OtherOTC | cash |
+| custodyFee | Custody Fee | CashTransfer | cash, taxes |
 | decreaseCallableLoan | Decrease of principal amount of callable loan | MoneyMarket | cash |
 | decreaseCallDeposit | Decrease of principal amount of cal deposit | MoneyMarket | cash |
 | deliverSecurityToFund | TBD |||
@@ -59,25 +64,24 @@ Transaction type enumeration:
 | dividendChoice | Distribution of a dividend to shareholders with a choice of benefit to receive. Shareholders may choose to receive shares or cash. To be distinguished from dividendReinvestment as the company creates new share capital in exchange for the dividend rather than investing the dividend in the market. | CorporateAction | cash, fees, taxes |
 | dividendReinvestment | Dividend payment where holders can keep cash or have the cash reinvested in the market by the issuer into additional shares in the issuing company. To be distinguished from dividendOption as the company invests the dividend in the market rather than creating new share capital in exchange for the dividend. | CorporateAction  | cash, asset, fees, taxes |
 | dividendStock | Dividend paid to shareholders in the form of equities of the issuing corporation | CorporateAction | asset |
-| exercise | TBD Exercise of an option or warrant |||
+| exercise* | TBD Exercise of an option or warrant |||
 | exerciseCash | TBD |||
 | exercisePhysical | TBD |||
-| expiration | TBD |||
+| expiration* | TBD |||
 | expirationOldSecurity | Expiration old security, includes lapses for options/warrants |||
-| fees | TBD || cash, fees |
-| finalLiquidationPayment | Final liquidation payment under expiration of the old security | CorporateAction |  cash, fees |
+| finalLiquidationPayment* | Final liquidation payment under expiration of the old security | CorporateAction |  cash, fees |
 | fxSpot | Foreign exchange spot transaction | FX | cash |
-| incompleteRights | TBD |||
-| increase | TBD |||
+| incompleteRights | TBD - can this be removed |||
 | increaseCallableLoan | Increase of principal amount of a callable loan | MoneyMarket | cash |
 | increaseCallDeposit | Increase of principal amount of a call deposit | MoneyMarket | cash |
 | inflowCash | Incoming payments related to cash account. | CashTransfer | cash |
 | instrumentExchange | TBD Exchange of securities | CorporateAction | asset |
 | interest | Interest payment | CashTransfer | cash, fees, taxes |
 | internalTransfer | TBD: still needed? Account Transfer within the same client/bank |||
-| knockIn | TBD |||
-| knockOut | TBD |||
-| liquidationPayment | A distribution of cash, assets or both. Debt may be paid in order of priority based on preferred claims to assets specified by the security. | CorporateAction | cash, fees, taxes |
+| knockIn | TBD - should this be modelled on the contract/option? |||
+| knockOut | TBD - should this be modelled on the contract/option? |||
+| liquidationPayment* | A distribution of cash, assets or both. Debt may be paid in order of priority based on preferred claims to assets specified by the security. | CorporateAction | cash, fees, taxes |
+| managementFee | Management Fee | CashTransfer | cash, taxes |
 | markToMarket | TBD |||
 | markToMarketCash | TBD |||
 | merger | Exchange of outstanding securities, initiated by the issuer which may include options, as the result of two or more companies combining assets, that is, an external, third party company. Cash payments may accompany share exchange. | CorporateAction | asset |
@@ -92,9 +96,9 @@ Transaction type enumeration:
 | openNonDeliverableForward | Opening of a non-deliverable forward contract | OtherOTC | cash, asset |
 | other | Other transaction type not covered by enum || all movementTypes possible |
 | outflowCash | Outgoing payments related to cash account. This covers for example the payment of bills, account transfers across banks, card payments, cash withdrawals, standing orders across clients/banks, “LSV” | CashTransfer | cash |
-| premium | TBD | CorporateAction | cash, fees, taxes |
-| prepayment | Prepayment to purchase e.g. a hedge fund with infrequent NAV calculation | SecurityTrade | cash, asset, fees, taxes |
-| publicOffer | TBD |||
+| premium* | This corporate event pays shareholders an amount in cash issued from the shares premium reserve. It is similar to a dividend but with different tax implications | CorporateAction | cash, fees, taxes |
+| prepayment* | difference to subscription TBD. Prepayment to purchase e.g. a hedge fund with infrequent NAV calculation | SecurityTrade | cash, asset, fees, taxes |
+| publicOffer | TBD - needed? |||
 | receiveFreeOfPayment | Receive of security free of payment | Security transfer | asset |
 | receiveFromFund | TBD |||
 | receiveSecurityFromFund | TBD |||
@@ -102,19 +106,19 @@ Transaction type enumeration:
 | redemption | The redemption of an entire issue outstanding of securities, for example, bonds, preferred equity, funds, by the issuer or its agent, for example, asset manager, at final maturity. | CorporateAction | cash, asset, fees, taxes |
 | redemptionPartial | Partial redemption | CorporateAction | cash, asset, fees, taxes |
 | redemptionPrior | Redemption prior to maturity | CorporateAction | cash, asset, fees, taxes |
-| reductionOfNominal | Reduction of nominal | CorporateAction | cash, asset, fees, taxes |
-| resetPayment | TBD |||
+| reductionOfNominal* | Reduction of nominal | CorporateAction | cash, asset, fees, taxes |
+| resetPayment* | TBD |||
 | rightDistribution | Right distribution (e.g. subscription rights related to a capital increase or in case of a dividend with the choice between stock/cash) | CorporateAction | asset |
-| sell | Sale of a security or financial instrument | SecurityTrade | cash, asset, fees, taxes |
+| sell | Sale of a security or financial instrument | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
 | sellBarrier | TBD |||
 | sellDigital | TBD |||
-| sellToClose | Sell to open refers to instances in which an option investor initiates, or opens, an option trade by selling or establishing a short position in an option | SecurityTrade | cash, asset, fees, taxes |
-| sellToOpen | TBD - should be covered by 'sell' | SecurityTrade | cash, asset, fees, taxes |
+| sellToClose | Sell to open refers to instances in which an option investor initiates, or opens, an option trade by selling or establishing a short position in an option | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
+| sellToOpen | TBD - should be covered by 'sell' | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
 | spinOff | A distribution of securities issued by another company. The distributed securities may either be of a newly created or of an existing company. For example, spin-off, demerger, unbundling, divestment. | CorporateAction | asset |
 | stockSplit | Increase in a corporation's number of outstanding equities without any change in the shareholder's equity or the aggregate market value at the time of the split. Equity price and nominal value are reduced accordingly. | CorporateAction | asset |
 | subscription | TBD || cash, asset, fees, taxes |
 | taxCorrections | Correction of Tax payment | CashTransfer | cash |
-| taxes | General tax payment | CashTransfer | cash |
+| tax | General tax payment | CashTransfer | cash |
 | transferMetalPhysical | TBD | ||
 | unwind | TBD |||
 | variationMargin | Variation margin payment on for example a future | CorporateAction | cash, fees, taxes |
@@ -129,11 +133,9 @@ Transaction type enumeration:
 | brokerageFee | Brokerage Fee |
 | capitalGainTax | Capital Gain Tax |
 | cash | Default type for a cash amount |
-| custodyFee | Custody Fee |
 | courtage | Courtage |
 | exchangeFee | Exchange Fee |
 | financialTransactionTax | Financial Transaction Tax |
-| managementFee | Management Fee |
 | otherFee | Other Fee |
 | other | Other |
 | otherTax | Other Tax |
