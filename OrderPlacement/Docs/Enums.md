@@ -37,3 +37,23 @@
 | order:trade | Fill or partial fill on the order. |
 | order:tradeCancel | A previously traded execution is deemed invalid |
 | order:tradeCorrect | Description |
+
+## financialInstrumentIdentification Type
+
+| Enum | Description |
+| --- | --- |
+| belgian | Identifier for Belgian securities. |
+| bloomberg | Identifier of a security assigned by the Bloomberg organisation. |
+| common | Identifier of securities issued in Luxembourg. The common code is a 9-digit code that replaces the CEDEL (Clearstream) and Euroclear codes. |
+| cta | Identifier of a security assigned by the Consolidated Tape Association. |
+| cusip | Committee on Uniform Securities and Identification Procedures (CUSIP). The standards body that created and maintains the securities classification system in the US. The CUSIP is composed of a 9-character number that uniquely identifies a particular security. Non-US securities have a similar number called the CINS number. |
+| dutch | Identifier for Dutch securities. |
+| isin | International Securities Identification Number (ISIN). A numbering system designed by the United Nation's International Organisation for Standardisation (ISO). The ISIN is composed of a 2-character prefix representing the country of issue, followed by the national security number (if one exists), and a check digit. Each country has a national numbering agency that assigns ISIN numbers for securities in that country. |
+| otherProprietaryIdentification | Proprietary identification of the security assigned by an institution or organisation. |
+| quick | Identifier of a security assigned by the Japanese QUICK identification scheme for financial instruments. |
+| ric | Reuters Identification Code (RIC). A numbering system used within the Reuters system to identify instruments worldwide. The RIC contains an X-character market specific code (can be the CUSIP or EPIC codes) followed by a full stop, then the two-digit ISO country code, for example, IBM in UK is IBM.UK. |
+| sedol | Stock Exchange Daily Official List (SEDOL) number. A code used by the London Stock Exchange to identify foreign stocks, especially those that aren't actively traded in the US and don't have a CUSIP number. |
+| sicovam | Identifier for French securities assigned by the Societe Interprofessionnelle Pour La Compensation des Valeurs Mobilieres in France. The Sicovam is composed of 5-digits. |
+| tickerSymbol | Letters that identify a stock traded on a stock exchange. The Ticker Symbol is a short and convenient way of identifying a stock, for example, RTR.L for Reuters quoted in London. |
+| valoren | Identifier for Swiss securities assigned by Telekurs Financial, the Swiss numbering agency. |
+| wertpapier | Wertpapier Kenn-nummer. A number issued in Germany by the Wertpapier Mitteilungen. The Wertpapier Kenn-nummer, sometimes called WPK, contains 6-digits, but no check digit. There are different ranges of numbers representing different classes of securities. |
