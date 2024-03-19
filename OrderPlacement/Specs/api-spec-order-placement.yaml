@@ -220,7 +220,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: 'Resources/eventSubscription.yaml'
+              $ref: 'Resources/eventSubscriptionRequest.yaml'
       responses:
         '201':
           description: Subscription created.

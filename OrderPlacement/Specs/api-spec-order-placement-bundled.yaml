@@ -215,7 +215,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/eventSubscription'
+              $ref: '#/components/schemas/eventSubscriptionRequest'
       responses:
         '201':
           description: Subscription created.
@@ -1152,6 +1152,21 @@ components:
       properties:
         eventSubscriptionId:
           $ref: '#/components/schemas/eventSubscriptionId'
+        callbackUrl:
+          description: Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL to send event notifications to.
+          type: string
+          format: uri
+          example: https://examplecallbackuri.com
+        eventTypes:
+          description: Array of event types the subscription applies to. An empty list indicates that no notifications are sent.
+          type: array
+          items:
+            $ref: '#/components/schemas/eventType'
+    eventSubscriptionRequest:
+      type: object
+      required:
+        - callbackUrl
+      properties:
         callbackUrl:
           description: Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL to send event notifications to.
           type: string
