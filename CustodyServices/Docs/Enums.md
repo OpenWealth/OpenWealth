@@ -1,7 +1,7 @@
 # Enumerations
 
-- [Transaction Types](##transaction-types)
-- [Movement types](##movement-types)
+- [Transaction Types](#transaction-types)
+- [Movement types](#movement-types)
 
 ## Transaction types
 
@@ -17,9 +17,9 @@ For clarification of content we group the transaction types by business event gr
 | SecurityTransfer | Inflows and Outlfows (external and internal) of security |
 | SecurityTrade | Exchange trades of securites and securiticed assets |
 | FX | Foreign Exchange related transactions |
-| MoneyMarket | Over-The-Counter borrowing and lending activities |
+| OtcBorrowingLending | Over-The-Counter borrowing and lending activities |
 | CorporateAction | Events by a company, agreed by the board and authorized by shareholders, that cause material change to the company's securities resulting in movements of cash or securities |
-| OtherOTC | Over-The-Counter contracts other than FX and MoneyMarket related |
+| OtherOTC | Over-The-Counter contracts other than FX and borrowing and lending related |
 | PreciousMetal | Transactions related to precious metal |
 
 **Transaction type enumeration:**
@@ -41,13 +41,13 @@ For clarification of content we group the transaction types by business event gr
 | buyToClose | Buy to close involves buying back an asset previously sold short to close out a short position | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
 | buyToOpen | TBD this still need? Should be covered by 'buy' || cash, asset, accruedInterest, fees, taxes |
 | capitalIncrease | Capital increase | CorporateAction | cash, asset, fees, taxes |
-| closeCallableLoan | Closing of a callable loan | MoneyMarket | cash, accruedInterest|
-| closeCallDeposit | Closing of a callable deposit | MoneyMarket ||
+| closeCallableLoan | Closing of a callable loan | OtcBorrowingLending | cash, accruedInterest|
+| closeCallDeposit | Closing of a callable deposit | OtcBorrowingLending ||
 | closeCreditDefaultSwap* | Closing of a credit default swap | OtherOTC | asset |
 | closeFxForward | Closing of a foreign exchange forward contract | FX | cash, asset |
 | closeFxSwap | Closing of a foreign exchange swap contract | FX | cash, asset|
-| closeFixedDeposit | Closing of a fixed deposit | MoneyMarket | cash, asset, accruedInterest |
-| closeFixedLoan | Closing of a fixed loan | MoneyMarket | cash, asset, accruedInterest |
+| closeFixedDeposit | Closing of a fixed deposit | OtcBorrowingLending | cash, asset, accruedInterest |
+| closeFixedLoan | Closing of a fixed loan | OtcBorrowingLending | cash, asset, accruedInterest |
 | closeInterestRateSwap* | Closing of an interest swap | OtherOTC | asset, cash, how is P&L paid? |
 | closeTotalReturnSwap* | Closing of a total return swap | OtherOTC | asset, cash, how is P&L paid? |
 | closeNonDeliverableForward | Closing of a non deliverable forward | OtherOTC | cash, asset, how is P&L paid? |
@@ -55,8 +55,8 @@ For clarification of content we group the transaction types by business event gr
 | coupon | Interest payment distributed to holders of an interest bearing asset. | CorporateAction | cash, fees, taxes |
 | creditEvent* | An occurrence of credit derivative for which the issuer of one or several underlying securities is unable to fulfill its financial obligations (as defined in terms and conditions) | OtherOTC | cash |
 | custodyFee | Custody Fee | CashTransfer | cash, taxes |
-| decreaseCallableLoan | Decrease of principal amount of callable loan | MoneyMarket | cash |
-| decreaseCallDeposit | Decrease of principal amount of cal deposit | MoneyMarket | cash |
+| decreaseCallableLoan | Decrease of principal amount of callable loan | OtcBorrowingLending | cash |
+| decreaseCallDeposit | Decrease of principal amount of cal deposit | OtcBorrowingLending | cash |
 | deliverSecurityToFund | TBD |||
 | deliveryFreeOfPayment | Security delivery free of payment | SecurityTransfer | asset |
 | deliveryVsPayment | Security delivery against payment | SecurityTrade | cash, asset, fees, taxes |
@@ -72,8 +72,8 @@ For clarification of content we group the transaction types by business event gr
 | finalLiquidationPayment* | Final liquidation payment under expiration of the old security | CorporateAction |  cash, fees |
 | fxSpot | Foreign exchange spot transaction | FX | cash |
 | incompleteRights | TBD - can this be removed |||
-| increaseCallableLoan | Increase of principal amount of a callable loan | MoneyMarket | cash |
-| increaseCallDeposit | Increase of principal amount of a call deposit | MoneyMarket | cash |
+| increaseCallableLoan | Increase of principal amount of a callable loan | OtcBorrowingLending | cash |
+| increaseCallDeposit | Increase of principal amount of a call deposit | OtcBorrowingLending | cash |
 | inflowCash | Incoming payments related to cash account. | CashTransfer | cash |
 | instrumentExchange | TBD Exchange of securities | CorporateAction | asset |
 | interest | Interest payment | CashTransfer | cash, fees, taxes |
@@ -85,10 +85,10 @@ For clarification of content we group the transaction types by business event gr
 | markToMarket | TBD |||
 | markToMarketCash | TBD |||
 | merger | Exchange of outstanding securities, initiated by the issuer which may include options, as the result of two or more companies combining assets, that is, an external, third party company. Cash payments may accompany share exchange. | CorporateAction | asset |
-| openCallableLoan | Opening of a callable loan contract | MoneyMarket | cash, asset |
-| openCallDeposit | Opening of a call deposit contract | MoneyMarket | cash, asset |
-| openFixedDeposit | Opening of a fixed deposit contract | MoneyMarket | cash, asset |
-| openFixedLoan | Opening of a fixed loan contract | MoneyMarket | cash, asset |
+| openCallableLoan | Opening of a callable loan contract | OtcBorrowingLending | cash, asset |
+| openCallDeposit | Opening of a call deposit contract | OtcBorrowingLending | cash, asset |
+| openFixedDeposit | Opening of a fixed deposit contract | OtcBorrowingLending | cash, asset |
+| openFixedLoan | Opening of a fixed loan contract | OtcBorrowingLending | cash, asset |
 | openFxForward | Opening of a foreign exchange forward contract | FX | cash |
 | openFxSwap | Opening of a foreign exchange swap contract | FX | cash |
 | openInterestRateSwap | Opening of an interest rate swap | OtherOTC | asset, cash |
