@@ -11,9 +11,9 @@
 | executed | The completely filled order has been allocated to the client(s) and is confirmed to be (fully) executed. This is a terminal state. |
 | expired | The order had no executions (no fills) and is confirmed to be expired. This is a terminal state. |
 | filled | The order has been fully executed. |
-| marketCancelled | Description |
-| marketExpired | Description |
-| marketRejected | Description |
+| marketCancelled | Market has accepted the cancellation of the outstanding amount of the order. |
+| marketExpired | Expiry of the order at the placed exchange  |
+| marketRejected | Market or broker side rejection of the order. |
 | partiallyCancelled | The partially filled order has been allocated to the client(s) and is confirmed to be cancelled. Note that the cancelled order contains partial executions and their corresponding allocations. This is a terminal state. |
 | partiallyExpired | The partially filled order has been allocated to the client(s) and is confirmed to be expired. This is a terminal state. |
 | partiallyFilled | The order has been patially executed |
@@ -28,15 +28,15 @@
 | Enum | Description |
 | --- | --- |
 | heartbeat | This event is sent to check if the receiving server is responsive. |
-| order:doneForDay | Order not, or partially, filled; no further executions forthcoming for the trading day |
+| order:doneForDay | Order not, or partially, filled; no further executions forthcoming for the trading day. |
 | order:orderStatusUpdate | Status of the order has changed |
-| order:pendingReplace | Description |
-| order:replace | Description |
-| order:restate | Description |
+| order:pendingReplace | Order with an Order Cancel/Replace Request pending . This does not indicated that the order has been replaced. |
+| order:replace | The replacement of the order has been successful. |
+| order:restate | Sell-side adjustement of an order without the electronical request of the customer. This is used for orders and corporate actions, changes communicated verbally to the sellside either due to normal business practices or as an emergency measure when electronic systems are not available, repricing of orders by the sellside (such as making Sell Short orders compliant with uptick / downtick rules), or other reasons (Broker option). |
 | order:suspend | Order has been placed in suspended state. |
 | order:trade | Fill or partial fill on the order. |
-| order:tradeCancel | A previously traded execution is deemed invalid |
-| order:tradeCorrect | Description |
+| order:tradeCancel | A previously traded execution is deemed invalid. Trade Cancel applies at the execution level and is used to cancel an execution which has been reported in error. |
+| order:tradeCorrect | Trade Correct applies at the execution level and is used to modify an incorrectly reported fill. |
 
 ## financialInstrumentIdentification Type
 
