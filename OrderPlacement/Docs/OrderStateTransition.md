@@ -45,12 +45,4 @@ stateDiagram-v2
     PendingCancel --> Cancelled: 41
     PendingCancel --> Placed: 53
     PendingCancel --> PartiallyFilled: 54
-
-    Executed --> [*]
-    PartiallyExpired --> [*]
-    Rejected --> [*]
-    PartiallyRejected --> [*]
-    Cancelled --> [*]
-    PartiallyCancelled --> [*]
-    Expired --> [*]
 ```
