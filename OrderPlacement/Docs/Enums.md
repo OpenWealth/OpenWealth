@@ -57,3 +57,105 @@
 | tickerSymbol | Letters that identify a stock traded on a stock exchange. The Ticker Symbol is a short and convenient way of identifying a stock, for example, RTR.L for Reuters quoted in London. |
 | valoren | Identifier for Swiss securities assigned by Telekurs Financial, the Swiss numbering agency. |
 | wertpapier | Wertpapier Kenn-nummer. A number issued in Germany by the Wertpapier Mitteilungen. The Wertpapier Kenn-nummer, sometimes called WPK, contains 6-digits, but no check digit. There are different ranges of numbers representing different classes of securities. |
+
+## executionType
+
+| Enum | Description |
+| --- | --- |
+| limit | The requested execution type is a limited order Therefore, a limitPrice needs to be indicated |
+| market | The order should be executed at market price |
+| stop | The requested execution type is a stop order Therefore, a stopPrice needs to be indicated |
+| stopLimit | The requested execution type is a stopLimit order Therefore, a stopPrice and limitPrice need to be indicated |
+
+## timeInForce
+
+| Enum | Description |
+| --- | --- |
+| atCrossing | An order that is valid only during crossing (auction) phases |
+| atTheClose | Indicated price is to be around the closing price, however, not held to the closing price |
+| atTheOpening | A market or limit-price order to be executed at the opening of the stock or notat all; all or part of any order not executed at the opening is treated as canceled |
+| day | A buy or sell order that, if not executed expires at the end of the trading day on which it was entered |
+| fillOrKill | A market or limit-price order that is to be executed in its entirety as soon as it is represented in the Trading Crowd; if not so executed, the order is to be canceled. Not to be confused with Immediate or Cancel. |
+| goodForAuction | An order that is valid for an auction initiated by a trading firm |
+| goodForMonth | An order that is valid until the end of the current month, i.e. from the time of order submission until the end of the last trading day of the current month |
+| goodForTime | Not used - The order remains valid for a specified time period |
+| goodThroughCrossing | An order that is valid up till and including a crossing phase |
+| goodTillCancel | An order to buy or sell that remains in effect until it is either executed or canceled; sometimes called an "open order" |
+| goodTillCrossing | An order to buy or sell that is canceled prior to the market entering into an auction or crossing phase |
+| goodTillDate | The order remains valid until the end of the specified date |
+| immediateOrCancel | A market or limit-price order that is to be executed in whole or in part as soon as it is represented in the Trading Crowd; any portion not executed is to be canceled. Not to be confused with Fill or Kill. |
+
+
+## Cancellation and Rejection Reasons
+### Orders
+
+| Enum | Description |
+| --- | --- |
+| allocationInvalid | Indicates on the order level, that there some error with an allocation within this order |
+| cancelledByHub | Receiving party cancelled the received order |
+| cancelledByInstructingParty | Instructing party cancelled the order |
+| cancelledByOther | Any other party than instructing party or hub cancelled the order (e.g. exchange, broker, etc.) |
+| cannotContainMarketIdentificationAndMarketDescription | Place of trade cannot contain market identification and market description at the same time |
+| currencyNotSupportedForFinancialInstrument | The chosen currency is not available for the selected financialInstrument |
+| displayQuantityNotImplemented | This attribute is not supported by the receiving party |
+| endOfLife | Order reached the endOfLife (e.g. due to expiry) |
+| executionTypeInconsequential | Inconsequencial executionType |
+| executionTypeNotSupported | Execution type not supported |
+| expiryDateTimeInThePast | expiryDateTime cannot be in the past |
+| expiryDateTimeMissing | expiryDateTime is missing |
+| expiryDateTimeNotAllowed | expiryDateTime not allowed due to rules of the stock exchange |
+| financialInstrumentIdentificationNotUnique | Identification of the financial instrument is not unique, e.g. due to missing characters |
+| financialInstrumentIdentificationTypeNotSupported | The selected type of the financial instrument is not implemented |
+| financialInstrumentNotAllowedViaInterface | The financial instrument is not permitted for trading via Order Placement interface |
+| financialInstrumentNotFound | FinancialInstrument not found |
+| financialInstrumentNotTradedOnMarket | Instrument not traded on indicated market |
+| icebergOrderTooLarge | Iceberg order too large |
+| invalidPrices | Invalid prices, e.g. the indicated price is to far of the current market value or the indicated price is provided with the wrong price type |
+| limitPriceMissingForExecutionType | LimitPrice is missing. (for executionTypes limit and stopLimit) |
+| limitPriceNotAllowedForExecutionType | LimitPrice is not allowed for executionType market or stop |
+| marketCurrentlyBlockedForTrading | Market is currently blocked for trading |
+| marketQuoteNotAvailableForProduct | Market quotes not available for given product |
+| maximumNumberOfAllocationsExceeded | Bank-specific limitation regarding the number of allocations within one order |
+| numberOfAllocationsDeviateFromAllocationsProvided | The numberOfAllocations deviate from the number of allocations provided under requestedAllocationList |
+| numberOfAllocationsEmpty | numberOfAllocations cannot be empty. Use “1” for single orders. |
+| numberOfAllocationsZero | numberOfAllocations equals to zero is not allowed Use “1” for single orders |
+| orderQuantityDeviatesFromSumOfAllocationQuantities | The total quantity of the order differs from the sum of all allocation amounts |
+| orderQuantityTooHigh | The order quantity is higher than what the financial institution accepts |
+| orderQuantityTooSmall | The amount of the orderQuantity does not fulfill the minimum size of the selected financialInstrument |
+| orderQuantityTypeNotImplemented | The selected type of the orderQuantity is not implemented |
+| orderQuantityTypeWrong | The selected type of the orderQuantity does not match the selected financialInstrument |
+| orderTypeNotSupportedByMarket | Given order type is not valid for given market |
+| other | Order has been cancelled due to a different reason |
+| placeOfTradeNotImplemented | PlaceOfTrade and its subattributes are not implemented |
+| placeOfTradeNotSupported | PlaceOfTrade is not supported |
+| productExpired | Product indicated in the order is expired |
+| selectedTimeInForceNotImplemented | The selected timeInForce instruction is not implemented/supported |
+| stopPriceMissingForExecutionType | StopPrice is missing (for executionTypes stop and stopLimit) |
+| stopPriceNotAllowedForExecutionType | StopPrice is not allowed for executionType market or limit |
+| timeInForceAndExpiryDateInconsistent | Time in force for day not consistent with expiry date (if both attributes are delivered in the request) |
+| valueTooHigh | The value of the order is exceeds the given limit by the receiving party |
+| wrongDenomination | The amount of the orderQuantity does not fulfill the tick size of the selected financialInstrument |
+
+### Allocations
+
+| Enum | Description |
+| --- | --- |
+| accountIdentificationMissing | Account identification is missing |
+| accountInvalidForOrderPlacement | The selected account cannot be used for order placements |
+| accountTypeMissing | The account type is missing for an indicated account |
+| accountTypeNotMatchingAccount | The selected type of the account does not match the account type of the financial institution, e.g. cashAccountID is sent with a accountType:safekeepingAccount |
+| allocationQuantityTooHigh | The indicated quantity exeeds the defined threshhold |
+| cashAccountMissing | No cashAccount provided for the allocation |
+| cashAccountNotFound | Indicated cash account has not been found |
+| insufficientBuyingPower | Client has not enough buying power |
+| insufficientQuantityAvailable | Client has not enough securities to sell |
+| invalidCurrencyForAccount | Invalid currency for given customer account/indicated currency not matching with accountCurrency |
+| other | Allocation has been cancelled/rejected due to another reason |
+| pretradeCheckFailed | Pre-trade checks failed. Allocation has been cancelled/rejected due to a reason that is not made available |
+| safekeepingAccountMissing | No safekeepingAccount provided for the allocation |
+| safekeepingAccountNotFound | Indicated safekeeping account has not been found |
+| tooManyCashAccountsIndicated | More than one cashAccount provided for the allocation Expected is exactly one cashAccount per allocation |
+| tooManySafekeepingAccounts | More than one safekeepingAccount provided for the allocation  Expected is exactly one safekeepingAccount per allocation |
+| valueTooHigh | The value of the order is exceeds the defined limit by the receiving party |
+| zeroQuantity | Zero quantity not processed |
+
