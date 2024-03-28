@@ -1,0 +1,42 @@
+description: Notification for the order placement API that is pushed to the TPP.
+type: object
+properties:
+  eventSubscriptionId:
+    $ref: '../Types/eventSubscriptionId.yaml'
+  version:
+    $ref: '../Types/version.yaml'
+  eventType:
+    $ref: '../Types/eventType.yaml'
+  resourceLink:
+    description: Link to resource that triggered the event notification
+    type: string
+    example: "/api/openwealth/order-placement/v2/orders/abcd1234"
+  created:
+    description: Timestamp - Date and time including timezone on which the notification has been created, according to ISO8601 
+    $ref: '../Types/date-time.yaml'
+  id:
+    description: Identification (UUID) of this notification.
+    $ref: '../Types/notificationId.yaml'
+  predecessorId:
+    description: Identification (UUID) of the notification that predeceeds this notification.
+    $ref: '../Types/notificationId.yaml'
+  orderStatus:
+    description: Status of the requested resource notification
+    $ref: '../Types/orderStatus.yaml'
+  executedQuantity:
+    description: Total quantity (e.g. number of shares) filled.
+    $ref: '../Types/executedQuantity.yaml'
+  averagePrice:
+    $ref: '../Types/averagePrice.yaml'
+  remainingQuantity:
+    $ref: '../Types/remainingQuantity.yaml'
+  dayExecutedQuantity:
+    $ref: '../Types/dayExecutedQuantity.yaml'
+  dayAveragePrice:
+    $ref: '../Types/dayAveragePrice.yaml'
+  lastQuantity:
+    $ref: '../Types/lastQuantity.yaml'
+  lastPrice:
+    $ref: '../Types/lastPrice.yaml'
+
+    

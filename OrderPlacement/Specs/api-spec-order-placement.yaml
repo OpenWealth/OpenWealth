@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 2.0.8
+  version: 2.1.1
   title: Order Placement API
   description: This API is used to place orders and check on the order status.
   contact:
@@ -10,9 +10,8 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/OpenWealthAPI/OrderPlacement/2.0.8
+  - description: Your servers url
+    url: url
 
 paths:
   /orders:
@@ -210,6 +209,201 @@ paths:
           $ref: '../../Globals/Responses/501.yaml'
         '503':
           $ref: '../../Globals/Responses/503.yaml'
+  /event-subscriptions:
+    post:
+      summary: Subscribe to Events
+      description: Allows TPP to subscribe to specific events for the API.
+      operationId: postEventSubscription
+      tags:
+        - event-notification-subscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'Resources/eventSubscriptionRequest.yaml'
+      responses:
+        '201':
+          description: Subscription created.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+          content:
+            application/json:
+              schema:
+                $ref: 'Resources/eventSubscription.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '409':
+          $ref: '../../Globals/Responses/409.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+        '504':
+          $ref: '../../Globals/Responses/504.yaml'
+    get:
+      summary: View Subscriptions
+      description: Allows TPP to view the event subscriptions.
+      operationId: getEventSubscriptions
+      tags:
+        - event-notification-subscription
+      responses:
+        '200':
+          description: Event Subscription read.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'Resources/eventSubscription.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+        '504':
+          $ref: '../../Globals/Responses/504.yaml'
+  /event-subscriptions/{eventSubscriptionId}:
+    parameters:
+      - name: eventSubscriptionId
+        in: path
+        description: >-
+          Unique identification as assigned by the API exposing party to uniquely
+          identify the callback URL resource.
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 40
+    get:
+      summary: View Subscription
+      description: Allows TPP to view the event subscription.
+      operationId: getEventSubscriptionByEventSubscriptionId
+      tags:
+        - event-notification-subscription
+      responses:
+        '200':
+          description: Event Subscription read.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+          content:
+            application/json:
+              schema:
+                $ref: 'Resources/eventSubscription.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+        '504':
+          $ref: '../../Globals/Responses/504.yaml'    
+    put:
+      summary: Change event subscription
+      description: Changes event subscription.
+      operationId: changeEventSubscriptionByEventSubscriptionId
+      tags:
+        - event-notification-subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'Resources/eventSubscription.yaml'
+      responses:
+        '200':
+          description: Event subscription changed
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+          content:
+            application/json:
+              schema:
+                $ref: 'Resources/eventSubscription.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+        '504':
+          $ref: '../../Globals/Responses/504.yaml'
+
+    delete:
+      summary: Delete event subscription
+      description: Deletes event subscriptions
+      operationId: deleteEventSubscriptionsByEventSubscriptionId
+      tags:
+        - event-notification-subscription
+      responses:
+        '204':
+          description: Event subscription deleted.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+        '504':
+          $ref: '../../Globals/Responses/504.yaml'
 
 components:
   ###############
