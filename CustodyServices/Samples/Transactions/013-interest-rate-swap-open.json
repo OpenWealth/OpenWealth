@@ -21,14 +21,14 @@
         "currencyOfDenomination": "CHF",
         "expiryDate": "2023-06-27",
         "interestRateReceived": {
-          "interestRateType": "fixedInterestRate",
+          "type": "fixed",
           "rate": 1.75,
           "dayCountBasis": "act_360",
           "paymentDate": "2023-06-27",
           "paymentFrequency": "atMaturity"
         },
         "interestRatePaid": {
-          "interestRateType": "floatingInterestRate",
+          "type": "floating",
           "spread": 0.2,
           "basis": "LIBOR",
           "dayCountBasis": "act_360",

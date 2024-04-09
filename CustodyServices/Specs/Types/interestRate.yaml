@@ -5,7 +5,7 @@ allOf:
   - $ref: '../../../Globals/Types/rate.yaml'
   - type: object
     properties:
-      interestRateType:
+      type:
         type: string
         description: Indicates the type of interest
         example: fixed
@@ -13,6 +13,7 @@ allOf:
           - fixed
           - variable
           - staggered
+          - floating
       dayCountBasis:
         $ref: 'dayCountBasis.yaml'
       paymentDate:
@@ -31,3 +32,9 @@ allOf:
           - weekly
           - atMaturity
           - other
+      basis:
+        type: string
+        description: Indicates the xxx such as LIBOR, EURIBOR
+      spread:
+        type: number
+        description: xxx
