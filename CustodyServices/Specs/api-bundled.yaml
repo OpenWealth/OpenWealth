@@ -158,7 +158,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/position'
+                  $ref: '#/components/schemas/valuatedPosition'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -198,7 +198,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/position'
+                $ref: '#/components/schemas/valuatedPosition'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -284,7 +284,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/position'
+                  $ref: '#/components/schemas/valuatedPosition'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -324,7 +324,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/position'
+                $ref: '#/components/schemas/valuatedPosition'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -825,12 +825,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/account'
-    date:
-      title: Date
-      type: string
-      format: date
-      pattern: \d{4}-\d{2}-\d{2}
-      example: '2018-04-13'
     financialInstrumentType:
       title: FinancialInstrumentType
       type: string
@@ -966,6 +960,12 @@ components:
         - u30E_360Isda
         - u30E_360
         - u30U_360
+    date:
+      title: Date
+      type: string
+      format: date
+      pattern: \d{4}-\d{2}-\d{2}
+      example: '2018-04-13'
     interestRate:
       title: InterestRate
       type: object
@@ -1402,6 +1402,84 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/financialInstrumentBase'
+    position:
+      title: Position
+      type: object
+      required:
+        - positionId
+        - financialInstrument
+        - account
+      properties:
+        id:
+          type: string
+          maxLength: 35
+          example: 876543219
+          description: Identification for the position given by the bank
+        financialInstrument:
+          $ref: '#/components/schemas/financialInstrument'
+        account:
+          $ref: '#/components/schemas/account'
+        name:
+          type: string
+          maxLength: 80
+          example: Stark Industries Inc.
+          description: Name of the position.
+        currency:
+          $ref: '#/components/schemas/currency'
+        safekeepingPlace:
+          type: string
+          pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
+          example: INSECHZZXXX
+          description: BIC of the place where the securities are safe-kept, physically or notionally
+        additionalCustodianInformation:
+          type: string
+          pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
+          example: INSECHZZXXX
+          description: Used for special use cases where safekeepingPlace is not suffienct. BIC of the place where the securities are safe-kept, physically or notionally
+        additionalDetails:
+          type: string
+          maxLength: 70
+          description: Provides additional information on the position.
+          example: Belongs to contract 129959959
+    accountDetails:
+      title: AccountDetails
+      allOf:
+        - $ref: '#/components/schemas/account'
+        - type: object
+          required:
+            - positionList
+          properties:
+            externalReference:
+              type: string
+              maxLength: 35
+              example: 987-654-321
+              description: Account reference used by a bank external party, e.g. PMS
+            positionList:
+              type: array
+              description: A list of positions
+              items:
+                $ref: '#/components/schemas/position'
+    customerAccountDetails:
+      title: CustomerAccountDetails
+      type: object
+      required:
+        - customerId
+      allOf:
+        - $ref: '#/components/schemas/Customer'
+        - type: object
+          properties:
+            accountDetailsList:
+              type: array
+              items:
+                $ref: '#/components/schemas/accountDetails'
+    customerPositionStatement:
+      title: CustomerPositionStatement
+      type: object
+      properties:
+        statement:
+          $ref: '#/components/schemas/statement'
+        customer:
+          $ref: '#/components/schemas/customerAccountDetails'
     quantity:
       title: Quantity
       type: object
@@ -1508,42 +1586,25 @@ components:
               $ref: '#/components/schemas/currency'
             targetCurrency:
               $ref: '#/components/schemas/currency'
-    position:
-      title: Position
+    valuatedPosition:
+      title: ValuatedPosition
       type: object
       required:
-        - id
         - positionDate
-        - financialInstrument
-        - account
         - quantity
         - valuation
+      allOf:
+        - $ref: '#/components/schemas/position'
       properties:
-        id:
-          type: string
-          maxLength: 35
-          example: 876543219
-          description: Identification for the position given by the bank
         positionDate:
           title: PositionDate
           description: Date at which the position was valuated.
           allOf:
             - $ref: '#/components/schemas/date'
-        financialInstrument:
-          $ref: '#/components/schemas/financialInstrument'
-        account:
-          $ref: '#/components/schemas/account'
         quantity:
           $ref: '#/components/schemas/quantity'
         valuation:
           $ref: '#/components/schemas/valuation'
-        name:
-          type: string
-          maxLength: 80
-          example: Stark Industries Inc.
-          description: Name of the position.
-        currency:
-          $ref: '#/components/schemas/currency'
         price:
           $ref: '#/components/schemas/valuationPrice'
         foreignExchangeRate:
@@ -1552,16 +1613,6 @@ components:
           $ref: '#/components/schemas/Price'
         costForeignExchangeRate:
           $ref: '#/components/schemas/foreignExchangeRate'
-        safekeepingPlace:
-          type: string
-          pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
-          example: INSECHZZXXX
-          description: BIC of the place where the securities are safe-kept, physically or notionally
-        additionalCustodianInformation:
-          type: string
-          pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
-          example: INSECHZZXXX
-          description: Used for special use cases where safekeepingPlace is not suffienct. BIC of the place where the securities are safe-kept, physically or notionally
         accruedInterest:
           $ref: '#/components/schemas/currencyAmount'
         numberOfDaysAccrued:
@@ -1572,50 +1623,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/quantity'
             - description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
-        additionalDetails:
-          type: string
-          maxLength: 70
-          description: Provides additional information on the position.
-          example: Belongs to contract 129959959
-    accountDetails:
-      title: AccountDetails
-      allOf:
-        - $ref: '#/components/schemas/account'
-        - type: object
-          required:
-            - positionList
-          properties:
-            externalReference:
-              type: string
-              maxLength: 35
-              example: 987-654-321
-              description: Account reference used by a bank external party, e.g. PMS
-            positionList:
-              type: array
-              description: A list of positions
-              items:
-                $ref: '#/components/schemas/position'
-    customerAccountDetails:
-      title: CustomerAccountDetails
-      type: object
-      required:
-        - customerId
-      allOf:
-        - $ref: '#/components/schemas/Customer'
-        - type: object
-          properties:
-            accountDetailsList:
-              type: array
-              items:
-                $ref: '#/components/schemas/accountDetails'
-    customerPositionStatement:
-      title: CustomerPositionStatement
-      type: object
-      properties:
-        statement:
-          $ref: '#/components/schemas/statement'
-        customer:
-          $ref: '#/components/schemas/customerAccountDetails'
     accountPositionStatement:
       title: AccountPositionStatement
       type: object
@@ -1776,6 +1783,7 @@ components:
         - financialInstrument
         - account
         - quantity
+        - positionId
       properties:
         type:
           $ref: '#/components/schemas/movementType'
