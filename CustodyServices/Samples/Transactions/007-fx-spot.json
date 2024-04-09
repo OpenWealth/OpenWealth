@@ -1,7 +1,6 @@
 {
   "id": "0000008",
-  "type": "fx",
-  "subtype": "fxSpot",
+  "type": "fxSpot",
   "transactionDate": "2023-01-05",
   "customerId": "123456",
   "reversalIndicator": false,

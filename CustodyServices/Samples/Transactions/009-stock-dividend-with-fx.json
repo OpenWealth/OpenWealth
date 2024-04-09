@@ -1,8 +1,7 @@
 {
   "id": "0000009",
+  "type": "dividendCash",
   "transactionDate": "2023-05-31",
-  "type": "corporateActions",
-  "subtype": "dividendCash",
   "customerId": "123456",
   "reversalIndicator": false,
   "triggeringFinancialInstrument": {
@@ -17,7 +16,7 @@
   },
   "movementList": [
     {
-      "type": "revenue",
+      "type": "cash",
       "movementDate": "2023-05-31",
       "financialInstrument": {
         "type": "cash",

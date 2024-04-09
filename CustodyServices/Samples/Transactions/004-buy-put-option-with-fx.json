@@ -1,8 +1,7 @@
 {
   "id": "0000005",
+  "type": "buy",
   "transactionDate": "2023-01-04",
-  "type": "securitiesExchange",
-  "subtype": "buy",
   "customerId": "123456",
   "reversalIndicator": false,
   "placeOfTrade": {
@@ -10,7 +9,7 @@
   },
   "movementList": [
     {
-      "type": "security",
+      "type": "asset",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "option",

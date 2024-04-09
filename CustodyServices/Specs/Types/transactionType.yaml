@@ -1,18 +1,66 @@
 title: TransactionType
 type: string
 description: Type of the transaction
-example: securitiesExchange
+example: buy
 enum:
-  - securitiesExchange
-  - cash
+  - accumulation
+  - additionalPayment
+  - adjustNotional
+  - assignment
+  - assimilation
+  - bonus
+  - buy
+  - buyToClose
+  - capitalIncrease
+  - closeContract
+  - conversionBondShare
+  - coupon
+  - creditEvent
+  - decreaseContractPrincipal
+  - deliveryFreeOfPayment
+  - deliveryVsPayment
+  - dividendCash
+  - dividendChoice
+  - dividendReinvestment
+  - dividendStock
+  - exercise
+  - expiration
   - fees
-  - credit
-  - fx
+  - finalLiquidationPayment
+  - fxSpot
+  - incompleteRights
+  - increaseContractPrincipal
+  - inflowCash
+  - instrumentExchange
+  - interest
+  - internalTransfer
+  - knockIn
+  - knockOut
+  - liquidationPayment
+  - markToMarket
+  - markToMarketCash
+  - merger
+  - openContract
+  - other
+  - outflowCash
+  - premium
+  - prepaymentSubstitution
+  - publicOffer
+  - receiveFreeOfPayment
+  - receiveVsPayment
+  - redemption
+  - redemptionPartial
+  - redemptionPrior
+  - reductionOfNominal
+  - resetPayment
+  - rightDistribution
+  - sell
+  - sellToOpen
+  - spinOff
+  - stockSplit
+  - subscription
+  - taxCorrections
   - taxes
-  - corporateActions
-  - fiduciary
-  - moneyMarket
-  - securitiesTransfer
-  - physical
-  - otc
-  - others
+  - transferMetalPhysical
+  - unwind
+  - variationMargin

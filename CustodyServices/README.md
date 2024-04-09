@@ -4,11 +4,11 @@ This API is part of the OpenWealth APIs for the connectivity between custody ban
 
 The documentation covers these topics:
 
-- [Overview and scope](##overview-and-scope)
-- [Quick start](##quick-start)
+- [Overview and scope](#overview-and-scope)
+- [Quick start](#quick-start)
 - [Principles and guidelines](Docs/PrinciplesAndGuidelines.md)
 - [Business objects and data entities](Docs/EntityModel.md)
-- [Use cases and examples](##use-cases-and-examples)
+- [Use cases and examples](#use-cases-and-examples)
 
 ## Overview and scope
 

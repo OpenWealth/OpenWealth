@@ -1,13 +1,12 @@
 {
   "id": "0000008",
-  "type": "fx",
-  "subtype": "fxForward",
+  "type": "openContract",
   "transactionDate": "2023-01-04",
   "customerId": "123456",
   "reversalIndicator": false,
   "movementList": [
     {
-      "type": "security",
+      "type": "asset",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "fxForward",
@@ -39,7 +38,7 @@
       "positionId": "008"
     },
     {
-      "type": "security",
+      "type": "asset",
       "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "fxForward",
@@ -56,7 +55,7 @@
         },
         "amountReceived": {
           "amount": 170000,
-          "currency": "USD"
+          "currency": "CHF"
         },
         "maturityDate": "2023-06-27"
       },
@@ -95,7 +94,7 @@
       },
       "valueDate": "2023-06-29",
       "positionId": "0002",
-      "positionCurrency": "USD"
+      "currency": "USD"
     },
     {
       "type": "cash",

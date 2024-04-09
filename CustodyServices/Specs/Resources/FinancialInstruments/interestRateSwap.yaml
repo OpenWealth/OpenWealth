@@ -1,4 +1,4 @@
-title: InterestSwap
+title: InterestRateSwap
 description: An interest rate swap is a forward contract in which one stream of future interest payments is exchanged for another based on a specified principal amount.
 required:
   - principalAmount
@@ -10,16 +10,14 @@ allOf:
   - type: object
     properties:
       principalAmount:
-        $ref: '../../Types/principalAmount.yaml'
+        description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+        $ref: '../../Types/currencyAmount.yaml'
       interestRatePaid:
-        title: InterestRatePaid
         description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.
-        allOf:
-          - $ref: '../../Types/interestRate.yaml'
+        $ref: '../../Types/interestRate.yaml'
       interestRateReceived:
-        title: InterestRateReceived
         description: Per annum ratio of interest received to the principal amount of the financial instrument for a specific period of time.
-        allOf:
-          - $ref: '../../Types/interestRate.yaml'
+        $ref: '../../Types/interestRate.yaml'
       maturityDate:
-        $ref: '../../Types/maturityDate.yaml'
+        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        $ref: '../../../../Globals/Types/date.yaml'

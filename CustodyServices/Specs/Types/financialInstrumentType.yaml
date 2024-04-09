@@ -19,7 +19,7 @@ enum:
   - fixedDeposit
   - callableLoan
   - callableDeposit
-  - interestSwap
+  - interestRateSwap
   - totalReturnSwap
   - creditDefaultSwap
   - cryptoAsset
