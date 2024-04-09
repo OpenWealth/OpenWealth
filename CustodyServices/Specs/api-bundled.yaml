@@ -606,7 +606,7 @@ components:
       schema:
         type: string
         minLength: 1
-        maxLength: 35
+        maxLength: 128
         example: 123123456
         description: Unique and unambiguous identification used by the bank for the customer.
     Date:
@@ -633,7 +633,7 @@ components:
       required: true
       schema:
         type: string
-        maxLength: 35
+        maxLength: 128
         description: Identification for the position given by the bank.
         example: 1234566-12-1
     accountId:
@@ -642,7 +642,7 @@ components:
       required: true
       schema:
         type: string
-        maxLength: 35
+        maxLength: 128
         description: The customer's account identification, this should NOT be an IBAN.
     transactionId:
       name: transactionId
@@ -650,7 +650,7 @@ components:
       required: true
       schema:
         type: string
-        maxLength: 35
+        maxLength: 128
         description: Identification for the transaction given by the bank.
         example: 1234566-12-7
   headers:
@@ -679,7 +679,7 @@ components:
           title: PortfolioIdentification
           type: string
           minLength: 1
-          maxLength: 35
+          maxLength: 128
           example: 876543219
           description: Unique and unambiguous identification for the portfolio between the portfolio owner and the portfolio servicer
         referenceCurrency:
@@ -694,7 +694,7 @@ components:
       properties:
         id:
           type: string
-          maxLength: 35
+          maxLength: 128
           example: 876543219
           description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
         type:
@@ -731,6 +731,7 @@ components:
       properties:
         id:
           type: string
+          maxLength: 128
           description: Unique and unambiguous identification used by the bank for the customer.
         referenceCurrency:
           $ref: '#/components/schemas/currency'
@@ -818,6 +819,7 @@ components:
       properties:
         id:
           type: string
+          maxLength: 128
           description: Unique and unambiguous identification used by the bank for the customer.
         referenceCurrency:
           $ref: '#/components/schemas/currency'
@@ -858,7 +860,7 @@ components:
       properties:
         identifier:
           type: string
-          maxLength: 35
+          maxLength: 128
           example: CH0012005267
           description: Instrument identification
         type:
@@ -974,7 +976,7 @@ components:
         - $ref: '#/components/schemas/rate'
         - type: object
           properties:
-            interestRateType:
+            type:
               type: string
               description: Indicates the type of interest
               example: fixed
@@ -982,12 +984,12 @@ components:
                 - fixed
                 - variable
                 - staggered
+                - floating
             dayCountBasis:
               $ref: '#/components/schemas/dayCountBasis'
             paymentDate:
-              allOf:
-                - $ref: '#/components/schemas/date'
-                - description: Date of the next interest payment.
+              description: Date of the next interest payment.
+              $ref: '#/components/schemas/date'
             paymentFrequency:
               type: string
               description: Specifies the frequency of an interest payment.
@@ -1000,28 +1002,19 @@ components:
                 - weekly
                 - atMaturity
                 - other
-    maturityDate:
-      title: MaturityDate
-      description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
-      allOf:
-        - $ref: '#/components/schemas/date'
-    nextInterestPaymentDate:
-      title: NextInterestPaymentDate
-      description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
-      allOf:
-        - $ref: '#/components/schemas/date'
-    issueDate:
-      title: IssueDate
-      description: Date at which the security was made available.
-      allOf:
-        - $ref: '#/components/schemas/date'
+            basis:
+              type: string
+              description: Indicates the xxx such as LIBOR, EURIBOR
+            spread:
+              type: number
+              description: xxx
     price:
       type: object
       required:
         - amount
-        - priceType
+        - type
       properties:
-        priceType:
+        type:
           type: string
           description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
           example: percentage
@@ -1034,11 +1027,6 @@ components:
           description: Signed decimal number
         currency:
           $ref: '#/components/schemas/currency'
-    conversionPrice:
-      title: ConversionPrice
-      description: Price of one target security in the conversion.
-      allOf:
-        - $ref: '#/components/schemas/price'
     bond:
       title: Bond
       description: Bond
@@ -1052,13 +1040,17 @@ components:
             interestRate:
               $ref: '#/components/schemas/interestRate'
             maturityDate:
-              $ref: '#/components/schemas/maturityDate'
+              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/date'
             nextInterestPaymentDate:
-              $ref: '#/components/schemas/nextInterestPaymentDate'
+              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/date'
             issueDate:
-              $ref: '#/components/schemas/issueDate'
+              description: Date at which the security was made available.
+              $ref: '#/components/schemas/date'
             conversionPrice:
-              $ref: '#/components/schemas/conversionPrice'
+              description: Price of one target security in the conversion.
+              $ref: '#/components/schemas/price'
             currencyOfDenomination:
               $ref: '#/components/schemas/currency'
             minimumDenomination:
@@ -1089,21 +1081,6 @@ components:
       description: Commodity
       allOf:
         - $ref: '#/components/schemas/financialInstrumentBase'
-    expiryDate:
-      title: ExpiryDate
-      description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
-      allOf:
-        - $ref: '#/components/schemas/date'
-    strikePrice:
-      title: StrikePrice
-      description: Predetermined price at which the holder will have to buy or sell the underlying instrument.
-      allOf:
-        - $ref: '#/components/schemas/price'
-    exercisePrice:
-      title: ExercisePrice
-      description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
-      allOf:
-        - $ref: '#/components/schemas/price'
     contractSize:
       title: ContractSize
       type: number
@@ -1172,16 +1149,10 @@ components:
           creditDefaultSwap: '#/components/schemas/creditDefaultSwap'
           cryptoAsset: '#/components/schemas/cryptoAsset'
           other: '#/components/schemas/otherFinancialInstrument'
-    underlyingFinancialInstrument:
-      title: UnderlyingFinancialInstrument
-      description: Underlying financial instrument
-      allOf:
-        - $ref: '#/components/schemas/financialInstrument'
     option:
       title: Option
       description: An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying asset at a predetermined price within a given timeframe
       required:
-        - expiryDate
         - strikePrice
         - contractSize
         - optionType
@@ -1192,11 +1163,14 @@ components:
         - type: object
           properties:
             expiryDate:
-              $ref: '#/components/schemas/expiryDate'
+              description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
+              $ref: '#/components/schemas/date'
             strikePrice:
-              $ref: '#/components/schemas/strikePrice'
+              description: Predetermined price at which the holder will have to buy or sell the underlying instrument.
+              $ref: '#/components/schemas/price'
             exercisePrice:
-              $ref: '#/components/schemas/exercisePrice'
+              description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
+              $ref: '#/components/schemas/price'
             contractSize:
               $ref: '#/components/schemas/contractSize'
             optionType:
@@ -1204,7 +1178,7 @@ components:
             optionStyle:
               $ref: '#/components/schemas/optionStyle'
             underlyingFinancialInstrument:
-              $ref: '#/components/schemas/underlyingFinancialInstrument'
+              $ref: '#/components/schemas/financialInstrument'
     future:
       title: Future
       description: Futures are derivative financial contracts that obligate parties to buy or sell an asset at a predetermined future date and price.
@@ -1217,13 +1191,15 @@ components:
         - type: object
           properties:
             expiryDate:
-              $ref: '#/components/schemas/expiryDate'
+              description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
+              $ref: '#/components/schemas/date'
             contractSize:
               $ref: '#/components/schemas/contractSize'
             underlyingFinancialInstrument:
-              $ref: '#/components/schemas/underlyingFinancialInstrument'
+              $ref: '#/components/schemas/financialInstrument'
             exercisePrice:
-              $ref: '#/components/schemas/exercisePrice'
+              description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
+              $ref: '#/components/schemas/price'
     currencyAmount:
       title: CurrencyAmount
       type: object
@@ -1250,17 +1226,14 @@ components:
         - type: object
           properties:
             amountPaid:
-              title: AmountPaid
               description: Amount paid at the maturity of a contract (i.e. FX forward)
-              allOf:
-                - $ref: '#/components/schemas/currencyAmount'
+              $ref: '#/components/schemas/currencyAmount'
             amountReceived:
-              title: amountReceived
               description: Amount received at the maturity of a contract (i.e. FX forward)
-              allOf:
-                - $ref: '#/components/schemas/currencyAmount'
+              $ref: '#/components/schemas/currencyAmount'
             maturityDate:
-              $ref: '#/components/schemas/maturityDate'
+              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/date'
     fxSwap:
       title: FxSwap
       description: A foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency for interest payments on a loan made in another currency.
@@ -1273,37 +1246,23 @@ components:
         - type: object
           properties:
             nearAmountPaid:
-              title: NearAmountPaid
               description: Amount paid at the earlier part of an FX swap
-              allOf:
-                - $ref: '#/components/schemas/currencyAmount'
+              $ref: '#/components/schemas/currencyAmount'
             nearAmountReceived:
-              title: NearAmountReceived
               description: Amount received at the earlier part of an FX swap
-              allOf:
-                - $ref: '#/components/schemas/currencyAmount'
+              $ref: '#/components/schemas/currencyAmount'
             farAmountPaid:
-              title: FarAmountPaid
               description: Amount paid at the maturity of an FX swap
-              allOf:
-                - $ref: '#/components/schemas/currencyAmount'
+              $ref: '#/components/schemas/currencyAmount'
             farAmountReceived:
-              title: FarAmountReceived
               description: Amount received at the maturity of an FX swap
-              allOf:
-                - $ref: '#/components/schemas/currencyAmount'
+              $ref: '#/components/schemas/currencyAmount'
             maturityDate:
-              $ref: '#/components/schemas/maturityDate'
+              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/date'
             nearMaturityDate:
-              title: NearMaturityDate
               description: Date of the settlement of the near leg
-              allOf:
-                - $ref: '#/components/schemas/maturityDate'
-    principalAmount:
-      title: PrincipalAmount
-      description: Indication of the cash values to be settled as of the start and maturity date of the contract.
-      allOf:
-        - $ref: '#/components/schemas/currencyAmount'
+              $ref: '#/components/schemas/date'
     mortgage:
       title: Mortgage
       description: A mortgage is a type of loan used to purchase or maintain a home, plot of land, or other types of real estate.
@@ -1315,9 +1274,14 @@ components:
         - type: object
           properties:
             principalAmount:
-              $ref: '#/components/schemas/principalAmount'
+              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              $ref: '#/components/schemas/currencyAmount'
             interestRate:
               $ref: '#/components/schemas/interestRate'
+            limit:
+              type: number
+              example: 100000
+              description: Maximum principal amount allowed by the credit contract
     moneyMarket:
       title: MoneyMarket
       description: Money market
@@ -1329,11 +1293,13 @@ components:
         - type: object
           properties:
             principalAmount:
-              $ref: '#/components/schemas/principalAmount'
+              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              $ref: '#/components/schemas/currencyAmount'
             interestRate:
               $ref: '#/components/schemas/interestRate'
             maturityDate:
-              $ref: '#/components/schemas/maturityDate'
+              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/date'
     interestRateSwap:
       title: InterestRateSwap
       description: An interest rate swap is a forward contract in which one stream of future interest payments is exchanged for another based on a specified principal amount.
@@ -1360,21 +1326,28 @@ components:
               $ref: '#/components/schemas/date'
     totalReturnSwap:
       title: TotalReturnSwap
-      description: A swap agreement in which Party A pays fees to Party B in exchange for the income or return generated by an asset owned by Party B.
+      description: A swap agreement in which Party A pays fees to Party B in exchange for the income or return generated by an asset owned by Party B. If the private client is party A and the bank party B the property 'interestRatePaid' should be used to describe the interest, for opposite parties 'interestRateReceived',
       required:
         - principalAmount
-        - interestRate
         - underlyingFinancialInstrument
       allOf:
         - $ref: '#/components/schemas/financialInstrumentBase'
         - type: object
           properties:
             principalAmount:
-              $ref: '#/components/schemas/principalAmount'
+              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              $ref: '#/components/schemas/currencyAmount'
+            interestRatePaid:
+              description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.
+              $ref: '#/components/schemas/interestRate'
+            interestRateReceived:
+              description: Per annum ratio of interest received to the principal amount of the financial instrument for a specific period of time.
+              $ref: '#/components/schemas/interestRate'
             maturityDate:
-              $ref: '#/components/schemas/maturityDate'
+              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/date'
             underlyingFinancialInstrument:
-              $ref: '#/components/schemas/underlyingFinancialInstrument'
+              $ref: '#/components/schemas/financialInstrument'
     creditDefaultSwap:
       title: CreditDefaultSwap
       description: A derivative product which serves as a form of insurance against the default of an underlying borrower or debt instrument
@@ -1385,11 +1358,13 @@ components:
         - type: object
           properties:
             principalAmount:
-              $ref: '#/components/schemas/principalAmount'
+              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              $ref: '#/components/schemas/currencyAmount'
             maturityDate:
-              $ref: '#/components/schemas/maturityDate'
+              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/date'
             underlyingFinancialInstrument:
-              $ref: '#/components/schemas/underlyingFinancialInstrument'
+              $ref: '#/components/schemas/financialInstrument'
     cryptoAsset:
       title: CryptoAsset
       description: Crypto Asset
@@ -1410,7 +1385,7 @@ components:
       properties:
         id:
           type: string
-          maxLength: 35
+          maxLength: 128
           example: 876543219
           description: Identification for the position given by the bank
         financialInstrument:
@@ -1449,7 +1424,7 @@ components:
           properties:
             externalReference:
               type: string
-              maxLength: 35
+              maxLength: 128
               example: 987-654-321
               description: Account reference used by a bank external party, e.g. PMS
             positionList:
@@ -1485,7 +1460,7 @@ components:
         - value
         - type
       properties:
-        quantityType:
+        type:
           type: string
           description: Specifies the type of the amount
           example: nominal
@@ -1543,9 +1518,9 @@ components:
       type: object
       required:
         - amount
-        - priceType
+        - type
       properties:
-        priceType:
+        type:
           type: string
           description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
           example: percentage
@@ -1595,10 +1570,8 @@ components:
         - $ref: '#/components/schemas/position'
       properties:
         positionDate:
-          title: PositionDate
           description: Date at which the position was valuated.
-          allOf:
-            - $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/date'
         quantity:
           $ref: '#/components/schemas/quantity'
         valuation:
@@ -1618,9 +1591,8 @@ components:
           example: 34
           description: Number of days used for calculating the accrued interest amount.
         blockedQuantity:
-          allOf:
-            - $ref: '#/components/schemas/quantity'
-            - description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
+          description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
+          $ref: '#/components/schemas/quantity'
     accountPositionStatement:
       title: AccountPositionStatement
       type: object
@@ -1696,15 +1668,21 @@ components:
         - transferMetalPhysical
         - unwind
         - variationMargin
-    triggeringFinancialInstrument:
-      title: TriggereingFinancialInstrument
-      description: Security triggering/causing the transaction.
-      allOf:
-        - $ref: '#/components/schemas/financialInstrument'
-        - type: object
-          properties:
-            triggeringQuantity:
-              $ref: '#/components/schemas/quantity'
+    placeOfTrade:
+      title: PlaceOfTrade
+      type: object
+      description: Market in which a trade transaction is to be or has been executed.
+      properties:
+        marketIdentificationCode:
+          type: string
+          maxLength: 4
+          description: Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code. Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
+          example: XSWX
+        marketDescription:
+          type: string
+          maxLength: 70
+          description: Description of the market when no Market Identification Code is available.
+          example: OTC
     movementType:
       title: MovementType
       type: string
@@ -1749,10 +1727,8 @@ components:
         type:
           $ref: '#/components/schemas/movementType'
         movementDate:
-          title: MovementDate
           description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank.
-          allOf:
-            - $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/date'
         financialInstrument:
           $ref: '#/components/schemas/financialInstrument'
         account:
@@ -1761,16 +1737,14 @@ components:
           $ref: '#/components/schemas/quantity'
         positionId:
           type: string
-          maxLength: 35
+          maxLength: 128
           description: Identification for the position given by the bank.
           example: 1234566-12-1
         positionCurrency:
           $ref: '#/components/schemas/currency'
         valueDate:
-          title: ValueDate
           description: Date when calculating economic benefit for a cash amount.
-          allOf:
-            - $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/date'
         price:
           $ref: '#/components/schemas/price'
         foreignExchangeRate:
@@ -1811,16 +1785,14 @@ components:
         id:
           type: string
           readOnly: true
-          maxLength: 35
+          maxLength: 128
           example: 987654321
           description: Transaction ID given by the bank
         type:
           $ref: '#/components/schemas/transactionType'
         transactionDate:
-          title: TransactionDate
           description: Date of transaction entity
-          allOf:
-            - $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/date'
         customerId:
           type: string
           description: Unique and unambiguous identification used by the bank for the customer.
@@ -1828,37 +1800,29 @@ components:
           description: Indicates whether it is the reversal of a previously reported movement.
           type: boolean
           default: false
-        placeOfTrade:
-          type: object
-          description: Market in which a trade transaction is to be or has been executed.
-          properties:
-            marketIdentificationCode:
-              type: string
-              maxLength: 4
-              description: Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code. Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
-              example: XSWX
-            marketDescription:
-              type: string
-              maxLength: 70
-              description: Description of the market when no Market Identification Code is available.
-              example: OTC
-        reversedtransactionId:
+        reference:
           type: string
-          maxLength: 35
+          description: Transaction reference as used in the transaction statement. This could be equal to the id of the transaction but may not if GUID are used to identify the transaction.
+        description:
+          type: string
+          description: Human readable description of the transaction. Often referred to as 'Buchungs-Text' in german transaction statements.
+        placeOfTrade:
+          $ref: '#/components/schemas/placeOfTrade'
+        reversedTransactionId:
+          type: string
+          maxLength: 128
           description: States the identification of the transaction that was reversed
           example: 2134123415
         tradeDate:
-          title: TradeDate
           description: Specifies the date/time on which the trade was executed.
-          allOf:
-            - $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/date'
         settlementDate:
-          title: SettlementDate
           description: Date and time at which the securities are to be delivered or received.
-          allOf:
-            - $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/date'
         triggeringFinancialInstrument:
-          $ref: '#/components/schemas/triggeringFinancialInstrument'
+          $ref: '#/components/schemas/financialInstrument'
+        triggeringQuantity:
+          $ref: '#/components/schemas/quantity'
         movementList:
           type: array
           description: List of movements belonging to a transaction from a banks perspective
@@ -1871,7 +1835,7 @@ components:
             $ref: '#/components/schemas/postingAmount'
         settlementCurrency:
           $ref: '#/components/schemas/currency'
-        transactionAdditionalDetails:
+        additionalDetails:
           type: string
           maxLength: 70
           description: Provides additional details on the transaction which can not be included within the structured fields of the message.
