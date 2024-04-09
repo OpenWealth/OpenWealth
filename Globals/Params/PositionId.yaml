@@ -3,6 +3,6 @@ in: path
 required: true
 schema:
   type: string
-  maxLength: 35
+  maxLength: 128
   description: Identification for the position given by the bank.
   example: 1234566-12-1

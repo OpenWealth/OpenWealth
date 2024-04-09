@@ -7,7 +7,7 @@ required:
 properties:
   id:
     type: string
-    maxLength: 35
+    maxLength: 128
     example: 876543219
     description: Identification for the position given by the bank
   financialInstrument:

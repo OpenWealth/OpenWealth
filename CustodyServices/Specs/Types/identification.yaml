@@ -1,6 +1,6 @@
 title: Identification
 type: object
-required: 
+required:
   - identifierType
   - identifier
 properties:
@@ -27,6 +27,6 @@ properties:
       - otherProprietaryIdentification
   identifier:
     type: string
-    maxLength: 35
+    maxLength: 128
     example: CH0012005267
     description: Identification value

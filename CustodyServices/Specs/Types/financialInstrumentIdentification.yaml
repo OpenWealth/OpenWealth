@@ -3,7 +3,7 @@ type: object
 properties:
   identifier:
     type: string
-    maxLength: 35
+    maxLength: 128
     example: CH0012005267
     description: Instrument identification
   type:

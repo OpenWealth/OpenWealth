@@ -3,5 +3,5 @@ in: path
 required: true
 schema:
   type: string
-  maxLength: 35
+  maxLength: 128
   description: The customer's account identification, this should NOT be an IBAN.
