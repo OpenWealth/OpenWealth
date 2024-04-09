@@ -77,7 +77,7 @@
         "name": "US Dollar",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "USD"
           }
         ],
@@ -104,7 +104,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],

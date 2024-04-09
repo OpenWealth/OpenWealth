@@ -9,7 +9,7 @@
     "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
     "identificationList": [
       {
-        "identifierType": "isin",
+        "type": "isin",
         "identifier": "CH0344958688"
       }
     ]
@@ -23,7 +23,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -50,7 +50,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],

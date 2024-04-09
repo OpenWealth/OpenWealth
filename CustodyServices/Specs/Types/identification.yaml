@@ -1,10 +1,10 @@
 title: Identification
 type: object
 required:
-  - identifierType
+  - type
   - identifier
 properties:
-  identifierType:
+  type:
     type: string
     example: isin
     description: Type of the identifier

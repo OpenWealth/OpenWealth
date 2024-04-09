@@ -25,7 +25,7 @@
       "name": "Apple Inc.",
       "identificationList": [
         {
-          "identifierType": "isin",
+          "type": "isin",
           "identifier": "US0378331005"
         }
       ]

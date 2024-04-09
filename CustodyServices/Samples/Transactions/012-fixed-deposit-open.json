@@ -47,7 +47,7 @@
         "name": "US Dollars",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "USD"
           }
         ],

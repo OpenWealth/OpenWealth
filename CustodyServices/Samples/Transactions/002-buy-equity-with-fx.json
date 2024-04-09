@@ -16,7 +16,7 @@
         "name": "Apple Inc.",
         "identificationList": [
           {
-            "identifierType": "isin",
+            "type": "isin",
             "identifier": "US0378331005"
           }
         ]
@@ -45,7 +45,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -77,7 +77,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -109,7 +109,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
