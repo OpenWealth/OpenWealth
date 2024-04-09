@@ -1,16 +1,16 @@
 {
-  "transactionId": "0000008",
-  "transactionType": "fx",
-  "transactionSubtype": "fxSpot",
+  "id": "0000008",
+  "type": "fx",
+  "subtype": "fxSpot",
   "transactionDate": "2023-01-05",
   "customerId": "123456",
   "reversalIndicator": false,
   "movementList": [
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-01-05",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -21,23 +21,23 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": -100000
       },
-      "currency": "CHF",
       "valueDate": "2023-01-07",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-01-05",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Euro",
         "identificationList": [
           {
@@ -48,17 +48,17 @@
         "currencyOfDenomination": "EUR"
       },
       "account": {
-        "accountId": "1234-57",
-        "accountType": "cashAccount",
+        "id": "1234-57",
+        "type": "cashAccount",
         "iban": "CH121212121212121213"
       },
       "quantity": {
         "quantityType": "unit",
         "value": 101001.15
       },
-      "currency": "EUR",
       "valueDate": "2023-01-07",
-      "positionId": "0001"
+      "positionId": "0001",
+      "positionCurrency": "EUR"
     }
   ],
   "postingAmounts": [
@@ -66,8 +66,8 @@
       "amount": -100000,
       "currency": "CHF",
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       }
     },
@@ -75,8 +75,8 @@
       "amount": 101001.15,
       "currency": "EUR",
       "account": {
-        "accountId": "1234-57",
-        "accountType": "cashAccount",
+        "id": "1234-57",
+        "type": "cashAccount",
         "iban": "CH121212121212121213"
       }
     }

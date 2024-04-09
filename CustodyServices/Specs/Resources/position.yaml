@@ -1,14 +1,14 @@
 title: Position
 type: object
 required:
-  - positionId
+  - id
   - positionDate
   - financialInstrument
   - account
   - quantity
   - valuation
 properties:
-  positionId:
+  id:
     type: string
     maxLength: 35
     example: 876543219
@@ -26,7 +26,7 @@ properties:
     $ref: '../Types/quantity.yaml'
   valuation:
     $ref: '../Types/valuation.yaml'
-  positionName:
+  name:
     type: string
     maxLength: 80
     example: Stark Industries Inc.

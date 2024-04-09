@@ -1,23 +1,23 @@
 title: Transaction
 type: object
 required:
-  - transactionId
-  - transactionType
+  - id
+  - type
   - transactionSubtype
   - transactionDate
   - customerId
   - reversalIndicator
 properties:
-  transactionType:
-    $ref: '../Types/transactionType.yaml'
-  transactionSubtype:
-    $ref: '../Types/transactionSubtype.yaml'
-  transactionId:
+  id:
     type: string
     readOnly: true
     maxLength: 35
     example: 987654321
     description: Transaction ID given by the bank
+  type:
+    $ref: '../Types/transactionType.yaml'
+  transactionSubtype:
+    $ref: '../Types/transactionSubtype.yaml'
   transactionDate:
     title: TransactionDate
     description: Date of transaction entity

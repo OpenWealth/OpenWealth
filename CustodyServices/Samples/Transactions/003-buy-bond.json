@@ -1,8 +1,8 @@
 {
-  "transactionId": "0000004",
+  "id": "0000004",
   "transactionDate": "2023-01-04",
-  "transactionType": "securitiesExchange",
-  "transactionSubtype": "buy",
+  "type": "securitiesExchange",
+  "subtype": "buy",
   "customerId": "123456",
   "reversalIndicator": false,
   "placeOfTrade": {
@@ -10,15 +10,14 @@
   },
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2023-01-04",
       "quantity": {
         "quantityType": "faceAmount",
         "value": 200000
       },
-      "currency": "CHF",
       "financialInstrument": {
-        "financialInstrumentType": "bond",
+        "type": "bond",
         "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
         "identificationList": [
           {
@@ -38,20 +37,21 @@
         "minimumDenomination": 1000
       },
       "account": {
-        "accountId": "123456-1",
-        "accountType": "safekeepingAccount"
+        "id": "123456-1",
+        "type": "safekeepingAccount"
       },
       "positionId": "003",
+      "positionCurrency": "CHF",
       "price": {
         "priceType": "percentage",
         "amount": 90.00
       }
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -62,23 +62,23 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": -180000
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "accruedInterest",
+      "type": "accruedInterest",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -89,23 +89,23 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": -500
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "brokerageFee",
+      "type": "brokerageFee",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -116,23 +116,23 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": -130
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "stampDuty",
+      "type": "stampDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -143,17 +143,17 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": -135
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     }
   ],
   "postingAmounts": [
@@ -161,8 +161,8 @@
       "amount": -180765.00,
       "currency": "CHF",
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       }
     }

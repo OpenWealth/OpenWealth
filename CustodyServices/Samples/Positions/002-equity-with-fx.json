@@ -1,8 +1,8 @@
 {
-  "positionId": "002",
+  "id": "002",
   "positionDate": "2023-01-04",
   "financialInstrument": {
-    "financialInstrumentType": "equity",
+    "type": "equity",
     "name": "Apple Inc.",
     "identificationList": [
       {
@@ -12,8 +12,8 @@
     ]
   },
   "account": {
-    "accountId": "123456-1",
-    "accountType": "safekeepingAccount"
+    "id": "123456-1",
+    "type": "safekeepingAccount"
   },
   "quantity": {
     "value": 40,
@@ -43,7 +43,7 @@
       "currency": "CHF"
     }
   },
-  "positionName": "Apple Inc.",
+  "name": "Apple Inc.",
   "currency": "USD",
   "safekeepingPlace": "INSECHZZXXX"
 }

@@ -1,8 +1,8 @@
 {
-  "transactionId": "0000003",
+  "id": "0000003",
   "transactionDate": "2023-01-04",
-  "transactionType": "securitiesExchange",
-  "transactionSubtype": "buy",
+  "type": "securitiesExchange",
+  "subtype": "buy",
   "customerId": "123456",
   "reversalIndicator": false,
   "placeOfTrade": {
@@ -10,10 +10,10 @@
   },
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "equity",
+        "type": "equity",
         "name": "Apple Inc.",
         "identificationList": [
           {
@@ -23,15 +23,15 @@
         ]
       },
       "account": {
-        "accountId": "123456-1",
-        "accountType": "safekeepingAccount"
+        "id": "123456-1",
+        "type": "safekeepingAccount"
       },
       "quantity": {
         "quantityType": "unit",
         "value": 40
       },
-      "currency": "USD",
       "positionId": "002",
+      "positionCurrency": "USD",
       "price": {
         "priceType": "actual",
         "value": 150.00,
@@ -39,10 +39,10 @@
       }
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -53,17 +53,17 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": -5100
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "0000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "rate": 0.85,
         "sourceCurrency": "USD",
@@ -71,10 +71,10 @@
       }
     },
     {
-      "movementType": "brokerageFeeDuty",
+      "type": "brokerageFeeDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -85,17 +85,17 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": -200.25
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "0000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "rate": 0.85,
         "sourceCurrency": "USD",
@@ -103,10 +103,10 @@
       }
     },
     {
-      "movementType": "stampDuty",
+      "type": "stampDuty",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -117,17 +117,17 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": -150.75
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "0000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "rate": 0.85,
         "sourceCurrency": "USD",
@@ -140,8 +140,8 @@
       "amount": -5451.00,
       "currency": "CHF",
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       }
     }

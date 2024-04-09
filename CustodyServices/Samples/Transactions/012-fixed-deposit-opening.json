@@ -1,16 +1,16 @@
 {
-  "transactionId": "00000012",
+  "id": "00000012",
   "transactionDate": "2022-12-31",
-  "transactionType": "moneyMarket",
-  "transactionSubtype": "openFixedDeposit",
+  "type": "moneyMarket",
+  "subtype": "openFixedDeposit",
   "customerId": "123456",
   "reversalIndicator": false,
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2022-12-31",
       "financialInstrument": {
-        "financialInstrumentType": "fixedDeposit",
+        "type": "fixedDeposit",
         "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
         "identificationList": [
           {
@@ -30,21 +30,21 @@
         }
       },
       "account": {
-        "accountId": "123456-1",
-        "accountType": "safekeepingAccount"
+        "id": "123456-1",
+        "type": "safekeepingAccount"
       },
       "quantity": {
         "value": 1,
         "quantityType": "unit"
       },
-      "currency": "USD",
-      "positionId": "012"
+      "positionId": "012",
+      "positionCurrency": "USD"
     },
     {
-      "movementType": "cash",
+      "type": "cash",
       "movementDate": "2022-12-31",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "US Dollars",
         "identificationList": [
           {
@@ -55,8 +55,8 @@
         "currencyOfDenomination": "USD"
       },
       "account": {
-        "accountId": "1234-58",
-        "accountType": "cashAccount",
+        "id": "1234-58",
+        "type": "cashAccount",
         "iban": "CH121212121212121214"
       },
       "quantity": {
@@ -64,9 +64,9 @@
         "quantityType": "nominal",
         "creditDebitIndicator": "debit"
       },
-      "currency": "USD",
       "valueDate": "2022-12-31",
-      "positionId": "0002"
+      "positionId": "0002",
+      "positionCurrency": "USD"
     }
   ],
   "postingAmounts": [
@@ -74,8 +74,8 @@
       "amount": -100000,
       "currency": "USD",
       "account": {
-        "accountId": "1234-58",
-        "accountType": "cashAccount",
+        "id": "1234-58",
+        "type": "cashAccount",
         "iban": "CH121212121212121214"
       }
     }

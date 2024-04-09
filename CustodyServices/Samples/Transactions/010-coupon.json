@@ -1,8 +1,8 @@
 {
-  "transactionId": "0000010",
+  "id": "0000010",
   "transactionDate": "2023-06-27",
-  "transactionType": "corporateActions",
-  "transactionSubtype": "coupon",
+  "type": "corporateActions",
+  "subtype": "coupon",
   "customerId": "123456",
   "reversalIndicator": false,
   "triggeringFinancialInstrument": {
@@ -17,10 +17,10 @@
   },
   "movementList": [
     {
-      "movementType": "revenue",
+      "type": "revenue",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -31,23 +31,23 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": 1000
       },
-      "currency": "CHF",
       "valueDate": "2023-06-28",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     },
     {
-      "movementType": "withholdingTax",
+      "type": "withholdingTax",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "financialInstrumentType": "cash",
+        "type": "cash",
         "name": "Swiss francs",
         "identificationList": [
           {
@@ -58,17 +58,17 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       },
       "quantity": {
         "quantityType": "unit",
         "value": -335
       },
-      "currency": "CHF",
       "valueDate": "2023-06-28",
-      "positionId": "0000"
+      "positionId": "0000",
+      "positionCurrency": "CHF"
     }
   ],
   "postingAmounts": [
@@ -76,8 +76,8 @@
       "amount": 665,
       "currency": "CHF",
       "account": {
-        "accountId": "1234-56",
-        "accountType": "cashAccount",
+        "id": "1234-56",
+        "type": "cashAccount",
         "iban": "CH121212121212121212"
       }
     }

@@ -1,16 +1,16 @@
 {
   "customerId": "123456",
-  "transactionId": "00000013",
+  "id": "00000013",
   "transactionDate": "2022-12-31",
-  "transactionType": "Swap",
-  "transactionSubtype": "openInterestRateSwap",
+  "type": "Swap",
+  "subtype": "openInterestRateSwap",
   "reversalIndicator": false,
   "movementList": [
     {
-      "movementType": "security",
+      "type": "security",
       "movementDate": "2022-12-31",
       "financialInstrument": {
-        "financialInstrumentType": "interestSwap",
+        "type": "interestSwap",
         "name": "Payer interest rate swap",
         "identificationList": [
           {
@@ -38,15 +38,15 @@
         }
       },
       "account": {
-        "accountId": "123456-1",
-        "accountType": "safekeepingAccount"
+        "id": "123456-1",
+        "type": "safekeepingAccount"
       },
       "quantity": {
         "value": 1,
         "quantityType": "unit"
       },
-      "currency": "CHF",
-      "positionId": "013"
+      "positionId": "013",
+      "positionCurrency": "CHF"
     }
   ],
   "postingAmounts": []
