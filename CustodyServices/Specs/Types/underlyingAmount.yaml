@@ -1,0 +1,4 @@
+title: UnderlyingAmount
+description: This field specifies the underlying currency and amount of the contract. The underlying currency is the currency which is to be exchanged for the counter currency.
+allOf:
+  - $ref: 'currencyAmount.yaml'

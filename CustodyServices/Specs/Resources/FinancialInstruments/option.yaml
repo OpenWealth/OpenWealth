@@ -20,20 +20,8 @@ allOf:
       contractSize:
         $ref: '../../Types/contractSize.yaml'
       optionType:
-        type: string
-        example: call
-        enum:
-          - call
-          - put
-        description: Specifies whether it is a Call option (right to purchase a specific underlying asset) or a Put option (right to sell a specific underlying asset).
+        $ref: '../../Types/optionType.yaml'
       optionStyle:
-        type: string
-        example: american
-        enum:
-          - american
-          - european
-          - bermudan
-          - asian
-        description: Specifies how an option can be exercised.
+        $ref: '../../Types/optionStyle.yaml'
       underlyingFinancialInstrument:
         $ref: '../underlyingFinancialInstrument.yaml'

@@ -12,6 +12,7 @@ enum:
   - option
   - future
   - fxForward
+  - fxOption
   - fxSwap
   - mortgage
   - fixedLoan
