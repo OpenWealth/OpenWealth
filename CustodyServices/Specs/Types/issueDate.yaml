@@ -1,4 +1,0 @@
-title: IssueDate
-description: Date at which the security was made available.
-allOf:
-  - $ref: '../../../Globals/Types/date.yaml'

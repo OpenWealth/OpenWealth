@@ -1,7 +1,6 @@
 title: Option
 description: An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying asset at a predetermined price within a given timeframe
 required:
-  - expiryDate
   - strikePrice
   - contractSize
   - optionType
@@ -12,11 +11,14 @@ allOf:
   - type: object
     properties:
       expiryDate:
-        $ref: '../../Types/expiryDate.yaml'
+        description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
+        $ref: '../../../../Globals/Types/date.yaml'
       strikePrice:
-        $ref: '../../Types/strikePrice.yaml'
+        description: Predetermined price at which the holder will have to buy or sell the underlying instrument.
+        $ref: '../../Types/price.yaml'
       exercisePrice:
-        $ref: '../../Types/exercisePrice.yaml'
+        description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
+        $ref: '../../Types/price.yaml'
       contractSize:
         $ref: '../../Types/contractSize.yaml'
       optionType:
@@ -24,4 +26,4 @@ allOf:
       optionStyle:
         $ref: '../../Types/optionStyle.yaml'
       underlyingFinancialInstrument:
-        $ref: '../underlyingFinancialInstrument.yaml'
+        $ref: '../financialInstrument.yaml'

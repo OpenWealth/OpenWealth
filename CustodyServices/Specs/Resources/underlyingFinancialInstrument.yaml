@@ -1,4 +1,0 @@
-title: UnderlyingFinancialInstrument
-description: Underlying financial instrument
-allOf:
-  - $ref: 'financialInstrument.yaml'

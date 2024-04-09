@@ -8,8 +8,10 @@ allOf:
   - type: object
     properties:
       principalAmount:
-        $ref: '../../Types/principalAmount.yaml'
+        description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+        $ref: '../../Types/currencyAmount.yaml'
       interestRate:
         $ref: '../../Types/interestRate.yaml'
       maturityDate:
-        $ref: '../../Types/maturityDate.yaml'
+        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        $ref: '../../../../Globals/Types/date.yaml'

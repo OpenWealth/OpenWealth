@@ -7,6 +7,13 @@ allOf:
   - type: object
     properties:
       principalAmount:
-        $ref: '../../Types/princiapalAmount.yaml'
+        description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+        $ref: 'currencyAmount.yaml'
+      interestRate:
+        $ref: '../../Types/interestRate.yaml'
+      limit:
+        type: number
+        example: 100000
+        description: Maximum principal amount allowed by the credit contract
       underlyingFinancialInstrument:
-        $ref: '../underlyingFinancialInstrument.yaml'
+        $ref: '../financialInstrument.yaml'

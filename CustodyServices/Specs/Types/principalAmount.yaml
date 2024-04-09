@@ -1,4 +1,0 @@
-title: PrincipalAmount
-description: Indication of the cash values to be settled as of the start and maturity date of the contract.
-allOf:
-  - $ref: 'currencyAmount.yaml'

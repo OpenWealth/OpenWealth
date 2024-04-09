@@ -17,9 +17,8 @@ allOf:
       dayCountBasis:
         $ref: 'dayCountBasis.yaml'
       paymentDate:
-        allOf:
-          - $ref: '../../../Globals/Types/date.yaml'
-          - description: Date of the next interest payment.
+        description: Date of the next interest payment.
+        $ref: '../../../Globals/Types/date.yaml'
       paymentFrequency:
         type: string
         description: Specifies the frequency of an interest payment.
