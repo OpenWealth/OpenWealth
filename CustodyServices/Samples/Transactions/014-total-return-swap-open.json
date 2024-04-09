@@ -1,6 +1,6 @@
 {
   "id": "00000014",
-  "type": "openTotalReturnSwap",
+  "type": "openContract",
   "transactionDate": "2022-12-31",
   "customerId": "123456",
   "reversalIndicator": false,

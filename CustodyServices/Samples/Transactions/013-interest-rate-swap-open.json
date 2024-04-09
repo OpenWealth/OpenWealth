@@ -1,6 +1,6 @@
 {
   "id": "00000013",
-  "type": "openInterestRateSwap",
+  "type": "openContract",
   "transactionDate": "2022-12-31",
   "customerId": "123456",
   "reversalIndicator": false,
@@ -9,7 +9,7 @@
       "type": "asset",
       "movementDate": "2022-12-31",
       "financialInstrument": {
-        "type": "interestSwap",
+        "type": "interestRateSwap",
         "name": "Payer interest rate swap",
         "identificationList": [
           {

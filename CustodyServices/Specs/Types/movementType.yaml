@@ -9,16 +9,20 @@ enum:
   - brokerageFee
   - capitalGainTax
   - cash
+  - commission
   - custodyFee
   - courtage
   - exchangeFee
   - financialTransactionTax
+  - interest
   - managementFee
   - otherFee
-  - others
+  - other
   - otherTax
+  - premium
   - reinvestmentAmount
   - stampDuty
   - thirdPartyFee
   - transactionFee
+  - valueAddedTax
   - withholdingTax
