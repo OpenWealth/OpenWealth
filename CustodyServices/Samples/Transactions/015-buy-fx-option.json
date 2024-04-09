@@ -39,7 +39,7 @@
       },
       "quantity": {
         "value": 1,
-        "quantityType": "unit"
+        "type": "unit"
       },
       "positionId": "015"
     },
@@ -63,7 +63,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -2000
       },
       "valueDate": "2023-01-04",

@@ -27,7 +27,7 @@
   },
   "quantity": {
     "value": 200000,
-    "quantityType": "faceAmount"
+    "type": "faceAmount"
   },
   "price": {
     "type": "percentage",

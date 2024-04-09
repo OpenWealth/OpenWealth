@@ -35,7 +35,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": 1000
       },
       "valueDate": "2023-06-28",
@@ -62,7 +62,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -335
       },
       "valueDate": "2023-06-28",

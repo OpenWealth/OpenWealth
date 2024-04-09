@@ -17,7 +17,7 @@
   },
   "quantity": {
     "value": 40,
-    "quantityType": "unit"
+    "type": "unit"
   },
   "price": {
     "type": "actual",

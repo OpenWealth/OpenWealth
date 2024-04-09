@@ -34,7 +34,7 @@
       },
       "quantity": {
         "value": 1,
-        "quantityType": "unit"
+        "type": "unit"
       },
       "positionId": "012",
       "positionCurrency": "USD"
@@ -60,7 +60,7 @@
       },
       "quantity": {
         "value": -100000,
-        "quantityType": "nominal",
+        "type": "nominal",
         "creditDebitIndicator": "debit"
       },
       "valueDate": "2022-12-31",

@@ -12,7 +12,7 @@
       "type": "asset",
       "movementDate": "2023-01-04",
       "quantity": {
-        "quantityType": "faceAmount",
+        "type": "faceAmount",
         "value": 200000
       },
       "financialInstrument": {
@@ -66,7 +66,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -180000
       },
       "valueDate": "2023-01-04",
@@ -93,7 +93,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -500
       },
       "valueDate": "2023-01-04",
@@ -120,7 +120,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -130
       },
       "valueDate": "2023-01-04",
@@ -147,7 +147,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -135
       },
       "valueDate": "2023-01-04",

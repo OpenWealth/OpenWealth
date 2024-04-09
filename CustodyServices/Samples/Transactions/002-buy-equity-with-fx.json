@@ -26,7 +26,7 @@
         "type": "safekeepingAccount"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": 40
       },
       "positionId": "002",
@@ -57,7 +57,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -5100
       },
       "valueDate": "2023-01-04",
@@ -89,7 +89,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -200.25
       },
       "valueDate": "2023-01-04",
@@ -121,7 +121,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -150.75
       },
       "valueDate": "2023-01-04",

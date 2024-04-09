@@ -44,7 +44,7 @@
       },
       "quantity": {
         "value": 1,
-        "quantityType": "unit"
+        "type": "unit"
       },
       "positionId": "014",
       "positionCurrency": "CHF"

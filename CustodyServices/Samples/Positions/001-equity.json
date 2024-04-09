@@ -18,7 +18,7 @@
   },
   "quantity": {
     "value": 1000,
-    "quantityType": "unit"
+    "type": "unit"
   },
   "price": {
     "type": "actual",

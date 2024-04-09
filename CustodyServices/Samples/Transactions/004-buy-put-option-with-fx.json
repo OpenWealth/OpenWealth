@@ -45,7 +45,7 @@
       },
       "quantity": {
         "value": 20,
-        "quantityType": "unit"
+        "type": "unit"
       },
       "positionId": "004",
       "positionCurrency": "USD",
@@ -75,7 +75,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -2550
       },
       "valueDate": "2023-01-04",
@@ -107,7 +107,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -30.25
       },
       "currency": "CHF",
@@ -139,7 +139,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -20.75
       },
       "currency": "CHF",
