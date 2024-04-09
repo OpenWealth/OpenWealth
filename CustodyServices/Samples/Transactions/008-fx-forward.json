@@ -55,7 +55,7 @@
         },
         "amountReceived": {
           "amount": 170000,
-          "currency": "USD"
+          "currency": "CHF"
         },
         "maturityDate": "2023-06-27"
       },
@@ -94,7 +94,7 @@
       },
       "valueDate": "2023-06-29",
       "positionId": "0002",
-      "positionCurrency": "USD"
+      "currency": "USD"
     },
     {
       "type": "cash",
