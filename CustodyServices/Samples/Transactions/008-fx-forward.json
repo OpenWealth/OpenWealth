@@ -1,6 +1,6 @@
 {
   "id": "0000008",
-  "type": "openFxForward",
+  "type": "openContract",
   "transactionDate": "2023-01-04",
   "customerId": "123456",
   "reversalIndicator": false,

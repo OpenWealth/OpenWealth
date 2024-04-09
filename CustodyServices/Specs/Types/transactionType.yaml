@@ -10,29 +10,13 @@ enum:
   - assimilation
   - bonus
   - buy
-  - buyBarrier
-  - buyDigital
-  - buyIssue
   - buyToClose
-  - buyToOpen
   - capitalIncrease
-  - closeCallableLoan
-  - closeCallDeposit
-  - closeCreditDefaultSwap
-  - closeFxForward
-  - closeFxSwap
-  - closeFixedDeposit
-  - closeFixedLoan
-  - closeInterestSwap
-  - closeTotalReturnSwap
-  - closeNonDeliverableForward
+  - closeContract
   - conversionBondShare
   - coupon
   - creditEvent
-  - decrease
-  - decreaseCallableLoan
-  - decreaseCallDeposit
-  - deliverSecurityToFund
+  - decreaseContractPrincipal
   - deliveryFreeOfPayment
   - deliveryVsPayment
   - dividendCash
@@ -40,17 +24,12 @@ enum:
   - dividendReinvestment
   - dividendStock
   - exercise
-  - exerciseCash
-  - exercisePhysical
   - expiration
-  - expirationOldSecurity
   - fees
   - finalLiquidationPayment
   - fxSpot
   - incompleteRights
-  - increase
-  - increaseCallableLoan
-  - increaseCallDeposit
+  - increaseContractPrincipal
   - inflowCash
   - instrumentExchange
   - interest
@@ -61,21 +40,13 @@ enum:
   - markToMarket
   - markToMarketCash
   - merger
-  - openCallableLoan
-  - openCallDeposit
-  - openFixedDeposit
-  - openFixedLoan
-  - openFxForward
-  - openFxSwap
-  - openNonDeliverableForward
+  - openContract
   - other
   - outflowCash
   - premium
-  - prepayment
+  - prepaymentSubstitution
   - publicOffer
   - receiveFreeOfPayment
-  - receiveFromFund
-  - receiveSecurityFromFund
   - receiveVsPayment
   - redemption
   - redemptionPartial
@@ -84,9 +55,6 @@ enum:
   - resetPayment
   - rightDistribution
   - sell
-  - sellBarrier
-  - sellDigital
-  - sellToClose
   - sellToOpen
   - spinOff
   - stockSplit
