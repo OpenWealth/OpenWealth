@@ -42,7 +42,7 @@
       "positionId": "003",
       "positionCurrency": "CHF",
       "price": {
-        "priceType": "percentage",
+        "type": "percentage",
         "amount": 90.00
       }
     },

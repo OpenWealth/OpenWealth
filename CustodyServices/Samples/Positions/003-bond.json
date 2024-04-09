@@ -30,7 +30,7 @@
     "quantityType": "faceAmount"
   },
   "price": {
-    "priceType": "percentage",
+    "type": "percentage",
     "value": 90,
     "priceDate": "2023-01-04",
     "sourceOfPrice": "CreditSuisse"

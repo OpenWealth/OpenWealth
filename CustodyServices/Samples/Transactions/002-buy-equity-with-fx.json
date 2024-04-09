@@ -32,7 +32,7 @@
       "positionId": "002",
       "positionCurrency": "USD",
       "price": {
-        "priceType": "actual",
+        "type": "actual",
         "value": 150.00,
         "currency": "USD"
       }

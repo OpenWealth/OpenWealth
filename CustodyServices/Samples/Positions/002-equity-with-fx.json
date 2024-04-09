@@ -20,7 +20,7 @@
     "quantityType": "unit"
   },
   "price": {
-    "priceType": "actual",
+    "type": "actual",
     "value": 150.00,
     "currency": "USD",
     "priceDate": "2023-01-04",

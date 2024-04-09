@@ -21,7 +21,7 @@
     "quantityType": "unit"
   },
   "price": {
-    "priceType": "actual",
+    "type": "actual",
     "value": 10,
     "currency": "CHF",
     "priceDate": "2022-12-31",

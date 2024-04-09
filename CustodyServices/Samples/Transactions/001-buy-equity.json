@@ -33,7 +33,7 @@
       "positionId": "001",
       "positionCurrency": "CHF",
       "price": {
-        "priceType": "actual",
+        "type": "actual",
         "value": 10,
         "currency": "CHF"
       }

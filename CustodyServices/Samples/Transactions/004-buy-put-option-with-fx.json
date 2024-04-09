@@ -22,7 +22,7 @@
         ],
         "contractSize": 5,
         "strikePrize": {
-          "priceType": "actual",
+          "type": "actual",
           "value": 185,
           "currency": "USD"
         },
@@ -50,7 +50,7 @@
       "positionId": "004",
       "positionCurrency": "USD",
       "price": {
-        "priceType": "actual",
+        "type": "actual",
         "value": 30.00,
         "currency": "USD"
       }
