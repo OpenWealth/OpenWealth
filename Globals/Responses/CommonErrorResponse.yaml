@@ -2,7 +2,7 @@ title: CommonErrorResponse
 type: object
 properties:
   type:
-    $ref: 'commonErrorType.yaml'
+    $ref: 'CommonErrorType.yaml'
   title:
     type: string
     example: This is the general problem description
