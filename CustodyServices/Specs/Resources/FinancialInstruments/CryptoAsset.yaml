@@ -1,4 +1,4 @@
 title: CryptoAsset
 description: Crypto Asset
 allOf:
-  - $ref: 'financialInstrumentBase.yaml'
+  - $ref: 'FinancialInstrumentBase.yaml'

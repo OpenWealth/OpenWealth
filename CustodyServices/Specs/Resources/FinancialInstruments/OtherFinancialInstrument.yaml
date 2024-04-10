@@ -1,4 +1,4 @@
 title: Other
 type: object
 allOf:
-  - $ref: 'financialInstrumentBase.yaml'
+  - $ref: 'FinancialInstrumentBase.yaml'

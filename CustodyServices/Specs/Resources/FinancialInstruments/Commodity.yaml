@@ -1,4 +1,4 @@
 title: Commodity
 description: Commodity
 allOf:
-  - $ref: 'financialInstrumentBase.yaml'
+  - $ref: 'FinancialInstrumentBase.yaml'

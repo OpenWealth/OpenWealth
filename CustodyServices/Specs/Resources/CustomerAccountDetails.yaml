@@ -9,4 +9,4 @@ allOf:
       accountDetailsList:
         type: array
         items:
-          $ref: 'accountDetails.yaml'
+          $ref: 'AccountDetails.yaml'

@@ -8,21 +8,21 @@ required:
   - optionType
   - optionStyle
 allOf:
-  - $ref: 'financialInstrumentBase.yaml'
+  - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
     properties:
       expiryDateTime:
         description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date/time at which it becomes due and has to be repaid.
-        $ref: '../../../../Globals/Types/dateTime.yaml'
+        $ref: '../../../../Globals/Types/DateTime.yaml'
       underlyingAmount:
         description: This field specifies the underlying currency and amount of the contract. The underlying currency is the currency which is to be exchanged for the counter currency.
-        $ref: 'currencyAmount.yaml'
+        $ref: '../../Types/CurrencyAmount.yaml'
       counterAmount:
         description: This field specifies the counter currency and amount of the contract. The counter currency is the currency which is to be exchanged for the underlying currency.
-        $ref: 'currencyAmount.yaml'
+        $ref: '../../Types/CurrencyAmount.yaml'
       premium:
-        $ref: '../../Types/currencyAmount.yaml'
+        $ref: '../../Types/CurrencyAmount.yaml'
       optionType:
-        $ref: '../../Types/optionType.yaml'
+        $ref: '../../Types/OptionType.yaml'
       optionStyle:
-        $ref: '../../Types/optionStyle.yaml'
+        $ref: '../../Types/OptionStyle.yaml'

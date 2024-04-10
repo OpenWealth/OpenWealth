@@ -10,30 +10,30 @@ required:
   - positionId
 properties:
   type:
-    $ref: '../Types/movementType.yaml'
+    $ref: '../Types/MovementType.yaml'
   movementDate:
     description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank.
-    $ref: '../../../Globals/Types/date.yaml'
+    $ref: '../../../Globals/Types/Date.yaml'
   financialInstrument:
-    $ref: 'financialInstrument.yaml'
+    $ref: 'FinancialInstrument.yaml'
   account:
-    $ref: 'account.yaml'
+    $ref: 'Account.yaml'
   quantity:
-    $ref: '../Types/quantity.yaml'
+    $ref: '../Types/Quantity.yaml'
   positionId:
     type: string
     maxLength: 128
     description: Identification for the position given by the bank.
     example: 1234566-12-1
   positionCurrency:
-    $ref: '../../../Globals/Types/currency.yaml'
+    $ref: '../../../Globals/Types/Currency.yaml'
   valueDate:
     description: Date when calculating economic benefit for a cash amount.
-    $ref: '../../../Globals/Types/date.yaml'
+    $ref: '../../../Globals/Types/Date.yaml'
   price:
-    $ref: '../Types/price.yaml'
+    $ref: '../Types/Price.yaml'
   foreignExchangeRate:
-    $ref: '../Types/foreignExchangeRate.yaml'
+    $ref: '../Types/ForeignExchangeRate.yaml'
   movementTypeAdditionalInformation:
     type: string
     maxLength: 35

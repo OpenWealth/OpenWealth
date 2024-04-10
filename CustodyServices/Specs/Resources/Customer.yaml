@@ -9,8 +9,8 @@ properties:
     maxLength: 128
     description: Unique and unambiguous identification used by the bank for the customer.
   referenceCurrency:
-    $ref: '../../../Globals/Types/currency.yaml'
+    $ref: '../../../Globals/Types/Currency.yaml'
   accountList:
     type: array
     items:
-      $ref: 'account.yaml'
+      $ref: 'Account.yaml'

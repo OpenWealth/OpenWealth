@@ -15,4 +15,4 @@ properties:
     example: 12000
     description: Signed decimal number
   currency:
-    $ref: '../../../Globals/Types/currency.yaml'
+    $ref: '../../../Globals/Types/Currency.yaml'

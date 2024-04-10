@@ -2,8 +2,8 @@ title: TransactionStatement
 type: object
 properties:
   statement:
-    $ref: 'statement.yaml'
+    $ref: 'Statement.yaml'
   transactions:
     type: array
     items:
-      $ref: 'transaction.yaml'
+      $ref: 'Transaction.yaml'

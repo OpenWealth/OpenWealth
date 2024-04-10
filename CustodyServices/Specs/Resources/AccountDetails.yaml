@@ -1,6 +1,6 @@
 title: AccountDetails
 allOf:
-  - $ref: 'account.yaml'
+  - $ref: 'Account.yaml'
   - type: object
     required:
       - positionList
@@ -14,4 +14,4 @@ allOf:
         type: array
         description: A list of positions
         items:
-          $ref: 'position.yaml'
+          $ref: 'ValuatedPosition.yaml'

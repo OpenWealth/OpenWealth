@@ -11,6 +11,6 @@ properties:
     description: Signed amount of the cash transaction
     example: 13023
   currency:
-    $ref: '../../../Globals/Types/currency.yaml'
+    $ref: '../../../Globals/Types/Currency.yaml'
   account:
-    $ref: 'account.yaml'
+    $ref: 'Account.yaml'

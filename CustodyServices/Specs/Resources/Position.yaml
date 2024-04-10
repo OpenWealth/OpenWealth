@@ -11,16 +11,16 @@ properties:
     example: 876543219
     description: Identification for the position given by the bank
   financialInstrument:
-    $ref: 'financialInstrument.yaml'
+    $ref: 'FinancialInstrument.yaml'
   account:
-    $ref: 'account.yaml'
+    $ref: 'Account.yaml'
   name:
     type: string
     maxLength: 80
     example: Stark Industries Inc.
     description: Name of the position.
   currency:
-    $ref: '../../../Globals/Types/currency.yaml'
+    $ref: '../../../Globals/Types/Currency.yaml'
   safekeepingPlace:
     type: string
     pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'

@@ -6,7 +6,7 @@ allOf:
       priceDate:
         description: Date of the price.
         allOf:
-          - $ref: '../../../Globals/Types/date.yaml'
+          - $ref: '../../../Globals/Types/Date.yaml'
       sourceOfPrice:
         type: string
         maxLength: 70

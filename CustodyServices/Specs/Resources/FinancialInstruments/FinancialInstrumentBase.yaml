@@ -5,7 +5,7 @@ required:
   - name
 properties:
   type:
-    $ref: '../../Types/financialInstrumentType.yaml'
+    $ref: '../../Types/FinancialInstrumentType.yaml'
   name:
     type: string
     maxLength: 170
@@ -14,12 +14,12 @@ properties:
   identificationList:
     type: array
     items:
-      $ref: '../../Types/financialInstrumentIdentification.yaml'
+      $ref: '../../Types/FinancialInstrumentIdentification.yaml'
     minItems: 1
   cfiCode:
-    $ref: '../../Types/cfiCode.yaml'
+    $ref: '../../Types/CfiCode.yaml'
   currencyOfDenomination:
-    $ref: '../../../../Globals/Types/currency.yaml'
+    $ref: '../../../../Globals/Types/Currency.yaml'
   hasFactor:
     type: boolean
     description: Indicates if there is a factor present for this financial instrument. If this indicator is set to TRUE, but the factor attribute is not present, might indicate, that the factor cannot be delivered or is currently not available.

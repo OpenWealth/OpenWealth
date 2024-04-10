@@ -15,10 +15,10 @@ properties:
     example: 987654321
     description: Transaction ID given by the bank
   type:
-    $ref: '../Types/transactionType.yaml'
+    $ref: '../Types/TransactionType.yaml'
   transactionDate:
     description: Date of transaction entity
-    $ref: '../../../Globals/Types/date.yaml'
+    $ref: '../../../Globals/Types/Date.yaml'
   customerId:
     type: string
     description: Unique and unambiguous identification used by the bank for the customer.
@@ -33,7 +33,7 @@ properties:
     type: string
     description: Human readable description of the transaction. Often referred to as 'Buchungs-Text' in german transaction statements.
   placeOfTrade:
-    $ref: '../Types/placeOfTrade.yaml'
+    $ref: '../Types/PlaceOfTrade.yaml'
   reversedTransactionId:
     type: string
     maxLength: 128
@@ -41,26 +41,26 @@ properties:
     example: 2134123415
   tradeDate:
     description: Specifies the date/time on which the trade was executed.
-    $ref: '../../../Globals/Types/date.yaml'
+    $ref: '../../../Globals/Types/Date.yaml'
   settlementDate:
     description: Date and time at which the securities are to be delivered or received.
-    $ref: '../../../Globals/Types/date.yaml'
+    $ref: '../../../Globals/Types/Date.yaml'
   triggeringFinancialInstrument:
-    $ref: 'financialInstrument.yaml'
+    $ref: 'FinancialInstrument.yaml'
   triggeringQuantity:
-    $ref: '../Types/quantity.yaml'
+    $ref: '../Types/Quantity.yaml'
   movementList:
     type: array
     description: List of movements belonging to a transaction from a banks perspective
     items:
-      $ref: 'movement.yaml'
+      $ref: 'Movement.yaml'
   postingAmountList:
     type: array
     description: List of total amounts of money that is to be/was posted to respective accounts in the account currency.
     items:
-      $ref: 'postingAmount.yaml'
+      $ref: 'PostingAmount.yaml'
   settlementCurrency:
-    $ref: '../../../Globals/Types/currency.yaml'
+    $ref: '../../../Globals/Types/Currency.yaml'
   additionalDetails:
     type: string
     maxLength: 70

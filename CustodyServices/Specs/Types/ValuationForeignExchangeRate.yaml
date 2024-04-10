@@ -6,7 +6,7 @@ allOf:
       rateDate:
         description: Date of rate.
         allOf:
-          - $ref: '../../../Globals/Types/date.yaml'
+          - $ref: '../../../Globals/Types/Date.yaml'
       sourceOfRate:
         type: string
         maxLength: 70
