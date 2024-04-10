@@ -14,7 +14,7 @@
     "currencyOfDenomination": "CHF",
     "expiryDate": "2023-06-27",
     "interestRatePaid": {
-      "interestRateType": "fixedInterestRate",
+      "type": "fixed",
       "rate": 1.2,
       "dayCountBasis": "act_360",
       "paymentDate": "2023-06-27",
@@ -25,7 +25,7 @@
       "name": "Apple Inc.",
       "identificationList": [
         {
-          "identifierType": "isin",
+          "type": "isin",
           "identifier": "US0378331005"
         }
       ]
@@ -36,7 +36,7 @@
     "type": "safekeepingAccount"
   },
   "quantity": {
-    "quantityType": "unit",
+    "type": "unit",
     "value": 1
   },
   "valuation": {

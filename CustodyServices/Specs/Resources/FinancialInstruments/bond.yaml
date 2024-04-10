@@ -10,13 +10,17 @@ allOf:
       interestRate:
         $ref: '../../Types/interestRate.yaml'
       maturityDate:
-        $ref: '../../Types/maturityDate.yaml'
+        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        $ref: '../../../../Globals/Types/date.yaml'
       nextInterestPaymentDate:
-        $ref: '../../Types/nextInterestPaymentDate.yaml'
+        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        $ref: '../../../../Globals/Types/date.yaml'
       issueDate:
-        $ref: '../../Types/issueDate.yaml'
+        description: Date at which the security was made available.
+        $ref: '../../../../Globals/Types/date.yaml'
       conversionPrice:
-        $ref: '../../Types/conversionPrice.yaml'
+        description: Price of one target security in the conversion.
+        $ref: '../../Types/price.yaml'
       currencyOfDenomination:
         $ref: '../../../../Globals/Types/currency.yaml'
       minimumDenomination:

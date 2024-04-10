@@ -25,7 +25,7 @@
     "type": "safekeepingAccount"
   },
   "quantity": {
-    "quantityType": "unit",
+    "type": "unit",
     "value": 1
   },
   "valuation": {

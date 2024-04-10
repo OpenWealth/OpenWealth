@@ -1,8 +1,0 @@
-title: TriggereingFinancialInstrument
-description: Security triggering/causing the transaction.
-allOf:
-  - $ref: 'financialInstrument.yaml'
-  - type: object
-    properties:
-      triggeringQuantity:
-        $ref: '../Types/quantity.yaml'

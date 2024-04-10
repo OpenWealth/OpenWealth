@@ -6,6 +6,7 @@ required:
 properties:
   id:
     type: string
+    maxLength: 128
     description: Unique and unambiguous identification used by the bank for the customer.
   referenceCurrency:
     $ref: '../../../Globals/Types/currency.yaml'

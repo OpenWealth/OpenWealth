@@ -1,4 +1,0 @@
-title: StrikePrice
-description: Predetermined price at which the holder will have to buy or sell the underlying instrument.
-allOf:
-  - $ref: 'price.yaml'

@@ -1,9 +1,9 @@
 type: object
 required:
   - amount
-  - priceType
+  - type
 properties:
-  priceType:
+  type:
     type: string
     description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
     example: percentage

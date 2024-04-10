@@ -9,14 +9,11 @@ allOf:
   - type: object
     properties:
       amountPaid:
-        title: AmountPaid
         description: Amount paid at the maturity of a contract (i.e. FX forward)
-        allOf:
-          - $ref: '../../Types/currencyAmount.yaml'
+        $ref: '../../Types/currencyAmount.yaml'
       amountReceived:
-        title: amountReceived
         description: Amount received at the maturity of a contract (i.e. FX forward)
-        allOf:
-          - $ref: '../../Types/currencyAmount.yaml'
+        $ref: '../../Types/currencyAmount.yaml'
       maturityDate:
-        $ref: '../../Types/maturityDate.yaml'
+        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        $ref: '../../../../Globals/Types/date.yaml'

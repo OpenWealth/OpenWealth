@@ -16,13 +16,13 @@
         "name": "Put Option Apple Inc., 185, 2024-06-01",
         "identificationList": [
           {
-            "identifierType": "otherProprietaryIdentification",
+            "type": "otherProprietaryIdentification",
             "identifier": "AAPL240601P00185000"
           }
         ],
         "contractSize": 5,
         "strikePrize": {
-          "priceType": "actual",
+          "type": "actual",
           "value": 185,
           "currency": "USD"
         },
@@ -33,7 +33,7 @@
           "name": "Apple Inc.",
           "identificationList": [
             {
-              "identifierType": "isin",
+              "type": "isin",
               "identifier": "CH0012138530"
             }
           ]
@@ -45,12 +45,12 @@
       },
       "quantity": {
         "value": 20,
-        "quantityType": "unit"
+        "type": "unit"
       },
       "positionId": "004",
       "positionCurrency": "USD",
       "price": {
-        "priceType": "actual",
+        "type": "actual",
         "value": 30.00,
         "currency": "USD"
       }
@@ -63,7 +63,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -75,7 +75,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -2550
       },
       "valueDate": "2023-01-04",
@@ -95,7 +95,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -107,7 +107,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -30.25
       },
       "currency": "CHF",
@@ -127,7 +127,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -139,7 +139,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -20.75
       },
       "currency": "CHF",

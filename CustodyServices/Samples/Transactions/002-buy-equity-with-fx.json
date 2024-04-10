@@ -16,7 +16,7 @@
         "name": "Apple Inc.",
         "identificationList": [
           {
-            "identifierType": "isin",
+            "type": "isin",
             "identifier": "US0378331005"
           }
         ]
@@ -26,13 +26,13 @@
         "type": "safekeepingAccount"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": 40
       },
       "positionId": "002",
       "positionCurrency": "USD",
       "price": {
-        "priceType": "actual",
+        "type": "actual",
         "value": 150.00,
         "currency": "USD"
       }
@@ -45,7 +45,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -57,7 +57,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -5100
       },
       "valueDate": "2023-01-04",
@@ -77,7 +77,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -89,7 +89,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -200.25
       },
       "valueDate": "2023-01-04",
@@ -109,7 +109,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -121,7 +121,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -150.75
       },
       "valueDate": "2023-01-04",

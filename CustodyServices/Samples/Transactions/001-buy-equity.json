@@ -16,7 +16,7 @@
         "name": "CREDIT SUISSE GROUP AG",
         "identificationList": [
           {
-            "identifierType": "isin",
+            "type": "isin",
             "identifier": "CH0012138530"
           }
         ],
@@ -27,13 +27,13 @@
         "type": "safekeepingAccount"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": 1000
       },
       "positionId": "001",
       "positionCurrency": "CHF",
       "price": {
-        "priceType": "actual",
+        "type": "actual",
         "value": 10,
         "currency": "CHF"
       }
@@ -46,7 +46,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -58,7 +58,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -100000
       },
       "valueDate": "2023-01-04",
@@ -73,7 +73,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -85,7 +85,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -397.75
       },
       "valueDate": "2023-01-04",
@@ -100,7 +100,7 @@
         "name": "Swiss francs",
         "identificationList": [
           {
-            "identifierType": "iso3",
+            "type": "iso3",
             "identifier": "CHF"
           }
         ],
@@ -112,7 +112,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": -75
       },
       "valueDate": "2023-01-04",

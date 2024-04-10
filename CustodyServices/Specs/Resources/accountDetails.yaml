@@ -7,7 +7,7 @@ allOf:
     properties:
       externalReference:
         type: string
-        maxLength: 35
+        maxLength: 128
         example: 987-654-321
         description: Account reference used by a bank external party, e.g. PMS
       positionList:

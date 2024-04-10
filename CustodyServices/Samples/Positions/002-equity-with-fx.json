@@ -6,7 +6,7 @@
     "name": "Apple Inc.",
     "identificationList": [
       {
-        "identifierType": "isin",
+        "type": "isin",
         "identifier": "US0378331005"
       }
     ]
@@ -17,10 +17,10 @@
   },
   "quantity": {
     "value": 40,
-    "quantityType": "unit"
+    "type": "unit"
   },
   "price": {
-    "priceType": "actual",
+    "type": "actual",
     "value": 150.00,
     "currency": "USD",
     "priceDate": "2023-01-04",

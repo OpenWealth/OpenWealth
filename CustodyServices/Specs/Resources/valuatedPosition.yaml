@@ -8,10 +8,8 @@ allOf:
   - $ref: 'position.yaml'
 properties:
   positionDate:
-    title: PositionDate
     description: Date at which the position was valuated.
-    allOf:
-      - $ref: '../../../Globals/Types/date.yaml'
+    $ref: '../../../Globals/Types/date.yaml'
   quantity:
     $ref: '../Types/quantity.yaml'
   valuation:
@@ -31,6 +29,5 @@ properties:
     example: 34
     description: Number of days used for calculating the accrued interest amount.
   blockedQuantity:
-    allOf:
-      - $ref: '../Types/quantity.yaml'
-      - description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
+    description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
+    $ref: '../Types/quantity.yaml'

@@ -18,10 +18,10 @@
   },
   "quantity": {
     "value": 1000,
-    "quantityType": "unit"
+    "type": "unit"
   },
   "price": {
-    "priceType": "actual",
+    "type": "actual",
     "value": 10,
     "currency": "CHF",
     "priceDate": "2022-12-31",

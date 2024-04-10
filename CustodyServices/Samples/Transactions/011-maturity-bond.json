@@ -9,7 +9,7 @@
     "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
     "identificationList": [
       {
-        "identifierType": "isin",
+        "type": "isin",
         "identifier": "CH0344958688"
       }
     ]
@@ -33,7 +33,7 @@
         "type": "safekeepingAccount"
       },
       "quantity": {
-        "quantityType": "faceAmount",
+        "type": "faceAmount",
         "value": -200000
       },
       "positionId": "003",
@@ -59,7 +59,7 @@
         "iban": "CH121212121212121212"
       },
       "quantity": {
-        "quantityType": "unit",
+        "type": "unit",
         "value": 200000
       },
       "valueDate": "2023-06-28",

@@ -19,7 +19,7 @@
   },
   "quantity": {
     "value": 500000,
-    "quantityType": "unit"
+    "type": "unit"
   },
   "valuation": {
     "valueInPositionCurrency": {

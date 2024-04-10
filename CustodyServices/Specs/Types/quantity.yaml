@@ -4,7 +4,7 @@ required:
   - value
   - type
 properties:
-  quantityType:
+  type:
     type: string
     description: Specifies the type of the amount
     example: nominal

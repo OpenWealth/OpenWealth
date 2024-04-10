@@ -9,29 +9,20 @@ allOf:
   - type: object
     properties:
       nearAmountPaid:
-        title: NearAmountPaid
         description: Amount paid at the earlier part of an FX swap
-        allOf:
-          - $ref: '../../Types/currencyAmount.yaml'
+        $ref: '../../Types/currencyAmount.yaml'
       nearAmountReceived:
-        title: NearAmountReceived
         description: Amount received at the earlier part of an FX swap
-        allOf:
-          - $ref: '../../Types/currencyAmount.yaml'
+        $ref: '../../Types/currencyAmount.yaml'
       farAmountPaid:
-        title: FarAmountPaid
         description: Amount paid at the maturity of an FX swap
-        allOf:
-          - $ref: '../../Types/currencyAmount.yaml'
+        $ref: '../../Types/currencyAmount.yaml'
       farAmountReceived:
-        title: FarAmountReceived
         description: Amount received at the maturity of an FX swap
-        allOf:
-          - $ref: '../../Types/currencyAmount.yaml'
+        $ref: '../../Types/currencyAmount.yaml'
       maturityDate:
-        $ref: '../../Types/maturityDate.yaml'
+        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        $ref: '../../../../Globals/Types/date.yaml'
       nearMaturityDate:
-        title: NearMaturityDate
         description: Date of the settlement of the near leg
-        allOf:
-          - $ref: '../../Types/maturityDate.yaml'
+        $ref: '../../../../Globals/Types/date.yaml'
