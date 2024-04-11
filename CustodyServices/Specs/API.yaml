@@ -8,9 +8,28 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
 servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/OpenWealthAPI/Custody_Services/2.0.3
+  - description: Your Server URL
+    url: https://your-server.com/
+
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch/
+
+tags:
+  - name: accounts
+    description: Accounts operations
+  - name: customers
+    description: Customer operations
+  - name: positions
+    description: Position operations
+  - name: transactions
+    description: Transaction operations
+
+security:
+  - OAuth2:
+      - read
 
 paths:
   /customers:
@@ -199,8 +218,6 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
-            nextCursor:
-              $ref: '../../Globals/Headers/Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -328,8 +345,6 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
-            nextCursor:
-              $ref: '../../Globals/Headers/Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -546,8 +561,6 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
-            nextCursor:
-              $ref: '../../Globals/Headers/Next-Cursor.yaml'
           content:
             application/json:
               schema:
