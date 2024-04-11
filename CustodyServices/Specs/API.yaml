@@ -112,6 +112,90 @@ paths:
         '503':
           $ref: '../../Globals/Responses/503.yaml'
 
+  /customers/{customerId}/accounts:
+    parameters:
+      - $ref: '../../Globals/Params/path_customerId.yaml'
+      - $ref: '../../Globals/Params/cursor.yaml'
+      - $ref: '../../Globals/Params/limit.yaml'
+      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+    get:
+      summary: Returns the accounts for a specific customer.
+      description: Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
+      operationId: getCustomerAccountsByCustomerId
+      tags:
+        - accounts
+      responses:
+        '200':
+          description: Account List
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+            nextCursor:
+              $ref: '../../Globals/Headers/Next-Cursor.yaml'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'Resources/Account.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+
+  /customers/{customerId}/accounts/{accountId}:
+    parameters:
+      - $ref: '../../Globals/Params/path_customerId.yaml'
+      - $ref: '../../Globals/Params/path_accountId.yaml'
+      - $ref: 'Params/endOfDayIndicator.yaml'
+      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+    get:
+      summary: Returns an account by id for a specific customer.
+      description: Returns an account for a specific customer.
+      operationId: getCustomerAccountById
+      tags:
+        - accounts
+      responses:
+        '200':
+          description: Account
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+            nextCursor:
+              $ref: '../../Globals/Headers/Next-Cursor.yaml'
+          content:
+            application/json:
+              schema:
+                $ref: 'Resources/Account.yaml'
+        '400':
+          $ref: '../../Globals/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/Responses/503.yaml'
+
   /customers/{customerId}/customer-position-statement:
     parameters:
       - $ref: '../../Globals/Params/path_customerId.yaml'
