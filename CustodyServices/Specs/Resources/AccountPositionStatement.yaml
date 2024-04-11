@@ -1,7 +1,0 @@
-title: AccountPositionStatement
-type: object
-properties:
-  statement:
-    $ref: 'Statement.yaml'
-  accountDetails:
-    $ref: 'AccountDetails.yaml'
