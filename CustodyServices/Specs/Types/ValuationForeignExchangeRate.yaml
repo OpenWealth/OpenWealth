@@ -1,0 +1,14 @@
+title: ValuationForeignExchangeRate
+allOf:
+  - $ref: 'ForeignExchangeRate.yaml'
+  - type: object
+    properties:
+      rateDate:
+        description: Date of rate.
+        allOf:
+          - $ref: '../../../Globals/Types/Date.yaml'
+      sourceOfRate:
+        type: string
+        maxLength: 70
+        description: Indicates the source of the (market) price
+        example: Reuters 4 o'clock

@@ -1,0 +1,10 @@
+name: dateType
+in: query
+required: true
+description: Indicates which type of date is decisive for the data shown.
+schema:
+  type: string
+  enum:
+    - transactionDate
+    - bookingDate
+    - valueDate

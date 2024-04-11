@@ -1,4 +1,0 @@
-title: Fund
-description: An investment fund is a supply of capital belonging to numerous investors used to collectively purchase securities while each investor retains ownership and control of his own shares.
-allOf:
-  - $ref: 'financialInstrumentBase.yaml'

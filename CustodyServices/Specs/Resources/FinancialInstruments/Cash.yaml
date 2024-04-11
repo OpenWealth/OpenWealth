@@ -1,0 +1,4 @@
+title: Cash
+description: Cash
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'

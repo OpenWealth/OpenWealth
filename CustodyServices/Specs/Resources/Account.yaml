@@ -1,0 +1,37 @@
+title: Account
+type: object
+required:
+  - id
+  - type
+  - referenceCurrency
+properties:
+  id:
+    type: string
+    maxLength: 128
+    example: 876543219
+    description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
+  type:
+    type: string
+    description: Indicatates the type of the account. If the account type is cashAccount, no information on the financial instrument is provided in the respective position in the account.
+    enum:
+      - cashAccount
+      - safekeepingAccount
+      - other
+  name:
+    type: string
+    maxLength: 70
+    description: Name of the account. It provides an additional means of identification, and is designated by the account servicer in agreement with the account owner.
+    example: Household account
+  referenceCurrency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  iban:
+    type: string
+    description: Contains the accounts Internatioinal Banking Account Number (IBAN) for a cashAccount if available.
+    maxLength: 34
+  designation:
+    type: string
+    maxLength: 70
+    description: Supplementary information on the account. Designated by the account servicer.
+    example: Current Account CHF
+  portfolioInformation:
+    $ref: 'PortfolioInformation.yaml'

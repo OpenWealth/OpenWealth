@@ -1,4 +1,0 @@
-title: Commodity
-description: Commodity
-allOf:
-  - $ref: 'financialInstrumentBase.yaml'

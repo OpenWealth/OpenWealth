@@ -1,0 +1,33 @@
+title: ValuatedPosition
+type: object
+required:
+  - positionDate
+  - quantity
+  - valuation
+allOf:
+  - $ref: 'Position.yaml'
+properties:
+  positionDate:
+    description: Date at which the position was valuated.
+    $ref: '../../../Globals/Types/Date.yaml'
+  quantity:
+    $ref: '../Types/Quantity.yaml'
+  valuation:
+    $ref: '../Types/Valuation.yaml'
+  price:
+    $ref: '../Types/ValuationPrice.yaml'
+  foreignExchangeRate:
+    $ref: '../Types/ValuationForeignExchangeRate.yaml'
+  costPrice:
+    $ref: '../Types/Price.yaml'
+  costForeignExchangeRate:
+    $ref: '../Types/ForeignExchangeRate.yaml'
+  accruedInterest:
+    $ref: '../Types/CurrencyAmount.yaml'
+  numberOfDaysAccrued:
+    type: integer
+    example: 34
+    description: Number of days used for calculating the accrued interest amount.
+  blockedQuantity:
+    description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
+    $ref: '../Types/Quantity.yaml'

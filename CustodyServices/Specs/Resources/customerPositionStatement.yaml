@@ -1,7 +1,0 @@
-title: CustomerPositionStatement
-type: object
-properties:
-  statement:
-    $ref: 'statement.yaml'
-  customer:
-    $ref: 'customerAccountDetails.yaml'

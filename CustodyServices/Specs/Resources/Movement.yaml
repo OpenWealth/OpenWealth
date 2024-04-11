@@ -1,0 +1,41 @@
+title: Movement
+type: object
+description: Describes a single movement/booking/flow within a transaction. Every transaction contains in the minimum one movement.
+required:
+  - type
+  - movementDate
+  - financialInstrument
+  - account
+  - quantity
+  - positionId
+properties:
+  type:
+    $ref: '../Types/MovementType.yaml'
+  movementDate:
+    description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank.
+    $ref: '../../../Globals/Types/Date.yaml'
+  financialInstrument:
+    $ref: 'FinancialInstrument.yaml'
+  account:
+    $ref: 'Account.yaml'
+  quantity:
+    $ref: '../Types/Quantity.yaml'
+  positionId:
+    type: string
+    maxLength: 128
+    description: Identification for the position given by the bank.
+    example: 1234566-12-1
+  positionCurrency:
+    $ref: '../../../Globals/Types/Currency.yaml'
+  valueDate:
+    description: Date when calculating economic benefit for a cash amount.
+    $ref: '../../../Globals/Types/Date.yaml'
+  price:
+    $ref: '../Types/Price.yaml'
+  foreignExchangeRate:
+    $ref: '../Types/ForeignExchangeRate.yaml'
+  movementTypeAdditionalInformation:
+    type: string
+    maxLength: 35
+    example: Fees for Reporting Service
+    description: Provides further details on an informative level, which goes beyond the granularity of the movementType.

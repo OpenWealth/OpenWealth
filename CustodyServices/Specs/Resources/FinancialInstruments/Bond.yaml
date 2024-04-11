@@ -1,0 +1,33 @@
+title: Bond
+description: Bond
+required:
+  - maturityDate
+  - interestRate
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      interestRate:
+        $ref: '../../Types/InterestRate.yaml'
+      maturityDate:
+        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        $ref: '../../../../Globals/Types/Date.yaml'
+      nextInterestPaymentDate:
+        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        $ref: '../../../../Globals/Types/Date.yaml'
+      issueDate:
+        description: Date at which the security was made available.
+        $ref: '../../../../Globals/Types/Date.yaml'
+      conversionPrice:
+        description: Price of one target security in the conversion.
+        $ref: '../../Types/Price.yaml'
+      currencyOfDenomination:
+        $ref: '../../../../Globals/Types/Currency.yaml'
+      minimumDenomination:
+        type: number
+        example: 10000
+        description: Indicates the minimum denomination of a security.
+      minimumIncrement:
+        type: number
+        example: 1000
+        description: Indicates the minimum tradable increments of a security.

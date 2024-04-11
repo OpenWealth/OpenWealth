@@ -1,4 +1,0 @@
-description: An opaque string value, or an empty string if there are no more results. 
-required: false
-schema:
-  type: string

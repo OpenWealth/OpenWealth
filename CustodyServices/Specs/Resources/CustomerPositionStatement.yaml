@@ -1,0 +1,7 @@
+title: CustomerPositionStatement
+type: object
+properties:
+  statement:
+    $ref: 'Statement.yaml'
+  customer:
+    $ref: 'CustomerAccountDetails.yaml'

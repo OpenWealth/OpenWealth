@@ -1,0 +1,19 @@
+title: Credit
+description: Credit
+required:
+  - principalAmount
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      principalAmount:
+        description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+        $ref: '../../Types/CurrencyAmount.yaml'
+      interestRate:
+        $ref: '../../Types/InterestRate.yaml'
+      limit:
+        type: number
+        example: 100000
+        description: Maximum principal amount allowed by the credit contract
+      underlyingFinancialInstrument:
+        $ref: '../FinancialInstrument.yaml'

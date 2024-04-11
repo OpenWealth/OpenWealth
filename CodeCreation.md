@@ -19,10 +19,10 @@ npm i -g @redocly/cli@latest
 Bundle a specification with this command
 
 ```console
-redocly bundle api.yaml --ext yaml --output api-bundled.yaml
+redocly bundle API.yaml --ext yaml --output API-bundled.yaml
 ```
 
-where 'api.yaml' is the OAS source file and 'api-bundled.yaml' denotes the bundled output file in YAML format.
+where 'API.yaml' is the OAS source file and 'API-bundled.yaml' denotes the bundled output file in YAML format.
 
 ## API Server/Client creation
 

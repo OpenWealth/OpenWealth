@@ -1,0 +1,8 @@
+name: eodIndicator
+in: query
+required: true
+description: Indicates if the position data is end-of-day (eod) data for the positions. If the parameter is set to false, the most recent data is shown, incl intraday changes on the position if the date is set to today.
+schema:
+  type: boolean
+  example: true
+  default: true

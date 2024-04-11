@@ -1,4 +1,0 @@
-title: Cash
-description: Cash
-allOf:
-  - $ref: 'financialInstrumentBase.yaml'
