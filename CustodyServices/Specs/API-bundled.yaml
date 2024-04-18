@@ -354,7 +354,6 @@ paths:
     parameters:
       - $ref: '#/components/parameters/path_customerId'
       - $ref: '#/components/parameters/date'
-      - $ref: '#/components/parameters/dateType'
       - $ref: '#/components/parameters/endOfDayIndicator'
       - $ref: '#/components/parameters/cursor'
       - $ref: '#/components/parameters/limit'
@@ -1228,12 +1227,16 @@ components:
       title: ValuatedPosition
       type: object
       required:
+        - endOfDayIndicator
         - positionDate
         - quantity
         - valuation
       allOf:
         - $ref: '#/components/schemas/Position'
       properties:
+        endOfDayIndicator:
+          description: Indicates if the positon has been confirmed by the end-of-day (eod) processing.
+          type: boolean
         positionDate:
           description: Date at which the position was valuated.
           $ref: '#/components/schemas/Date'
@@ -1434,10 +1437,10 @@ components:
       required:
         - id
         - type
-        - transactionSubtype
         - transactionDate
         - customerId
         - reversalIndicator
+        - endOfDayIndicator
       properties:
         id:
           type: string
@@ -1457,6 +1460,9 @@ components:
           description: Indicates whether it is the reversal of a previously reported movement.
           type: boolean
           default: false
+        endOfDayIndicator:
+          description: Indicates if the transaction has been confirmed by the end-of-day (eod) processing.
+          type: boolean
         reference:
           type: string
           description: Transaction reference as used in the transaction statement. This could be equal to the id of the transaction but may not if GUID are used to identify the transaction.
@@ -1540,14 +1546,17 @@ components:
         maxLength: 128
         description: The customer's account identification, this should NOT be an IBAN.
     endOfDayIndicator:
-      name: eodIndicator
+      name: endOfDayIndicator
       in: query
-      required: true
-      description: Indicates if the position data is end-of-day (eod) data for the positions. If the parameter is set to false, the most recent data is shown, incl intraday changes on the position if the date is set to today.
+      required: false
+      description: |
+        Indicates if the resources (positions & transactions) have been confirmed by the end-of-day (eod) processing.
+        If the parameter is not set, all resources will be delivered.
+        If the parameter is set to true, only resources with with the particular property set to true will be delivered.
+        If the parameter is set to false, only resources with with the particular property set to false will be delivered.
       schema:
         type: boolean
         example: true
-        default: true
     date:
       name: date
       in: query
@@ -1566,17 +1575,6 @@ components:
         maxLength: 128
         description: Identification for the position given by the bank.
         example: 1234566-12-1
-    dateType:
-      name: dateType
-      in: query
-      required: true
-      description: Indicates which type of date is decisive for the data shown.
-      schema:
-        type: string
-        enum:
-          - transactionDate
-          - bookingDate
-          - valueDate
     path_transactionId:
       name: transactionId
       in: path
