@@ -368,7 +368,6 @@ paths:
     parameters:
       - $ref: '../../Globals/Params/path_customerId.yaml'
       - $ref: '../../Globals/Params/date.yaml'
-      - $ref: 'Params/dateType.yaml'
       - $ref: 'Params/endOfDayIndicator.yaml'
       - $ref: '../../Globals/Params/cursor.yaml'
       - $ref: '../../Globals/Params/limit.yaml'
