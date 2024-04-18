@@ -3,7 +3,6 @@ type: object
 required:
   - id
   - type
-  - transactionSubtype
   - transactionDate
   - customerId
   - reversalIndicator
@@ -58,7 +57,7 @@ properties:
     type: array
     description: List of total amounts of money that is to be/was posted to respective accounts in the account currency.
     items:
-      $ref: 'PostingAmount.yaml'
+      $ref: '../Types/PostingAmount.yaml'
   settlementCurrency:
     $ref: '../../../Globals/Types/Currency.yaml'
   additionalDetails:

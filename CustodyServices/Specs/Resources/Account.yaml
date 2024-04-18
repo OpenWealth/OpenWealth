@@ -34,4 +34,4 @@ properties:
     description: Supplementary information on the account. Designated by the account servicer.
     example: Current Account CHF
   portfolioInformation:
-    $ref: 'PortfolioInformation.yaml'
+    $ref: '../Types/PortfolioInformation.yaml'
