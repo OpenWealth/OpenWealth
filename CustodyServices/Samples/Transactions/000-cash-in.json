@@ -4,6 +4,7 @@
   "transactionDate": "2022-12-31",
   "customerId": "123456",
   "reversalIndicator": false,
+  "endOfDayIndicator": true,
   "movementList": [
     {
       "type": "cash",

@@ -1,5 +1,6 @@
 {
   "id": "001",
+  "endOfDayIndicator": true,
   "positionDate": "2022-12-31",
   "financialInstrument": {
     "type": "equity",

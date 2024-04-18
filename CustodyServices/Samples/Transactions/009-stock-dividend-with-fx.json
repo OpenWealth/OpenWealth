@@ -4,6 +4,7 @@
   "transactionDate": "2023-05-31",
   "customerId": "123456",
   "reversalIndicator": false,
+  "endOfDayIndicator": true,
   "triggeringFinancialInstrument": {
     "type": "equity",
     "name": "Apple Inc.",

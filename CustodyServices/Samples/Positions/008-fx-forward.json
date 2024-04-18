@@ -1,5 +1,6 @@
 {
   "id": "008",
+  "endOfDayIndicator": true,
   "positionDate": "2023-01-04",
   "financialInstrument": {
     "type": "fxForward",

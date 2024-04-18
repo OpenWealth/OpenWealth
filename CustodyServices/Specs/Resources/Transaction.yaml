@@ -6,6 +6,7 @@ required:
   - transactionDate
   - customerId
   - reversalIndicator
+  - endOfDayIndicator
 properties:
   id:
     type: string
@@ -25,6 +26,9 @@ properties:
     description: Indicates whether it is the reversal of a previously reported movement.
     type: boolean
     default: false
+  endOfDayIndicator:
+    description: Indicates if the transaction has been confirmed by the end-of-day (eod) processing.
+    type: boolean
   reference:
     type: string
     description: Transaction reference as used in the transaction statement. This could be equal to the id of the transaction but may not if GUID are used to identify the transaction.
