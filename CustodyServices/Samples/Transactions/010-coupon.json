@@ -4,6 +4,7 @@
   "transactionDate": "2023-06-27",
   "customerId": "123456",
   "reversalIndicator": false,
+  "endOfDayIndicator": true,
   "triggeringFinancialInstrument": {
     "type": "bond",
     "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",

@@ -13,4 +13,4 @@ properties:
   currency:
     $ref: '../../../Globals/Types/Currency.yaml'
   account:
-    $ref: 'Account.yaml'
+    $ref: '../Resources/Account.yaml'

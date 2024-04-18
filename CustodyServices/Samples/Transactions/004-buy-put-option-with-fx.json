@@ -4,6 +4,7 @@
   "transactionDate": "2023-01-04",
   "customerId": "123456",
   "reversalIndicator": false,
+  "endOfDayIndicator": true,
   "placeOfTrade": {
     "marketIdentificationCode": "XNYS"
   },

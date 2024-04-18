@@ -104,23 +104,21 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-  /customers/{customerId}/customer-position-statement:
+  /customers/{customerId}/accounts:
     parameters:
       - $ref: '#/components/parameters/path_customerId'
-      - $ref: '#/components/parameters/date'
-      - $ref: '#/components/parameters/endOfDayIndicator'
       - $ref: '#/components/parameters/cursor'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/x_correlation_id_in_header'
     get:
-      summary: Returns a position statement for a specific customer.
-      description: Returns all positions (incl. investment cash accounts) for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
-      operationId: getCustomerPositionStatementByCustomerId
+      summary: Returns the accounts for a specific customer.
+      description: Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
+      operationId: getCustomerAccountsByCustomerId
       tags:
-        - positions
+        - accounts
       responses:
         '200':
-          description: Position List
+          description: Account List
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
@@ -129,7 +127,49 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerPositionStatement'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/accounts/{accountId}:
+    parameters:
+      - $ref: '#/components/parameters/path_customerId'
+      - $ref: '#/components/parameters/path_accountId'
+      - $ref: '#/components/parameters/endOfDayIndicator'
+      - $ref: '#/components/parameters/x_correlation_id_in_header'
+    get:
+      summary: Returns an account by id for a specific customer.
+      description: Returns an account for a specific customer.
+      operationId: getCustomerAccountById
+      tags:
+        - accounts
+      responses:
+        '200':
+          description: Account
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/Next-Cursor'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -228,48 +268,6 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-  /accounts/{accountId}/account-position-statement:
-    parameters:
-      - $ref: '#/components/parameters/path_accountId'
-      - $ref: '#/components/parameters/date'
-      - $ref: '#/components/parameters/endOfDayIndicator'
-      - $ref: '#/components/parameters/cursor'
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/x_correlation_id_in_header'
-    get:
-      summary: Returns the positions statement for a specific account.
-      description: Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
-      operationId: getAccountPositionStatementByAccountId
-      tags:
-        - positions
-      responses:
-        '200':
-          description: Position List
-          headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountPositionStatement'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '500':
-          $ref: '#/components/responses/500'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   /accounts/{accountId}/positions:
     parameters:
       - $ref: '#/components/parameters/path_accountId'
@@ -352,140 +350,10 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-  /customers/{customerId}/transaction-statement:
-    parameters:
-      - $ref: '#/components/parameters/path_customerId'
-      - $ref: '#/components/parameters/date'
-      - $ref: '#/components/parameters/dateType'
-      - $ref: '#/components/parameters/endOfDayIndicator'
-      - $ref: '#/components/parameters/cursor'
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/x_correlation_id_in_header'
-    get:
-      summary: Returns a transactions statement for a specific customer.
-      description: Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
-      operationId: getTransactionStatementByCustomerId
-      tags:
-        - transactions
-      responses:
-        '200':
-          description: Returns a transaction list for a specific customer.
-          headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TransactionStatement'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '500':
-          $ref: '#/components/responses/500'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
-  /accounts/{accountId}/transaction-statement:
-    parameters:
-      - $ref: '#/components/parameters/path_accountId'
-      - $ref: '#/components/parameters/date'
-      - $ref: '#/components/parameters/dateType'
-      - $ref: '#/components/parameters/endOfDayIndicator'
-      - $ref: '#/components/parameters/cursor'
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/x_correlation_id_in_header'
-    get:
-      summary: Returns the transactions a specific account.
-      description: Returns the transactions for all positions in a specific account. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
-      operationId: getTransactionStatementByAccountId
-      tags:
-        - transactions
-      responses:
-        '200':
-          description: Returns a transactions list for all positions and cash accounts in a specific protfolio.
-          headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TransactionStatement'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '500':
-          $ref: '#/components/responses/500'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
-  /positions/{positionId}/transaction-statement:
-    parameters:
-      - $ref: '#/components/parameters/path_positionId'
-      - $ref: '#/components/parameters/date'
-      - $ref: '#/components/parameters/dateType'
-      - $ref: '#/components/parameters/endOfDayIndicator'
-      - $ref: '#/components/parameters/cursor'
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/x_correlation_id_in_header'
-    get:
-      summary: Returns the transactions for a specific position.
-      description: Returns transactions for a specific position. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
-      operationId: getTransactionStatementByPositionId
-      tags:
-        - transactions
-      responses:
-        '200':
-          description: Transaction list
-          headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TransactionStatement'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '500':
-          $ref: '#/components/responses/500'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   /customers/{customerId}/transactions:
     parameters:
       - $ref: '#/components/parameters/path_customerId'
       - $ref: '#/components/parameters/date'
-      - $ref: '#/components/parameters/dateType'
       - $ref: '#/components/parameters/endOfDayIndicator'
       - $ref: '#/components/parameters/cursor'
       - $ref: '#/components/parameters/limit'
@@ -571,6 +439,54 @@ components:
       description: ISO 4217 code
       pattern: '[A-Z]{3}'
       example: CHF
+    Customer:
+      title: Customer
+      type: object
+      description: Overview of the customer with the respective accounts
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: Unique and unambiguous identification used by the bank for the customer.
+        referenceCurrency:
+          $ref: '#/components/schemas/Currency'
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for CommonErrorResponse.
+      type: string
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      example: /problems/TECHNICAL_ERROR
+    CommonErrorResponse:
+      title: CommonErrorResponse
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
+          type: string
+          example: This is the general problem description
+        detail:
+          type: string
+          example: Detailed problem description with respect to the current request
+        instance:
+          type: string
+          example: path/to/corresponding/resource
     PortfolioInformation:
       title: PortfolioInformation
       type: object
@@ -622,94 +538,6 @@ components:
           example: Current Account CHF
         portfolioInformation:
           $ref: '#/components/schemas/PortfolioInformation'
-    Customer:
-      title: Customer
-      type: object
-      description: Overview of the customer with the respective accounts
-      required:
-        - id
-      properties:
-        id:
-          type: string
-          maxLength: 128
-          description: Unique and unambiguous identification used by the bank for the customer.
-        referenceCurrency:
-          $ref: '#/components/schemas/Currency'
-        accountList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-    CommonErrorType:
-      title: Common Error Type
-      description: Error Types for CommonErrorResponse.
-      type: string
-      enum:
-        - /problems/INVALID_PAYLOAD
-        - /problems/MALFORMED_PAYLOAD
-        - /problems/INVALID_TOKEN
-        - /problems/EXPIRED_TOKEN
-        - /problems/INSUFFICIENT_PRIVILEGES
-        - /problems/NO_ACCESS_TO_RESOURCE
-        - /problems/RESOURCE_DOES_NOT_EXIST
-        - /problems/RESOURCE_NOT_READY
-        - /problems/RESOURCE_TOO_LARGE
-        - /problems/WRONG_METHOD
-        - /problems/OPERATION_NOT_ALLOWED
-        - /problems/TECHNICAL_ERROR
-        - /problems/NOT_IMPLEMENTED
-        - /problems/SERVICE_UNAVAILABLE
-      example: /problems/TECHNICAL_ERROR
-    CommonErrorResponse:
-      title: CommonErrorResponse
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/CommonErrorType'
-        title:
-          type: string
-          example: This is the general problem description
-        detail:
-          type: string
-          example: Detailed problem description with respect to the current request
-        instance:
-          type: string
-          example: path/to/corresponding/resource
-    Statement:
-      title: Statement
-      type: object
-      required:
-        - statementDateTime
-        - date
-        - endOfDayIndicator
-      properties:
-        statementDateTime:
-          type: string
-          format: date-time
-          example: '2018-04-13T11:11:11Z'
-          description: Date and time of the statement creation (UTC Timestamp). In accordance with ISO 8601.
-        date:
-          type: object
-          required:
-            - date
-            - dateType
-          properties:
-            date:
-              type: string
-              format: date
-              example: '2018-04-13'
-              description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
-            dateType:
-              type: string
-              example: transactionDate
-              description: Specifies the type of date.
-              enum:
-                - transactionDate
-                - bookingDate
-                - valueDate
-        endOfDayIndicator:
-          type: boolean
-          description: Indicates if the data displayed is end-of-day data. If true, the data is end-of-day data. If false and date is today, current (intraday) data will be displayed.
-          example: true
     FinancialInstrumentType:
       title: FinancialInstrumentType
       type: string
@@ -1159,7 +987,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
@@ -1177,7 +1007,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
@@ -1198,7 +1030,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
@@ -1218,7 +1052,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRatePaid:
               description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.
@@ -1240,7 +1076,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRatePaid:
               description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.
@@ -1263,7 +1101,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             maturityDate:
               description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
@@ -1399,12 +1239,16 @@ components:
       title: ValuatedPosition
       type: object
       required:
+        - endOfDayIndicator
         - positionDate
         - quantity
         - valuation
       allOf:
         - $ref: '#/components/schemas/Position'
       properties:
+        endOfDayIndicator:
+          description: Indicates if the positon has been confirmed by the end-of-day (eod) processing.
+          type: boolean
         positionDate:
           description: Date at which the position was valuated.
           $ref: '#/components/schemas/Date'
@@ -1429,53 +1273,6 @@ components:
         blockedQuantity:
           description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
           $ref: '#/components/schemas/Quantity'
-    AccountDetails:
-      title: AccountDetails
-      allOf:
-        - $ref: '#/components/schemas/Account'
-        - type: object
-          required:
-            - positionList
-          properties:
-            externalReference:
-              type: string
-              maxLength: 128
-              example: 987-654-321
-              description: Account reference used by a bank external party, e.g. PMS
-            positionList:
-              type: array
-              description: A list of positions
-              items:
-                $ref: '#/components/schemas/ValuatedPosition'
-    CustomerAccountDetails:
-      title: CustomerAccountDetails
-      type: object
-      required:
-        - customerId
-      allOf:
-        - $ref: '#/components/schemas/Customer'
-        - type: object
-          properties:
-            accountDetailsList:
-              type: array
-              items:
-                $ref: '#/components/schemas/AccountDetails'
-    CustomerPositionStatement:
-      title: CustomerPositionStatement
-      type: object
-      properties:
-        statement:
-          $ref: '#/components/schemas/Statement'
-        customer:
-          $ref: '#/components/schemas/CustomerAccountDetails'
-    AccountPositionStatement:
-      title: AccountPositionStatement
-      type: object
-      properties:
-        statement:
-          $ref: '#/components/schemas/Statement'
-        accountDetails:
-          $ref: '#/components/schemas/AccountDetails'
     TransactionType:
       title: TransactionType
       type: string
@@ -1652,10 +1449,10 @@ components:
       required:
         - id
         - type
-        - transactionSubtype
         - transactionDate
         - customerId
         - reversalIndicator
+        - endOfDayIndicator
       properties:
         id:
           type: string
@@ -1675,6 +1472,9 @@ components:
           description: Indicates whether it is the reversal of a previously reported movement.
           type: boolean
           default: false
+        endOfDayIndicator:
+          description: Indicates if the transaction has been confirmed by the end-of-day (eod) processing.
+          type: boolean
         reference:
           type: string
           description: Transaction reference as used in the transaction statement. This could be equal to the id of the transaction but may not if GUID are used to identify the transaction.
@@ -1715,16 +1515,6 @@ components:
           maxLength: 70
           description: Provides additional details on the transaction which can not be included within the structured fields of the message.
           example: Replaces transaction nr. 12234567489
-    TransactionStatement:
-      title: TransactionStatement
-      type: object
-      properties:
-        statement:
-          $ref: '#/components/schemas/Statement'
-        transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Transaction'
   parameters:
     cursor:
       name: cursor
@@ -1759,6 +1549,26 @@ components:
         maxLength: 128
         example: 123123456
         description: Unique and unambiguous identification used by the bank for the customer.
+    path_accountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        description: The customer's account identification, this should NOT be an IBAN.
+    endOfDayIndicator:
+      name: endOfDayIndicator
+      in: query
+      required: false
+      description: |
+        Indicates if the resources (positions & transactions) have been confirmed by the end-of-day (eod) processing.
+        If the parameter is not set, all resources will be delivered.
+        If the parameter is set to true, only resources with with the particular property set to true will be delivered.
+        If the parameter is set to false, only resources with with the particular property set to false will be delivered.
+      schema:
+        type: boolean
+        example: true
     date:
       name: date
       in: query
@@ -1768,15 +1578,6 @@ components:
         format: date
         description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
         example: '2019-12-31'
-    endOfDayIndicator:
-      name: eodIndicator
-      in: query
-      required: true
-      description: Indicates if the position data is end-of-day (eod) data for the positions. If the parameter is set to false, the most recent data is shown, incl intraday changes on the position if the date is set to today.
-      schema:
-        type: boolean
-        example: true
-        default: true
     path_positionId:
       name: positionId
       in: path
@@ -1786,25 +1587,6 @@ components:
         maxLength: 128
         description: Identification for the position given by the bank.
         example: 1234566-12-1
-    path_accountId:
-      name: accountId
-      in: path
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-        description: The customer's account identification, this should NOT be an IBAN.
-    dateType:
-      name: dateType
-      in: query
-      required: true
-      description: Indicates which type of date is decisive for the data shown.
-      schema:
-        type: string
-        enum:
-          - transactionDate
-          - bookingDate
-          - valueDate
     path_transactionId:
       name: transactionId
       in: path

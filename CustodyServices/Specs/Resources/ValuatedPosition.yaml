@@ -1,12 +1,16 @@
 title: ValuatedPosition
 type: object
 required:
+  - endOfDayIndicator
   - positionDate
   - quantity
   - valuation
 allOf:
   - $ref: 'Position.yaml'
 properties:
+  endOfDayIndicator:
+    description: Indicates if the positon has been confirmed by the end-of-day (eod) processing.
+    type: boolean
   positionDate:
     description: Date at which the position was valuated.
     $ref: '../../../Globals/Types/Date.yaml'
