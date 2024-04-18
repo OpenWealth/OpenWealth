@@ -987,7 +987,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
@@ -1005,7 +1007,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
@@ -1026,7 +1030,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
@@ -1046,7 +1052,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRatePaid:
               description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.
@@ -1068,7 +1076,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRatePaid:
               description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.
@@ -1091,7 +1101,9 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: Indication of the cash values to be settled as of the start and maturity date of the contract.
+              description: |
+                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
+                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
               $ref: '#/components/schemas/CurrencyAmount'
             maturityDate:
               description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
