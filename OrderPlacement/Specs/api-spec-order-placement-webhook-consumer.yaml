@@ -29,7 +29,7 @@ paths:
           description: Notification accepted
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
    
         '400':
           $ref: '../../Globals/Responses/400.yaml'

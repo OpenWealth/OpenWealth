@@ -26,7 +26,7 @@ paths:
           description: Notification accepted
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/x_correlation_id_in_header'
         '400':
           $ref: '#/components/responses/400'
         '500':
@@ -202,7 +202,6 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
-        - /problems/CONFLICT
       example: /problems/TECHNICAL_ERROR
     CommonErrorResponse:
       title: CommonErrorResponse
@@ -220,11 +219,13 @@ components:
           type: string
           example: path/to/corresponding/resource
   headers:
-    XCorrelationId:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
+    x_correlation_id_in_header:
+      in: header
+      name: X-Correlation-ID
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+      required: true
       schema:
         type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   responses:
     '400':
       headers:

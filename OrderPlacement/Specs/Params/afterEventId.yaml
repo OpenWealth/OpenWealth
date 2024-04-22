@@ -1,0 +1,4 @@
+name: afterEventId
+in: query
+schema:
+  $ref: '../Types/eventSubscriptionId.yaml'
