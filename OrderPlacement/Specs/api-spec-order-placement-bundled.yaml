@@ -31,7 +31,7 @@ paths:
           description: Order accepted for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
           content:
             application/json:
               schema:
@@ -66,9 +66,9 @@ paths:
           description: Order list.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
             X-nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
+              $ref: '#/components/headers/NextCursor'
           content:
             application/json:
               schema:
@@ -112,7 +112,7 @@ paths:
           description: Receive a specific order with the corresponding allocations and status.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
           content:
             application/json:
               schema:
@@ -144,7 +144,7 @@ paths:
           description: Order cancellation received for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
           content:
             application/json:
               schema:
@@ -182,7 +182,7 @@ paths:
           description: Returns list of accounts the requestor has access to.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
           content:
             application/json:
               schema:
@@ -221,7 +221,7 @@ paths:
           description: Subscription created.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
           content:
             application/json:
               schema:
@@ -257,7 +257,7 @@ paths:
           description: Event Subscription read.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
           content:
             application/json:
               schema:
@@ -296,7 +296,7 @@ paths:
           description: Event Subscription read.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
           content:
             application/json:
               schema:
@@ -336,7 +336,7 @@ paths:
           description: Event subscription changed
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
           content:
             application/json:
               schema:
@@ -370,7 +370,7 @@ paths:
           description: Event subscription deleted.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -404,7 +404,7 @@ paths:
           description: aggregated event-notification list
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
           content:
             application/json:
               schema:
@@ -469,15 +469,12 @@ components:
         format: int32
         minimum: 1
   headers:
-    x_correlation_id_in_header:
-      in: header
-      name: X-Correlation-ID
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-      required: true
+    XCorrelationId:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
-    Next-Cursor:
-      name: Next-Cursor
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    NextCursor:
       description: An opaque string value, or an empty string if there are no more results.
       required: false
       schema:
@@ -1095,7 +1092,7 @@ components:
         dateList:
           items:
             $ref: '#/components/schemas/orderDate'
-    CommonErrorType:
+    commonErrorType:
       title: Common Error Type
       description: Error Types for CommonErrorResponse.
       type: string
@@ -1120,7 +1117,7 @@ components:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/CommonErrorType'
+          $ref: '#/components/schemas/commonErrorType'
         title:
           type: string
           example: This is the general problem description

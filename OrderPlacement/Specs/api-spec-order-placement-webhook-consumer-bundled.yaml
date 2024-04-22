@@ -26,7 +26,7 @@ paths:
           description: Notification accepted
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/x_correlation_id_in_header'
+              $ref: '#/components/headers/XCorrelationId'
         '400':
           $ref: '#/components/responses/400'
         '500':
@@ -183,7 +183,7 @@ components:
           $ref: '#/components/schemas/lastQuantity'
         lastPrice:
           $ref: '#/components/schemas/lastPrice'
-    CommonErrorType:
+    commonErrorType:
       title: Common Error Type
       description: Error Types for CommonErrorResponse.
       type: string
@@ -208,7 +208,7 @@ components:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/CommonErrorType'
+          $ref: '#/components/schemas/commonErrorType'
         title:
           type: string
           example: This is the general problem description
@@ -219,13 +219,11 @@ components:
           type: string
           example: path/to/corresponding/resource
   headers:
-    x_correlation_id_in_header:
-      in: header
-      name: X-Correlation-ID
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-      required: true
+    XCorrelationId:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   responses:
     '400':
       headers:

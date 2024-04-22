@@ -8,7 +8,7 @@ properties:
   amount:
     $ref: 'amount.yaml'
   currency:
-    $ref: '../../../Globals/Types/currency.yaml'
+    $ref: '../../../Globals/V2/Types/currency.yaml'
   creditDebitIndicator:
     $ref: 'creditDebitIndicator.yaml'
   foreignExchangeRate:
