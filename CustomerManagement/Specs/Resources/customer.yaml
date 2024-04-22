@@ -23,9 +23,9 @@ properties:
     description: Status of the customer relationship
     example: active
   referenceCurrency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   openingDate:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
   language:
     $ref: '../Types/language.yaml'
   customerSegment:

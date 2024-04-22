@@ -7,7 +7,7 @@ properties:
   amountTotalNetAssets:
     $ref: 'amount.yaml'
   currency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   referenceYear:
     $ref: 'year.yaml'
   additionalInformation:

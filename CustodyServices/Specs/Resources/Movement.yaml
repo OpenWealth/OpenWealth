@@ -13,7 +13,7 @@ properties:
     $ref: '../Types/MovementType.yaml'
   movementDate:
     description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank.
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V3/Types/Date.yaml'
   financialInstrument:
     $ref: 'FinancialInstrument.yaml'
   account:
@@ -26,10 +26,10 @@ properties:
     description: Identification for the position given by the bank.
     example: 1234566-12-1
   positionCurrency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V3/Types/Currency.yaml'
   valueDate:
     description: Date when calculating economic benefit for a cash amount.
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V3/Types/Date.yaml'
   price:
     $ref: '../Types/Price.yaml'
   foreignExchangeRate:

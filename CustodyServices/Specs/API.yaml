@@ -34,9 +34,9 @@ security:
 paths:
   /customers:
     parameters:
-      - $ref: '../../Globals/Params/cursor.yaml'
-      - $ref: '../../Globals/Params/limit.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/cursor.yaml'
+      - $ref: '../../Globals/V3/Params/limit.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns all customers and respective accounts accessible for the logged in user.
       description: This endpoint returns a highlevel list of customers and the respective accounts accessible for the logged in user. Paging is done based on the customerOverview object, i.e. if limit is set to 1, then 1 customerOverview will be returned per page.
@@ -49,9 +49,9 @@ paths:
           description: Returns a list with all customers and the respective accounts.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -59,26 +59,26 @@ paths:
                 items:
                   $ref: 'Resources/Customer.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}:
     parameters:
-      - $ref: '../../Globals/Params/path_customerId.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns a specific customers and respective accounts accessible for the logged in user.
       description: This endpoint returns a single customer and the list of the customer's respective accounts accessible for the logged in user.
@@ -90,34 +90,34 @@ paths:
           description: Returns a the specified customers and the respective accounts.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/Customer.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/accounts:
     parameters:
-      - $ref: '../../Globals/Params/path_customerId.yaml'
-      - $ref: '../../Globals/Params/cursor.yaml'
-      - $ref: '../../Globals/Params/limit.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+      - $ref: '../../Globals/V3/Params/cursor.yaml'
+      - $ref: '../../Globals/V3/Params/limit.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns the accounts for a specific customer.
       description: Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
@@ -129,9 +129,9 @@ paths:
           description: Account List
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -139,28 +139,28 @@ paths:
                 items:
                   $ref: 'Resources/Account.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/accounts/{accountId}:
     parameters:
-      - $ref: '../../Globals/Params/path_customerId.yaml'
-      - $ref: '../../Globals/Params/path_accountId.yaml'
+      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+      - $ref: '../../Globals/V3/Params/path_accountId.yaml'
       - $ref: 'Params/endOfDayIndicator.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns an account by id for a specific customer.
       description: Returns an account for a specific customer.
@@ -172,38 +172,38 @@ paths:
           description: Account
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/Account.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/positions:
     parameters:
-      - $ref: '../../Globals/Params/path_customerId.yaml'
-      - $ref: '../../Globals/Params/date.yaml'
+      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+      - $ref: '../../Globals/V3/Params/date.yaml'
       - $ref: 'Params/endOfDayIndicator.yaml'
-      - $ref: '../../Globals/Params/cursor.yaml'
-      - $ref: '../../Globals/Params/limit.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/cursor.yaml'
+      - $ref: '../../Globals/V3/Params/limit.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns the positions for a specific customer.
       description: Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
@@ -215,9 +215,9 @@ paths:
           description: Position List
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -225,28 +225,28 @@ paths:
                 items:
                   $ref: 'Resources/ValuatedPosition.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/positions/{positionId}:
     parameters:
-      - $ref: '../../Globals/Params/path_customerId.yaml'
-      - $ref: '../../Globals/Params/path_positionId.yaml'
+      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+      - $ref: '../../Globals/V3/Params/path_positionId.yaml'
       - $ref: 'Params/endOfDayIndicator.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns a positions by id for a specific customer.
       description: Returns a positions for a specific customer.
@@ -258,36 +258,36 @@ paths:
           description: Position
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/ValuatedPosition.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
   /accounts/{accountId}/positions:
     parameters:
-      - $ref: '../../Globals/Params/path_accountId.yaml'
-      - $ref: '../../Globals/Params/date.yaml'
+      - $ref: '../../Globals/V3/Params/path_accountId.yaml'
+      - $ref: '../../Globals/V3/Params/date.yaml'
       - $ref: 'Params/endOfDayIndicator.yaml'
-      - $ref: '../../Globals/Params/cursor.yaml'
-      - $ref: '../../Globals/Params/limit.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/cursor.yaml'
+      - $ref: '../../Globals/V3/Params/limit.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns the positions for a specific account.
       description: Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
@@ -299,9 +299,9 @@ paths:
           description: Position List
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -309,28 +309,28 @@ paths:
                 items:
                   $ref: 'Resources/ValuatedPosition.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
   /accounts/{accountId}/positions/{positionId}:
     parameters:
-      - $ref: '../../Globals/Params/path_accountId.yaml'
-      - $ref: '../../Globals/Params/path_positionId.yaml'
+      - $ref: '../../Globals/V3/Params/path_accountId.yaml'
+      - $ref: '../../Globals/V3/Params/path_positionId.yaml'
       - $ref: 'Params/endOfDayIndicator.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns a positions by id for a specific account.
       description: Returns a positions for a specific account.
@@ -342,36 +342,36 @@ paths:
           description: Position
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/ValuatedPosition.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/transactions:
     parameters:
-      - $ref: '../../Globals/Params/path_customerId.yaml'
-      - $ref: '../../Globals/Params/date.yaml'
+      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+      - $ref: '../../Globals/V3/Params/date.yaml'
       - $ref: 'Params/endOfDayIndicator.yaml'
-      - $ref: '../../Globals/Params/cursor.yaml'
-      - $ref: '../../Globals/Params/limit.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/cursor.yaml'
+      - $ref: '../../Globals/V3/Params/limit.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns a transactions for a specific customer.
       description: Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
@@ -383,9 +383,9 @@ paths:
           description: Returns a transaction list for a specific customer.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -393,27 +393,27 @@ paths:
                 items:
                   $ref: 'Resources/Transaction.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/transactions/{transactionId}:
     parameters:
-      - $ref: '../../Globals/Params/path_customerId.yaml'
-      - $ref: '../../Globals/Params/path_transactionId.yaml'
-      - $ref: '../../Globals/Params/x_correlation_id_in_header.yaml'
+      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+      - $ref: '../../Globals/V3/Params/path_transactionId.yaml'
+      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns a transaction for a specific customer.
       description: Returns a transaction instance by id.
@@ -425,27 +425,27 @@ paths:
           description: Returns a transaction list for a specific customer.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/X-Correlation-Id.yaml'
+              $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/Transaction.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V3/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V3/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V3/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V3/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V3/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V3/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V3/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V3/Responses/503.yaml'
 
 components:
   schemas: {}

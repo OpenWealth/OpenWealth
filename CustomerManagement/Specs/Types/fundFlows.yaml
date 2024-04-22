@@ -8,19 +8,19 @@ properties:
     $ref: 'amount.yaml'
     # description: Expected amount of fund inflows in the next three months in customer reference currency
   currencyExpectedInflows:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
     # description: Customer reference currency of expected fund inflows
   amountPlannedTotalAssets:
     $ref: 'amount.yaml'
     # description: Planned/expected amount of total assets in the next 12 months in customer reference currency
   currencyPlannedTotalAssets:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
     # description: Customer reference currency of expected amount of total assets in the next 12 months
   amountExpectedTurnover:
     # description: 'Expected fund flows per year: Expected amount of account turnover (incoming money/outgoing money per year without initial deposit) in customer reference currency.'
     $ref: 'amount.yaml'
   currencyExpectedTurnover:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
     # description: Customer reference currency of expected fund flows per year
   numberOfInflows:
     description: Number of expected annual inflows

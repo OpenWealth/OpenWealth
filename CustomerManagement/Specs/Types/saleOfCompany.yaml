@@ -22,11 +22,11 @@ properties:
   companyAnnualTurnover:
     $ref: 'amount.yaml'
   currencyAnnualTurnover:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   companyAnnualProfit:
     $ref: 'amount.yaml'
   currencyAnnualProfit:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   startCapitalOrigin:
     type: string
     maxLength: 250
@@ -43,7 +43,7 @@ properties:
     description: Names of other shareholders of that company
     example: David Beispiel, Charlotte Meyer, Benjamin Müller
   dateOfSale:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
     # description: Date of sale of company e.g 05.12.2009
   buyer:
     type: string

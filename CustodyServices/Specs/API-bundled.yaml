@@ -1604,20 +1604,11 @@ components:
     '400':
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
-        X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
       description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
       content:
         application/problem+json:
@@ -1626,20 +1617,11 @@ components:
     '401':
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
-        X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
       description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
       content:
         application/problem+json:
@@ -1648,20 +1630,11 @@ components:
     '403':
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
-        X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
       description: Forbidden - The server understood the request but refuses to authorize it.
       content:
         application/problem+json:
@@ -1670,20 +1643,11 @@ components:
     '404':
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
-        X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
       description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
       content:
         application/problem+json:
@@ -1692,20 +1656,11 @@ components:
     '405':
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
-        X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
       description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
       content:
         application/problem+json:
@@ -1714,20 +1669,11 @@ components:
     '500':
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
-        X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
       description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
@@ -1736,20 +1682,11 @@ components:
     '501':
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
-        X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
       description: Not Implemented - The server does not support the functionality required to fulfill the request.
       content:
         application/problem+json:
@@ -1758,20 +1695,11 @@ components:
     '503':
       headers:
         Content-Type:
-          schema:
-            type: string
-            description: application/problem+json; charset=utf-8 according to RFC7807
-            example: application/problem+json
+          $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
-          schema:
-            type: string
-            description: Response language - always en
-            example: en
-        X-Correlation-ID:
-          schema:
-            type: string
-            description: Client defined ID from request to correlates HTTP requests between a client and server.
-            example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
       description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
       content:
         application/problem+json:
@@ -1779,14 +1707,22 @@ components:
             $ref: '#/components/schemas/CommonErrorResponse'
   headers:
     X-Correlation-Id:
-      name: X-Correlation-Id
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
     Next-Cursor:
-      name: Next-Cursor
       description: An opaque string value, or an empty string if there are no more results.
       required: false
       schema:
         type: string
+    Problem-Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807
+      schema:
+        type: string
+        example: application/problem+json
+    Content-Language:
+      description: Response language - always en
+      schema:
+        type: string
+        example: en
