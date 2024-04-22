@@ -23,7 +23,7 @@ properties:
     description: Name of the account. It provides an additional means of identification, and is designated by the account servicer in agreement with the account owner.
     example: Household account
   referenceCurrency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V3/Types/Currency.yaml'
   iban:
     type: string
     description: Contains the accounts Internatioinal Banking Account Number (IBAN) for a cashAccount if available.

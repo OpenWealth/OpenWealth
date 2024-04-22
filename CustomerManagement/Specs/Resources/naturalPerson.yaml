@@ -28,11 +28,11 @@ properties:
     example: PhD
     description: Official title of the person
   dateOfBirth:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
   dateOfMarriage:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
   dateOfDeath:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
   gender:
     type: string
     enum:

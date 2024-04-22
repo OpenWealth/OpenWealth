@@ -18,7 +18,7 @@ properties:
     $ref: '../Types/TransactionType.yaml'
   transactionDate:
     description: Date of transaction entity
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V3/Types/Date.yaml'
   customerId:
     type: string
     description: Unique and unambiguous identification used by the bank for the customer.
@@ -44,10 +44,10 @@ properties:
     example: 2134123415
   tradeDate:
     description: Specifies the date/time on which the trade was executed.
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V3/Types/Date.yaml'
   settlementDate:
     description: Date and time at which the securities are to be delivered or received.
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V3/Types/Date.yaml'
   triggeringFinancialInstrument:
     $ref: 'FinancialInstrument.yaml'
   triggeringQuantity:
@@ -63,7 +63,7 @@ properties:
     items:
       $ref: '../Types/PostingAmount.yaml'
   settlementCurrency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V3/Types/Currency.yaml'
   additionalDetails:
     type: string
     maxLength: 70

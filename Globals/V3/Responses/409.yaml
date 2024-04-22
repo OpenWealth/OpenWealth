@@ -1,0 +1,12 @@
+headers:
+  Content-Type:
+    $ref: '../Headers/Problem-Content-Type.yaml'
+  Content-Language:
+    $ref: '../Headers/Content-Language.yaml'
+  X-Correlation-Id:
+    $ref: '../Headers/X-Correlation-Id.yaml'
+description: Conflict - The request conflicts with the current state of the target resource.
+content:
+  application/problem+json:
+    schema:
+      $ref: 'CommonErrorResponse.yaml'

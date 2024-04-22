@@ -9,16 +9,16 @@ properties:
     description: Description of asset
     example: House in Davos with 5 rooms and 2 bathrooms.
   dateOfAcquisition:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
     # description: Date when the asset was bought
   initialValue:
     $ref: 'amount.yaml'
     # description: Amount/Value of the asset when it was initially acquired e.g. 1'250'000
   currency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
     # description: Currency the initial asset was acquired in e.g. CHF
   dateOfSale:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
     # description: Date of sale of asset e.g 05.12.2009
   buyer:
     type: string

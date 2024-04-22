@@ -1,0 +1,12 @@
+headers:
+  Content-Type:
+    $ref: '../Headers/Problem-Content-Type.yaml'
+  Content-Language:
+    $ref: '../Headers/Content-Language.yaml'
+  X-Correlation-Id:
+    $ref: '../Headers/X-Correlation-Id.yaml'
+description: Not Implemented - The server does not support the functionality required to fulfill the request.
+content:
+  application/problem+json:
+    schema:
+      $ref: 'CommonErrorResponse.yaml'

@@ -72,7 +72,7 @@ properties:
     description: Unique document type ID
     example: US101 - e.g. as document type ID for the document type formW9
   issueDate:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
   languageCode:
     $ref: '../Types/language.yaml'
     # language of document e.g. EN

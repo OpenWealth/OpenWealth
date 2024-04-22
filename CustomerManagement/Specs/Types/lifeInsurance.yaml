@@ -12,7 +12,7 @@ properties:
     description: Name of the provider
     example: Swiss Insurance Company
   dateOfReception:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
     # description: Date when the life insurance was received.
   additionalInformation:
     $ref: 'additionalInformation.yaml'

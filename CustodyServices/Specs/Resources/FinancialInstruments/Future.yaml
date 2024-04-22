@@ -10,7 +10,7 @@ allOf:
     properties:
       expiryDate:
         description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
-        $ref: '../../../../Globals/Types/Date.yaml'
+        $ref: '../../../../Globals/V3/Types/Date.yaml'
       contractSize:
         $ref: '../../Types/ContractSize.yaml'
       underlyingFinancialInstrument:

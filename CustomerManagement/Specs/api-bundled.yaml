@@ -1200,11 +1200,13 @@ components:
       description: External customer/person ID
       example: 123-456-787
     Currency:
+      title: Currency
       type: string
       description: ISO 4217 code
       pattern: '[A-Z]{3}'
       example: CHF
     Date:
+      title: Date
       type: string
       format: date
       pattern: \d{4}-\d{2}-\d{2}
@@ -1269,7 +1271,7 @@ components:
           description: Indicates the instruction/full name of the previous bank advisor on the side of the custody bank.
           example: Peter Vergangenheit PC5-PV
           readOnly: true
-    CommonErrorType:
+    commonErrorType:
       title: Common Error Type
       description: Error Types for CommonErrorResponse.
       type: string
@@ -1294,7 +1296,7 @@ components:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/CommonErrorType'
+          $ref: '#/components/schemas/commonErrorType'
         title:
           type: string
           example: This is the general problem description

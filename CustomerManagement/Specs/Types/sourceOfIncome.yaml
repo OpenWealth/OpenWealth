@@ -17,7 +17,7 @@ properties:
   amount:
     $ref: 'amount.yaml'
   currency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   industry:
     type: string
     maxLength: 35

@@ -24,7 +24,7 @@ properties:
     description: Nature of the assets received
     example: Cash, Stocks and a property in Davos
   dateOfReception:
-    $ref: '../../../Globals/Types/Date.yaml'
+    $ref: '../../../Globals/V2/Types/Date.yaml'
     # description: Date when the inheritance was received
   additionalInformation:
     $ref: 'additionalInformation.yaml'

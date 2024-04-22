@@ -26,7 +26,7 @@ properties:
   companyAnnualTurnover:
     $ref: 'amount.yaml'
   currencyAnnualTurnover:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   industry:
     type: string
     maxLength: 35

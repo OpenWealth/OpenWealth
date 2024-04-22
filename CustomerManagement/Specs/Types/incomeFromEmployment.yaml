@@ -23,11 +23,11 @@ properties:
   companyAnnualTurnover:
     $ref: 'amount.yaml'
   currencyAnnualTurnover:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   companyAnnualProfit:
     $ref: 'amount.yaml'
   currencyAnnualProfit:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   roleOrPosition:
     $ref: 'position.yaml'
   period:

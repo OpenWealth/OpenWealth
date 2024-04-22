@@ -10,4 +10,4 @@ properties:
     example: 12000
     description: Signed amount
   currency:
-    $ref: '../../../Globals/Types/Currency.yaml'
+    $ref: '../../../Globals/V3/Types/Currency.yaml'
