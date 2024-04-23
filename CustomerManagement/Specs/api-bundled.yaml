@@ -28,9 +28,9 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
             nextCursor:
-              $ref: '#/components/headers/NextCursor'
+              $ref: '#/components/headers/X-nextCursor'
           content:
             application/json:
               schema:
@@ -73,7 +73,7 @@ paths:
           description: Accepted
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -109,7 +109,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -145,7 +145,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -183,9 +183,9 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
             nextCursor:
-              $ref: '#/components/headers/NextCursor'
+              $ref: '#/components/headers/X-nextCursor'
           content:
             application/json:
               schema:
@@ -229,7 +229,7 @@ paths:
           description: Accepted
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -266,7 +266,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -303,7 +303,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -342,7 +342,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -386,7 +386,7 @@ paths:
           description: Created
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -424,7 +424,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -467,7 +467,7 @@ paths:
           description: Accepted
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -500,7 +500,7 @@ paths:
           description: Accepted
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -535,7 +535,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -579,7 +579,7 @@ paths:
           description: Created
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -617,7 +617,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -660,7 +660,7 @@ paths:
           description: Accepted
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -694,7 +694,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -738,7 +738,7 @@ paths:
           description: Created
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -775,7 +775,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -812,7 +812,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -849,7 +849,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -893,7 +893,7 @@ paths:
           description: Accepted
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -934,7 +934,7 @@ paths:
           description: Accepted.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -970,7 +970,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -1006,7 +1006,7 @@ paths:
           description: OK
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -3059,12 +3059,12 @@ components:
         domicile:
           $ref: '#/components/schemas/country'
   headers:
-    XCorrelationId:
+    X-Correlation-ID:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    NextCursor:
+    X-nextCursor:
       description: An opaque string value, or an empty string if there are no more results.
       required: false
       schema:

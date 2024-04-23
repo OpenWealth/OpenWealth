@@ -33,7 +33,7 @@ paths:
           description: Order accepted for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
@@ -68,9 +68,9 @@ paths:
           description: Order list.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
             X-nextCursor:
-              $ref: '../../Globals/V2/Headers/NextCursor.yaml'
+              $ref: '../../Globals/V2/Headers/X-nextCursor.yaml'
           content:
             application/json:
               schema:
@@ -115,7 +115,7 @@ paths:
           description: Receive a specific order with the corresponding allocations and status.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
@@ -148,7 +148,7 @@ paths:
           description: Order cancellation received for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
@@ -187,7 +187,7 @@ paths:
           description: Returns list of accounts the requestor has access to.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
@@ -226,7 +226,7 @@ paths:
           description: Subscription created.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
@@ -262,7 +262,7 @@ paths:
           description: Event Subscription read.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
@@ -301,7 +301,7 @@ paths:
           description: Event Subscription read.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
@@ -341,7 +341,7 @@ paths:
           description: Event subscription changed
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
@@ -376,7 +376,7 @@ paths:
           description: Event subscription deleted.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
         '400':
           $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
@@ -411,7 +411,7 @@ paths:
           description: aggregated event-notification list
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/V2/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:

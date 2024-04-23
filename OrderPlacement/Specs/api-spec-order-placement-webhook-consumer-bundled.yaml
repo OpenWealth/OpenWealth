@@ -26,7 +26,7 @@ paths:
           description: Notification accepted
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
         '400':
           $ref: '#/components/responses/400'
         '500':
@@ -219,7 +219,7 @@ components:
           type: string
           example: path/to/corresponding/resource
   headers:
-    XCorrelationId:
+    X-Correlation-ID:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string

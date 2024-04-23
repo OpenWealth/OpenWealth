@@ -31,7 +31,7 @@ paths:
           description: Order accepted for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -66,9 +66,9 @@ paths:
           description: Order list.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
             X-nextCursor:
-              $ref: '#/components/headers/NextCursor'
+              $ref: '#/components/headers/X-nextCursor'
           content:
             application/json:
               schema:
@@ -112,7 +112,7 @@ paths:
           description: Receive a specific order with the corresponding allocations and status.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -144,7 +144,7 @@ paths:
           description: Order cancellation received for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -182,7 +182,7 @@ paths:
           description: Returns list of accounts the requestor has access to.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -221,7 +221,7 @@ paths:
           description: Subscription created.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -257,7 +257,7 @@ paths:
           description: Event Subscription read.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -296,7 +296,7 @@ paths:
           description: Event Subscription read.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -336,7 +336,7 @@ paths:
           description: Event subscription changed
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -370,7 +370,7 @@ paths:
           description: Event subscription deleted.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -404,7 +404,7 @@ paths:
           description: aggregated event-notification list
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/XCorrelationId'
+              $ref: '#/components/headers/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -469,12 +469,12 @@ components:
         format: int32
         minimum: 1
   headers:
-    XCorrelationId:
+    X-Correlation-ID:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    NextCursor:
+    X-nextCursor:
       description: An opaque string value, or an empty string if there are no more results.
       required: false
       schema:
