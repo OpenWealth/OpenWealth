@@ -45,7 +45,7 @@ paths:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
             nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
+              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
@@ -123,7 +123,7 @@ paths:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
             nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
+              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
@@ -165,7 +165,7 @@ paths:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
             nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
+              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
@@ -207,7 +207,7 @@ paths:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
             nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
+              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
@@ -289,7 +289,7 @@ paths:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
             nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
+              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
@@ -371,7 +371,7 @@ paths:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
             nextCursor:
-              $ref: '#/components/headers/Next-Cursor'
+              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
@@ -1711,7 +1711,7 @@ components:
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    Next-Cursor:
+    X-Next-Cursor:
       description: An opaque string value, or an empty string if there are no more results.
       required: false
       schema:

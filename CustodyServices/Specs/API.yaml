@@ -51,7 +51,7 @@ paths:
             X-Correlation-ID:
               $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/X-Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -131,7 +131,7 @@ paths:
             X-Correlation-ID:
               $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/X-Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -174,7 +174,7 @@ paths:
             X-Correlation-ID:
               $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/X-Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -217,7 +217,7 @@ paths:
             X-Correlation-ID:
               $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/X-Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -301,7 +301,7 @@ paths:
             X-Correlation-ID:
               $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/X-Next-Cursor.yaml'
           content:
             application/json:
               schema:
@@ -385,7 +385,7 @@ paths:
             X-Correlation-ID:
               $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
             nextCursor:
-              $ref: '../../Globals/V3/Headers/Next-Cursor.yaml'
+              $ref: '../../Globals/V3/Headers/X-Next-Cursor.yaml'
           content:
             application/json:
               schema:
