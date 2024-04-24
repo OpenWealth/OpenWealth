@@ -33,7 +33,7 @@ allOf:
           - other
       basis:
         type: string
-        description: Indicates the xxx such as LIBOR, EURIBOR
+        description: Benchmark by which floating rate will adjust in accordance with market conditions, such as LIBOR, EURIBOR
       spread:
         type: number
-        description: xxx
+        description: The floating rate will be equal to the base rate (basis) plus the spread
