@@ -405,7 +405,7 @@ paths:
     get:
       description: Get aggregated event-notification list
       tags:
-        - Event Notifications
+        - event-notification
       responses:
         '200':
           description: aggregated event-notification list
