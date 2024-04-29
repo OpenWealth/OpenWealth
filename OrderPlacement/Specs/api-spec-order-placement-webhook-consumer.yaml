@@ -29,12 +29,12 @@ paths:
           description: Notification accepted
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
    
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
 
 components:
   ###############

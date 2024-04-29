@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 2.1.1
+  version: 2.2.0
   title: Order Placement API
   description: This API is used to place orders and check on the order status.
   contact:
@@ -33,27 +33,27 @@ paths:
           description: Order accepted for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/order.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
     get:
       summary: Returns a list of open security orders.
       description: Returns all open orders to which the user of the API has access to. Paging is done based on the order object, i.e. if limit is set to 1, then 1 order will be returned per page.
@@ -68,9 +68,9 @@ paths:
           description: Order list.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
             X-nextCursor:
-              $ref: '../../Globals/Headers/NextCursor.yaml'
+              $ref: '../../Globals/V2/Headers/X-nextCursor.yaml'
           content:
             application/json:
               schema:
@@ -78,21 +78,21 @@ paths:
                 items:
                   $ref: 'Resources/order.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
 
   /orders/{clientOrderId}:
     parameters:
@@ -115,27 +115,27 @@ paths:
           description: Receive a specific order with the corresponding allocations and status.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/order.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
 
     delete:
       summary: Cancellation of a specific order.
@@ -148,27 +148,27 @@ paths:
           description: Order cancellation received for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/order.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
 
   /accountaccesses:
     parameters:
@@ -187,28 +187,28 @@ paths:
           description: Returns list of accounts the requestor has access to.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
                 items:
                   $ref: 'Resources/accountAccess.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
   /event-subscriptions:
     post:
       summary: Subscribe to Events
@@ -226,31 +226,31 @@ paths:
           description: Subscription created.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/eventSubscription.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '409':
-          $ref: '../../Globals/Responses/409.yaml'
+          $ref: '../../Globals/V2/Responses/409.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
         '504':
-          $ref: '../../Globals/Responses/504.yaml'
+          $ref: '../../Globals/V2/Responses/504.yaml'
     get:
       summary: View Subscriptions
       description: Allows TPP to view the event subscriptions.
@@ -262,7 +262,7 @@ paths:
           description: Event Subscription read.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
@@ -270,35 +270,26 @@ paths:
                 items:
                   $ref: 'Resources/eventSubscription.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
         '504':
-          $ref: '../../Globals/Responses/504.yaml'
+          $ref: '../../Globals/V2/Responses/504.yaml'
   /event-subscriptions/{eventSubscriptionId}:
     parameters:
-      - name: eventSubscriptionId
-        in: path
-        description: >-
-          Unique identification as assigned by the API exposing party to uniquely
-          identify the callback URL resource.
-        required: true
-        schema:
-          type: string
-          minLength: 1
-          maxLength: 40
+      - $ref: 'Params/path_eventSubscriptionId.yaml'
     get:
       summary: View Subscription
       description: Allows TPP to view the event subscription.
@@ -310,29 +301,29 @@ paths:
           description: Event Subscription read.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/eventSubscription.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
         '504':
-          $ref: '../../Globals/Responses/504.yaml'    
+          $ref: '../../Globals/V2/Responses/504.yaml'    
     put:
       summary: Change event subscription
       description: Changes event subscription.
@@ -350,29 +341,29 @@ paths:
           description: Event subscription changed
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
           content:
             application/json:
               schema:
                 $ref: 'Resources/eventSubscription.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
         '504':
-          $ref: '../../Globals/Responses/504.yaml'
+          $ref: '../../Globals/V2/Responses/504.yaml'
 
     delete:
       summary: Delete event subscription
@@ -385,25 +376,50 @@ paths:
           description: Event subscription deleted.
           headers:
             X-Correlation-ID:
-              $ref: '../../Globals/Headers/XCorrelationId.yaml'
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
         '400':
-          $ref: '../../Globals/Responses/400.yaml'
+          $ref: '../../Globals/V2/Responses/400.yaml'
         '401':
-          $ref: '../../Globals/Responses/401.yaml'
+          $ref: '../../Globals/V2/Responses/401.yaml'
         '403':
-          $ref: '../../Globals/Responses/403.yaml'
+          $ref: '../../Globals/V2/Responses/403.yaml'
         '404':
-          $ref: '../../Globals/Responses/404.yaml'
+          $ref: '../../Globals/V2/Responses/404.yaml'
         '405':
-          $ref: '../../Globals/Responses/405.yaml'
+          $ref: '../../Globals/V2/Responses/405.yaml'
         '500':
-          $ref: '../../Globals/Responses/500.yaml'
+          $ref: '../../Globals/V2/Responses/500.yaml'
         '501':
-          $ref: '../../Globals/Responses/501.yaml'
+          $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
-          $ref: '../../Globals/Responses/503.yaml'
+          $ref: '../../Globals/V2/Responses/503.yaml'
         '504':
-          $ref: '../../Globals/Responses/504.yaml'
+          $ref: '../../Globals/V2/Responses/504.yaml'
+
+  /event-subscriptions/{eventSubscriptionId}/event-notifications:
+    parameters:
+      - $ref: 'Params/path_eventSubscriptionId.yaml'
+      - $ref: 'Params/fromEventDateTime.yaml'
+      - $ref: 'Params/afterEventId.yaml'
+      - $ref: '../../Globals/V2/Params/Limit.yaml'
+    get:
+      description: Get aggregated event-notification list
+      tags:
+        - event-notification
+      responses:
+        '200':
+          description: aggregated event-notification list
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'Resources/notificationOrderPlacement.yaml'
+        '404':
+          $ref: '../../Globals/V2/Responses/404.yaml'
 
 components:
   ###############

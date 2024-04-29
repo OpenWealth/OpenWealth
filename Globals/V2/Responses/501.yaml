@@ -18,4 +18,4 @@ description: Not Implemented - The server does not support the functionality req
 content:
   application/problem+json:
     schema:
-      $ref: 'CommonErrorResponse.yaml'
+      $ref: 'commonErrorResponse.yaml'

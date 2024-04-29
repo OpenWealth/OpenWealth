@@ -18,4 +18,4 @@ description: Method Not Allowed - The method received in the request-line is kno
 content:
   application/problem+json:
     schema:
-      $ref: 'CommonErrorResponse.yaml'
+      $ref: 'commonErrorResponse.yaml'
