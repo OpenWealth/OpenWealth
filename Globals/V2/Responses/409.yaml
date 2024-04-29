@@ -18,4 +18,4 @@ description: Conflict - The request conflicts with the current state of the targ
 content:
   application/problem+json:
     schema:
-      $ref: 'CommonErrorResponse.yaml'
+      $ref: 'commonErrorResponse.yaml'

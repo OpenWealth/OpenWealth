@@ -2,12 +2,12 @@ headers:
   Content-Type:
     schema:
       type: string
-      description: "application/problem+json; charset=utf-8 according to RFC7807"
+      description: 'application/problem+json; charset=utf-8 according to RFC7807'
       example: application/problem+json
   Content-Language:
     schema:
       type: string
-      description: "Response language - always en"
+      description: 'Response language - always en'
       example: en
   X-Correlation-ID:
     schema:
@@ -18,4 +18,4 @@ description: Unauthorized - The request has not been applied because it lacks va
 content:
   application/problem+json:
     schema:
-      $ref: "CommonErrorResponse.yaml"
+      $ref: 'commonErrorResponse.yaml'

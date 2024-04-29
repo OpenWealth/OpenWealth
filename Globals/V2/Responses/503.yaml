@@ -18,4 +18,4 @@ description: Service Unavailable - The server is currently unable to handle the 
 content:
   application/problem+json:
     schema:
-      $ref: 'CommonErrorResponse.yaml'
+      $ref: 'commonErrorResponse.yaml'

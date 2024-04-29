@@ -1112,7 +1112,7 @@ components:
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
       example: /problems/TECHNICAL_ERROR
-    CommonErrorResponse:
+    commonErrorResponse:
       title: CommonErrorResponse
       type: object
       properties:
@@ -1320,7 +1320,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '401':
       headers:
         Content-Type:
@@ -1342,7 +1342,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '403':
       headers:
         Content-Type:
@@ -1364,7 +1364,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '404':
       headers:
         Content-Type:
@@ -1386,7 +1386,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '405':
       headers:
         Content-Type:
@@ -1408,7 +1408,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '409':
       headers:
         Content-Type:
@@ -1430,7 +1430,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '500':
       headers:
         Content-Type:
@@ -1452,7 +1452,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '501':
       headers:
         Content-Type:
@@ -1474,7 +1474,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '503':
       headers:
         Content-Type:
@@ -1496,7 +1496,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '504':
       headers:
         Content-Type:
@@ -1518,4 +1518,4 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
