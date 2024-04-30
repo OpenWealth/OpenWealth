@@ -65,7 +65,7 @@
       "positionId": "0000",
       "positionCurrency": "CHF",
       "foreignExchangeRate": {
-        "rate": 0.85,
+        "value": 0.85,
         "sourceCurrency": "USD",
         "targetCurrency": "CHF"
       }
@@ -97,7 +97,7 @@
       "positionId": "0000",
       "positionCurrency": "CHF",
       "foreignExchangeRate": {
-        "rate": 0.85,
+        "value": 0.85,
         "sourceCurrency": "USD",
         "targetCurrency": "CHF"
       }
@@ -129,7 +129,7 @@
       "positionId": "0000",
       "positionCurrency": "CHF",
       "foreignExchangeRate": {
-        "rate": 0.85,
+        "value": 0.85,
         "sourceCurrency": "USD",
         "targetCurrency": "CHF"
       }

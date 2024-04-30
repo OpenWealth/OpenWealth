@@ -28,7 +28,7 @@
     "sourceOfPrice": "CreditSuisse"
   },
   "foreignExchangeRate": {
-    "rate": 0.85,
+    "value": 0.85,
     "sourceCurrency": "USD",
     "targetCurrency": "CHF",
     "rateDate": "2023-01-04",

@@ -13,7 +13,7 @@
     ],
     "interestRate": {
       "type": "fixed",
-      "rate": 0.005,
+      "value": 0.005,
       "dayCountBasis": "act_360",
       "paymentDate": "2023-06-27",
       "paymentFrequency": "annual"
