@@ -100,7 +100,7 @@ erDiagram
 
 ## Transaction
 
-A transaction is an entity that describes an agreement of trade of financial wealth. Properties are the transaction type, dates related to the agreement, related account and customer, etc. Examples of transactions simple transfer of cash, a purchase of exchange-traded security, a confirmation of revenue or right distribution of a holding, a forward foreign exchange transaction, etc. A transaction encloses one or more movements of financial instruments in a given account.
+A transaction is an entity that describes an agreement of trade of financial wealth or a business event caused by the held instrument that may result in change of holding or risk. Properties are the transaction type, dates related to the agreement, related account and customer, etc. Examples of transactions simple transfer of cash, a purchase of exchange-traded security, a confirmation of revenue or right distribution of a holding, a forward foreign exchange transaction, etc. A transaction encloses one or more movements of financial instruments in a given account.
 
 **Entity Relationships of a transaction**
 
