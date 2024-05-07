@@ -8,9 +8,7 @@ allOf:
   - type: object
     properties:
       principalAmount:
-        description: |
-          Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
-          The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
+        description: The current amount subject to loan on which interest is calculated
         $ref: '../../Types/CurrencyAmount.yaml'
       interestRate:
         $ref: '../../Types/InterestRate.yaml'

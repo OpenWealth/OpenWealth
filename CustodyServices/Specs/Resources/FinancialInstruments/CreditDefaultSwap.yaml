@@ -7,9 +7,7 @@ allOf:
   - type: object
     properties:
       principalAmount:
-        description: |
-          Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
-          The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
+        description: The principal amount is the amount the risk 'buyer' agrees to pay the counter party in case of a default.
         $ref: '../../Types/CurrencyAmount.yaml'
       maturityDate:
         description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
