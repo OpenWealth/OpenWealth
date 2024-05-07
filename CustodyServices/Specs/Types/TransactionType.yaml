@@ -6,8 +6,7 @@ enum:
   - accumulation
   - additionalPayment
   - adjustNotional
-  - assignment
-  - assimilation
+  - amortizationAndInterestPayment
   - bonus
   - buy
   - buyToClose
@@ -16,7 +15,7 @@ enum:
   - conversionBondShare
   - coupon
   - creditEvent
-  - decreaseContractPrincipal
+  - decreasePrincipal
   - deliveryFreeOfPayment
   - deliveryVsPayment
   - dividendCash
@@ -28,24 +27,18 @@ enum:
   - fees
   - finalLiquidationPayment
   - fxSpot
-  - incompleteRights
-  - increaseContractPrincipal
+  - increasePrincipal
   - inflowCash
   - instrumentExchange
-  - interest
+  - interestPayment
   - internalTransfer
-  - knockIn
-  - knockOut
   - liquidationPayment
-  - markToMarket
-  - markToMarketCash
   - merger
   - openContract
   - other
   - outflowCash
   - premium
   - prepaymentSubstitution
-  - publicOffer
   - receiveFreeOfPayment
   - receiveVsPayment
   - redemption

@@ -20,6 +20,7 @@ enum:
   - other
   - otherTax
   - premium
+  - reclaimableTax
   - reinvestmentAmount
   - stampDuty
   - thirdPartyFee
