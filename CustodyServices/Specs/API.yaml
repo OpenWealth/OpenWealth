@@ -38,15 +38,15 @@ paths:
       - $ref: '../../Globals/V3/Params/limit.yaml'
       - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns all customers and respective accounts accessible for the logged in user.
-      description: This endpoint returns a highlevel list of customers and the respective accounts accessible for the logged in user. Paging is done based on the customerOverview object, i.e. if limit is set to 1, then 1 customerOverview will be returned per page.
+      summary: Returns all customers (business partners) accessible for the logged in user.
+      description: This endpoint returns a highlevel list of customers accessible for the logged in user. Paging is done based on the customer object, i.e. if limit is set to 1, then 1 customer will be returned per page.
 
       operationId: getCustomers
       tags:
         - customers
       responses:
         '200':
-          description: Returns a list with all customers and the respective accounts.
+          description: Returns a list with all customers.
           headers:
             X-Correlation-ID:
               $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
@@ -80,14 +80,14 @@ paths:
       - $ref: '../../Globals/V3/Params/path_customerId.yaml'
       - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns a specific customers and respective accounts accessible for the logged in user.
-      description: This endpoint returns a single customer and the list of the customer's respective accounts accessible for the logged in user.
+      summary: Returns a specific customer accessible for the logged in user.
+      description: This endpoint returns a single customer.
       operationId: getCustomersByCustomerId
       tags:
         - customers
       responses:
         '200':
-          description: Returns a the specified customers and the respective accounts.
+          description: Returns a the specified customer.
           headers:
             X-Correlation-ID:
               $ref: '../../Globals/V3/Headers/X-Correlation-Id.yaml'
@@ -119,7 +119,7 @@ paths:
       - $ref: '../../Globals/V3/Params/limit.yaml'
       - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns the accounts for a specific customer.
+      summary: Returns the accounts for a specific customer accessible to the querying user.
       description: Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
       operationId: getCustomerAccountsByCustomerId
       tags:
@@ -163,7 +163,7 @@ paths:
       - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
       summary: Returns an account by id for a specific customer.
-      description: Returns an account for a specific customer.
+      description: Returns an account by id for a specific customer.
       operationId: getCustomerAccountById
       tags:
         - accounts
