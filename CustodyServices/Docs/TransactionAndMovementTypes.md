@@ -67,7 +67,7 @@ For clarification of content we group the transaction types by business event gr
 | redemption | The redemption of an entire issue outstanding of securities, for example, bonds, preferred equity, funds, by the issuer or its agent, for example, asset manager, at final maturity. | CorporateAction | cash, asset, fees, taxes |
 | redemptionPartial | Partial redemption | CorporateAction | cash, asset, fees, taxes |
 | redemptionPrior | Redemption prior to maturity | CorporateAction | cash, asset, fees, taxes |
-| reductionOfNominal* | Reduction of nominal | CorporateAction | cash, asset, fees, taxes |
+| reductionOfNominal | Reduction of nominal | CorporateAction | cash, asset, fees, taxes |
 | resetPayment | Net payment of the accrued interest of the swapped legs of an interest rate swap | OtherOTC | cash |
 | rightDistribution | Right distribution (e.g. subscription rights related to a capital increase or in case of a dividend with the choice between stock/cash) | CorporateAction | asset |
 | sell | Sale of a security or financial instrument | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
