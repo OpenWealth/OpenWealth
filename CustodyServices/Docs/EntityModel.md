@@ -2,13 +2,13 @@
 
 In the following we will describe the essential data objects, their relations and their interface represenation. We will highlight conventions an try to enhance a common understanding of these objects.
 
-- [Customer](###customer)
-- [Portfolio](###portfolio)
-- [Account](###account)
-- [Financial Instruments](###financial-Instrument)
-- [Position](###position)
-- [Transaction](###transaction)
-- [Movement](###movement)
+- [Customer](#customer)
+- [Portfolio](#portfolio)
+- [Account](#account)
+- [Financial Instruments](#financial-Instrument)
+- [Position](#position)
+- [Transaction](#transaction)
+- [Movement](#movement)
 
 
 ## Customer
