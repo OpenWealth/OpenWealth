@@ -8,6 +8,7 @@ The documentation covers these topics:
 - [Quick start](#quick-start)
 - [Principles and guidelines](Docs/PrinciplesAndGuidelines.md)
 - [Business objects and data entities](Docs/EntityModel.md)
+- [Enumeration and types](#enumeration-and-types)
 - [Use cases and examples](#use-cases-and-examples)
 
 ## Overview and scope
@@ -24,6 +25,17 @@ TBD
 - How to implement the spec
 - Positions API
 - Transactions API
+
+## Enumeration and types
+
+The main strategy to categorize (bankable) wealth and associated business events that cause change in wealth or the underlying risk are the following:
+
+- [Financial Instrument Types](Docs/FinancialInstrumentTypes.md)
+- [Transaction and Movement Types](Docs/TransactionAndMovementTypes.md)
+
+The financial instrument type characterizes a monetary contract, which confers a right or claim against some counterparty in the form of a payment, equity ownership or dividends (stocks), debt (bonds, loans, deposit accounts), currency (forex), or derivatives (futures, forwards, options, and swaps). In a technical way the financial instrument type further defines the properties (mandatory and optional) to fully describe the asset.
+
+The transaction types categorize business events (Geschäftsvorfälle). A business event typically results in one or multiple movements - changes of holdings of a position. The transaction type enforces restrictions on its content resulting in guidelines for the implementation of the data object (technical structure, mandatory and optional fields, consistency checks). A dividend payment for example typically consists of a triggering instrument, a gross movement (amount) of cash changed and a withholding tax movement. The typing of these partial movement is described by the movement type enumerator.
 
 ## Use cases and examples
 

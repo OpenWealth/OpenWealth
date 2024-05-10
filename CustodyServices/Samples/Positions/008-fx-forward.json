@@ -39,7 +39,7 @@
       "currency": "CHF"
     },
     "foreignExchangeRate": {
-      "rate": 0.9,
+      "value": 0.9,
       "sourceCurrency": "USD",
       "targetCurrency": "CHF",
       "rateDate": "2023-01-04"

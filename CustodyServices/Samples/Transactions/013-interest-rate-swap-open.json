@@ -23,7 +23,7 @@
         "expiryDate": "2023-06-27",
         "interestRateReceived": {
           "type": "fixed",
-          "rate": 1.75,
+          "value": 1.75,
           "dayCountBasis": "act_360",
           "paymentDate": "2023-06-27",
           "paymentFrequency": "atMaturity"

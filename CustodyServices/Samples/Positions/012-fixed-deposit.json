@@ -35,7 +35,7 @@
       "currency": "CHF"
     },
     "foreignExchangeRate": {
-      "rate": 0.9,
+      "value": 0.9,
       "sourceCurrency": "USD",
       "targetCurrency": "CHF",
       "rateDate": "2022-12-31"

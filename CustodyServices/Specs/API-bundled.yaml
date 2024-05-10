@@ -33,14 +33,14 @@ paths:
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/x_correlation_id_in_header'
     get:
-      summary: Returns all customers and respective accounts accessible for the logged in user.
-      description: This endpoint returns a highlevel list of customers and the respective accounts accessible for the logged in user. Paging is done based on the customerOverview object, i.e. if limit is set to 1, then 1 customerOverview will be returned per page.
+      summary: Returns all customers (business partners) accessible for the logged in user.
+      description: This endpoint returns a highlevel list of customers accessible for the logged in user. Paging is done based on the customer object, i.e. if limit is set to 1, then 1 customer will be returned per page.
       operationId: getCustomers
       tags:
         - customers
       responses:
         '200':
-          description: Returns a list with all customers and the respective accounts.
+          description: Returns a list with all customers.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
@@ -73,14 +73,14 @@ paths:
       - $ref: '#/components/parameters/path_customerId'
       - $ref: '#/components/parameters/x_correlation_id_in_header'
     get:
-      summary: Returns a specific customers and respective accounts accessible for the logged in user.
-      description: This endpoint returns a single customer and the list of the customer's respective accounts accessible for the logged in user.
+      summary: Returns a specific customer accessible for the logged in user.
+      description: This endpoint returns a single customer.
       operationId: getCustomersByCustomerId
       tags:
         - customers
       responses:
         '200':
-          description: Returns a the specified customers and the respective accounts.
+          description: Returns a the specified customer.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
@@ -111,7 +111,7 @@ paths:
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/x_correlation_id_in_header'
     get:
-      summary: Returns the accounts for a specific customer.
+      summary: Returns the accounts for a specific customer accessible to the querying user.
       description: Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
       operationId: getCustomerAccountsByCustomerId
       tags:
@@ -154,7 +154,7 @@ paths:
       - $ref: '#/components/parameters/x_correlation_id_in_header'
     get:
       summary: Returns an account by id for a specific customer.
-      description: Returns an account for a specific customer.
+      description: Returns an account by id for a specific customer.
       operationId: getCustomerAccountById
       tags:
         - accounts
@@ -553,9 +553,10 @@ components:
         - option
         - future
         - fxForward
-        - fxOption
         - fxSwap
+        - fxOption
         - mortgage
+        - credit
         - fixedLoan
         - fixedDeposit
         - callableLoan
@@ -647,14 +648,6 @@ components:
       description: Cash
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
-    Rate:
-      title: Rate
-      type: object
-      properties:
-        rate:
-          type: number
-          example: 0.00125
-          description: Actual decimal rate
     DayCountBasis:
       title: DayCountBasis
       type: string
@@ -683,42 +676,49 @@ components:
       title: InterestRate
       type: object
       description: Per annum ratio of interest received or paid to the principal amount of the contract for a specific period of time.
-      allOf:
-        - $ref: '#/components/schemas/Rate'
-        - type: object
-          properties:
-            type:
-              type: string
-              description: Indicates the type of interest
-              example: fixed
-              enum:
-                - fixed
-                - variable
-                - staggered
-                - floating
-            dayCountBasis:
-              $ref: '#/components/schemas/DayCountBasis'
-            paymentDate:
-              description: Date of the next interest payment.
-              $ref: '#/components/schemas/Date'
-            paymentFrequency:
-              type: string
-              description: Specifies the frequency of an interest payment.
-              example: quarterly
-              enum:
-                - annual
-                - monthly
-                - quarterly
-                - semiAnnual
-                - weekly
-                - atMaturity
-                - other
-            basis:
-              type: string
-              description: Indicates the xxx such as LIBOR, EURIBOR
-            spread:
-              type: number
-              description: xxx
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          description: |
+            Indicates the type of interest, where 
+            'fixed' denotes a fixed interest rate for the agreed period
+            'variable' denotes a rate that fluctuates over time because it is based on an underlying benchmark ('basis') interest rate that changes periodically with the market
+            'staggered' denotes a rate that is set at different levels for different periods of time or differnt underlying principal amount.
+          example: fixed
+          enum:
+            - fixed
+            - variable
+            - staggered
+        value:
+          type: number
+          example: 0.00125
+          description: Current rate as decimal
+        dayCountBasis:
+          $ref: '#/components/schemas/DayCountBasis'
+        paymentDate:
+          description: Date of the next interest payment.
+          $ref: '#/components/schemas/Date'
+        paymentFrequency:
+          type: string
+          description: Specifies the frequency of an interest payment.
+          example: quarterly
+          enum:
+            - annual
+            - monthly
+            - quarterly
+            - semiAnnual
+            - weekly
+            - atMaturity
+            - other
+        basis:
+          type: string
+          description: Benchmark by which floating rate will adjust in accordance with market conditions, such as LIBOR, EURIBOR
+        spread:
+          type: number
+          description: The floating rate will be equal to the base rate (basis) plus the spread
     Price:
       type: object
       required:
@@ -830,6 +830,7 @@ components:
         - $ref: '#/components/schemas/Future'
         - $ref: '#/components/schemas/FxForward'
         - $ref: '#/components/schemas/FxSwap'
+        - $ref: '#/components/schemas/FxOption'
         - $ref: '#/components/schemas/Mortgage'
         - $ref: '#/components/schemas/Credit'
         - $ref: '#/components/schemas/MoneyMarket'
@@ -851,6 +852,7 @@ components:
           future: '#/components/schemas/Future'
           fxForward: '#/components/schemas/FxForward'
           fxSwap: '#/components/schemas/FxSwap'
+          fxOption: '#/components/schemas/FxOption'
           mortgage: '#/components/schemas/Mortgage'
           credit: '#/components/schemas/Credit'
           fixedLoan: '#/components/schemas/MoneyMarket'
@@ -979,6 +981,41 @@ components:
             maturityDate:
               description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
+    DateTime:
+      title: DateTime
+      type: string
+      format: date-time
+      pattern: \d{4}-\d{2}-\d{2}T\d{2}:\d{2}[\+\-]\d{2}:\d{2}
+      example: 2018-04-13T16:00+01:00
+    FxOption:
+      title: FxOption
+      description: An FX option is a contract that gives the buyer the right, but not the obligation, to buy or sell a certain currency at a specified exchange rate on or before a specified date. For this right, a premium is paid to the seller.
+      required:
+        - expiryDateTime
+        - underlyingAmount
+        - counterAmount
+        - premium
+        - optionType
+        - optionStyle
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          properties:
+            expiryDateTime:
+              description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date/time at which it becomes due and has to be repaid.
+              $ref: '#/components/schemas/DateTime'
+            underlyingAmount:
+              description: This field specifies the underlying currency and amount of the contract. The underlying currency is the currency which is to be exchanged for the counter currency.
+              $ref: '#/components/schemas/CurrencyAmount'
+            counterAmount:
+              description: This field specifies the counter currency and amount of the contract. The counter currency is the currency which is to be exchanged for the underlying currency.
+              $ref: '#/components/schemas/CurrencyAmount'
+            premium:
+              $ref: '#/components/schemas/CurrencyAmount'
+            optionType:
+              $ref: '#/components/schemas/OptionType'
+            optionStyle:
+              $ref: '#/components/schemas/OptionStyle'
     Mortgage:
       title: Mortgage
       description: A mortgage is a type of loan used to purchase or maintain a home, plot of land, or other types of real estate.
@@ -990,9 +1027,7 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: |
-                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
-                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
+              description: The current amount subject to loan on which interest is calculated
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
@@ -1010,9 +1045,7 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: |
-                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
-                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
+              description: The current amount subject to loan or borrowing on which interest is calculated
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
@@ -1024,7 +1057,7 @@ components:
               $ref: '#/components/schemas/FinancialInstrument'
     MoneyMarket:
       title: MoneyMarket
-      description: Money market
+      description: The money market schema covers both fixed and callable loans and deposits
       required:
         - principalAmount
         - interestRate
@@ -1033,9 +1066,7 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: |
-                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
-                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
+              description: The current amount subject to loan or borrowing on which interest is calculated
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
@@ -1055,9 +1086,7 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: |
-                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
-                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
+              description: The principal amount serves as the foundation for calculating interest and the returns on an investment.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRatePaid:
               description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.
@@ -1079,9 +1108,7 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: |
-                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
-                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
+              description: The principal amount serves as the foundation for calculating interest and the returns on an investment.
               $ref: '#/components/schemas/CurrencyAmount'
             interestRatePaid:
               description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.
@@ -1104,9 +1131,7 @@ components:
         - type: object
           properties:
             principalAmount:
-              description: |
-                Principal is frequently the term used to refer to the original sum borrowed in a loan or put into an investment.
-                The principal amount serves as the foundation for calculating interest, the returns on an investment, amortization schedules, and other parts of a transaction.
+              description: The principal amount is the amount the risk 'buyer' agrees to pay the counter party in case of a default.
               $ref: '#/components/schemas/CurrencyAmount'
             maturityDate:
               description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
@@ -1185,14 +1210,19 @@ components:
     ForeignExchangeRate:
       title: ForeignExchangeRate
       type: object
-      allOf:
-        - $ref: '#/components/schemas/Rate'
-        - type: object
-          properties:
-            sourceCurrency:
-              $ref: '#/components/schemas/Currency'
-            targetCurrency:
-              $ref: '#/components/schemas/Currency'
+      description: An exchange rate is a rate at which one currency will be exchanged for another currency.
+      required:
+        - value
+        - sourceCurrency
+        - targetCurrency
+      properties:
+        value:
+          type: number
+          description: Current rate as decimal
+        sourceCurrency:
+          $ref: '#/components/schemas/Currency'
+        targetCurrency:
+          $ref: '#/components/schemas/Currency'
     ValuationForeignExchangeRate:
       title: ValuationForeignExchangeRate
       allOf:
@@ -1285,8 +1315,7 @@ components:
         - accumulation
         - additionalPayment
         - adjustNotional
-        - assignment
-        - assimilation
+        - amortizationAndInterestPayment
         - bonus
         - buy
         - buyToClose
@@ -1295,7 +1324,7 @@ components:
         - conversionBondShare
         - coupon
         - creditEvent
-        - decreaseContractPrincipal
+        - decreasePrincipal
         - deliveryFreeOfPayment
         - deliveryVsPayment
         - dividendCash
@@ -1307,24 +1336,18 @@ components:
         - fees
         - finalLiquidationPayment
         - fxSpot
-        - incompleteRights
-        - increaseContractPrincipal
+        - increasePrincipal
         - inflowCash
         - instrumentExchange
-        - interest
+        - interestPayment
         - internalTransfer
-        - knockIn
-        - knockOut
         - liquidationPayment
-        - markToMarket
-        - markToMarketCash
         - merger
         - openContract
         - other
         - outflowCash
         - premium
         - prepaymentSubstitution
-        - publicOffer
         - receiveFreeOfPayment
         - receiveVsPayment
         - redemption
@@ -1381,6 +1404,7 @@ components:
         - other
         - otherTax
         - premium
+        - reclaimableTax
         - reinvestmentAmount
         - stampDuty
         - thirdPartyFee
