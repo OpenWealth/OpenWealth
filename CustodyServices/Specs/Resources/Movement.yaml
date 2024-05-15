@@ -12,7 +12,10 @@ properties:
   type:
     $ref: '../Types/MovementType.yaml'
   movementDate:
-    description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank.
+    description: |
+      Date when the movement was confirmed in the custodians ledger. 
+      This typically corresponds with the booking date (or posting date) by the bank.
+      Note that balances of end of day positions should be consistent with the aggregation of movements up to the particular date
     $ref: '../../../Globals/V3/Types/Date.yaml'
   financialInstrument:
     $ref: 'FinancialInstrument.yaml'

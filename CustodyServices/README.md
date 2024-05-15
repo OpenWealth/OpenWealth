@@ -1,6 +1,6 @@
 # OpenWealth Custody Services API
 
-This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions. In this version (2.0) only transactions which include effective cash or securities movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.
+This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions. In the version 3.0 only transactions which include effective cash or securities movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.
 
 The documentation covers these topics:
 
@@ -18,30 +18,36 @@ The technology provider will access the APIs with the EAM access token and first
 
 ## Quick start
 
-TBD
-
 - How to use the OpenAPI spec
 - What is contained in the specs
 - How to implement the spec
 - Positions API
 - Transactions API
 
+Details to be added
+
 ## Enumeration and types
 
-The main strategy to categorize (bankable) wealth and associated business events that cause change in wealth or the underlying risk are the following:
+The two main discriminators to categorize (bankable) wealth and associated business events that cause change in wealth or the underlying risk are:
 
-- [Financial Instrument Types](Docs/FinancialInstrumentTypes.md)
-- [Transaction and Movement Types](Docs/TransactionAndMovementTypes.md)
+- [Financial Instrument Types](Docs/TypesAndImplementationGuideline.md)
+- [Transaction Types](Docs/TypesAndImplementationGuideline.md)
 
-The financial instrument type characterizes a monetary contract, which confers a right or claim against some counterparty in the form of a payment, equity ownership or dividends (stocks), debt (bonds, loans, deposit accounts), currency (forex), or derivatives (futures, forwards, options, and swaps). In a technical way the financial instrument type further defines the properties (mandatory and optional) to fully describe the asset.
+The financial instrument type characterizes a monetary contract, which confers a right or claim against some counterparty in the form of a payment, equity ownership or revenue, debt (bonds, loans, deposit accounts), currency (forex), or derivatives (futures, forwards, options, and swaps).
 
-The transaction types categorize business events (Geschäftsvorfälle). A business event typically results in one or multiple movements - changes of holdings of a position. The transaction type enforces restrictions on its content resulting in guidelines for the implementation of the data object (technical structure, mandatory and optional fields, consistency checks). A dividend payment for example typically consists of a triggering instrument, a gross movement (amount) of cash changed and a withholding tax movement. The typing of these partial movement is described by the movement type enumerator.
+The transaction types categorize business events (Geschäftsvorfälle). A business event typically results in one or multiple movements - changes of holdings of a position and or changes of properties of the held position.
+
+Detailed descriptions of all currently supported instrument types and transaction types including implementation guides and references to sample data can be found here:
+
+[Types and implementation guidlines](Docs/TypesAndImplementationGuideline.md)
 
 ## Use cases and examples
 
 ### A portfolio life cycle
 
 A good way to get familiar with the needs of a securities accounting is to look at a simple life cycle of a portfolio. Each business event in this life cycle should be interchangeable on a digital data level between the bank and the 3rd party system (EAM software). Business events related to the customer information (such as identification, forms, compliance etc.) are covered by OpenWealths Customer Management API (link TBD). Events related to the customers wealth, such as transfer of funds, investements etc. are covered by the Custody Services API. In the following we will link custody events to example and reference implementation of the API schemes. The chronological events could look like the following:
+
+*Links to samples to be added
 
 - EAM signs wealth management contract of a discretionary mandate with customer and sends onboarding docs to the chosen custody
 - EAM requests opening of a safekeeping account and on or more cash accounts (i.e. CHF, EUR, USD)
