@@ -7,8 +7,8 @@ allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
     properties:
-      principalAmount:
-        description: The principal amount serves as the foundation for calculating interest and the returns on an investment.
+      notionalAmount:
+        description: The notional amount serves as the foundation for calculating interest and the returns on an investment.
         $ref: '../../Types/CurrencyAmount.yaml'
       interestRatePaid:
         description: Per annum ratio of interest paid to the principal amount of the financial instrument for a specific period of time.

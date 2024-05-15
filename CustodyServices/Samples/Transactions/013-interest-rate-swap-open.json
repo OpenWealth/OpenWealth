@@ -18,7 +18,7 @@
             "type": "otherProprietaryIdentification"
           }
         ],
-        "principalAmount": 100000,
+        "notionalAmount": 100000,
         "currencyOfDenomination": "CHF",
         "expiryDate": "2023-06-27",
         "interestRateReceived": {
