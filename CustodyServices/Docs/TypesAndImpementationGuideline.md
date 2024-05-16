@@ -129,10 +129,9 @@ For clarification of content we group the transaction types by business event gr
 | accruedInterest | Accrued Interest |
 | additionalWithholdingTax | Additional Withholding Tax |
 | asset | Default type for securities and contracts |
-| brokerageFee | Brokerage Fee |
+| brokerageFee | Brokerage Fee charged by the exchange |
 | capitalGainTax | Capital Gain Tax |
 | cash | Default type for a cash amount |
-| courtage | Courtage |
 | exchangeFee | Exchange Fee |
 | financialTransactionTax | Financial Transaction Tax |
 | otherFee | Other Fee |
@@ -142,7 +141,7 @@ For clarification of content we group the transaction types by business event gr
 | reinvestmentAmount | Reinvestment Amount |
 | stampDuty | Stamp Duty |
 | thirdPartyFee | Third Party Fee |
-| transactionFee | Transaction Fee |
+| transactionFee | Transaction Fee charged by the custodian |
 | withholdingTax | Withholding Tax |
 
 ## Business events in the lifecycle of the financial instruments and implementation guide
