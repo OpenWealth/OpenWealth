@@ -19,12 +19,37 @@ The technology provider will access the APIs with the EAM access token and first
 ## Quick start
 
 - How to use the OpenAPI spec
-- What is contained in the specs
-- How to implement the spec
-- Positions API
-- Transactions API
 
-Details to be added
+You find the latest version of the API here:
+
+[CustodyServicesAPI](Specs/API-bundled.yaml)
+
+The easiest way to get an overview on the endpoints and structures of the API is to copy the content into the Swagger Editor:
+
+[Swagger Editor](https://editor-next.swagger.io/)
+
+You can very easily browse the contained API endpooints and the associated payload schemes in the UI
+
+- What is contained in the specs?
+
+The specs covers information about endpoint paths (API URLs), headers and parameters (such as filter params, cursor and pagination related params etc.) that need to be added to the requests and also the data schemes of the returned data.
+
+- How to implement the spec
+
+With the API specification given in the OpenAPI Format (OAS3) it is very easy to create code in your preferred language with the open code generators available here:
+
+[OpenAPI Generator](https://openapi-generator.tech/docs/generators)
+
+There are generators that provide the code foundation for both serving data requests as well as reading data according to the given specification.
+
+- Which operations and business objects are covered by the API?
+
+The API defines endpoints to retrieve information about the following business objects:
+
+**Customers:** Query business partners that are authorized to requesting user
+**Accounts:** Query cash and safekeeping accounts for a given customer and/or authorized to the requesting user
+**Positions:** Query positions and their valuation for a given date and customer or account
+**Transaction:** Query transactions and associated changes in holdings for a given date and customer or account
 
 ## Enumeration and types
 
