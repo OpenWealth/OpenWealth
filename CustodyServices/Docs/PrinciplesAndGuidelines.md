@@ -1,13 +1,13 @@
-## Implementation guidelines
+# Principles and guidelines
 
 In addition to specifying the the OpenWealth interface in a machine readable format (i.e. OpenApi spec), OpenWealth strives for a common understanding of business events. OpenWealth considers the common modelling of business events as important as the structural specification for an essential gain of imperoperability and reduction of implementation costs.
 For this purpose a number of guidelines and principles have been elaborated:
 
-**Positions**
+## Positions
 
 TBD
 
-**Transactions**
+## Transactions
 
 - Bottom up consistency of the movements in the ledger
 

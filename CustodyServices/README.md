@@ -6,8 +6,8 @@ The documentation covers these topics:
 
 - [Overview and scope](#overview-and-scope)
 - [Quick start](#quick-start)
-- [Principles and guidelines](Docs/PrinciplesAndGuidelines.md)
-- [Business objects and data entities](Docs/EntityModel.md)
+- [Principles and guidelines](#principles-and-guidelines)
+- [Business objects and data entities](#business-objects-and-data-entities)
 - [Enumeration and types](#enumeration-and-types)
 - [Use cases and examples](#use-cases-and-examples)
 
@@ -50,6 +50,30 @@ The API defines endpoints to retrieve information about the following business o
 - **Accounts:** Query cash and safekeeping accounts for a given customer and/or authorized to the requesting user
 - **Positions:** Query positions and their valuation for a given date and customer or account
 - **Transaction:** Query transactions and associated changes in holdings for a given date and customer or account
+
+## Principles and guidelines
+
+The strengths of an OpenAPI specification lies in the definition of manner of interaction of two intaracting parties, in particular the definition of a set of URLs and associated parameters for the communication as well as the structural definition of the data contract - schema and semantics, such as enumerations and terminologies.
+Ensuring consistency of the content however is hard to achieve by the the OpenAPI definition.
+In order to achieve a maximal data quality and straight through process rate between the participant, we try to define a set of principles that encourages participants to increase data quality and common understanding of financial instruments, business events and their modelling. Thes principles are defined here:
+
+[Principles and guidelines](Docs/PrinciplesAndGuidelines.md)
+
+## Business objects and data entities
+
+The main business objects in this API are
+
+- Customer
+- Portfolio
+- Account
+- Financial Instrument
+- Position
+- Transaction
+- Movement
+
+How OpenWealth understands these entities and what the relationship between them is, is described in detail here:
+
+[Business objects and data entities](Docs/EntityModel.md)
 
 ## Enumeration and types
 
