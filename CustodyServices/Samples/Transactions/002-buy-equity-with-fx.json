@@ -71,7 +71,7 @@
       }
     },
     {
-      "type": "brokerageFeeDuty",
+      "type": "brokerageFee",
       "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
