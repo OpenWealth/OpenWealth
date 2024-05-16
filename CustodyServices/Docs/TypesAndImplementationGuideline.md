@@ -276,9 +276,21 @@ TBD
 
 ### FX Forward
 
+A currency forward is a binding contract in the foreign exchange market that locks in the exchange rate for the purchase or sale of a currency on a future date. A currency forward is essentially a customizable hedging tool that does not involve an upfront margin payment.
+
 - Open Contract
 
+At the opening of the contract the amount of currency bought or sold, the rate at wich will be exchanged and the future date for settlement are defined. In many cases the accounts for settlement of the two currencies are already available inlcluding the value date of the cash settlements. The triggering instrument - the contract asset - should be set.
+In terms of movements this results in the contract entry with quantity=1 and possibly the two cash moves (each of the currencies) with future movement and value date. This would be the preferred implementation.
+
 - Close Contract
+
+The closing of the contract typically consists of a single movement entry with quantity=-1 of the contract asset. If details to the cash settlement (accounts and value date) are only available at the time of maturity, the cash movements would be included in this transaction. The triggering instrument - the contract asset - should be set.
+
+Comments and alternatives:
+
+If the net profit and loss of the contract will immediately be credited or debited to the leading currencies account this should be done with another fx spot transaction.
+Certain providers may expose the actual cash settlement in a separat fx spot transaction and the opening and closing of the forward will consist of the contract movement only. In this case, make sure to set the triggering instrument - the contract asset - on all transactions.
 
 ### FX Swap
 
