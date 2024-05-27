@@ -28,10 +28,6 @@ properties:
     type: number
     example: 0.85
     description: Information regarding the factor.
-  inactiveIndicator:
-    type: boolean
-    description: Indicates if the instrument is inactive
-    default: false
   additionalDetails:
     type: string
     maxLength: 70
