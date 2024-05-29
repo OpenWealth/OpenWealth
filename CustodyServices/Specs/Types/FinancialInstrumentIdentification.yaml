@@ -1,5 +1,8 @@
 title: FinancialInstrumentIdentification
 type: object
+required:
+  - identifier
+  - type
 properties:
   identifier:
     type: string
@@ -25,4 +28,5 @@ properties:
       - sicovam
       - belgian
       - common
+      - iso3
       - otherProprietaryIdentification
