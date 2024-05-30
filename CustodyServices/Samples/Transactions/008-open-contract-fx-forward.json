@@ -1,0 +1,62 @@
+{
+  "id": "0000008-1",
+  "type": "openContract",
+  "transactionDate": "2023-01-04",
+  "customerId": "123456",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "triggeringInstrument": {
+    "type": "fxForward",
+    "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+    "identificationList": [
+      {
+        "identifier": "fxForwardRef111",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "amountPaid": {
+      "amount": 200000,
+      "currency": "USD"
+    },
+    "amountReceived": {
+      "amount": 170000,
+      "currency": "CHF"
+    },
+    "maturityDate": "2023-06-27"
+  },
+  "movementList": [
+    {
+      "type": "asset",
+      "movementDate": "2023-01-04",
+      "financialInstrument": {
+        "type": "fxForward",
+        "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+        "identificationList": [
+          {
+            "identifier": "fxForwardRef111",
+            "type": "otherProprietaryIdentification"
+          }
+        ],
+        "amountPaid": {
+          "amount": 200000,
+          "currency": "USD"
+        },
+        "amountReceived": {
+          "amount": 170000,
+          "currency": "CHF"
+        },
+        "maturityDate": "2023-06-27"
+      },
+      "account": {
+        "id": "123456-1",
+        "type": "safekeepingAccount"
+      },
+      "quantity": {
+        "value": 1,
+        "type": "unit"
+      },
+      "positionId": "008"
+    }
+  ],
+  "postingAmounts": []
+}

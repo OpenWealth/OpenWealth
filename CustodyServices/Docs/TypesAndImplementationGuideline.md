@@ -45,7 +45,7 @@ Here you find an overview on the currently supported financial instruments with 
 
 ## Transaction types
 
-The enumerations transaction type and movement type are the main classifiers of business events (Geschäftsvorfälle) and their componenets. The transaction type should be used to determine the business event type in the sense that it descripes an event like a purchase, a dividend payment etc that results in changes of wealth holding. These changes or deltas are called movements, such as security moves or cash moves. If a resulting cash move consists of multiple parts sush as taxes, fees and gross amounts each of these will be listed as separate movements. In this case the type of movement further determines the type of this change. The default types for cash movements - 'cash' - and security and contract movements - 'asset' should be used if the transaction type alse determines the type of this particular movement.
+The enumerations transaction type and movement type are the main classifiers of business events (Geschäftsvorfälle) and their components. The transaction type should be used to determine the business event type in the sense that it describes an event such a purchase, a dividend payment etc., that results in changes of wealth holding. These changes in holding quantity of certain instruments are called movements, such as security moves or cash moves. If a resulting cash move consists of multiple parts such as taxes, fees and gross amounts, each of these will be listed as separate movements. In this case the type of movement determines the type of change in more detail than the transaction type associated to the transaction containing the movement. The default types for cash movements - 'cash' - and security and contract movements - 'asset' should be used if the transaction type alse determines the type of this particular movement.
 
 For clarification of content we group the transaction types by business event group and capture the possible movement types per transaction type.
 
@@ -165,14 +165,14 @@ In terms of movements these transaction types are identical to a Buy/Sell (see a
 
 ### Cash
 
-This section consists of all transaction types that result in cash movements only without a triggering reason originating from another instrument such as revenue, fees, taxes resulting from a corporate action, interest or similar. The default transaction types are inflow and outflow cash, but also fees like custody, management or account fees belong here as well as tax general obligations. The movements consist normally of a single entry, but may also contain multiples movements on the same account such as a gross amount (type=cash) and for example a value added tax
+This section consists of all transaction types that result in cash movements only without a triggering reason originating from another instrument such as revenue, fees, taxes resulting from a corporate action, interest or similar. The default transaction types are inflow and outflow cash, but also fees like custody, management or account fees belong here as well as tax general obligations. The movements in this transaction consist normally of a single entry, but may also contain multiples movements on the same account, for example a gross amount (type=cash) and a value added tax.
 
 ### Bond
 
 - Coupon
 
 The coupon payment of a bond is the periodic payout of the accrued interest.
-The movements will at least contain a gross cash movement (type=cash), possible also fees/taxes. Triggering instrument must be set.
+The movements will at least contain a gross cash movement (type=cash), possibly also fees/taxes. Triggering instrument must be set.
 
 - Redemption / Redemption Prior
 
@@ -280,25 +280,45 @@ A currency forward is a binding contract in the foreign exchange market that loc
 
 - Open Contract
 
-At the opening of the contract the amount of currency bought or sold, the rate at wich will be exchanged and the future date for settlement are defined. In many cases the accounts for settlement of the two currencies are already available inlcluding the value date of the cash settlements. The triggering instrument - the contract asset - should be set.
-In terms of movements this results in the contract entry with quantity=1 and possibly the two cash moves (each of the currencies) with future movement and value date. This would be the preferred implementation.
+At the opening of the contract the amount of currency bought or sold, the rate at which will be exchanged and the future date for settlement are defined.  Note that if the accounts for settlement of the two currencies are already available including the value date of the cash settlements this may already be added to the transaction.
+In terms of movements this results in the contract move with quantity=1 and possibly the two cash moves (each of the currencies). The triggering instrument - the contract asset - should be set.
+
+Example: [008-open-contract-fx-forward.json](../Samples/Transactions/008-open-contract-fx-forward.json)
 
 - Close Contract
 
-The closing of the contract typically consists of a single movement entry with quantity=-1 of the contract asset. If details to the cash settlement (accounts and value date) are only available at the time of maturity, the cash movements would be included in this transaction. The triggering instrument - the contract asset - should be set.
+The closing of the contract typically consists of a single movement entry with quantity=-1 and possibly - if not already added in the contract opening transaction - two cash movements for each currency and account respectively. This would be the preferred implementation. The triggering instrument - the contract asset - should be set.
+
+Example: [008-close-contract-fx-forward.json](../Samples/Transactions/008-close-contract-fx-forward.json)
 
 Comments and alternatives:
 
-If the net profit and loss of the contract will immediately be credited or debited to the leading currencies account this should be done with another fx spot transaction.
+If the net profit and loss of the contract will immediately be credited or debited to the leading currencies account at maturity this should be done with another fx spot transaction.
 Certain providers may expose the actual cash settlement in a separat fx spot transaction and the opening and closing of the forward will consist of the contract movement only. In this case, make sure to set the triggering instrument - the contract asset - on all transactions.
 
 ### FX Swap
 
+
+Historically a foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency for interest payments on a loan made in another currency. However the fx swap is most frequently used as a hedging mean by reducing exposure to anticipated fluctuations in exchange rates. In this sense an fx swap is often used to extend or renew a fx forward contract. In essense the fx swap consists of two fixed foreign exchange agreements - the near leg (or spot) and the far leg at maturity with opposite signs.
+
 - Open Contract
 
-- FX Spot
+At the opening of the contract the amount of currency bought or sold at the near leg (often the spot fx) as well as the rate at wich will be exchanged and the future date are defined.
+In terms of movements this results in the contract move with quantity=1 and the two cash moves (each of the currencies) - the near leg (or spot fx). The triggering instrument - the contract asset - should be set. 
+
+Example: [009-open-contract-fx-swap.json](../Samples/Transactions/009-open-contract-fx-swap.json)
 
 - Close Contract
+
+The closing of the contract typically consists of a single movement entry with quantity=-1 and two cash movements for each currency and account respectively. The triggering instrument - the contract asset - should be set.
+
+Example: [009-close-contract-fx-swap.json](../Samples/Transactions/009-close-contract-fx-swap.json)
+
+Comments and alternatives:
+
+If the near leg is in the future of the contract date and fx spot transaction may be triggered at the time of near leg maturity instead of adding the two cash moves in the opening of the contract. In the same sense it is possible that the settlement of the far legs is sent separately from the closing of the contract. Make sure to set the triggering instrument - the contract asset - on all transactions.
+If the net profit and loss of the contract will immediately be credited or debited to the leading currencies account at maturity this should be done with another fx spot transaction.
+
 
 ### Mortgage and Credit
 
