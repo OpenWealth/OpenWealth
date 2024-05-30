@@ -1,7 +1,7 @@
 title: InterestRateSwap
 description: An interest rate swap is a forward contract in which one stream of future interest payments is exchanged for another based on a specified principal amount.
 required:
-  - principalAmount
+  - notionalAmount
   - interestRatePaid
   - interestRateReceived
   - maturityDate
