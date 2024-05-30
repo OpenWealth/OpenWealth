@@ -1,5 +1,5 @@
 {
-  "id": "008",
+  "id": "009",
   "endOfDayIndicator": true,
   "positionDate": "2023-01-04",
   "financialInstrument": {
@@ -31,8 +31,8 @@
   },
   "valuation": {
     "valueInPositionCurrency": {
-      "amount": 11111.10,
-      "currency": "USD"
+      "amount": 10000,
+      "currency": "CHF"
     },
     "valueInReferenceCurrency": {
       "amount": 10000,
@@ -45,7 +45,7 @@
       "rateDate": "2023-01-04"
     }
   },
-  "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
-  "currency": "CHF",
+  "name": "FX Swap, 200'000 USD to CHF",
+  "currency": "USD",
   "safekeepingPlace": "INSECHZZXXX"
 }

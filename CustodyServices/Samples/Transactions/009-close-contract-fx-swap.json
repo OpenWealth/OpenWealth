@@ -6,8 +6,8 @@
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "triggeringInstrument": {
-    "type": "fxForward",
-    "name": "FX Forward Swap, 200'000 USD",
+    "type": "fxSwap",
+    "name": "FX Swap, 200'000 USD to CHF",
     "identificationList": [
       {
         "identifier": "fxSwapRef112",
@@ -38,8 +38,8 @@
       "type": "asset",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "type": "fxForward",
-        "name": "FX Forward Swap, 200'000 USD",
+        "type": "fxSwap",
+        "name": "FX Swap, 200'000 USD to CHF",
         "identificationList": [
           {
             "identifier": "fxSwapRef112",
