@@ -1,4 +1,5 @@
 title: FinancialInstrumentBase
+description: Base schema for a financial instrument.
 type: object
 required:
   - type
@@ -13,6 +14,7 @@ properties:
     description: Name of the financial instrument in free format text.
   identificationList:
     type: array
+    description: List of identification objects.
     items:
       $ref: '../../Types/FinancialInstrumentIdentification.yaml'
     minItems: 1

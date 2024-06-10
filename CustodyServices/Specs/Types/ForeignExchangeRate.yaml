@@ -8,7 +8,8 @@ required:
 properties:
   value:
     type: number
-    description: Current rate as decimal
+    description: Current rate as decimal.
+    example: 0.98
   sourceCurrency:
     $ref: '../../../Globals/V3/Types/Currency.yaml'
   targetCurrency:

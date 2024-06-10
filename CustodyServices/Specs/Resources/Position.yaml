@@ -1,5 +1,6 @@
 title: Position
 type: object
+description: Position entity.
 required:
   - positionId
   - financialInstrument
@@ -8,8 +9,8 @@ properties:
   id:
     type: string
     maxLength: 128
-    example: 876543219
-    description: Identification for the position given by the bank
+    example: 876-543219
+    description: Identification for the position given by the bank.
   financialInstrument:
     $ref: 'FinancialInstrument.yaml'
   account:
@@ -25,12 +26,12 @@ properties:
     type: string
     pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
     example: INSECHZZXXX
-    description: 'BIC of the place where the securities are safe-kept, physically or notionally'
+    description: BIC of the place where the securities are safe-kept, physically or notionally.
   additionalCustodianInformation:
     type: string
     pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
     example: INSECHZZXXX
-    description: 'Used for special use cases where safekeepingPlace is not suffienct. BIC of the place where the securities are safe-kept, physically or notionally'
+    description: Used for special use cases where safekeepingPlace is not suffienct. BIC of the place where the securities are safe-kept, physically or notionally.
   additionalDetails:
     type: string
     maxLength: 70

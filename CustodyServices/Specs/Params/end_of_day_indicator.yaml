@@ -1,11 +1,11 @@
-name: endOfDayIndicator
 in: query
+name: end_of_day_indicator
 required: false
+schema:
+  type: boolean
+  example: true
 description: |
   Indicates if the resources (positions & transactions) have been confirmed by the end-of-day (eod) processing.
   If the parameter is not set, all resources will be delivered.
   If the parameter is set to true, only resources with with the particular property set to true will be delivered.
   If the parameter is set to false, only resources with with the particular property set to false will be delivered.
-schema:
-  type: boolean
-  example: true

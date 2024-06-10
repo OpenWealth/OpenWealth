@@ -1,6 +1,6 @@
 title: FinancialInstrumentType
 type: string
-description: Type of the financial instrument
+description: Type of the financial instrument.
 example: equity
 enum:
   - cash

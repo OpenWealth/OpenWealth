@@ -1,7 +1,7 @@
 title: DayCountBasis
 type: string
 example: u30_360
-description: Interest method of the instrument
+description: Interest method of the instrument.
 enum:
   - act_360
   - act_365

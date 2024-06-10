@@ -1,5 +1,5 @@
 title: CreditDefaultSwap
-description: A derivative product which serves as a form of insurance against the default of an underlying borrower or debt instrument
+description: A derivative product which serves as a form of insurance against the default of an underlying borrower or debt instrument.
 required:
   - notionalAmount
 allOf:

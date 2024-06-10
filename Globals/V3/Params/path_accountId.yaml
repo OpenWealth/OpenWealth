@@ -1,7 +1,8 @@
-name: accountId
 in: path
+name: accountId
 required: true
 schema:
   type: string
   maxLength: 128
   description: The customer's account identification, this should NOT be an IBAN.
+description: Account ID parameter.

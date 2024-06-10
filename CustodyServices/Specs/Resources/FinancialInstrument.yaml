@@ -1,5 +1,6 @@
 title: FinancialInstrument
 type: object
+description: Financial instrument entity.
 oneOf:
   - $ref: 'FinancialInstruments/Cash.yaml'
   - $ref: 'FinancialInstruments/Bond.yaml'

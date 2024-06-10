@@ -1,6 +1,6 @@
 title: Customer
 type: object
-description: Overview of the customer with the respective accounts
+description: Overview of the customer with the respective accounts.
 required:
   - id
 properties:
@@ -8,5 +8,6 @@ properties:
     type: string
     maxLength: 128
     description: Unique and unambiguous identification used by the bank for the customer.
+    example: 12345-6
   referenceCurrency:
     $ref: '../../../Globals/V3/Types/Currency.yaml'
