@@ -1,5 +1,6 @@
 title: ValuatedPosition
 type: object
+description: Valuated position entity.
 required:
   - endOfDayIndicator
   - positionDate
@@ -11,6 +12,7 @@ properties:
   endOfDayIndicator:
     description: Indicates if the positon has been confirmed by the end-of-day (eod) processing.
     type: boolean
+    example: true
   positionDate:
     description: Date at which the position was valuated.
     $ref: '../../../Globals/V3/Types/Date.yaml'

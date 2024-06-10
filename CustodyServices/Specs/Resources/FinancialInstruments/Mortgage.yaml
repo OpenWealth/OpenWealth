@@ -8,11 +8,11 @@ allOf:
   - type: object
     properties:
       principalAmount:
-        description: The current amount subject to loan on which interest is calculated
+        description: The current amount subject to loan on which interest is calculated.
         $ref: '../../Types/CurrencyAmount.yaml'
       interestRate:
         $ref: '../../Types/InterestRate.yaml'
       limit:
         type: number
         example: 100000
-        description: Maximum principal amount allowed by the credit contract
+        description: Maximum principal amount allowed by the credit contract.

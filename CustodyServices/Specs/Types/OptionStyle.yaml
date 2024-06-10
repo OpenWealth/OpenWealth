@@ -1,9 +1,9 @@
 title: OptionStyle
 type: string
+description: Specifies how an option can be exercised.
 example: american
 enum:
   - american
   - european
   - bermudan
   - asian
-description: Specifies how an option can be exercised.

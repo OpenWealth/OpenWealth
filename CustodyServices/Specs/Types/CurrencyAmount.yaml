@@ -1,6 +1,6 @@
 title: CurrencyAmount
 type: object
-description: Amount denoted in a given currency
+description: Amount denoted in a given currency.
 required:
   - value
   - currency
@@ -8,6 +8,6 @@ properties:
   amount:
     type: number
     example: 12000
-    description: Signed amount
+    description: Signed amount.
   currency:
     $ref: '../../../Globals/V3/Types/Currency.yaml'

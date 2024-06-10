@@ -1,5 +1,6 @@
 title: Account
 type: object
+description: Account entity.
 required:
   - id
   - type
@@ -8,11 +9,12 @@ properties:
   id:
     type: string
     maxLength: 128
-    example: 876543219
+    example: 8765432-19
     description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
   type:
     type: string
     description: Indicatates the type of the account. If the account type is cashAccount, no information on the financial instrument is provided in the respective position in the account.
+    example: cashAccount
     enum:
       - cashAccount
       - safekeepingAccount
@@ -28,6 +30,7 @@ properties:
     type: string
     description: Contains the accounts Internatioinal Banking Account Number (IBAN) for a cashAccount if available.
     maxLength: 34
+    example: CH123456789
   designation:
     type: string
     maxLength: 70

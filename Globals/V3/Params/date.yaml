@@ -1,5 +1,6 @@
-name: date
 in: query
+name: date
+description: A date value.
 required: true
 schema:
   type: string

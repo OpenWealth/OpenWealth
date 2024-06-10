@@ -1,4 +1,5 @@
 title: Date
 type: string
+description: Date according to ISO 8601.
 format: date
 example: 2018-04-13

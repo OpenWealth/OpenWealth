@@ -1,5 +1,6 @@
 title: FinancialInstrumentIdentification
 type: object
+description: Financial instrument identification in the form of a key value pair.
 required:
   - identifier
   - type
@@ -8,11 +9,11 @@ properties:
     type: string
     maxLength: 128
     example: CH0012005267
-    description: Instrument identification
+    description: Instrument identification.
   type:
     type: string
     example: isin
-    description: Type of the instrument ID. isin is prefered
+    description: Type of the instrument ID. isin is prefered.
     enum:
       - isin
       - sedol

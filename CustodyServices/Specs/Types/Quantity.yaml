@@ -1,13 +1,14 @@
 title: Quantity
 type: object
+description: Quantity entity.
 required:
   - value
   - type
 properties:
   type:
     type: string
-    description: Specifies the type of the amount
-    example: nominal
+    description: Specifies the type of the amount.
+    example: unit
     enum:
       - unit
       - faceAmount
@@ -16,4 +17,4 @@ properties:
   value:
     type: number
     example: 12000
-    description: Signed decimal number
+    description: Signed decimal number.

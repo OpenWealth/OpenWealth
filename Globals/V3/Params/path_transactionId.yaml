@@ -1,8 +1,9 @@
-name: transactionId
 in: path
+name: transactionId
 required: true
 schema:
   type: string
   maxLength: 128
   description: Identification for the transaction given by the bank.
   example: 1234566-12-7
+description: Transaction ID.

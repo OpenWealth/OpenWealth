@@ -1,14 +1,18 @@
 title: CommonErrorResponse
 type: object
+description: Common error response.
 properties:
   type:
     $ref: 'CommonErrorType.yaml'
   title:
     type: string
+    description: Title of the error response.
     example: This is the general problem description
   detail:
     type: string
+    description: Detailed description of the error response.
     example: Detailed problem description with respect to the current request
   instance:
     type: string
+    description: Entity instance that threw the error.
     example: path/to/corresponding/resource

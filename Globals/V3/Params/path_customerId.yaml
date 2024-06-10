@@ -1,9 +1,10 @@
-name: customerId
 in: path
+name: customerId
 required: true
 schema:
   type: string
   minLength: 1
   maxLength: 128
-  example: 123123456
+  example: 123123-456
   description: Unique and unambiguous identification used by the bank for the customer.
+description: Customer ID Parameter.

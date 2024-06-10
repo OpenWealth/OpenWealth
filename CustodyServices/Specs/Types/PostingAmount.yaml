@@ -1,14 +1,14 @@
 title: PostingAmount
 type: object
+description: Total amount of money that is to be/was posted to the account in the account currency.
 required:
   - amount
   - currency
   - account
-description: Total amount of money that is to be/was posted to the account in the account currency.
 properties:
   amount:
     type: number
-    description: Signed amount of the cash transaction
+    description: Signed amount of the cash transaction.
     example: 13023
   currency:
     $ref: '../../../Globals/V3/Types/Currency.yaml'

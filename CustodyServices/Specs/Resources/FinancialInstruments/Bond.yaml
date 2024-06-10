@@ -1,5 +1,5 @@
 title: Bond
-description: Bond
+description: Bond.
 required:
   - maturityDate
   - interestRate

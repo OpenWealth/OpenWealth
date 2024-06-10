@@ -1,8 +1,9 @@
-name: positionId
 in: path
+name: positionId
 required: true
 schema:
   type: string
   maxLength: 128
   description: Identification for the position given by the bank.
   example: 1234566-12-1
+description: Position ID parameter.

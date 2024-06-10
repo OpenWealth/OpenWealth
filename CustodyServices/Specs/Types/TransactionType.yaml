@@ -1,6 +1,6 @@
 title: TransactionType
 type: string
-description: Type of the transaction
+description: Type of the transaction.
 example: buy
 enum:
   - accumulation

@@ -1,6 +1,6 @@
-name: cursor
 in: query
-description: An opaque string value used for pagination
+name: cursor
 required: false
 schema:
   type: string
+description: An opaque string value used for pagination.

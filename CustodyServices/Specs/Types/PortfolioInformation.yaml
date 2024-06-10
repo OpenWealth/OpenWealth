@@ -1,12 +1,13 @@
 title: PortfolioInformation
 type: object
+description: Information about the portfolio.
 properties:
   identification:
     title: PortfolioIdentification
     type: string
     minLength: 1
     maxLength: 128
-    example: 876543219
-    description: Unique and unambiguous identification for the portfolio between the portfolio owner and the portfolio servicer
+    example: 87654-3219
+    description: Unique and unambiguous identification for the portfolio between the portfolio owner and the portfolio servicer.
   referenceCurrency:
     $ref: '../../../Globals/V3/Types/Currency.yaml'

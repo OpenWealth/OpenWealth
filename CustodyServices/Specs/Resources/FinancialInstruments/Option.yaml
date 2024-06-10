@@ -1,5 +1,5 @@
 title: Option
-description: An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying asset at a predetermined price within a given timeframe
+description: An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying asset at a predetermined price within a given timeframe.
 required:
   - strikePrice
   - contractSize

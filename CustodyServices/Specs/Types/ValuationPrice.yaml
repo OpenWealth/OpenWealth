@@ -1,4 +1,5 @@
 title: ValuationPrice
+description: Price used for valuation purpose.
 allOf:
   - $ref: 'Price.yaml'
   - type: object
@@ -10,5 +11,5 @@ allOf:
       sourceOfPrice:
         type: string
         maxLength: 70
-        description: Indicates the source of the (market)price
+        description: Indicates the source of the (market)price.
         example: SIX Swiss Exchange

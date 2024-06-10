@@ -1,5 +1,6 @@
 title: Transaction
 type: object
+description: Transaction entity.
 required:
   - id
   - type
@@ -12,36 +13,41 @@ properties:
     type: string
     readOnly: true
     maxLength: 128
-    example: 987654321
-    description: Transaction ID given by the bank
+    example: 9876-54321
+    description: Transaction ID given by the bank.
   type:
     $ref: '../Types/TransactionType.yaml'
   transactionDate:
-    description: Date of transaction entity
+    description: Date of transaction entity.
     $ref: '../../../Globals/V3/Types/Date.yaml'
   customerId:
     type: string
     description: Unique and unambiguous identification used by the bank for the customer.
+    example: 12345-6
   reversalIndicator:
     description: Indicates whether it is the reversal of a previously reported movement.
     type: boolean
     default: false
+    example: false
   endOfDayIndicator:
     description: Indicates if the transaction has been confirmed by the end-of-day (eod) processing.
     type: boolean
+    example: true
   reference:
     type: string
     description: Transaction reference as used in the transaction statement. This could be equal to the id of the transaction but may not if GUID are used to identify the transaction.
+    example: XS12345678
   description:
     type: string
     description: Human readable description of the transaction. Often referred to as 'Buchungs-Text' in german transaction statements.
+    example: Buy 500 Apple Inc at 176 USD
   placeOfTrade:
     $ref: '../Types/PlaceOfTrade.yaml'
   reversedTransactionId:
     type: string
     maxLength: 128
-    description: States the identification of the transaction that was reversed
-    example: 2134123415
+    description: States the identification of the transaction that was reversed.
+    example: 2134123-415
   tradeDate:
     description: Specifies the date/time on which the trade was executed.
     $ref: '../../../Globals/V3/Types/Date.yaml'
@@ -54,7 +60,7 @@ properties:
     $ref: '../Types/Quantity.yaml'
   movementList:
     type: array
-    description: List of movements belonging to a transaction from a banks perspective
+    description: List of movements belonging to a transaction from a banks perspective.
     items:
       $ref: 'Movement.yaml'
   postingAmountList:
