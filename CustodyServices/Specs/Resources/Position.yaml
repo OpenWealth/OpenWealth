@@ -2,7 +2,7 @@ title: Position
 type: object
 description: Position entity.
 required:
-  - positionId
+  - id
   - financialInstrument
   - account
 properties:

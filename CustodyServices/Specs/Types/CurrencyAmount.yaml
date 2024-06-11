@@ -2,7 +2,7 @@ title: CurrencyAmount
 type: object
 description: Amount denoted in a given currency.
 required:
-  - value
+  - amount
   - currency
 properties:
   amount:

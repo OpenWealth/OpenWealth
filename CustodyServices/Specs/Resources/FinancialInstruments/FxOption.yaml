@@ -4,9 +4,6 @@ required:
   - expiryDateTime
   - underlyingAmount
   - counterAmount
-  - premium
-  - optionType
-  - optionStyle
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object

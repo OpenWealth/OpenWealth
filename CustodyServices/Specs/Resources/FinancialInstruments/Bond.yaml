@@ -1,8 +1,5 @@
 title: Bond
 description: Bond.
-required:
-  - maturityDate
-  - interestRate
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
@@ -31,3 +28,6 @@ allOf:
         type: number
         example: 1000
         description: Indicates the minimum tradable increments of a security.
+      underlyingFinancialInstrument:
+        description: Financial instrument that would be subject to a conversion.
+        $ref: '../FinancialInstrument.yaml'

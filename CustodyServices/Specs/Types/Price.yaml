@@ -1,8 +1,8 @@
 type: object
 description: Price entity.
 required:
-  - amount
   - type
+  - value
 properties:
   type:
     type: string

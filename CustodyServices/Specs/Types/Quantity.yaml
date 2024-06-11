@@ -2,8 +2,8 @@ title: Quantity
 type: object
 description: Quantity entity.
 required:
-  - value
   - type
+  - value
 properties:
   type:
     type: string

@@ -2,7 +2,7 @@ title: Valuation
 type: object
 description: Detailed information about the valuation of a position.
 required:
-  - value
+  - valueInPositionCurrency
 properties:
   valueInPositionCurrency:
     $ref: 'CurrencyAmount.yaml'
