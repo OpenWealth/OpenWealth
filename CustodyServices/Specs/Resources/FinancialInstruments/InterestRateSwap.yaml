@@ -4,7 +4,6 @@ required:
   - notionalAmount
   - interestRatePaid
   - interestRateReceived
-  - maturityDate
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
