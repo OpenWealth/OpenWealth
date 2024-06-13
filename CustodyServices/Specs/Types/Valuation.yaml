@@ -8,7 +8,5 @@ properties:
     $ref: 'CurrencyAmount.yaml'
   valueInReferenceCurrency:
     $ref: 'CurrencyAmount.yaml'
-  foreignExchangeRate:
-    $ref: 'ValuationForeignExchangeRate.yaml'
   valuationDate:
     $ref: '../../../Globals/V3/Types/Date.yaml'
