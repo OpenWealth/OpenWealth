@@ -2,20 +2,16 @@ type: object
 properties:
   sourceCurrency:
     description: Currency of the amount to be converted in a currency conversion.
-    type: string
-    pattern: '[A-Z]{3}'
-    example: CHF
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   rate:
     type: string
-    pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+    pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
     maxLength: 22
-    example: 1.0963
+    example: '1.0963'
     description: Indicates the rate of a fx transaction for one source currency unit to the target currency. E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
   targetCurrency:
     description: Currency into which an amount is to be converted in a currency conversion.
-    type: string
-    pattern: '[A-Z]{3}'
-    example: CHF
+    $ref: '../../../Globals/V2/Types/Currency.yaml'
   fxType:
     type: string
     description: Defines, if the indicated fx rate includes (costPrice) or excludes (dealPrice) fees and taxes.

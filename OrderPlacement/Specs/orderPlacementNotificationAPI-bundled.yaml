@@ -1,15 +1,20 @@
 openapi: 3.0.0
 info:
-  version: 1.0.5
+  version: 2.2.1
   title: OpenWealth Order Placement Event Notification API - TPP Endpoint
   description: API for Receiving Event Notification for OpenWealth APIs
   contact:
     email: openwealth@synpulse.com
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: youropenfinanceservergoeshere.com
+  - description: Your server url
+    url: https://www.openwealth.ch
+security: []
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
 paths:
   /event-notifications:
     post:
@@ -23,7 +28,7 @@ paths:
               $ref: '#/components/schemas/notificationOrderPlacement'
       responses:
         '202':
-          description: Notification accepted
+          description: Notification accepted.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -32,14 +37,6 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 components:
-  parameters:
-    eventSubscriptionId:
-      name: EventSubscriptionId
-      in: path
-      description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
-      required: true
-      schema:
-        $ref: '#/components/schemas/eventSubscriptionId'
   schemas:
     eventSubscriptionId:
       description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
@@ -70,12 +67,13 @@ components:
         - order:tradeCancel
         - order:tradeCorrect
       example: order:orderStatusUpdated
-    date-time:
+    dateTime:
+      title: DateTime
       type: string
       format: date-time
-      example: '2023-04-13T11:11:11Z'
+      example: 2018-04-13T16:00+01:00
     notificationId:
-      description: Identification of the notification
+      description: Identification of the notification.
       type: string
       example: 120066c9-58a1-432b-aa60-712fae7f143e
     orderStatus:
@@ -102,46 +100,48 @@ components:
       example: partiallyFilled
     executedQuantity:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Total quantity (e.g. number of shares) filled.
-      example: 100
+      example: '100'
     averagePrice:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Calculated average price of all fills on this order.
-      example: 17.8
+      example: '17.8'
     remainingQuantity:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
-      description: Quantity open for further execution. If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
-      example: 20
+      description: |
+        Quantity open for further execution.
+        If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
+      example: '20'
     dayExecutedQuantity:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Quantity on an order that has traded today.
-      example: 5
+      example: '5'
     dayAveragePrice:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
-      description: The average price for quantity that has traded today.
-      example: 17.8
+      description: Calculated average price of all fills on this order.
+      example: '17.8'
     lastQuantity:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Quantity (e.g. shares) bought/sold on this (last) fill.
-      example: 30
+      example: '30'
     lastPrice:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Price of this (last) fill.
-      example: 17.8
+      example: '17.8'
     notificationOrderPlacement:
       description: Notification for the order placement API that is pushed to the TPP.
       type: object
@@ -153,12 +153,12 @@ components:
         eventType:
           $ref: '#/components/schemas/eventType'
         resourceLink:
-          description: Link to resource that triggered the event notification
+          description: Link to resource that triggered the event notification.
           type: string
           example: /api/openwealth/order-placement/v2/orders/abcd1234
         created:
           description: Timestamp - Date and time including timezone on which the notification has been created, according to ISO8601
-          $ref: '#/components/schemas/date-time'
+          $ref: '#/components/schemas/dateTime'
         id:
           description: Identification (UUID) of this notification.
           $ref: '#/components/schemas/notificationId'
@@ -166,22 +166,30 @@ components:
           description: Identification (UUID) of the notification that predeceeds this notification.
           $ref: '#/components/schemas/notificationId'
         orderStatus:
-          description: Status of the requested resource notification
+          description: Status of the requested resource notification.
           $ref: '#/components/schemas/orderStatus'
         executedQuantity:
           description: Total quantity (e.g. number of shares) filled.
           $ref: '#/components/schemas/executedQuantity'
         averagePrice:
+          description: Calculated average price of all fills on this order.
           $ref: '#/components/schemas/averagePrice'
         remainingQuantity:
+          description: |
+            Quantity open for further execution.
+            If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
           $ref: '#/components/schemas/remainingQuantity'
         dayExecutedQuantity:
+          description: Quantity on an order that has traded today.
           $ref: '#/components/schemas/dayExecutedQuantity'
         dayAveragePrice:
+          description: The average price for quantity that has traded today.
           $ref: '#/components/schemas/dayAveragePrice'
         lastQuantity:
+          description: Quantity (e.g. shares) bought/sold on this (last) fill.
           $ref: '#/components/schemas/lastQuantity'
         lastPrice:
+          description: Price of this (last) fill.
           $ref: '#/components/schemas/lastPrice'
     commonErrorType:
       title: Common Error Type
@@ -203,7 +211,7 @@ components:
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
       example: /problems/TECHNICAL_ERROR
-    CommonErrorResponse:
+    commonErrorResponse:
       title: CommonErrorResponse
       type: object
       properties:
@@ -246,7 +254,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'
     '500':
       headers:
         Content-Type:
@@ -268,4 +276,4 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
+            $ref: '#/components/schemas/commonErrorResponse'

@@ -3,12 +3,16 @@ description: Completed allocation
 properties:
   allocationIdentification:
     type: string
-    description: Unambiguous identifier of the individual allocation of the bulk order , as assigned by the confirming party. Corresponds with the transactionIdentification of the OpenWealth Custody Services API.
-    example: 123123123
+    description: |
+      Unambiguous identifier of the individual allocation of the bulk order, as assigned by the confirming party.
+      Corresponds with the transactionIdentification of the OpenWealth Custody Services API.
+    example: 123-123123
   executedQuantity:
+    description: Total quantity (e.g. number of shares) filled.
     $ref: 'executedQuantity.yaml'
   averagePrice:
-    $ref: 'dayAveragePrice.yaml'
+    description: The average price for quantity that has traded.
+    $ref: 'averagePrice.yaml'
   bookingDate:
     $ref: 'bookingDate.yaml'
   billingDetails:

@@ -1,16 +1,27 @@
 openapi: 3.0.0
 info:
-  version: 1.0.5
+  version: 2.2.1
   title: OpenWealth Order Placement Event Notification API - TPP Endpoint
-  description: API for Receiving Event Notification for OpenWealth APIs
+  description: API for Receiving Event Notification for OpenWealth APIs.
   contact:
     email: openwealth@synpulse.com
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  - url: youropenfinanceservergoeshere.com
+  - description: Your server url
+    url: https://www.openwealth.ch
+
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
+
+tags:
+  - name: event-notification
+    description: Order event notifications.
+
+security: []
 
 paths:
   /event-notifications:
@@ -18,36 +29,24 @@ paths:
       summary: Push notification towards TPP
       description: Push notficiations for subscribed event notifications.
       operationId: postEventNotification
+      tags:
+        - event-notification
       requestBody:
         content:
           application/json:
             schema:
               $ref: 'Resources/notificationOrderPlacement.yaml'
-              
+
       responses:
         '202':
-          description: Notification accepted
+          description: Notification accepted.
           headers:
             X-Correlation-ID:
               $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
-   
+
         '400':
           $ref: '../../Globals/V2/Responses/400.yaml'
         '500':
           $ref: '../../Globals/V2/Responses/500.yaml'
 
-components:
-  ###############
-  # Parameters  #
-  ###############
-
-  parameters:
-    eventSubscriptionId:
-      name: EventSubscriptionId
-      in: path
-      description: >-
-        Unique identification as assigned by the API exposing party to uniquely
-        identify the callback URL resource.
-      required: true
-      schema:
-        $ref: 'Types/eventSubscriptionId.yaml'
+components: {}

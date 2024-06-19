@@ -3,8 +3,8 @@ properties:
   identification:
     type: string
     maxLength: 35
-    example: 876543219
-    description: Unambiguous identification for the account
+    example: 8765-43219
+    description: Unambiguous identification for the account.
   type:
     type: string
     description: Indicates the type of the account.
