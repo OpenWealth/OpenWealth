@@ -1,6 +1,7 @@
-name: fromEventDate
 in: query
+name: fromEventDate
 schema:
   type: string
   format: date-time
+description: Date from which events are considered.
 example: 2022-10-26T07:58:30.996+0100

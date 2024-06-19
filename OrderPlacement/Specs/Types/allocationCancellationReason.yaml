@@ -26,3 +26,4 @@ properties:
   proprietary:
     type: string
     description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
+    example: Cancelled by client.

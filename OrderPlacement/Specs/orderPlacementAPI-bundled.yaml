@@ -1,16 +1,27 @@
 openapi: 3.0.0
 info:
-  version: 2.2.0
+  version: 2.2.1
   title: Order Placement API
   description: This API is used to place orders and check on the order status.
   contact:
     email: openwealth@synpulse.com
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - description: Your servers url
-    url: url
+  - description: Your server url
+    url: https://www.openwealth.ch
+tags:
+  - name: accountaccess
+    description: Account access operations.
+  - name: event-notification
+    description: Event notification operations.
+  - name: event-notification-subscription
+    description: Event notification subscription operations.
+  - name: orderplacement
+    description: Order placement operations.
+  - name: orderstatus
+    description: Order status operations.
 paths:
   /orders:
     parameters:
@@ -485,27 +496,24 @@ components:
       format: date-time
       example: '2018-04-13T11:11:11Z'
       description: Date and time of the statement creation (UTC Timestamp). In accordance with ISO 8601.
+    amount:
+      type: string
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      maxLength: 22
+      example: 12000
+      description: Absolute amount.
     orderQuantity:
       type: object
       properties:
         amount:
-          type: string
-          pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
-          maxLength: 22
-          example: 300
+          $ref: '#/components/schemas/amount'
         type:
           type: string
-          description: Type of the amount
+          description: Type of the amount.
           example: unitsNumber
           enum:
             - unitsNumber
             - nominal
-    amount:
-      type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
-      maxLength: 22
-      example: 12000
-      description: Absolute amount
     financialInstrumentDetails:
       type: object
       required:
@@ -520,11 +528,11 @@ components:
             identification:
               type: string
               example: CH0012005267
-              description: Instrument identification
+              description: Instrument identification.
             type:
               type: string
               example: isin
-              description: Type of the instrument identification
+              description: Type of the instrument identification.
               enum:
                 - isin
                 - sedol
@@ -558,8 +566,25 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code
-      pattern: '[A-Z]{3}'
+      pattern: ^[A-Z]{3}$
       example: CHF
+    limitPrice:
+      type: string
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      maxLength: 22
+      description: Limit price per unit of quantity (e.g. per share)
+      example: '17.8'
+    stopPrice:
+      type: string
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      maxLength: 22
+      description: Price of this (last) fill.
+      example: '17.8'
+    dateTime:
+      title: DateTime
+      type: string
+      format: date-time
+      example: 2018-04-13T16:00+01:00
     bulkOrderDetails:
       required:
         - side
@@ -603,17 +628,11 @@ components:
             - stop
             - stopLimit
         limitPrice:
-          type: string
-          pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
-          maxLength: 22
           description: Limit price per unit of quantity (e.g. per share)
-          example: 12.5
+          $ref: '#/components/schemas/limitPrice'
         stopPrice:
-          type: string
-          pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
-          maxLength: 22
           description: Stop price per unit of quantity (e.g. per share)
-          example: 10.05
+          $ref: '#/components/schemas/stopPrice'
         timeInForce:
           type: string
           description: Specifies how long the order remains in effect.
@@ -633,17 +652,14 @@ components:
             - goodForAuction
             - goodForMonth
         expiryDateTime:
-          type: string
-          format: date-time
-          example: '2018-04-13T11:11:11Z'
-          description: Date and time of the order expiration (UTC Timestamp). In accordance with ISO 8601.
+          $ref: '#/components/schemas/dateTime'
     account:
       type: object
       properties:
         identification:
           type: string
           maxLength: 35
-          example: 876543219
+          example: 8765-43219
           description: Unambiguous identification for the account
         type:
           type: string
@@ -665,13 +681,10 @@ components:
         clientAllocationIdentification:
           type: string
           description: Unambiguous identifier for the individual allocation of the bulk order, as assigned by the instructing party.
-          example: 321321321
+          example: '321321321'
         amount:
-          type: string
-          pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
-          maxLength: 22
           description: Quantity to be allocated to specific safekeeping account
-          example: 100
+          $ref: '#/components/schemas/amount'
     allocationCancellationReason:
       type: object
       properties:
@@ -703,35 +716,41 @@ components:
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
     executedQuantity:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Total quantity (e.g. number of shares) filled.
-      example: 100
+      example: '100'
     remainingQuantity:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
-      description: Quantity open for further execution. If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
+      description: |
+        Quantity open for further execution.
+        If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
       example: 20
     remainingAllocation:
       type: object
       description: Provides an overview of what quantity has already been allocated to the allocation and what quantity is still outstanding.
       properties:
         executedQuantity:
+          description: Total quantity (e.g. number of shares) filled.
           $ref: '#/components/schemas/executedQuantity'
         remainingQuantity:
+          description: |
+            Quantity open for further execution.
+            If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0,
+            otherwise remainingQuantity = orderQuantity - executedQuantity.
           $ref: '#/components/schemas/remainingQuantity'
-    dayAveragePrice:
+    averagePrice:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
-      description: The average price for quantity that has traded today.
-      example: 17.8
+      description: Calculated average price of all fills on this order.
+      example: '17.8'
     date:
       title: Date
       type: string
       format: date
-      pattern: \d{4}-\d{2}-\d{2}
       example: '2018-04-13'
     bookingDate:
       type: object
@@ -751,20 +770,16 @@ components:
       properties:
         sourceCurrency:
           description: Currency of the amount to be converted in a currency conversion.
-          type: string
-          pattern: '[A-Z]{3}'
-          example: CHF
+          $ref: '#/components/schemas/Currency'
         rate:
           type: string
-          pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+          pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
           maxLength: 22
           example: 1.0963
           description: Indicates the rate of a fx transaction for one source currency unit to the target currency. E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
         targetCurrency:
           description: Currency into which an amount is to be converted in a currency conversion.
-          type: string
-          pattern: '[A-Z]{3}'
-          example: CHF
+          $ref: '#/components/schemas/Currency'
         fxType:
           type: string
           description: Defines, if the indicated fx rate includes (costPrice) or excludes (dealPrice) fees and taxes.
@@ -796,7 +811,7 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code
-      pattern: '[A-Z]{3}'
+      pattern: ^[A-Z]{3}$
       example: CHF
     accruedInterest:
       type: object
@@ -819,7 +834,7 @@ components:
       properties:
         feeType:
           type: string
-          description: Indicates the type of fee/tax
+          description: Indicates the type of fee/tax.
           enum:
             - stampDuty
             - withholdingTax
@@ -862,12 +877,16 @@ components:
       properties:
         allocationIdentification:
           type: string
-          description: Unambiguous identifier of the individual allocation of the bulk order , as assigned by the confirming party. Corresponds with the transactionIdentification of the OpenWealth Custody Services API.
+          description: |
+            Unambiguous identifier of the individual allocation of the bulk order, as assigned by the confirming party.
+            Corresponds with the transactionIdentification of the OpenWealth Custody Services API.
           example: 123123123
         executedQuantity:
+          description: Total quantity (e.g. number of shares) filled.
           $ref: '#/components/schemas/executedQuantity'
         averagePrice:
-          $ref: '#/components/schemas/dayAveragePrice'
+          description: The average price for quantity that has traded.
+          $ref: '#/components/schemas/averagePrice'
         bookingDate:
           $ref: '#/components/schemas/bookingDate'
         billingDetails:
@@ -946,7 +965,7 @@ components:
       description: Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp). In accordance with ISO 8601.
     orderCancellationReason:
       type: object
-      description: Indicates the reason, why an order is invalid/cancelled/rejected
+      description: Indicates the reason, why an order is invalid/cancelled/rejected.
       properties:
         code:
           type: string
@@ -1002,16 +1021,24 @@ components:
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
     dayOrderQuantity:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
-      description: The orderQuantity less all quantity (adjusted for stock splits) that traded on previous days. DayOrderQuantity = OrderQuantity - (executedQuantity - dayExecutedQuantity).
-      example: 15
+      description: |
+        The orderQuantity less all quantity (adjusted for stock splits) that traded on previous days.
+        DayOrderQuantity = OrderQuantity - (executedQuantity - dayExecutedQuantity).
+      example: '15'
     dayExecutedQuantity:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Quantity on an order that has traded today.
-      example: 5
+      example: '5'
+    dayAveragePrice:
+      type: string
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      maxLength: 22
+      description: Calculated average price of all fills on this order.
+      example: '17.8'
     orderStatusHistory:
       type: object
       description: Provides the status of the order was at a certain time in its lifecycle.
@@ -1039,24 +1066,24 @@ components:
         remainingQuantity:
           $ref: '#/components/schemas/remainingQuantity'
         averagePrice:
-          type: string
-          pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
-          maxLength: 22
           description: Calculated average price of all fills on this order.
-          example: 17.85
+          $ref: '#/components/schemas/averagePrice'
         dayOrderQuantity:
           $ref: '#/components/schemas/dayOrderQuantity'
         dayExecutedQuantity:
           $ref: '#/components/schemas/dayExecutedQuantity'
         dayAveragePrice:
+          description: The average price for quantity that has traded today.
           $ref: '#/components/schemas/dayAveragePrice'
         factor:
           type: string
-          pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+          pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
           maxLength: 22
           example: 100
           description: |
-            For Fixed Income: Amorization Factor for deriving Current face from Original face for ABS or MBS securities, note the fraction may be greater than, equal to or less than . In TIPS securities this is the Inflation index.
+            For Fixed Income: Amorization Factor for deriving Current face from Original face for ABS or MBS securities.
+            Note the fraction may be greater than, equal to or less than.
+            In TIPS securities this is the Inflation index.
             Qty * Factor * Price = Gross Trade Amount
 
             For Derivatives: Contract Value Factor by which price must be adjusted to determine the true nominal value of one futures/options contract.
@@ -1231,32 +1258,22 @@ components:
         - v2
         - v3
       example: v2
-    date-time:
-      type: string
-      format: date-time
-      example: '2023-04-13T11:11:11Z'
     notificationId:
-      description: Identification of the notification
+      description: Identification of the notification.
       type: string
       example: 120066c9-58a1-432b-aa60-712fae7f143e
-    averagePrice:
-      type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
-      maxLength: 22
-      description: Calculated average price of all fills on this order.
-      example: 17.8
     lastQuantity:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Quantity (e.g. shares) bought/sold on this (last) fill.
-      example: 30
+      example: '30'
     lastPrice:
       type: string
-      pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Price of this (last) fill.
-      example: 17.8
+      example: '17.8'
     notificationOrderPlacement:
       description: Notification for the order placement API that is pushed to the TPP.
       type: object
@@ -1273,7 +1290,7 @@ components:
           example: /api/openwealth/order-placement/v2/orders/abcd1234
         created:
           description: Timestamp - Date and time including timezone on which the notification has been created, according to ISO8601
-          $ref: '#/components/schemas/date-time'
+          $ref: '#/components/schemas/dateTime'
         id:
           description: Identification (UUID) of this notification.
           $ref: '#/components/schemas/notificationId'
@@ -1287,16 +1304,24 @@ components:
           description: Total quantity (e.g. number of shares) filled.
           $ref: '#/components/schemas/executedQuantity'
         averagePrice:
+          description: Calculated average price of all fills on this order.
           $ref: '#/components/schemas/averagePrice'
         remainingQuantity:
+          description: |
+            Quantity open for further execution.
+            If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
           $ref: '#/components/schemas/remainingQuantity'
         dayExecutedQuantity:
+          description: Quantity on an order that has traded today.
           $ref: '#/components/schemas/dayExecutedQuantity'
         dayAveragePrice:
+          description: The average price for quantity that has traded today.
           $ref: '#/components/schemas/dayAveragePrice'
         lastQuantity:
+          description: Quantity (e.g. shares) bought/sold on this (last) fill.
           $ref: '#/components/schemas/lastQuantity'
         lastPrice:
+          description: Price of this (last) fill.
           $ref: '#/components/schemas/lastPrice'
   responses:
     '400':

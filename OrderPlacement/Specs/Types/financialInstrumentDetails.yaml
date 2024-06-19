@@ -11,11 +11,11 @@ properties:
       identification:
         type: string
         example: CH0012005267
-        description: Instrument identification
+        description: Instrument identification.
       type:
         type: string
         example: isin
-        description: Type of the instrument identification
+        description: Type of the instrument identification.
         enum:
           - isin
           - sedol

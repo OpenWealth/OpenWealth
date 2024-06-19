@@ -1,9 +1,9 @@
 name: eventSubscriptionId
 in: path
+required: true
 description: >-
   Unique identification as assigned by the API exposing party to uniquely
   identify the callback URL resource.
-required: true
 schema:
   type: string
   minLength: 1

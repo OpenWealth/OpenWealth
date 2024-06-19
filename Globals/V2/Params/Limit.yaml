@@ -1,8 +1,8 @@
-name: limit
 in: query
-description: Maximum number of items to return.
+name: limit
 required: false
 schema:
   type: integer
   format: int32
   minimum: 1
+description: Maximum number of items to return.

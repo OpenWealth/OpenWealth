@@ -1,24 +1,42 @@
 openapi: 3.0.0
 info:
-  version: 2.2.0
+  version: 2.2.1
   title: Order Placement API
   description: This API is used to place orders and check on the order status.
   contact:
     email: openwealth@synpulse.com
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  - description: Your servers url
-    url: url
+  - description: Your server url
+    url: https://www.openwealth.ch
+
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
+
+tags:
+  - name: accountaccess
+    description: Account access operations.
+  - name: event-notification
+    description: Event notification operations.
+  - name: event-notification-subscription
+    description: Event notification subscription operations.
+  - name: orderplacement
+    description: Order placement operations.
+  - name: orderstatus
+    description: Order status operations.
+
+security: []
 
 paths:
   /orders:
     parameters:
       - $ref: '#/components/parameters/correlation_in_header'
     post:
-      summary: Posts a new order.
+      summary: Posts a new order
       description: Posts a new order.
       operationId: postOrder
       tags:
@@ -55,7 +73,7 @@ paths:
         '503':
           $ref: '../../Globals/V2/Responses/503.yaml'
     get:
-      summary: Returns a list of open security orders.
+      summary: Returns a list of open security orders
       description: Returns all open orders to which the user of the API has access to. Paging is done based on the order object, i.e. if limit is set to 1, then 1 order will be returned per page.
       operationId: getOrders
       tags:
@@ -96,16 +114,16 @@ paths:
 
   /orders/{clientOrderId}:
     parameters:
-      - name: clientOrderId
-        in: path
+      - in: path
+        name: clientOrderId
         required: true
-        description: The security order id. This Id corresponds with the clientOrderIdentification.
         schema:
           type: string
           maxLength: 20
+        description: The security order id. This Id corresponds with the clientOrderIdentification.
       - $ref: '#/components/parameters/correlation_in_header'
     get:
-      summary: Returns a single security order.
+      summary: Returns a single security order
       description: Returns a specific security order.
       operationId: getOrderByClientOrderId
       tags:
@@ -136,9 +154,8 @@ paths:
           $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
           $ref: '../../Globals/V2/Responses/503.yaml'
-
     delete:
-      summary: Cancellation of a specific order.
+      summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
       operationId: deleteOrderByClientOrderId
       tags:
@@ -169,12 +186,11 @@ paths:
           $ref: '../../Globals/V2/Responses/501.yaml'
         '503':
           $ref: '../../Globals/V2/Responses/503.yaml'
-
   /accountaccesses:
     parameters:
       - $ref: '#/components/parameters/correlation_in_header'
     get:
-      summary: Returns list of accounts the requestor has access to.
+      summary: Returns list of accounts the requestor has access to
       description: Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
       operationId: getAccountAccesses
       tags:
@@ -323,7 +339,7 @@ paths:
         '503':
           $ref: '../../Globals/V2/Responses/503.yaml'
         '504':
-          $ref: '../../Globals/V2/Responses/504.yaml'    
+          $ref: '../../Globals/V2/Responses/504.yaml'
     put:
       summary: Change event subscription
       description: Changes event subscription.
@@ -367,7 +383,7 @@ paths:
 
     delete:
       summary: Delete event subscription
-      description: Deletes event subscriptions
+      description: Deletes event subscriptions.
       operationId: deleteEventSubscriptionsByEventSubscriptionId
       tags:
         - event-notification-subscription
@@ -401,14 +417,15 @@ paths:
       - $ref: 'Params/path_eventSubscriptionId.yaml'
       - $ref: 'Params/fromEventDateTime.yaml'
       - $ref: 'Params/afterEventId.yaml'
-      - $ref: '../../Globals/V2/Params/Limit.yaml'
+      - $ref: '#/components/parameters/limit'
     get:
-      description: Get aggregated event-notification list
+      summary: Get event notifications
+      description: Get aggregated event-notification list.
       tags:
         - event-notification
       responses:
         '200':
-          description: aggregated event-notification list
+          description: aggregated event-notification list.
           headers:
             X-Correlation-ID:
               $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'

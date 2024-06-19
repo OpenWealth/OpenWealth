@@ -6,7 +6,7 @@ description: Order object with extended allocation information.
 properties:
   clientOrderIdentification:
     type: string
-    example: 123123123
+    example: 123-123123
     description: Unambiguous identifier for the bulk order, as assigned by the instructing party.
     maxLength: 20
   orderDateTime:
@@ -18,7 +18,7 @@ properties:
   orderIdentification:
     type: string
     description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
-    example: 321321321
+    example: 321-321321
     readOnly: true
   bulkOrderDetails:
     $ref: 'bulkOrderDetails.yaml'

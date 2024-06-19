@@ -32,7 +32,7 @@ properties:
     $ref: '../../../Globals/V2/Types/Currency.yaml'
   executionType:
     type: string
-    description: Type of the execution of the order
+    description: Type of the execution of the order.
     example: limit
     enum:
       - market
@@ -40,17 +40,11 @@ properties:
       - stop
       - stopLimit
   limitPrice:
-    type: string
-    pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
-    maxLength: 22
     description: Limit price per unit of quantity (e.g. per share)
-    example: 12.50
+    $ref: '../Types/limitPrice.yaml'
   stopPrice:
-    type: string
-    pattern: '[0-9]{1,12}([.][0-9]{1,9})?'
-    maxLength: 22
     description: Stop price per unit of quantity (e.g. per share)
-    example: 10.05
+    $ref: '../Types/stopPrice.yaml'
   timeInForce:
     type: string
     description: Specifies how long the order remains in effect.
@@ -70,7 +64,4 @@ properties:
       - goodForAuction
       - goodForMonth
   expiryDateTime:
-    type: string
-    format: date-time
-    example: 2018-04-13T11:11:11Z
-    description: Date and time of the order expiration (UTC Timestamp). In accordance with ISO 8601.
+    $ref: '../../../Globals/V2/Types/dateTime.yaml'

@@ -1,5 +1,5 @@
 type: string
 pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
 maxLength: 22
-description: Calculated average price of all fills on this order.
+description: Limit price per unit of quantity (e.g. per share).
 example: '17.8'
