@@ -1,9 +1,9 @@
 in: query
 name: date
-description: A date value.
 required: true
 schema:
   type: string
   format: date
   description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
   example: 2019-12-31
+description: A date value.

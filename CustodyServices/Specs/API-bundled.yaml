@@ -693,7 +693,7 @@ components:
         type:
           type: string
           description: |
-            Indicates the type of interest, where 
+            Indicates the type of interest, where
             'fixed' denotes a fixed interest rate for the agreed period.
             'variable' denotes a rate that fluctuates over time because it is based on an underlying benchmark ('basis') interest rate that changes periodically with the market.
             'staggered' denotes a rate that is set at different levels for different periods of time or differnt underlying principal amount.
@@ -735,8 +735,8 @@ components:
       type: object
       description: Price entity.
       required:
-        - amount
         - type
+        - value
       properties:
         type:
           type: string
@@ -751,84 +751,6 @@ components:
           description: Signed decimal number.
         currency:
           $ref: '#/components/schemas/Currency'
-    Bond:
-      title: Bond
-      description: Bond.
-      required:
-        - maturityDate
-        - interestRate
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-        - type: object
-          properties:
-            interestRate:
-              $ref: '#/components/schemas/InterestRate'
-            maturityDate:
-              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
-              $ref: '#/components/schemas/Date'
-            nextInterestPaymentDate:
-              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
-              $ref: '#/components/schemas/Date'
-            issueDate:
-              description: Date at which the security was made available.
-              $ref: '#/components/schemas/Date'
-            conversionPrice:
-              description: Price of one target security in the conversion.
-              $ref: '#/components/schemas/Price'
-            currencyOfDenomination:
-              $ref: '#/components/schemas/Currency'
-            minimumDenomination:
-              type: number
-              example: 10000
-              description: Indicates the minimum denomination of a security.
-            minimumIncrement:
-              type: number
-              example: 1000
-              description: Indicates the minimum tradable increments of a security.
-    Equity:
-      title: Equity
-      description: Equity, typically referred to as shareholders' equity (or owners' equity for privately held companies), represents the amount of money that would be returned to a company's shareholders if all of the assets were liquidated and all of the company's debt was paid off in the case of liquidation.
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-    Fund:
-      title: Fund
-      description: An investment fund is a supply of capital belonging to numerous investors used to collectively purchase securities while each investor retains ownership and control of his own shares.
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-    Index:
-      title: Index
-      description: A financial index produces a numeric score based on inputs such as a variety of asset prices.
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-    Commodity:
-      title: Commodity
-      description: Commodity.
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-    ContractSize:
-      title: ContractSize
-      type: number
-      description: Contract size of the instrument.
-      example: 100
-      default: 1
-    OptionType:
-      title: OptionType
-      type: string
-      description: Specifies whether it is a Call option (right to purchase a specific underlying asset) or a Put option (right to sell a specific underlying asset).
-      example: call
-      enum:
-        - call
-        - put
-    OptionStyle:
-      title: OptionStyle
-      type: string
-      description: Specifies how an option can be exercised.
-      example: american
-      enum:
-        - american
-        - european
-        - bermudan
-        - asian
     FinancialInstrument:
       title: FinancialInstrument
       type: object
@@ -878,14 +800,88 @@ components:
           creditDefaultSwap: '#/components/schemas/CreditDefaultSwap'
           cryptoAsset: '#/components/schemas/CryptoAsset'
           other: '#/components/schemas/OtherFinancialInstrument'
+    Bond:
+      title: Bond
+      description: Bond.
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          properties:
+            interestRate:
+              $ref: '#/components/schemas/InterestRate'
+            maturityDate:
+              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/Date'
+            nextInterestPaymentDate:
+              description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/Date'
+            issueDate:
+              description: Date at which the security was made available.
+              $ref: '#/components/schemas/Date'
+            conversionPrice:
+              description: Price of one target security in the conversion.
+              $ref: '#/components/schemas/Price'
+            currencyOfDenomination:
+              $ref: '#/components/schemas/Currency'
+            minimumDenomination:
+              type: number
+              example: 10000
+              description: Indicates the minimum denomination of a security.
+            minimumIncrement:
+              type: number
+              example: 1000
+              description: Indicates the minimum tradable increments of a security.
+            underlyingFinancialInstrument:
+              description: Financial instrument that would be subject to a conversion.
+              $ref: '#/components/schemas/FinancialInstrument'
+    Equity:
+      title: Equity
+      description: Equity, typically referred to as shareholders' equity (or owners' equity for privately held companies), represents the amount of money that would be returned to a company's shareholders if all of the assets were liquidated and all of the company's debt was paid off in the case of liquidation.
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+    Fund:
+      title: Fund
+      description: An investment fund is a supply of capital belonging to numerous investors used to collectively purchase securities while each investor retains ownership and control of his own shares.
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+    Index:
+      title: Index
+      description: A financial index produces a numeric score based on inputs such as a variety of asset prices.
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+    Commodity:
+      title: Commodity
+      description: Commodity.
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+    ContractSize:
+      title: ContractSize
+      type: number
+      description: Contract size of the instrument.
+      example: 100
+      default: 1
+    OptionType:
+      title: OptionType
+      type: string
+      description: Specifies whether it is a Call option (right to purchase a specific underlying asset) or a Put option (right to sell a specific underlying asset).
+      example: call
+      enum:
+        - call
+        - put
+    OptionStyle:
+      title: OptionStyle
+      type: string
+      description: Specifies how an option can be exercised.
+      example: american
+      enum:
+        - american
+        - european
+        - bermudan
+        - asian
     Option:
       title: Option
       description: An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying asset at a predetermined price within a given timeframe.
       required:
-        - strikePrice
-        - contractSize
-        - optionType
-        - optionStyle
         - underlyingFinancialInstrument
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
@@ -894,9 +890,6 @@ components:
             expiryDate:
               description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
               $ref: '#/components/schemas/Date'
-            strikePrice:
-              description: Predetermined price at which the holder will have to buy or sell the underlying instrument.
-              $ref: '#/components/schemas/Price'
             exercisePrice:
               description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
               $ref: '#/components/schemas/Price'
@@ -912,8 +905,6 @@ components:
       title: Future
       description: Futures are derivative financial contracts that obligate parties to buy or sell an asset at a predetermined future date and price.
       required:
-        - expiryDate
-        - contractSize
         - underlyingFinancialInstrument
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
@@ -934,7 +925,7 @@ components:
       type: object
       description: Amount denoted in a given currency.
       required:
-        - value
+        - amount
         - currency
       properties:
         amount:
@@ -1008,9 +999,6 @@ components:
         - expiryDateTime
         - underlyingAmount
         - counterAmount
-        - premium
-        - optionType
-        - optionStyle
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
@@ -1035,7 +1023,6 @@ components:
       description: A mortgage is a type of loan used to purchase or maintain a home, plot of land, or other types of real estate.
       required:
         - principalAmount
-        - interestRate
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
@@ -1074,7 +1061,6 @@ components:
       description: The money market schema covers both fixed and callable loans and deposits.
       required:
         - principalAmount
-        - interestRate
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
@@ -1094,7 +1080,6 @@ components:
         - notionalAmount
         - interestRatePaid
         - interestRateReceived
-        - maturityDate
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
@@ -1163,12 +1148,16 @@ components:
       description: Other financial instrument.
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          properties:
+            underlyingFinancialInstrument:
+              $ref: '#/components/schemas/FinancialInstrument'
     Position:
       title: Position
       type: object
       description: Position entity.
       required:
-        - positionId
+        - id
         - financialInstrument
         - account
       properties:
@@ -1208,8 +1197,8 @@ components:
       type: object
       description: Quantity entity.
       required:
-        - value
         - type
+        - value
       properties:
         type:
           type: string
@@ -1224,6 +1213,35 @@ components:
           type: number
           example: 12000
           description: Signed decimal number.
+    Valuation:
+      title: Valuation
+      type: object
+      description: Detailed information about the valuation of a position.
+      required:
+        - valueInPositionCurrency
+      properties:
+        valueInPositionCurrency:
+          $ref: '#/components/schemas/CurrencyAmount'
+        valueInReferenceCurrency:
+          $ref: '#/components/schemas/CurrencyAmount'
+        valuationDate:
+          $ref: '#/components/schemas/Date'
+    ValuationPrice:
+      title: ValuationPrice
+      description: Price used for valuation purpose.
+      allOf:
+        - $ref: '#/components/schemas/Price'
+        - type: object
+          properties:
+            priceDate:
+              description: Date of the price.
+              allOf:
+                - $ref: '#/components/schemas/Date'
+            sourceOfPrice:
+              type: string
+              maxLength: 70
+              description: Indicates the source of the (market)price.
+              example: SIX Swiss Exchange
     ForeignExchangeRate:
       title: ForeignExchangeRate
       type: object
@@ -1257,37 +1275,6 @@ components:
               maxLength: 70
               description: Indicates the source of the (market) price.
               example: Reuters 4 o'clock
-    Valuation:
-      title: Valuation
-      type: object
-      description: Detailed information about the valuation of a position.
-      required:
-        - value
-      properties:
-        valueInPositionCurrency:
-          $ref: '#/components/schemas/CurrencyAmount'
-        valueInReferenceCurrency:
-          $ref: '#/components/schemas/CurrencyAmount'
-        foreignExchangeRate:
-          $ref: '#/components/schemas/ValuationForeignExchangeRate'
-        valuationDate:
-          $ref: '#/components/schemas/Date'
-    ValuationPrice:
-      title: ValuationPrice
-      description: Price used for valuation purpose.
-      allOf:
-        - $ref: '#/components/schemas/Price'
-        - type: object
-          properties:
-            priceDate:
-              description: Date of the price.
-              allOf:
-                - $ref: '#/components/schemas/Date'
-            sourceOfPrice:
-              type: string
-              maxLength: 70
-              description: Indicates the source of the (market)price.
-              example: SIX Swiss Exchange
     ValuatedPosition:
       title: ValuatedPosition
       type: object
