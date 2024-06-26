@@ -1,5 +1,5 @@
 {
-  "id": "0000009",
+  "id": "trx-002-01",
   "type": "dividendCash",
   "transactionDate": "2023-05-31",
   "customerId": "123456",
@@ -40,7 +40,7 @@
         "value": 270
       },
       "valueDate": "2023-05-31",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.9,
@@ -72,7 +72,7 @@
         "value": -90
       },
       "valueDate": "2023-05-31",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.9,

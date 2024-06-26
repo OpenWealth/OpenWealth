@@ -1,24 +1,14 @@
 {
-  "id": "0000010",
-  "type": "coupon",
-  "transactionDate": "2023-06-27",
+  "id": "trx-000-01",
+  "type": "fxSpot",
+  "transactionDate": "2023-01-05",
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
-  "triggeringFinancialInstrument": {
-    "type": "bond",
-    "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
-    "identificationList": [
-      {
-        "type": "isin",
-        "identifier": "CH0344958688"
-      }
-    ]
-  },
   "movementList": [
     {
       "type": "cash",
-      "movementDate": "2023-06-27",
+      "movementDate": "2023-01-05",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss francs",
@@ -37,48 +27,57 @@
       },
       "quantity": {
         "type": "unit",
-        "value": 1000
+        "value": -100000
       },
-      "valueDate": "2023-06-28",
-      "positionId": "0000",
+      "valueDate": "2023-01-07",
+      "positionId": "pos-000",
       "positionCurrency": "CHF"
     },
     {
-      "type": "withholdingTax",
-      "movementDate": "2023-06-27",
+      "type": "cash",
+      "movementDate": "2023-01-05",
       "financialInstrument": {
         "type": "cash",
-        "name": "Swiss francs",
+        "name": "Euro",
         "identificationList": [
           {
             "type": "iso3",
-            "identifier": "CHF"
+            "identifier": "EUR"
           }
         ],
-        "currencyOfDenomination": "CHF"
+        "currencyOfDenomination": "EUR"
       },
       "account": {
-        "id": "1234-56",
+        "id": "1234-57",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121213"
       },
       "quantity": {
         "type": "unit",
-        "value": -335
+        "value": 101001.15
       },
-      "valueDate": "2023-06-28",
-      "positionId": "0000",
-      "positionCurrency": "CHF"
+      "valueDate": "2023-01-07",
+      "positionId": "pos-000-1",
+      "positionCurrency": "EUR"
     }
   ],
   "postingAmounts": [
     {
-      "amount": 665,
+      "amount": -100000,
       "currency": "CHF",
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
         "iban": "CH121212121212121212"
+      }
+    },
+    {
+      "amount": 101001.15,
+      "currency": "EUR",
+      "account": {
+        "id": "1234-57",
+        "type": "cashAccount",
+        "iban": "CH121212121212121213"
       }
     }
   ]

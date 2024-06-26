@@ -1,7 +1,7 @@
 {
-  "id": "0000009-2",
-  "type": "closeContract",
-  "transactionDate": "2023-06-27",
+  "id": "trx-009-00",
+  "type": "openContract",
+  "transactionDate": "2023-01-04",
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
@@ -36,7 +36,7 @@
   "movementList": [
     {
       "type": "asset",
-      "movementDate": "2023-06-27",
+      "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "fxSwap",
         "name": "FX Swap, 200'000 USD to CHF",
@@ -70,14 +70,14 @@
         "type": "safekeepingAccount"
       },
       "quantity": {
-        "type": "unit",
-        "value": -1
+        "value": 1,
+        "type": "unit"
       },
-      "positionId": "009"
+      "positionId": "pos-009"
     },
     {
       "type": "cash",
-      "movementDate": "2023-06-27",
+      "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
         "name": "US Dollar",
@@ -96,15 +96,15 @@
       },
       "quantity": {
         "type": "unit",
-        "value": -200000
+        "value": 200000
       },
-      "valueDate": "2023-06-29",
-      "positionId": "0002",
+      "valueDate": "2023-01-04",
+      "positionId": "pos-000-2",
       "currency": "USD"
     },
     {
       "type": "cash",
-      "movementDate": "2023-06-27",
+      "movementDate": "2023-01-04",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss francs",
@@ -123,16 +123,16 @@
       },
       "quantity": {
         "type": "unit",
-        "value": 170000
+        "value": -165000
       },
-      "valueDate": "2023-06-29",
-      "positionId": "0000",
+      "valueDate": "2023-01-04",
+      "positionId": "pos-000",
       "currency": "CHF"
     }
   ],
   "postingAmounts": [
     {
-      "amount": -200000,
+      "amount": 200000,
       "currency": "USD",
       "account": {
         "id": "1234-56",
@@ -141,7 +141,7 @@
       }
     },
     {
-      "amount": 170000,
+      "amount": -165000,
       "currency": "CHF",
       "account": {
         "id": "1234-57",

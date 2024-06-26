@@ -1,68 +1,50 @@
 {
-  "id": "0000009-1",
-  "type": "openContract",
-  "transactionDate": "2023-01-04",
+  "id": "trx-008-01",
+  "type": "closeContract",
+  "transactionDate": "2023-06-27",
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "triggeringInstrument": {
-    "type": "fxSwap",
-    "name": "FX Swap, 200'000 USD to CHF",
+    "type": "fxForward",
+    "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
     "identificationList": [
       {
-        "identifier": "fxSwapRef112",
+        "identifier": "fxForwardRef111",
         "type": "otherProprietaryIdentification"
       }
     ],
-    "nearAmountPaid": {
-      "amount": 165000,
-      "currency": "CHF"
-    },
-    "nearAmountReceived": {
+    "amountPaid": {
       "amount": 200000,
       "currency": "USD"
     },
-    "farAmountPaid": {
-      "amount": 200000,
-      "currency": "USD"
-    },
-    "farAmountReceived": {
+    "amountReceived": {
       "amount": 170000,
       "currency": "CHF"
     },
-    "nearMaturityDate": "2023-01-04",
     "maturityDate": "2023-06-27"
   },
   "movementList": [
     {
       "type": "asset",
-      "movementDate": "2023-01-04",
+      "movementDate": "2023-06-27",
       "financialInstrument": {
-        "type": "fxSwap",
-        "name": "FX Swap, 200'000 USD to CHF",
+        "type": "fxForward",
+        "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
         "identificationList": [
           {
-            "identifier": "fxSwapRef112",
+            "identifier": "fxForwardRef111",
             "type": "otherProprietaryIdentification"
           }
         ],
-        "nearAmountPaid": {
-          "amount": 165000,
-          "currency": "CHF"
-        },
-        "nearAmountReceived": {
+        "amountPaid": {
           "amount": 200000,
           "currency": "USD"
         },
-        "farAmountPaid": {
-          "amount": 200000,
-          "currency": "USD"
-        },
-        "farAmountReceived": {
+        "amountReceived": {
           "amount": 170000,
           "currency": "CHF"
         },
-        "nearMaturityDate": "2023-01-04",
         "maturityDate": "2023-06-27"
       },
       "account": {
@@ -70,14 +52,14 @@
         "type": "safekeepingAccount"
       },
       "quantity": {
-        "value": 1,
-        "type": "unit"
+        "type": "unit",
+        "value": -1
       },
-      "positionId": "009"
+      "positionId": "pos-008"
     },
     {
       "type": "cash",
-      "movementDate": "2023-01-04",
+      "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "cash",
         "name": "US Dollar",
@@ -96,15 +78,15 @@
       },
       "quantity": {
         "type": "unit",
-        "value": 200000
+        "value": -200000
       },
-      "valueDate": "2023-01-04",
-      "positionId": "0002",
+      "valueDate": "2023-06-29",
+      "positionId": "pos-000-2",
       "currency": "USD"
     },
     {
       "type": "cash",
-      "movementDate": "2023-01-04",
+      "movementDate": "2023-06-27",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss francs",
@@ -123,16 +105,16 @@
       },
       "quantity": {
         "type": "unit",
-        "value": -165000
+        "value": 170000
       },
-      "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "valueDate": "2023-06-29",
+      "positionId": "pos-000",
       "currency": "CHF"
     }
   ],
   "postingAmounts": [
     {
-      "amount": 200000,
+      "amount": -200000,
       "currency": "USD",
       "account": {
         "id": "1234-56",
@@ -141,7 +123,7 @@
       }
     },
     {
-      "amount": -165000,
+      "amount": 170000,
       "currency": "CHF",
       "account": {
         "id": "1234-57",

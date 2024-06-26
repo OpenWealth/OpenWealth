@@ -1,5 +1,5 @@
 {
-  "id": "0000005",
+  "id": "trx-010-00",
   "type": "buy",
   "transactionDate": "2023-01-04",
   "customerId": "123456",
@@ -42,7 +42,7 @@
         "value": 1,
         "type": "unit"
       },
-      "positionId": "015"
+      "positionId": "pos-010"
     },
     {
       "type": "cash",
@@ -68,7 +68,7 @@
         "value": -2000
       },
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF"
     }
   ],

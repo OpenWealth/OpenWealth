@@ -163,11 +163,11 @@ The movements typically only consist of a credit/debit movement of the instrumen
 Receive/Delivery versus payment is a procedure for the settlement of securities transactions in which the cash payment/receipt and the reception/delivery of the securities need to happen simultaneously in order for the transaction to settle.
 In terms of movements these transaction types are identical to a Buy/Sell (see above)
 
-### Cash
+### 0 - Cash
 
 This section consists of all transaction types that result in cash movements only without a triggering reason originating from another instrument such as revenue, fees, taxes resulting from a corporate action, interest or similar. The default transaction types are inflow and outflow cash, but also fees like custody, management or account fees belong here as well as tax general obligations. The movements in this transaction consist normally of a single entry, but may also contain multiples movements on the same account, for example a gross amount (type=cash) and a value added tax.
 
-### Bond
+### 1 - Bond
 
 - Coupon
 
@@ -189,7 +189,7 @@ It typically results in a cash movement and potentially a change in the held qua
 Conversion of securities (generally convertible bonds or preferred shares) into another form of securities (usually common shares) at a pre-stated price/ratio.
 This includes at least two security (type=asset) movements - the debit of the bond and credit of the share/equity.
 
-### Equity
+### 2 - Equity
 
 - Bonus
 
@@ -245,7 +245,7 @@ The movements may consist of a credit of the newly created security. Triggering 
 Increase in a corporation's number of outstanding equities without any change in the shareholder's equity or the aggregate market value at the time of the split. Equity price and nominal value are reduced accordingly.
 The movements may consist of a debit of the old held quantity and a credit of the multiple of the old quantity. Triggering instrument must be set. Enusre the prices respect before and after situation.
 
-### Fund
+### 3 - Fund
 
 - Subscription
 
@@ -260,21 +260,23 @@ The movements consists of the debit of the prepayment 'dummy paper', the credit 
 - Accumulation
 
 Funds related event in which the income (for example accumulation units) that accrues during an accounting period is retained within the fund instead of being paid away to investors. The retained income is nonetheless deemed to have been distributed to investors for tax purposes.
-The movements typicall< consist of a gross cash credit (type=cash), a debit withholding or reclaimable tax and a reinvested amount. This results in a net zero posting amount - no actual movement on the account occurs. Triggering instrument must be set.
+The movements typically consist of a gross cash credit (type=cash), a debit withholding or reclaimable tax and a reinvested amount. This results in a net zero posting amount - no actual movement on the account occurs. Triggering instrument must be set.
 
-### Commodity
+### 4 - Index
+
+### 5 - Commodity
 
 TBD
 
-### Option
+### 6 - Option
 
 - Exercise
 
-### Future
+### 7 - Future
 
 - Margin payment
 
-### FX Forward
+### 8 - FX Forward
 
 A currency forward is a binding contract in the foreign exchange market that locks in the exchange rate for the purchase or sale of a currency on a future date. A currency forward is essentially a customizable hedging tool that does not involve an upfront margin payment.
 
@@ -283,20 +285,20 @@ A currency forward is a binding contract in the foreign exchange market that loc
 At the opening of the contract the amount of currency bought or sold, the rate at which will be exchanged and the future date for settlement are defined.  Note that if the accounts for settlement of the two currencies are already available including the value date of the cash settlements this may already be added to the transaction.
 In terms of movements this results in the contract move with quantity=1 and possibly the two cash moves (each of the currencies). The triggering instrument - the contract asset - should be set.
 
-Example: [008-open-contract-fx-forward.json](../Samples/Transactions/008-open-contract-fx-forward.json)
+Example: [008-fx-forward-open-contract.json](../Samples/Transactions/008-fx-forward-open-contract.json)
 
 - Close Contract
 
 The closing of the contract typically consists of a single movement entry with quantity=-1 and possibly - if not already added in the contract opening transaction - two cash movements for each currency and account respectively. This would be the preferred implementation. The triggering instrument - the contract asset - should be set.
 
-Example: [008-close-contract-fx-forward.json](../Samples/Transactions/008-close-contract-fx-forward.json)
+Example: [008-fx-forward-close-contract.json](../Samples/Transactions/008-fx-forward-close-contract.json)
 
 Comments and alternatives:
 
 If the net profit and loss of the contract will immediately be credited or debited to the leading currencies account at maturity this should be done with another fx spot transaction.
 Certain providers may expose the actual cash settlement in a separat fx spot transaction and the opening and closing of the forward will consist of the contract movement only. In this case, make sure to set the triggering instrument - the contract asset - on all transactions.
 
-### FX Swap
+### 9 - FX Swap
 
 
 Historically a foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency for interest payments on a loan made in another currency. However the fx swap is most frequently used as a hedging mean by reducing exposure to anticipated fluctuations in exchange rates. In this sense an fx swap is often used to extend or renew a fx forward contract. In essense the fx swap consists of two fixed foreign exchange agreements - the near leg (or spot) and the far leg at maturity with opposite signs.
@@ -306,21 +308,22 @@ Historically a foreign currency swap is an agreement between two foreign parties
 At the opening of the contract the amount of currency bought or sold at the near leg (often the spot fx) as well as the rate at wich will be exchanged and the future date are defined.
 In terms of movements this results in the contract move with quantity=1 and the two cash moves (each of the currencies) - the near leg (or spot fx). The triggering instrument - the contract asset - should be set. 
 
-Example: [009-open-contract-fx-swap.json](../Samples/Transactions/009-open-contract-fx-swap.json)
+Example: [009-fx-swap-open-contract.json](../Samples/Transactions/009-fx-swap-open-contract.json)
 
 - Close Contract
 
 The closing of the contract typically consists of a single movement entry with quantity=-1 and two cash movements for each currency and account respectively. The triggering instrument - the contract asset - should be set.
 
-Example: [009-close-contract-fx-swap.json](../Samples/Transactions/009-close-contract-fx-swap.json)
+Example: [009-fx-swap-close-contract.json](../Samples/Transactions/009-fx-swap-close-contract.json)
 
 Comments and alternatives:
 
 If the near leg is in the future of the contract date and fx spot transaction may be triggered at the time of near leg maturity instead of adding the two cash moves in the opening of the contract. In the same sense it is possible that the settlement of the far legs is sent separately from the closing of the contract. Make sure to set the triggering instrument - the contract asset - on all transactions.
 If the net profit and loss of the contract will immediately be credited or debited to the leading currencies account at maturity this should be done with another fx spot transaction.
 
+### 10 - FX Swap
 
-### Mortgage and Credit
+### 11 - Mortgage and Credit
 
 - Open Contract
 
@@ -330,7 +333,7 @@ If the net profit and loss of the contract will immediately be credited or debit
 
 - Close Contract
 
-### Fixed and Callable Loans and Deposits
+### 12 - Fixed and Callable Loans and Deposits
 
 - Open Contract
 
@@ -338,7 +341,7 @@ If the net profit and loss of the contract will immediately be credited or debit
 
 - Close Contract
 
-### Interest Rate Swap
+### 13 - Interest Rate Swap
 
 - Open contract
 
@@ -361,7 +364,7 @@ The transaction instance of the closing of the contract should contain at least 
 
 The business event of an unwind typically includes all necessary movements in order the close the contract before maturity, this may include closing of contract, interests, fees, additional payments etc.
 
-### Total Return Swap
+### 14 - Total Return Swap
 
 - Open contract
 
@@ -383,7 +386,7 @@ The transaction instance of the closing of the contract should contain at least 
 
 The business event of an unwind typically includes all necessary movements in order the close the contract before maturity, this may include closing of contract, interests, fees, additional payments etc.
 
-### Credit Default Swap
+### 15 - Credit Default Swap
 
 - Open contract
 

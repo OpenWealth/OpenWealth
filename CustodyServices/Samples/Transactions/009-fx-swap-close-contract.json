@@ -1,27 +1,36 @@
 {
-  "id": "0000008-2",
+  "id": "trx-009-01",
   "type": "closeContract",
   "transactionDate": "2023-06-27",
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "triggeringInstrument": {
-    "type": "fxForward",
-    "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+    "type": "fxSwap",
+    "name": "FX Swap, 200'000 USD to CHF",
     "identificationList": [
       {
-        "identifier": "fxForwardRef111",
+        "identifier": "fxSwapRef112",
         "type": "otherProprietaryIdentification"
       }
     ],
-    "amountPaid": {
+    "nearAmountPaid": {
+      "amount": 165000,
+      "currency": "CHF"
+    },
+    "nearAmountReceived": {
       "amount": 200000,
       "currency": "USD"
     },
-    "amountReceived": {
+    "farAmountPaid": {
+      "amount": 200000,
+      "currency": "USD"
+    },
+    "farAmountReceived": {
       "amount": 170000,
       "currency": "CHF"
     },
+    "nearMaturityDate": "2023-01-04",
     "maturityDate": "2023-06-27"
   },
   "movementList": [
@@ -29,22 +38,31 @@
       "type": "asset",
       "movementDate": "2023-06-27",
       "financialInstrument": {
-        "type": "fxForward",
-        "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+        "type": "fxSwap",
+        "name": "FX Swap, 200'000 USD to CHF",
         "identificationList": [
           {
-            "identifier": "fxForwardRef111",
+            "identifier": "fxSwapRef112",
             "type": "otherProprietaryIdentification"
           }
         ],
-        "amountPaid": {
+        "nearAmountPaid": {
+          "amount": 165000,
+          "currency": "CHF"
+        },
+        "nearAmountReceived": {
           "amount": 200000,
           "currency": "USD"
         },
-        "amountReceived": {
+        "farAmountPaid": {
+          "amount": 200000,
+          "currency": "USD"
+        },
+        "farAmountReceived": {
           "amount": 170000,
           "currency": "CHF"
         },
+        "nearMaturityDate": "2023-01-04",
         "maturityDate": "2023-06-27"
       },
       "account": {
@@ -55,7 +73,7 @@
         "type": "unit",
         "value": -1
       },
-      "positionId": "008"
+      "positionId": "pos-009"
     },
     {
       "type": "cash",
@@ -81,7 +99,7 @@
         "value": -200000
       },
       "valueDate": "2023-06-29",
-      "positionId": "0002",
+      "positionId": "pos-000-2",
       "currency": "USD"
     },
     {
@@ -108,7 +126,7 @@
         "value": 170000
       },
       "valueDate": "2023-06-29",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "currency": "CHF"
     }
   ],

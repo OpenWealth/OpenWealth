@@ -1,5 +1,5 @@
 {
-  "id": "00000012",
+  "id": "trx-012-00",
   "type": "openContract",
   "transactionDate": "2022-12-31",
   "customerId": "123456",
@@ -37,7 +37,7 @@
         "value": 1,
         "type": "unit"
       },
-      "positionId": "012",
+      "positionId": "pos-012",
       "positionCurrency": "USD"
     },
     {
@@ -65,7 +65,7 @@
         "creditDebitIndicator": "debit"
       },
       "valueDate": "2022-12-31",
-      "positionId": "0002",
+      "positionId": "pos-000-2",
       "positionCurrency": "USD"
     }
   ],

@@ -1,5 +1,5 @@
 {
-  "id": "0000003",
+  "id": "trx-002-00",
   "type": "buy",
   "transactionDate": "2023-01-04",
   "customerId": "123456",
@@ -30,7 +30,7 @@
         "type": "unit",
         "value": 40
       },
-      "positionId": "002",
+      "positionId": "pos-002-1",
       "positionCurrency": "USD",
       "price": {
         "type": "actual",
@@ -62,7 +62,7 @@
         "value": -5100
       },
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.85,
@@ -94,7 +94,7 @@
         "value": -200.25
       },
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.85,
@@ -126,7 +126,7 @@
         "value": -150.75
       },
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.85,

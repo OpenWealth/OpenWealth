@@ -1,5 +1,5 @@
 {
-  "id": "00000014",
+  "id": "trx-014-00",
   "type": "openContract",
   "transactionDate": "2022-12-31",
   "customerId": "123456",
@@ -47,7 +47,7 @@
         "value": 1,
         "type": "unit"
       },
-      "positionId": "014",
+      "positionId": "pos-014",
       "positionCurrency": "CHF"
     }
   ],

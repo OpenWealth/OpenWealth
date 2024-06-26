@@ -1,5 +1,5 @@
 {
-  "id": "00000011",
+  "id": "trx-001-02",
   "type": "redemption",
   "transactionDate": "2023-06-27",
   "customerId": "123456",
@@ -37,7 +37,7 @@
         "type": "faceAmount",
         "value": -200000
       },
-      "positionId": "003",
+      "positionId": "pos-001",
       "positionCurrency": "CHF"
     },
     {
@@ -64,7 +64,7 @@
         "value": 200000
       },
       "valueDate": "2023-06-28",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF"
     }
   ],

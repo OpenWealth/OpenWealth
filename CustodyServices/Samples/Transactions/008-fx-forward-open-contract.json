@@ -1,5 +1,5 @@
 {
-  "id": "0000008-1",
+  "id": "trx-008-00",
   "type": "openContract",
   "transactionDate": "2023-01-04",
   "customerId": "123456",
@@ -55,7 +55,7 @@
         "value": 1,
         "type": "unit"
       },
-      "positionId": "008"
+      "positionId": "pos-008"
     }
   ],
   "postingAmounts": []
