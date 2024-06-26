@@ -11,7 +11,7 @@ properties:
       Indicates the type of interest, where
       'fixed' denotes a fixed interest rate for the agreed period.
       'variable' denotes a rate that fluctuates over time because it is based on an underlying benchmark ('basis') interest rate that changes periodically with the market.
-      'staggered' denotes a rate that is set at different levels for different periods of time or differnt underlying principal amount.
+      'staggered' denotes a rate that is set at different levels for different periods of time or different underlying principal amount.
     example: fixed
     enum:
       - fixed

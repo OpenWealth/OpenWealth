@@ -13,7 +13,7 @@ properties:
   type:
     type: string
     example: isin
-    description: Type of the instrument ID. isin is prefered.
+    description: Type of the instrument ID. isin is preferred.
     enum:
       - isin
       - sedol
