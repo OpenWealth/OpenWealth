@@ -7,6 +7,8 @@ enum:
   - additionalPayment
   - adjustNotional
   - amortizationAndInterestPayment
+  - assignment
+  - assimilation
   - bonus
   - buy
   - buyToClose
