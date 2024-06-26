@@ -13,7 +13,7 @@
     ],
     "principalAmount": 100000,
     "currencyOfDenomination": "CHF",
-    "expiryDate": "2023-06-27",
+    "maturityDate": "2023-06-27",
     "interestRatePaid": {
       "type": "fixed",
       "value": 1.2,

@@ -137,6 +137,7 @@ For clarification of content we group the transaction types by business event gr
 | otherFee | Other Fee |
 | other | Other |
 | otherTax | Other Tax |
+| premium | Premium amount |
 | reclaimableTax | Reclaimable Tax |
 | reinvestmentAmount | Reinvestment Amount |
 | stampDuty | Stamp Duty |
@@ -166,6 +167,14 @@ In terms of movements these transaction types are identical to a Buy/Sell (see a
 ### 0 - Cash
 
 This section consists of all transaction types that result in cash movements only without a triggering reason originating from another instrument such as revenue, fees, taxes resulting from a corporate action, interest or similar. The default transaction types are inflow and outflow cash, but also fees like custody, management or account fees belong here as well as tax general obligations. The movements in this transaction consist normally of a single entry, but may also contain multiples movements on the same account, for example a gross amount (type=cash) and a value added tax.
+
+- Inflow Cash
+
+Example: [000-cash-inflow.json](../Samples/Transactions/000-cash-inflow.json)
+
+- FX Spot
+
+Example: [000-fx-spot.json](../Samples/Transactions/000-fx-spot.json)
 
 ### 1 - Bond
 
@@ -347,22 +356,32 @@ If the net profit and loss of the contract will immediately be credited or debit
 
 The transaction instance of the opening of the contract should contain only one movement with quantity = 1 of the InterestRateSwap instrument. Make sure to set the properties on the contract instrument properly (principal, both interests, maturity etc)
 
+Example: [013-interest-rate-swap-open-contract.json](../Samples/Transactions/013-interest-rate-swap-open-contract.json)
+
 - Interest payment
 
-The payment typically occurs periodically and the net amount consist of the difference betwee the two accumulated interests based on the swapped rates.
-The implementation of the transaction ideally consists of at least the two cash movements (each accrued interest)
+The payment typically occurs periodically and the net amount consist of the difference between the two accumulated interests based on the swapped rates.
+The implementation of the transaction consists of at least the two cash movements (each legs accrued interest)
+
+Example: [013-interest-rate-swap-interest-payment.json](../Samples/Transactions/013-interest-rate-swap-interest-payment.json)
 
 - Additional payment
 
 The payment may occur during the lifetime of the contract is undertstood as a premium or fee payment of some sort for the contract.
 
+Example: [013-interest-rate-swap-additional-payment.json](../Samples/Transactions/013-interest-rate-swap-additional-payment.json)
+
 - Close contract
 
 The transaction instance of the closing of the contract should contain at least one movement with quantity = -1 of the InterestRateSwap instrument. Additionally the interests of both legs and possible fees may also be contained in the transaction as separate movements
 
+Example: [013-interest-rate-swap-close-contract.json](../Samples/Transactions/013-interest-rate-swap-close-contract.json)
+
 - Unwind
 
 The business event of an unwind typically includes all necessary movements in order the close the contract before maturity, this may include closing of contract, interests, fees, additional payments etc.
+
+Example: [013-interest-rate-swap-unwind.json](../Samples/Transactions/013-interest-rate-swap-unwind.json)
 
 ### 14 - Total Return Swap
 
