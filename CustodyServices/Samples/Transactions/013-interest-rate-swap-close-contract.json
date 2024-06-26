@@ -1,0 +1,117 @@
+{
+  "id": "trx-013-4",
+  "type": "closeContract",
+  "transactionDate": "2023-06-27",
+  "customerId": "123456",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "movementList": [
+    {
+      "type": "asset",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "type": "interestRateSwap",
+        "name": "Payer interest rate swap",
+        "identificationList": [
+          {
+            "identifier": "swapContract1",
+            "type": "otherProprietaryIdentification"
+          }
+        ],
+        "notionalAmount": 100000,
+        "currencyOfDenomination": "CHF",
+        "maturityDate": "2023-06-27",
+        "interestRateReceived": {
+          "type": "fixed",
+          "value": 1.75,
+          "dayCountBasis": "act_360",
+          "paymentDate": "2023-06-27",
+          "paymentFrequency": "atMaturity"
+        },
+        "interestRatePaid": {
+          "type": "floating",
+          "spread": 0.2,
+          "basis": "LIBOR",
+          "dayCountBasis": "act_360",
+          "paymentDate": "2023-06-27",
+          "paymentFrequency": "atMaturity"
+        }
+      },
+      "account": {
+        "id": "123456-1",
+        "type": "safekeepingAccount"
+      },
+      "quantity": {
+        "value": -1,
+        "type": "unit"
+      },
+      "positionId": "pos-013",
+      "positionCurrency": "CHF"
+    },
+    {
+      "type": "interest",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "type": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "1234-56",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "value": 1200,
+        "type": "unit"
+      },
+      "valueDate": "2023-06-27",
+      "positionId": "pos-000",
+      "positionCurrency": "CHF"
+    },
+    {
+      "type": "interest",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "type": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "1234-56",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "value": -1150,
+        "type": "unit"
+      },
+      "valueDate": "2023-06-27",
+      "positionId": "pos-000",
+      "positionCurrency": "CHF"
+    }
+  ],
+  "postingAmounts": [
+    {
+      "amount": 50,
+      "currency": "CHF",
+      "account": {
+        "id": "1234-56",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212"
+      }
+    }
+  ]
+}
