@@ -70,6 +70,8 @@ For clarification of content we group the transaction types by business event gr
 | additionalPayment | Payment that is related to an OTC Contract without changing the principal amount, typically a fee or premium | OtherOTC | cash, premium, fees, taxes |
 | adjustNotional | Adjustment of the principal or notional value of the underlying asset in a contract | OtherOTC | cash, fees, taxes |
 | amortizationAndInterestPayment | Amortization and interest payment | OtcBorrowingLending | cash, interest, fees |
+| assignment | Assignment (passive excercise - the option writer automatically fulfills his duties) of a an option  || asset, cash, fees, taxes|
+| assimilation | Assimilation of newly issued securities (for example after a capital increase) into the existing stock of securities | CorporateAction | asset, cash, fees, taxes |
 | bonus | Bonus or capitalisation issue. Security holders receive additional assets free of payment from the issuer, in proportion to their holding | CorporateAction | asset |
 | buy | Purchase of a security or financial instrument | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
 | buyToClose | Buy to close involves buying back an asset previously sold short to close out a short position | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
@@ -86,7 +88,7 @@ For clarification of content we group the transaction types by business event gr
 | dividendChoice | Distribution of a dividend to shareholders with a choice of benefit to receive. Shareholders may choose to receive shares or cash. To be distinguished from dividendReinvestment as the company creates new share capital in exchange for the dividend rather than investing the dividend in the market. | CorporateAction | cash, fees, taxes |
 | dividendReinvestment | Dividend payment where holders can keep cash or have the cash reinvested in the market by the issuer into additional shares in the issuing company. To be distinguished from dividendOption as the company invests the dividend in the market rather than creating new share capital in exchange for the dividend. | CorporateAction  | cash, asset, fees, taxes |
 | dividendStock | Dividend paid to shareholders in the form of equities of the issuing corporation | CorporateAction | asset |
-| exercise | Exercise of a right, an option or warrant || asset, cash, fees, taxes|
+| exercise | Exercise (initiated by the holder) of a right, an option or warrant || asset, cash, fees, taxes|
 | expiration | Expiration of a security - contract, right, an option or warrant || asset |
 | finalLiquidationPayment | Final liquidation payment under expiration of the old security | CorporateAction |  cash, fees |
 | fxSpot | Foreign exchange spot transaction | FX | cash |
@@ -215,7 +217,6 @@ The movements usually consist of a gross cash entry (type=cash) and a withholdin
 Distribution of a dividend to shareholders with a choice of benefit to receive. Shareholders may choose to receive shares or cash. To be distinguished from dividendReinvestment as the company creates new share capital in exchange for the dividend rather than investing the dividend in the market.
 The movements usually consist of a gross cash entry (type=cash) and a withholding or reclaimable tax entry. The exercise to reinvest would usually be confirmed as a separat business event. Triggering instrument must be set.
 
-
 - Dividend Reinvestment
 
 Dividend payment where holders can keep cash or have the cash reinvested in the market by the issuer into additional shares in the issuing company. To be distinguished from divivdendChoice as the company invests the dividend in the market rather than creating new share capital in exchange for the dividend.
@@ -227,6 +228,10 @@ Dividend paid to shareholders in the form of equities of the issuing corporation
 The movements typically only consist of a credit movement of the instrument of subject. Triggering instrument must be set.
 
 - Capital Increase
+
+TBD
+
+- Assimilation
 
 TBD
 
@@ -280,6 +285,8 @@ TBD
 ### 6 - Option
 
 - Exercise
+
+- Assignment
 
 ### 7 - Future
 
