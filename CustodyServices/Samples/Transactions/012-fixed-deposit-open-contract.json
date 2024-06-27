@@ -5,6 +5,19 @@
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
+  "triggeringFinancialInstrument": {
+    "type": "fixedDeposit",
+    "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
+    "identificationList": [
+      {
+        "identifier": "fixedDepositContract1",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "principalAmount": {
+      "amount": 100000
+    }
+  },
   "movementList": [
     {
       "type": "asset",

@@ -8,6 +8,16 @@
   "placeOfTrade": {
     "marketIdentificationCode": "XNYS"
   },
+  "triggeringFinancialInstrument": {
+    "type": "equity",
+    "name": "Apple Inc.",
+    "identificationList": [
+      {
+        "type": "isin",
+        "identifier": "US0378331005"
+      }
+    ]
+  },
   "movementList": [
     {
       "type": "asset",

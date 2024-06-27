@@ -5,6 +5,36 @@
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
+  "triggeringFinancialInstrument": {
+    "type": "totalReturnSwap",
+    "identificationList": [
+      {
+        "identifier": "swapContract2",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "name": "Total return swap",
+    "notionalAmount": 100000,
+    "currencyOfDenomination": "CHF",
+    "maturityDate": "2023-06-27",
+    "interestRatePaid": {
+      "type": "fixed",
+      "value": 1.2,
+      "dayCountBasis": "act_360",
+      "paymentDate": "2023-06-27",
+      "paymentFrequency": "atMaturity"
+    },
+    "undelyingFinancialInstrument": {
+      "type": "equity",
+      "name": "Apple Inc.",
+      "identificationList": [
+        {
+          "type": "isin",
+          "identifier": "US0378331005"
+        }
+      ]
+    }
+  },
   "movementList": [
     {
       "type": "asset",

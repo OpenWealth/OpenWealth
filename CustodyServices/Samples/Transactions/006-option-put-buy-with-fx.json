@@ -8,6 +8,25 @@
   "placeOfTrade": {
     "marketIdentificationCode": "XNYS"
   },
+  "triggeringFinancialInstrument": {
+    "type": "option",
+    "name": "Put Option Apple Inc., 185, 2024-06-01",
+    "identificationList": [
+      {
+        "type": "otherProprietaryIdentification",
+        "identifier": "AAPL240601P00185000"
+      }
+    ],
+    "underlyingFinancialInstrument": {
+      "name": "Apple Inc.",
+      "identificationList": [
+        {
+          "type": "isin",
+          "identifier": "CH0012138530"
+        }
+      ]
+    }
+  },
   "movementList": [
     {
       "type": "asset",

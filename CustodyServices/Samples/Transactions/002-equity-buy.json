@@ -8,6 +8,17 @@
   "placeOfTrade": {
     "marketIdentificationCode": "XSWX"
   },
+  "triggeringFinancialInstrument": {
+    "type": "equity",
+    "name": "CREDIT SUISSE GROUP AG",
+    "identificationList": [
+      {
+        "type": "isin",
+        "identifier": "CH0012138530"
+      }
+    ],
+    "currencyOfDenomination": "CHF"
+  },
   "movementList": [
     {
       "type": "asset",

@@ -8,6 +8,16 @@
   "placeOfTrade": {
     "marketIdentificationCode": "XSWX"
   },
+  "triggeringFinancialInstrument": {
+    "type": "bond",
+    "name": "Schweizerische Eidgenossenschaft 0,5% 18/32",
+    "identificationList": [
+      {
+        "type": "isin",
+        "identifier": "CH0344958688"
+      }
+    ]
+  },
   "movementList": [
     {
       "type": "asset",

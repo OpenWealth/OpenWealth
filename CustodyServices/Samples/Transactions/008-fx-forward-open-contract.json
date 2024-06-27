@@ -5,7 +5,7 @@
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
-  "triggeringInstrument": {
+  "triggeringFinancialInstrument": {
     "type": "fxForward",
     "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
     "identificationList": [

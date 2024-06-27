@@ -5,7 +5,7 @@
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
-  "triggeringInstrument": {
+  "triggeringFinancialInstrument": {
     "type": "fxSwap",
     "name": "FX Swap, 200'000 USD to CHF",
     "identificationList": [
