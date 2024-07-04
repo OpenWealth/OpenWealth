@@ -5,7 +5,9 @@ required:
   - amount
 properties:
   accounts:
-    $ref: '../Resources/account.yaml'
+    type: array
+    items:
+      $ref: '../Resources/account.yaml'
   clientAllocationIdentification:
     type: string
     description: Unambiguous identifier for the individual allocation of the bulk order, as assigned by the instructing party.
