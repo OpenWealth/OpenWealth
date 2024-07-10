@@ -11,6 +11,7 @@ info:
 servers:
   - description: Your server url
     url: https://www.openwealth.ch
+security: []
 tags:
   - name: accountaccess
     description: Account access operations.
@@ -22,12 +23,15 @@ tags:
     description: Order placement operations.
   - name: orderstatus
     description: Order status operations.
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
 paths:
   /orders:
     parameters:
       - $ref: '#/components/parameters/correlation_in_header'
     post:
-      summary: Posts a new order.
+      summary: Posts a new order
       description: Posts a new order.
       operationId: postOrder
       tags:
@@ -64,7 +68,7 @@ paths:
         '503':
           $ref: '#/components/responses/503'
     get:
-      summary: Returns a list of open security orders.
+      summary: Returns a list of open security orders
       description: Returns all open orders to which the user of the API has access to. Paging is done based on the order object, i.e. if limit is set to 1, then 1 order will be returned per page.
       operationId: getOrders
       tags:
@@ -104,16 +108,16 @@ paths:
           $ref: '#/components/responses/503'
   /orders/{clientOrderId}:
     parameters:
-      - name: clientOrderId
-        in: path
+      - in: path
+        name: clientOrderId
         required: true
-        description: The security order id. This Id corresponds with the clientOrderIdentification.
         schema:
           type: string
           maxLength: 20
+        description: The security order id. This Id corresponds with the clientOrderIdentification.
       - $ref: '#/components/parameters/correlation_in_header'
     get:
-      summary: Returns a single security order.
+      summary: Returns a single security order
       description: Returns a specific security order.
       operationId: getOrderByClientOrderId
       tags:
@@ -145,7 +149,7 @@ paths:
         '503':
           $ref: '#/components/responses/503'
     delete:
-      summary: Cancellation of a specific order.
+      summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
       operationId: deleteOrderByClientOrderId
       tags:
@@ -180,7 +184,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/correlation_in_header'
     get:
-      summary: Returns list of accounts the requestor has access to.
+      summary: Returns list of accounts the requestor has access to
       description: Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
       operationId: getAccountAccesses
       tags:
@@ -372,7 +376,7 @@ paths:
           $ref: '#/components/responses/504'
     delete:
       summary: Delete event subscription
-      description: Deletes event subscriptions
+      description: Deletes event subscriptions.
       operationId: deleteEventSubscriptionsByEventSubscriptionId
       tags:
         - event-notification-subscription
@@ -405,14 +409,15 @@ paths:
       - $ref: '#/components/parameters/path_eventSubscriptionId'
       - $ref: '#/components/parameters/fromEventDateTime'
       - $ref: '#/components/parameters/afterEventId'
-      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/limit'
     get:
-      description: Get aggregated event-notification list
+      summary: Get event notifications
+      description: Get aggregated event-notification list.
       tags:
         - event-notification
       responses:
         '200':
-          description: aggregated event-notification list
+          description: aggregated event-notification list.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -452,33 +457,26 @@ components:
     path_eventSubscriptionId:
       name: eventSubscriptionId
       in: path
-      description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
       required: true
+      description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
       schema:
         type: string
         minLength: 1
         maxLength: 40
     fromEventDateTime:
-      name: fromEventDate
       in: query
+      name: fromEventDate
       schema:
         type: string
         format: date-time
+      description: Date from which events are considered.
       example: 2022-10-26T07:58:30.996+0100
     afterEventId:
-      name: afterEventId
       in: query
+      name: afterEventId
       schema:
         $ref: '#/components/schemas/eventSubscriptionId'
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of items to return.
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
+      description: Event Id after which events are considered.
   headers:
     X-Correlation-ID:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
@@ -500,10 +498,11 @@ components:
       type: string
       pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
-      example: 12000
+      example: '12000'
       description: Absolute amount.
     orderQuantity:
       type: object
+      description: Ordered quantity.
       properties:
         amount:
           $ref: '#/components/schemas/amount'
@@ -572,7 +571,7 @@ components:
       type: string
       pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
-      description: Limit price per unit of quantity (e.g. per share)
+      description: Limit price per unit of quantity (e.g. per share).
       example: '17.8'
     stopPrice:
       type: string
@@ -620,7 +619,7 @@ components:
           $ref: '#/components/schemas/Currency'
         executionType:
           type: string
-          description: Type of the execution of the order
+          description: Type of the execution of the order.
           example: limit
           enum:
             - market
@@ -660,7 +659,7 @@ components:
           type: string
           maxLength: 35
           example: 8765-43219
-          description: Unambiguous identification for the account
+          description: Unambiguous identification for the account.
         type:
           type: string
           description: Indicates the type of the account.
@@ -677,7 +676,9 @@ components:
         - amount
       properties:
         accounts:
-          $ref: '#/components/schemas/account'
+          type: array
+          items:
+            $ref: '#/components/schemas/account'
         clientAllocationIdentification:
           type: string
           description: Unambiguous identifier for the individual allocation of the bulk order, as assigned by the instructing party.
@@ -714,6 +715,7 @@ components:
         proprietary:
           type: string
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
+          example: Cancelled by client.
     executedQuantity:
       type: string
       pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
@@ -727,7 +729,7 @@ components:
       description: |
         Quantity open for further execution.
         If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
-      example: 20
+      example: '20'
     remainingAllocation:
       type: object
       description: Provides an overview of what quantity has already been allocated to the allocation and what quantity is still outstanding.
@@ -775,7 +777,7 @@ components:
           type: string
           pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
           maxLength: 22
-          example: 1.0963
+          example: '1.0963'
           description: Indicates the rate of a fx transaction for one source currency unit to the target currency. E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
         targetCurrency:
           description: Currency into which an amount is to be converted in a currency conversion.
@@ -850,6 +852,7 @@ components:
             - thirdPartyFee
             - otherFee
             - others
+          example: stampDuty
         amount:
           $ref: '#/components/schemas/amount'
         currency:
@@ -880,7 +883,7 @@ components:
           description: |
             Unambiguous identifier of the individual allocation of the bulk order, as assigned by the confirming party.
             Corresponds with the transactionIdentification of the OpenWealth Custody Services API.
-          example: 123123123
+          example: 123-123123
         executedQuantity:
           description: Total quantity (e.g. number of shares) filled.
           $ref: '#/components/schemas/executedQuantity'
@@ -916,7 +919,7 @@ components:
       properties:
         clientOrderIdentification:
           type: string
-          example: 123123123
+          example: 123-123123
           description: Unambiguous identifier for the bulk order, as assigned by the instructing party.
           maxLength: 20
         orderDateTime:
@@ -928,7 +931,7 @@ components:
         orderIdentification:
           type: string
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
-          example: 321321321
+          example: 321-321321
           readOnly: true
         bulkOrderDetails:
           $ref: '#/components/schemas/bulkOrderDetails'
@@ -1019,6 +1022,7 @@ components:
         proprietary:
           type: string
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
+          example: Cancelled by client
     dayOrderQuantity:
       type: string
       pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
@@ -1079,7 +1083,7 @@ components:
           type: string
           pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
           maxLength: 22
-          example: 100
+          example: '100'
           description: |
             For Fixed Income: Amorization Factor for deriving Current face from Original face for ABS or MBS securities.
             Note the fraction may be greater than, equal to or less than.
@@ -1163,7 +1167,7 @@ components:
       properties:
         clientOrderIdentification:
           type: string
-          example: 123123123
+          example: 123-123123
           description: Unambiguous identifier for the bulk order, as assigned by the instructing party.
           maxLength: 20
         orderDateTime:
@@ -1175,7 +1179,7 @@ components:
         orderIdentification:
           type: string
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
-          example: 321321321
+          example: 321-321321
           readOnly: true
         bulkOrderDetails:
           $ref: '#/components/schemas/bulkOrderDetails'
@@ -1197,6 +1201,7 @@ components:
           enum:
             - read
             - write
+          example: read
     eventSubscriptionId:
       description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
       type: string
@@ -1285,7 +1290,7 @@ components:
         eventType:
           $ref: '#/components/schemas/eventType'
         resourceLink:
-          description: Link to resource that triggered the event notification
+          description: Link to resource that triggered the event notification.
           type: string
           example: /api/openwealth/order-placement/v2/orders/abcd1234
         created:
@@ -1298,7 +1303,7 @@ components:
           description: Identification (UUID) of the notification that predeceeds this notification.
           $ref: '#/components/schemas/notificationId'
         orderStatus:
-          description: Status of the requested resource notification
+          description: Status of the requested resource notification.
           $ref: '#/components/schemas/orderStatus'
         executedQuantity:
           description: Total quantity (e.g. number of shares) filled.
