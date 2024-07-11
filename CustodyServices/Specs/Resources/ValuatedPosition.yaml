@@ -10,7 +10,7 @@ allOf:
   - $ref: 'Position.yaml'
 properties:
   endOfDayIndicator:
-    description: Indicates if the positon has been confirmed by the end-of-day (eod) processing.
+    description: Indicates if the position has been confirmed by the end-of-day (eod) processing.
     type: boolean
     example: true
   positionDate:

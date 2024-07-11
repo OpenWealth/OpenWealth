@@ -13,7 +13,9 @@ properties:
     description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
   type:
     type: string
-    description: Indicates the type of the account. If the account type is cashAccount, no information on the financial instrument is provided in the respective position in the account.
+    description: >
+      Indicates the type of the account. If the account type is cashAccount, no information on the financial instrument is
+      provided in the respective position in the account.
     example: cashAccount
     enum:
       - cashAccount
@@ -22,7 +24,9 @@ properties:
   name:
     type: string
     maxLength: 70
-    description: Name of the account. It provides an additional means of identification, and is designated by the account servicer in agreement with the account owner.
+    description: >
+      Name of the account. It provides an additional means of identification, and is designated by the account servicer in
+      agreement with the account owner.
     example: Household account
   referenceCurrency:
     $ref: '../../../Globals/V3/Types/Currency.yaml'

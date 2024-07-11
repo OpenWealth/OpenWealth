@@ -1,4 +1,7 @@
 title: Equity
-description: Equity, typically referred to as shareholders' equity (or owners' equity for privately held companies), represents the amount of money that would be returned to a company's shareholders if all of the assets were liquidated and all of the company's debt was paid off in the case of liquidation.
+description: >
+  Equity, typically referred to as shareholders' equity (or owners' equity for privately held companies), represents the amount
+  of money that would be returned to a company's shareholders if all of the assets were liquidated and all of the company's debt
+  was paid off in the case of liquidation.
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'

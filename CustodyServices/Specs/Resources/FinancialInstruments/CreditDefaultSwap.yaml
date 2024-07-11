@@ -10,7 +10,9 @@ allOf:
         description: The notional amount is the amount the risk 'buyer' agrees to pay the counter party in case of a default.
         $ref: '../../Types/CurrencyAmount.yaml'
       maturityDate:
-        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        description: >
+          Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+          is repaid by the issuer to the investor.
         $ref: '../../../../Globals/V3/Types/Date.yaml'
       underlyingFinancialInstrument:
         $ref: '../FinancialInstrument.yaml'

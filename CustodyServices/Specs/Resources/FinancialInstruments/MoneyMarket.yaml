@@ -12,5 +12,7 @@ allOf:
       interestRate:
         $ref: '../../Types/InterestRate.yaml'
       maturityDate:
-        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        description: >
+          Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+          is repaid by the issuer to the investor.
         $ref: '../../../../Globals/V3/Types/Date.yaml'
