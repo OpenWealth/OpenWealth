@@ -33,14 +33,14 @@ security: []
 
 paths:
   /orders:
-    parameters:
-      - $ref: '#/components/parameters/correlation_in_header'
     post:
+      tags:
+        - orderplacement
       summary: Posts a new order
       description: Posts a new order.
       operationId: postOrder
-      tags:
-        - orderplacement
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
       requestBody:
         content:
           application/json:
@@ -73,14 +73,15 @@ paths:
         '503':
           $ref: '../../Globals/V2/Responses/503.yaml'
     get:
+      tags:
+        - orderstatus
       summary: Returns a list of open security orders
       description: Returns all open orders to which the user of the API has access to. Paging is done based on the order object, i.e. if limit is set to 1, then 1 order will be returned per page.
       operationId: getOrders
-      tags:
-        - orderstatus
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Order list.
@@ -113,21 +114,15 @@ paths:
           $ref: '../../Globals/V2/Responses/503.yaml'
 
   /orders/{clientOrderId}:
-    parameters:
-      - in: path
-        name: clientOrderId
-        required: true
-        schema:
-          type: string
-          maxLength: 20
-        description: The security order id. This Id corresponds with the clientOrderIdentification.
-      - $ref: '#/components/parameters/correlation_in_header'
     get:
+      tags:
+        - orderstatus
       summary: Returns a single security order
       description: Returns a specific security order.
       operationId: getOrderByClientOrderId
-      tags:
-        - orderstatus
+      parameters:
+        - $ref: 'Params/clientOrderId.yaml'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Receive a specific order with the corresponding allocations and status.
@@ -155,11 +150,14 @@ paths:
         '503':
           $ref: '../../Globals/V2/Responses/503.yaml'
     delete:
+      tags:
+        - orderplacement
       summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
       operationId: deleteOrderByClientOrderId
-      tags:
-        - orderplacement
+      parameters:
+        - $ref: 'Params/clientOrderId.yaml'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '202':
           description: Order cancellation received for further processing.
@@ -187,17 +185,16 @@ paths:
         '503':
           $ref: '../../Globals/V2/Responses/503.yaml'
   /accountaccesses:
-    parameters:
-      - $ref: '#/components/parameters/correlation_in_header'
     get:
+      tags:
+        - accountaccess
       summary: Returns list of accounts the requestor has access to
       description: Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
       operationId: getAccountAccesses
-      tags:
-        - accountaccess
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Returns list of accounts the requestor has access to.
@@ -227,11 +224,13 @@ paths:
           $ref: '../../Globals/V2/Responses/503.yaml'
   /event-subscriptions:
     post:
+      tags:
+        - event-notification-subscription
       summary: Subscribe to Events
       description: Allows TPP to subscribe to specific events for the API.
       operationId: postEventSubscription
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
       requestBody:
         content:
           application/json:
@@ -268,11 +267,13 @@ paths:
         '504':
           $ref: '../../Globals/V2/Responses/504.yaml'
     get:
+      tags:
+        - event-notification-subscription
       summary: View Subscriptions
       description: Allows TPP to view the event subscriptions.
       operationId: getEventSubscriptions
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Event Subscription read.
@@ -304,14 +305,15 @@ paths:
         '504':
           $ref: '../../Globals/V2/Responses/504.yaml'
   /event-subscriptions/{eventSubscriptionId}:
-    parameters:
-      - $ref: 'Params/path_eventSubscriptionId.yaml'
     get:
+      tags:
+        - event-notification-subscription
       summary: View Subscription
       description: Allows TPP to view the event subscription.
       operationId: getEventSubscriptionByEventSubscriptionId
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: 'Params/path_eventSubscriptionId.yaml'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Event Subscription read.
@@ -341,11 +343,14 @@ paths:
         '504':
           $ref: '../../Globals/V2/Responses/504.yaml'
     put:
+      tags:
+        - event-notification-subscription
       summary: Change event subscription
       description: Changes event subscription.
       operationId: changeEventSubscriptionByEventSubscriptionId
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: 'Params/path_eventSubscriptionId.yaml'
+        - $ref: '#/components/parameters/correlation_in_header'
       requestBody:
         required: true
         content:
@@ -382,11 +387,14 @@ paths:
           $ref: '../../Globals/V2/Responses/504.yaml'
 
     delete:
+      tags:
+        - event-notification-subscription
       summary: Delete event subscription
       description: Deletes event subscriptions.
       operationId: deleteEventSubscriptionsByEventSubscriptionId
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: 'Params/path_eventSubscriptionId.yaml'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '204':
           description: Event subscription deleted.
@@ -413,16 +421,17 @@ paths:
           $ref: '../../Globals/V2/Responses/504.yaml'
 
   /event-subscriptions/{eventSubscriptionId}/event-notifications:
-    parameters:
-      - $ref: 'Params/path_eventSubscriptionId.yaml'
-      - $ref: 'Params/fromEventDateTime.yaml'
-      - $ref: 'Params/afterEventId.yaml'
-      - $ref: '#/components/parameters/limit'
     get:
-      summary: Get event notifications
-      description: Get aggregated event-notification list.
       tags:
         - event-notification
+      summary: Get event notifications
+      description: Get aggregated event-notification list.
+      parameters:
+        - $ref: 'Params/path_eventSubscriptionId.yaml'
+        - $ref: 'Params/fromEventDateTime.yaml'
+        - $ref: 'Params/afterEventId.yaml'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: aggregated event-notification list.

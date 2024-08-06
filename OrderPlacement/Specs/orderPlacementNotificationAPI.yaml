@@ -26,11 +26,13 @@ security: []
 paths:
   /event-notifications:
     post:
+      tags:
+        - event-notification
       summary: Push notification towards TPP
       description: Push notficiations for subscribed event notifications.
       operationId: postEventNotification
-      tags:
-        - event-notification
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
       requestBody:
         content:
           application/json:
@@ -49,4 +51,12 @@ paths:
         '500':
           $ref: '../../Globals/V2/Responses/500.yaml'
 
-components: {}
+components:
+  parameters:
+    correlation_in_header:
+      in: header
+      name: X-Correlation-ID
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+      required: true
+      schema:
+        type: string

@@ -28,14 +28,14 @@ externalDocs:
   url: https://openwealth.ch
 paths:
   /orders:
-    parameters:
-      - $ref: '#/components/parameters/correlation_in_header'
     post:
+      tags:
+        - orderplacement
       summary: Posts a new order
       description: Posts a new order.
       operationId: postOrder
-      tags:
-        - orderplacement
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
       requestBody:
         content:
           application/json:
@@ -68,14 +68,15 @@ paths:
         '503':
           $ref: '#/components/responses/503'
     get:
+      tags:
+        - orderstatus
       summary: Returns a list of open security orders
       description: Returns all open orders to which the user of the API has access to. Paging is done based on the order object, i.e. if limit is set to 1, then 1 order will be returned per page.
       operationId: getOrders
-      tags:
-        - orderstatus
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Order list.
@@ -107,21 +108,15 @@ paths:
         '503':
           $ref: '#/components/responses/503'
   /orders/{clientOrderId}:
-    parameters:
-      - in: path
-        name: clientOrderId
-        required: true
-        schema:
-          type: string
-          maxLength: 20
-        description: The security order id. This Id corresponds with the clientOrderIdentification.
-      - $ref: '#/components/parameters/correlation_in_header'
     get:
+      tags:
+        - orderstatus
       summary: Returns a single security order
       description: Returns a specific security order.
       operationId: getOrderByClientOrderId
-      tags:
-        - orderstatus
+      parameters:
+        - $ref: '#/components/parameters/clientOrderId'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Receive a specific order with the corresponding allocations and status.
@@ -149,11 +144,14 @@ paths:
         '503':
           $ref: '#/components/responses/503'
     delete:
+      tags:
+        - orderplacement
       summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
       operationId: deleteOrderByClientOrderId
-      tags:
-        - orderplacement
+      parameters:
+        - $ref: '#/components/parameters/clientOrderId'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '202':
           description: Order cancellation received for further processing.
@@ -181,17 +179,16 @@ paths:
         '503':
           $ref: '#/components/responses/503'
   /accountaccesses:
-    parameters:
-      - $ref: '#/components/parameters/correlation_in_header'
     get:
+      tags:
+        - accountaccess
       summary: Returns list of accounts the requestor has access to
       description: Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
       operationId: getAccountAccesses
-      tags:
-        - accountaccess
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Returns list of accounts the requestor has access to.
@@ -221,11 +218,13 @@ paths:
           $ref: '#/components/responses/503'
   /event-subscriptions:
     post:
+      tags:
+        - event-notification-subscription
       summary: Subscribe to Events
       description: Allows TPP to subscribe to specific events for the API.
       operationId: postEventSubscription
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
       requestBody:
         content:
           application/json:
@@ -262,11 +261,13 @@ paths:
         '504':
           $ref: '#/components/responses/504'
     get:
+      tags:
+        - event-notification-subscription
       summary: View Subscriptions
       description: Allows TPP to view the event subscriptions.
       operationId: getEventSubscriptions
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Event Subscription read.
@@ -298,14 +299,15 @@ paths:
         '504':
           $ref: '#/components/responses/504'
   /event-subscriptions/{eventSubscriptionId}:
-    parameters:
-      - $ref: '#/components/parameters/path_eventSubscriptionId'
     get:
+      tags:
+        - event-notification-subscription
       summary: View Subscription
       description: Allows TPP to view the event subscription.
       operationId: getEventSubscriptionByEventSubscriptionId
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: '#/components/parameters/path_eventSubscriptionId'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: Event Subscription read.
@@ -335,11 +337,14 @@ paths:
         '504':
           $ref: '#/components/responses/504'
     put:
+      tags:
+        - event-notification-subscription
       summary: Change event subscription
       description: Changes event subscription.
       operationId: changeEventSubscriptionByEventSubscriptionId
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: '#/components/parameters/path_eventSubscriptionId'
+        - $ref: '#/components/parameters/correlation_in_header'
       requestBody:
         required: true
         content:
@@ -375,11 +380,14 @@ paths:
         '504':
           $ref: '#/components/responses/504'
     delete:
+      tags:
+        - event-notification-subscription
       summary: Delete event subscription
       description: Deletes event subscriptions.
       operationId: deleteEventSubscriptionsByEventSubscriptionId
-      tags:
-        - event-notification-subscription
+      parameters:
+        - $ref: '#/components/parameters/path_eventSubscriptionId'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '204':
           description: Event subscription deleted.
@@ -405,16 +413,17 @@ paths:
         '504':
           $ref: '#/components/responses/504'
   /event-subscriptions/{eventSubscriptionId}/event-notifications:
-    parameters:
-      - $ref: '#/components/parameters/path_eventSubscriptionId'
-      - $ref: '#/components/parameters/fromEventDateTime'
-      - $ref: '#/components/parameters/afterEventId'
-      - $ref: '#/components/parameters/limit'
     get:
-      summary: Get event notifications
-      description: Get aggregated event-notification list.
       tags:
         - event-notification
+      summary: Get event notifications
+      description: Get aggregated event-notification list.
+      parameters:
+        - $ref: '#/components/parameters/path_eventSubscriptionId'
+        - $ref: '#/components/parameters/fromEventDateTime'
+        - $ref: '#/components/parameters/afterEventId'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
       responses:
         '200':
           description: aggregated event-notification list.
@@ -454,6 +463,14 @@ components:
       required: true
       schema:
         type: string
+    clientOrderId:
+      in: path
+      name: clientOrderId
+      required: true
+      schema:
+        type: string
+        maxLength: 20
+      description: The security order id. This Id corresponds with the clientOrderIdentification.
     path_eventSubscriptionId:
       name: eventSubscriptionId
       in: path
@@ -496,7 +513,7 @@ components:
       description: Date and time of the statement creation (UTC Timestamp). In accordance with ISO 8601.
     amount:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       example: '12000'
       description: Absolute amount.
@@ -565,17 +582,17 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code
-      pattern: ^[A-Z]{3}$
+      pattern: '^[A-Z]{3}$'
       example: CHF
     limitPrice:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: Limit price per unit of quantity (e.g. per share).
       example: '17.8'
     stopPrice:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: Price of this (last) fill.
       example: '17.8'
@@ -718,13 +735,13 @@ components:
           example: Cancelled by client.
     executedQuantity:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: Total quantity (e.g. number of shares) filled.
       example: '100'
     remainingQuantity:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: |
         Quantity open for further execution.
@@ -745,7 +762,7 @@ components:
           $ref: '#/components/schemas/remainingQuantity'
     averagePrice:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: Calculated average price of all fills on this order.
       example: '17.8'
@@ -775,7 +792,7 @@ components:
           $ref: '#/components/schemas/Currency'
         rate:
           type: string
-          pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+          pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
           maxLength: 22
           example: '1.0963'
           description: Indicates the rate of a fx transaction for one source currency unit to the target currency. E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
@@ -813,7 +830,7 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code
-      pattern: ^[A-Z]{3}$
+      pattern: '^[A-Z]{3}$'
       example: CHF
     accruedInterest:
       type: object
@@ -1025,7 +1042,7 @@ components:
           example: Cancelled by client
     dayOrderQuantity:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: |
         The orderQuantity less all quantity (adjusted for stock splits) that traded on previous days.
@@ -1033,13 +1050,13 @@ components:
       example: '15'
     dayExecutedQuantity:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: Quantity on an order that has traded today.
       example: '5'
     dayAveragePrice:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: Calculated average price of all fills on this order.
       example: '17.8'
@@ -1081,7 +1098,7 @@ components:
           $ref: '#/components/schemas/dayAveragePrice'
         factor:
           type: string
-          pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+          pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
           maxLength: 22
           example: '100'
           description: |
@@ -1269,13 +1286,13 @@ components:
       example: 120066c9-58a1-432b-aa60-712fae7f143e
     lastQuantity:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: Quantity (e.g. shares) bought/sold on this (last) fill.
       example: '30'
     lastPrice:
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
       maxLength: 22
       description: Price of this (last) fill.
       example: '17.8'
