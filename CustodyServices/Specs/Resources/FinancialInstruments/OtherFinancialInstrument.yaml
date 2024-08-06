@@ -3,3 +3,7 @@ type: object
 description: Other financial instrument.
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      underlyingFinancialInstrument:
+        $ref: '../FinancialInstrument.yaml'

@@ -2,7 +2,12 @@ openapi: 3.0.0
 info:
   version: 3.0.0
   title: Custody Services
-  description: 'This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions. In this version (2.0) only transactions which include effective cash or securities movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.'
+  description: >
+    This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
+    This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either
+    update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive
+    data from custody banks regarding transactions. In this version (2.0) only transactions which include effective cash or securities
+    movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.
   contact:
     email: openwealth@synpulse.com
   license:
@@ -10,7 +15,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
   - description: Your Server URL
-    url: https://your-server.com
+    url: https://api.openwealth.ch
 externalDocs:
   description: Find out more about OpenWealth API specifications.
   url: https://openwealth.ch
@@ -26,16 +31,18 @@ tags:
 security: []
 paths:
   /customers:
-    parameters:
-      - $ref: '../../Globals/V3/Params/cursor.yaml'
-      - $ref: '../../Globals/V3/Params/limit.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns all customers (business partners) accessible for the logged in user.
-      description: This endpoint returns a highlevel list of customers accessible for the logged in user. Paging is done based on the customer object, i.e. if limit is set to 1, then 1 customer will be returned per page.
-      operationId: getCustomers
       tags:
         - customers
+      summary: Returns all customers (business partners) accessible for the logged in user
+      description: >
+        This endpoint returns a highlevel list of customers accessible for the logged in user. Paging is done based on the customer object,
+        i.e. if limit is set to 1, then 1 customer will be returned per page.
+      operationId: getCustomers
+      parameters:
+        - $ref: '../../Globals/V3/Params/cursor.yaml'
+        - $ref: '../../Globals/V3/Params/limit.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Returns a list with all customers.
@@ -68,15 +75,15 @@ paths:
           $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}:
-    parameters:
-      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns a specific customer accessible for the logged in user.
-      description: This endpoint returns a single customer.
-      operationId: getCustomersByCustomerId
       tags:
         - customers
+      summary: Returns a specific customer accessible for the logged in user
+      description: This endpoint returns a single customer.
+      operationId: getCustomersByCustomerId
+      parameters:
+        - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Returns a the specified customer.
@@ -105,17 +112,19 @@ paths:
           $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/accounts:
-    parameters:
-      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
-      - $ref: '../../Globals/V3/Params/cursor.yaml'
-      - $ref: '../../Globals/V3/Params/limit.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns the accounts for a specific customer accessible to the querying user.
-      description: Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
-      operationId: getCustomerAccountsByCustomerId
       tags:
         - accounts
+      summary: Returns the accounts for a specific customer accessible to the querying user
+      description: >
+        Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1,
+        then 1 account will be returned per page.
+      operationId: getCustomerAccountsByCustomerId
+      parameters:
+        - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+        - $ref: '../../Globals/V3/Params/cursor.yaml'
+        - $ref: '../../Globals/V3/Params/limit.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Account List
@@ -148,17 +157,17 @@ paths:
           $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/accounts/{accountId}:
-    parameters:
-      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
-      - $ref: '../../Globals/V3/Params/path_accountId.yaml'
-      - $ref: 'Params/end_of_day_indicator.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns an account by id for a specific customer.
-      description: Returns an account by id for a specific customer.
-      operationId: getCustomerAccountById
       tags:
         - accounts
+      summary: Returns an account by id for a specific customer
+      description: Returns an account by id for a specific customer.
+      operationId: getCustomerAccountById
+      parameters:
+        - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+        - $ref: '../../Globals/V3/Params/path_accountId.yaml'
+        - $ref: 'Params/end_of_day_indicator.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Account
@@ -189,19 +198,21 @@ paths:
           $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/positions:
-    parameters:
-      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
-      - $ref: '../../Globals/V3/Params/date.yaml'
-      - $ref: 'Params/end_of_day_indicator.yaml'
-      - $ref: '../../Globals/V3/Params/cursor.yaml'
-      - $ref: '../../Globals/V3/Params/limit.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns the positions for a specific customer.
-      description: Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
-      operationId: getCustomerPositionByCustomerId
       tags:
         - positions
+      summary: Returns the positions for a specific customer
+      description: >
+        Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1,
+        then 1 position will be returned per page.
+      operationId: getCustomerPositionByCustomerId
+      parameters:
+        - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+        - $ref: '../../Globals/V3/Params/date.yaml'
+        - $ref: 'Params/end_of_day_indicator.yaml'
+        - $ref: '../../Globals/V3/Params/cursor.yaml'
+        - $ref: '../../Globals/V3/Params/limit.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Position List
@@ -234,17 +245,17 @@ paths:
           $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/positions/{positionId}:
-    parameters:
-      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
-      - $ref: '../../Globals/V3/Params/path_positionId.yaml'
-      - $ref: 'Params/end_of_day_indicator.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns a positions by id for a specific customer.
-      description: Returns a positions for a specific customer.
-      operationId: getCustomerPositionById
       tags:
         - positions
+      summary: Returns a positions by id for a specific customer
+      description: Returns a positions for a specific customer.
+      operationId: getCustomerPositionById
+      parameters:
+        - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+        - $ref: '../../Globals/V3/Params/path_positionId.yaml'
+        - $ref: 'Params/end_of_day_indicator.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Position
@@ -273,19 +284,21 @@ paths:
           $ref: '../../Globals/V3/Responses/503.yaml'
 
   /accounts/{accountId}/positions:
-    parameters:
-      - $ref: '../../Globals/V3/Params/path_accountId.yaml'
-      - $ref: '../../Globals/V3/Params/date.yaml'
-      - $ref: 'Params/end_of_day_indicator.yaml'
-      - $ref: '../../Globals/V3/Params/cursor.yaml'
-      - $ref: '../../Globals/V3/Params/limit.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns the positions for a specific account.
-      description: Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
-      operationId: getAccountPositionByAccountId
       tags:
         - positions
+      summary: Returns the positions for a specific account
+      description: >
+        Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1,
+        then 1 position will be returned per page.
+      operationId: getAccountPositionByAccountId
+      parameters:
+        - $ref: '../../Globals/V3/Params/path_accountId.yaml'
+        - $ref: '../../Globals/V3/Params/date.yaml'
+        - $ref: 'Params/end_of_day_indicator.yaml'
+        - $ref: '../../Globals/V3/Params/cursor.yaml'
+        - $ref: '../../Globals/V3/Params/limit.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Position List
@@ -318,17 +331,17 @@ paths:
           $ref: '../../Globals/V3/Responses/503.yaml'
 
   /accounts/{accountId}/positions/{positionId}:
-    parameters:
-      - $ref: '../../Globals/V3/Params/path_accountId.yaml'
-      - $ref: '../../Globals/V3/Params/path_positionId.yaml'
-      - $ref: 'Params/end_of_day_indicator.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns a positions by id for a specific account.
-      description: Returns a positions for a specific account.
-      operationId: getAccountPositionById
       tags:
         - positions
+      summary: Returns a positions by id for a specific account
+      description: Returns a positions for a specific account.
+      operationId: getAccountPositionById
+      parameters:
+        - $ref: '../../Globals/V3/Params/path_accountId.yaml'
+        - $ref: '../../Globals/V3/Params/path_positionId.yaml'
+        - $ref: 'Params/end_of_day_indicator.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Position
@@ -357,19 +370,21 @@ paths:
           $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/transactions:
-    parameters:
-      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
-      - $ref: '../../Globals/V3/Params/date.yaml'
-      - $ref: 'Params/end_of_day_indicator.yaml'
-      - $ref: '../../Globals/V3/Params/cursor.yaml'
-      - $ref: '../../Globals/V3/Params/limit.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns a transactions for a specific customer.
-      description: Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
-      operationId: getTransactionByCustomerId
       tags:
         - transactions
+      summary: Returns a transactions for a specific customer
+      description: >
+        Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1,
+        then 1 transaction will be returned per page.
+      operationId: getTransactionByCustomerId
+      parameters:
+        - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+        - $ref: '../../Globals/V3/Params/date.yaml'
+        - $ref: 'Params/end_of_day_indicator.yaml'
+        - $ref: '../../Globals/V3/Params/cursor.yaml'
+        - $ref: '../../Globals/V3/Params/limit.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Returns a transaction list for a specific customer.
@@ -402,16 +417,16 @@ paths:
           $ref: '../../Globals/V3/Responses/503.yaml'
 
   /customers/{customerId}/transactions/{transactionId}:
-    parameters:
-      - $ref: '../../Globals/V3/Params/path_customerId.yaml'
-      - $ref: '../../Globals/V3/Params/path_transactionId.yaml'
-      - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
     get:
-      summary: Returns a transaction for a specific customer.
-      description: Returns a transaction instance by id.
-      operationId: getTransactionByTransactionId
       tags:
         - transactions
+      summary: Returns a transaction for a specific customer
+      description: Returns a transaction instance by id.
+      operationId: getTransactionByTransactionId
+      parameters:
+        - $ref: '../../Globals/V3/Params/path_customerId.yaml'
+        - $ref: '../../Globals/V3/Params/path_transactionId.yaml'
+        - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
           description: Returns a transaction list for a specific customer.

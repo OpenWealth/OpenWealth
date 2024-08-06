@@ -1,8 +1,5 @@
 title: Bond
 description: Bond.
-required:
-  - maturityDate
-  - interestRate
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
@@ -10,10 +7,9 @@ allOf:
       interestRate:
         $ref: '../../Types/InterestRate.yaml'
       maturityDate:
-        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
-        $ref: '../../../../Globals/V3/Types/Date.yaml'
-      nextInterestPaymentDate:
-        description: Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+        description: >
+          Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+          is repaid by the issuer to the investor.
         $ref: '../../../../Globals/V3/Types/Date.yaml'
       issueDate:
         description: Date at which the security was made available.
@@ -31,3 +27,6 @@ allOf:
         type: number
         example: 1000
         description: Indicates the minimum tradable increments of a security.
+      underlyingFinancialInstrument:
+        description: Financial instrument that would be subject to a conversion.
+        $ref: '../FinancialInstrument.yaml'

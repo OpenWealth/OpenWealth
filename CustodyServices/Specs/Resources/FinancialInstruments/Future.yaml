@@ -1,15 +1,15 @@
 title: Future
 description: Futures are derivative financial contracts that obligate parties to buy or sell an asset at a predetermined future date and price.
 required:
-  - expiryDate
-  - contractSize
   - underlyingFinancialInstrument
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
     properties:
       expiryDate:
-        description: Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
+        description: >
+          Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
+          date at which it becomes due and has to be repaid.
         $ref: '../../../../Globals/V3/Types/Date.yaml'
       contractSize:
         $ref: '../../Types/ContractSize.yaml'

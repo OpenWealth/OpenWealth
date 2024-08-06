@@ -2,13 +2,11 @@ title: Valuation
 type: object
 description: Detailed information about the valuation of a position.
 required:
-  - value
+  - valueInPositionCurrency
 properties:
   valueInPositionCurrency:
     $ref: 'CurrencyAmount.yaml'
   valueInReferenceCurrency:
     $ref: 'CurrencyAmount.yaml'
-  foreignExchangeRate:
-    $ref: 'ValuationForeignExchangeRate.yaml'
   valuationDate:
     $ref: '../../../Globals/V3/Types/Date.yaml'
