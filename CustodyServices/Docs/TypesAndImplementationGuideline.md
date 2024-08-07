@@ -91,19 +91,21 @@ For clarification of content we group the transaction types by business event gr
 | exercise | Exercise (initiated by the holder) of a right, an option or warrant || asset, cash, fees, taxes|
 | expiration | Expiration of a security - contract, right, an option or warrant || asset |
 | finalLiquidationPayment | Final liquidation payment under expiration of the old security | CorporateAction |  cash, fees |
+| fees | Fee payment | CashTransfer | cash, fees |
 | fxSpot | Foreign exchange spot transaction | FX | cash |
+| finalLiquidationPayment | A distribution of cash, assets or both. Debt may be paid in order of priority based on preferred claims to assets specified by the security. | CorporateAction | asset, cash, fees, taxes |
 | increasePrincipal | Increase of principal amount of a borrowing or lending contract | OtcBorrowingLending | cash |
 | inflowCash | Incoming payments related to cash account. | CashTransfer | cash |
 | instrumentExchange | Exchange of securities, typically a debit of one asset in exchange of a credit of another. This also includes receive and deliver security from/to fund | CorporateAction | asset |
 | interestPayment | Interest payment | CashTransfer | cash, fees, taxes |
 | internalTransfer | Account Transfer within the same client/bank | CashTransfer | cash |
-| liquidationPayment | A distribution of cash, assets or both. Debt may be paid in order of priority based on preferred claims to assets specified by the security. | CorporateAction | cash, fees, taxes |
-| managementFee | Management Fee | CashTransfer | cash, taxes |
+| liquidationPayment | A distribution of cash, assets or both. Debt may be paid in order of priority based on preferred claims to assets specified by the security. | CorporateAction | asset, cash, fees, taxes |
 | merger | Exchange of outstanding securities, initiated by the issuer which may include options, as the result of two or more companies combining assets, that is, an external, third party company. Cash payments may accompany share exchange. | CorporateAction | asset |
 | openContract | Opening of an OTC contract | FX, OtcBorrowingLending, OtherOTC | cash, asset, fees, premium |
 | other | Other transaction type not covered by enum || all movementTypes possible |
 | outflowCash | Outgoing payments related to cash account. This covers for example the payment of bills, account transfers across banks, card payments, cash withdrawals, standing orders across clients/banks, “LSV” | CashTransfer | cash |
 | premium | This corporate event pays shareholders an amount in cash issued from the shares premium reserve. It is similar to a dividend but with different tax implications | CorporateAction | cash, fees, taxes |
+| prepaymentSubstitution | Prepayment substitution - conversion of fundsubscription to real fund shares | CorporateAction | asset, fees, taxes |
 | receiveFreeOfPayment | Receive of security free of payment | Security transfer | asset |
 | receiveVsPayment | Receive of security against payment | SecurityTrade | cash, asset, fees, taxes |
 | redemption | The redemption of an entire issue outstanding of securities, for example, bonds, preferred equity, funds, by the issuer or its agent, for example, asset manager, at final maturity. | CorporateAction | cash, asset, fees, taxes |
@@ -116,12 +118,11 @@ For clarification of content we group the transaction types by business event gr
 | sellToOpen | Sell to open refers to instances in which an option investor initiates, or opens, an option trade by selling or establishing a short position in an option | SecurityTrade | cash, asset, accruedInterest, fees, taxes |
 | spinOff | A distribution of securities issued by another company. The distributed securities may either be of a newly created or of an existing company. For example, spin-off, demerger, unbundling, divestment. | CorporateAction | asset |
 | stockSplit | Increase in a corporation's number of outstanding equities without any change in the shareholder's equity or the aggregate market value at the time of the split. Equity price and nominal value are reduced accordingly. | CorporateAction | asset |
-| subscription | Prepayment to purchase e.g. a mutual or hedge fund with infrequent NAV calculation || cash, asset, fees, taxes |
+| subscription | Prepayment to purchase e.g. a mutual or hedge fund with infrequent NAV calculation | SecurityTrade | cash, asset, fees, taxes |
 | taxCorrections | Correction of tax payment | CashTransfer | cash |
-| tax | General tax payment | CashTransfer | cash |
+| taxes | General tax payment | CashTransfer | cash |
 | transferMetalPhysical | TBD | ||
 | unwind | Closing of an open OTC contract prior to the agreed expiration. This may involve payments of accrued interests, fees and the closing of the contract | OtherOTC | cash, asset, fees|
-| upfrontPayment | Upfront payment that is related to an OTC Contract without changing the principal amount, typically a fee or premium | OtherOTC | cash, premium, fees, taxes |
 | variationMargin | Variation margin payment on for example a future | CorporateAction | cash, fees, taxes |
 
 ## Movement types
@@ -134,8 +135,12 @@ For clarification of content we group the transaction types by business event gr
 | brokerageFee | Brokerage Fee charged by the exchange |
 | capitalGainTax | Capital Gain Tax |
 | cash | Default type for a cash amount |
+| commission | Commission |
+| custodyFee | Custody Fee |
 | exchangeFee | Exchange Fee |
 | financialTransactionTax | Financial Transaction Tax |
+| interest | Interest |
+| managementFee | Management Fee |
 | otherFee | Other Fee |
 | other | Other |
 | otherTax | Other Tax |
@@ -145,6 +150,7 @@ For clarification of content we group the transaction types by business event gr
 | stampDuty | Stamp Duty |
 | thirdPartyFee | Third Party Fee |
 | transactionFee | Transaction Fee charged by the custodian |
+| valueAddedTax | Value Added Tax |
 | withholdingTax | Withholding Tax |
 
 ## Business events in the lifecycle of the financial instruments and implementation guide
