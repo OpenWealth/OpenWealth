@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.0.0
+  version: 3.0.1
   title: Custody Services
   description: |
     This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions. In this version (2.0) only transactions which include effective cash or securities movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.
@@ -157,7 +157,6 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_accountId'
-        - $ref: '#/components/parameters/end_of_day_indicator'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
@@ -1463,7 +1462,10 @@ components:
         type:
           $ref: '#/components/schemas/MovementType'
         movementDate:
-          description: Date when the movement was confirmed in the source ledger. This typically corresponds with the booking date (or posting date) by the bank.
+          description: |
+            Date when the movement was confirmed in the custodians ledger. 
+            This typically corresponds with the booking date (or posting date) by the bank.
+            Note that balances of end of day positions should be consistent with the aggregation of movements up to the particular date
           $ref: '#/components/schemas/Date'
         financialInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
@@ -1630,6 +1632,16 @@ components:
         maxLength: 128
         description: The customer's account identification, this should NOT be an IBAN.
       description: Account ID parameter.
+    date:
+      in: query
+      name: date
+      required: true
+      schema:
+        type: string
+        format: date
+        description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
+        example: '2019-12-31'
+      description: A date value.
     end_of_day_indicator:
       in: query
       name: end_of_day_indicator
@@ -1642,16 +1654,6 @@ components:
         - If the parameter is not set, all resources will be delivered.
         - If the parameter is set to true, only resources with with the particular property set to true will be delivered.
         - If the parameter is set to false, only resources with with the particular property set to false will be delivered.
-    date:
-      in: query
-      name: date
-      required: true
-      schema:
-        type: string
-        format: date
-        description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
-        example: '2019-12-31'
-      description: A date value.
     path_positionId:
       in: path
       name: positionId
