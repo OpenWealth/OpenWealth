@@ -3,7 +3,7 @@ info:
   version: 3.0.1
   title: Custody Services
   description: |
-    This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions. In this version (2.0) only transactions which include effective cash or securities movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.
+    This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions.
   contact:
     email: openwealth@synpulse.com
   license:
@@ -1465,7 +1465,7 @@ components:
           description: |
             Date when the movement was confirmed in the custodians ledger. 
             This typically corresponds with the booking date (or posting date) by the bank.
-            Note that balances of end of day positions should be consistent with the aggregation of movements up to the particular date
+            Note that balances of end of day positions should be consistent with the aggregation of movements up to the particular date.
           $ref: '#/components/schemas/Date'
         financialInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
