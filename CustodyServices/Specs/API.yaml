@@ -166,7 +166,6 @@ paths:
       parameters:
         - $ref: '../../Globals/V3/Params/path_customerId.yaml'
         - $ref: '../../Globals/V3/Params/path_accountId.yaml'
-        - $ref: 'Params/end_of_day_indicator.yaml'
         - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
         '200':
