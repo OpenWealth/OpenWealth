@@ -1,0 +1,153 @@
+{
+  "id": "trx-009-00",
+  "type": "openContract",
+  "transactionDate": "2023-01-04",
+  "customerId": "123456",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "triggeringFinancialInstrument": {
+    "type": "fxSwap",
+    "name": "FX Swap, 200'000 USD to CHF",
+    "identificationList": [
+      {
+        "identifier": "fxSwapRef112",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "nearAmountPaid": {
+      "amount": 165000,
+      "currency": "CHF"
+    },
+    "nearAmountReceived": {
+      "amount": 200000,
+      "currency": "USD"
+    },
+    "farAmountPaid": {
+      "amount": 200000,
+      "currency": "USD"
+    },
+    "farAmountReceived": {
+      "amount": 170000,
+      "currency": "CHF"
+    },
+    "nearMaturityDate": "2023-01-04",
+    "maturityDate": "2023-06-27"
+  },
+  "movementList": [
+    {
+      "type": "asset",
+      "movementDate": "2023-01-04",
+      "financialInstrument": {
+        "type": "fxSwap",
+        "name": "FX Swap, 200'000 USD to CHF",
+        "identificationList": [
+          {
+            "identifier": "fxSwapRef112",
+            "type": "otherProprietaryIdentification"
+          }
+        ],
+        "nearAmountPaid": {
+          "amount": 165000,
+          "currency": "CHF"
+        },
+        "nearAmountReceived": {
+          "amount": 200000,
+          "currency": "USD"
+        },
+        "farAmountPaid": {
+          "amount": 200000,
+          "currency": "USD"
+        },
+        "farAmountReceived": {
+          "amount": 170000,
+          "currency": "CHF"
+        },
+        "nearMaturityDate": "2023-01-04",
+        "maturityDate": "2023-06-27"
+      },
+      "account": {
+        "id": "123456-1",
+        "type": "safekeepingAccount"
+      },
+      "quantity": {
+        "value": 1,
+        "type": "unit"
+      },
+      "positionId": "pos-009"
+    },
+    {
+      "type": "cash",
+      "movementDate": "2023-01-04",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "US Dollar",
+        "identificationList": [
+          {
+            "type": "iso3",
+            "identifier": "USD"
+          }
+        ],
+        "currencyOfDenomination": "USD"
+      },
+      "account": {
+        "id": "1234-56",
+        "type": "cashAccount",
+        "iban": "CH121212121212121214"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 200000
+      },
+      "valueDate": "2023-01-04",
+      "positionId": "pos-000-2",
+      "currency": "USD"
+    },
+    {
+      "type": "cash",
+      "movementDate": "2023-01-04",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "type": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "1234-57",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": -165000
+      },
+      "valueDate": "2023-01-04",
+      "positionId": "pos-000",
+      "currency": "CHF"
+    }
+  ],
+  "postingAmounts": [
+    {
+      "amount": 200000,
+      "currency": "USD",
+      "account": {
+        "id": "1234-56",
+        "type": "cashAccount",
+        "iban": "CH121212121212121214"
+      }
+    },
+    {
+      "amount": -165000,
+      "currency": "CHF",
+      "account": {
+        "id": "1234-57",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212"
+      }
+    }
+  ]
+}

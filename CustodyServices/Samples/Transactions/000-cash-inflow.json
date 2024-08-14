@@ -1,5 +1,5 @@
 {
-  "id": "0000001",
+  "id": "trx-000-00",
   "type": "inflowCash",
   "transactionDate": "2022-12-31",
   "customerId": "123456",
@@ -30,7 +30,7 @@
         "type": "unit"
       },
       "valueDate": "2022-12-31",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF"
     }
   ],

@@ -1,5 +1,5 @@
 {
-  "id": "013",
+  "id": "pos-013",
   "endOfDayIndicator": true,
   "positionDate": "2022-12-31",
   "financialInstrument": {
@@ -13,7 +13,7 @@
     ],
     "principalAmount": 100000,
     "currencyOfDenomination": "CHF",
-    "expiryDate": "2023-06-27",
+    "maturityDate": "2023-06-27",
     "interestRateReceived": {
       "type": "fixed",
       "value": 1.75,

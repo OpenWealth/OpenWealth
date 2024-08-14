@@ -1,5 +1,5 @@
 {
-  "id": "0000005",
+  "id": "trx-002-00",
   "type": "buy",
   "transactionDate": "2023-01-04",
   "customerId": "123456",
@@ -8,51 +8,43 @@
   "placeOfTrade": {
     "marketIdentificationCode": "XNYS"
   },
+  "triggeringFinancialInstrument": {
+    "type": "equity",
+    "name": "Apple Inc.",
+    "identificationList": [
+      {
+        "type": "isin",
+        "identifier": "US0378331005"
+      }
+    ]
+  },
   "movementList": [
     {
       "type": "asset",
       "movementDate": "2023-01-04",
       "financialInstrument": {
-        "type": "option",
-        "name": "Put Option Apple Inc., 185, 2024-06-01",
+        "type": "equity",
+        "name": "Apple Inc.",
         "identificationList": [
           {
-            "type": "otherProprietaryIdentification",
-            "identifier": "AAPL240601P00185000"
+            "type": "isin",
+            "identifier": "US0378331005"
           }
-        ],
-        "contractSize": 5,
-        "strikePrize": {
-          "type": "actual",
-          "value": 185,
-          "currency": "USD"
-        },
-        "expiryDate": "2023-06-01",
-        "optionType": "put",
-        "optionStyle": "american",
-        "underlyingFinancialInstrument": {
-          "name": "Apple Inc.",
-          "identificationList": [
-            {
-              "type": "isin",
-              "identifier": "CH0012138530"
-            }
-          ]
-        }
+        ]
       },
       "account": {
         "id": "123456-1",
         "type": "safekeepingAccount"
       },
       "quantity": {
-        "value": 20,
-        "type": "unit"
+        "type": "unit",
+        "value": 40
       },
-      "positionId": "004",
+      "positionId": "pos-002-1",
       "positionCurrency": "USD",
       "price": {
         "type": "actual",
-        "value": 30.00,
+        "value": 150.00,
         "currency": "USD"
       }
     },
@@ -77,13 +69,13 @@
       },
       "quantity": {
         "type": "unit",
-        "value": -2550
+        "value": -5100
       },
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF",
       "foreignExchangeRate": {
-        "value": 0.9,
+        "value": 0.85,
         "sourceCurrency": "USD",
         "targetCurrency": "CHF"
       }
@@ -109,11 +101,11 @@
       },
       "quantity": {
         "type": "unit",
-        "value": -30.25
+        "value": -200.25
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.85,
         "sourceCurrency": "USD",
@@ -141,11 +133,11 @@
       },
       "quantity": {
         "type": "unit",
-        "value": -20.75
+        "value": -150.75
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.85,
         "sourceCurrency": "USD",
@@ -155,7 +147,7 @@
   ],
   "postingAmounts": [
     {
-      "amount": -2601.00,
+      "amount": -5451.00,
       "currency": "CHF",
       "account": {
         "id": "1234-56",

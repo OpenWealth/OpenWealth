@@ -1,10 +1,29 @@
 {
-  "id": "0000005",
+  "id": "trx-010-00",
   "type": "buy",
   "transactionDate": "2023-01-04",
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
+  "triggeringFinancialInstrument": {
+    "type": "fxOption",
+    "name": "FX Option Sell 100'000 CHF at 120'000 USD",
+    "identificationList": [
+      {
+        "type": "otherProprietaryIdentification",
+        "identifier": "fxOprtionContractRef1"
+      }
+    ],
+    "underlyingAmount": {
+      "amount": 100000,
+      "currency": "CHF"
+    },
+    "counterAmount": {
+      "amount": 120000,
+      "currency": "USD"
+    },
+    "expiryDateTime": "2023-06-01T10:00+01:00"
+  },
   "movementList": [
     {
       "type": "asset",
@@ -42,7 +61,7 @@
         "value": 1,
         "type": "unit"
       },
-      "positionId": "015"
+      "positionId": "pos-010"
     },
     {
       "type": "cash",
@@ -68,7 +87,7 @@
         "value": -2000
       },
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF"
     }
   ],

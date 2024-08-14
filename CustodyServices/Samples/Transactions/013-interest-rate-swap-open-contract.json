@@ -1,10 +1,38 @@
 {
-  "id": "00000013",
+  "id": "trx-013-00",
   "type": "openContract",
   "transactionDate": "2022-12-31",
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
+  "triggeringFinancialInstrument": {
+    "type": "interestRateSwap",
+    "name": "Payer interest rate swap",
+    "identificationList": [
+      {
+        "identifier": "swapContract1",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "notionalAmount": 100000,
+    "currencyOfDenomination": "CHF",
+    "maturityDate": "2023-06-27",
+    "interestRateReceived": {
+      "type": "fixed",
+      "value": 1.75,
+      "dayCountBasis": "act_360",
+      "paymentDate": "2023-06-27",
+      "paymentFrequency": "atMaturity"
+    },
+    "interestRatePaid": {
+      "type": "floating",
+      "spread": 0.2,
+      "basis": "LIBOR",
+      "dayCountBasis": "act_360",
+      "paymentDate": "2023-06-27",
+      "paymentFrequency": "atMaturity"
+    }
+  },
   "movementList": [
     {
       "type": "asset",
@@ -20,7 +48,7 @@
         ],
         "notionalAmount": 100000,
         "currencyOfDenomination": "CHF",
-        "expiryDate": "2023-06-27",
+        "maturityDate": "2023-06-27",
         "interestRateReceived": {
           "type": "fixed",
           "value": 1.75,
@@ -45,7 +73,7 @@
         "value": 1,
         "type": "unit"
       },
-      "positionId": "013",
+      "positionId": "pos-013",
       "positionCurrency": "CHF"
     }
   ],

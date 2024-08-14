@@ -1,5 +1,5 @@
 {
-  "id": "008",
+  "id": "pos-008",
   "endOfDayIndicator": true,
   "positionDate": "2023-01-04",
   "financialInstrument": {
@@ -31,8 +31,8 @@
   },
   "valuation": {
     "valueInPositionCurrency": {
-      "amount": 10000,
-      "currency": "CHF"
+      "amount": 11111.10,
+      "currency": "USD"
     },
     "valueInReferenceCurrency": {
       "amount": 10000,

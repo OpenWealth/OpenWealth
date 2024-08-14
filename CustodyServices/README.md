@@ -1,13 +1,13 @@
 # OpenWealth Custody Services API
 
-This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions. In this version (2.0) only transactions which include effective cash or securities movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.
+This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions. In the version 3.0 only transactions which include effective cash or securities movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.
 
 The documentation covers these topics:
 
 - [Overview and scope](#overview-and-scope)
 - [Quick start](#quick-start)
-- [Principles and guidelines](Docs/PrinciplesAndGuidelines.md)
-- [Business objects and data entities](Docs/EntityModel.md)
+- [Principles and guidelines](#principles-and-guidelines)
+- [Business objects and data entities](#business-objects-and-data-entities)
 - [Enumeration and types](#enumeration-and-types)
 - [Use cases and examples](#use-cases-and-examples)
 
@@ -18,30 +18,85 @@ The technology provider will access the APIs with the EAM access token and first
 
 ## Quick start
 
-TBD
+### How to use the OpenAPI spec
 
-- How to use the OpenAPI spec
-- What is contained in the specs
-- How to implement the spec
-- Positions API
-- Transactions API
+You find the latest version of the API here:
+
+[CustodyServicesAPI](Specs/API-bundled.yaml)
+
+The easiest way to get an overview on the endpoints and structures of the API is to copy the content into the Swagger Editor:
+
+[Swagger Editor](https://editor-next.swagger.io/)
+
+You can very easily browse the contained API endpooints and the associated payload schemes in the UI
+
+### What is contained in the specs?
+
+The specs covers information about endpoint paths (API URLs), headers and parameters (such as filter params, cursor and pagination related params etc.) that need to be added to the requests and also the data schemes of the returned data.
+
+### How to implement the spec
+
+With the API specification given in the OpenAPI Format (OAS3) it is very easy to create code in your preferred language with the open code generators available here:
+
+[OpenAPI Generator](https://openapi-generator.tech/docs/generators)
+
+There are generators that provide the code foundation for both serving data requests as well as reading data according to the given specification.
+
+### Which operations and business objects are covered by the API?
+
+The API defines endpoints to retrieve information about the following business objects:
+
+- **Customers:** Query business partners that are authorized to requesting user
+- **Accounts:** Query cash and safekeeping accounts for a given customer and/or authorized to the requesting user
+- **Positions:** Query positions and their valuation for a given date and customer or account
+- **Transaction:** Query transactions and associated changes in holdings for a given date and customer or account
+
+## Principles and guidelines
+
+The strengths of an OpenAPI specification lies in the definition of manner of interaction of two intaracting parties, in particular the definition of a set of URLs and associated parameters for the communication as well as the structural definition of the data contract - schema and semantics, such as enumerations and terminologies.
+Ensuring consistency of the content however is hard to achieve by the the OpenAPI definition.
+In order to achieve a maximal data quality and straight through process rate between the participant, we try to define a set of principles that encourages participants to increase data quality and common understanding of financial instruments, business events and their modelling. Thes principles are defined here:
+
+[Principles and guidelines](Docs/PrinciplesAndGuidelines.md)
+
+## Business objects and data entities
+
+The main business objects in this API are
+
+- Customer
+- Portfolio
+- Account
+- Financial Instrument
+- Position
+- Transaction
+- Movement
+
+How OpenWealth understands these entities and what the relationship between them is, is described in detail here:
+
+[Business objects and data entities](Docs/EntityModel.md)
 
 ## Enumeration and types
 
-The main strategy to categorize (bankable) wealth and associated business events that cause change in wealth or the underlying risk are the following:
+The two main discriminators to categorize (bankable) wealth and associated business events that cause change in wealth or the underlying risk are:
 
-- [Financial Instrument Types](Docs/FinancialInstrumentTypes.md)
-- [Transaction and Movement Types](Docs/TransactionAndMovementTypes.md)
+- [Financial Instrument Types](Docs/TypesAndImplementationGuideline.md)
+- [Transaction Types](Docs/TypesAndImplementationGuideline.md)
 
-The financial instrument type characterizes a monetary contract, which confers a right or claim against some counterparty in the form of a payment, equity ownership or dividends (stocks), debt (bonds, loans, deposit accounts), currency (forex), or derivatives (futures, forwards, options, and swaps). In a technical way the financial instrument type further defines the properties (mandatory and optional) to fully describe the asset.
+The financial instrument type characterizes a monetary contract, which confers a right or claim against some counterparty in the form of a payment, equity ownership or revenue, debt (bonds, loans, deposit accounts), currency (forex), or derivatives (futures, forwards, options, and swaps).
 
-The transaction types categorize business events (Geschäftsvorfälle). A business event typically results in one or multiple movements - changes of holdings of a position. The transaction type enforces restrictions on its content resulting in guidelines for the implementation of the data object (technical structure, mandatory and optional fields, consistency checks). A dividend payment for example typically consists of a triggering instrument, a gross movement (amount) of cash changed and a withholding tax movement. The typing of these partial movement is described by the movement type enumerator.
+The transaction types categorize business events (Geschäftsvorfälle). A business event typically results in one or multiple movements - changes of holdings of a position and or changes of properties of the held position.
+
+Detailed descriptions of all currently supported instrument types and transaction types including implementation guides and references to sample data can be found here:
+
+[Types and implementation guidlines](Docs/TypesAndImplementationGuideline.md)
 
 ## Use cases and examples
 
 ### A portfolio life cycle
 
 A good way to get familiar with the needs of a securities accounting is to look at a simple life cycle of a portfolio. Each business event in this life cycle should be interchangeable on a digital data level between the bank and the 3rd party system (EAM software). Business events related to the customer information (such as identification, forms, compliance etc.) are covered by OpenWealths Customer Management API (link TBD). Events related to the customers wealth, such as transfer of funds, investements etc. are covered by the Custody Services API. In the following we will link custody events to example and reference implementation of the API schemes. The chronological events could look like the following:
+
+*Links to samples to be added
 
 - EAM signs wealth management contract of a discretionary mandate with customer and sends onboarding docs to the chosen custody
 - EAM requests opening of a safekeeping account and on or more cash accounts (i.e. CHF, EUR, USD)

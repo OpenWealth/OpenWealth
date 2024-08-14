@@ -1,5 +1,5 @@
 {
-  "id": "0000002",
+  "id": "trx-002-00",
   "type": "buy",
   "transactionDate": "2023-01-04",
   "customerId": "123456",
@@ -7,6 +7,17 @@
   "endOfDayIndicator": true,
   "placeOfTrade": {
     "marketIdentificationCode": "XSWX"
+  },
+  "triggeringFinancialInstrument": {
+    "type": "equity",
+    "name": "CREDIT SUISSE GROUP AG",
+    "identificationList": [
+      {
+        "type": "isin",
+        "identifier": "CH0012138530"
+      }
+    ],
+    "currencyOfDenomination": "CHF"
   },
   "movementList": [
     {
@@ -31,7 +42,7 @@
         "type": "unit",
         "value": 1000
       },
-      "positionId": "001",
+      "positionId": "pos-002",
       "positionCurrency": "CHF",
       "price": {
         "type": "actual",
@@ -63,7 +74,7 @@
         "value": -100000
       },
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF"
     },
     {
@@ -90,7 +101,7 @@
         "value": -397.75
       },
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF"
     },
     {
@@ -117,7 +128,7 @@
         "value": -75
       },
       "valueDate": "2023-01-04",
-      "positionId": "0000",
+      "positionId": "pos-000",
       "positionCurrency": "CHF"
     }
   ],

@@ -1,19 +1,23 @@
 {
-  "id": "pos-012",
+  "id": "pos-009",
   "endOfDayIndicator": true,
-  "positionDate": "2022-12-31",
+  "positionDate": "2023-01-04",
   "financialInstrument": {
-    "type": "fixedDeposit",
-    "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
+    "type": "fxForward",
+    "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
     "identificationList": [
       {
-        "identifier": "fixedDepositContract1",
+        "identifier": "fxForwardRef111",
         "type": "otherProprietaryIdentification"
       }
     ],
-    "principalAmount": {
-      "amount": 100000,
+    "amountPaid": {
+      "amount": 200000,
       "currency": "USD"
+    },
+    "amountReceived": {
+      "amount": 170000,
+      "currency": "CHF"
     },
     "maturityDate": "2023-06-27"
   },
@@ -27,21 +31,21 @@
   },
   "valuation": {
     "valueInPositionCurrency": {
-      "amount": 100000,
-      "currency": "USD"
+      "amount": 10000,
+      "currency": "CHF"
     },
     "valueInReferenceCurrency": {
-      "amount": 90000,
+      "amount": 10000,
       "currency": "CHF"
     },
     "foreignExchangeRate": {
       "value": 0.9,
       "sourceCurrency": "USD",
       "targetCurrency": "CHF",
-      "rateDate": "2022-12-31"
+      "rateDate": "2023-01-04"
     }
   },
-  "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
-  "currency": "CHF",
+  "name": "FX Swap, 200'000 USD to CHF",
+  "currency": "USD",
   "safekeepingPlace": "INSECHZZXXX"
 }
