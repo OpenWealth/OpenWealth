@@ -35,7 +35,7 @@ properties:
     example: true
   reference:
     type: string
-    description: >
+    description: |
       Transaction reference as used in the transaction statement. This could be equal to the id of the transaction
       but may not if GUID are used to identify the transaction.
     example: XS12345678

@@ -1,5 +1,5 @@
 title: FxSwap
-description: >
+description: |
   A foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency
   for interest payments on a loan made in another currency.
 required:
@@ -29,7 +29,7 @@ allOf:
         description: Date of the settlement of the near leg.
         $ref: '../../../../Globals/V3/Types/Date.yaml'
       maturityDate:
-        description: >
+        description: |
           Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
           is repaid by the issuer to the investor.
         $ref: '../../../../Globals/V3/Types/Date.yaml'

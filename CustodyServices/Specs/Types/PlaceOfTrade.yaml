@@ -5,7 +5,7 @@ properties:
   marketIdentificationCode:
     type: string
     maxLength: 4
-    description: >
+    description: |
       Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
       Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
     example: XSWX

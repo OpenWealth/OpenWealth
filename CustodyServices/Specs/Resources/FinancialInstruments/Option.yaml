@@ -1,5 +1,5 @@
 title: Option
-description: >
+description: |
   An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying
   asset at a predetermined price within a given time frame.
 required:
@@ -9,7 +9,7 @@ allOf:
   - type: object
     properties:
       expiryDate:
-        description: >
+        description: |
           Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
           date at which it becomes due and has to be repaid.
         $ref: '../../../../Globals/V3/Types/Date.yaml'
