@@ -1,0 +1,9 @@
+description: Event type the subscription should apply to AND reason why a notification is sent.
+type: string
+enum:
+  - heartbeat
+  - transaction:changed
+  - transaction:deleted
+  - position:changed
+  - position:deleted
+example: transaction:changed

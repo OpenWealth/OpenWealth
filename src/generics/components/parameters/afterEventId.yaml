@@ -1,0 +1,7 @@
+in: query
+name: afterEventId
+schema:
+  type: string
+  maxLength: 128
+  example: 3v3n7subscr1p70n
+description: Event Id after which events are considered.

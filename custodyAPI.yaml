@@ -444,6 +444,228 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
+  /event-subscriptions:
+    post:
+      tags:
+        - event-notification-subscription
+      summary: Subscribe to Events
+      description: Allows TPP to subscribe to specific events for the API.
+      operationId: postEventSubscription
+      parameters:
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSubscription'
+      responses:
+        '201':
+          description: Subscription created.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    get:
+      tags:
+        - event-notification-subscription
+      summary: View Subscriptions
+      description: Allows TPP to view the event subscriptions.
+      operationId: getEventSubscriptions
+      parameters:
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Event Subscription read.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+  /event-subscriptions/{eventSubscriptionId}:
+    get:
+      tags:
+        - event-notification-subscription
+      summary: View Subscription
+      description: Allows TPP to view the event subscription.
+      operationId: getEventSubscriptionByEventSubscriptionId
+      parameters:
+        - $ref: '#/components/parameters/path_eventSubscriptionId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Event Subscription read.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    put:
+      tags:
+        - event-notification-subscription
+      summary: Change event subscription
+      description: Changes event subscription.
+      operationId: changeEventSubscriptionByEventSubscriptionId
+      parameters:
+        - $ref: '#/components/parameters/path_eventSubscriptionId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSubscription'
+      responses:
+        '200':
+          description: Event subscription changed
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    delete:
+      tags:
+        - event-notification-subscription
+      summary: Delete event subscription
+      description: Deletes event subscriptions.
+      operationId: deleteEventSubscriptionsByEventSubscriptionId
+      parameters:
+        - $ref: '#/components/parameters/path_eventSubscriptionId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '204':
+          description: Event subscription deleted.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+  /event-subscriptions/{eventSubscriptionId}/event-notifications:
+    get:
+      tags:
+        - event-notification
+      summary: Get event notifications
+      description: Get aggregated event-notification list.
+      parameters:
+        - $ref: '#/components/parameters/path_eventSubscriptionId'
+        - $ref: '#/components/parameters/fromEventDateTime'
+        - $ref: '#/components/parameters/afterEventId'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: aggregated event-notification list.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventNotification'
+        '404':
+          $ref: '#/components/responses/404'
 components:
   schemas:
     Currency:
@@ -1645,6 +1867,79 @@ components:
           maxLength: 70
           description: Provides additional details on the transaction which can not be included within the structured fields of the message.
           example: Replaces transaction nr. 12234567489
+    EventType:
+      description: Event type the subscription should apply to AND reason why a notification is sent.
+      type: string
+      enum:
+        - heartbeat
+        - transaction:changed
+        - transaction:deleted
+        - position:changed
+        - position:deleted
+      example: transaction:changed
+    EventSubscription:
+      type: object
+      required:
+        - eventSubscriptionId
+      properties:
+        id:
+          description: |
+            Unique identification as assigned by the API exposing party to uniquely
+            identify the callback URL resource.
+          type: string
+          maxLength: 128
+          example: 3v3n7subscr1p70n
+        callbackUrl:
+          description: |
+            Callback URL for a TPP hosted service. Will be used by API exposing party, in
+            conjunction with the resource name, to construct a URL to send
+            event notifications to.
+          type: string
+          format: uri
+          example: https://examplecallbackuri.com
+        eventTypes:
+          description: Array of event types the subscription applies to. An empty list indicates that no notifications are sent.
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+    Version:
+      description: Indicates to which version of the respective API the referencing entity is belonging to.
+      type: string
+      enum:
+        - v1
+        - v2
+        - v3
+        - v4
+        - v5
+      example: v2
+    EventNotification:
+      description: Notification for the order placement API that is pushed to the TPP.
+      type: object
+      properties:
+        id:
+          description: Identification (UUID)  of the event notification.
+          type: string
+          example: 120066c9-58a1-432b-aa60-712fae7f143e
+        eventSubscriptionId:
+          description: |
+            Unique identification as assigned by the API exposing party to uniquely
+            identify the callback URL resource.
+          type: string
+          example: 3v3n7subscr1p70n
+        version:
+          $ref: '#/components/schemas/Version'
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        resourceLink:
+          description: Link to resource that triggered the event notification.
+          type: string
+          example: /api/openwealth/custody/v3/transactions/abcd1234
+        created:
+          description: Timestamp - Date and time including timezone on which the notification has been created, according to ISO8601
+          $ref: '#/components/schemas/DateTime'
+        predecessorId:
+          description: Identification (UUID) of the notification that predeceeds this notification.
+          type: string
   parameters:
     cursor:
       in: query
@@ -1731,6 +2026,31 @@ components:
         description: Identification for the transaction given by the bank.
         example: 1234566-12-7
       description: Transaction ID.
+    path_eventSubscriptionId:
+      name: eventSubscriptionId
+      in: path
+      required: true
+      description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+    fromEventDateTime:
+      in: query
+      name: fromEventDate
+      schema:
+        type: string
+        format: date-time
+      description: Date from which events are considered.
+      example: 2022-10-26T07:58:30.996+0100
+    afterEventId:
+      in: query
+      name: afterEventId
+      schema:
+        type: string
+        maxLength: 128
+        example: 3v3n7subscr1p70n
+      description: Event Id after which events are considered.
   securitySchemes: {}
   responses:
     '400':
@@ -1804,6 +2124,19 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+    '409':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      description: Conflict - The request conflicts with the current state of the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
     '500':
       headers:
         Content-Type:
@@ -1843,6 +2176,19 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+    '504':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        X-Correlation-Id:
+          $ref: '#/components/headers/X-Correlation-Id'
+      description: Gateway Timeout - The server did not get a response in time that it needed in order to complete the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
   headers:
     X-Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
@@ -1864,3 +2210,8 @@ components:
       schema:
         type: string
         example: en
+    X-Correlation-ID:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5

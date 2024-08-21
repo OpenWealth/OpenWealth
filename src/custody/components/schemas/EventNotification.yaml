@@ -1,0 +1,27 @@
+description: Notification for the order placement API that is pushed to the TPP.
+type: object
+properties:
+  id:
+    description: Identification (UUID)  of the event notification.
+    type: string
+    example: '120066c9-58a1-432b-aa60-712fae7f143e'
+  eventSubscriptionId:
+    description: |
+      Unique identification as assigned by the API exposing party to uniquely
+      identify the callback URL resource.
+    type: string
+    example: 3v3n7subscr1p70n
+  version:
+    $ref: '../../../Globals/V3/Types/Version.yaml'
+  eventType:
+    $ref: '../Types/EventType.yaml'
+  resourceLink:
+    description: Link to resource that triggered the event notification.
+    type: string
+    example: '/api/openwealth/custody/v3/transactions/abcd1234'
+  created:
+    description: Timestamp - Date and time including timezone on which the notification has been created, according to ISO8601
+    $ref: '../../../Globals/V3/Types/DateTime.yaml'
+  predecessorId:
+    description: Identification (UUID) of the notification that predeceeds this notification.
+    type: string
