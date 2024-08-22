@@ -650,6 +650,7 @@ paths:
         - $ref: '#/components/parameters/path_eventSubscriptionId'
         - $ref: '#/components/parameters/fromEventDateTime'
         - $ref: '#/components/parameters/afterEventId'
+        - $ref: '#/components/parameters/cursor.yaml'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
