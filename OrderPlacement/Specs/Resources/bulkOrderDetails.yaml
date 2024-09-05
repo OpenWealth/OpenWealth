@@ -65,3 +65,8 @@ properties:
       - goodForMonth
   expiryDateTime:
     $ref: '../../../Globals/V2/Types/dateTime.yaml'
+  additionalDetails:
+    type: string
+    maxLength: 128
+    description: Provides additional details on the order which can not be included within the structured fields of the message.
+    example: at pre Market and today
