@@ -71,7 +71,9 @@ paths:
       tags:
         - orderstatus
       summary: Returns a list of open security orders
-      description: Returns all open orders to which the user of the API has access to. Paging is done based on the order object, i.e. if limit is set to 1, then 1 order will be returned per page.
+      description: |
+        Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
+        i.e. if limit is set to 1, then 1 order will be returned per page.
       operationId: getOrders
       parameters:
         - $ref: '#/components/parameters/cursor'
@@ -183,7 +185,9 @@ paths:
       tags:
         - accountaccess
       summary: Returns list of accounts the requestor has access to
-      description: Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
+      description: |
+        Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
+        object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
       operationId: getAccountAccesses
       parameters:
         - $ref: '#/components/parameters/cursor'
@@ -441,8 +445,8 @@ paths:
 components:
   parameters:
     limit:
-      name: limit
       in: query
+      name: limit
       description: Maximum number of items to return.
       required: false
       schema:
@@ -450,19 +454,19 @@ components:
         format: int32
         minimum: 1
     cursor:
-      name: cursor
       in: query
-      description: An opaque string value used for pagination
+      name: cursor
       required: false
       schema:
         type: string
+      description: An opaque string value used for pagination.
     correlation_in_header:
       in: header
       name: X-Correlation-ID
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
       required: true
       schema:
         type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
     clientOrderId:
       in: path
       name: clientOrderId
@@ -472,14 +476,16 @@ components:
         maxLength: 20
       description: The security order id. This Id corresponds with the clientOrderIdentification.
     path_eventSubscriptionId:
-      name: eventSubscriptionId
       in: path
+      name: eventSubscriptionId
       required: true
-      description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
       schema:
         type: string
         minLength: 1
         maxLength: 40
+      description: |
+        Unique identification as assigned by the API exposing party to uniquely
+        identify the callback URL resource.
     fromEventDateTime:
       in: query
       name: fromEventDate
@@ -513,7 +519,7 @@ components:
       description: Date and time of the statement creation (UTC Timestamp). In accordance with ISO 8601.
     amount:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       example: '12000'
       description: Absolute amount.
@@ -572,7 +578,9 @@ components:
         marketIdentificationCode:
           type: string
           maxLength: 4
-          description: Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code. Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
+          description: |
+            Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
+            Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
           example: XSWX
         marketDescription:
           type: string
@@ -582,17 +590,17 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code
-      pattern: '^[A-Z]{3}$'
+      pattern: ^[A-Z]{3}$
       example: CHF
     limitPrice:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Limit price per unit of quantity (e.g. per share).
       example: '17.8'
     stopPrice:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Price of this (last) fill.
       example: '17.8'
@@ -740,17 +748,18 @@ components:
           example: Cancelled by client.
     executedQuantity:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Total quantity (e.g. number of shares) filled.
       example: '100'
     remainingQuantity:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: |
         Quantity open for further execution.
-        If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
+        If the status is cancelled, expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0,
+        otherwise remainingQuantity = orderQuantity - executedQuantity.
       example: '20'
     remainingAllocation:
       type: object
@@ -767,7 +776,7 @@ components:
           $ref: '#/components/schemas/remainingQuantity'
     averagePrice:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Calculated average price of all fills on this order.
       example: '17.8'
@@ -797,10 +806,12 @@ components:
           $ref: '#/components/schemas/Currency'
         rate:
           type: string
-          pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+          pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
           maxLength: 22
           example: '1.0963'
-          description: Indicates the rate of a fx transaction for one source currency unit to the target currency. E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
+          description: |
+            Indicates the rate of a fx transaction for one source currency unit to the target currency. E.g. 1GBP=xxxEUR, where the
+            source currency is GBP and the target currency is EUR.
         targetCurrency:
           description: Currency into which an amount is to be converted in a currency conversion.
           $ref: '#/components/schemas/Currency'
@@ -835,7 +846,7 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code
-      pattern: '^[A-Z]{3}$'
+      pattern: ^[A-Z]{3}$
       example: CHF
     accruedInterest:
       type: object
@@ -987,7 +998,9 @@ components:
       type: string
       format: date-time
       example: '2018-04-13T11:11:11Z'
-      description: Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp). In accordance with ISO 8601.
+      description: |
+        Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp). In accordance
+        with ISO 8601.
     orderCancellationReason:
       type: object
       description: Indicates the reason, why an order is invalid/cancelled/rejected.
@@ -1047,7 +1060,7 @@ components:
           example: Cancelled by client
     dayOrderQuantity:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: |
         The orderQuantity less all quantity (adjusted for stock splits) that traded on previous days.
@@ -1055,13 +1068,13 @@ components:
       example: '15'
     dayExecutedQuantity:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Quantity on an order that has traded today.
       example: '5'
     dayAveragePrice:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Calculated average price of all fills on this order.
       example: '17.8'
@@ -1103,7 +1116,7 @@ components:
           $ref: '#/components/schemas/dayAveragePrice'
         factor:
           type: string
-          pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+          pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
           maxLength: 22
           example: '100'
           description: |
@@ -1112,8 +1125,9 @@ components:
             In TIPS securities this is the Inflation index.
             Qty * Factor * Price = Gross Trade Amount
 
-            For Derivatives: Contract Value Factor by which price must be adjusted to determine the true nominal value of one futures/options contract.
-            (Qty * Price) * Factor = Nominal Value"
+            For Derivatives: Contract Value Factor by which price must be adjusted to determine the true nominal value of one futures/options
+            contract.
+            (Qty * Price) * Factor = Nominal Value
         orderStatusHistoryList:
           items:
             $ref: '#/components/schemas/orderStatusHistory'
@@ -1225,7 +1239,9 @@ components:
             - write
           example: read
     eventSubscriptionId:
-      description: Unique identification as assigned by the API exposing party to uniquely identify the callback URL resource.
+      description: |
+        Unique identification as assigned by the API exposing party to uniquely
+        identify the callback URL resource.
       type: string
       minLength: 1
       maxLength: 40
@@ -1253,7 +1269,9 @@ components:
         eventSubscriptionId:
           $ref: '#/components/schemas/eventSubscriptionId'
         callbackUrl:
-          description: Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL to send event notifications to.
+          description: |
+            Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL
+            to send event notifications to.
           type: string
           format: uri
           example: https://examplecallbackuri.com
@@ -1268,7 +1286,9 @@ components:
         - callbackUrl
       properties:
         callbackUrl:
-          description: Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL to send event notifications to.
+          description: |
+            Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL
+            to send event notifications to.
           type: string
           format: uri
           example: https://examplecallbackuri.com
@@ -1291,13 +1311,13 @@ components:
       example: 120066c9-58a1-432b-aa60-712fae7f143e
     lastQuantity:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Quantity (e.g. shares) bought/sold on this (last) fill.
       example: '30'
     lastPrice:
       type: string
-      pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
       maxLength: 22
       description: Price of this (last) fill.
       example: '17.8'
@@ -1368,7 +1388,9 @@ components:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
             example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-      description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
+      description: |
+        Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed
+        request syntax.
       content:
         application/problem+json:
           schema:
@@ -1434,7 +1456,9 @@ components:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
             example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-      description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+      description: |
+        Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one
+        exists.
       content:
         application/problem+json:
           schema:
@@ -1456,7 +1480,9 @@ components:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
             example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-      description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+      description: |
+        Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the
+        target resource.
       content:
         application/problem+json:
           schema:
@@ -1544,7 +1570,9 @@ components:
             type: string
             description: Client defined ID from request to correlates HTTP requests between a client and server.
             example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-      description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+      description: |
+        Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled
+        maintenance.
       content:
         application/problem+json:
           schema:

@@ -76,7 +76,9 @@ paths:
       tags:
         - orderstatus
       summary: Returns a list of open security orders
-      description: Returns all open orders to which the user of the API has access to. Paging is done based on the order object, i.e. if limit is set to 1, then 1 order will be returned per page.
+      description: |
+        Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
+        i.e. if limit is set to 1, then 1 order will be returned per page.
       operationId: getOrders
       parameters:
         - $ref: '#/components/parameters/cursor'
@@ -189,7 +191,9 @@ paths:
       tags:
         - accountaccess
       summary: Returns list of accounts the requestor has access to
-      description: Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
+      description: |
+        Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
+        object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
       operationId: getAccountAccesses
       parameters:
         - $ref: '#/components/parameters/cursor'
@@ -454,8 +458,8 @@ components:
 
   parameters:
     limit:
-      name: limit
       in: query
+      name: limit
       description: Maximum number of items to return.
       required: false
       schema:
@@ -465,16 +469,16 @@ components:
     #        maximum: 100
     #        default: 20
     cursor:
-      name: cursor
       in: query
-      description: An opaque string value used for pagination
+      name: cursor
       required: false
       schema:
         type: string
+      description: An opaque string value used for pagination.
     correlation_in_header:
       in: header
       name: X-Correlation-ID
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
       required: true
       schema:
         type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.

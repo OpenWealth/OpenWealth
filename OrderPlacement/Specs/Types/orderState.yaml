@@ -36,8 +36,9 @@ properties:
       In TIPS securities this is the Inflation index.
       Qty * Factor * Price = Gross Trade Amount
 
-      For Derivatives: Contract Value Factor by which price must be adjusted to determine the true nominal value of one futures/options contract.
-      (Qty * Price) * Factor = Nominal Value"
+      For Derivatives: Contract Value Factor by which price must be adjusted to determine the true nominal value of one futures/options
+      contract.
+      (Qty * Price) * Factor = Nominal Value
   orderStatusHistoryList:
     items:
       $ref: 'orderStatusHistory.yaml'
