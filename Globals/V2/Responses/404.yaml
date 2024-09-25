@@ -14,7 +14,9 @@ headers:
       type: string
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+description: |
+  Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one
+  exists.
 content:
   application/problem+json:
     schema:

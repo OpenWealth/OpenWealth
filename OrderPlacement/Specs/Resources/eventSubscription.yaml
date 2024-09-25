@@ -5,10 +5,9 @@ properties:
   eventSubscriptionId:
     $ref: '../Types/eventSubscriptionId.yaml'
   callbackUrl:
-    description: >-
-      Callback URL for a TPP hosted service. Will be used by API exposing party, in
-      conjunction with the resource name, to construct a URL to send
-      event notifications to.
+    description: |
+      Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL
+      to send event notifications to.
     type: string
     format: uri
     example: 'https://examplecallbackuri.com'
@@ -17,4 +16,3 @@ properties:
     type: array
     items:
       $ref: '../Types/eventType.yaml'
-

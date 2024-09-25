@@ -14,7 +14,9 @@ headers:
       type: string
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
+description: |
+  Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed
+  request syntax.
 content:
   application/problem+json:
     schema:

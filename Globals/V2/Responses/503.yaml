@@ -14,7 +14,9 @@ headers:
       type: string
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+description: |
+  Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled
+  maintenance.
 content:
   application/problem+json:
     schema:
