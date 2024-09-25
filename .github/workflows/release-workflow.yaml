@@ -1,0 +1,247 @@
+name: Release workflow
+# description: Create new OpenWealth release.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version tag (required format: v[mayor].[minor].[bugfix], e.g. v1.3.0)'
+        type: string
+        required: true
+      apiName:
+        description: 'Build and release Instrument API'
+        required: true
+        default: 'custody'
+        type: choice
+        options:
+          - custodyServices
+          - orderPlacement
+          - customerManagement
+      # force:
+      #   description: 'If force is true, already published releases can be overwritten. Caution: This action deletes already published releases and can **not** be undone!'
+      #   type: boolean
+      #   required: false
+    # secrets:
+    #   SFTI_BOT_TOKEN:
+    #     required: true
+
+env:
+  REDOCLY_VERSION: '1.25.3'
+
+jobs:
+  variables:
+    runs-on: ubuntu-latest
+    outputs:
+      REPO_NAME: ${{ steps.var.outputs.REPO_NAME }}
+      VERSION: ${{ steps.var.outputs.VERSION }}
+      API_NAME: ${{ steps.var.outputs.API_NAME }}
+      API_FILE: ${{ steps.var.outputs.API_FILE }}
+      BASE_BRANCH: ${{ steps.var.outputs.BASE_BRANCH }} # branch to release, only main supported
+      RELEASE_NAME: ${{ steps.var.outputs.RELEASE_NAME }}
+      RELEASE_TAG: ${{ steps.var.outputs.RELEASE_TAG }}
+      RELEASE_BRANCH_NAME: ${{ steps.var.outputs.RELEASE_BRANCH_NAME }}
+      RELEASE_NOTES: ${{ steps.var.outputs.RELEASE_NOTES }}
+
+    steps:
+      - name: Validate input parameters
+        id: param_check
+        run: |
+          VERSION_REGEX="^v[0-9]+\.[0-9]+\.[0-9]+$"
+          version=${{ github.event.inputs.version }}
+          if [[ ! "$version" =~ $VERSION_REGEX ]]; then
+            echo "Invalid version format: $version . Please provide a version matching the pattern 'v[number].[number].[number]'."
+            exit 1
+          fi
+
+      - name: Extract variables for Release action # Adjust names only here
+        id: var
+        run: |
+          version=$( echo ${{ github.event.inputs.version }} | grep -oP '[0-9]+\.[0-9]+\.[0-9]+' )  # alternative: '[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]'
+          apiName=${{ github.event.inputs.apiName }}
+          apiFile="${apiName^}/Specs/${apiName}API-bundled.yaml"
+          tagName="v${version}-${apiName}"
+          repo_name=$( echo ${{ github.repository }} | sed -E "s/^.*\///" )
+          echo "REPO_NAME=$repo_name" >> $GITHUB_OUTPUT
+          echo "VERSION"=$version >> $GITHUB_OUTPUT
+          echo "API_NAME"=$apiName >> $GITHUB_OUTPUT
+          echo "API_FILE"=$apiFile >> $GITHUB_OUTPUT
+          echo "BASE_BRANCH=main" >> $GITHUB_OUTPUT
+          echo "RELEASE_NAME=\"$repo_name Release $version\"" >> $GITHUB_OUTPUT
+          echo "RELEASE_TAG="$tagName >> $GITHUB_OUTPUT
+          echo "RELEASE_BRANCH_NAME=release/$version" >> $GITHUB_OUTPUT
+          echo "RELEASE_NOTES=RELEASE.md" >> $GITHUB_OUTPUT
+
+  release:
+    runs-on: ubuntu-latest
+    needs: variables
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    outputs:
+      RELEASE_ID: ${{ steps.create_release_draft.outputs.RELEASE_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout Wiki
+        uses: actions/checkout@v4
+        with:
+          repository: ${{github.repository}}.wiki
+          path: wiki
+
+      - name: Get release note content from wiki
+        id: release_note_body
+        run: |
+          # regex="### Release ${{ needs.variables.outputs.RELEASE_TAG }}[[:print:]]*[[:cntrl:]]{2}([^-][[:print:]]*[[:cntrl:]]{1,2})*(- [[:print:]]*[[:cntrl:]])+[[:cntrl:]]{2}"  ## matches section + optional text + at least one bullet point
+          # content=$(grep -ozE "$regex" wiki/Releases.md | tr "\0" "\n" | tail -n +3)
+
+          body="## Release ${{ needs.variables.outputs.RELEASE_TAG }}"$'\n\n# \n\n'
+          echo "BODY=${body//$'\n'/'\n'}" >> $GITHUB_OUTPUT
+
+      - name: Check file version
+        id: check_version
+        run: |
+          BASE_BRANCH=${{ needs.variables.outputs.BASE_BRANCH }}
+
+          git checkout -q origin/$BASE_BRANCH
+          release_version=${{ needs.variables.outputs.VERSION }}
+
+          version=$(grep -Eo 'version: [0-9]+\.[0-9]+\.[0-9]+' ${{ needs.variables.outputs.API_FILE }}| grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+          echo "Extracted version: $version"
+
+          if [[ $version != $release_version ]]; then
+            echo "Release $release_version does not match version in file $version"
+            exit 1
+          fi
+          echo "Versions matched"
+
+      - name: Delete release (draft) if already exists
+        id: delete_release_draft
+        run: |
+          ACCESS_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME=${{ github.repository }}
+          TAG=${{ needs.variables.outputs.RELEASE_TAG }}
+          RELEASE_NAME=${{ needs.variables.outputs.RELEASE_NAME }}
+
+          # Get the release ID belonging to the release tag
+          RELEASE_ID=$(curl -sS -X GET -H "Authorization: Bearer $ACCESS_TOKEN" "https://api.github.com/repos/$REPO_NAME/releases" | jq -r ".[] | select(.name == \"$RELEASE_NAME\") | .id")
+
+          # RELEASE_ID var contains 0 or 1 IDs
+          if [[ ! $RELEASE_ID =~ ^[0-9]*$ ]]; then
+            echo "Found more than one release with name \"$RELEASE_ID\"."
+            exit 1
+          fi
+
+          is_draft=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$REPO_NAME/releases/$RELEASE_ID | jq '.draft')
+
+          if [[ "$is_draft" == 'false' ]]; then
+            echo "Release $RELEASE_NAME has already been published."
+            exit 1
+          fi
+
+          if [[ "$is_draft" == 'true' ]]; then
+            if [[ -n "$RELEASE_ID" ]]; then
+              # Delete the existing release draft
+              curl -sS -X DELETE -H "Authorization: Bearer $ACCESS_TOKEN" "https://api.github.com/repos/$REPO_NAME/releases/$RELEASE_ID"
+              echo "Deleted release \"$RELEASE_NAME\" with ID $RELEASE_ID"
+            fi
+          fi
+
+      - name: Create release draft
+        id: create_release_draft
+        run: |
+          ACCESS_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME=${{ github.repository }}
+
+          RESPONSE=$(curl -sS -i -X POST \
+            -H "Authorization: Bearer $ACCESS_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/$REPO_NAME/releases" \
+            -d '{
+              "tag_name": "'"${{ needs.variables.outputs.RELEASE_TAG }}"'",
+              "target_commitish": "'"${{ needs.variables.outputs.BASE_BRANCH }}"'",
+              "name": "'${{ needs.variables.outputs.RELEASE_NAME }}'",
+              "body": "'"${{ steps.release_note_body.outputs.BODY }}"'",
+              "generate_release_notes": true,
+              "draft": true
+            }')
+
+          if [[ $(echo $RESPONSE | head -n 1 | cut -d$' ' -f2 ) -ne 201 ]]; then
+            echo "Failed to create release draft. Received response from GitHub API:"
+            echo "$RESPONSE"
+            exit 1
+          fi
+
+          echo "RELEASE_ID=$(echo $RESPONSE | grep -o -z '\{.*\}' | jq -r '.id')" >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
+      - name: Install redocly
+        run: |
+          npm install -g @redocly/cli
+
+      - name: create API documentation
+        id: create_api_docu
+        run: |
+          export NODE_NO_WARNINGS=1
+          mkdir -p ${{ needs.variables.outputs.DOC_PATH }}
+          doc_file=${{ needs.variables.outputs.API_NAME }}API-${{ needs.variables.outputs.VERSION }}.html
+          redocly build-docs ${{ needs.variables.outputs.API_FILE }} --output $doc_file
+          echo "Created documentation: $doc_file"
+          echo "doc_file=$doc_file" >> $GITHUB_OUTPUT
+
+      - name: Upload doc file to release assets
+        id: upload_documentation
+        run: |
+          ACCESS_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME=${{ github.repository }}
+          RELEASE_ID=${{ steps.create_release_draft.outputs.RELEASE_ID }}
+
+          RELEASE_ASSET_DOCU=${{ steps.create_api_docu.outputs.doc_file }}
+
+          RESPONSE=$(curl -sS -i -X POST \
+            -H "Authorization: Bearer $ACCESS_TOKEN" \
+            -H "Content-Type: application/octet-stream" \
+            --data-binary "@$RELEASE_ASSET_DOCU" \
+            https://uploads.github.com/repos/$REPO_NAME/releases/$RELEASE_ID/assets?name=$RELEASE_ASSET_DOCU)
+
+          if [[ $(echo $RESPONSE | head -n 1 | cut -d$' ' -f2 ) -ne 201 ]]; then
+            echo "Failed to upload release asset $RELEASE_ASSET_DOCU. Received response from GitHub API:"
+            echo "$RESPONSE"
+            exit 1
+          fi
+
+          RELEASE_ASSET_API="${{ needs.variables.outputs.API_NAME }}API-${{ needs.variables.outputs.VERSION }}.yaml"
+          cp ${{ needs.variables.outputs.API_FILE }} "${RELEASE_ASSET_API}"
+
+          RESPONSE=$(curl -sS -i -X POST \
+            -H "Authorization: Bearer $ACCESS_TOKEN" \
+            -H "Content-Type: application/octet-stream" \
+            --data-binary "@$RELEASE_ASSET_API" \
+            https://uploads.github.com/repos/$REPO_NAME/releases/$RELEASE_ID/assets?name=$RELEASE_ASSET_API)
+
+          if [[ $(echo $RESPONSE | head -n 1 | cut -d$' ' -f2 ) -ne 201 ]]; then
+            echo "Failed to upload release asset $RELEASE_ASSET. Received response from GitHub API:"
+            echo "$RESPONSE"
+            exit 1
+          fi
+
+  rollback:
+    runs-on: ubuntu-latest
+    needs:
+      - release
+    if: |
+      always() &&
+      (needs.release.result == 'error')
+    steps:
+      - name: Rollback on error, delete release
+        run: |
+          ACCESS_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME=${{ github.repository }}
+          RELEASE_ID=${{ needs.release.outputs.RELEASE_ID }}
+          curl -sS -X DELETE -H "Authorization: Bearer $ACCESS_TOKEN" "https://api.github.com/repos/$REPO_NAME/releases/$RELEASE_ID"
