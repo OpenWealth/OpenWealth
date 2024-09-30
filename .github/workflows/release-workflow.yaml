@@ -17,13 +17,10 @@ on:
           - custodyServices
           - orderPlacement
           - customerManagement
-      # force:
-      #   description: 'If force is true, already published releases can be overwritten. Caution: This action deletes already published releases and can **not** be undone!'
-      #   type: boolean
-      #   required: false
-    # secrets:
-    #   SFTI_BOT_TOKEN:
-    #     required: true
+      commit_sha:
+        description: 'The commit SHA to create the release from'
+        required: true
+        default: 'main' # Default to the latest commit on main if SHA isn't provided
 
 env:
   REDOCLY_VERSION: '1.25.3'
@@ -39,8 +36,6 @@ jobs:
       BASE_BRANCH: ${{ steps.var.outputs.BASE_BRANCH }} # branch to release, only main supported
       RELEASE_NAME: ${{ steps.var.outputs.RELEASE_NAME }}
       RELEASE_TAG: ${{ steps.var.outputs.RELEASE_TAG }}
-      RELEASE_BRANCH_NAME: ${{ steps.var.outputs.RELEASE_BRANCH_NAME }}
-      RELEASE_NOTES: ${{ steps.var.outputs.RELEASE_NOTES }}
 
     steps:
       - name: Validate input parameters
@@ -66,10 +61,8 @@ jobs:
           echo "API_NAME"=$apiName >> $GITHUB_OUTPUT
           echo "API_FILE"=$apiFile >> $GITHUB_OUTPUT
           echo "BASE_BRANCH=main" >> $GITHUB_OUTPUT
-          echo "RELEASE_NAME=\"$repo_name Release $version\"" >> $GITHUB_OUTPUT
+          echo "RELEASE_NAME=\"Release ${apiName^}API $version\"" >> $GITHUB_OUTPUT
           echo "RELEASE_TAG="$tagName >> $GITHUB_OUTPUT
-          echo "RELEASE_BRANCH_NAME=release/$version" >> $GITHUB_OUTPUT
-          echo "RELEASE_NOTES=RELEASE.md" >> $GITHUB_OUTPUT
 
   release:
     runs-on: ubuntu-latest
@@ -85,21 +78,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Checkout Wiki
-        uses: actions/checkout@v4
         with:
-          repository: ${{github.repository}}.wiki
-          path: wiki
+          fetch-depth: 0 # Fetch all history for the repository to access any commit
 
-      - name: Get release note content from wiki
-        id: release_note_body
-        run: |
-          # regex="### Release ${{ needs.variables.outputs.RELEASE_TAG }}[[:print:]]*[[:cntrl:]]{2}([^-][[:print:]]*[[:cntrl:]]{1,2})*(- [[:print:]]*[[:cntrl:]])+[[:cntrl:]]{2}"  ## matches section + optional text + at least one bullet point
-          # content=$(grep -ozE "$regex" wiki/Releases.md | tr "\0" "\n" | tail -n +3)
-
-          body="## Release ${{ needs.variables.outputs.RELEASE_TAG }}"$'\n\n# \n\n'
-          echo "BODY=${body//$'\n'/'\n'}" >> $GITHUB_OUTPUT
+      - name: Checkout specific commit
+        run: git checkout ${{ inputs.commit_sha }} # Using the commit SHA from the workflow input
 
       - name: Check file version
         id: check_version
@@ -162,9 +145,8 @@ jobs:
             "https://api.github.com/repos/$REPO_NAME/releases" \
             -d '{
               "tag_name": "'"${{ needs.variables.outputs.RELEASE_TAG }}"'",
-              "target_commitish": "'"${{ needs.variables.outputs.BASE_BRANCH }}"'",
+              "target_commitish": "'"${{ inputs.commit_sha }}"'",
               "name": "'${{ needs.variables.outputs.RELEASE_NAME }}'",
-              "body": "'"${{ steps.release_note_body.outputs.BODY }}"'",
               "generate_release_notes": true,
               "draft": true
             }')
@@ -189,7 +171,6 @@ jobs:
         id: create_api_docu
         run: |
           export NODE_NO_WARNINGS=1
-          mkdir -p ${{ needs.variables.outputs.DOC_PATH }}
           doc_file=${{ needs.variables.outputs.API_NAME }}API-${{ needs.variables.outputs.VERSION }}.html
           redocly build-docs ${{ needs.variables.outputs.API_FILE }} --output $doc_file
           echo "Created documentation: $doc_file"
