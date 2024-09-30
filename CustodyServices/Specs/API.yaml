@@ -2,12 +2,11 @@ openapi: 3.0.0
 info:
   version: 3.0.1
   title: Custody Services
-  description: >
+  description: |
     This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
     This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either
     update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive
-    data from custody banks regarding transactions. In this version (2.0) only transactions which include effective cash or securities
-    movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.
+    data from custody banks regarding transactions.
   contact:
     email: openwealth@synpulse.com
   license:
@@ -35,7 +34,7 @@ paths:
       tags:
         - customers
       summary: Returns all customers (business partners) accessible for the logged in user
-      description: >
+      description: |
         This endpoint returns a highlevel list of customers accessible for the logged in user. Paging is done based on the customer object,
         i.e. if limit is set to 1, then 1 customer will be returned per page.
       operationId: getCustomers
@@ -116,7 +115,7 @@ paths:
       tags:
         - accounts
       summary: Returns the accounts for a specific customer accessible to the querying user
-      description: >
+      description: |
         Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1,
         then 1 account will be returned per page.
       operationId: getCustomerAccountsByCustomerId
@@ -201,7 +200,7 @@ paths:
       tags:
         - positions
       summary: Returns the positions for a specific customer
-      description: >
+      description: |
         Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1,
         then 1 position will be returned per page.
       operationId: getCustomerPositionByCustomerId
@@ -287,7 +286,7 @@ paths:
       tags:
         - positions
       summary: Returns the positions for a specific account
-      description: >
+      description: |
         Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1,
         then 1 position will be returned per page.
       operationId: getAccountPositionByAccountId
@@ -373,7 +372,7 @@ paths:
       tags:
         - transactions
       summary: Returns a transactions for a specific customer
-      description: >
+      description: |
         Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1,
         then 1 transaction will be returned per page.
       operationId: getTransactionByCustomerId

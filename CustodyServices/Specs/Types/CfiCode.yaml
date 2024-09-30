@@ -1,6 +1,6 @@
 title: CFICode
 type: string
-description: >
+description: |
   Indicates the type of the financial instrument. Must follow the ISO 10962, which is also known as CFI (classification of
   financial instruments). At least indicate the CFI Category (1st character) and the CFI Group (2nd character). The CFI
   attributes 1-4 (3rd to 6th character in the string) are optional.

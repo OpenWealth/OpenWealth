@@ -3,7 +3,10 @@ info:
   version: 3.0.1
   title: Custody Services
   description: |
-    This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems). This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive data from custody banks regarding transactions. In this version (2.0) only transactions which include effective cash or securities movements are in scope and corporate actions without any cash impact are delivered only on a informative basis.
+    This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
+    This API allows the user to receive data from custody banks regarding accounts and positions. The API is designed to be used for either
+    update end of day data batches or single near-realtime account/position information. Furthermore, this API allows the user to receive
+    data from custody banks regarding transactions.
   contact:
     email: openwealth@synpulse.com
   license:
@@ -32,7 +35,8 @@ paths:
         - customers
       summary: Returns all customers (business partners) accessible for the logged in user
       description: |
-        This endpoint returns a highlevel list of customers accessible for the logged in user. Paging is done based on the customer object, i.e. if limit is set to 1, then 1 customer will be returned per page.
+        This endpoint returns a highlevel list of customers accessible for the logged in user. Paging is done based on the customer object,
+        i.e. if limit is set to 1, then 1 customer will be returned per page.
       operationId: getCustomers
       parameters:
         - $ref: '#/components/parameters/cursor'
@@ -110,7 +114,8 @@ paths:
         - accounts
       summary: Returns the accounts for a specific customer accessible to the querying user
       description: |
-        Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1, then 1 account will be returned per page.
+        Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1,
+        then 1 account will be returned per page.
       operationId: getCustomerAccountsByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
@@ -192,7 +197,8 @@ paths:
         - positions
       summary: Returns the positions for a specific customer
       description: |
-        Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
+        Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1,
+        then 1 position will be returned per page.
       operationId: getCustomerPositionByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
@@ -275,7 +281,8 @@ paths:
         - positions
       summary: Returns the positions for a specific account
       description: |
-        Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1, then 1 position will be returned per page.
+        Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1,
+        then 1 position will be returned per page.
       operationId: getAccountPositionByAccountId
       parameters:
         - $ref: '#/components/parameters/path_accountId'
@@ -358,7 +365,8 @@ paths:
         - transactions
       summary: Returns a transactions for a specific customer
       description: |
-        Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1, then 1 transaction will be returned per page.
+        Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1,
+        then 1 transaction will be returned per page.
       operationId: getTransactionByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
@@ -526,7 +534,8 @@ components:
         type:
           type: string
           description: |
-            Indicates the type of the account. If the account type is cashAccount, no information on the financial instrument is provided in the respective position in the account.
+            Indicates the type of the account. If the account type is cashAccount, no information on the financial instrument is
+            provided in the respective position in the account.
           example: cashAccount
           enum:
             - cashAccount
@@ -536,7 +545,8 @@ components:
           type: string
           maxLength: 70
           description: |
-            Name of the account. It provides an additional means of identification, and is designated by the account servicer in agreement with the account owner.
+            Name of the account. It provides an additional means of identification, and is designated by the account servicer in
+            agreement with the account owner.
           example: Household account
         referenceCurrency:
           $ref: '#/components/schemas/Currency'
@@ -618,7 +628,9 @@ components:
       title: CFICode
       type: string
       description: |
-        Indicates the type of the financial instrument. Must follow the ISO 10962, which is also known as CFI (classification of financial instruments). At least indicate the CFI Category (1st character) and the CFI Group (2nd character). The CFI attributes 1-4 (3rd to 6th character in the string) are optional.
+        Indicates the type of the financial instrument. Must follow the ISO 10962, which is also known as CFI (classification of
+        financial instruments). At least indicate the CFI Category (1st character) and the CFI Group (2nd character). The CFI
+        attributes 1-4 (3rd to 6th character in the string) are optional.
       pattern: '^[A-Z]{2,6}$'
       minLength: 2
       maxLength: 6
@@ -651,7 +663,8 @@ components:
         hasFactor:
           type: boolean
           description: |
-            Indicates if there is a factor present for this financial instrument. If this indicator is set to TRUE, but the factor attribute is not present, might indicate, that the factor cannot be delivered or is currently not available.
+            Indicates if there is a factor present for this financial instrument. If this indicator is set to TRUE, but the factor
+            attribute is not present, might indicate, that the factor cannot be delivered or is currently not available.
           example: true
         factor:
           type: number
@@ -820,7 +833,8 @@ components:
               $ref: '#/components/schemas/InterestRate'
             maturityDate:
               description: |
-                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+                is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
             issueDate:
               description: Date at which the security was made available.
@@ -844,13 +858,16 @@ components:
     Equity:
       title: Equity
       description: |
-        Equity, typically referred to as shareholders' equity (or owners' equity for privately held companies), represents the amount of money that would be returned to a company's shareholders if all of the assets were liquidated and all of the company's debt was paid off in the case of liquidation.
+        Equity, typically referred to as shareholders' equity (or owners' equity for privately held companies), represents the amount
+        of money that would be returned to a company's shareholders if all of the assets were liquidated and all of the company's debt
+        was paid off in the case of liquidation.
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
     Fund:
       title: Fund
       description: |
-        An investment fund is a supply of capital belonging to numerous investors used to collectively purchase securities while each investor retains ownership and control of his own shares.
+        An investment fund is a supply of capital belonging to numerous investors used to collectively purchase securities while each
+        investor retains ownership and control of his own shares.
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
     Index:
@@ -890,7 +907,8 @@ components:
     Option:
       title: Option
       description: |
-        An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying asset at a predetermined price within a given time frame.
+        An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying
+        asset at a predetermined price within a given time frame.
       required:
         - underlyingFinancialInstrument
       allOf:
@@ -899,7 +917,8 @@ components:
           properties:
             expiryDate:
               description: |
-                Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
+                Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
+                date at which it becomes due and has to be repaid.
               $ref: '#/components/schemas/Date'
             exercisePrice:
               description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
@@ -923,7 +942,8 @@ components:
           properties:
             expiryDate:
               description: |
-                Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date at which it becomes due and has to be repaid.
+                Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
+                date at which it becomes due and has to be repaid.
               $ref: '#/components/schemas/Date'
             contractSize:
               $ref: '#/components/schemas/ContractSize'
@@ -965,12 +985,14 @@ components:
               $ref: '#/components/schemas/CurrencyAmount'
             maturityDate:
               description: |
-                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+                is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
     FxSwap:
       title: FxSwap
       description: |
-        A foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency for interest payments on a loan made in another currency.
+        A foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency
+        for interest payments on a loan made in another currency.
       required:
         - nearAmountPaid
         - nearAmountReceived
@@ -999,7 +1021,8 @@ components:
               $ref: '#/components/schemas/Date'
             maturityDate:
               description: |
-                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+                is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
     DateTime:
       title: DateTime
@@ -1010,7 +1033,8 @@ components:
     FxOption:
       title: FxOption
       description: |
-        An FX option is a contract that gives the buyer the right, but not the obligation, to buy or sell a certain currency at a specified exchange rate on or before a specified date. For this right, a premium is paid to the seller.
+        An FX option is a contract that gives the buyer the right, but not the obligation, to buy or sell a certain currency at a
+        specified exchange rate on or before a specified date. For this right, a premium is paid to the seller.
       required:
         - expiryDateTime
         - underlyingAmount
@@ -1021,15 +1045,18 @@ components:
           properties:
             expiryDateTime:
               description: |
-                Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the date/time at which it becomes due and has to be repaid.
+                Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
+                date/time at which it becomes due and has to be repaid.
               $ref: '#/components/schemas/DateTime'
             underlyingAmount:
               description: |
-                This field specifies the underlying currency and amount of the contract. The underlying currency is the currency which is to be exchanged for the counter currency.
+                This field specifies the underlying currency and amount of the contract. The underlying currency is the currency which
+                is to be exchanged for the counter currency.
               $ref: '#/components/schemas/CurrencyAmount'
             counterAmount:
               description: |
-                This field specifies the counter currency and amount of the contract. The counter currency is the currency which is to be exchanged for the underlying currency.
+                This field specifies the counter currency and amount of the contract. The counter currency is the currency
+                which is to be exchanged for the underlying currency.
               $ref: '#/components/schemas/CurrencyAmount'
             premium:
               $ref: '#/components/schemas/CurrencyAmount'
@@ -1091,12 +1118,14 @@ components:
               $ref: '#/components/schemas/InterestRate'
             maturityDate:
               description: |
-                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+                is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
     InterestRateSwap:
       title: InterestRateSwap
       description: |
-        An interest rate swap is a forward contract in which one stream of future interest payments is exchanged for another based on a specified principal amount.
+        An interest rate swap is a forward contract in which one stream of future interest payments is exchanged for another based
+        on a specified principal amount.
       required:
         - notionalAmount
         - interestRatePaid
@@ -1116,12 +1145,15 @@ components:
               $ref: '#/components/schemas/InterestRate'
             maturityDate:
               description: |
-                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+                is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
     TotalReturnSwap:
       title: TotalReturnSwap
       description: |
-        A swap agreement in which Party A pays fees to Party B in exchange for the income or return generated by an asset owned by Party B. If the private client is party A and the bank party B the property 'interestRatePaid' should be used to describe the interest, for opposite parties 'interestRateReceived'.
+        A swap agreement in which Party A pays fees to Party B in exchange for the income or return generated by an asset owned by
+        Party B. If the private client is party A and the bank party B the property 'interestRatePaid' should be used to describe
+        the interest, for opposite parties 'interestRateReceived'.
       required:
         - notionalAmount
         - underlyingFinancialInstrument
@@ -1140,7 +1172,8 @@ components:
               $ref: '#/components/schemas/InterestRate'
             maturityDate:
               description: |
-                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+                is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
             underlyingFinancialInstrument:
               $ref: '#/components/schemas/FinancialInstrument'
@@ -1158,7 +1191,8 @@ components:
               $ref: '#/components/schemas/CurrencyAmount'
             maturityDate:
               description: |
-                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal is repaid by the issuer to the investor.
+                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+                is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
             underlyingFinancialInstrument:
               $ref: '#/components/schemas/FinancialInstrument'
@@ -1411,7 +1445,8 @@ components:
           type: string
           maxLength: 4
           description: |
-            Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code. Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
+            Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
+            Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
           example: XSWX
         marketDescription:
           type: string
@@ -1465,7 +1500,7 @@ components:
           description: |
             Date when the movement was confirmed in the custodians ledger. 
             This typically corresponds with the booking date (or posting date) by the bank.
-            Note that balances of end of day positions should be consistent with the aggregation of movements up to the particular date
+            Note that balances of end of day positions should be consistent with the aggregation of movements up to the particular date.
           $ref: '#/components/schemas/Date'
         financialInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
@@ -1548,7 +1583,8 @@ components:
         reference:
           type: string
           description: |
-            Transaction reference as used in the transaction statement. This could be equal to the id of the transaction but may not if GUID are used to identify the transaction.
+            Transaction reference as used in the transaction statement. This could be equal to the id of the transaction
+            but may not if GUID are used to identify the transaction.
           example: XS12345678
         description:
           type: string
