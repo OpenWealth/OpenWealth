@@ -2,7 +2,7 @@ type: object
 properties:
   sourceCurrency:
     description: Currency of the amount to be converted in a currency conversion.
-    $ref: '../../../Globals/V2/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/currency.yaml'
   rate:
     type: string
     pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
@@ -13,7 +13,7 @@ properties:
       source currency is GBP and the target currency is EUR.
   targetCurrency:
     description: Currency into which an amount is to be converted in a currency conversion.
-    $ref: '../../../Globals/V2/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/currency.yaml'
   fxType:
     type: string
     description: Defines, if the indicated fx rate includes (costPrice) or excludes (dealPrice) fees and taxes.
