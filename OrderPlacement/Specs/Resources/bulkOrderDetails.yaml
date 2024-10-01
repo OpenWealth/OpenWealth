@@ -29,7 +29,7 @@ properties:
   placeOfTrade:
     $ref: '../Types/placeOfTrade.yaml'
   currency:
-    $ref: '../../../Globals/V2/Types/Currency.yaml'
+    $ref: '../../../Globals/V2/Types/currency.yaml'
   executionType:
     type: string
     description: Type of the execution of the order.
