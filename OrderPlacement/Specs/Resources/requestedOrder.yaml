@@ -20,6 +20,11 @@ properties:
     description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
     example: 321-321321
     readOnly: true
+  quoteIdentification:
+    type: string
+    example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+    description: Unique identifier of quote that corresponds to given order. Use together with executionTYpe "previouslyQuoted"
+    maxLength: 36
   bulkOrderDetails:
     $ref: 'bulkOrderDetails.yaml'
   requestedAllocationList:
