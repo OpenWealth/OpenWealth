@@ -15,3 +15,10 @@ properties:
   amount:
     description: Quantity to be allocated to specific safekeeping account
     $ref: 'amount.yaml'
+  swapNearQuantity:
+    description: quantity for near leg of swap to be allocated to specific safekeeping account, for FX currency swap only
+    $ref: 'orderQuantity.yaml'
+  swapFarQuantity:
+    description: quantity of far leg of swap to be allocated to specific safekeeping account, for FX currency swap only
+    $ref: 'orderQuantity.yaml'
+

@@ -48,6 +48,8 @@ properties:
       - timeInForceAndExpiryDateInconsistent
       - valueTooHigh
       - wrongDenomination
+      - quoteExpired
+      - quoteNotFound
       - other
     example: endOfLife
   proprietary:

@@ -1,0 +1,24 @@
+type: object
+required:
+  - quoteIdentification
+  - quoteRequestIdentification
+  - quotePrice
+  - expiryDateTime
+properties:
+  quoteRequestIdentification:
+    type: string
+    example: dc94b287-39fc-45d6-8b74-c8c08662df7b
+    description: Unique identifier of quote request to which this quote corresponds
+    maxLength: 36
+  quoteIdentification:
+    type: string
+    example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+    description: Unique identifier of given quote
+    maxLength: 36
+  quotePrice:
+    $ref: '../Types/quotePrice.yaml'
+  expiryDateTime:
+    type: string
+    format: date-time
+    example: 2018-04-13T11:11:11Z
+    description: Timestamp of the quote expiration.

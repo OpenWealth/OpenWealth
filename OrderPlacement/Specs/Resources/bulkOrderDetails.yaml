@@ -39,6 +39,7 @@ properties:
       - limit
       - stop
       - stopLimit
+      - previouslyQuoted
   limitPrice:
     description: Limit price per unit of quantity (e.g. per share)
     $ref: '../Types/limitPrice.yaml'

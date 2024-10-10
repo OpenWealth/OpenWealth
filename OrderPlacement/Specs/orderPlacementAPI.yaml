@@ -28,6 +28,8 @@ tags:
     description: Order placement operations.
   - name: orderstatus
     description: Order status operations.
+  - name: quote
+    description: Quote request and quote related information.
 
 security: []
 
@@ -450,6 +452,46 @@ paths:
                   $ref: 'Resources/notificationOrderPlacement.yaml'
         '404':
           $ref: '../../Globals/V2/Responses/404.yaml'
+
+  /quote:
+    post:
+      tags:
+        - quote
+      summary: Request quote for an FX or crypto product
+      description: Request quote an FX or crypto product
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'Resources/quoteRequest.yaml'
+      responses:
+        '200':
+          description: Returns quote for the given request.
+          headers:
+            X-Correlation-ID:
+              $ref: '../../Globals/V2/Headers/X-Correlation-ID.yaml'
+          content:
+            application/json:
+              schema:
+                $ref: 'Resources/quote.yaml'
+        '400':
+          $ref: '../../Globals/V2/Responses/400.yaml'
+        '401':
+          $ref: '../../Globals/V2/Responses/401.yaml'
+        '403':
+          $ref: '../../Globals/V2/Responses/403.yaml'
+        '404':
+          $ref: '../../Globals/V2/Responses/404.yaml'
+        '405':
+          $ref: '../../Globals/V2/Responses/405.yaml'
+        '500':
+          $ref: '../../Globals/V2/Responses/500.yaml'
+        '501':
+          $ref: '../../Globals/V2/Responses/501.yaml'
+        '503':
+          $ref: '../../Globals/V2/Responses/503.yaml'
 
 components:
   ###############
