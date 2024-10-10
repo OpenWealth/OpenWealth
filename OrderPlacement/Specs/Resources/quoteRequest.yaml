@@ -8,11 +8,6 @@ required:
   - orderQuantity
   - requestedAllocationList
 properties:
-  quoteRequestIdentification:
-    type: string
-    example: dc94b287-39fc-45d6-8b74-c8c08662df7b
-    description: Unique identifier of given quote request
-    maxLength: 36
   listing:
     baseInstrument:
       description: Base instrument of the listing, EUR in case of EUR/USD, ETH in case of ETH/USD, ETH/BTC
