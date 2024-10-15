@@ -1,0 +1,7 @@
+type: string
+description: Type of contract corresponding to the requested quote.
+example: forward
+enum:
+  - forward
+  - swap
+  - spot

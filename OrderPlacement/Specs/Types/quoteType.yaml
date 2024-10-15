@@ -1,0 +1,5 @@
+description: Type of quote. Tradeable quote is supposed to result directly in a trade. An indicative quote does nto result directly in a trade
+type: string
+enum:
+  - tradeable
+  - indicative

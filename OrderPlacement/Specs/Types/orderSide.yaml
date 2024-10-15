@@ -1,0 +1,6 @@
+type: string
+description: Side taken by a party on an order. The side is considered from the client's perspective and relates to the baseInstrument. If the side is set to buy, it equals the purchase of the baseInstrument. Conversely, if the side is set to sell, it equals the sale of the baseInstrument. For swap, the side always refers to the near leg.
+example: buy
+enum:
+  - buy
+  - sell

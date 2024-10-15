@@ -1,19 +1,65 @@
 type: object
 required:
   - quoteIdentification
-  - quoteRequestIdentification
-  - quotePrice
+  - listing
+  - contractType
   - expiryDateTime
+  - quoteType
+  - side
 properties:
   quoteIdentification:
     type: string
     example: 6dca5123-e370-4272-8ef4-68d421f52f6e
     description: Unique identifier of given quote
     maxLength: 36
-  quotePrice:
-    $ref: '../Types/quotePrice.yaml'
+  listing:
+    baseInstrument:
+      description: Base instrument of the listing, EUR in case of EUR/USD, ETH in case of ETH/USD, ETH/BTC
+      $ref: '../Types/financialInstrumentDetails.yaml'
+    quoteInstrument:
+      description: Quote instrument of the listing, USD in case of EUR/USD, USD or BTC in case of ETH/USD, ETH/BTC
+      $ref: '../Types/financialInstrumentDetails.yaml'
+  contractType:
+    $ref: '../Types/contractType.yaml'
   expiryDateTime:
     type: string
     format: date-time
     example: 2018-04-13T11:11:11Z
     description: Timestamp of the quote expiration.
+  orderQuantity:
+    description: Total quantity of the order to be quoted, for forward and spot orders
+    $ref: '../Types/orderQuantity.yaml'
+  quoteType:
+    $ref: '../Types/quoteType.yaml'
+  quotePrice:
+    description: Rate for order with requested parameters, for spot and forward contracts
+    $ref: '../Types/quotePrice.yaml'
+  settlementDate:
+    description: Settlement date, for spot and forward contracts.
+    $ref: '../../../Globals/V2/Types/dateTime.yaml'
+  side:
+    $ref: '../Types/orderSide.yaml'
+  swapFarPrice:
+    description: Rate for far leg, for swap contracts
+    $ref: '../Types/quotePrice.yaml'
+  swapFarQuantity:
+    description: Total quantity of far leg of swap, for FX currency swap
+    $ref: '../Types/orderQuantity.yaml'
+  swapFarSettlementDate:
+    description: Settlement date for far leg of swap, FX swap
+    $ref: '../../../Globals/V2/Types/dateTime.yaml'
+  swapNearPrice:
+    description: Rate for near leg, for swap contracts
+    $ref: '../Types/quotePrice.yaml'
+  swapNearQuantity:
+    description: Total quantity for near leg of swap, for FX currency swap
+    $ref: '../Types/orderQuantity.yaml'
+  swapNearSettlementDate:
+    description: Settlement date for near leg of swap, for FX swap
+    $ref: '../../../Globals/V2/Types/dateTime.yaml'
+  requestedAllocationsList:
+    type: array
+    items:
+      $ref: '../Types/requestedAllocation.yaml'
+  unitReference:
+    $ref: '../Types/unitReference.yaml'

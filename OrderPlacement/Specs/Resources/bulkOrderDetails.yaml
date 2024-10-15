@@ -1,20 +1,13 @@
 required:
   - side
   - orderQuantity
-  - financialInstrumentDetails
-  - currency
   - executionType
   - timeInForce
   - numberOfAllocations
 type: object
 properties:
   side:
-    type: string
-    description: Side taken by a party on an order.
-    example: buy
-    enum:
-      - buy
-      - sell
+    $ref: '../Types/orderSide.yaml'
   orderQuantity:
     $ref: '../Types/orderQuantity.yaml'
   displayQuantity:
@@ -71,3 +64,5 @@ properties:
     maxLength: 128
     description: Provides additional details on the order which can not be included within the structured fields of the message.
     example: at pre Market and today
+  unitReference:
+    $ref: '../Types/unitReference.yaml'
