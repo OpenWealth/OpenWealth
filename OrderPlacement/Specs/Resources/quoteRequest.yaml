@@ -8,12 +8,8 @@ required:
   - unitReference
 properties:
   listing:
-    baseInstrument:
-      description: Base instrument of the listing, EUR in case of EUR/USD, ETH in case of ETH/USD, ETH/BTC
-      $ref: '../Types/financialInstrumentDetails.yaml'
-    quoteInstrument:
-      description: Quote instrument of the listing, USD in case of EUR/USD, USD or BTC in case of ETH/USD, ETH/BTC
-      $ref: '../Types/financialInstrumentDetails.yaml'
+    description: Listing of the product being quoted
+    $ref: '../Types/listing.yaml'
   contractType:
     $ref: '../Types/contractType.yaml'
   orderQuantity:

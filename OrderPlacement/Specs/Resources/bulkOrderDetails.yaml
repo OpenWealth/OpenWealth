@@ -17,12 +17,9 @@ properties:
     format: integer
     example: 5
     description: Indicates number of orders to be combined for average pricing and allocation.
-  financialInstrumentDetails:
-    $ref: '../Types/financialInstrumentDetails.yaml'
-  placeOfTrade:
-    $ref: '../Types/placeOfTrade.yaml'
-  currency:
-    $ref: '../../../Globals/V2/Types/currency.yaml'
+  listing:
+    description: listing of a financial product quoted on a given venue
+    $ref: '../Types/listing.yaml'
   executionType:
     type: string
     description: Type of the execution of the order.

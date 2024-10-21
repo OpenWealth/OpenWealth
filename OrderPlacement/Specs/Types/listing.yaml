@@ -1,0 +1,14 @@
+type: object
+required:
+  - baseInstrument
+  - quoteInstrument
+description: Listing of a financial instrument (baseInstrument) quoted in another instrument (quoteInstrument) at given venue (placeOfTrade)
+properties:
+  baseInstrument:
+    description: Base instrument of the listing, EUR in case of EUR/USD, ETH in case of ETH/USD, ETH/BTC
+    $ref: '../Types/financialInstrumentDetails.yaml'
+  quoteInstrument:
+    description: Quote instrument of the listing, USD in case of EUR/USD, USD or BTC in case of ETH/USD, ETH/BTC
+    $ref: '../Types/financialInstrumentDetails.yaml'
+  placeOfTrade:
+    $ref: '../Types/placeOfTrade.yaml'
