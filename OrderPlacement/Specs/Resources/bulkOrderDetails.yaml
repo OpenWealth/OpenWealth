@@ -64,5 +64,24 @@ properties:
     maxLength: 128
     description: Provides additional details on the order which can not be included within the structured fields of the message.
     example: at pre Market and today
+  contractType:
+    $ref: '../Types/contractType.yaml'
+  quoteType:
+    $ref: '../Types/quoteType.yaml'
+  settlementDate:
+    description: Settlement date, for spot and forward contracts.
+    $ref: '../../../Globals/V2/Types/dateTime.yaml'
+  swapFarQuantity:
+    description: Total quantity of far leg of swap, for FX currency swap
+    $ref: '../Types/orderQuantity.yaml'
+  swapFarSettlementDate:
+    description: Settlement date for far leg of swap, FX swap
+    $ref: '../../../Globals/V2/Types/dateTime.yaml'
+  swapNearQuantity:
+    description: Total quantity for near leg of swap, for FX currency swap
+    $ref: '../Types/orderQuantity.yaml'
+  swapNearSettlementDate:
+    description: Settlement date for near leg of swap, for FX swap
+    $ref: '../../../Globals/V2/Types/dateTime.yaml'
   unitReference:
     $ref: '../Types/unitReference.yaml'

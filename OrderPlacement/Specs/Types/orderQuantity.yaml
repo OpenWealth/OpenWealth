@@ -9,7 +9,7 @@ properties:
   type:
     type: string
     description: Type of the amount.
-    example: unitsNumber
+    example: unit
     enum:
-      - unitsNumber
+      - unit
       - nominal

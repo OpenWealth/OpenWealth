@@ -50,7 +50,7 @@ properties:
       - wrongDenomination
       - quoteExpired
       - quoteNotFound
-      - quoteInconsistentWithOrderParameters
+      - quoteInconsistentWithOrderDetails
       - other
     example: endOfLife
   proprietary:
