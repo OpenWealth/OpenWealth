@@ -25,7 +25,7 @@ properties:
     $ref: '../Types/orderStatus.yaml'
   executedQuantity:
     description: Total quantity (e.g. number of shares) filled.
-    $ref: '../Types/executedQuantity.yaml'
+    $ref: '../Types/orderQuantity.yaml'
   averagePrice:
     description: Calculated average price of all fills on this order.
     $ref: '../Types/averagePrice.yaml'
@@ -33,16 +33,16 @@ properties:
     description: |
       Quantity open for further execution.
       If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
-    $ref: '../Types/remainingQuantity.yaml'
+    $ref: '../Types/orderQuantity.yaml'
   dayExecutedQuantity:
     description: Quantity on an order that has traded today.
-    $ref: '../Types/dayExecutedQuantity.yaml'
+    $ref: '../Types/orderQuantity.yaml'
   dayAveragePrice:
     description: The average price for quantity that has traded today.
     $ref: '../Types/dayAveragePrice.yaml'
   lastQuantity:
     description: Quantity (e.g. shares) bought/sold on this (last) fill.
-    $ref: '../Types/lastQuantity.yaml'
+    $ref: '../Types/orderQuantity.yaml'
   lastPrice:
     description: Price of this (last) fill.
     $ref: '../Types/lastPrice.yaml'

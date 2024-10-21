@@ -1,5 +1,5 @@
 type: object
-description: Ordered quantity.
+description: Type for order quantity.
 required:
   - amount
   - type

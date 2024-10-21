@@ -3,10 +3,10 @@ description: Provides an overview of what quantity has already been allocated to
 properties:
   executedQuantity:
     description: Total quantity (e.g. number of shares) filled.
-    $ref: 'executedQuantity.yaml'
+    $ref: 'orderQuantity.yaml'
   remainingQuantity:
     description: |
       Quantity open for further execution.
       If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0,
       otherwise remainingQuantity = orderQuantity - executedQuantity.
-    $ref: 'remainingQuantity.yaml'
+    $ref: 'orderQuantity.yaml'

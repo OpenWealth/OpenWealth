@@ -9,7 +9,7 @@ properties:
     example: 123-123123
   executedQuantity:
     description: Total quantity (e.g. number of shares) filled.
-    $ref: 'executedQuantity.yaml'
+    $ref: 'orderQuantity.yaml'
   averagePrice:
     description: The average price for quantity that has traded.
     $ref: 'averagePrice.yaml'
