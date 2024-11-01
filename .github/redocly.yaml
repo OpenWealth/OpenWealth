@@ -1,0 +1,118 @@
+# https://redocly.com/docs/cli/rules/built-in-rules/
+# rules based on recommend ruleset of redocly (https://redocly.com/docs/cli/rules/recommended/)
+# comments show the default value in the recommended ruleset, if not specified the rule was turned off
+
+plugins:
+  - redocly/redocly_iso_rules.js
+  - redocly/redocly_sfti_rules.js
+
+rules:
+  # special rules
+  no-unresolved-refs: error
+  no-unused-components: warn
+  security-defined: error
+  spec: error
+  spec-components-invalid-map-name: error
+  spec-strict-refs: error #
+
+  # info
+  info-contact: error #
+  info-license: error # warn
+  info-license-url: error # warn
+
+  # operations
+  operation-2xx-response: warn
+  operation-4xx-response: warn
+  operation-4xx-problem-details-rfc7807: error #
+  operation-description: warn # <--
+  operation-operationId: off # warn
+  operation-operationId-unique: error
+  operation-operationId-url-safe: error
+  operation-summary: error
+
+  # parameters
+  boolean-parameter-prefixes: off
+  no-invalid-parameter-examples: error #
+  operation-parameters-unique: error
+  parameter-description: warn # <--
+  path-declaration-must-exist: error
+  path-not-include-query: error
+  path-parameters-defined: error
+
+  # paths
+  no-ambiguous-paths: warn #
+  no-http-verbs-in-paths: error #
+  no-identical-paths: error
+  no-path-trailing-slash: error
+  path-excludes-patterns: off
+  path-segment-plural:
+    severity: error
+    ignoreLastPathSegment: true
+    exceptions:
+      - iso20022
+      - status
+  paths-kebab-case: error #
+
+  # Requests, Responses, and Schemas
+  no-enum-type-mismatch: error
+  no-example-value-and-externalValue: error
+  no-invalid-media-type-examples: off
+  no-invalid-schema-examples: error #
+  request-mime-type:
+    severity: warn
+    allowedValues:
+      - application/json
+      - application/xml
+      - multipart/form-data
+  response-mime-type:
+    severity: warn
+    allowedValues:
+      - application/json
+      - application/problem+json
+      - application/xml
+      - application/pdf
+  response-contains-header: off #
+  response-contains-property: off
+  scalar-property-missing-example: off
+  required-string-property-missing-min-length: off
+
+  # servers
+  no-empty-servers: error
+  no-server-example.com: warn
+  no-server-trailing-slash: error
+  no-server-variables-empty-enum: error
+  no-undefined-server-variable: error
+
+  # tags
+  operation-singular-tag: error #
+  operation-tag-defined: error #
+  tag-description: warn
+  tags-alphabetical: off
+
+  # custom rules
+  # iso/request-body-keys: error
+  iso/data-types: error
+
+  sfti/root-object-order: error
+  sfti/openapi-version:
+    severity: error
+    versions:
+      - '3.0.0'
+      - '3.0.1'
+      - '3.0.3'
+      - '3.1.0'
+  sfti/info-content: error
+  sfti/external-docs: error
+  sfti/component-order: error
+  # sfti/parameter-name-order: error
+  sfti/parameter-object-order: error
+  # sfti/use-ref-when-used-multiple-times: warn
+
+  sfti/info-description: error
+  sfti/tag-description: error
+  sfti/parameter-description: error
+  sfti/schema-description: error
+
+  sfti/path-parameter: error
+  sfti/header-parameter: error
+  sfti/query-parameter: error
