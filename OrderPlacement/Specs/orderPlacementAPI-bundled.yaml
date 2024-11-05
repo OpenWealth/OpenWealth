@@ -23,6 +23,8 @@ tags:
     description: Order placement operations.
   - name: orderstatus
     description: Order status operations.
+  - name: quote
+    description: Quote request and quote related information.
 externalDocs:
   description: Find out more about OpenWealth API specifications.
   url: https://openwealth.ch
@@ -442,6 +444,45 @@ paths:
                   $ref: '#/components/schemas/notificationOrderPlacement'
         '404':
           $ref: '#/components/responses/404'
+  /quote:
+    post:
+      tags:
+        - quote
+      summary: Request quote for an FX or crypto product
+      description: Request quote an FX or crypto product
+      parameters:
+        - $ref: '#/components/parameters/correlation_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quoteRequest'
+      responses:
+        '200':
+          description: Returns quote for the given request.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quote'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
 components:
   parameters:
     limit:
@@ -517,6 +558,13 @@ components:
       format: date-time
       example: '2018-04-13T11:11:11Z'
       description: Date and time of the statement creation (UTC Timestamp). In accordance with ISO 8601.
+    orderSide:
+      type: string
+      description: Side taken by a party on an order. The side is considered from the client's perspective and relates to the baseInstrument. If the side is set to buy, it equals the purchase of the baseInstrument. Conversely, if the side is set to sell, it equals the sale of the baseInstrument. For swap, the side always refers to the near leg.
+      example: buy
+      enum:
+        - buy
+        - sell
     amount:
       type: string
       pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
@@ -526,15 +574,18 @@ components:
     orderQuantity:
       type: object
       description: Ordered quantity.
+      required:
+        - amount
+        - type
       properties:
         amount:
           $ref: '#/components/schemas/amount'
         type:
           type: string
           description: Type of the amount.
-          example: unitsNumber
+          example: unit
           enum:
-            - unitsNumber
+            - unit
             - nominal
     financialInstrumentDetails:
       type: object
@@ -570,6 +621,8 @@ components:
                 - sicovam
                 - belgian
                 - common
+                - cryptocurrency
+                - iso4217
                 - otherProprietaryIdentification
     placeOfTrade:
       type: object
@@ -586,7 +639,7 @@ components:
           type: string
           description: Description of the market when no Market Identification Code is available.
           example: OTC
-    Currency:
+    currency:
       title: Currency
       type: string
       description: ISO 4217 code
@@ -609,6 +662,32 @@ components:
       type: string
       format: date-time
       example: 2018-04-13T16:00+01:00
+    contractType:
+      type: string
+      description: Type of contract corresponding to the requested quote.
+      example: forward
+      enum:
+        - forward
+        - swap
+        - spot
+    quoteType:
+      description: Type of quote. Tradeable quote is supposed to result directly in a trade. An indicative quote does nto result directly in a trade
+      type: string
+      enum:
+        - tradeable
+        - indicative
+    quotePrice:
+      type: string
+      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
+      maxLength: 22
+      description: Quote price (rate), part of response to a quote request
+      example: '1.8567'
+    unitReference:
+      type: string
+      description: indicates whether the order quantity is expressed in base instrument or quote instrument. BaseInstrument by default. For swap, the unitReference always reference to nearLeg
+      enum:
+        - baseInstrument
+        - quoteInstrument
     bulkOrderDetails:
       required:
         - side
@@ -621,12 +700,7 @@ components:
       type: object
       properties:
         side:
-          type: string
-          description: Side taken by a party on an order.
-          example: buy
-          enum:
-            - buy
-            - sell
+          $ref: '#/components/schemas/orderSide'
         orderQuantity:
           $ref: '#/components/schemas/orderQuantity'
         displayQuantity:
@@ -641,7 +715,7 @@ components:
         placeOfTrade:
           $ref: '#/components/schemas/placeOfTrade'
         currency:
-          $ref: '#/components/schemas/Currency'
+          $ref: '#/components/schemas/currency'
         executionType:
           type: string
           description: Type of the execution of the order.
@@ -651,6 +725,7 @@ components:
             - limit
             - stop
             - stopLimit
+            - previouslyQuoted
         limitPrice:
           description: Limit price per unit of quantity (e.g. per share)
           $ref: '#/components/schemas/limitPrice'
@@ -682,6 +757,29 @@ components:
           maxLength: 128
           description: Provides additional details on the order which can not be included within the structured fields of the message.
           example: at pre Market and today
+        contractType:
+          $ref: '#/components/schemas/contractType'
+        quoteType:
+          $ref: '#/components/schemas/quoteType'
+        quotePrice:
+          $ref: '#/components/schemas/quotePrice'
+        settlementDate:
+          description: Settlement date, for spot and forward contracts.
+          $ref: '#/components/schemas/dateTime'
+        swapFarQuantity:
+          description: Total quantity of far leg of swap, for FX currency swap
+          $ref: '#/components/schemas/orderQuantity'
+        swapFarSettlementDate:
+          description: Settlement date for far leg of swap, FX swap
+          $ref: '#/components/schemas/dateTime'
+        swapNearQuantity:
+          description: Total quantity for near leg of swap, for FX currency swap
+          $ref: '#/components/schemas/orderQuantity'
+        swapNearSettlementDate:
+          description: Settlement date for near leg of swap, for FX swap
+          $ref: '#/components/schemas/dateTime'
+        unitReference:
+          $ref: '#/components/schemas/unitReference'
     account:
       type: object
       properties:
@@ -716,6 +814,12 @@ components:
         amount:
           description: Quantity to be allocated to specific safekeeping account
           $ref: '#/components/schemas/amount'
+        swapNearQuantity:
+          description: quantity for near leg of swap to be allocated to specific safekeeping account, for FX currency swap only
+          $ref: '#/components/schemas/orderQuantity'
+        swapFarQuantity:
+          description: quantity of far leg of swap to be allocated to specific safekeeping account, for FX currency swap only
+          $ref: '#/components/schemas/orderQuantity'
     allocationCancellationReason:
       type: object
       properties:
@@ -803,7 +907,7 @@ components:
       properties:
         sourceCurrency:
           description: Currency of the amount to be converted in a currency conversion.
-          $ref: '#/components/schemas/Currency'
+          $ref: '#/components/schemas/currency'
         rate:
           type: string
           pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
@@ -814,7 +918,7 @@ components:
             source currency is GBP and the target currency is EUR.
         targetCurrency:
           description: Currency into which an amount is to be converted in a currency conversion.
-          $ref: '#/components/schemas/Currency'
+          $ref: '#/components/schemas/currency'
         fxType:
           type: string
           description: Defines, if the indicated fx rate includes (costPrice) or excludes (dealPrice) fees and taxes.
@@ -837,17 +941,11 @@ components:
         amount:
           $ref: '#/components/schemas/amount'
         currency:
-          $ref: '#/components/schemas/Currency'
+          $ref: '#/components/schemas/currency'
         creditDebitIndicator:
           $ref: '#/components/schemas/creditDebitIndicator'
         foreignExchangeRate:
           $ref: '#/components/schemas/foreignExchangeRate'
-    currency:
-      title: Currency
-      type: string
-      description: ISO 4217 code
-      pattern: ^[A-Z]{3}$
-      example: CHF
     accruedInterest:
       type: object
       properties:
@@ -1052,6 +1150,9 @@ components:
             - timeInForceAndExpiryDateInconsistent
             - valueTooHigh
             - wrongDenomination
+            - quoteExpired
+            - quoteNotFound
+            - quoteInconsistentWithOrderDetails
             - other
           example: endOfLife
         proprietary:
@@ -1217,6 +1318,11 @@ components:
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
           example: 321-321321
           readOnly: true
+        quoteIdentification:
+          type: string
+          example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+          description: Unique identifier of quote that corresponds to given order. Use together with executionTYpe "previouslyQuoted"
+          maxLength: 36
         bulkOrderDetails:
           $ref: '#/components/schemas/bulkOrderDetails'
         requestedAllocationList:
@@ -1370,6 +1476,119 @@ components:
         lastPrice:
           description: Price of this (last) fill.
           $ref: '#/components/schemas/lastPrice'
+    quoteRequest:
+      type: object
+      required:
+        - contractType
+        - listing
+        - quoteType
+        - requestedAllocationList
+        - side
+        - unitReference
+      properties:
+        listing:
+          baseInstrument:
+            description: Base instrument of the listing, EUR in case of EUR/USD, ETH in case of ETH/USD, ETH/BTC
+            $ref: ../Types/financialInstrumentDetails.yaml
+          quoteInstrument:
+            description: Quote instrument of the listing, USD in case of EUR/USD, USD or BTC in case of ETH/USD, ETH/BTC
+            $ref: ../Types/financialInstrumentDetails.yaml
+        contractType:
+          $ref: '#/components/schemas/contractType'
+        orderQuantity:
+          description: Total quantity of the order to be quoted, for forward and spot orders
+          $ref: '#/components/schemas/orderQuantity'
+        quoteType:
+          $ref: '#/components/schemas/quoteType'
+        settlementDate:
+          description: Settlement date, for spot and forward contracts.
+          $ref: '#/components/schemas/dateTime'
+        side:
+          $ref: '#/components/schemas/orderSide'
+        swapFarQuantity:
+          description: Total quantity of far leg of swap, for FX currency swap
+          $ref: '#/components/schemas/orderQuantity'
+        swapFarSettlementDate:
+          description: Settlement date for far leg of swap, FX swap
+          $ref: '#/components/schemas/dateTime'
+        swapNearQuantity:
+          description: Total quantity for near leg of swap, for FX currency swap
+          $ref: '#/components/schemas/orderQuantity'
+        swapNearSettlementDate:
+          description: Settlement date for near leg of swap, for FX swap
+          $ref: '#/components/schemas/dateTime'
+        requestedAllocationsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/requestedAllocation'
+        unitReference:
+          $ref: '#/components/schemas/unitReference'
+    quote:
+      type: object
+      required:
+        - quoteIdentification
+        - listing
+        - contractType
+        - expiryDateTime
+        - quoteType
+        - side
+      properties:
+        quoteIdentification:
+          type: string
+          example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+          description: Unique identifier of given quote
+          maxLength: 36
+        listing:
+          baseInstrument:
+            description: Base instrument of the listing, EUR in case of EUR/USD, ETH in case of ETH/USD, ETH/BTC
+            $ref: ../Types/financialInstrumentDetails.yaml
+          quoteInstrument:
+            description: Quote instrument of the listing, USD in case of EUR/USD, USD or BTC in case of ETH/USD, ETH/BTC
+            $ref: ../Types/financialInstrumentDetails.yaml
+        contractType:
+          $ref: '#/components/schemas/contractType'
+        expiryDateTime:
+          type: string
+          format: date-time
+          example: '2018-04-13T11:11:11Z'
+          description: Timestamp of the quote expiration.
+        orderQuantity:
+          description: Total quantity of the order to be quoted, for forward and spot orders
+          $ref: '#/components/schemas/orderQuantity'
+        quoteType:
+          $ref: '#/components/schemas/quoteType'
+        quotePrice:
+          description: Rate for order with requested parameters, for spot and forward contracts
+          $ref: '#/components/schemas/quotePrice'
+        settlementDate:
+          description: Settlement date, for spot and forward contracts.
+          $ref: '#/components/schemas/dateTime'
+        side:
+          $ref: '#/components/schemas/orderSide'
+        swapFarPrice:
+          description: Rate for far leg, for swap contracts
+          $ref: '#/components/schemas/quotePrice'
+        swapFarQuantity:
+          description: Total quantity of far leg of swap, for FX currency swap
+          $ref: '#/components/schemas/orderQuantity'
+        swapFarSettlementDate:
+          description: Settlement date for far leg of swap, FX swap
+          $ref: '#/components/schemas/dateTime'
+        swapNearPrice:
+          description: Rate for near leg, for swap contracts
+          $ref: '#/components/schemas/quotePrice'
+        swapNearQuantity:
+          description: Total quantity for near leg of swap, for FX currency swap
+          $ref: '#/components/schemas/orderQuantity'
+        swapNearSettlementDate:
+          description: Settlement date for near leg of swap, for FX swap
+          $ref: '#/components/schemas/dateTime'
+        requestedAllocationsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/requestedAllocation'
+        unitReference:
+          $ref: '#/components/schemas/unitReference'
   responses:
     '400':
       headers:
