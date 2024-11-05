@@ -1,6 +1,8 @@
 required:
   - side
   - orderQuantity
+  - financialInstrumentDetails
+  - currency
   - executionType
   - timeInForce
   - numberOfAllocations
@@ -68,6 +70,8 @@ properties:
     $ref: '../Types/contractType.yaml'
   quoteType:
     $ref: '../Types/quoteType.yaml'
+  quotePrice:
+    $ref: '../Types/quotePrice.yaml'
   settlementDate:
     description: Settlement date, for spot and forward contracts.
     $ref: '../../../Globals/V2/Types/dateTime.yaml'
