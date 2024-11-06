@@ -6,4 +6,4 @@ allOf:
   - type: object
     properties:
       underlyingFinancialInstrument:
-        $ref: '../FinancialInstrument.yaml'
+        $ref: 'FinancialInstrumentBase.yaml'

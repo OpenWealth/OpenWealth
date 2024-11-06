@@ -1,10 +1,10 @@
 title: Future
 description: Futures are derivative financial contracts that obligate parties to buy or sell an asset at a predetermined future date and price.
-required:
-  - underlyingFinancialInstrument
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
+    required:
+      - underlyingFinancialInstrument
     properties:
       expiryDate:
         description: |
@@ -14,7 +14,7 @@ allOf:
       contractSize:
         $ref: '../../Types/ContractSize.yaml'
       underlyingFinancialInstrument:
-        $ref: '../FinancialInstrument.yaml'
+        $ref: 'FinancialInstrumentBase.yaml'
       exercisePrice:
         description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
         $ref: '../../Types/Price.yaml'

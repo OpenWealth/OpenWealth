@@ -1,10 +1,10 @@
 title: MoneyMarket
 description: The money market schema covers both fixed and callable loans and deposits.
-required:
-  - principalAmount
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
+    required:
+      - principalAmount
     properties:
       principalAmount:
         description: The current amount subject to loan or borrowing on which interest is calculated.

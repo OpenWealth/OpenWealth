@@ -2,13 +2,13 @@ title: InterestRateSwap
 description: |
   An interest rate swap is a forward contract in which one stream of future interest payments is exchanged for another based
   on a specified principal amount.
-required:
-  - notionalAmount
-  - interestRatePaid
-  - interestRateReceived
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
+    required:
+      - notionalAmount
+      - interestRatePaid
+      - interestRateReceived
     properties:
       notionalAmount:
         description: The notional amount serves as the foundation for calculating interest and the returns on an investment.

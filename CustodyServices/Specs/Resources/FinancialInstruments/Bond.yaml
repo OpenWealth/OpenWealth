@@ -29,4 +29,4 @@ allOf:
         description: Indicates the minimum tradable increments of a security.
       underlyingFinancialInstrument:
         description: Financial instrument that would be subject to a conversion.
-        $ref: '../FinancialInstrument.yaml'
+        $ref: 'FinancialInstrumentBase.yaml'

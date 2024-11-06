@@ -1,10 +1,10 @@
 title: Mortgage
 description: A mortgage is a type of loan used to purchase or maintain a home, plot of land, or other types of real estate.
-required:
-  - principalAmount
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
+    required:
+      - principalAmount
     properties:
       principalAmount:
         description: The current amount subject to loan on which interest is calculated.

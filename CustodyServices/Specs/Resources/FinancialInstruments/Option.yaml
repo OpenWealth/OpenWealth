@@ -2,11 +2,11 @@ title: Option
 description: |
   An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying
   asset at a predetermined price within a given time frame.
-required:
-  - underlyingFinancialInstrument
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
+    required:
+      - underlyingFinancialInstrument
     properties:
       expiryDate:
         description: |
@@ -23,4 +23,4 @@ allOf:
       optionStyle:
         $ref: '../../Types/OptionStyle.yaml'
       underlyingFinancialInstrument:
-        $ref: '../FinancialInstrument.yaml'
+        $ref: 'FinancialInstrumentBase.yaml'
