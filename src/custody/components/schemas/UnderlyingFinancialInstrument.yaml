@@ -1,0 +1,34 @@
+title: UnderlyingFinancialInstrument
+description: Undelying financial instrument.
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - properties:
+      initialLevel:
+        decription: |
+          with respect to each Underlying, the relevant Initial Level, which is equal to
+          100% of its Level on the Initial Fixing Date, as determined by the Calculation Agent.
+        $ref: '../../Types/Price.yaml'
+      excercisePrice:
+        description: |
+          An option's strike refers to the investor's buying price (call option) or selling price (put option) of the underlying.
+          For participation and yield enhancement products, the strike defines
+          the reference price of the underlyings of the relevant Structured Product.
+          Barriers, bonus levels and cap levels are based on the reference price.
+        $ref: '../../Types/Price.yaml'
+      barrier:
+        $ref: '../../Types/Barrier.yaml'
+      upperBarrier:
+        $ref: '../../Types/Barrier.yaml'
+      lowerBarrier:
+        $ref: '../../Types/Barrier.yaml'
+      weight:
+        type: number
+      relevantNumber:
+        description: |
+          With respect to each Underlying, the number of such Underlying contained in the Basket on the
+          Final Fixing Date, as determined by the Calculation Agent based on the number specified in the
+          table above of such Underlying contained in the Basket and as may be adjusted due to the
+          Reinvested Dividend Payments during the term of the Products by the Calculation Agent.
+        type: number
+# valuation time?
+

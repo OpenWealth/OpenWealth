@@ -1,0 +1,21 @@
+title: Barrier
+type: object
+description: |
+  Barriers denote a threshold for the price of the underlying. Outperforming or failing to reach
+  the barrier changes the Structured Product’s repayment conditions (payoff).
+required:
+  - amount
+  - currency
+properties:
+  price:
+    description: |
+      Barriers denote a threshold for the price of the underlying.
+      Outperforming or failing to reach the barrier changes the Structured Product's repayment conditions (payoff).
+    $ref: 'Price.yaml'
+  observationType:
+    description: How the barrier event is observed
+    type: string
+    enum:
+      - continuous
+      - atObservationDate
+## barrier observation dates, period

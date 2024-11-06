@@ -1,0 +1,99 @@
+title: Option
+description: |
+  An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying
+  asset at a predetermined price within a given time frame.
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    required:
+      - underlyingFinancialInstrument
+    properties:
+      structureProductType:
+        $ref: '../../Types/StructuredProductType.yaml'
+      nominalAmount:
+        description: |
+          The nominal is a Structured Product's nominal value.
+          Repayment of the product refers to this amount.
+        $ref: '../../Types/CurrencyAmount.yaml'
+      denomination:
+        description: TBD.
+        $ref: '../../Types/CurrencyAmount.yaml'
+      initialFixingDate:
+        description: The date on which the Initial Level and the Strike etc. are fixed.
+        $ref: '../../../../Globals/V3/Types/Date.yaml'
+      issuer:
+        description: Company who issued the Product.
+        type: string
+      issueDate:
+        description: The date on which the Products are issued and the Issue Price is paid.
+        $ref: '../../../../Globals/V3/Types/Date.yaml'
+      issuePrice:
+        description: Price of issuance (typically in percent - 100%).
+        $ref: '../../Types/Price.yaml'
+      maturityDate:
+        description: TBD.
+        $ref: '../../../../Globals/V3/Types/Date.yaml'
+      exercisePrice:
+        description: |
+          An option's strike/exercise Price refers to the investor's buying price (call option) or selling price (put option) of the underlying.
+          For participation and yield enhancement products, the strike defines
+          the reference price of the underlyings of the relevant Structured Product.
+          Barriers, bonus levels and cap levels are based on the reference price.
+        $ref: '../../Types/Price.yaml'
+      cap:
+        description: |
+          Some Structured Products are equipped with a cap. On the one hand, the cap limits the
+          investor's profit potential, but on the other, it allows more attractive conditions with a
+          sideways trend of prices or only slightly rising prices.
+        $ref: '../../Types/Price.yaml'
+      barrier:
+        $ref: '../../Types/Barrier.yaml'
+      upperBarrier:
+        $ref: '../../Types/Barrier.yaml'
+      lowerBarrier:
+        $ref: '../../Types/Barrier.yaml'
+      stopLossPrice:
+        description: TBD.
+        $ref: '../../Types/Price.yaml'
+      interestRateList:
+        description: TBD.
+        items:
+          $ref: '../../Types/InterestRate.yaml'
+      conversionRatio:
+        description: |
+          The number of warrants held by the warrant holder in order to be entitled for one underlying stock.
+        type: number
+      rebate:
+        description: |
+          The payouts made when a barrier has been breached are referred to as rebates, with the
+          amounts expressed as a percentage of the nominal.
+        type: number
+      capitalProtection:
+        description: Percentage of the nominal that is protected (e.g. 100)
+        type: number
+      participation:
+        description: |
+          This indicates to what proportion the investor profits
+          from the price performance of the underlying asset. This
+          can be 1:1, over- or underproportional.
+        type: number
+      quanto:
+        description: TBD.
+        type: boolean
+      settlementType:
+        description: |
+          If a Structured Product reaches the end of its term, it is redeemed in accordance with the
+          payoff diagram defined in the term sheet. The issuer can make the repayment in accordance
+          with the product description (final terms) by physical delivery of the underlying or by cash
+          settlement. In the case of cash settlement, the investor receives the value of the product (at
+          the time of final fixing) in cash on the redemption date.
+        type: string
+        enum:
+          - cash
+          - physical
+      underlyingFinancialInstrument:
+        $ref: 'UnderlyingFinancialInstrument.yaml'
+# down and updside participation, capital protection all in %
+# settlement type -> cash or physical
+# COSI
+# Final fixing date, final redemption date
