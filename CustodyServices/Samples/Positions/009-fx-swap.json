@@ -23,7 +23,8 @@
   },
   "account": {
     "id": "123456-1",
-    "type": "safekeepingAccount"
+    "type": "safekeepingAccount",
+    "referenceCurrency": "CHF"
   },
   "quantity": {
     "type": "unit",

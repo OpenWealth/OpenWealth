@@ -14,7 +14,10 @@
         "type": "otherProprietaryIdentification"
       }
     ],
-    "notionalAmount": 100000,
+    "notionalAmount": {
+      "amount": 100000,
+      "currency": "CHF"
+    },
     "currencyOfDenomination": "CHF",
     "maturityDate": "2023-06-27",
     "interestRateReceived": {
@@ -25,7 +28,7 @@
       "paymentFrequency": "atMaturity"
     },
     "interestRatePaid": {
-      "type": "floating",
+      "type": "variable",
       "spread": 0.2,
       "basis": "LIBOR",
       "dayCountBasis": "act_360",
@@ -51,7 +54,8 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "value": 1200,
@@ -78,7 +82,8 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "value": -1150,
@@ -89,14 +94,15 @@
       "positionCurrency": "CHF"
     }
   ],
-  "postingAmounts": [
+  "postingAmountList": [
     {
       "amount": 50,
       "currency": "CHF",
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       }
     }
   ]

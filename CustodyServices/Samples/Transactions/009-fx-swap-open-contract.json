@@ -67,7 +67,8 @@
       },
       "account": {
         "id": "123456-1",
-        "type": "safekeepingAccount"
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "value": 1,
@@ -92,7 +93,8 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121214"
+        "iban": "CH121212121212121214",
+        "referenceCurrency": "USD"
       },
       "quantity": {
         "type": "unit",
@@ -119,7 +121,8 @@
       "account": {
         "id": "1234-57",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "type": "unit",
@@ -130,14 +133,15 @@
       "currency": "CHF"
     }
   ],
-  "postingAmounts": [
+  "postingAmountList": [
     {
       "amount": 200000,
       "currency": "USD",
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121214"
+        "iban": "CH121212121212121214",
+        "referenceCurrency": "USD"
       }
     },
     {
@@ -146,7 +150,8 @@
       "account": {
         "id": "1234-57",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       }
     }
   ]

@@ -23,7 +23,8 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "value": 500000,
@@ -34,14 +35,15 @@
       "positionCurrency": "CHF"
     }
   ],
-  "postingAmounts": [
+  "postingAmountList": [
     {
       "amount": 500000,
       "currency": "CHF",
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       }
     }
   ]

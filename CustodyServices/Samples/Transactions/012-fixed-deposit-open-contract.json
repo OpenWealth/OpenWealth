@@ -15,7 +15,8 @@
       }
     ],
     "principalAmount": {
-      "amount": 100000
+      "amount": 100000,
+      "currency": "CHF"
     }
   },
   "movementList": [
@@ -32,7 +33,8 @@
           }
         ],
         "principalAmount": {
-          "amount": 100000
+          "amount": 100000,
+          "currency": "CHF"
         },
         "interestRate": {
           "type": "fixed",
@@ -44,7 +46,8 @@
       },
       "account": {
         "id": "123456-1",
-        "type": "safekeepingAccount"
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "value": 1,
@@ -70,11 +73,12 @@
       "account": {
         "id": "1234-58",
         "type": "cashAccount",
-        "iban": "CH121212121212121214"
+        "iban": "CH121212121212121214",
+        "referenceCurrency": "USD"
       },
       "quantity": {
         "value": -100000,
-        "type": "nominal",
+        "type": "unit",
         "creditDebitIndicator": "debit"
       },
       "valueDate": "2022-12-31",
@@ -82,14 +86,15 @@
       "positionCurrency": "USD"
     }
   ],
-  "postingAmounts": [
+  "postingAmountList": [
     {
       "amount": -100000,
       "currency": "USD",
       "account": {
         "id": "1234-58",
         "type": "cashAccount",
-        "iban": "CH121212121212121214"
+        "iban": "CH121212121212121214",
+        "referenceCurrency": "USD"
       }
     }
   ]
