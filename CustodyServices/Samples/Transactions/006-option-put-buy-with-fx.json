@@ -42,7 +42,7 @@
           }
         ],
         "contractSize": 5,
-        "strikePrize": {
+        "exercisePrice": {
           "type": "actual",
           "value": 185,
           "currency": "USD"
