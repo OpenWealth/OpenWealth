@@ -1,0 +1,36 @@
+name: Bundle and lint workflow
+# description: Check specifications for SFTI's openapi rules.
+on:
+  workflow_call:
+    inputs:
+      apiName:
+        description: 'Name of API in scope'
+        type: string
+      commitSha:
+        description: 'The commit SHA subject to the linting'
+        type: string
+
+jobs:
+  lint-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commitSha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
+      # Install Redocly CLI
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli
+
+      # Run the Redocly lint command
+      - name: Run Redocly lint
+        run: |
+          api=${{ inputs.apiName }}
+          apiBundledFile="${api^}/Specs/API-bundled.yaml"
+          redocly lint --config=.github/redocly.yaml --format=stylish $apiBundledFile
