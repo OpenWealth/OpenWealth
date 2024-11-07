@@ -6,19 +6,19 @@
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "triggeringFinancialInstrument": {
-    "type": "Fund",
+    "type": "fund",
     "name": "SILVERH AS L SQ GC",
     "identificationList": [
       {
         "identifier": "LU1336212615",
-        "type": "Isin"
+        "type": "isin"
       }
     ],
     "cfiCode": "CI",
     "currencyOfDenomination": "CHF"
   },
   "triggeringQuantity": {
-    "type": "Unit",
+    "type": "unit",
     "value": 9956.192
   },
   "triggeringPrice": {
@@ -31,22 +31,22 @@
       "type": "asset",
       "movementDate": "2023-04-31",
       "financialInstrument": {
-        "type": "Equity",
+        "type": "equity",
         "name": "FUND PRE-PAYM",
         "identificationList": [
           {
             "identifier": "XF0002897300",
-            "type": "Isin"
+            "type": "isin"
           }
         ],
         "currencyOfDenomination": "CHF",
         "underlyingFinancialInstrument": {
-          "type": "Fund",
+          "type": "fund",
           "name": "SILVERH AS L SQ GC",
           "identificationList": [
             {
               "identifier": "LU1336212615",
-              "type": "Isin"
+              "type": "isin"
             }
           ],
           "cfiCode": "CI",
@@ -55,10 +55,11 @@
       },
       "account": {
         "id": "123456-1",
-        "type": "safekeepingAccount"
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
-        "type": "Unit",
+        "type": "unit",
         "value": -1000000
       },
       "positionId": "pos-006-0",
@@ -68,12 +69,12 @@
       "type": "asset",
       "movementDate": "2023-04-31",
       "financialInstrument": {
-        "type": "Fund",
+        "type": "fund",
         "name": "SILVERH AS L SQ GC",
         "identificationList": [
           {
             "identifier": "LU1336212615",
-            "type": "Isin"
+            "type": "isin"
           }
         ],
         "cfiCode": "CI",
@@ -81,10 +82,11 @@
       },
       "account": {
         "id": "123456-1",
-        "type": "safekeepingAccount"
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
-        "type": "Unit",
+        "type": "unit",
         "value": 9956.192
       },
       "positionId": "pos-006-1",
@@ -99,22 +101,23 @@
       "type": "cash",
       "movementDate": "2023-04-31",
       "financialInstrument": {
-        "type": "Cash",
+        "type": "cash",
         "name": "Swiss franc",
         "identificationList": [
           {
             "identifier": "CHF",
-            "type": "Iso3"
+            "type": "iso3"
           }
         ]
       },
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
-        "type": "Unit",
+        "type": "unit",
         "value": 1000000
       },
       "positionId": "pos-000",
@@ -125,22 +128,23 @@
       "type": "reinvestmentAmount",
       "movementDate": "2023-04-31",
       "financialInstrument": {
-        "type": "Cash",
+        "type": "cash",
         "name": "Swiss franc",
         "identificationList": [
           {
             "identifier": "CHF",
-            "type": "Iso3"
+            "type": "iso3"
           }
         ]
       },
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
-        "type": "Unit",
+        "type": "unit",
         "value": 999999.9
       },
       "positionId": "pos-000",
@@ -151,22 +155,23 @@
       "type": "brokerageFee",
       "movementDate": "2023-04-31",
       "financialInstrument": {
-        "type": "Cash",
+        "type": "cash",
         "name": "Swiss franc",
         "identificationList": [
           {
             "identifier": "CHF",
-            "type": "Iso3"
+            "type": "iso3"
           }
         ]
       },
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
-        "type": "Unit",
+        "type": "unit",
         "value": 1000
       },
       "positionId": "pos-000",
@@ -177,22 +182,23 @@
       "type": "stampDuty",
       "movementDate": "2023-04-31",
       "financialInstrument": {
-        "type": "Cash",
+        "type": "cash",
         "name": "Swiss franc",
         "identificationList": [
           {
             "identifier": "CHF",
-            "type": "Iso3"
+            "type": "iso3"
           }
         ]
       },
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
-        "type": "Unit",
+        "type": "unit",
         "value": 1500
       },
       "positionId": "pos-000",
@@ -203,22 +209,23 @@
       "type": "otherFee",
       "movementDate": "2023-04-31",
       "financialInstrument": {
-        "type": "Cash",
+        "type": "cash",
         "name": "Swiss franc",
         "identificationList": [
           {
             "identifier": "CHF",
-            "type": "Iso3"
+            "type": "iso3"
           }
         ]
       },
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
-        "type": "Unit",
+        "type": "unit",
         "value": 99.75
       },
       "positionId": "pos-000",
@@ -233,7 +240,8 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       }
     }
   ]
