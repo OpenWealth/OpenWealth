@@ -60,6 +60,8 @@ properties:
     $ref: 'FinancialInstrument.yaml'
   triggeringQuantity:
     $ref: '../Types/Quantity.yaml'
+  triggeringPrice:
+    $ref: '../Types/Price.yaml'
   movementList:
     type: array
     description: List of movements belonging to a transaction from a banks perspective.
