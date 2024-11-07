@@ -6,7 +6,7 @@ allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
     required:
-      - underlyingFinancialInstrument
+      - underlyingFinancialInstrumentList
     properties:
       structureProductType:
         $ref: '../../Types/StructuredProductType.yaml'
@@ -91,7 +91,7 @@ allOf:
         enum:
           - cash
           - physical
-      underlyingFinancialInstrument:
+      underlyingFinancialInstrumentList:
         $ref: 'UnderlyingFinancialInstrument.yaml'
 # down and updside participation, capital protection all in %
 # settlement type -> cash or physical
