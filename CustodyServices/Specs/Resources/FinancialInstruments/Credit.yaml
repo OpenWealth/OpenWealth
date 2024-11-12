@@ -16,4 +16,4 @@ allOf:
         example: 100000
         description: Maximum principal amount allowed by the credit contract.
       underlyingFinancialInstrument:
-        $ref: 'FinancialInstrumentBase.yaml'
+        $ref: '../FinancialInstrument.yaml'

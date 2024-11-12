@@ -23,4 +23,4 @@ allOf:
       optionStyle:
         $ref: '../../Types/OptionStyle.yaml'
       underlyingFinancialInstrument:
-        $ref: 'FinancialInstrumentBase.yaml'
+        $ref: '../FinancialInstrument.yaml'

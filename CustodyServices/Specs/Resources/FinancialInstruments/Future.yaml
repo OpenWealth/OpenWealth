@@ -14,7 +14,7 @@ allOf:
       contractSize:
         $ref: '../../Types/ContractSize.yaml'
       underlyingFinancialInstrument:
-        $ref: 'FinancialInstrumentBase.yaml'
+        $ref: '../FinancialInstrument.yaml'
       exercisePrice:
         description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
         $ref: '../../Types/Price.yaml'

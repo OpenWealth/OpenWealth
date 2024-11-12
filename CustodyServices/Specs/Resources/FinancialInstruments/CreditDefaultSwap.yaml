@@ -15,4 +15,4 @@ allOf:
           is repaid by the issuer to the investor.
         $ref: '../../../../Globals/V3/Types/Date.yaml'
       underlyingFinancialInstrument:
-        $ref: 'FinancialInstrumentBase.yaml'
+        $ref: '../FinancialInstrument.yaml'
