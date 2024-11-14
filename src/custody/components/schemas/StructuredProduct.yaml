@@ -11,6 +11,12 @@ allOf:
     properties:
       structureProductType:
         $ref: '../../Types/StructuredProductType.yaml'
+      sspaCode:
+        description: The SSPA (Swiss Structure Product Association) categorization of a structured product.
+        type: string
+      eusipaCode:
+        description: The EUSIPA (European Structure Investment Product Association) categorization of a structured product.
+        type: string
       nominalAmount:
         description: |
           The nominal is a Structured Product's nominal value.
