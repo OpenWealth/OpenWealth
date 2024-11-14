@@ -2,20 +2,45 @@ title: Barrier
 type: object
 description: |
   Barriers denote a threshold for the price of the underlying. Outperforming or failing to reach
-  the barrier changes the Structured Product’s repayment conditions (payoff).
+  the barrier changes the Structured Product's repayment conditions (payoff).
 required:
-  - amount
-  - currency
+  - price
 properties:
   price:
     description: |
       Barriers denote a threshold for the price of the underlying.
       Outperforming or failing to reach the barrier changes the Structured Product's repayment conditions (payoff).
     $ref: 'Price.yaml'
+  barrierType:
+    description: |
+      The barrier type determine whether the option becomes active or inactive based on the underlying asset's price movement.
+    enum:
+      - upAndIn
+      - downAndIn
+      - upAndOut
+      - downAndIn
   observationType:
     description: How the barrier event is observed
     type: string
     enum:
       - continuous
       - atObservationDate
-## barrier observation dates, period
+  observationDates:
+    type: array
+    items:
+      type: string
+      format: date
+  barrierEvent:
+    description: TBD
+    type: string
+    enum:
+      - atOrBelow
+      - atOrAbove
+  underlyingWatchType:
+    description: TBD.
+    type: string
+    enum:
+      - allOf
+      - worstOf
+      - bestOf
+## TODO: barrier observation dates, period

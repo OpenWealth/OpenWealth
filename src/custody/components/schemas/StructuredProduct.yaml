@@ -1,7 +1,7 @@
-title: Option
+title: StructuredProduct
 description: |
-  An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying
-  asset at a predetermined price within a given time frame.
+  An option is a financial instrument that gives the holder the right, but not the obligation,
+  to buy or sell an underlying asset at a predetermined price within a given time frame.
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
@@ -16,7 +16,7 @@ allOf:
           Repayment of the product refers to this amount.
         $ref: '../../Types/CurrencyAmount.yaml'
       denomination:
-        description: TBD.
+        description: This is the minimum amount that an investor must commit to purchase the structured product.
         $ref: '../../Types/CurrencyAmount.yaml'
       initialFixingDate:
         description: The date on which the Initial Level and the Strike etc. are fixed.
@@ -31,16 +31,22 @@ allOf:
         description: Price of issuance (typically in percent - 100%).
         $ref: '../../Types/Price.yaml'
       maturityDate:
-        description: TBD.
+        description: |
+          Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+          is repaid by the issuer to the investor.
+        $ref: '../../../../Globals/V3/Types/Date.yaml'
+      expiryDate:
+        description: Date on which an order, a privilege, an entitlement or an offer terminates.
         $ref: '../../../../Globals/V3/Types/Date.yaml'
       exercisePrice:
         description: |
-          An option's strike/exercise Price refers to the investor's buying price (call option) or selling price (put option) of the underlying.
+          An option's strike/exercise Price refers to the investor's buying price (call option)
+          or selling price (put option) of the underlying.
           For participation and yield enhancement products, the strike defines
           the reference price of the underlyings of the relevant Structured Product.
           Barriers, bonus levels and cap levels are based on the reference price.
         $ref: '../../Types/Price.yaml'
-      cap:
+      capPrice:
         description: |
           Some Structured Products are equipped with a cap. On the one hand, the cap limits the
           investor's profit potential, but on the other, it allows more attractive conditions with a
@@ -52,13 +58,17 @@ allOf:
         $ref: '../../Types/Barrier.yaml'
       lowerBarrier:
         $ref: '../../Types/Barrier.yaml'
-      stopLossPrice:
-        description: TBD.
-        $ref: '../../Types/Price.yaml'
-      interestRateList:
-        description: TBD.
-        items:
-          $ref: '../../Types/InterestRate.yaml'
+      stopLossBarrier:
+        description: |
+          When the price of the underlying drops below the financing level,
+          which is the amount of the underlying financed by the issuer, the issuer can no longer fully recover the investment.
+        $ref: '../../Types/Barrier.yaml'
+      conditionalCoupon:
+        description: Designates if the coupon payment is bound to conditions.
+        type: boolean
+      coupon:
+        description: A coupon is the annual interest rate paid on an investment, expressed as a percentage of the face value and paid.
+        $ref: '../../Types/InterestRate.yaml'
       conversionRatio:
         description: |
           The number of warrants held by the warrant holder in order to be entitled for one underlying stock.
@@ -68,17 +78,21 @@ allOf:
           The payouts made when a barrier has been breached are referred to as rebates, with the
           amounts expressed as a percentage of the nominal.
         type: number
-      capitalProtection:
+      capitalProtectionFactor:
         description: Percentage of the nominal that is protected (e.g. 100)
         type: number
-      participation:
+      participationFactor:
         description: |
-          This indicates to what proportion the investor profits
+          This indicates to what proportion in percent the investor profits
           from the price performance of the underlying asset. This
           can be 1:1, over- or underproportional.
         type: number
       quanto:
-        description: TBD.
+        description: |
+          A quanto is a type of derivative in which the underlying is denominated in one currency,
+          but the instrument itself is settled in another currency at some rate.
+          Such products are attractive for speculators and investors who wish to have exposure to a foreign asset,
+          but without the corresponding exchange rate risk.
         type: boolean
       settlementType:
         description: |
