@@ -6,6 +6,7 @@ allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
     required:
+      - structureProductType
       - underlyingFinancialInstrumentList
     properties:
       structureProductType:
