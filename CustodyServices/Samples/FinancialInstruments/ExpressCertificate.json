@@ -27,7 +27,7 @@
   "conditionalCoupon": true,
   "coupon": {
     "type": "fixed",
-    "value": 0.01501,
+    "value": 0.1,
     "paymentFrequency": "quarterly"
   },
   "quanto": true,
@@ -36,13 +36,32 @@
     "price": {
       "type": "percent",
       "value": 70
-    }
+    },
+    "barrierEvent": "atOrBelow",
+    "observationType": "continuous",
+    "underlyingWatchType": "worstOf"
   },
   "triggerBarrier": {
     "price": {
       "type": "percent",
       "value": 95
-    }
+    },
+    "barrierEvent": "atOrAbove",
+    "observationType": "atObservationDate",
+    "underlyingWatchType": "allOf",
+    "observationDates": [
+      "2023-03-28",
+      "2023-06-28",
+      "2023-09-28",
+      "2023-12-28",
+      "2024-03-28",
+      "2024-06-28",
+      "2024-09-30",
+      "2024-12-30",
+      "2025-03-28",
+      "2025-06-30",
+      "2025-09-30"
+    ]
   },
   "excercisePrice": {
     "type": "percent",
