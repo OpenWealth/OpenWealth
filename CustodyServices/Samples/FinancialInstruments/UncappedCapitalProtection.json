@@ -1,6 +1,8 @@
 {
   "type": "structuredProduct",
   "structuredProductType": "uncappedCapitalProtection",
+  "sspaCode": "1100",
+  "eusipaCode": "1100",
   "name": "2Y JB 100.00% Capital Protection Note with Participation (140%) on Swiss Market® Index",
   "identificationList": [
     {
