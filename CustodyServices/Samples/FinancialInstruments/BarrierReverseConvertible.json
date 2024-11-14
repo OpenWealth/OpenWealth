@@ -1,7 +1,7 @@
 {
   "type": "structuredProduct",
   "structuredProductType": "barrierReverseConvertible",
-  "name": "JB MULTI CONDITIONAL COUPON BARRIER REVERSE CONVERTIBLE ON SWISS RE AG, NESTLE SA, ROCHE HOLDING AG, NOVARTIS AG",
+  "name": "10.00% P.A. JB CALLABLE MULTI BARRIER REVERSE CONVERTIBLE (55%) ON SWISS RE AG, SANDOZ GROUP AG, STADLER RAIL AG, SIKA AG",
   "identificationList": [
     {
       "type": "isin",
@@ -32,6 +32,15 @@
     "type": "fixed",
     "value": 0.1,
     "paymentFrequency": "yearly"
+  },
+  "barrier": {
+    "price": {
+      "type": "percent",
+      "value": 55
+    },
+    "barrierEvent": "atOrBelow",
+    "observationType": "continuous",
+    "underlyingWatchType": "worstOf"
   },
   "settlementType": "cash",
   "excercisePrice": {
@@ -68,7 +77,9 @@
           "type": "actual",
           "value": 63.1675,
           "currency": "CHF"
-        }
+        },
+        "barrierEvent": "atOrBelow",
+        "observationType": "continuous"
       },
       "excercisePrice": {
         "type": "actual",
@@ -100,7 +111,9 @@
           "type": "actual",
           "value": 19.503,
           "currency": "CHF"
-        }
+        },
+        "barrierEvent": "atOrBelow",
+        "observationType": "continuous"
       },
       "excercisePrice": {
         "type": "actual",
@@ -132,7 +145,9 @@
           "type": "actual",
           "value": 14.2725,
           "currency": "CHF"
-        }
+        },
+        "barrierEvent": "atOrBelow",
+        "observationType": "continuous"
       },
       "excercisePrice": {
         "type": "actual",
@@ -164,7 +179,9 @@
           "type": "actual",
           "value": 145.86,
           "currency": "CHF"
-        }
+        },
+        "barrierEvent": "atOrBelow",
+        "observationType": "continuous"
       },
       "excercisePrice": {
         "type": "actual",
