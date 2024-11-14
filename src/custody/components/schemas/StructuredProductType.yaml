@@ -26,3 +26,4 @@ enum:
   - openEndKnockOutWarrant ## In CH in obiger Kat enthalten
   - miniFuture ## Mini-Future
   - constantLeverageCertificate ## Constant-Leverage Zertifikat
+  - otherStructuredProduct
