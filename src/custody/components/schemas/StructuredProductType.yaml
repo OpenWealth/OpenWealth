@@ -14,9 +14,7 @@ enum:
   - barrierReverseConvertible ## Barrier Reverse Convertible
   - cappedOutperformanceCertificate
   - cappedBonusCertificate
-  - expressCertificate ## Express-Zertifikat
-  - conditionalCouponReverseConvertible ## nicht in Euro Liste
-  - conditionalCouponBarrierReverseConvertible ## nicht in Euro Liste
+  - expressCertificate ## (Barrier) Reverse Convertible mit bedingtem Coupon 1255 & 1260
   - trackerCertificate ## Tracker Zertifikat
   - outperformanceCertificate ## Outpeformance zertifikat
   - bonusCertificate ## Bonus-Zertifikat

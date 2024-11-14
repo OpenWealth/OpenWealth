@@ -1,0 +1,94 @@
+{
+  "type": "structuredProduct",
+  "structuredProductType": "expressCertficate",
+  "name": "JB MULTI CONDITIONAL COUPON BARRIER REVERSE CONVERTIBLE ON SWISS RE AG, NESTLE SA, ROCHE HOLDING AG, NOVARTIS AG",
+  "identificationList": [
+    {
+      "type": "isin",
+      "identifier": "CH1238078039"
+    },
+    {
+      "type": "valoren",
+      "identifier": "123807803"
+    }
+  ],
+  "initialFixingDate": "2022-12-21",
+  "issuer": "Bank Julius Baer & Co. Ltd., Guernsey",
+  "issueDate": "2023-01-04",
+  "issuePrice": {
+    "type": "percent",
+    "value": 100
+  },
+  "currencyOfDenomination": "EUR",
+  "denomination": {
+    "amount": 1000,
+    "currency": "CHF"
+  },
+  "conditionalCoupon": true,
+  "coupon": {
+    "type": "fixed",
+    "value": 0.01501,
+    "paymentFrequency": "quarterly"
+  },
+  "quanto": true,
+  "settlementType": "physical",
+  "barrier": {
+    "price": {
+      "type": "percent",
+      "value": 70
+    }
+  },
+  "triggerBarrier": {
+    "price": {
+      "type": "percent",
+      "value": 95
+    }
+  },
+  "excercisePrice": {
+    "type": "percent",
+    "value": 70
+  },
+  "maturityDate": "2026-01-05",
+  "underlyingFinancialInstrumentList": [
+    {
+      "type": "equity",
+      "name": "Swiss Re Ltd",
+      "identificationList": [
+        {
+          "type": "isin",
+          "identifier": "CH0126881561"
+        },
+        {
+          "type": "valoren",
+          "identifier": "12688156"
+        }
+      ],
+      "currencyOfDenomination": "CHF",
+      "initialLevel": {
+        "type": "actual",
+        "value": 87.00,
+        "currency": "CHF"
+      },
+      "barrier": {
+        "price": {
+          "type": "actual",
+          "value": 60.90,
+          "currency": "CHF"
+        }
+      },
+      "triggerBarrier": {
+        "price": {
+          "type": "actual",
+          "value": 60.90,
+          "currency": "CHF"
+        }
+      },
+      "excercisePrice": {
+        "type": "actual",
+        "value": 60.90,
+        "currency": "CHF"
+      }
+    }
+  ],
+  "additionalDetails": "LASTLOOK (BARRIER OBSERVATION AT MATURITY, 50%), PHYSICAL SETTLEMENT, 1.501% CONDITIONAL PREMIUM (QUARTERLY, THRESHOLD 50%), QUANTO EUR, MEMORY EFFECT, QUARTERLY AUTOCALLABLE (TRIGGER BARRIER 95%)"
+}

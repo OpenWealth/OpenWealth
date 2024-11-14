@@ -25,9 +25,9 @@
   },
   "currencyOfDenomination": "USD",
   "capitalProtection": 100,
-  "participation": 140,
+  "participationFactor": 140,
   "quanto": true,
-  "excercisePrize": {
+  "excercisePrice": {
     "type": "percent",
     "value": 100
   },
@@ -50,7 +50,7 @@
       "value": 11993.83,
       "currency": "CHF"
     },
-    "excercisePrize": {
+    "excercisePrice": {
       "type": "actual",
       "value": 11993.83,
       "currency": "CHF"
