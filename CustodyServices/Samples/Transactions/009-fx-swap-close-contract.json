@@ -102,7 +102,7 @@
       },
       "valueDate": "2023-06-29",
       "positionId": "pos-000-2",
-      "currency": "USD"
+      "positionCurrency": "USD"
     },
     {
       "type": "cash",
@@ -130,10 +130,10 @@
       },
       "valueDate": "2023-06-29",
       "positionId": "pos-000",
-      "currency": "CHF"
+      "positionCurrency": "CHF"
     }
   ],
-  "postingAmounts": [
+  "postingAmountList": [
     {
       "amount": -200000,
       "currency": "USD",

@@ -78,8 +78,7 @@
       },
       "quantity": {
         "value": -100000,
-        "type": "unit",
-        "creditDebitIndicator": "debit"
+        "type": "unit"
       },
       "valueDate": "2022-12-31",
       "positionId": "pos-000-2",

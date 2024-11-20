@@ -135,9 +135,9 @@
         "type": "unit",
         "value": -30.25
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "pos-000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.85,
         "sourceCurrency": "USD",
@@ -168,9 +168,9 @@
         "type": "unit",
         "value": -20.75
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "pos-000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.85,
         "sourceCurrency": "USD",
