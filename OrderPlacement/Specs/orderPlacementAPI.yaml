@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 2.2.1
+  version: 2.3.0 - fx_crypto_draft
   title: Order Placement API
   description: This API is used to place orders and check on the order status.
   contact:
