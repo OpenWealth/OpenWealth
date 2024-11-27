@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.0.2-draft
+  version: 3.0.2
   title: Custody Services
   description: |
     This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
@@ -247,7 +247,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_positionId'
-        - $ref: '#/components/parameters/dateOptional'
+        - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/end_of_day_indicator'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
@@ -332,7 +332,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_accountId'
         - $ref: '#/components/parameters/path_positionId'
-        - $ref: '#/components/parameters/dateOptional'
+        - $ref: '#/components/parameters/date'
         - $ref: '#/components/parameters/end_of_day_indicator'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
@@ -1702,16 +1702,6 @@ components:
         description: Identification for the position given by the bank.
         example: 1234566-12-1
       description: Position ID parameter.
-    dateOptional:
-      in: query
-      name: date
-      required: false
-      schema:
-        type: string
-        format: date
-        description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
-        example: '2019-12-31'
-      description: A date value.
     path_transactionId:
       in: path
       name: transactionId

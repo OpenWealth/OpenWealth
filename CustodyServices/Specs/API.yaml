@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.0.2-draft
+  version: 3.0.2
   title: Custody Services
   description: |
     This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
@@ -252,7 +252,7 @@ paths:
       parameters:
         - $ref: '../../Globals/V3/Params/path_customerId.yaml'
         - $ref: '../../Globals/V3/Params/path_positionId.yaml'
-        - $ref: 'Params/dateOptional.yaml'
+        - $ref: '../../Globals/V3/Params/date.yaml'
         - $ref: 'Params/end_of_day_indicator.yaml'
         - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
@@ -339,7 +339,7 @@ paths:
       parameters:
         - $ref: '../../Globals/V3/Params/path_accountId.yaml'
         - $ref: '../../Globals/V3/Params/path_positionId.yaml'
-        - $ref: 'Params/dateOptional.yaml'
+        - $ref: '../../Globals/V3/Params/date.yaml'
         - $ref: 'Params/end_of_day_indicator.yaml'
         - $ref: '../../Globals/V3/Params/x_correlation_id_in_header.yaml'
       responses:
