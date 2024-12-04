@@ -35,5 +35,7 @@ properties:
     example: 34
     description: Number of days used for calculating the accrued interest amount.
   blockedQuantity:
-    description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
+    description: |
+      Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading.
+      The amount is of the same amountType as the position itself.
     $ref: '../Types/Quantity.yaml'

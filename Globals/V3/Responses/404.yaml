@@ -5,8 +5,10 @@ headers:
     $ref: '../Headers/Content-Language.yaml'
   X-Correlation-Id:
     $ref: '../Headers/X-Correlation-Id.yaml'
-description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+description: |
+  Not Found - The origin server did not find a current representation for the target resource
+  or is not willing to disclose that one exists.
 content:
   application/problem+json:
     schema:
-      $ref: "CommonErrorResponse.yaml"
+      $ref: 'CommonErrorResponse.yaml'

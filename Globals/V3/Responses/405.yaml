@@ -5,7 +5,9 @@ headers:
     $ref: '../Headers/Content-Language.yaml'
   X-Correlation-Id:
     $ref: '../Headers/X-Correlation-Id.yaml'
-description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+description: |
+  Method Not Allowed - The method received in the request-line is known by the origin server
+  but not supported by the target resource.
 content:
   application/problem+json:
     schema:

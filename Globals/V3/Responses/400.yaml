@@ -5,7 +5,9 @@ headers:
     $ref: '../Headers/Content-Language.yaml'
   X-Correlation-Id:
     $ref: '../Headers/X-Correlation-Id.yaml'
-description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
+description: |
+  Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
+  as malformed request syntax.
 content:
   application/problem+json:
     schema:
