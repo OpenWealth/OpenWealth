@@ -14,7 +14,7 @@ properties:
     type: boolean
     example: true
   positionDate:
-    description: Date at which the position was valuated.
+    description: Date when the valuated position entity is exposed in the API (corresponding to the dateParam).
     $ref: '../../../Globals/V3/Types/Date.yaml'
   quantity:
     $ref: '../Types/Quantity.yaml'
