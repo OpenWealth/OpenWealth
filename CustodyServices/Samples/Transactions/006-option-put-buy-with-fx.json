@@ -18,6 +18,7 @@
       }
     ],
     "underlyingFinancialInstrument": {
+      "type": "equity",
       "name": "Apple Inc.",
       "identificationList": [
         {
@@ -41,7 +42,7 @@
           }
         ],
         "contractSize": 5,
-        "strikePrize": {
+        "exercisePrice": {
           "type": "actual",
           "value": 185,
           "currency": "USD"
@@ -50,6 +51,7 @@
         "optionType": "put",
         "optionStyle": "american",
         "underlyingFinancialInstrument": {
+          "type": "equity",
           "name": "Apple Inc.",
           "identificationList": [
             {
@@ -61,7 +63,8 @@
       },
       "account": {
         "id": "123456-1",
-        "type": "safekeepingAccount"
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "value": 20,
@@ -92,7 +95,8 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "type": "unit",
@@ -124,15 +128,16 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "type": "unit",
         "value": -30.25
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "pos-000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.85,
         "sourceCurrency": "USD",
@@ -156,15 +161,16 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "type": "unit",
         "value": -20.75
       },
-      "currency": "CHF",
       "valueDate": "2023-01-04",
       "positionId": "pos-000",
+      "positionCurrency": "CHF",
       "foreignExchangeRate": {
         "value": 0.85,
         "sourceCurrency": "USD",
@@ -172,14 +178,15 @@
       }
     }
   ],
-  "postingAmounts": [
+  "postingAmountList": [
     {
       "amount": -2601.00,
       "currency": "CHF",
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       }
     }
   ]

@@ -1,12 +1,12 @@
 title: FxForward
 description: A forward contract is a customized contract between two parties to buy or sell currencies at a specified price on a future date.
-required:
-  - amountPaid
-  - amountReceived
-  - maturityDate
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
+    required:
+      - amountPaid
+      - amountReceived
+      - maturityDate
     properties:
       amountPaid:
         description: Amount paid at the maturity of a contract (i.e. FX forward).

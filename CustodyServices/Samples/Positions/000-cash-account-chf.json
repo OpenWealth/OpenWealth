@@ -8,7 +8,7 @@
     "identificationList": [
       {
         "identifier": "CHF",
-        "type": "currency"
+        "type": "iso3"
       }
     ],
     "currencyOfDenomination": "CHF"
@@ -16,7 +16,8 @@
   "account": {
     "id": "1234-56",
     "type": "cashAccount",
-    "iban": "CH121212121212121212"
+    "iban": "CH121212121212121212",
+    "referenceCurrency": "CHF"
   },
   "quantity": {
     "value": 500000,

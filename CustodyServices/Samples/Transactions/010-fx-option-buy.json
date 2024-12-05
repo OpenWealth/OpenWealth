@@ -22,7 +22,7 @@
       "amount": 120000,
       "currency": "USD"
     },
-    "expiryDateTime": "2023-06-01T10:00+01:00"
+    "expiryDateTime": "2023-06-01T10:00:00Z"
   },
   "movementList": [
     {
@@ -46,16 +46,17 @@
           "currency": "USD"
         },
         "premium": {
-          "type": "percent",
-          "value": 1
+          "amount": 150,
+          "currency": "USD"
         },
-        "expiryDateTime": "2023-06-01T10:00+01:00",
+        "expiryDateTime": "2023-06-01T10:00:00Z",
         "optionType": "put",
         "optionStyle": "american"
       },
       "account": {
         "id": "123456-1",
-        "type": "safekeepingAccount"
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "value": 1,
@@ -80,7 +81,8 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "type": "unit",
@@ -91,14 +93,15 @@
       "positionCurrency": "CHF"
     }
   ],
-  "postingAmounts": [
+  "postingAmountList": [
     {
       "amount": -2000.00,
       "currency": "CHF",
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       }
     }
   ]

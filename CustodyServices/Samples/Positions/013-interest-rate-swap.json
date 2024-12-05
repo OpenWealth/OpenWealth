@@ -3,7 +3,7 @@
   "endOfDayIndicator": true,
   "positionDate": "2022-12-31",
   "financialInstrument": {
-    "type": "interestSwap",
+    "type": "interestRateSwap",
     "name": "Payer interest rate swap",
     "identificationList": [
       {
@@ -11,7 +11,10 @@
         "type": "otherProprietaryIdentification"
       }
     ],
-    "principalAmount": 100000,
+    "notionalAmount": {
+      "amount": 100000,
+      "currency": "CHF"
+    },
     "currencyOfDenomination": "CHF",
     "maturityDate": "2023-06-27",
     "interestRateReceived": {
@@ -22,7 +25,7 @@
       "paymentFrequency": "atMaturity"
     },
     "interestRatePaid": {
-      "type": "floating",
+      "type": "variable",
       "spread": 0.2,
       "basis": "LIBOR",
       "dayCountBasis": "act_360",
@@ -32,7 +35,8 @@
   },
   "account": {
     "id": "123456-1",
-    "type": "safekeepingAccount"
+    "type": "safekeepingAccount",
+    "referenceCurrency": "CHF"
   },
   "quantity": {
     "type": "unit",

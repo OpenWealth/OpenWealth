@@ -11,7 +11,10 @@
         "type": "otherProprietaryIdentification"
       }
     ],
-    "principalAmount": 100000,
+    "notionalAmount": {
+      "amount": 100000,
+      "currency": "CHF"
+    },
     "currencyOfDenomination": "CHF",
     "maturityDate": "2023-06-27",
     "interestRatePaid": {
@@ -21,7 +24,7 @@
       "paymentDate": "2023-06-27",
       "paymentFrequency": "atMaturity"
     },
-    "undelyingFinancialInstrument": {
+    "underlyingFinancialInstrument": {
       "type": "equity",
       "name": "Apple Inc.",
       "identificationList": [
@@ -34,7 +37,8 @@
   },
   "account": {
     "id": "123456-1",
-    "type": "safekeepingAccount"
+    "type": "safekeepingAccount",
+    "referenceCurrency": "CHF"
   },
   "quantity": {
     "type": "unit",

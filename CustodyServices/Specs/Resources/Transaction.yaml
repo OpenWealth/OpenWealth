@@ -18,7 +18,7 @@ properties:
   type:
     $ref: '../Types/TransactionType.yaml'
   transactionDate:
-    description: Date of transaction entity.
+    description: Date when the transaction entity is exposed in the API (corresponding to the dateParam).
     $ref: '../../../Globals/V3/Types/Date.yaml'
   customerId:
     type: string
@@ -60,6 +60,8 @@ properties:
     $ref: 'FinancialInstrument.yaml'
   triggeringQuantity:
     $ref: '../Types/Quantity.yaml'
+  triggeringPrice:
+    $ref: '../Types/Price.yaml'
   movementList:
     type: array
     description: List of movements belonging to a transaction from a banks perspective.

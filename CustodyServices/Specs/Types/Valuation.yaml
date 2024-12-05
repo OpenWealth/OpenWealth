@@ -9,4 +9,5 @@ properties:
   valueInReferenceCurrency:
     $ref: 'CurrencyAmount.yaml'
   valuationDate:
+    description: Date when the position was valuated.
     $ref: '../../../Globals/V3/Types/Date.yaml'

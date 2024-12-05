@@ -23,7 +23,8 @@
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       },
       "quantity": {
         "type": "unit",
@@ -50,7 +51,8 @@
       "account": {
         "id": "1234-57",
         "type": "cashAccount",
-        "iban": "CH121212121212121213"
+        "iban": "CH121212121212121213",
+        "referenceCurrency": "EUR"
       },
       "quantity": {
         "type": "unit",
@@ -61,14 +63,15 @@
       "positionCurrency": "EUR"
     }
   ],
-  "postingAmounts": [
+  "postingAmountList": [
     {
       "amount": -100000,
       "currency": "CHF",
       "account": {
         "id": "1234-56",
         "type": "cashAccount",
-        "iban": "CH121212121212121212"
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
       }
     },
     {
@@ -77,7 +80,8 @@
       "account": {
         "id": "1234-57",
         "type": "cashAccount",
-        "iban": "CH121212121212121213"
+        "iban": "CH121212121212121213",
+        "referenceCurrency": "EUR"
       }
     }
   ]

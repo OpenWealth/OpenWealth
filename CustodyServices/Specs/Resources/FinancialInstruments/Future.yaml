@@ -1,10 +1,10 @@
 title: Future
 description: Futures are derivative financial contracts that obligate parties to buy or sell an asset at a predetermined future date and price.
-required:
-  - underlyingFinancialInstrument
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
+    required:
+      - underlyingFinancialInstrument
     properties:
       expiryDate:
         description: |

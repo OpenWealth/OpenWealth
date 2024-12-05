@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.0.2
+  version: 3.1.0-draft
   title: Custody Services
   description: |
     This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
@@ -554,9 +554,14 @@ components:
           $ref: '#/components/schemas/Currency'
         iban:
           type: string
-          description: Contains the accounts International Banking Account Number (IBAN) for a cashAccount if available.
+          description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
           maxLength: 34
           example: CH123456789
+        number:
+          type: string
+          description: Contains the accounts custody proprietary account number for an account if available.
+          maxLength: 70
+          example: 123-1234-234
         designation:
           type: string
           maxLength: 70
@@ -712,7 +717,6 @@ components:
       description: Per annum ratio of interest received or paid to the principal amount of the contract for a specific period of time.
       required:
         - type
-        - value
       properties:
         type:
           type: string
@@ -911,11 +915,11 @@ components:
       description: |
         An option is a financial instrument that gives the holder the right, but not the obligation, to buy or sell an underlying
         asset at a predetermined price within a given time frame.
-      required:
-        - underlyingFinancialInstrument
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - underlyingFinancialInstrument
           properties:
             expiryDate:
               description: |
@@ -936,11 +940,11 @@ components:
     Future:
       title: Future
       description: Futures are derivative financial contracts that obligate parties to buy or sell an asset at a predetermined future date and price.
-      required:
-        - underlyingFinancialInstrument
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - underlyingFinancialInstrument
           properties:
             expiryDate:
               description: |
@@ -971,13 +975,13 @@ components:
     FxForward:
       title: FxForward
       description: A forward contract is a customized contract between two parties to buy or sell currencies at a specified price on a future date.
-      required:
-        - amountPaid
-        - amountReceived
-        - maturityDate
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - amountPaid
+            - amountReceived
+            - maturityDate
           properties:
             amountPaid:
               description: Amount paid at the maturity of a contract (i.e. FX forward).
@@ -995,16 +999,16 @@ components:
       description: |
         A foreign currency swap is an agreement between two foreign parties to swap interest payments on a loan made in one currency
         for interest payments on a loan made in another currency.
-      required:
-        - nearAmountPaid
-        - nearAmountReceived
-        - farAmountPaid
-        - farAmountReceived
-        - nearMaturityDate
-        - maturityDate
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - nearAmountPaid
+            - nearAmountReceived
+            - farAmountPaid
+            - farAmountReceived
+            - nearMaturityDate
+            - maturityDate
           properties:
             nearAmountPaid:
               description: Amount paid at the earlier part of an FX swap.
@@ -1031,19 +1035,19 @@ components:
       type: string
       description: DateTime according to ISO 8601.
       format: date-time
-      example: 2018-04-13T16:00+01:00
+      example: '2018-04-13T16:00:00Z'
     FxOption:
       title: FxOption
       description: |
         An FX option is a contract that gives the buyer the right, but not the obligation, to buy or sell a certain currency at a
         specified exchange rate on or before a specified date. For this right, a premium is paid to the seller.
-      required:
-        - expiryDateTime
-        - underlyingAmount
-        - counterAmount
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - expiryDateTime
+            - underlyingAmount
+            - counterAmount
           properties:
             expiryDateTime:
               description: |
@@ -1069,11 +1073,11 @@ components:
     Mortgage:
       title: Mortgage
       description: A mortgage is a type of loan used to purchase or maintain a home, plot of land, or other types of real estate.
-      required:
-        - principalAmount
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - principalAmount
           properties:
             principalAmount:
               description: The current amount subject to loan on which interest is calculated.
@@ -1087,11 +1091,11 @@ components:
     Credit:
       title: Credit
       description: Credit.
-      required:
-        - principalAmount
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - principalAmount
           properties:
             principalAmount:
               description: The current amount subject to loan or borrowing on which interest is calculated.
@@ -1107,11 +1111,11 @@ components:
     MoneyMarket:
       title: MoneyMarket
       description: The money market schema covers both fixed and callable loans and deposits.
-      required:
-        - principalAmount
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - principalAmount
           properties:
             principalAmount:
               description: The current amount subject to loan or borrowing on which interest is calculated.
@@ -1128,13 +1132,13 @@ components:
       description: |
         An interest rate swap is a forward contract in which one stream of future interest payments is exchanged for another based
         on a specified principal amount.
-      required:
-        - notionalAmount
-        - interestRatePaid
-        - interestRateReceived
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - notionalAmount
+            - interestRatePaid
+            - interestRateReceived
           properties:
             notionalAmount:
               description: The notional amount serves as the foundation for calculating interest and the returns on an investment.
@@ -1156,12 +1160,12 @@ components:
         A swap agreement in which Party A pays fees to Party B in exchange for the income or return generated by an asset owned by
         Party B. If the private client is party A and the bank party B the property 'interestRatePaid' should be used to describe
         the interest, for opposite parties 'interestRateReceived'.
-      required:
-        - notionalAmount
-        - underlyingFinancialInstrument
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - notionalAmount
+            - underlyingFinancialInstrument
           properties:
             notionalAmount:
               description: The notional amount serves as the foundation for calculating interest and the returns on an investment.
@@ -1182,11 +1186,11 @@ components:
     CreditDefaultSwap:
       title: CreditDefaultSwap
       description: A derivative product which serves as a form of insurance against the default of an underlying borrower or debt instrument.
-      required:
-        - notionalAmount
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
+          required:
+            - notionalAmount
           properties:
             notionalAmount:
               description: The notional amount is the amount the risk 'buyer' agrees to pay the counter party in case of a default.
@@ -1609,6 +1613,8 @@ components:
           $ref: '#/components/schemas/FinancialInstrument'
         triggeringQuantity:
           $ref: '#/components/schemas/Quantity'
+        triggeringPrice:
+          $ref: '#/components/schemas/Price'
         movementList:
           type: array
           description: List of movements belonging to a transaction from a banks perspective.
