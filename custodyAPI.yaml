@@ -450,7 +450,7 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code.
-      pattern: ^[A-Z]{3}$
+      pattern: '^[A-Z]{3}$'
       example: CHF
     Customer:
       title: Customer
@@ -993,7 +993,7 @@ components:
         Indicates the type of the financial instrument. Must follow the ISO 10962, which is also known as CFI (classification of
         financial instruments). At least indicate the CFI Category (1st character) and the CFI Group (2nd character). The CFI
         attributes 1-4 (3rd to 6th character in the string) are optional.
-      pattern: ^[A-Z]{2,6}$
+      pattern: '^[A-Z]{2,6}$'
       minLength: 2
       maxLength: 6
       example: ESVUFR
@@ -1252,12 +1252,12 @@ components:
           $ref: '#/components/schemas/Currency'
         safekeepingPlace:
           type: string
-          pattern: ^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$
+          pattern: '^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$'
           example: INSECHZZXXX
           description: BIC of the place where the securities are safe-kept, physically or notionally.
         additionalCustodianInformation:
           type: string
-          pattern: ^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$
+          pattern: '^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$'
           example: INSECHZZXXX
           description: |
             Used for special use cases where safekeepingPlace is not sufficient. BIC of the place where the securities are safe-kept,
