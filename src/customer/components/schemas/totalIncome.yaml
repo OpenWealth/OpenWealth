@@ -1,0 +1,18 @@
+type: object
+required:
+  - amountYearlyIncome
+  - currency
+  - referenceYear
+properties:
+  amountYearlyIncome:
+    $ref: 'amount.yaml'
+  currency:
+    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+  referenceYear:
+    $ref: 'year.yaml'
+  additonalInformation:
+    $ref: 'additionalInformation.yaml'
+  sourceOfIncomeList:
+    type: array
+    items:
+      $ref: 'sourceOfIncome.yaml'

@@ -1,0 +1,69 @@
+type: object
+required:
+  - streetName
+  - postCode
+  - townName
+  - country
+properties:
+  department:
+    type: string
+    maxLength: 35
+    description: Identification of a division of a large organsiation or building
+    example: HR
+  streetName:
+    type: string
+    maxLength: 35
+    description: Name of the street or thoroughfare
+    example: Wall Street
+  buildingNumber:
+    type: string
+    maxLength: 35
+    description: Number that identifies the position of the building on a street
+    example: 118
+  buildingName:
+    type: string
+    maxLength: 35
+    description: Name of the building or house
+    example: New York Stock Exchange
+  floor:
+    type: string
+    maxLength: 35
+    description: Floor or story within a building
+    example: 15
+  postBox:
+    type: string
+    maxLength: 35
+    description: Numbered box in a post office, assigned to a person or organisation, where letters are kept until called for.
+    example: PO Box 12
+  room:
+    type: string
+    maxLength: 35
+    description: Building room number
+    example: 2.15
+  postCode:
+    type: string
+    maxLength: 35
+    description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail
+    example: 8001
+  townName:
+    type: string
+    maxLength: 35
+    description: Name of the town or city
+    example: New York
+  townLocationName:
+    type: string
+    maxLength: 35
+    description: Specific location name within the town
+    example: Financial District
+  districtName:
+    type: string
+    maxLength: 35
+    description: Identifies a subdivision within a country sub-division
+    example: Manhattan
+  countrySubDivision:
+    type: string
+    maxLength: 35
+    description: Identifies a subdivision of a country such as state, region, county
+    example: New York
+  country:
+    $ref: 'country.yaml'

@@ -1,0 +1,18 @@
+title: CreditDefaultSwap
+description: A derivative product which serves as a form of insurance against the default of an underlying borrower or debt instrument.
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    required:
+      - notionalAmount
+    properties:
+      notionalAmount:
+        description: The notional amount is the amount the risk 'buyer' agrees to pay the counter party in case of a default.
+        $ref: 'CurrencyAmount.yaml'
+      maturityDate:
+        description: |
+          Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+          is repaid by the issuer to the investor.
+        $ref: '../../../generics/components/schemas/Date.yaml'
+      underlyingFinancialInstrument:
+        $ref: 'FinancialInstrument.yaml'

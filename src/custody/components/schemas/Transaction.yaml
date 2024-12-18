@@ -1,0 +1,81 @@
+title: Transaction
+type: object
+description: Transaction entity.
+required:
+  - id
+  - type
+  - transactionDate
+  - customerId
+  - reversalIndicator
+  - endOfDayIndicator
+properties:
+  id:
+    type: string
+    readOnly: true
+    maxLength: 128
+    example: 9876-54321
+    description: Transaction ID given by the bank.
+  type:
+    $ref: 'TransactionType.yaml'
+  transactionDate:
+    description: Date when the transaction entity is exposed in the API (corresponding to the dateParam).
+    $ref: '../../../generics/components/schemas/Date.yaml'
+  customerId:
+    type: string
+    description: Unique and unambiguous identification used by the bank for the customer.
+    example: 12345-6
+  reversalIndicator:
+    description: Indicates whether it is the reversal of a previously reported movement.
+    type: boolean
+    default: false
+    example: false
+  endOfDayIndicator:
+    description: Indicates if the transaction has been confirmed by the end-of-day (eod) processing.
+    type: boolean
+    example: true
+  reference:
+    type: string
+    description: |
+      Transaction reference as used in the transaction statement. This could be equal to the id of the transaction
+      but may not if GUID are used to identify the transaction.
+    example: XS12345678
+  description:
+    type: string
+    description: Human readable description of the transaction. Often referred to as 'Buchungs-Text' in german transaction statements.
+    example: Buy 500 Apple Inc at 176 USD
+  placeOfTrade:
+    $ref: 'PlaceOfTrade.yaml'
+  reversedTransactionId:
+    type: string
+    maxLength: 128
+    description: States the identification of the transaction that was reversed.
+    example: 2134123-415
+  tradeDate:
+    description: Specifies the date/time on which the trade was executed.
+    $ref: '../../../generics/components/schemas/Date.yaml'
+  settlementDate:
+    description: Date and time at which the securities are to be delivered or received.
+    $ref: '../../../generics/components/schemas/Date.yaml'
+  triggeringFinancialInstrument:
+    $ref: 'FinancialInstrument.yaml'
+  triggeringQuantity:
+    $ref: 'Quantity.yaml'
+  triggeringPrice:
+    $ref: 'Price.yaml'
+  movementList:
+    type: array
+    description: List of movements belonging to a transaction from a banks perspective.
+    items:
+      $ref: 'Movement.yaml'
+  postingAmountList:
+    type: array
+    description: List of total amounts of money that is to be/was posted to respective accounts in the account currency.
+    items:
+      $ref: 'PostingAmount.yaml'
+  settlementCurrency:
+    $ref: '../../../generics/components/schemas/Currency.yaml'
+  additionalDetails:
+    type: string
+    maxLength: 70
+    description: Provides additional details on the transaction which can not be included within the structured fields of the message.
+    example: Replaces transaction nr. 12234567489

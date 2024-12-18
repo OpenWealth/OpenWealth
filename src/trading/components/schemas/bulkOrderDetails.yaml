@@ -1,0 +1,72 @@
+required:
+  - side
+  - orderQuantity
+  - financialInstrumentDetails
+  - currency
+  - executionType
+  - timeInForce
+  - numberOfAllocations
+type: object
+properties:
+  side:
+    type: string
+    description: Side taken by a party on an order.
+    example: buy
+    enum:
+      - buy
+      - sell
+  orderQuantity:
+    $ref: 'orderQuantity.yaml'
+  displayQuantity:
+    $ref: 'amount.yaml'
+  numberOfAllocations:
+    type: number
+    format: integer
+    example: 5
+    description: Indicates number of orders to be combined for average pricing and allocation.
+  financialInstrumentDetails:
+    $ref: 'financialInstrumentDetails.yaml'
+  placeOfTrade:
+    $ref: 'placeOfTrade.yaml'
+  currency:
+    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+  executionType:
+    type: string
+    description: Type of the execution of the order.
+    example: limit
+    enum:
+      - market
+      - limit
+      - stop
+      - stopLimit
+  limitPrice:
+    description: Limit price per unit of quantity (e.g. per share)
+    $ref: 'limitPrice.yaml'
+  stopPrice:
+    description: Stop price per unit of quantity (e.g. per share)
+    $ref: 'stopPrice.yaml'
+  timeInForce:
+    type: string
+    description: Specifies how long the order remains in effect.
+    example: day
+    enum:
+      - day
+      - goodTillCancel
+      - atTheOpening
+      - immediateOrCancel
+      - fillOrKill
+      - goodTillCrossing
+      - goodTillDate
+      - atTheClose
+      - goodThroughCrossing
+      - atCrossing
+      - goodForTime
+      - goodForAuction
+      - goodForMonth
+  expiryDateTime:
+    $ref: '../../../generics/V2/components/schemas/dateTime.yaml'
+  additionalDetails:
+    type: string
+    maxLength: 128
+    description: Provides additional details on the order which can not be included within the structured fields of the message.
+    example: at pre Market and today

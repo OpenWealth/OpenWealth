@@ -32,5 +32,5 @@ jobs:
       - name: Run Redocly lint
         run: |
           api=${{ inputs.apiName }}
-          apiBundledFile="${api^}/Specs/API-bundled.yaml"
+          apiBundledFile="${api}API.yaml"
           redocly lint --config=.github/redocly.yaml --format=stylish $apiBundledFile

@@ -1,0 +1,30 @@
+allOf:
+  - $ref: 'sourceBase.yaml'
+required:
+  - nameOfGiftor
+  - relationToGiftor
+  - originOfAssetsOfGiftor
+properties:
+  nameOfGiftor:
+    type: string
+    maxLength: 140
+  relationToGiftor:
+    type: string
+    maxLength: 35
+    description: Relation of the person to the giftor
+    example: Anna Muster is a good friend.
+  originOfAssetsOfGiftor:
+    type: string
+    maxLength: 2500
+    description: Original origin of the assets of the giftor - how was the wealth generated?
+    example: Anna Muster was CEO of a large bank in London from 1997-2005.
+  natureOfAssets:
+    type: string
+    maxLength: 250
+    description: Nature of the assets received
+    example: Cash
+  dateOfReception:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    # description: Date when the gift was received
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'

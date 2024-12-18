@@ -1,0 +1,63 @@
+type: object
+required:
+  - purposeOfRelationship
+  - soleBeneficialOwner
+  - fundFlows
+  - sourceOfWealthList
+  - totalWealth
+  - totalIncome
+  - employment
+  - politicalStatus
+  - fatca
+properties:
+  externalReference:
+    $ref: 'externalReference.yaml'
+  purposeOfRelationship:
+    type: string
+    description: Description of purpose of relationship e.g. Asset Management by EAM
+    example: Investments, Payments and asset management by EAM
+  additionalInformationRelationship:
+    $ref: 'additionalInformation.yaml'
+    # description: Additional information on purpose of relationship.
+  soleBeneficialOwner:
+    type: boolean
+    description: Is the person the sole beneficial owner of this customer relationship?
+    example: true
+  fundFlows:
+    $ref: 'fundFlows.yaml'
+  sourceOfWealthList:
+    type: array
+    items:
+      $ref: 'sourceOfWealth.yaml'
+  totalWealth:
+    $ref: 'totalWealth.yaml'
+  totalIncome:
+    $ref: 'totalIncome.yaml'
+  employment:
+    $ref: 'employment.yaml'
+  education:
+    $ref: 'education.yaml'
+  corporateInsiderPersonList:
+    type: array
+    items:
+      $ref: 'corporateInsiderPerson.yaml'
+  corporateInsiderRelationList:
+    type: array
+    items:
+      $ref: 'corporateInsiderRelation.yaml'
+  majorShareholderPersonList:
+    type: array
+    items:
+      $ref: 'majorShareholder.yaml'
+  majorShareholderRelationList:
+    type: array
+    items:
+      $ref: 'majorShareholderRelation.yaml'
+  politicalStatus:
+    $ref: 'politicalStatus.yaml'
+  fatca:
+    $ref: 'fatca.yaml'
+  externalAssetManager:
+    $ref: 'externalAssetManager.yaml'
+  furtherDetails:
+    $ref: 'furtherDetails.yaml'

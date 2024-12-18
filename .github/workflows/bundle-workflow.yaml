@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   bundle-api:
-    if: contains(github.event.pull_request.labels.*.name, 'custodyServices') || contains(github.event.pull_request.labels.*.name, 'orderPlacement') || contains(github.event.pull_request.labels.*.name, 'customerManagement')
+    if: contains(github.event.pull_request.labels.*.name, 'custody') || contains(github.event.pull_request.labels.*.name, 'trading') || contains(github.event.pull_request.labels.*.name, 'customer')
     runs-on: ubuntu-latest
     outputs:
       API: ${{ steps.var.outputs.API }}
@@ -29,22 +29,22 @@ jobs:
           ref: ${{ github.head_ref }} # Checkout the head branch of the PR
 
       - name: Set API of subject from label
-        if: contains(github.event.pull_request.labels.*.name, 'custodyServices')
-        run: echo "API_NAME=custodyServices" >> $GITHUB_ENV
+        if: contains(github.event.pull_request.labels.*.name, 'custody')
+        run: echo "API_NAME=custody" >> $GITHUB_ENV
 
       - name: Set API of subject from label
-        if: contains(github.event.pull_request.labels.*.name, 'orderPlacement')
-        run: echo "API_NAME=orderPlacement" >> $GITHUB_ENV
+        if: contains(github.event.pull_request.labels.*.name, 'trading')
+        run: echo "API_NAME=trading" >> $GITHUB_ENV
 
       - name: Set API of subject from label
-        if: contains(github.event.pull_request.labels.*.name, 'customerManagement')
-        run: echo "API_NAME=customerManagement" >> $GITHUB_ENV
+        if: contains(github.event.pull_request.labels.*.name, 'customer')
+        run: echo "API_NAME=customer" >> $GITHUB_ENV
 
       - name: Get Pull Request Labels and set variables
         id: var
         run: |
-          apiFile="${API_NAME^}/Specs/API.yaml"
-          apiBundledFile="${API_NAME^}/Specs/API-bundled.yaml"
+          apiFile="src/${API_NAME}/API.yaml"
+          apiBundledFile="${API_NAME}API.yaml"
           echo "API"=$API_NAME >> $GITHUB_OUTPUT
           echo "API_FILE"=$apiFile >> $GITHUB_OUTPUT
           echo "API_BUNDLED_FILE"=$apiBundledFile >> $GITHUB_OUTPUT

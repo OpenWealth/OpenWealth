@@ -1,0 +1,5 @@
+in: query
+name: afterEventId
+schema:
+  $ref: '../schemas/eventSubscriptionId.yaml'
+description: Event Id after which events are considered.

@@ -1,0 +1,12 @@
+type: object
+description: Indicates a date with a dateType relevant for the respective order.
+properties:
+  date:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+  dateType:
+    type: string
+    example: bookingDate
+    enum:
+      - transactionDate
+      - bookingDate
+      - valueDate

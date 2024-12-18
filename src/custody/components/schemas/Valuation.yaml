@@ -1,0 +1,13 @@
+title: Valuation
+type: object
+description: Detailed information about the valuation of a position.
+required:
+  - valueInPositionCurrency
+properties:
+  valueInPositionCurrency:
+    $ref: 'CurrencyAmount.yaml'
+  valueInReferenceCurrency:
+    $ref: 'CurrencyAmount.yaml'
+  valuationDate:
+    description: Date when the position was valuated.
+    $ref: '../../../generics/components/schemas/Date.yaml'

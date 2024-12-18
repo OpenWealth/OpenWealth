@@ -1,0 +1,5 @@
+type: object
+description: Indicates the booking date for an order or allocation.
+properties:
+  date:
+    $ref: '../../../generics/V2/components/schemas//date.yaml'

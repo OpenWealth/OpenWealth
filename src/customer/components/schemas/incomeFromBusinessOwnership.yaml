@@ -1,0 +1,49 @@
+allOf:
+  - $ref: 'sourceBase.yaml'
+type: object
+required:
+  - companyName
+properties:
+  companyName:
+    type: string
+    maxLength: 140
+    # description: Name of the company
+  companyDomicile:
+    $ref: 'country.yaml'
+    # description: Domicile of the company e.g. CH
+  companyBusinessActivity:
+    type: string
+    maxLength: 250
+    description: Description of the business activity of the company and industry (e.g. NOGA Code)
+    example: The Beispiel AG trades with commodities (mainly crude oil). Noga Code "661200".
+  companyNumberOfEmployees:
+    type: integer
+    description: Number of employees of company.
+    example: 5145
+  companyAnnualTurnover:
+    $ref: 'amount.yaml'
+  currencyAnnualTurnover:
+    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+  companyAnnualProfit:
+    $ref: 'amount.yaml'
+  currencyAnnualProfit:
+    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+  startCapitalOrigin:
+    type: string
+    maxLength: 250
+    description: Origin of start capital in case of business ownership / acquisition
+    example: Capital gains on bitcoins were used to found the company.
+  companyFoundingYear:
+    $ref: 'year.yaml'
+  shareholdingInPercent:
+    type: integer
+    description: Percentage of shareholding in the company
+    example: 25
+  namesOfOtherShareholders:
+    type: string
+    description: Names of other shareholders of that company
+    example: David Beispiel, Charlotte Meyer, Benjamin Müller
+  period:
+    $ref: 'period.yaml'
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'

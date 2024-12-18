@@ -14,9 +14,9 @@ on:
         default: 'custody'
         type: choice
         options:
-          - custodyServices
-          - orderPlacement
-          - customerManagement
+          - custody
+          - trading
+          - customer
       commit_sha:
         description: 'The commit SHA to create the release from'
         required: true
@@ -53,7 +53,7 @@ jobs:
         run: |
           version=$( echo ${{ github.event.inputs.version }} | grep -oP '[0-9]+\.[0-9]+\.[0-9]+' )  # alternative: '[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]'
           apiName=${{ github.event.inputs.apiName }}
-          apiFile="${apiName^}/Specs/${apiName}API-bundled.yaml"
+          apiFile="${apiName}API.yaml"
           tagName="v${version}-${apiName}"
           repo_name=$( echo ${{ github.repository }} | sed -E "s/^.*\///" )
           echo "REPO_NAME=$repo_name" >> $GITHUB_OUTPUT

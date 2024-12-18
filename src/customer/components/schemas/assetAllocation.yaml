@@ -1,0 +1,28 @@
+type: object
+required:
+  - type
+  - amount
+  - currency
+properties:
+  type:
+    type: string
+    enum:
+      - tradableFinancialAssets
+      - realEstate
+      - pensionAssets
+      - companyShareholdings
+      - nonTradableFinancialAssets
+      - other
+    description: Indicates the type of the asset
+    example: realEstate
+  amount:
+    $ref: 'amount.yaml'
+  currency:
+    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+  percentageOfAllocation:
+    type: string
+    maxLength: 35
+    description: '% of total asset allocation'
+    example: 12%
+  furtherDetailsAsset:
+    $ref: 'furtherDetailsAsset.yaml'

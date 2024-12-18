@@ -1,0 +1,33 @@
+type: object
+required:
+  - personId
+  - language
+  - personType
+  - countryOfDomicile
+properties:
+  personId:
+    type: string
+    minLength: 1
+    maxLength: 35
+    description: Unique person ID assigned by the custody bank
+    example: 123-456-214
+  externalReference:
+    $ref: 'externalReference.yaml'
+  language:
+    $ref: 'language.yaml'
+  countryOfDomicile:
+    $ref: 'country.yaml'
+  openingDate:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+  taxDomicileList:
+    type: array
+    items:
+      $ref: 'country.yaml'
+  personType:
+    type: string
+    enum:
+      - naturalPerson
+      - legalPerson
+      - personAssociation
+    example: naturalPerson
+    description: Indicates the person type (e.g. Natural Person) of the person object

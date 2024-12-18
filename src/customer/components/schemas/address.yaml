@@ -1,0 +1,32 @@
+type: object
+required:
+  - addressId
+  - isDomicile
+  - language
+  - isMailingAddress
+  - physicalAddress
+properties:
+  addressId:
+    type: string
+    minLength: 1
+    maxLength: 35
+    readOnly: True
+    description: Unique address ID assigned by the custody bank
+    example: 12345678
+  externalReference:
+    $ref: 'externalReference.yaml'
+  addressName:
+    type: string
+    description: Name of the address object
+    example: Mustergasse 15, 8001 Zürich, Schweiz
+  isDomicile:
+    type: boolean
+  language:
+    # description: Language of the address object
+    type: boolean
+  isMailingAddress:
+    type: boolean
+  salutationDetails:
+    $ref: 'salutationDetails.yaml'
+  physicalAddress:
+    $ref: 'physicalAddress.yaml'
