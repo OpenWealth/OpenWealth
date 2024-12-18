@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.1.0-draft
+  version: 3.1.0
   title: Custody Services
   description: |
     This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
@@ -327,7 +327,7 @@ paths:
       tags:
         - positions
       summary: Returns a positions by id for a specific account
-      description: Returns a positions for a specific account, if the date is not provided, the last available valuation date should be returned.
+      description: Returns a positions for a specific account.
       operationId: getAccountPositionById
       parameters:
         - $ref: '#/components/parameters/path_accountId'
@@ -450,7 +450,7 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code.
-      pattern: '^[A-Z]{3}$'
+      pattern: ^[A-Z]{3}$
       example: CHF
     Customer:
       title: Customer
@@ -462,7 +462,12 @@ components:
         id:
           type: string
           maxLength: 128
-          description: Unique and unambiguous identification used by the bank for the customer.
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+          example: MTIzNDUtNg
+        number:
+          type: string
+          description: Contains the customers custody proprietary customer number if available.
+          maxLength: 70
           example: 12345-6
         referenceCurrency:
           $ref: '#/components/schemas/Currency'
@@ -531,7 +536,7 @@ components:
         id:
           type: string
           maxLength: 128
-          example: 8765432-19
+          example: ODc2NTQzMi0xOQ
           description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
         type:
           type: string
@@ -569,265 +574,11 @@ components:
           example: Current Account CHF
         portfolioInformation:
           $ref: '#/components/schemas/PortfolioInformation'
-    FinancialInstrumentType:
-      title: FinancialInstrumentType
-      type: string
-      description: Type of the financial instrument.
-      example: equity
-      enum:
-        - cash
-        - bond
-        - equity
-        - fund
-        - index
-        - commodity
-        - option
-        - future
-        - fxForward
-        - fxSwap
-        - fxOption
-        - mortgage
-        - credit
-        - fixedLoan
-        - fixedDeposit
-        - callableLoan
-        - callableDeposit
-        - interestRateSwap
-        - totalReturnSwap
-        - creditDefaultSwap
-        - cryptoAsset
-        - other
-    FinancialInstrumentIdentification:
-      title: FinancialInstrumentIdentification
-      type: object
-      description: Financial instrument identification in the form of a key value pair.
-      required:
-        - identifier
-        - type
-      properties:
-        identifier:
-          type: string
-          maxLength: 128
-          example: CH0012005267
-          description: Instrument identification.
-        type:
-          type: string
-          example: isin
-          description: Type of the instrument ID. isin is preferred.
-          enum:
-            - isin
-            - sedol
-            - cusip
-            - ric
-            - tickerSymbol
-            - bloomberg
-            - cta
-            - quick
-            - wertpapier
-            - dutch
-            - valoren
-            - sicovam
-            - belgian
-            - common
-            - iso3
-            - otherProprietaryIdentification
-    CfiCode:
-      title: CFICode
-      type: string
-      description: |
-        Indicates the type of the financial instrument. Must follow the ISO 10962, which is also known as CFI (classification of
-        financial instruments). At least indicate the CFI Category (1st character) and the CFI Group (2nd character). The CFI
-        attributes 1-4 (3rd to 6th character in the string) are optional.
-      pattern: '^[A-Z]{2,6}$'
-      minLength: 2
-      maxLength: 6
-      example: ESVUFR
-    FinancialInstrumentBase:
-      title: FinancialInstrumentBase
-      description: Base schema for a financial instrument.
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          $ref: '#/components/schemas/FinancialInstrumentType'
-        name:
-          type: string
-          maxLength: 170
-          example: Novartis AG
-          description: Name of the financial instrument in free format text.
-        identificationList:
-          type: array
-          description: List of identification objects.
-          items:
-            $ref: '#/components/schemas/FinancialInstrumentIdentification'
-          minItems: 1
-        cfiCode:
-          $ref: '#/components/schemas/CfiCode'
-        currencyOfDenomination:
-          $ref: '#/components/schemas/Currency'
-        hasFactor:
-          type: boolean
-          description: |
-            Indicates if there is a factor present for this financial instrument. If this indicator is set to TRUE, but the factor
-            attribute is not present, might indicate, that the factor cannot be delivered or is currently not available.
-          example: true
-        factor:
-          type: number
-          example: 0.85
-          description: Information regarding the factor.
-        additionalDetails:
-          type: string
-          maxLength: 70
-          description: Provides additional information about the financial instrument in narrative form.
-          example: Group contract number 129959961
     Cash:
       title: Cash
       description: Cash.
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
-    DayCountBasis:
-      title: DayCountBasis
-      type: string
-      example: u30_360
-      description: Interest method of the instrument.
-      enum:
-        - act_360
-        - act_365
-        - act_actIcma
-        - act_actIsda
-        - act_actAfb
-        - act_365L
-        - bus_252
-        - u30_360
-        - u30E_360Icma
-        - u30E_360Isda
-        - u30E_360
-        - u30U_360
-    Date:
-      title: Date
-      type: string
-      description: Date according to ISO 8601.
-      format: date
-      example: '2018-04-13'
-    InterestRate:
-      title: InterestRate
-      type: object
-      description: Per annum ratio of interest received or paid to the principal amount of the contract for a specific period of time.
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          description: |
-            Indicates the type of interest, where
-            - 'fixed' denotes a fixed interest rate for the agreed period.
-            - 'variable' denotes a rate that fluctuates over time because it is based on an underlying benchmark ('basis') interest rate that changes periodically with the market.
-            - 'staggered' denotes a rate that is set at different levels for different periods of time or different underlying principal amount.
-          example: fixed
-          enum:
-            - fixed
-            - variable
-            - staggered
-        value:
-          type: number
-          example: 0.00125
-          description: Current rate as decimal.
-        dayCountBasis:
-          $ref: '#/components/schemas/DayCountBasis'
-        paymentDate:
-          description: Date of the next interest payment.
-          $ref: '#/components/schemas/Date'
-        paymentFrequency:
-          type: string
-          description: Specifies the frequency of an interest payment.
-          example: quarterly
-          enum:
-            - annual
-            - monthly
-            - quarterly
-            - semiAnnual
-            - weekly
-            - atMaturity
-            - other
-        basis:
-          type: string
-          description: Benchmark by which floating rate will adjust in accordance with market conditions, such as LIBOR, EURIBOR.
-          example: LIBOR
-        spread:
-          type: number
-          description: The floating rate will be equal to the base rate (basis) plus the spread.
-          example: 0.001
-    Price:
-      type: object
-      description: Price entity.
-      required:
-        - type
-        - value
-      properties:
-        type:
-          type: string
-          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
-          example: percentage
-          enum:
-            - actual
-            - percentage
-        value:
-          type: number
-          example: 12000
-          description: Signed decimal number.
-        currency:
-          $ref: '#/components/schemas/Currency'
-    FinancialInstrument:
-      title: FinancialInstrument
-      type: object
-      description: Financial instrument entity.
-      oneOf:
-        - $ref: '#/components/schemas/Cash'
-        - $ref: '#/components/schemas/Bond'
-        - $ref: '#/components/schemas/Equity'
-        - $ref: '#/components/schemas/Fund'
-        - $ref: '#/components/schemas/Index'
-        - $ref: '#/components/schemas/Commodity'
-        - $ref: '#/components/schemas/Option'
-        - $ref: '#/components/schemas/Future'
-        - $ref: '#/components/schemas/FxForward'
-        - $ref: '#/components/schemas/FxSwap'
-        - $ref: '#/components/schemas/FxOption'
-        - $ref: '#/components/schemas/Mortgage'
-        - $ref: '#/components/schemas/Credit'
-        - $ref: '#/components/schemas/MoneyMarket'
-        - $ref: '#/components/schemas/InterestRateSwap'
-        - $ref: '#/components/schemas/TotalReturnSwap'
-        - $ref: '#/components/schemas/CreditDefaultSwap'
-        - $ref: '#/components/schemas/CryptoAsset'
-        - $ref: '#/components/schemas/OtherFinancialInstrument'
-      discriminator:
-        propertyName: type
-        mapping:
-          cash: '#/components/schemas/Cash'
-          bond: '#/components/schemas/Bond'
-          equity: '#/components/schemas/Equity'
-          fund: '#/components/schemas/Fund'
-          index: '#/components/schemas/Index'
-          commodity: '#/components/schemas/Commodity'
-          option: '#/components/schemas/Option'
-          future: '#/components/schemas/Future'
-          fxForward: '#/components/schemas/FxForward'
-          fxSwap: '#/components/schemas/FxSwap'
-          fxOption: '#/components/schemas/FxOption'
-          mortgage: '#/components/schemas/Mortgage'
-          credit: '#/components/schemas/Credit'
-          fixedLoan: '#/components/schemas/MoneyMarket'
-          fixedDeposit: '#/components/schemas/MoneyMarket'
-          callableLoan: '#/components/schemas/MoneyMarket'
-          callableDeposit: '#/components/schemas/MoneyMarket'
-          interestRateSwap: '#/components/schemas/InterestRateSwap'
-          totalReturnSwap: '#/components/schemas/TotalReturnSwap'
-          creditDefaultSwap: '#/components/schemas/CreditDefaultSwap'
-          cryptoAsset: '#/components/schemas/CryptoAsset'
-          other: '#/components/schemas/OtherFinancialInstrument'
     Bond:
       title: Bond
       description: Bond.
@@ -886,30 +637,6 @@ components:
       description: Commodity.
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
-    ContractSize:
-      title: ContractSize
-      type: number
-      description: Contract size of the instrument.
-      example: 100
-      default: 1
-    OptionType:
-      title: OptionType
-      type: string
-      description: Specifies whether it is a Call option (right to purchase a specific underlying asset) or a Put option (right to sell a specific underlying asset).
-      example: call
-      enum:
-        - call
-        - put
-    OptionStyle:
-      title: OptionStyle
-      type: string
-      description: Specifies how an option can be exercised.
-      example: american
-      enum:
-        - american
-        - european
-        - bermudan
-        - asian
     Option:
       title: Option
       description: |
@@ -958,20 +685,6 @@ components:
             exercisePrice:
               description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
               $ref: '#/components/schemas/Price'
-    CurrencyAmount:
-      title: CurrencyAmount
-      type: object
-      description: Amount denoted in a given currency.
-      required:
-        - amount
-        - currency
-      properties:
-        amount:
-          type: number
-          example: 12000
-          description: Signed amount.
-        currency:
-          $ref: '#/components/schemas/Currency'
     FxForward:
       title: FxForward
       description: A forward contract is a customized contract between two parties to buy or sell currencies at a specified price on a future date.
@@ -1030,12 +743,6 @@ components:
                 Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
                 is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
-    DateTime:
-      title: DateTime
-      type: string
-      description: DateTime according to ISO 8601.
-      format: date-time
-      example: '2018-04-13T16:00:00Z'
     FxOption:
       title: FxOption
       description: |
@@ -1217,6 +924,307 @@ components:
           properties:
             underlyingFinancialInstrument:
               $ref: '#/components/schemas/FinancialInstrument'
+    FinancialInstrumentType:
+      title: FinancialInstrumentType
+      type: string
+      description: Type of the financial instrument.
+      example: equity
+      enum:
+        - cash
+        - bond
+        - equity
+        - fund
+        - index
+        - commodity
+        - option
+        - future
+        - fxForward
+        - fxSwap
+        - fxOption
+        - mortgage
+        - credit
+        - fixedLoan
+        - fixedDeposit
+        - callableLoan
+        - callableDeposit
+        - interestRateSwap
+        - totalReturnSwap
+        - creditDefaultSwap
+        - cryptoAsset
+        - other
+    FinancialInstrumentIdentification:
+      title: FinancialInstrumentIdentification
+      type: object
+      description: Financial instrument identification in the form of a key value pair.
+      required:
+        - identifier
+        - type
+      properties:
+        identifier:
+          type: string
+          maxLength: 128
+          example: CH0012005267
+          description: Instrument identification.
+        type:
+          type: string
+          example: isin
+          description: Type of the instrument ID. isin is preferred.
+          enum:
+            - isin
+            - sedol
+            - cusip
+            - ric
+            - tickerSymbol
+            - bloomberg
+            - cta
+            - quick
+            - wertpapier
+            - dutch
+            - valoren
+            - sicovam
+            - belgian
+            - common
+            - iso3
+            - otherProprietaryIdentification
+    CfiCode:
+      title: CFICode
+      type: string
+      description: |
+        Indicates the type of the financial instrument. Must follow the ISO 10962, which is also known as CFI (classification of
+        financial instruments). At least indicate the CFI Category (1st character) and the CFI Group (2nd character). The CFI
+        attributes 1-4 (3rd to 6th character in the string) are optional.
+      pattern: ^[A-Z]{2,6}$
+      minLength: 2
+      maxLength: 6
+      example: ESVUFR
+    FinancialInstrumentBase:
+      title: FinancialInstrumentBase
+      description: Base schema for a financial instrument.
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          $ref: '#/components/schemas/FinancialInstrumentType'
+        name:
+          type: string
+          maxLength: 170
+          example: Novartis AG
+          description: Name of the financial instrument in free format text.
+        identificationList:
+          type: array
+          description: List of identification objects.
+          items:
+            $ref: '#/components/schemas/FinancialInstrumentIdentification'
+          minItems: 1
+        cfiCode:
+          $ref: '#/components/schemas/CfiCode'
+        currencyOfDenomination:
+          $ref: '#/components/schemas/Currency'
+        hasFactor:
+          type: boolean
+          description: |
+            Indicates if there is a factor present for this financial instrument. If this indicator is set to TRUE, but the factor
+            attribute is not present, might indicate, that the factor cannot be delivered or is currently not available.
+          example: true
+        factor:
+          type: number
+          example: 0.85
+          description: Information regarding the factor.
+        additionalDetails:
+          type: string
+          maxLength: 70
+          description: Provides additional information about the financial instrument in narrative form.
+          example: Group contract number 129959961
+    DayCountBasis:
+      title: DayCountBasis
+      type: string
+      example: u30_360
+      description: Interest method of the instrument.
+      enum:
+        - act_360
+        - act_365
+        - act_actIcma
+        - act_actIsda
+        - act_actAfb
+        - act_365L
+        - bus_252
+        - u30_360
+        - u30E_360Icma
+        - u30E_360Isda
+        - u30E_360
+        - u30U_360
+    Date:
+      title: Date
+      type: string
+      description: Date according to ISO 8601.
+      format: date
+      example: '2018-04-13'
+    InterestRate:
+      title: InterestRate
+      type: object
+      description: Per annum ratio of interest received or paid to the principal amount of the contract for a specific period of time.
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: |
+            Indicates the type of interest, where
+            - 'fixed' denotes a fixed interest rate for the agreed period.
+            - 'variable' denotes a rate that fluctuates over time because it is based on an underlying benchmark ('basis') interest rate
+            that changes periodically with the market.
+            - 'staggered' denotes a rate that is set at different levels for different periods of time or different underlying principal amount.
+          example: fixed
+          enum:
+            - fixed
+            - variable
+            - staggered
+        value:
+          type: number
+          example: 0.00125
+          description: Current rate as decimal.
+        dayCountBasis:
+          $ref: '#/components/schemas/DayCountBasis'
+        paymentDate:
+          description: Date of the next interest payment.
+          $ref: '#/components/schemas/Date'
+        paymentFrequency:
+          type: string
+          description: Specifies the frequency of an interest payment.
+          example: quarterly
+          enum:
+            - annual
+            - monthly
+            - quarterly
+            - semiAnnual
+            - weekly
+            - atMaturity
+            - other
+        basis:
+          type: string
+          description: Benchmark by which floating rate will adjust in accordance with market conditions, such as LIBOR, EURIBOR.
+          example: LIBOR
+        spread:
+          type: number
+          description: The floating rate will be equal to the base rate (basis) plus the spread.
+          example: 0.001
+    Price:
+      type: object
+      description: Price entity.
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+          example: percentage
+          enum:
+            - actual
+            - percentage
+        value:
+          type: number
+          example: 12000
+          description: Signed decimal number.
+        currency:
+          $ref: '#/components/schemas/Currency'
+    FinancialInstrument:
+      title: FinancialInstrument
+      type: object
+      description: Financial instrument entity.
+      oneOf:
+        - $ref: '#/components/schemas/Cash'
+        - $ref: '#/components/schemas/Bond'
+        - $ref: '#/components/schemas/Equity'
+        - $ref: '#/components/schemas/Fund'
+        - $ref: '#/components/schemas/Index'
+        - $ref: '#/components/schemas/Commodity'
+        - $ref: '#/components/schemas/Option'
+        - $ref: '#/components/schemas/Future'
+        - $ref: '#/components/schemas/FxForward'
+        - $ref: '#/components/schemas/FxSwap'
+        - $ref: '#/components/schemas/FxOption'
+        - $ref: '#/components/schemas/Mortgage'
+        - $ref: '#/components/schemas/Credit'
+        - $ref: '#/components/schemas/MoneyMarket'
+        - $ref: '#/components/schemas/InterestRateSwap'
+        - $ref: '#/components/schemas/TotalReturnSwap'
+        - $ref: '#/components/schemas/CreditDefaultSwap'
+        - $ref: '#/components/schemas/CryptoAsset'
+        - $ref: '#/components/schemas/OtherFinancialInstrument'
+      discriminator:
+        propertyName: type
+        mapping:
+          cash: '#/components/schemas/Cash'
+          bond: '#/components/schemas/Bond'
+          equity: '#/components/schemas/Equity'
+          fund: '#/components/schemas/Fund'
+          index: '#/components/schemas/Index'
+          commodity: '#/components/schemas/Commodity'
+          option: '#/components/schemas/Option'
+          future: '#/components/schemas/Future'
+          fxForward: '#/components/schemas/FxForward'
+          fxSwap: '#/components/schemas/FxSwap'
+          fxOption: '#/components/schemas/FxOption'
+          mortgage: '#/components/schemas/Mortgage'
+          credit: '#/components/schemas/Credit'
+          fixedLoan: '#/components/schemas/MoneyMarket'
+          fixedDeposit: '#/components/schemas/MoneyMarket'
+          callableLoan: '#/components/schemas/MoneyMarket'
+          callableDeposit: '#/components/schemas/MoneyMarket'
+          interestRateSwap: '#/components/schemas/InterestRateSwap'
+          totalReturnSwap: '#/components/schemas/TotalReturnSwap'
+          creditDefaultSwap: '#/components/schemas/CreditDefaultSwap'
+          cryptoAsset: '#/components/schemas/CryptoAsset'
+          other: '#/components/schemas/OtherFinancialInstrument'
+    ContractSize:
+      title: ContractSize
+      type: number
+      description: Contract size of the instrument.
+      example: 100
+      default: 1
+    OptionType:
+      title: OptionType
+      type: string
+      description: |
+        Specifies whether it is a Call option (right to purchase a specific underlying asset)
+        or a Put option (right to sell a specific underlying asset).
+      example: call
+      enum:
+        - call
+        - put
+    OptionStyle:
+      title: OptionStyle
+      type: string
+      description: Specifies how an option can be exercised.
+      example: american
+      enum:
+        - american
+        - european
+        - bermudan
+        - asian
+    CurrencyAmount:
+      title: CurrencyAmount
+      type: object
+      description: Amount denoted in a given currency.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: number
+          example: 12000
+          description: Signed amount.
+        currency:
+          $ref: '#/components/schemas/Currency'
+    DateTime:
+      title: DateTime
+      type: string
+      description: DateTime according to ISO 8601.
+      format: date-time
+      example: '2018-04-13T16:00:00Z'
     Position:
       title: Position
       type: object
@@ -1229,7 +1237,7 @@ components:
         id:
           type: string
           maxLength: 128
-          example: 876-543219
+          example: ODc2LTU0MzIxOQ
           description: Identification for the position given by the bank.
         financialInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
@@ -1244,14 +1252,16 @@ components:
           $ref: '#/components/schemas/Currency'
         safekeepingPlace:
           type: string
-          pattern: '^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$'
+          pattern: ^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$
           example: INSECHZZXXX
           description: BIC of the place where the securities are safe-kept, physically or notionally.
         additionalCustodianInformation:
           type: string
-          pattern: '^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$'
+          pattern: ^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$
           example: INSECHZZXXX
-          description: Used for special use cases where safekeepingPlace is not sufficient. BIC of the place where the securities are safe-kept, physically or notionally.
+          description: |
+            Used for special use cases where safekeepingPlace is not sufficient. BIC of the place where the securities are safe-kept,
+            physically or notionally.
         additionalDetails:
           type: string
           maxLength: 70
@@ -1290,6 +1300,7 @@ components:
         valueInReferenceCurrency:
           $ref: '#/components/schemas/CurrencyAmount'
         valuationDate:
+          description: Date when the position was valuated.
           $ref: '#/components/schemas/Date'
     ValuationPrice:
       title: ValuationPrice
@@ -1357,7 +1368,7 @@ components:
           type: boolean
           example: true
         positionDate:
-          description: Date at which the position was valuated.
+          description: Date when the valuated position entity is exposed in the API (corresponding to the dateParam).
           $ref: '#/components/schemas/Date'
         quantity:
           $ref: '#/components/schemas/Quantity'
@@ -1378,7 +1389,9 @@ components:
           example: 34
           description: Number of days used for calculating the accrued interest amount.
         blockedQuantity:
-          description: Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading. The amount is of the same amountType as the position itself.
+          description: |
+            Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading.
+            The amount is of the same amountType as the position itself.
           $ref: '#/components/schemas/Quantity'
     TransactionType:
       title: TransactionType
@@ -1504,7 +1517,7 @@ components:
           $ref: '#/components/schemas/MovementType'
         movementDate:
           description: |
-            Date when the movement was confirmed in the custodians ledger. 
+            Date when the movement was confirmed in the custodians ledger.
             This typically corresponds with the booking date (or posting date) by the bank.
             Note that balances of end of day positions should be consistent with the aggregation of movements up to the particular date.
           $ref: '#/components/schemas/Date'
@@ -1566,12 +1579,12 @@ components:
           type: string
           readOnly: true
           maxLength: 128
-          example: 9876-54321
+          example: OTg3Ni01NDMyMQ
           description: Transaction ID given by the bank.
         type:
           $ref: '#/components/schemas/TransactionType'
         transactionDate:
-          description: Date of transaction entity.
+          description: Date when the transaction entity is exposed in the API (corresponding to the dateParam).
           $ref: '#/components/schemas/Date'
         customerId:
           type: string
@@ -1728,7 +1741,9 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-Id:
           $ref: '#/components/headers/X-Correlation-Id'
-      description: Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error as malformed request syntax.
+      description: |
+        Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
+        as malformed request syntax.
       content:
         application/problem+json:
           schema:
@@ -1767,7 +1782,9 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-Id:
           $ref: '#/components/headers/X-Correlation-Id'
-      description: Not Found - The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+      description: |
+        Not Found - The origin server did not find a current representation for the target resource
+        or is not willing to disclose that one exists.
       content:
         application/problem+json:
           schema:
@@ -1780,7 +1797,9 @@ components:
           $ref: '#/components/headers/Content-Language'
         X-Correlation-Id:
           $ref: '#/components/headers/X-Correlation-Id'
-      description: Method Not Allowed - The method received in the request-line is known by the origin server but not supported by the target resource.
+      description: |
+        Method Not Allowed - The method received in the request-line is known by the origin server
+        but not supported by the target resource.
       content:
         application/problem+json:
           schema:

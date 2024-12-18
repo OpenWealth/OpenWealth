@@ -13,7 +13,7 @@ properties:
     type: string
     readOnly: true
     maxLength: 128
-    example: 9876-54321
+    example: OTg3Ni01NDMyMQ
     description: Transaction ID given by the bank.
   type:
     $ref: 'TransactionType.yaml'
