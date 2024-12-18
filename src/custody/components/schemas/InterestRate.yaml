@@ -1,0 +1,48 @@
+title: InterestRate
+type: object
+description: Per annum ratio of interest received or paid to the principal amount of the contract for a specific period of time.
+required:
+  - type
+properties:
+  type:
+    type: string
+    description: |
+      Indicates the type of interest, where
+      - 'fixed' denotes a fixed interest rate for the agreed period.
+      - 'variable' denotes a rate that fluctuates over time because it is based on an underlying benchmark ('basis') interest rate
+      that changes periodically with the market.
+      - 'staggered' denotes a rate that is set at different levels for different periods of time or different underlying principal amount.
+    example: fixed
+    enum:
+      - fixed
+      - variable
+      - staggered
+  value:
+    type: number
+    example: 0.00125
+    description: Current rate as decimal.
+  dayCountBasis:
+    $ref: 'DayCountBasis.yaml'
+  paymentDate:
+    description: Date of the next interest payment.
+    $ref: '../../../generics/components/schemas/Date.yaml'
+  paymentFrequency:
+    type: string
+    description: Specifies the frequency of an interest payment.
+    example: quarterly
+    enum:
+      - annual
+      - monthly
+      - quarterly
+      - semiAnnual
+      - weekly
+      - atMaturity
+      - other
+  basis:
+    type: string
+    description: Benchmark by which floating rate will adjust in accordance with market conditions, such as LIBOR, EURIBOR.
+    example: LIBOR
+  spread:
+    type: number
+    description: The floating rate will be equal to the base rate (basis) plus the spread.
+    example: 0.001

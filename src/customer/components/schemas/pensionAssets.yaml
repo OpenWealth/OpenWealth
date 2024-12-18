@@ -1,0 +1,25 @@
+allOf:
+  - $ref: 'sourceBase.yaml'
+properties:
+  type:
+    type: string
+    maxLength: 125
+    description: Type of pension e.g. monthly payment
+    example: Monthly pension payment
+  provider:
+    type: string
+    maxLength: 35
+    description: Name of the pension provider
+    example: BVK
+  dateOfRetirement:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    # description: Date of retirement.
+  lastEmployer:
+    type: string
+    maxLength: 140
+    # description: Name of the last employer
+  dateOfReception:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    # description: Date when the pension assets were received.
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'

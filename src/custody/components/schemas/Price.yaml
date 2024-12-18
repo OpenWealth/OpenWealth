@@ -1,0 +1,19 @@
+type: object
+description: Price entity.
+required:
+  - type
+  - value
+properties:
+  type:
+    type: string
+    description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+    example: percentage
+    enum:
+      - actual
+      - percentage
+  value:
+    type: number
+    example: 12000
+    description: Signed decimal number.
+  currency:
+    $ref: '../../../generics/components/schemas/Currency.yaml'

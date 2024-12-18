@@ -1,0 +1,15 @@
+title: ValuationForeignExchangeRate
+description: Foreign exchange rate of given by a defined source and used for valuation.
+allOf:
+  - $ref: 'ForeignExchangeRate.yaml'
+  - type: object
+    properties:
+      rateDate:
+        description: Date of rate.
+        allOf:
+          - $ref: '../../../generics/components/schemas/Date.yaml'
+      sourceOfRate:
+        type: string
+        maxLength: 70
+        description: Indicates the source of the (market) price.
+        example: Reuters 4 o'clock

@@ -1,0 +1,41 @@
+title: ValuatedPosition
+type: object
+description: Valuated position entity.
+required:
+  - endOfDayIndicator
+  - positionDate
+  - quantity
+  - valuation
+allOf:
+  - $ref: 'Position.yaml'
+properties:
+  endOfDayIndicator:
+    description: Indicates if the position has been confirmed by the end-of-day (eod) processing.
+    type: boolean
+    example: true
+  positionDate:
+    description: Date when the valuated position entity is exposed in the API (corresponding to the dateParam).
+    $ref: '../../../generics/components/schemas/Date.yaml'
+  quantity:
+    $ref: 'Quantity.yaml'
+  valuation:
+    $ref: 'Valuation.yaml'
+  price:
+    $ref: 'ValuationPrice.yaml'
+  foreignExchangeRate:
+    $ref: 'ValuationForeignExchangeRate.yaml'
+  costPrice:
+    $ref: 'Price.yaml'
+  costForeignExchangeRate:
+    $ref: 'ForeignExchangeRate.yaml'
+  accruedInterest:
+    $ref: 'CurrencyAmount.yaml'
+  numberOfDaysAccrued:
+    type: integer
+    example: 34
+    description: Number of days used for calculating the accrued interest amount.
+  blockedQuantity:
+    description: |
+      Indicates the amount of the position which is blocked, i.e. not freely available, e.g. for trading.
+      The amount is of the same amountType as the position itself.
+    $ref: 'Quantity.yaml'

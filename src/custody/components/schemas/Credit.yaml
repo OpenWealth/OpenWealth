@@ -1,0 +1,19 @@
+title: Credit
+description: Credit.
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    required:
+      - principalAmount
+    properties:
+      principalAmount:
+        description: The current amount subject to loan or borrowing on which interest is calculated.
+        $ref: 'CurrencyAmount.yaml'
+      interestRate:
+        $ref: 'InterestRate.yaml'
+      limit:
+        type: number
+        example: 100000
+        description: Maximum principal amount allowed by the credit contract.
+      underlyingFinancialInstrument:
+        $ref: 'FinancialInstrument.yaml'

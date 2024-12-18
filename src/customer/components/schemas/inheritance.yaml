@@ -1,0 +1,30 @@
+allOf:
+  - $ref: 'sourceBase.yaml'
+required:
+  - nameOfTestator
+  - relationToTestator
+  - originOfAssetsOfTestator
+properties:
+  nameOfTestator:
+    type: string
+    maxLength: 140
+  relationToTestator:
+    type: string
+    maxLength: 35
+    description: Relation of the person to the testator
+    example: Mr Mark Muster was the father of Mr Hans Muster.
+  originOfAssetsOfTestator:
+    type: string
+    maxLength: 250
+    description: Original origin of the assets of the testator - how was the wealth generated?
+    example: Mark Muster was CEO of bank ABC in Dubai from 1997-2010.
+  natureOfAssets:
+    type: string
+    maxLength: 250
+    description: Nature of the assets received
+    example: Cash, Stocks and a property in Davos
+  dateOfReception:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    # description: Date when the inheritance was received
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'

@@ -1,0 +1,15 @@
+title: ValuationPrice
+description: Price used for valuation purpose.
+allOf:
+  - $ref: 'Price.yaml'
+  - type: object
+    properties:
+      priceDate:
+        description: Date of the price.
+        allOf:
+          - $ref: '../../../generics/components/schemas/Date.yaml'
+      sourceOfPrice:
+        type: string
+        maxLength: 70
+        description: Indicates the source of the (market)price.
+        example: SIX Swiss Exchange

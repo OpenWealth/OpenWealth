@@ -1,0 +1,18 @@
+allOf:
+  - $ref: 'sourceBase.yaml'
+properties:
+  type:
+    type: string
+    maxLength: 125
+    description: Details about the life insurance
+    example: Life insurance was remitted as a one-time payment
+  provider:
+    type: string
+    maxLength: 35
+    description: Name of the provider
+    example: Swiss Insurance Company
+  dateOfReception:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    # description: Date when the life insurance was received.
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'

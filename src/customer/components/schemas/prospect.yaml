@@ -1,0 +1,27 @@
+type: object
+required:
+  - givenName
+  - lastName
+  - nationalityList
+  - dateOfBirth
+  - domicile
+properties:
+  givenName:
+    type: string
+    maxLength: 35
+    description: Given name(s) of the person. The primary name(s) according to the passport should be indicated in that field and no abbreviations/common names (Dan instead of Daniel etc.) used.
+    example: Anthony
+  lastName:
+    type: string
+    maxLength: 35
+    description: Last name(s) of the person. The last name(s) according to the passport should be indicated in that field (hyphenated and spaced names as well).
+    example: Stark
+  nationalityList:
+    type: array
+    description: Country/Countries where a person was born or is legally accepted as belonging to the country. The first country in the list represents the main nationality.
+    items:
+      $ref: 'country.yaml'
+  dateOfBirth:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+  domicile:
+    $ref: 'country.yaml'

@@ -1,0 +1,34 @@
+allOf:
+  - $ref: 'sourceBase.yaml'
+required:
+  - details
+properties:
+  details:
+    type: string
+    maxLength: 250
+    description: Description of assets which were sold
+    example: Bitcoins
+  acquisitionOfAsset:
+    type: string
+    maxLength: 250
+    description: Origin of acquisition of asset  - When and how were the assets bought?
+    example: Bitcoins were bought in 2014 with savings from employment
+  dateOfAcquisition:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    # description: Date when the property/asset was bought
+  nameBankOrBroker:
+    type: string
+    maxLength: 35
+    description: Name of the bank/broker over which the assets were sold.
+    example: Coinbase
+  initialValue:
+    $ref: 'amount.yaml'
+    # description: Amount/Value of the asset/property when it was initially acquired e.g. 1'250'000
+  currency:
+    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+    # description: Currency the initial asset was acquired in e.g. CHF
+  dateOfSale:
+    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    # description: Date of sale of property/asset e.g 05.12.2009
+  additionalInformation:
+    $ref: 'additionalInformation.yaml'
