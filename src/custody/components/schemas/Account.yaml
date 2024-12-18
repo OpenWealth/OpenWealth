@@ -9,7 +9,7 @@ properties:
   id:
     type: string
     maxLength: 128
-    example: 8765432-19
+    example: ODc2NTQzMi0xOQ
     description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
   type:
     type: string

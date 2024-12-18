@@ -9,7 +9,7 @@ properties:
   id:
     type: string
     maxLength: 128
-    example: 876-543219
+    example: ODc2LTU0MzIxOQ
     description: Identification for the position given by the bank.
   financialInstrument:
     $ref: 'FinancialInstrument.yaml'
