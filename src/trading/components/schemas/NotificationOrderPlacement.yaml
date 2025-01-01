@@ -2,47 +2,41 @@ description: Notification for the order placement API that is pushed to the TPP.
 type: object
 properties:
   eventSubscriptionId:
-    $ref: 'eventSubscriptionId.yaml'
+    $ref: 'EventSubscriptionId.yaml'
   version:
-    $ref: 'version.yaml'
+    $ref: 'Version.yaml'
   eventType:
-    $ref: 'eventType.yaml'
+    $ref: 'EventType.yaml'
   resourceLink:
     description: Link to resource that triggered the event notification.
     type: string
     example: '/api/openwealth/order-placement/v2/orders/abcd1234'
   created:
     description: Timestamp - Date and time including timezone on which the notification has been created, according to ISO8601
-    $ref: '../../../generics/V2/components/schemas/dateTime.yaml'
+    $ref: '../../../generics/components/schemas/DateTime.yaml'
   id:
     description: Identification (UUID) of this notification.
-    $ref: 'notificationId.yaml'
+    $ref: 'NotificationId.yaml'
   predecessorId:
     description: Identification (UUID) of the notification that predeceeds this notification.
-    $ref: 'notificationId.yaml'
+    $ref: 'NotificationId.yaml'
   orderStatus:
     description: Status of the requested resource notification.
-    $ref: 'orderStatus.yaml'
+    $ref: 'OrderStatus.yaml'
   executedQuantity:
     description: Total quantity (e.g. number of shares) filled.
-    $ref: 'executedQuantity.yaml'
+    $ref: 'Quantity.yaml'
   averagePrice:
     description: Calculated average price of all fills on this order.
-    $ref: 'averagePrice.yaml'
+    $ref: 'Price.yaml'
   remainingQuantity:
     description: |
       Quantity open for further execution.
       If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
-    $ref: 'remainingQuantity.yaml'
-  dayExecutedQuantity:
-    description: Quantity on an order that has traded today.
-    $ref: 'dayExecutedQuantity.yaml'
-  dayAveragePrice:
-    description: The average price for quantity that has traded today.
-    $ref: 'dayAveragePrice.yaml'
+    $ref: 'Quantity.yaml'
   lastQuantity:
     description: Quantity (e.g. shares) bought/sold on this (last) fill.
-    $ref: 'lastQuantity.yaml'
+    $ref: 'Quantity.yaml'
   lastPrice:
     description: Price of this (last) fill.
-    $ref: 'lastPrice.yaml'
+    $ref: 'Price.yaml'

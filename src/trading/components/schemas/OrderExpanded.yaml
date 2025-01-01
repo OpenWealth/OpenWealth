@@ -1,0 +1,9 @@
+type: object
+description: Order object with extended information.
+allOf:
+  - $ref: 'Order.yaml'
+  - properties:
+      executionList:
+        $ref: 'Execution.yaml'
+      statusHistoryList:
+        $ref: 'StatusHistory.yaml'

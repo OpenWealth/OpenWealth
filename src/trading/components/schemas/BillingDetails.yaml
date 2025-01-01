@@ -3,10 +3,10 @@ properties:
   billingAmountList:
     type: array
     items:
-      $ref: 'billingAmount.yaml'
+      $ref: 'BillingAmount.yaml'
   accruedInterests:
-    $ref: 'accruedInterest.yaml'
+    $ref: 'AccruedInterest.yaml'
   feesOrTaxList:
     type: array
     items:
-      $ref: 'feeOrTax.yaml'
+      $ref: 'FeeOrTax.yaml'

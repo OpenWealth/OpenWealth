@@ -1,0 +1,17 @@
+type: object
+description: Trade execution
+properties:
+  id:
+    type: string
+    description: |
+      TBD.
+    example: MTIzLTk4ODc3NTY=
+  executedQuantity:
+    description: Total quantity (e.g. number of shares) executed.
+    $ref: 'Quantity.yaml'
+  executionDateTime:
+    description: DateTime of the single execution.
+    $ref: ../../../generics/components/schemas/DateTime.yaml
+  price:
+    description: The average price for quantity that has traded.
+    $ref: 'Price.yaml'

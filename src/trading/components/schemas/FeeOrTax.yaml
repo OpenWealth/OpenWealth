@@ -20,9 +20,9 @@ properties:
       - others
     example: stampDuty
   amount:
-    $ref: 'amount.yaml'
+    $ref: 'Amount.yaml'
   currency:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+    $ref: '../../../generics/components/schemas/Currency.yaml'
   creditDebitIndicator:
     $ref: 'creditDebitIndicator.yaml'
   foreignExchangeRate:

@@ -1,0 +1,15 @@
+type: object
+description: Execution allocation
+properties:
+  allocationId:
+    type: string
+    description: |
+      Unambiguous identifier of the individual allocation of the bulk order, as assigned by the confirming party.
+      Corresponds with the transactionIdentification of the OpenWealth Custody Services API.
+    example: MTIzLTEyMzQ1Nw==
+  allocatedQuantity:
+    description: Total quantity (e.g. number of shares) filled.
+    $ref: 'Quantity.yaml'
+  execution:
+    description: Single execution that was subject to allocation.
+    $ref: 'Execution.yaml'

@@ -1,0 +1,52 @@
+type: object
+description: Extended details regarding the allocations including validity of the allocation and billing details.
+required:
+  - id
+  - orderId
+  - cashAccount
+  - safekeepingAccount
+  - requestedQuantity
+properties:
+  id:
+    type: string
+    description: Unambiguous identifier for the allocation, as assigned by the confirming party.
+    example: MTIzLTEyMzQ1Nw==
+    readOnly: true
+  orderId:
+    type: string
+    description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
+    example: MzIxLTMyMTMyMQ==
+    readOnly: true
+  cashAccount:
+    $ref: 'Account.yaml'
+  safekeepingAccount:
+    $ref: 'Account.yaml'
+  requestedQuantity:
+    description: Quantity to be allocated to specific safekeeping account
+    $ref: 'Quantity.yaml'
+  remainingQuantity:
+    description: |
+      Quantity open for further execution.
+      If the status is cancelled, expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0,
+      otherwise remainingQuantity = orderQuantity - executedQuantity.
+    $ref: 'Quantity.yaml'
+    readOnly: true
+  averagePrice:
+    description: The average price for quantity that was traded.
+    $ref: 'Price.yaml'
+    readOnly: true
+  bookingDate:
+    description: Indicates the booking date for an order or allocation.
+    $ref: '../../../generics/components/schemas/Date.yaml'
+    readOnly: true
+  allocationCancellationReasonList:
+    items:
+      $ref: 'allocationCancellationReason.yaml'
+    readOnly: true
+  executionAllocationList:
+    items:
+      $ref: 'executionAllocation.yaml'
+      readOnly: true
+  billingDetails:
+    $ref: 'billingDetails.yaml'
+    readOnly: true
