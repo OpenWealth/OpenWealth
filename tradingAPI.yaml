@@ -92,7 +92,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/OrderExpanded'
+                  $ref: '#/components/schemas/Order'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -551,22 +551,26 @@ components:
         - marketExpired
       example: partiallyFilled
     Quantity:
+      title: Quantity
       type: object
-      description: Ordered quantity.
+      description: Quantity entity.
+      required:
+        - type
+        - value
       properties:
-        amount:
-          type: string
-          pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
-          maxLength: 22
-          example: '12000'
-          description: Absolute amount.
         type:
           type: string
-          description: Type of the amount.
-          example: unitsNumber
+          description: Specifies the type of the amount.
+          example: unit
           enum:
-            - unitsNumber
-            - nominal
+            - unit
+            - faceAmount
+            - amortisedValue
+            - digitalTokenUnit
+        value:
+          type: number
+          example: 12000
+          description: Signed decimal number.
     FinancialInstrumentDetails:
       type: object
       required:
@@ -624,10 +628,25 @@ components:
       pattern: ^[A-Z]{3}$
       example: CHF
     Price:
-      type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
-      maxLength: 22
-      example: '17.8'
+      type: object
+      description: Price entity.
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+          example: percentage
+          enum:
+            - actual
+            - percentage
+        value:
+          type: number
+          example: 12000
+          description: Signed decimal number.
+        currency:
+          $ref: '#/components/schemas/Currency'
     DateTime:
       title: DateTime
       type: string
@@ -650,12 +669,6 @@ components:
             - cashAccount
             - safekeepingAccount
             - other
-    Date:
-      title: Date
-      type: string
-      description: Date according to ISO 8601.
-      format: date
-      example: '2018-04-13'
     allocationCancellationReason:
       type: object
       properties:
@@ -686,103 +699,45 @@ components:
           type: string
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
           example: Cancelled by client.
-    Execution:
-      type: object
-      description: Trade execution
-      properties:
-        id:
-          type: string
-          description: |
-            TBD.
-          example: MTIzLTk4ODc3NTY=
-        executedQuantity:
-          description: Total quantity (e.g. number of shares) executed.
-          $ref: '#/components/schemas/Quantity'
-        executionDateTime:
-          description: DateTime of the single execution.
-          $ref: '#/components/schemas/DateTime'
-        price:
-          description: The average price for quantity that has traded.
-          $ref: '#/components/schemas/Price'
-    executionAllocation:
-      type: object
-      description: Execution allocation
-      properties:
-        allocationId:
-          type: string
-          description: |
-            Unambiguous identifier of the individual allocation of the bulk order, as assigned by the confirming party.
-            Corresponds with the transactionIdentification of the OpenWealth Custody Services API.
-          example: MTIzLTEyMzQ1Nw==
-        allocatedQuantity:
-          description: Total quantity (e.g. number of shares) filled.
-          $ref: '#/components/schemas/Quantity'
-        execution:
-          description: Single execution that was subject to allocation.
-          $ref: '#/components/schemas/Execution'
-    amount:
+    Date:
+      title: Date
       type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
-      maxLength: 22
-      example: '12000'
-      description: Absolute amount.
-    currency:
-      title: Currency
-      type: string
-      description: ISO 4217 code
-      pattern: ^[A-Z]{3}$
-      example: CHF
-    creditDebitIndicator:
-      type: string
-      enum:
-        - credit
-        - debit
-      example: debit
-      description: Specifies if the amount is a debit (negative) or credit (positive) amount.
-    foreignExchangeRate:
+      description: Date according to ISO 8601.
+      format: date
+      example: '2018-04-13'
+    ForeignExchangeRate:
+      title: ForeignExchangeRate
       type: object
+      description: An exchange rate is a rate at which one currency will be exchanged for another currency.
+      required:
+        - value
+        - sourceCurrency
+        - targetCurrency
       properties:
+        value:
+          type: number
+          description: Current rate as decimal.
+          example: 0.98
         sourceCurrency:
-          description: Currency of the amount to be converted in a currency conversion.
-          $ref: '#/components/schemas/currency'
-        rate:
-          type: string
-          pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
-          maxLength: 22
-          example: '1.0963'
-          description: |
-            Indicates the rate of a fx transaction for one source currency unit to the target currency. E.g. 1GBP=xxxEUR, where the
-            source currency is GBP and the target currency is EUR.
+          $ref: '#/components/schemas/Currency'
         targetCurrency:
-          description: Currency into which an amount is to be converted in a currency conversion.
-          $ref: '#/components/schemas/currency'
-        fxType:
-          type: string
-          description: Defines, if the indicated fx rate includes (costPrice) or excludes (dealPrice) fees and taxes.
-          example: costPrice
-          enum:
-            - costPrice
-            - dealPrice
-    BillingAmount:
+          $ref: '#/components/schemas/Currency'
+    Amount:
+      title: Amount
       type: object
+      description: Amount entity.
+      required:
+        - type
+        - value
       properties:
-        type:
-          type: string
-          description: Indicates the type of billing amount.
-          example: grossTradeAmount
-          enum:
-            - grossTradeAmount
-            - grossSettlementAmount
-            - netSettlementAmount
-            - netBillingAmount
-        amount:
-          $ref: '#/components/schemas/amount'
+        value:
+          type: number
+          example: 12000
+          description: Signed decimal number.
         currency:
-          $ref: '#/components/schemas/currency'
-        creditDebitIndicator:
-          $ref: '#/components/schemas/creditDebitIndicator'
+          $ref: '#/components/schemas/Currency'
         foreignExchangeRate:
-          $ref: '#/components/schemas/foreignExchangeRate'
+          $ref: '#/components/schemas/ForeignExchangeRate'
     AccruedInterest:
       type: object
       properties:
@@ -792,62 +747,79 @@ components:
           example: 28
           description: Specifies the number of days used for calculating the accrued interest amount.
         amount:
-          $ref: '#/components/schemas/amount'
-        currency:
-          $ref: '#/components/schemas/currency'
-        creditDebitIndicator:
-          $ref: '#/components/schemas/creditDebitIndicator'
-        foreignExchangeRate:
-          $ref: '#/components/schemas/foreignExchangeRate'
-    Amount:
-      type: string
-      pattern: ^[0-9]{1,12}([.][0-9]{1,9})?$
-      maxLength: 22
-      example: '12000'
-      description: Absolute amount.
-    FeeOrTax:
-      type: object
-      properties:
-        feeType:
-          type: string
-          description: Indicates the type of fee/tax.
-          enum:
-            - stampDuty
-            - withholdingTax
-            - capitalGainTax
-            - financialTransactionTax
-            - otherTaxes
-            - transactionFee
-            - brokerageFee
-            - managementFee
-            - courtage
-            - custodyFee
-            - exchangeFee
-            - thirdPartyFee
-            - otherFee
-            - others
-          example: stampDuty
-        amount:
-          $ref: '#/components/schemas/Amount'
+          type: number
+          description: TBD.
         currency:
           $ref: '#/components/schemas/Currency'
-        creditDebitIndicator:
-          $ref: '#/components/schemas/creditDebitIndicator'
         foreignExchangeRate:
-          $ref: '#/components/schemas/foreignExchangeRate'
+          $ref: '#/components/schemas/ForeignExchangeRate'
     billingDetails:
       type: object
       properties:
-        billingAmountList:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingAmount'
+        grossTradeAmount:
+          $ref: '#/components/schemas/Amount'
+        grossSettlementAmount:
+          $ref: '#/components/schemas/Amount'
+        netSettlementAmount:
+          $ref: '#/components/schemas/Amount'
+        netBillingAmount:
+          $ref: '#/components/schemas/Amount'
         accruedInterests:
           $ref: '#/components/schemas/AccruedInterest'
-        feesOrTaxList:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeeOrTax'
+        stampDuty:
+          $ref: '#/components/schemas/Amount'
+        withholdingTax:
+          $ref: '#/components/schemas/Amount'
+        capitalGainTax:
+          $ref: '#/components/schemas/Amount'
+        financialTransactionTax:
+          $ref: '#/components/schemas/Amount'
+        otherTaxes:
+          $ref: '#/components/schemas/Amount'
+        transactionFee:
+          $ref: '#/components/schemas/Amount'
+        brokerageFee:
+          $ref: '#/components/schemas/Amount'
+        managementFee:
+          $ref: '#/components/schemas/Amount'
+        courtage:
+          $ref: '#/components/schemas/Amount'
+        custodyFee:
+          $ref: '#/components/schemas/Amount'
+        exchangeFee:
+          $ref: '#/components/schemas/Amount'
+        thirdPartyFee:
+          $ref: '#/components/schemas/Amount'
+        otherFee:
+          $ref: '#/components/schemas/Amount'
+        others:
+          $ref: '#/components/schemas/Amount'
+    executionAllocation:
+      type: object
+      description: Execution allocation
+      properties:
+        executionReference:
+          type: string
+          description: Reference and|or identification of execution.
+        executedQuantity:
+          description: Total quantity (e.g. number of shares) executed.
+          $ref: '#/components/schemas/Quantity'
+        executionDateTime:
+          description: DateTime of the single execution.
+          $ref: '#/components/schemas/DateTime'
+        price:
+          description: The price for quantity that has traded.
+          $ref: '#/components/schemas/Price'
+        placeOfTrade:
+          $ref: '#/components/schemas/PlaceOfTrade'
+        transactionId:
+          description: Indicates the transaction identification for an allocated execution.
+          $ref: '#/components/schemas/Date'
+        bookingDate:
+          description: Indicates the booking date for an order or allocation.
+          $ref: '#/components/schemas/Date'
+        billingDetails:
+          $ref: '#/components/schemas/billingDetails'
     Allocation:
       type: object
       description: Extended details regarding the allocations including validity of the allocation and billing details.
@@ -886,10 +858,6 @@ components:
           description: The average price for quantity that was traded.
           $ref: '#/components/schemas/Price'
           readOnly: true
-        bookingDate:
-          description: Indicates the booking date for an order or allocation.
-          $ref: '#/components/schemas/Date'
-          readOnly: true
         allocationCancellationReasonList:
           items:
             $ref: '#/components/schemas/allocationCancellationReason'
@@ -897,11 +865,8 @@ components:
         executionAllocationList:
           items:
             $ref: '#/components/schemas/executionAllocation'
-            readOnly: true
-        billingDetails:
-          $ref: '#/components/schemas/billingDetails'
           readOnly: true
-    orderCancellationReason:
+    OrderCancellationReason:
       type: object
       description: Indicates the reason, why an order is invalid/cancelled/rejected.
       properties:
@@ -1053,56 +1018,11 @@ components:
             $ref: '#/components/schemas/Allocation'
         orderCancellationReasonList:
           items:
-            $ref: '#/components/schemas/orderCancellationReason'
+            $ref: '#/components/schemas/OrderCancellationReason'
+          readOnly: true
         executedQuantity:
           $ref: '#/components/schemas/Quantity'
-    orderStatus:
-      type: string
-      description: Shows in which stage of its life cycle an order is.
-      enum:
-        - acknowledged
-        - accepted
-        - customerRelease
-        - placed
-        - partiallyFilled
-        - filled
-        - executed
-        - cancelled
-        - partiallyCancelled
-        - marketCancelled
-        - pendingCancel
-        - rejected
-        - partiallyRejected
-        - marketRejected
-        - expired
-        - partiallyExpired
-        - marketExpired
-      example: partiallyFilled
-    statusDateTime:
-      type: string
-      format: date-time
-      example: '2018-04-13T11:11:11Z'
-      description: |
-        Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp). In accordance
-        with ISO 8601.
-    StatusHistory:
-      type: object
-      description: Provides the status of the order was at a certain time in its lifecycle.
-      properties:
-        status:
-          $ref: '#/components/schemas/orderStatus'
-        statusDateTime:
-          $ref: '#/components/schemas/statusDateTime'
-    OrderExpanded:
-      type: object
-      description: Order object with extended information.
-      allOf:
-        - $ref: '#/components/schemas/Order'
-        - properties:
-            executionList:
-              $ref: '#/components/schemas/Execution'
-            statusHistoryList:
-              $ref: '#/components/schemas/StatusHistory'
+          readOnly: true
     CommonErrorType:
       title: Common Error Type
       description: Error Types for CommonErrorResponse.
@@ -1237,9 +1157,11 @@ components:
             $ref: '#/components/schemas/Allocation'
         orderCancellationReasonList:
           items:
-            $ref: '#/components/schemas/orderCancellationReason'
+            $ref: '#/components/schemas/OrderCancellationReason'
+          readOnly: true
         executedQuantity:
           $ref: '#/components/schemas/Quantity'
+          readOnly: true
     account:
       type: object
       properties:

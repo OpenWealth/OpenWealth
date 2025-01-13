@@ -1,12 +1,40 @@
 type: object
 properties:
-  billingAmountList:
-    type: array
-    items:
-      $ref: 'BillingAmount.yaml'
+  grossTradeAmount:
+    $ref: 'Amount.yaml'
+  grossSettlementAmount:
+    $ref: 'Amount.yaml'
+  netSettlementAmount:
+    $ref: 'Amount.yaml'
+  netBillingAmount:
+    $ref: 'Amount.yaml'
   accruedInterests:
     $ref: 'AccruedInterest.yaml'
-  feesOrTaxList:
-    type: array
-    items:
-      $ref: 'FeeOrTax.yaml'
+  stampDuty:
+    $ref: 'Amount.yaml'
+  withholdingTax:
+    $ref: 'Amount.yaml'
+  capitalGainTax:
+    $ref: 'Amount.yaml'
+  financialTransactionTax:
+    $ref: 'Amount.yaml'
+  otherTaxes:
+    $ref: 'Amount.yaml'
+  transactionFee:
+    $ref: 'Amount.yaml'
+  brokerageFee:
+    $ref: 'Amount.yaml'
+  managementFee:
+    $ref: 'Amount.yaml'
+  courtage:
+    $ref: 'Amount.yaml'
+  custodyFee:
+    $ref: 'Amount.yaml'
+  exchangeFee:
+    $ref: 'Amount.yaml'
+  thirdPartyFee:
+    $ref: 'Amount.yaml'
+  otherFee:
+    $ref: 'Amount.yaml'
+  others:
+    $ref: 'Amount.yaml'

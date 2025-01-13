@@ -1,16 +1,20 @@
+title: Quantity
 type: object
-description: Ordered quantity.
+description: Quantity entity.
+required:
+  - type
+  - value
 properties:
-  amount:
-    type: string
-    pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
-    maxLength: 22
-    example: '12000'
-    description: Absolute amount.
   type:
     type: string
-    description: Type of the amount.
-    example: unitsNumber
+    description: Specifies the type of the amount.
+    example: unit
     enum:
-      - unitsNumber
-      - nominal
+      - unit
+      - faceAmount
+      - amortisedValue
+      - digitalTokenUnit
+  value:
+    type: number
+    example: 12000
+    description: Signed decimal number.

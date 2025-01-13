@@ -97,7 +97,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: './components/schemas/OrderExpanded.yaml'
+                  $ref: './components/schemas/Order.yaml'
         '400':
           $ref: '../generics/components/responses/400.yaml'
         '401':

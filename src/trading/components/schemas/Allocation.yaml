@@ -35,10 +35,6 @@ properties:
     description: The average price for quantity that was traded.
     $ref: 'Price.yaml'
     readOnly: true
-  bookingDate:
-    description: Indicates the booking date for an order or allocation.
-    $ref: '../../../generics/components/schemas/Date.yaml'
-    readOnly: true
   allocationCancellationReasonList:
     items:
       $ref: 'allocationCancellationReason.yaml'
@@ -46,7 +42,4 @@ properties:
   executionAllocationList:
     items:
       $ref: 'executionAllocation.yaml'
-      readOnly: true
-  billingDetails:
-    $ref: 'billingDetails.yaml'
     readOnly: true

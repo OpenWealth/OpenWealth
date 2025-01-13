@@ -1,23 +1,16 @@
+title: ForeignExchangeRate
 type: object
+description: An exchange rate is a rate at which one currency will be exchanged for another currency.
+required:
+  - value
+  - sourceCurrency
+  - targetCurrency
 properties:
+  value:
+    type: number
+    description: Current rate as decimal.
+    example: 0.98
   sourceCurrency:
-    description: Currency of the amount to be converted in a currency conversion.
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
-  rate:
-    type: string
-    pattern: '^[0-9]{1,12}([.][0-9]{1,9})?$'
-    maxLength: 22
-    example: '1.0963'
-    description: |
-      Indicates the rate of a fx transaction for one source currency unit to the target currency. E.g. 1GBP=xxxEUR, where the
-      source currency is GBP and the target currency is EUR.
+    $ref: '../../../generics/components/schemas/Currency.yaml'
   targetCurrency:
-    description: Currency into which an amount is to be converted in a currency conversion.
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
-  fxType:
-    type: string
-    description: Defines, if the indicated fx rate includes (costPrice) or excludes (dealPrice) fees and taxes.
-    example: costPrice
-    enum:
-      - costPrice
-      - dealPrice
+    $ref: '../../../generics/components/schemas/Currency.yaml'

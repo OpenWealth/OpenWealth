@@ -6,10 +6,9 @@ properties:
     example: 28
     description: Specifies the number of days used for calculating the accrued interest amount.
   amount:
-    $ref: 'amount.yaml'
+    type: number
+    description: TBD.
   currency:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
-  creditDebitIndicator:
-    $ref: 'creditDebitIndicator.yaml'
+    $ref: '../../../generics/components/schemas/Currency.yaml'
   foreignExchangeRate:
-    $ref: 'foreignExchangeRate.yaml'
+    $ref: 'ForeignExchangeRate.yaml'
