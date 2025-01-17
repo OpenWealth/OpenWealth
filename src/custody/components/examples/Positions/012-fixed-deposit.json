@@ -18,13 +18,19 @@
     "maturityDate": "2023-06-27"
   },
   "account": {
-    "id": "123456-1",
+    "id": "safekeeping-account-1",
     "type": "safekeepingAccount",
     "referenceCurrency": "CHF"
   },
   "quantity": {
     "type": "unit",
     "value": 1
+  },
+  "foreignExchangeRate": {
+    "value": 0.9,
+    "sourceCurrency": "USD",
+    "targetCurrency": "CHF",
+    "rateDate": "2022-12-31"
   },
   "valuation": {
     "valueInPositionCurrency": {
@@ -34,12 +40,6 @@
     "valueInReferenceCurrency": {
       "amount": 90000,
       "currency": "CHF"
-    },
-    "foreignExchangeRate": {
-      "value": 0.9,
-      "sourceCurrency": "USD",
-      "targetCurrency": "CHF",
-      "rateDate": "2022-12-31"
     }
   },
   "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",

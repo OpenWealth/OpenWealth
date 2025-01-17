@@ -1,0 +1,66 @@
+CashIncome:
+  externalValue: './transactions/000-cash-inflow.json'
+FxSpot:
+  externalValue: './transactions/000-fx-spot.json'
+BondBuy:
+  externalValue: './transactions/001-bond-buy.json'
+BondCoupon:
+  externalValue: './transactions/001-bond-coupon.json'
+BondMaturity:
+  externalValue: './transactions/001-bond-maturity.json'
+EquityBuxFx:
+  externalValue: './transactions/002-equity-buy-with-fx.json'
+EquityBuy:
+  externalValue: './transactions/002-equity-buy.json'
+EquityCashDividendFx:
+  externalValue: './transactions/002-equity-cash-dividend-with-fx.json'
+EquityPublicOffer:
+  externalValue: './transactions/002-equity-public-offer.json'
+EquityPublicOfferAcceptance:
+  externalValue: './transactions/002-equity-public-offer-acceptance.json'
+EquityPublicExpiry:
+  externalValue: './transactions/002-equity-public-offer-expiry.json'
+FundBuy:
+  externalValue: './transactions/003-fund-buy.json'
+FundAccumulation:
+  externalValue: './transactions/003-fund-accumulation.json'
+OptionPutBuyFx:
+  externalValue: './transactions/006-option-put-buy-with-fx.json'
+FxForwardOpen:
+  externalValue: './transactions/008-fx-forward-open-contract.json'
+FxForwardClose:
+  externalValue: './transactions/008-fx-forward-close-contract.json'
+FxSwapOpen:
+  externalValue: './transactions/009-fx-swap-open-contract.json'
+FxSwapClose:
+  externalValue: './transactions/009-fx-swap-close-contract.json'
+FxOptionBuy:
+  externalValue: './transactions/010-fx-option-buy.json'
+CallableDepositOpen:
+  externalValue: './transactions/011-callable-deposit-open.json'
+CallableDepositDecreasePrinciple:
+  externalValue: './transactions/011-callable-deposit-decrease-principle.json'
+CallableDepositInterestPayment:
+  externalValue: './transactions/011-callable-deposit-interest-payment.json'
+CallableDepositClose:
+  externalValue: './transactions/011-callable-deposit-close.json'
+FixedDepositOpen:
+  externalValue: './transactions/012-fixed-deposit-open-contract.json'
+FixedDepositClose:
+  externalValue: './transactions/012-fixed-deposit-close-contract.json'
+InterestRateSwapOpenContract:
+  externalValue: './transactions/013-interest-rate-swap-open-contract.json'
+InterestRateSwapAdditionalPayment:
+  externalValue: './transactions/013-interest-rate-swap-additional-payment.json'
+InterestRateSwapInterestPayment:
+  externalValue: './transactions/013-interest-rate-swap-interest-payment.json'
+InterestRateSwapCloseContract:
+  externalValue: './transactions/013-interest-rate-swap-close-contract.json'
+InterestRateSwapUnwind:
+  externalValue: './transactions/013-interest-rate-swap-unwind.json'
+TotalreturnSwapOpenContract:
+  externalValue: './transactions/014-total-return-swap-open-contract.json'
+CreditOpen:
+  externalValue: './transactions/015-credit-open.json'
+CreditInterestAndAmortization:
+  externalValue: './transactions/015-credit-amortisation-and-interest-payment.json'

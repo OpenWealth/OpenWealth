@@ -1,0 +1,7 @@
+{
+  "id": "cash-account-usd-1",
+  "type": "cashAccount",
+  "iban": "CH121212121212121214",
+  "number": "1234-5-4",
+  "referenceCurrency": "USD"
+}

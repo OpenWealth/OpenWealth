@@ -1,0 +1,2 @@
+eventSubscription1:
+  externalValue: ./event-subscriptions/event-subscription.json

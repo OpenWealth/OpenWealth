@@ -1,0 +1,42 @@
+{
+  "id": "pos-011",
+  "endOfDayIndicator": true,
+  "positionDate": "2022-12-31",
+  "financialInstrument": {
+    "type": "callableDeposit",
+    "name": "Callable Deposit 6'00'000 CHF",
+    "identificationList": [
+      {
+        "identifier": "CallableDepositContract1",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "principalAmount": {
+      "amount": 6000000,
+      "currency": "CHF"
+    },
+    "maturityDate": "2023-06-27"
+  },
+  "account": {
+    "id": "safekeeping-account-1",
+    "type": "safekeepingAccount",
+    "referenceCurrency": "CHF"
+  },
+  "quantity": {
+    "type": "unit",
+    "value": 1
+  },
+  "valuation": {
+    "valueInPositionCurrency": {
+      "amount": 6000000,
+      "currency": "CHF"
+    },
+    "valueInReferenceCurrency": {
+      "amount": 6000000,
+      "currency": "CHF"
+    }
+  },
+  "name": "Callable Deposit 6'000'000 USD",
+  "currency": "CHF",
+  "safekeepingPlace": "INSECHZZXXX"
+}

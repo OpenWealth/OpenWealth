@@ -1,0 +1,2 @@
+Customer:
+  externalValue: './customers/customer.json'

@@ -1,0 +1,45 @@
+{
+  "id": "pos-003",
+  "endOfDayIndicator": true,
+  "positionDate": "2022-12-31",
+  "financialInstrument": {
+    "type": "fund",
+    "name": "SILVERH AS L SQ GC",
+    "identificationList": [
+      {
+        "identifier": "LU1336212615",
+        "type": "isin"
+      }
+    ],
+    "currencyOfDenomination": "CHF"
+  },
+  "account": {
+    "id": "safekeeping-account-1",
+    "type": "safekeepingAccount",
+    "referenceCurrency": "CHF"
+  },
+  "quantity": {
+    "value": 9956.192,
+    "type": "unit"
+  },
+  "price": {
+    "type": "actual",
+    "value": 115.00,
+    "currency": "CHF",
+    "priceDate": "2022-12-31",
+    "sourceOfPrice": "CreditSuisse"
+  },
+  "valuation": {
+    "valueInPositionCurrency": {
+      "amount": 1144962.08,
+      "currency": "CHF"
+    },
+    "valueInReferenceCurrency": {
+      "amount": 1144962.08,
+      "currency": "CHF"
+    }
+  },
+  "name": "SILVERH AS L SQ GC",
+  "currency": "CHF",
+  "safekeepingPlace": "INSECHZZXXX"
+}

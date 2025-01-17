@@ -1,0 +1,12 @@
+cashAccount1CHF:
+  externalValue: ./accounts/cash-account-chf-1.json
+cashAccount1EUR:
+  externalValue: ./accounts/cash-account-eur-1.json
+safekeepingAccount1:
+  externalValue: ./accounts/safekeeping-account-1.json
+cashAccount2CHF:
+  externalValue: ./accounts/cash-account-chf-2.json
+cashAccount2EUR:
+  externalValue: ./accounts/cash-account-chf-2.json
+safekeepingAccount2:
+  externalValue: ./Accounts/safekeeping-account-2.json

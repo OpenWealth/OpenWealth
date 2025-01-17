@@ -2,7 +2,7 @@
   "id": "trx-000-01",
   "type": "fxSpot",
   "transactionDate": "2023-01-05",
-  "customerId": "123456",
+  "customerId": "customer-1",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "movementList": [
@@ -21,7 +21,7 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"
@@ -49,7 +49,7 @@
         "currencyOfDenomination": "EUR"
       },
       "account": {
-        "id": "1234-57",
+        "id": "cash-account-eur-1",
         "type": "cashAccount",
         "iban": "CH121212121212121213",
         "referenceCurrency": "EUR"
@@ -68,7 +68,7 @@
       "amount": -100000,
       "currency": "CHF",
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"
@@ -78,7 +78,7 @@
       "amount": 101001.15,
       "currency": "EUR",
       "account": {
-        "id": "1234-57",
+        "id": "cash-account-eur-1",
         "type": "cashAccount",
         "iban": "CH121212121212121213",
         "referenceCurrency": "EUR"

@@ -1,0 +1,138 @@
+{
+  "id": "trx-011-03",
+  "type": "closeContract",
+  "transactionDate": "2019-02-25",
+  "customerId": "customer-1",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "reference": "callableDepositContract1",
+  "tradeDate": "2019-02-25",
+  "triggeringFinancialInstrument": {
+    "type": "callableDeposit",
+    "name": "Call Deposit CHF",
+    "identificationList": [
+      {
+        "identifier": "callableDepositContract1",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "currencyOfDenomination": "CHF",
+    "principalAmount": {
+      "amount": 0,
+      "currency": "CHF"
+    },
+    "interestRate": {
+      "type": "fixed",
+      "value": 0.021
+    }
+  },
+  "movementList": [
+    {
+      "type": "asset",
+      "movementDate": "2019-02-25",
+      "financialInstrument": {
+        "type": "callableDeposit",
+        "name": "Call Deposit CHF",
+        "identificationList": [
+          {
+            "identifier": "123456-9F-1",
+            "type": "otherProprietaryIdentification"
+          }
+        ],
+        "currencyOfDenomination": "CHF",
+        "principalAmount": {
+          "amount": 0,
+          "currency": "CHF"
+        },
+        "interestRate": {
+          "type": "fixed",
+          "value": 0.021
+        }
+      },
+      "account": {
+        "id": "safekeeping-account-1",
+        "type": "safekeepingAccount",
+        "number": "0835-2236550-85-000",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": -1
+      },
+      "positionId": "pos-011",
+      "positionCurrency": "CHF",
+      "valueDate": "2019-02-25"
+    },
+    {
+      "type": "cash",
+      "movementDate": "2019-02-25",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss franc",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "iso3"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 2900000
+      },
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
+      "valueDate": "2019-02-25"
+    },
+    {
+      "type": "interest",
+      "movementDate": "2019-02-25",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss franc",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "iso3"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 133.33
+      },
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
+      "valueDate": "2019-02-25"
+    }
+  ],
+  "postingAmountList": [
+    {
+      "amount": 120133.33,
+      "currency": "CHF",
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      }
+    }
+  ]
+}

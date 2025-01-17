@@ -1,0 +1,14 @@
+bondOrder:
+  externalValue: ./orders/bond-order-executed.json
+equitySimpleOrder:
+  externalValue: ./orders/equity-simple-order-executed.json
+equityOrder:
+  externalValue: ./orders/equity-order-executed.json
+equityOrderPartiallyExecuted:
+  externalValue: ./orders/equity-order-partially-filled.json
+fxSpotOrder:
+  externalValue: ./orders/fx-spot-order-executed.json
+fxSwapOrder:
+  externalValue: ./orders/fx-swap-order-executed.json
+cryptoOrder:
+  externalValue: ./orders/crypto-order-executed.json

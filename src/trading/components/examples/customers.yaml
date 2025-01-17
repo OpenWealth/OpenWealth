@@ -1,0 +1,4 @@
+customer1:
+  externalValue: ./customers/customer-1.json
+customer2:
+  externalValue: ./customers/customer-2.json

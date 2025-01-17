@@ -2,7 +2,7 @@
   "id": "trx-002-00",
   "type": "buy",
   "transactionDate": "2023-01-04",
-  "customerId": "123456",
+  "customerId": "customer-1",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "placeOfTrade": {
@@ -17,6 +17,15 @@
         "identifier": "US0378331005"
       }
     ]
+  },
+  "triggeringPrice": {
+    "type": "actual",
+    "value": 150.00,
+    "currency": "USD"
+  },
+  "triggeringQuantity": {
+    "type": "unit",
+    "value": 40
   },
   "movementList": [
     {
@@ -33,7 +42,7 @@
         ]
       },
       "account": {
-        "id": "123456-1",
+        "id": "safekeeping-account-1",
         "type": "safekeepingAccount",
         "referenceCurrency": "CHF"
       },
@@ -64,7 +73,7 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"
@@ -97,7 +106,7 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"
@@ -130,7 +139,7 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"
@@ -154,7 +163,7 @@
       "amount": -5451.00,
       "currency": "CHF",
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"

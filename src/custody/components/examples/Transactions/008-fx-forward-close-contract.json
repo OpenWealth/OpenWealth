@@ -2,7 +2,7 @@
   "id": "trx-008-01",
   "type": "closeContract",
   "transactionDate": "2023-06-27",
-  "customerId": "123456",
+  "customerId": "customer-1",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "triggeringFinancialInstrument": {
@@ -48,7 +48,7 @@
         "maturityDate": "2023-06-27"
       },
       "account": {
-        "id": "123456-1",
+        "id": "safekeeping-account-1",
         "type": "safekeepingAccount",
         "referenceCurrency": "CHF"
       },
@@ -73,7 +73,7 @@
         "currencyOfDenomination": "USD"
       },
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-usd-1",
         "type": "cashAccount",
         "iban": "CH121212121212121214",
         "referenceCurrency": "USD"
@@ -101,7 +101,7 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "id": "1234-57",
+        "id": "cash-account-eur-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"
@@ -120,7 +120,7 @@
       "amount": -200000,
       "currency": "USD",
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-usd-1",
         "type": "cashAccount",
         "iban": "CH121212121212121214",
         "referenceCurrency": "USD"
@@ -130,7 +130,7 @@
       "amount": 170000,
       "currency": "CHF",
       "account": {
-        "id": "1234-57",
+        "id": "cash-account-eur-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"

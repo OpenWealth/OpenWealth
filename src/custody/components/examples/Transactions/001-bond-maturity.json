@@ -2,7 +2,7 @@
   "id": "trx-001-02",
   "type": "redemption",
   "transactionDate": "2023-06-27",
-  "customerId": "123456",
+  "customerId": "customer-1",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "triggeringFinancialInstrument": {
@@ -30,7 +30,7 @@
         ]
       },
       "account": {
-        "id": "123456-1",
+        "id": "safekeeping-account-1",
         "type": "safekeepingAccount",
         "referenceCurrency": "CHF"
       },
@@ -56,7 +56,7 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"
@@ -75,7 +75,7 @@
       "amount": 200000,
       "currency": "CHF",
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"

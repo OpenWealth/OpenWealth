@@ -1,0 +1,126 @@
+{
+  "id": "trx-003-03",
+  "type": "accumulation",
+  "transactionDate": "2022-11-16",
+  "customerId": "customer-1",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "reference": "trx-003-03",
+  "triggeringFinancialInstrument": {
+    "type": "fund",
+    "name": "SILVERH AS L SQ GC",
+    "identificationList": [
+      {
+        "identifier": "LU1336212615",
+        "type": "isin"
+      }
+    ],
+    "currencyOfDenomination": "CHF"
+  },
+  "triggeringQuantity": {
+    "type": "unit",
+    "value": 9956.192
+  },
+  "movementList": [
+    {
+      "type": "cash",
+      "movementDate": "2022-11-16",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss franc",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "iso3"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 2131.5
+      },
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
+      "valueDate": "2022-11-16"
+    },
+    {
+      "type": "reinvestmentAmount",
+      "movementDate": "2022-11-16",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss franc",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "iso3"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": -1385.45
+      },
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
+      "valueDate": "2022-11-16"
+    },
+    {
+      "type": "withholdingTax",
+      "movementDate": "2022-11-16",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss franc",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "iso3"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": -746.05
+      },
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
+      "valueDate": "2022-11-16"
+    }
+  ],
+  "postingAmountList": [
+    {
+      "amount": 0,
+      "currency": "CHF",
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      }
+    }
+  ]
+}

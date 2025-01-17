@@ -1,0 +1,7 @@
+{
+  "id": "cash-account-chf-2",
+  "type": "cashAccount",
+  "customerId": "customer-2",
+  "number": "4321-5-2",
+  "referenceCurrency": "CHF"
+}

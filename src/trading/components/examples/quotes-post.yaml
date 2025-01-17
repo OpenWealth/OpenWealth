@@ -1,0 +1,4 @@
+bondQuote:
+  externalValue: ./quotes/bond-quote-post.json
+fxSwapQuote:
+  externalValue: ./quotes/fx-swap-quote-post.json

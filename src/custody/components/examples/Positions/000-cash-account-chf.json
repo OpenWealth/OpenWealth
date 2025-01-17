@@ -14,7 +14,7 @@
     "currencyOfDenomination": "CHF"
   },
   "account": {
-    "id": "1234-56",
+    "id": "cash-account-chf-1",
     "type": "cashAccount",
     "iban": "CH121212121212121212",
     "referenceCurrency": "CHF"

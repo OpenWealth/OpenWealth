@@ -2,7 +2,7 @@
   "id": "trx-008-00",
   "type": "openContract",
   "transactionDate": "2023-01-04",
-  "customerId": "123456",
+  "customerId": "customer-1",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "triggeringFinancialInstrument": {
@@ -48,7 +48,7 @@
         "maturityDate": "2023-06-27"
       },
       "account": {
-        "id": "123456-1",
+        "id": "safekeeping-account-1",
         "type": "safekeepingAccount",
         "referenceCurrency": "CHF"
       },

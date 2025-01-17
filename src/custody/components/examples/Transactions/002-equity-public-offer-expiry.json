@@ -1,0 +1,105 @@
+{
+  "id": "trx-002-03",
+  "type": "instrumentExchange",
+  "transactionDate": "2025-01-04",
+  "customerId": "customer-1",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "description": "Public offer expiry INDUS equity",
+  "triggeringFinancialInstrument": {
+    "type": "equity",
+    "name": "INDUS Holding AG Zum Rueckkauf eingereichte Aktien",
+    "identificationList": [
+      {
+        "type": "isin",
+        "identifier": "DE000A40UT21"
+      },
+      {
+        "type": "valoren",
+        "identifier": "139864684"
+      }
+    ],
+    "currencyOfDenomination": "EUR"
+  },
+  "triggeringPrice": {
+    "type": "actual",
+    "value": 22.05,
+    "currency": "EUR"
+  },
+  "triggeringQuantity": {
+    "type": "unit",
+    "value": 300
+  },
+  "movementList": [
+    {
+      "type": "asset",
+      "movementDate": "2025-01-04",
+      "financialInstrument": {
+        "type": "equity",
+        "name": "INDUS Holding AG Zum Rueckkauf eingereichte Aktien",
+        "identificationList": [
+          {
+            "type": "isin",
+            "identifier": "DE000A40UT21"
+          },
+          {
+            "type": "valoren",
+            "identifier": "139864684"
+          }
+        ],
+        "currencyOfDenomination": "EUR"
+      },
+      "account": {
+        "id": "safekeeping-account-1",
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": -300
+      },
+      "positionId": "pos-002-04",
+      "positionCurrency": "EUR",
+      "price": {
+        "type": "actual",
+        "value": 22.05,
+        "currency": "EUR"
+      }
+    },
+    {
+      "type": "asset",
+      "movementDate": "2024-12-02",
+      "financialInstrument": {
+        "type": "equity",
+        "name": "INDUS Aktie",
+        "identificationList": [
+          {
+            "type": "isin",
+            "identifier": "DE0006200108"
+          },
+          {
+            "type": "valoren",
+            "identifier": "407618"
+          }
+        ],
+        "currencyOfDenomination": "EUR"
+      },
+      "account": {
+        "id": "safekeeping-account-1",
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 300
+      },
+      "positionId": "pos-002-03",
+      "positionCurrency": "EUR",
+      "price": {
+        "type": "actual",
+        "value": 20.73,
+        "currency": "EUR"
+      }
+    }
+  ]
+}

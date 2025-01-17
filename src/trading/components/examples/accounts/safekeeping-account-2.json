@@ -1,0 +1,7 @@
+{
+  "id": "safekeeping-account-2",
+  "type": "safekeepingAccount",
+  "customerId": "customer-2",
+  "number": "4321-5-1",
+  "referenceCurrency": "EUR"
+}
