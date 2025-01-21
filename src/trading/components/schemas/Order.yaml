@@ -42,6 +42,7 @@ properties:
     readOnly: true
   status:
     $ref: 'OrderStatus.yaml'
+    readOnly: true
   side:
     type: string
     description: Side taken by a party on an order.
