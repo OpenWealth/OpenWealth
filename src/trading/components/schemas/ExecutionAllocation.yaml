@@ -16,8 +16,11 @@ properties:
   placeOfTrade:
     $ref: 'PlaceOfTrade.yaml'
   transactionId:
+    type: string
+    readOnly: true
+    maxLength: 128
+    example: OTg3Ni01NDMyMQ
     description: Indicates the transaction identification for an allocated execution.
-    $ref: '../../../generics/components/schemas/Date.yaml'
   bookingDate:
     description: Indicates the booking date for an order or allocation.
     $ref: '../../../generics/components/schemas/Date.yaml'
