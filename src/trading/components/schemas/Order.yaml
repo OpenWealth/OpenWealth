@@ -105,6 +105,7 @@ properties:
     items:
       $ref: 'Allocation.yaml'
   orderCancellationReasonList:
+    type: array
     items:
       $ref: 'OrderCancellationReason.yaml'
     readOnly: true

@@ -36,10 +36,12 @@ properties:
     $ref: 'Price.yaml'
     readOnly: true
   allocationCancellationReasonList:
+    type: array
     items:
       $ref: 'allocationCancellationReason.yaml'
     readOnly: true
   executionAllocationList:
+    type: array
     items:
       $ref: 'executionAllocation.yaml'
     readOnly: true
