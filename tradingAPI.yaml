@@ -813,8 +813,11 @@ components:
         placeOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
         transactionId:
+          type: string
+          readOnly: true
+          maxLength: 128
+          example: OTg3Ni01NDMyMQ
           description: Indicates the transaction identification for an allocated execution.
-          $ref: '#/components/schemas/Date'
         bookingDate:
           description: Indicates the booking date for an order or allocation.
           $ref: '#/components/schemas/Date'
@@ -859,10 +862,12 @@ components:
           $ref: '#/components/schemas/Price'
           readOnly: true
         allocationCancellationReasonList:
+          type: array
           items:
             $ref: '#/components/schemas/allocationCancellationReason'
           readOnly: true
         executionAllocationList:
+          type: array
           items:
             $ref: '#/components/schemas/executionAllocation'
           readOnly: true
@@ -954,6 +959,7 @@ components:
           readOnly: true
         status:
           $ref: '#/components/schemas/OrderStatus'
+          readOnly: true
         side:
           type: string
           description: Side taken by a party on an order.
@@ -1017,6 +1023,7 @@ components:
           items:
             $ref: '#/components/schemas/Allocation'
         orderCancellationReasonList:
+          type: array
           items:
             $ref: '#/components/schemas/OrderCancellationReason'
           readOnly: true
@@ -1093,6 +1100,7 @@ components:
           readOnly: true
         status:
           $ref: '#/components/schemas/OrderStatus'
+          readOnly: true
         side:
           type: string
           description: Side taken by a party on an order.
@@ -1156,6 +1164,7 @@ components:
           items:
             $ref: '#/components/schemas/Allocation'
         orderCancellationReasonList:
+          type: array
           items:
             $ref: '#/components/schemas/OrderCancellationReason'
           readOnly: true
