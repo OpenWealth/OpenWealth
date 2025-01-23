@@ -202,6 +202,7 @@ paths:
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/accountAccess'
         '400':
