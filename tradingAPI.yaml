@@ -19,9 +19,9 @@ tags:
     description: Event notification operations.
   - name: event-notification-subscription
     description: Event notification subscription operations.
-  - name: orderplacement
+  - name: order
     description: Order placement operations.
-  - name: orderstatus
+  - name: order-status-history
     description: Order status operations.
 externalDocs:
   description: Find out more about OpenWealth API specifications.
@@ -30,7 +30,7 @@ paths:
   /orders:
     post:
       tags:
-        - orderplacement
+        - order
       summary: Posts a new order
       description: Posts a new order.
       operationId: postOrder
@@ -69,7 +69,7 @@ paths:
           $ref: '#/components/responses/503'
     get:
       tags:
-        - orderstatus
+        - order
       summary: Returns a list of open security orders
       description: |
         Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
@@ -112,7 +112,7 @@ paths:
   /orders/{orderId}:
     get:
       tags:
-        - orderstatus
+        - order
       summary: Returns a single security order
       description: Returns a specific security order.
       operationId: getOrderByClientOrderId
@@ -147,7 +147,7 @@ paths:
           $ref: '#/components/responses/503'
     delete:
       tags:
-        - orderplacement
+        - order
       summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
       operationId: deleteOrderByClientOrderId
@@ -572,18 +572,18 @@ components:
           type: number
           example: 12000
           description: Signed decimal number.
-    FinancialInstrumentDetails:
+    FinancialInstrument:
       type: object
       required:
-        - financialInstrumentIdentification
+        - identification
       properties:
-        financialInstrumentIdentification:
+        identification:
           type: object
           required:
             - identification
             - type
           properties:
-            identification:
+            identifier:
               type: string
               example: CH0012005267
               description: Instrument identification.
@@ -644,7 +644,7 @@ components:
             - percentage
         value:
           type: number
-          example: 12000
+          example: 100.23
           description: Signed decimal number.
         currency:
           $ref: '#/components/schemas/Currency'
@@ -657,11 +657,11 @@ components:
     Account:
       type: object
       properties:
-        identification:
+        id:
           type: string
           maxLength: 35
-          example: 8765-43219
-          description: Unambiguous identification for the account.
+          example: ljhcglarsjhgfvl
+          description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
         type:
           type: string
           description: Indicates the type of the account.
@@ -670,6 +670,16 @@ components:
             - cashAccount
             - safekeepingAccount
             - other
+        iban:
+          type: string
+          description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
+          maxLength: 34
+          example: CH123456789
+        number:
+          type: string
+          description: Contains the accounts custody proprietary account number for an account if available.
+          maxLength: 70
+          example: 123-1234-234
     allocationCancellationReason:
       type: object
       properties:
@@ -700,12 +710,26 @@ components:
           type: string
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
           example: Cancelled by client.
-    Date:
-      title: Date
-      type: string
-      description: Date according to ISO 8601.
-      format: date
-      example: '2018-04-13'
+    Execution:
+      type: object
+      description: Entity describing a market execution
+      properties:
+        reference:
+          type: string
+          description: |
+            Identification or reference of the executed trade.
+          example: MTIzLTk4ODc3NTY=
+        quantity:
+          description: Total quantity (e.g. number of shares) executed.
+          type: number
+        executionDateTime:
+          description: DateTime of the single execution.
+          $ref: '#/components/schemas/DateTime'
+        price:
+          description: The average price for quantity that has traded.
+          $ref: '#/components/schemas/Price'
+        placeOfTrade:
+          $ref: '#/components/schemas/PlaceOfTrade'
     ForeignExchangeRate:
       title: ForeignExchangeRate
       type: object
@@ -754,7 +778,7 @@ components:
           $ref: '#/components/schemas/Currency'
         foreignExchangeRate:
           $ref: '#/components/schemas/ForeignExchangeRate'
-    billingDetails:
+    BillingDetails:
       type: object
       properties:
         grossTradeAmount:
@@ -799,31 +823,21 @@ components:
       type: object
       description: Execution allocation
       properties:
-        executionReference:
-          type: string
-          description: Reference and|or identification of execution.
-        executedQuantity:
-          description: Total quantity (e.g. number of shares) executed.
+        allocatedQuantity:
           $ref: '#/components/schemas/Quantity'
-        executionDateTime:
-          description: DateTime of the single execution.
-          $ref: '#/components/schemas/DateTime'
         price:
-          description: The price for quantity that has traded.
+          description: The price for the allocated quantity.
           $ref: '#/components/schemas/Price'
-        placeOfTrade:
-          $ref: '#/components/schemas/PlaceOfTrade'
+        executionList:
+          description: List of market executions, that contributed to the allocated quantity.
+          $ref: '#/components/schemas/Execution'
+        billingDetails:
+          $ref: '#/components/schemas/BillingDetails'
         transactionId:
           type: string
-          readOnly: true
           maxLength: 128
           example: OTg3Ni01NDMyMQ
           description: Indicates the transaction identification for an allocated execution.
-        bookingDate:
-          description: Indicates the booking date for an order or allocation.
-          $ref: '#/components/schemas/Date'
-        billingDetails:
-          $ref: '#/components/schemas/billingDetails'
     Allocation:
       type: object
       description: Extended details regarding the allocations including validity of the allocation and billing details.
@@ -837,25 +851,27 @@ components:
         id:
           type: string
           description: Unambiguous identifier for the allocation, as assigned by the confirming party.
-          example: MTIzLTEyMzQ1Nw==
+          example: 08ca53e9-d78e-4e8c-9d7a-5e1ec900b1a0
           readOnly: true
         orderId:
           type: string
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
           example: MzIxLTMyMTMyMQ==
           readOnly: true
-        cashAccount:
+        creditAccount:
+          description: Account that is credited when executing the trade.
           $ref: '#/components/schemas/Account'
-        safekeepingAccount:
+        debitAccount:
+          description: Account that is debited when executing the trade.
           $ref: '#/components/schemas/Account'
         requestedQuantity:
-          description: Quantity to be allocated to specific safekeeping account
+          description: Quantity to be allocated to specific safekeeping account.
           $ref: '#/components/schemas/Quantity'
         remainingQuantity:
           description: |
             Quantity open for further execution.
-            If the status is cancelled, expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0,
-            otherwise remainingQuantity = orderQuantity - executedQuantity.
+            If the status is cancelled, expired, or rejected (in which case the order is no longer active)
+            then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
           $ref: '#/components/schemas/Quantity'
           readOnly: true
         averagePrice:
@@ -934,7 +950,7 @@ components:
         - clientOrderIdentification
         - side
         - orderQuantity
-        - financialInstrumentDetails
+        - financialInstrument
         - currency
         - executionType
         - timeInForce
@@ -945,12 +961,12 @@ components:
         id:
           type: string
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
-          example: MzIxLTMyMTMyMQ==
+          example: e6751a48-0819-4482-98a4-760453ba770d
           readOnly: true
         clientOrderIdentification:
           type: string
           example: 123-123123
-          description: Unambiguous identifier for the bulk order, as assigned by the instructing party.
+          description: Identification of the order, as assigned by the instructing party.
           maxLength: 20
         orderDateTime:
           type: string
@@ -978,9 +994,9 @@ components:
           format: integer
           example: 5
           description: Indicates number of orders to be combined for average pricing and allocation.
-        financialInstrumentDetails:
-          $ref: '#/components/schemas/FinancialInstrumentDetails'
-        placeOfTrade:
+        financialInstrument:
+          $ref: '#/components/schemas/FinancialInstrument'
+        requestedPlaceOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
         currency:
           $ref: '#/components/schemas/Currency'
@@ -1075,7 +1091,7 @@ components:
         - clientOrderIdentification
         - side
         - orderQuantity
-        - financialInstrumentDetails
+        - financialInstrument
         - currency
         - executionType
         - timeInForce
@@ -1086,12 +1102,12 @@ components:
         id:
           type: string
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
-          example: MzIxLTMyMTMyMQ==
+          example: e6751a48-0819-4482-98a4-760453ba770d
           readOnly: true
         clientOrderIdentification:
           type: string
           example: 123-123123
-          description: Unambiguous identifier for the bulk order, as assigned by the instructing party.
+          description: Identification of the order, as assigned by the instructing party.
           maxLength: 20
         orderDateTime:
           type: string
@@ -1119,9 +1135,9 @@ components:
           format: integer
           example: 5
           description: Indicates number of orders to be combined for average pricing and allocation.
-        financialInstrumentDetails:
-          $ref: '#/components/schemas/FinancialInstrumentDetails'
-        placeOfTrade:
+        financialInstrument:
+          $ref: '#/components/schemas/FinancialInstrument'
+        requestedPlaceOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
         currency:
           $ref: '#/components/schemas/Currency'
@@ -1175,11 +1191,11 @@ components:
     account:
       type: object
       properties:
-        identification:
+        id:
           type: string
           maxLength: 35
-          example: 8765-43219
-          description: Unambiguous identification for the account.
+          example: ljhcglarsjhgfvl
+          description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
         type:
           type: string
           description: Indicates the type of the account.
@@ -1188,6 +1204,16 @@ components:
             - cashAccount
             - safekeepingAccount
             - other
+        iban:
+          type: string
+          description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
+          maxLength: 34
+          example: CH123456789
+        number:
+          type: string
+          description: Contains the accounts custody proprietary account number for an account if available.
+          maxLength: 70
+          example: 123-1234-234
     accountAccess:
       type: object
       required:

@@ -10,25 +10,27 @@ properties:
   id:
     type: string
     description: Unambiguous identifier for the allocation, as assigned by the confirming party.
-    example: MTIzLTEyMzQ1Nw==
+    example: 08ca53e9-d78e-4e8c-9d7a-5e1ec900b1a0
     readOnly: true
   orderId:
     type: string
     description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
     example: MzIxLTMyMTMyMQ==
     readOnly: true
-  cashAccount:
+  creditAccount:
+    description: Account that is credited when executing the trade.
     $ref: 'Account.yaml'
-  safekeepingAccount:
+  debitAccount:
+    description: Account that is debited when executing the trade.
     $ref: 'Account.yaml'
   requestedQuantity:
-    description: Quantity to be allocated to specific safekeeping account
+    description: Quantity to be allocated to specific safekeeping account.
     $ref: 'Quantity.yaml'
   remainingQuantity:
     description: |
       Quantity open for further execution.
-      If the status is cancelled, expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0,
-      otherwise remainingQuantity = orderQuantity - executedQuantity.
+      If the status is cancelled, expired, or rejected (in which case the order is no longer active)
+      then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
     $ref: 'Quantity.yaml'
     readOnly: true
   averagePrice:

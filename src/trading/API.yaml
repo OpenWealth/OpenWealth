@@ -24,9 +24,9 @@ tags:
     description: Event notification operations.
   - name: event-notification-subscription
     description: Event notification subscription operations.
-  - name: orderplacement
+  - name: order
     description: Order placement operations.
-  - name: orderstatus
+  - name: order-status-history
     description: Order status operations.
 
 security: []
@@ -35,7 +35,7 @@ paths:
   /orders:
     post:
       tags:
-        - orderplacement
+        - order
       summary: Posts a new order
       description: Posts a new order.
       operationId: postOrder
@@ -74,7 +74,7 @@ paths:
           $ref: '../generics/components/responses/503.yaml'
     get:
       tags:
-        - orderstatus
+        - order
       summary: Returns a list of open security orders
       description: |
         Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
@@ -118,7 +118,7 @@ paths:
   /orders/{orderId}:
     get:
       tags:
-        - orderstatus
+        - order
       summary: Returns a single security order
       description: Returns a specific security order.
       operationId: getOrderByClientOrderId
@@ -153,7 +153,7 @@ paths:
           $ref: '../generics/components/responses/503.yaml'
     delete:
       tags:
-        - orderplacement
+        - order
       summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
       operationId: deleteOrderByClientOrderId

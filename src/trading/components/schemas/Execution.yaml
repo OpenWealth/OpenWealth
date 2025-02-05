@@ -1,17 +1,19 @@
 type: object
-description: Trade execution
+description: Entity describing a market execution
 properties:
-  id:
+  reference:
     type: string
     description: |
-      TBD.
+      Identification or reference of the executed trade.
     example: MTIzLTk4ODc3NTY=
-  executedQuantity:
+  quantity:
     description: Total quantity (e.g. number of shares) executed.
-    $ref: 'Quantity.yaml'
+    type: number
   executionDateTime:
     description: DateTime of the single execution.
     $ref: ../../../generics/components/schemas/DateTime.yaml
   price:
     description: The average price for quantity that has traded.
     $ref: 'Price.yaml'
+  placeOfTrade:
+    $ref: 'PlaceOfTrade.yaml'

@@ -16,7 +16,7 @@ required:
   - clientOrderIdentification
   - side
   - orderQuantity
-  - financialInstrumentDetails
+  - financialInstrument
   - currency
   - executionType
   - timeInForce
@@ -27,12 +27,12 @@ properties:
   id:
     type: string
     description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
-    example: MzIxLTMyMTMyMQ==
+    example: e6751a48-0819-4482-98a4-760453ba770d
     readOnly: true
   clientOrderIdentification:
     type: string
     example: 123-123123
-    description: Unambiguous identifier for the bulk order, as assigned by the instructing party.
+    description: Identification of the order, as assigned by the instructing party.
     maxLength: 20
   orderDateTime:
     type: string
@@ -60,9 +60,9 @@ properties:
     format: integer
     example: 5
     description: Indicates number of orders to be combined for average pricing and allocation.
-  financialInstrumentDetails:
-    $ref: 'FinancialInstrumentDetails.yaml'
-  placeOfTrade:
+  financialInstrument:
+    $ref: 'FinancialInstrument.yaml'
+  requestedPlaceOfTrade:
     $ref: 'PlaceOfTrade.yaml'
   currency:
     $ref: '../../../generics/components/schemas/Currency.yaml'

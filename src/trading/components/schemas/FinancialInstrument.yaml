@@ -1,14 +1,14 @@
 type: object
 required:
-  - financialInstrumentIdentification
+  - identification
 properties:
-  financialInstrumentIdentification:
+  identification:
     type: object
     required:
       - identification
       - type
     properties:
-      identification:
+      identifier:
         type: string
         example: CH0012005267
         description: Instrument identification.

@@ -1,28 +1,24 @@
 type: object
 description: Execution allocation
 properties:
-  executionReference:
-    type: string
-    description: Reference and|or identification of execution.
-  executedQuantity:
-    description: Total quantity (e.g. number of shares) executed.
+  # allocationId:
+  #   type: string
+  #   example: 08ca53e9-d78e-4e8c-9d7a-5e1ec900b1a0
+  allocatedQuantity:
     $ref: 'Quantity.yaml'
-  executionDateTime:
-    description: DateTime of the single execution.
-    $ref: ../../../generics/components/schemas/DateTime.yaml
   price:
-    description: The price for quantity that has traded.
+    description: The price for the allocated quantity.
     $ref: 'Price.yaml'
-  placeOfTrade:
-    $ref: 'PlaceOfTrade.yaml'
+  executionList:
+    description: List of market executions, that contributed to the allocated quantity.
+    $ref: 'Execution.yaml'
+  billingDetails:
+    $ref: 'BillingDetails.yaml'
   transactionId:
     type: string
-    readOnly: true
     maxLength: 128
     example: OTg3Ni01NDMyMQ
     description: Indicates the transaction identification for an allocated execution.
-  bookingDate:
-    description: Indicates the booking date for an order or allocation.
-    $ref: '../../../generics/components/schemas/Date.yaml'
-  billingDetails:
-    $ref: 'billingDetails.yaml'
+  # bookingDate:
+  #   description: Indicates the booking date for an order or allocation.
+  #   $ref: '../../../generics/components/schemas/Date.yaml'

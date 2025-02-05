@@ -13,7 +13,7 @@ properties:
       - percentage
   value:
     type: number
-    example: 12000
+    example: 100.23
     description: Signed decimal number.
   currency:
     $ref: '../../../generics/components/schemas/Currency.yaml'
