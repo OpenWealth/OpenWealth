@@ -18,20 +18,62 @@ externalDocs:
   url: https://openwealth.ch
 
 tags:
-  - name: accountaccess
+  - name: account
     description: Account access operations.
+  - name: order
+    description: Order operations.
+  - name: order-status
+    description: Order status operations.
+  - name: event-subscription
+    description: Event notification subscription operations.
   - name: event-notification
     description: Event notification operations.
-  - name: event-notification-subscription
-    description: Event notification subscription operations.
-  - name: order
-    description: Order placement operations.
-  - name: order-status-history
-    description: Order status operations.
 
 security: []
 
 paths:
+  /accounts:
+    get:
+      tags:
+        - account
+      summary: Returns list of accounts the requestor has access to
+      description: |
+        Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
+        object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
+      operationId: getAccountAccesses
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
+      responses:
+        '200':
+          description: Returns list of accounts the requestor has access to.
+          headers:
+            X-Correlation-ID:
+              $ref: '../generics/components/headers/X-Correlation-ID.yaml'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components/schemas/account.yaml'
+        '400':
+          $ref: '../generics/components/responses/400.yaml'
+        '401':
+          $ref: '../generics/components/responses/401.yaml'
+        '403':
+          $ref: '../generics/components/responses/403.yaml'
+        '404':
+          $ref: '../generics/components/responses/404.yaml'
+        '405':
+          $ref: '../generics/components/responses/405.yaml'
+        '500':
+          $ref: '../generics/components/responses/500.yaml'
+        '501':
+          $ref: '../generics/components/responses/501.yaml'
+        '503':
+          $ref: '../generics/components/responses/503.yaml'
+
   /orders:
     post:
       tags:
@@ -72,6 +114,7 @@ paths:
           $ref: '../generics/components/responses/501.yaml'
         '503':
           $ref: '../generics/components/responses/503.yaml'
+
     get:
       tags:
         - order
@@ -135,6 +178,9 @@ paths:
             application/json:
               schema:
                 $ref: './components/schemas/order.yaml'
+              examples:
+                ExecutedOrder:
+                  externalValue: ./components/examples/orderWithExecutionAllocation.json
         '400':
           $ref: '../generics/components/responses/400.yaml'
         '401':
@@ -151,6 +197,7 @@ paths:
           $ref: '../generics/components/responses/501.yaml'
         '503':
           $ref: '../generics/components/responses/503.yaml'
+
     delete:
       tags:
         - order
@@ -186,16 +233,18 @@ paths:
           $ref: '../generics/components/responses/501.yaml'
         '503':
           $ref: '../generics/components/responses/503.yaml'
-  /accountaccesses:
+
+  /orders/{orderId}/statuses:
     get:
       tags:
-        - accountaccess
+        - order-status
       summary: Returns list of accounts the requestor has access to
       description: |
-        Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
-        object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
-      operationId: getAccountAccesses
+        Returns list of order statuses for a given order. Paging is done based on the order status
+        object, i.e. if limit is set to 1, then 1 order status object will be returned per page.
+      operationId: getOrderStatuses
       parameters:
+        - $ref: './components/parameters/orderId.yaml'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/correlation_in_header'
@@ -210,7 +259,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: './components/schemas/accountAccess.yaml'
+                  $ref: './components/schemas/OrderStatus.yaml'
         '400':
           $ref: '../generics/components/responses/400.yaml'
         '401':
@@ -227,10 +276,11 @@ paths:
           $ref: '../generics/components/responses/501.yaml'
         '503':
           $ref: '../generics/components/responses/503.yaml'
+
   /event-subscriptions:
     post:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: Subscribe to Events
       description: Allows TPP to subscribe to specific events for the API.
       operationId: postEventSubscription
@@ -273,7 +323,7 @@ paths:
           $ref: '../generics/components/responses/504.yaml'
     get:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: View Subscriptions
       description: Allows TPP to view the event subscriptions.
       operationId: getEventSubscriptions
@@ -309,10 +359,11 @@ paths:
           $ref: '../generics/components/responses/503.yaml'
         '504':
           $ref: '../generics/components/responses/504.yaml'
+
   /event-subscriptions/{eventSubscriptionId}:
     get:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: View Subscription
       description: Allows TPP to view the event subscription.
       operationId: getEventSubscriptionByEventSubscriptionId
@@ -347,9 +398,10 @@ paths:
           $ref: '../generics/components/responses/503.yaml'
         '504':
           $ref: '../generics/components/responses/504.yaml'
+
     put:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: Change event subscription
       description: Changes event subscription.
       operationId: changeEventSubscriptionByEventSubscriptionId
@@ -393,7 +445,7 @@ paths:
 
     delete:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: Delete event subscription
       description: Deletes event subscriptions.
       operationId: deleteEventSubscriptionsByEventSubscriptionId

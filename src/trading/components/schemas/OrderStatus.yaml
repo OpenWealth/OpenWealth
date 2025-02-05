@@ -1,21 +1,30 @@
-type: string
-description: Shows in which stage of its life cycle an order is.
-enum:
-  - acknowledged
-  - accepted
-  - customerRelease
-  - placed
-  - partiallyFilled
-  - filled
-  - executed
-  - cancelled
-  - partiallyCancelled
-  - marketCancelled
-  - pendingCancel
-  - rejected
-  - partiallyRejected
-  - marketRejected
-  - expired
-  - partiallyExpired
-  - marketExpired
-example: partiallyFilled
+type: object
+description: Provides the status of the order was at a certain time in its lifecycle.
+properties:
+  status:
+    type: string
+    description: Shows in which stage of its life cycle an order is.
+    enum:
+      - acknowledged
+      - accepted
+      - customerRelease
+      - placed
+      - partiallyFilled
+      - filled
+      - executed
+      - cancelled
+      - partiallyCancelled
+      - marketCancelled
+      - pendingCancel
+      - rejected
+      - partiallyRejected
+      - marketRejected
+      - expired
+      - partiallyExpired
+      - marketExpired
+    example: partiallyFilled
+  statusDateTime:
+    description: |
+      Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp). In accordance
+      with ISO 8601.
+    $ref: '../../../generics/components/schemas/DateTime.yaml'

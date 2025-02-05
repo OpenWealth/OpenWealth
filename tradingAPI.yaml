@@ -13,20 +13,61 @@ servers:
     url: https://www.openwealth.ch
 security: []
 tags:
-  - name: accountaccess
+  - name: account
     description: Account access operations.
+  - name: order
+    description: Order operations.
+  - name: order-status
+    description: Order status operations.
+  - name: event-subscription
+    description: Event notification subscription operations.
   - name: event-notification
     description: Event notification operations.
-  - name: event-notification-subscription
-    description: Event notification subscription operations.
-  - name: order
-    description: Order placement operations.
-  - name: order-status-history
-    description: Order status operations.
 externalDocs:
   description: Find out more about OpenWealth API specifications.
   url: https://openwealth.ch
 paths:
+  /accounts:
+    get:
+      tags:
+        - account
+      summary: Returns list of accounts the requestor has access to
+      description: |
+        Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
+        object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
+      operationId: getAccountAccesses
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
+      responses:
+        '200':
+          description: Returns list of accounts the requestor has access to.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/account'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
   /orders:
     post:
       tags:
@@ -129,6 +170,193 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/order'
+              examples:
+                ExecutedOrder:
+                  value:
+                    id: order-1
+                    clientOrderIdentification: 123-123123
+                    orderDateTime: '2018-04-13T11:11:11Z'
+                    status: executed
+                    side: buy
+                    orderQuantity:
+                      type: unit
+                      value: 5
+                    displayQuantity:
+                      type: unit
+                      value: 5
+                    numberOfAllocations: 2
+                    financialInstrument:
+                      identification:
+                        identifier: CH0012005267
+                        type: isin
+                    currency: CHF
+                    executionType: market
+                    timeInForce: goodTillDate
+                    expiryDateTime: '2018-04-13T18:00:00Z'
+                    allocationList:
+                      - id: allocation-1
+                        orderId: order-1
+                        debitAccount:
+                          id: cash-acc-1
+                          type: cashAccount
+                          number: 1234-1234
+                          iban: CH1234567891234
+                        creditAccount:
+                          id: safe-1
+                          type: safekeepingAccount
+                          number: 1234-12
+                        requestedQuantity:
+                          type: unit
+                          value: 3
+                        remainingQuantity:
+                          type: unit
+                          value: 0
+                        price:
+                          type: actual
+                          value: 10.8
+                          currency: CHF
+                        executionAllocationList:
+                          - allocatedQuantity:
+                              type: unit
+                              value: 3
+                            price:
+                              type: actual
+                              value: 10.8
+                              currency: CHF
+                            executionList:
+                              - reference: exec-1
+                                quantity: 2
+                                executionDateTime: '2018-04-13T14:00:00Z'
+                                price:
+                                  type: actual
+                                  value: 10
+                                  currency: CHF
+                                placeOfTrade:
+                                  marketIdentificationCode: XSWX
+                              - reference: exec-2
+                                quantity: 2
+                                executionDateTime: '2018-04-13T15:00:00Z'
+                                price:
+                                  type: actual
+                                  value: 11
+                                  currency: CHF
+                                placeOfTrade:
+                                  marketIdentificationCode: XBRN
+                              - reference: exec-3
+                                quantity: 1
+                                executionDateTime: '2018-04-13T16:00:00Z'
+                                price:
+                                  type: actual
+                                  value: 12
+                                  currency: CHF
+                                placeOfTrade:
+                                  marketIdentificationCode: XFRA
+                            billingDetails:
+                              grossTradeAmount:
+                                value: 32.4
+                                currency: CHF
+                              grossSettlementAmount:
+                                value: 32.4
+                                currency: CHF
+                              netSettlementAmount:
+                                value: 35.4
+                                currency: CHF
+                              netBillingAmount:
+                                value: 35.4
+                                currency: CHF
+                              stampDuty:
+                                value: 1
+                                currency: CHF
+                              brokerageFee:
+                                value: 1
+                                currency: CHF
+                              exchangeFee:
+                                value: 1
+                                currency: CHF
+                            transactionId: trx-1
+                      - id: allocation-2
+                        orderId: order-1
+                        debitAccount:
+                          id: cash-acc-2
+                          type: cashAccount
+                          number: 1234-4321
+                          iban: CH1234567894321
+                        creditAccount:
+                          id: safe-2
+                          type: safekeepingAccount
+                          number: 1234-42
+                        requestedQuantity:
+                          type: unit
+                          value: 2
+                        remainingQuantity:
+                          type: unit
+                          value: 0
+                        averagePrice:
+                          type: actual
+                          value: 10.8
+                          currency: CHF
+                        executionAllocationList:
+                          - allocatedQuantity:
+                              type: unit
+                              value: 2
+                            price:
+                              type: actual
+                              value: 10.8
+                              currency: CHF
+                            executionList:
+                              - reference: exec-1
+                                quantity: 2
+                                executionDateTime: '2018-04-13T14:00:00Z'
+                                price:
+                                  type: actual
+                                  value: 10
+                                  currency: CHF
+                                placeOfTrade:
+                                  marketIdentificationCode: XSWX
+                              - reference: exec-2
+                                quantity: 2
+                                executionDateTime: '2018-04-13T15:00:00Z'
+                                price:
+                                  type: actual
+                                  value: 11
+                                  currency: CHF
+                                placeOfTrade:
+                                  marketIdentificationCode: XBRN
+                              - reference: exec-3
+                                quantity: 1
+                                executionDateTime: '2018-04-13T16:00:00Z'
+                                price:
+                                  type: actual
+                                  value: 12
+                                  currency: CHF
+                                placeOfTrade:
+                                  marketIdentificationCode: XFRA
+                            billingDetails:
+                              grossTradeAmount:
+                                value: 21.6
+                                currency: CHF
+                              grossSettlementAmount:
+                                value: 21.6
+                                currency: CHF
+                              netSettlementAmount:
+                                value: 24.6
+                                currency: CHF
+                              netBillingAmount:
+                                value: 24.6
+                                currency: CHF
+                              stampDuty:
+                                value: 1
+                                currency: CHF
+                              brokerageFee:
+                                value: 1
+                                currency: CHF
+                              exchangeFee:
+                                value: 1
+                                currency: CHF
+                            transactionId: trx-2
+                    executedQuantity:
+                      type: unit
+                      value: 5
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -180,16 +408,17 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-  /accountaccesses:
+  /orders/{orderId}/statuses:
     get:
       tags:
-        - accountaccess
+        - order-status
       summary: Returns list of accounts the requestor has access to
       description: |
-        Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
-        object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
-      operationId: getAccountAccesses
+        Returns list of order statuses for a given order. Paging is done based on the order status
+        object, i.e. if limit is set to 1, then 1 order status object will be returned per page.
+      operationId: getOrderStatuses
       parameters:
+        - $ref: '#/components/parameters/orderId'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/correlation_in_header'
@@ -204,7 +433,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/accountAccess'
+                  $ref: '#/components/schemas/OrderStatus'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -224,7 +453,7 @@ paths:
   /event-subscriptions:
     post:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: Subscribe to Events
       description: Allows TPP to subscribe to specific events for the API.
       operationId: postEventSubscription
@@ -267,7 +496,7 @@ paths:
           $ref: '#/components/responses/504'
     get:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: View Subscriptions
       description: Allows TPP to view the event subscriptions.
       operationId: getEventSubscriptions
@@ -306,7 +535,7 @@ paths:
   /event-subscriptions/{eventSubscriptionId}:
     get:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: View Subscription
       description: Allows TPP to view the event subscription.
       operationId: getEventSubscriptionByEventSubscriptionId
@@ -343,7 +572,7 @@ paths:
           $ref: '#/components/responses/504'
     put:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: Change event subscription
       description: Changes event subscription.
       operationId: changeEventSubscriptionByEventSubscriptionId
@@ -386,7 +615,7 @@ paths:
           $ref: '#/components/responses/504'
     delete:
       tags:
-        - event-notification-subscription
+        - event-subscription
       summary: Delete event subscription
       description: Deletes event subscriptions.
       operationId: deleteEventSubscriptionsByEventSubscriptionId
@@ -508,11 +737,6 @@ components:
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    X-Next-Cursor:
-      description: An opaque string value, or an empty string if there are no more results.
-      required: false
-      schema:
-        type: string
     Problem-Content-Type:
       description: application/problem+json; charset=utf-8 according to RFC7807.
       schema:
@@ -528,29 +752,114 @@ components:
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    X-Next-Cursor:
+      description: An opaque string value, or an empty string if there are no more results.
+      required: false
+      schema:
+        type: string
   schemas:
-    OrderStatus:
+    account:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 35
+          example: ljhcglarsjhgfvl
+          description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
+        type:
+          type: string
+          description: Indicates the type of the account.
+          example: safekeepingAccount
+          enum:
+            - cashAccount
+            - safekeepingAccount
+            - other
+        iban:
+          type: string
+          description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
+          maxLength: 34
+          example: CH123456789
+        number:
+          type: string
+          description: Contains the accounts custody proprietary account number for an account if available.
+          maxLength: 70
+          example: 123-1234-234
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for CommonErrorResponse.
       type: string
-      description: Shows in which stage of its life cycle an order is.
       enum:
-        - acknowledged
-        - accepted
-        - customerRelease
-        - placed
-        - partiallyFilled
-        - filled
-        - executed
-        - cancelled
-        - partiallyCancelled
-        - marketCancelled
-        - pendingCancel
-        - rejected
-        - partiallyRejected
-        - marketRejected
-        - expired
-        - partiallyExpired
-        - marketExpired
-      example: partiallyFilled
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      example: /problems/TECHNICAL_ERROR
+    CommonErrorResponse:
+      title: CommonErrorResponse
+      type: object
+      description: Common error response.
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
+          type: string
+          description: Title of the error response.
+          example: This is the general problem description
+        detail:
+          type: string
+          description: Detailed description of the error response.
+          example: Detailed problem description with respect to the current request
+        instance:
+          type: string
+          description: Entity instance that threw the error.
+          example: path/to/corresponding/resource
+    DateTime:
+      title: DateTime
+      type: string
+      description: DateTime according to ISO 8601.
+      format: date-time
+      example: '2018-04-13T16:00:00Z'
+    OrderStatus:
+      type: object
+      description: Provides the status of the order was at a certain time in its lifecycle.
+      properties:
+        status:
+          type: string
+          description: Shows in which stage of its life cycle an order is.
+          enum:
+            - acknowledged
+            - accepted
+            - customerRelease
+            - placed
+            - partiallyFilled
+            - filled
+            - executed
+            - cancelled
+            - partiallyCancelled
+            - marketCancelled
+            - pendingCancel
+            - rejected
+            - partiallyRejected
+            - marketRejected
+            - expired
+            - partiallyExpired
+            - marketExpired
+          example: partiallyFilled
+        statusDateTime:
+          description: |
+            Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp). In accordance
+            with ISO 8601.
+          $ref: '#/components/schemas/DateTime'
     Quantity:
       title: Quantity
       type: object
@@ -648,12 +957,6 @@ components:
           description: Signed decimal number.
         currency:
           $ref: '#/components/schemas/Currency'
-    DateTime:
-      title: DateTime
-      type: string
-      description: DateTime according to ISO 8601.
-      format: date-time
-      example: '2018-04-13T16:00:00Z'
     Account:
       type: object
       properties:
@@ -1047,45 +1350,6 @@ components:
         executedQuantity:
           $ref: '#/components/schemas/Quantity'
           readOnly: true
-    CommonErrorType:
-      title: Common Error Type
-      description: Error Types for CommonErrorResponse.
-      type: string
-      enum:
-        - /problems/INVALID_PAYLOAD
-        - /problems/MALFORMED_PAYLOAD
-        - /problems/INVALID_TOKEN
-        - /problems/EXPIRED_TOKEN
-        - /problems/INSUFFICIENT_PRIVILEGES
-        - /problems/NO_ACCESS_TO_RESOURCE
-        - /problems/RESOURCE_DOES_NOT_EXIST
-        - /problems/RESOURCE_NOT_READY
-        - /problems/RESOURCE_TOO_LARGE
-        - /problems/WRONG_METHOD
-        - /problems/OPERATION_NOT_ALLOWED
-        - /problems/TECHNICAL_ERROR
-        - /problems/NOT_IMPLEMENTED
-        - /problems/SERVICE_UNAVAILABLE
-      example: /problems/TECHNICAL_ERROR
-    CommonErrorResponse:
-      title: CommonErrorResponse
-      type: object
-      description: Common error response.
-      properties:
-        type:
-          $ref: '#/components/schemas/CommonErrorType'
-        title:
-          type: string
-          description: Title of the error response.
-          example: This is the general problem description
-        detail:
-          type: string
-          description: Detailed description of the error response.
-          example: Detailed problem description with respect to the current request
-        instance:
-          type: string
-          description: Entity instance that threw the error.
-          example: path/to/corresponding/resource
     order:
       required:
         - clientOrderIdentification
@@ -1188,47 +1452,6 @@ components:
         executedQuantity:
           $ref: '#/components/schemas/Quantity'
           readOnly: true
-    account:
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 35
-          example: ljhcglarsjhgfvl
-          description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
-        type:
-          type: string
-          description: Indicates the type of the account.
-          example: safekeepingAccount
-          enum:
-            - cashAccount
-            - safekeepingAccount
-            - other
-        iban:
-          type: string
-          description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
-          maxLength: 34
-          example: CH123456789
-        number:
-          type: string
-          description: Contains the accounts custody proprietary account number for an account if available.
-          maxLength: 70
-          example: 123-1234-234
-    accountAccess:
-      type: object
-      required:
-        - account
-        - accessType
-      properties:
-        account:
-          $ref: '#/components/schemas/account'
-        accessType:
-          type: string
-          description: Indicates what type of access the requestor has for the specified account.
-          enum:
-            - read
-            - write
-          example: read
     eventSubscriptionId:
       description: |
         Unique identification as assigned by the API exposing party to uniquely
