@@ -38,8 +38,8 @@ paths:
         - account
       summary: Returns list of accounts the requestor has access to
       description: |
-        Returns list of accounts the requestor has access to with the type of access the requestor has. Paging is done based on the accountaccess
-        object, i.e. if limit is set to 1, then 1 accountaccess object will be returned per page.
+        Returns list of accounts the requestor has access to Paging is done based on the accountaccess
+        object, i.e. if limit is set to 1, then 1 account object will be returned per page.
       operationId: getAccountAccesses
       parameters:
         - $ref: '#/components/parameters/cursor'
