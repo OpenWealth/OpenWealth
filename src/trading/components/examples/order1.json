@@ -1,8 +1,11 @@
 {
   "id": "order-1",
-  "clientOrderIdentification": "123-123123",
+  "clientReference": "123-123123",
   "orderDateTime": "2018-04-13T11:11:11Z",
-  "status": "executed",
+  "status": {
+    "status": "executed",
+    "statusDateTime": "2018-04-13T16:00:00Z"
+  },
   "side": "buy",
   "orderQuantity": {
     "type": "unit",
@@ -62,46 +65,10 @@
             "value": 10.8,
             "currency": "CHF"
           },
-          "executionList": [
-            {
-              "reference": "exec-1",
-              "quantity": 2,
-              "executionDateTime": "2018-04-13T14:00:00Z",
-              "price": {
-                "type": "actual",
-                "value": 10,
-                "currency": "CHF"
-              },
-              "placeOfTrade": {
-                "marketIdentificationCode": "XSWX"
-              }
-            },
-            {
-              "reference": "exec-2",
-              "quantity": 2,
-              "executionDateTime": "2018-04-13T15:00:00Z",
-              "price": {
-                "type": "actual",
-                "value": 11,
-                "currency": "CHF"
-              },
-              "placeOfTrade": {
-                "marketIdentificationCode": "XBRN"
-              }
-            },
-            {
-              "reference": "exec-3",
-              "quantity": 1,
-              "executionDateTime": "2018-04-13T16:00:00Z",
-              "price": {
-                "type": "actual",
-                "value": 12,
-                "currency": "CHF"
-              },
-              "placeOfTrade": {
-                "marketIdentificationCode": "XFRA"
-              }
-            }
+          "executionIds": [
+            "exec-1",
+            "exec-2",
+            "exec-3"
           ],
           "billingDetails": {
             "grossTradeAmount": {
@@ -175,46 +142,10 @@
             "value": 10.8,
             "currency": "CHF"
           },
-          "executionList": [
-            {
-              "reference": "exec-1",
-              "quantity": 2,
-              "executionDateTime": "2018-04-13T14:00:00Z",
-              "price": {
-                "type": "actual",
-                "value": 10,
-                "currency": "CHF"
-              },
-              "placeOfTrade": {
-                "marketIdentificationCode": "XSWX"
-              }
-            },
-            {
-              "reference": "exec-2",
-              "quantity": 2,
-              "executionDateTime": "2018-04-13T15:00:00Z",
-              "price": {
-                "type": "actual",
-                "value": 11,
-                "currency": "CHF"
-              },
-              "placeOfTrade": {
-                "marketIdentificationCode": "XBRN"
-              }
-            },
-            {
-              "reference": "exec-3",
-              "quantity": 1,
-              "executionDateTime": "2018-04-13T16:00:00Z",
-              "price": {
-                "type": "actual",
-                "value": 12,
-                "currency": "CHF"
-              },
-              "placeOfTrade": {
-                "marketIdentificationCode": "XFRA"
-              }
-            }
+          "executionIds": [
+            "exec-1",
+            "exec-2",
+            "exec-3"
           ],
           "billingDetails": {
             "grossTradeAmount": {

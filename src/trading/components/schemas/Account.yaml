@@ -3,7 +3,7 @@ properties:
   id:
     type: string
     maxLength: 35
-    example: ljhcglarsjhgfvl
+    example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
     description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
   type:
     type: string
@@ -17,7 +17,7 @@ properties:
     type: string
     description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
     maxLength: 34
-    example: CH123456789
+    example: CH1234567891234
   number:
     type: string
     description: Contains the accounts custody proprietary account number for an account if available.

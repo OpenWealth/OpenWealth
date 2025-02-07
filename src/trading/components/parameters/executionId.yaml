@@ -1,0 +1,7 @@
+in: path
+name: executionId
+required: true
+schema:
+  type: string
+  maxLength: 20
+description: The executionId as given py the API provider.

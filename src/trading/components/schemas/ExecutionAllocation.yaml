@@ -9,9 +9,11 @@ properties:
   price:
     description: The price for the allocated quantity.
     $ref: 'Price.yaml'
-  executionList:
+  executionIds:
     description: List of market executions, that contributed to the allocated quantity.
-    $ref: 'Execution.yaml'
+    items:
+      type: string
+      description: Unambiguous identifier for the execution.
   billingDetails:
     $ref: 'BillingDetails.yaml'
   transactionId:

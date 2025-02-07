@@ -14,9 +14,11 @@ servers:
 security: []
 tags:
   - name: account
-    description: Account access operations.
+    description: Account operations.
   - name: order
     description: Order operations.
+  - name: execution
+    description: Execution operations.
   - name: order-status
     description: Order status operations.
   - name: event-subscription
@@ -35,7 +37,7 @@ paths:
       description: |
         Returns list of accounts the requestor has access to Paging is done based on the accountaccess
         object, i.e. if limit is set to 1, then 1 account object will be returned per page.
-      operationId: getAccountAccesses
+      operationId: getAccounts
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
@@ -74,7 +76,7 @@ paths:
         - order
       summary: Posts a new order
       description: Posts a new order.
-      operationId: postOrder
+      operationId: createOrder
       parameters:
         - $ref: '#/components/parameters/correlation_in_header'
       requestBody:
@@ -111,7 +113,7 @@ paths:
     get:
       tags:
         - order
-      summary: Returns a list of open security orders
+      summary: Returns a list of open orders
       description: |
         Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
         i.e. if limit is set to 1, then 1 order will be returned per page.
@@ -154,9 +156,9 @@ paths:
     get:
       tags:
         - order
-      summary: Returns a single security order
+      summary: Returns a single order
       description: Returns a specific security order.
-      operationId: getOrderByClientOrderId
+      operationId: getOrderById
       parameters:
         - $ref: '#/components/parameters/orderId'
         - $ref: '#/components/parameters/correlation_in_header'
@@ -171,12 +173,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/order'
               examples:
-                ExecutedOrder:
+                Order1:
                   value:
                     id: order-1
-                    clientOrderIdentification: 123-123123
+                    clientReference: 123-123123
                     orderDateTime: '2018-04-13T11:11:11Z'
-                    status: executed
+                    status:
+                      status: executed
+                      statusDateTime: '2018-04-13T16:00:00Z'
                     side: buy
                     orderQuantity:
                       type: unit
@@ -223,34 +227,10 @@ paths:
                               type: actual
                               value: 10.8
                               currency: CHF
-                            executionList:
-                              - reference: exec-1
-                                quantity: 2
-                                executionDateTime: '2018-04-13T14:00:00Z'
-                                price:
-                                  type: actual
-                                  value: 10
-                                  currency: CHF
-                                placeOfTrade:
-                                  marketIdentificationCode: XSWX
-                              - reference: exec-2
-                                quantity: 2
-                                executionDateTime: '2018-04-13T15:00:00Z'
-                                price:
-                                  type: actual
-                                  value: 11
-                                  currency: CHF
-                                placeOfTrade:
-                                  marketIdentificationCode: XBRN
-                              - reference: exec-3
-                                quantity: 1
-                                executionDateTime: '2018-04-13T16:00:00Z'
-                                price:
-                                  type: actual
-                                  value: 12
-                                  currency: CHF
-                                placeOfTrade:
-                                  marketIdentificationCode: XFRA
+                            executionIds:
+                              - exec-1
+                              - exec-2
+                              - exec-3
                             billingDetails:
                               grossTradeAmount:
                                 value: 32.4
@@ -303,34 +283,10 @@ paths:
                               type: actual
                               value: 10.8
                               currency: CHF
-                            executionList:
-                              - reference: exec-1
-                                quantity: 2
-                                executionDateTime: '2018-04-13T14:00:00Z'
-                                price:
-                                  type: actual
-                                  value: 10
-                                  currency: CHF
-                                placeOfTrade:
-                                  marketIdentificationCode: XSWX
-                              - reference: exec-2
-                                quantity: 2
-                                executionDateTime: '2018-04-13T15:00:00Z'
-                                price:
-                                  type: actual
-                                  value: 11
-                                  currency: CHF
-                                placeOfTrade:
-                                  marketIdentificationCode: XBRN
-                              - reference: exec-3
-                                quantity: 1
-                                executionDateTime: '2018-04-13T16:00:00Z'
-                                price:
-                                  type: actual
-                                  value: 12
-                                  currency: CHF
-                                placeOfTrade:
-                                  marketIdentificationCode: XFRA
+                            executionIds:
+                              - exec-1
+                              - exec-2
+                              - exec-3
                             billingDetails:
                               grossTradeAmount:
                                 value: 21.6
@@ -378,7 +334,7 @@ paths:
         - order
       summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
-      operationId: deleteOrderByClientOrderId
+      operationId: deleteOrderById
       parameters:
         - $ref: '#/components/parameters/orderId'
         - $ref: '#/components/parameters/correlation_in_header'
@@ -392,6 +348,260 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/order'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /orders/{orderId}/executions:
+    get:
+      tags:
+        - execution
+      summary: Returns a list of executions by order
+      description: |
+        Returns all executions by order ID
+      operationId: getOrderEceutions
+      parameters:
+        - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
+      responses:
+        '200':
+          description: Execution list.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+            X-nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Execution'
+              examples:
+                ExecutionsOrder1:
+                  value:
+                    - id: exec-1
+                      reference: exec-1
+                      quantity: 2
+                      executionDateTime: '2018-04-13T14:00:00Z'
+                      price:
+                        type: actual
+                        value: 10
+                        currency: CHF
+                      placeOfTrade:
+                        marketIdentificationCode: XSWX
+                    - id: exec-2
+                      reference: exec-2
+                      quantity: 2
+                      executionDateTime: '2018-04-13T15:00:00Z'
+                      price:
+                        type: actual
+                        value: 11
+                        currency: CHF
+                      placeOfTrade:
+                        marketIdentificationCode: XBRN
+                    - id: exec-3
+                      reference: exec-3
+                      quantity: 1
+                      executionDateTime: '2018-04-13T16:00:00Z'
+                      price:
+                        type: actual
+                        value: 12
+                        currency: CHF
+                      placeOfTrade:
+                        marketIdentificationCode: XFRA
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /orders/{orderId}/executions/{executionId}:
+    get:
+      tags:
+        - execution
+      summary: Returns a single execution
+      description: Returns a specific execution by order ID and execution ID.
+      operationId: getExecutionById
+      parameters:
+        - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/executionId'
+        - $ref: '#/components/parameters/correlation_in_header'
+      responses:
+        '200':
+          description: Receive a specific order with the corresponding allocations and status.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order'
+              examples:
+                Order1:
+                  value:
+                    id: order-1
+                    clientReference: 123-123123
+                    orderDateTime: '2018-04-13T11:11:11Z'
+                    status:
+                      status: executed
+                      statusDateTime: '2018-04-13T16:00:00Z'
+                    side: buy
+                    orderQuantity:
+                      type: unit
+                      value: 5
+                    displayQuantity:
+                      type: unit
+                      value: 5
+                    numberOfAllocations: 2
+                    financialInstrument:
+                      identification:
+                        identifier: CH0012005267
+                        type: isin
+                    currency: CHF
+                    executionType: market
+                    timeInForce: goodTillDate
+                    expiryDateTime: '2018-04-13T18:00:00Z'
+                    allocationList:
+                      - id: allocation-1
+                        orderId: order-1
+                        debitAccount:
+                          id: cash-acc-1
+                          type: cashAccount
+                          number: 1234-1234
+                          iban: CH1234567891234
+                        creditAccount:
+                          id: safe-1
+                          type: safekeepingAccount
+                          number: 1234-12
+                        requestedQuantity:
+                          type: unit
+                          value: 3
+                        remainingQuantity:
+                          type: unit
+                          value: 0
+                        price:
+                          type: actual
+                          value: 10.8
+                          currency: CHF
+                        executionAllocationList:
+                          - allocatedQuantity:
+                              type: unit
+                              value: 3
+                            price:
+                              type: actual
+                              value: 10.8
+                              currency: CHF
+                            executionIds:
+                              - exec-1
+                              - exec-2
+                              - exec-3
+                            billingDetails:
+                              grossTradeAmount:
+                                value: 32.4
+                                currency: CHF
+                              grossSettlementAmount:
+                                value: 32.4
+                                currency: CHF
+                              netSettlementAmount:
+                                value: 35.4
+                                currency: CHF
+                              netBillingAmount:
+                                value: 35.4
+                                currency: CHF
+                              stampDuty:
+                                value: 1
+                                currency: CHF
+                              brokerageFee:
+                                value: 1
+                                currency: CHF
+                              exchangeFee:
+                                value: 1
+                                currency: CHF
+                            transactionId: trx-1
+                      - id: allocation-2
+                        orderId: order-1
+                        debitAccount:
+                          id: cash-acc-2
+                          type: cashAccount
+                          number: 1234-4321
+                          iban: CH1234567894321
+                        creditAccount:
+                          id: safe-2
+                          type: safekeepingAccount
+                          number: 1234-42
+                        requestedQuantity:
+                          type: unit
+                          value: 2
+                        remainingQuantity:
+                          type: unit
+                          value: 0
+                        averagePrice:
+                          type: actual
+                          value: 10.8
+                          currency: CHF
+                        executionAllocationList:
+                          - allocatedQuantity:
+                              type: unit
+                              value: 2
+                            price:
+                              type: actual
+                              value: 10.8
+                              currency: CHF
+                            executionIds:
+                              - exec-1
+                              - exec-2
+                              - exec-3
+                            billingDetails:
+                              grossTradeAmount:
+                                value: 21.6
+                                currency: CHF
+                              grossSettlementAmount:
+                                value: 21.6
+                                currency: CHF
+                              netSettlementAmount:
+                                value: 24.6
+                                currency: CHF
+                              netBillingAmount:
+                                value: 24.6
+                                currency: CHF
+                              stampDuty:
+                                value: 1
+                                currency: CHF
+                              brokerageFee:
+                                value: 1
+                                currency: CHF
+                              exchangeFee:
+                                value: 1
+                                currency: CHF
+                            transactionId: trx-2
+                    executedQuantity:
+                      type: unit
+                      value: 5
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -706,6 +916,14 @@ components:
         type: string
         maxLength: 20
       description: The orderId as given py the API provider.
+    executionId:
+      in: path
+      name: executionId
+      required: true
+      schema:
+        type: string
+        maxLength: 20
+      description: The executionId as given py the API provider.
     path_eventSubscriptionId:
       in: path
       name: eventSubscriptionId
@@ -764,7 +982,7 @@ components:
         id:
           type: string
           maxLength: 35
-          example: ljhcglarsjhgfvl
+          example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
           description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
         type:
           type: string
@@ -778,7 +996,7 @@ components:
           type: string
           description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
           maxLength: 34
-          example: CH123456789
+          example: CH1234567891234
         number:
           type: string
           description: Contains the accounts custody proprietary account number for an account if available.
@@ -963,7 +1181,7 @@ components:
         id:
           type: string
           maxLength: 35
-          example: ljhcglarsjhgfvl
+          example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
           description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
         type:
           type: string
@@ -977,7 +1195,7 @@ components:
           type: string
           description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
           maxLength: 34
-          example: CH123456789
+          example: CH1234567891234
         number:
           type: string
           description: Contains the accounts custody proprietary account number for an account if available.
@@ -1013,26 +1231,6 @@ components:
           type: string
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
           example: Cancelled by client.
-    Execution:
-      type: object
-      description: Entity describing a market execution
-      properties:
-        reference:
-          type: string
-          description: |
-            Identification or reference of the executed trade.
-          example: MTIzLTk4ODc3NTY=
-        quantity:
-          description: Total quantity (e.g. number of shares) executed.
-          type: number
-        executionDateTime:
-          description: DateTime of the single execution.
-          $ref: '#/components/schemas/DateTime'
-        price:
-          description: The average price for quantity that has traded.
-          $ref: '#/components/schemas/Price'
-        placeOfTrade:
-          $ref: '#/components/schemas/PlaceOfTrade'
     ForeignExchangeRate:
       title: ForeignExchangeRate
       type: object
@@ -1131,9 +1329,11 @@ components:
         price:
           description: The price for the allocated quantity.
           $ref: '#/components/schemas/Price'
-        executionList:
+        executionIds:
           description: List of market executions, that contributed to the allocated quantity.
-          $ref: '#/components/schemas/Execution'
+          items:
+            type: string
+            description: Unambiguous identifier for the execution.
         billingDetails:
           $ref: '#/components/schemas/BillingDetails'
         transactionId:
@@ -1159,7 +1359,7 @@ components:
         orderId:
           type: string
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
-          example: MzIxLTMyMTMyMQ==
+          example: e6751a48-0819-4482-98a4-760453ba770d
           readOnly: true
         creditAccount:
           description: Account that is credited when executing the trade.
@@ -1250,7 +1450,7 @@ components:
           example: Cancelled by client
     Order:
       required:
-        - clientOrderIdentification
+        - clientReference
         - side
         - orderQuantity
         - financialInstrument
@@ -1266,10 +1466,10 @@ components:
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
           example: e6751a48-0819-4482-98a4-760453ba770d
           readOnly: true
-        clientOrderIdentification:
+        clientReference:
           type: string
           example: 123-123123
-          description: Identification of the order, as assigned by the instructing party.
+          description: Reference of the order, as assigned by the instructing party.
           maxLength: 20
         orderDateTime:
           type: string
@@ -1352,7 +1552,7 @@ components:
           readOnly: true
     order:
       required:
-        - clientOrderIdentification
+        - clientReference
         - side
         - orderQuantity
         - financialInstrument
@@ -1368,10 +1568,10 @@ components:
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
           example: e6751a48-0819-4482-98a4-760453ba770d
           readOnly: true
-        clientOrderIdentification:
+        clientReference:
           type: string
           example: 123-123123
-          description: Identification of the order, as assigned by the instructing party.
+          description: Reference of the order, as assigned by the instructing party.
           maxLength: 20
         orderDateTime:
           type: string
@@ -1452,6 +1652,36 @@ components:
         executedQuantity:
           $ref: '#/components/schemas/Quantity'
           readOnly: true
+    Execution:
+      type: object
+      description: Entity describing a market execution
+      properties:
+        id:
+          type: string
+          description: Unambiguous identifier for the execution.
+          example: b7469157-02ea-4938-a485-bc3d9ff43f4d
+          readOnly: true
+        orderId:
+          type: string
+          description: Unambiguous identifier for the order, as assigned by the confirming party.
+          example: e6751a48-0819-4482-98a4-760453ba770d
+          readOnly: true
+        reference:
+          type: string
+          description: |
+            Identification or reference of the executed trade.
+          example: MTIzLTk4ODc3NTY=
+        quantity:
+          description: Total quantity (e.g. number of shares) executed.
+          type: number
+        executionDateTime:
+          description: DateTime of the single execution.
+          $ref: '#/components/schemas/DateTime'
+        price:
+          description: The average price for quantity that has traded.
+          $ref: '#/components/schemas/Price'
+        placeOfTrade:
+          $ref: '#/components/schemas/PlaceOfTrade'
     eventSubscriptionId:
       description: |
         Unique identification as assigned by the API exposing party to uniquely

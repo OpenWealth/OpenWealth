@@ -1,6 +1,16 @@
 type: object
 description: Entity describing a market execution
 properties:
+  id:
+    type: string
+    description: Unambiguous identifier for the execution.
+    example: b7469157-02ea-4938-a485-bc3d9ff43f4d
+    readOnly: true
+  orderId:
+    type: string
+    description: Unambiguous identifier for the order, as assigned by the confirming party.
+    example: e6751a48-0819-4482-98a4-760453ba770d
+    readOnly: true
   reference:
     type: string
     description: |

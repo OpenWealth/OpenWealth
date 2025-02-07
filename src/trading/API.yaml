@@ -19,9 +19,11 @@ externalDocs:
 
 tags:
   - name: account
-    description: Account access operations.
+    description: Account operations.
   - name: order
     description: Order operations.
+  - name: execution
+    description: Execution operations.
   - name: order-status
     description: Order status operations.
   - name: event-subscription
@@ -40,7 +42,7 @@ paths:
       description: |
         Returns list of accounts the requestor has access to Paging is done based on the accountaccess
         object, i.e. if limit is set to 1, then 1 account object will be returned per page.
-      operationId: getAccountAccesses
+      operationId: getAccounts
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
@@ -80,7 +82,7 @@ paths:
         - order
       summary: Posts a new order
       description: Posts a new order.
-      operationId: postOrder
+      operationId: createOrder
       parameters:
         - $ref: '#/components/parameters/correlation_in_header'
       requestBody:
@@ -118,7 +120,7 @@ paths:
     get:
       tags:
         - order
-      summary: Returns a list of open security orders
+      summary: Returns a list of open orders
       description: |
         Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
         i.e. if limit is set to 1, then 1 order will be returned per page.
@@ -162,9 +164,9 @@ paths:
     get:
       tags:
         - order
-      summary: Returns a single security order
+      summary: Returns a single order
       description: Returns a specific security order.
-      operationId: getOrderByClientOrderId
+      operationId: getOrderById
       parameters:
         - $ref: './components/parameters/orderId.yaml'
         - $ref: '#/components/parameters/correlation_in_header'
@@ -179,8 +181,8 @@ paths:
               schema:
                 $ref: './components/schemas/order.yaml'
               examples:
-                ExecutedOrder:
-                  externalValue: ./components/examples/orderWithExecutionAllocation.json
+                Order1:
+                  externalValue: ./components/examples/order1.json
         '400':
           $ref: '../generics/components/responses/400.yaml'
         '401':
@@ -203,7 +205,7 @@ paths:
         - order
       summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
-      operationId: deleteOrderByClientOrderId
+      operationId: deleteOrderById
       parameters:
         - $ref: './components/parameters/orderId.yaml'
         - $ref: '#/components/parameters/correlation_in_header'
@@ -217,6 +219,94 @@ paths:
             application/json:
               schema:
                 $ref: './components/schemas/order.yaml'
+        '400':
+          $ref: '../generics/components/responses/400.yaml'
+        '401':
+          $ref: '../generics/components/responses/401.yaml'
+        '403':
+          $ref: '../generics/components/responses/403.yaml'
+        '404':
+          $ref: '../generics/components/responses/404.yaml'
+        '405':
+          $ref: '../generics/components/responses/405.yaml'
+        '500':
+          $ref: '../generics/components/responses/500.yaml'
+        '501':
+          $ref: '../generics/components/responses/501.yaml'
+        '503':
+          $ref: '../generics/components/responses/503.yaml'
+
+  /orders/{orderId}/executions:
+    get:
+      tags:
+        - execution
+      summary: Returns a list of executions by order
+      description: |
+        Returns all executions by order ID
+      operationId: getOrderEceutions
+      parameters:
+        - $ref: './components/parameters/orderId.yaml'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_in_header'
+      responses:
+        '200':
+          description: Execution list.
+          headers:
+            X-Correlation-ID:
+              $ref: '../generics/components/headers/X-Correlation-ID.yaml'
+            X-nextCursor:
+              $ref: '../generics/components/headers/X-Next-Cursor.yaml'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components/schemas/Execution.yaml'
+              examples:
+                ExecutionsOrder1:
+                  externalValue: ./components/examples/executionsOrder1.json
+        '400':
+          $ref: '../generics/components/responses/400.yaml'
+        '401':
+          $ref: '../generics/components/responses/401.yaml'
+        '403':
+          $ref: '../generics/components/responses/403.yaml'
+        '404':
+          $ref: '../generics/components/responses/404.yaml'
+        '405':
+          $ref: '../generics/components/responses/405.yaml'
+        '500':
+          $ref: '../generics/components/responses/500.yaml'
+        '501':
+          $ref: '../generics/components/responses/501.yaml'
+        '503':
+          $ref: '../generics/components/responses/503.yaml'
+
+  /orders/{orderId}/executions/{executionId}:
+    get:
+      tags:
+        - execution
+      summary: Returns a single execution
+      description: Returns a specific execution by order ID and execution ID.
+      operationId: getExecutionById
+      parameters:
+        - $ref: './components/parameters/orderId.yaml'
+        - $ref: './components/parameters/executionId.yaml'
+        - $ref: '#/components/parameters/correlation_in_header'
+      responses:
+        '200':
+          description: Receive a specific order with the corresponding allocations and status.
+          headers:
+            X-Correlation-ID:
+              $ref: '../generics/components/headers/X-Correlation-ID.yaml'
+          content:
+            application/json:
+              schema:
+                $ref: './components/schemas/order.yaml'
+              examples:
+                Order1:
+                  externalValue: ./components/examples/order1.json
         '400':
           $ref: '../generics/components/responses/400.yaml'
         '401':
