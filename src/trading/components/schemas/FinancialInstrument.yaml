@@ -31,4 +31,6 @@ properties:
           - sicovam
           - belgian
           - common
+          - cryptocurrency
+          - iso4217
           - otherProprietaryIdentification
