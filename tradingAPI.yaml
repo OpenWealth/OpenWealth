@@ -420,7 +420,7 @@ paths:
       summary: Returns a list of executions by order
       description: |
         Returns all executions by order ID
-      operationId: getOrderEceutions
+      operationId: getOrderEcecutions
       parameters:
         - $ref: '#/components/parameters/orderId'
         - $ref: '#/components/parameters/cursor'
@@ -512,151 +512,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/order'
+                $ref: '#/components/schemas/Execution'
               examples:
                 Order1:
                   value:
-                    id: order-1
-                    clientReference: 123-123123
-                    orderDateTime: '2018-04-13T11:11:11Z'
-                    status:
-                      status: executed
-                      statusDateTime: '2018-04-13T16:00:00Z'
-                    side: buy
-                    orderQuantity:
-                      type: unit
-                      value: 5
-                    displayQuantity:
-                      type: unit
-                      value: 5
-                    numberOfAllocations: 2
-                    baseInstrument:
-                      identification:
-                        identifier: CH0012005267
-                        type: isin
-                    quoteInstrument:
-                      identification:
-                        identifier: CHF
-                        type: iso4217
-                    executionType: market
-                    timeInForce: goodTillDate
-                    expiryDateTime: '2018-04-13T18:00:00Z'
-                    allocationList:
-                      - id: allocation-1
-                        orderId: order-1
-                        debitAccount:
-                          id: cash-acc-1
-                          type: cashAccount
-                          number: 1234-1234
-                          iban: CH1234567891234
-                        creditAccount:
-                          id: safe-1
-                          type: safekeepingAccount
-                          number: 1234-12
-                        requestedQuantity:
-                          type: unit
-                          value: 3
-                        remainingQuantity:
-                          type: unit
-                          value: 0
-                        price:
-                          type: actual
-                          value: 10.8
-                          currency: CHF
-                        executionAllocationList:
-                          - allocatedQuantity:
-                              type: unit
-                              value: 3
-                            price:
-                              type: actual
-                              value: 10.8
-                              currency: CHF
-                            executionIds:
-                              - exec-1
-                              - exec-2
-                              - exec-3
-                            billingDetails:
-                              grossTradeAmount:
-                                value: 32.4
-                                currency: CHF
-                              grossSettlementAmount:
-                                value: 32.4
-                                currency: CHF
-                              netSettlementAmount:
-                                value: 35.4
-                                currency: CHF
-                              netBillingAmount:
-                                value: 35.4
-                                currency: CHF
-                              stampDuty:
-                                value: 1
-                                currency: CHF
-                              brokerageFee:
-                                value: 1
-                                currency: CHF
-                              exchangeFee:
-                                value: 1
-                                currency: CHF
-                            transactionId: trx-1
-                      - id: allocation-2
-                        orderId: order-1
-                        debitAccount:
-                          id: cash-acc-2
-                          type: cashAccount
-                          number: 1234-4321
-                          iban: CH1234567894321
-                        creditAccount:
-                          id: safe-2
-                          type: safekeepingAccount
-                          number: 1234-42
-                        requestedQuantity:
-                          type: unit
-                          value: 2
-                        remainingQuantity:
-                          type: unit
-                          value: 0
-                        averagePrice:
-                          type: actual
-                          value: 10.8
-                          currency: CHF
-                        executionAllocationList:
-                          - allocatedQuantity:
-                              type: unit
-                              value: 2
-                            price:
-                              type: actual
-                              value: 10.8
-                              currency: CHF
-                            executionIds:
-                              - exec-1
-                              - exec-2
-                              - exec-3
-                            billingDetails:
-                              grossTradeAmount:
-                                value: 21.6
-                                currency: CHF
-                              grossSettlementAmount:
-                                value: 21.6
-                                currency: CHF
-                              netSettlementAmount:
-                                value: 24.6
-                                currency: CHF
-                              netBillingAmount:
-                                value: 24.6
-                                currency: CHF
-                              stampDuty:
-                                value: 1
-                                currency: CHF
-                              brokerageFee:
-                                value: 1
-                                currency: CHF
-                              exchangeFee:
-                                value: 1
-                                currency: CHF
-                            transactionId: trx-2
-                    executedQuantity:
-                      type: unit
-                      value: 5
+                    - id: exec-1
+                      orderId: order-1
+                      reference: exec-1
+                      quantity: 2
+                      executionDateTime: '2018-04-13T14:00:00Z'
+                      price:
+                        type: actual
+                        value: 10
+                        currency: CHF
+                      placeOfTrade:
+                        marketIdentificationCode: XSWX
+                    - id: exec-2
+                      orderId: order-1
+                      reference: exec-2
+                      quantity: 2
+                      executionDateTime: '2018-04-13T15:00:00Z'
+                      price:
+                        type: actual
+                        value: 11
+                        currency: CHF
+                      placeOfTrade:
+                        marketIdentificationCode: XBRN
+                    - id: exec-3
+                      orderId: order-1
+                      reference: exec-3
+                      quantity: 1
+                      executionDateTime: '2018-04-13T16:00:00Z'
+                      price:
+                        type: actual
+                        value: 12
+                        currency: CHF
+                      placeOfTrade:
+                        marketIdentificationCode: XFRA
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -677,7 +569,7 @@ paths:
     get:
       tags:
         - order-status
-      summary: Returns list of accounts the requestor has access to
+      summary: Returns list of order statuses for a given order
       description: |
         Returns list of order statuses for a given order. Paging is done based on the order status
         object, i.e. if limit is set to 1, then 1 order status object will be returned per page.

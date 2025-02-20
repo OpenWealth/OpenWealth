@@ -246,7 +246,7 @@ paths:
       summary: Returns a list of executions by order
       description: |
         Returns all executions by order ID
-      operationId: getOrderEceutions
+      operationId: getOrderEcecutions
       parameters:
         - $ref: './components/parameters/orderId.yaml'
         - $ref: '#/components/parameters/cursor'
@@ -306,10 +306,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: './components/schemas/order.yaml'
+                $ref: './components/schemas/Execution.yaml'
               examples:
                 Order1:
-                  externalValue: ./components/examples/order1.json
+                  externalValue: ./components/examples/executionsOrder1.json
         '400':
           $ref: '../generics/components/responses/400.yaml'
         '401':
@@ -331,7 +331,7 @@ paths:
     get:
       tags:
         - order-status
-      summary: Returns list of accounts the requestor has access to
+      summary: Returns list of order statuses for a given order
       description: |
         Returns list of order statuses for a given order. Paging is done based on the order status
         object, i.e. if limit is set to 1, then 1 order status object will be returned per page.
