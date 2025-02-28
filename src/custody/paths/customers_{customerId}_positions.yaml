@@ -1,0 +1,47 @@
+get:
+  tags:
+    - positions
+  summary: Returns the positions for a specific customer
+  description: >
+    Returns all positions for a specific customer. Paging is done based on the
+    position object, i.e. if limit is set to 1,
+
+    then 1 position will be returned per page.
+  operationId: getCustomerPositionByCustomerId
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/date.yaml
+    - $ref: ../components/parameters/end_of_day_indicator.yaml
+    - $ref: ../../generics/components/parameters/cursor.yaml
+    - $ref: ../../generics/components/parameters/limit.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  responses:
+    '200':
+      description: Position List
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        nextCursor:
+          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/ValuatedPosition.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

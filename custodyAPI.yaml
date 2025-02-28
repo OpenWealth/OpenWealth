@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.1.0
+  version: 3.2.0-draft
   title: Custody Services
   description: |
     This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
@@ -1621,6 +1621,11 @@ components:
           $ref: '#/components/schemas/Date'
         settlementDate:
           description: Date and time at which the securities are to be delivered or received.
+          $ref: '#/components/schemas/Date'
+        exDate:
+          description: |
+            Date as from which trading (including exchange and OTC trading) occurs
+            on the underlying security without the benefit.
           $ref: '#/components/schemas/Date'
         triggeringFinancialInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
