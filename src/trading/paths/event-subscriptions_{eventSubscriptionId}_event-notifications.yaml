@@ -1,0 +1,26 @@
+get:
+  tags:
+    - event-notification
+  summary: Get event notifications
+  description: Get aggregated event-notification list.
+  operationId: geteventNotificationsByEventSubscriptionId
+  parameters:
+    - $ref: ../components/parameters/path_eventSubscriptionId.yaml
+    - $ref: ../components/parameters/fromEventDateTime.yaml
+    - $ref: ../components/parameters/afterEventId.yaml
+    - $ref: ../../generics/components/parameters/limit.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  responses:
+    '200':
+      description: aggregated event-notification list.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/notificationOrderPlacement.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml

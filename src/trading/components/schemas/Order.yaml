@@ -1,28 +1,14 @@
-# required:
-#   - extendedOrder
-#   - orderState
-# type: object
-# properties:
-#   statementDateTime:
-#     $ref: 'statementDateTime.yaml'
-#   extendedOrder:
-#     $ref: 'extendedOrder.yaml'
-#   orderState:
-#     $ref: 'orderState.yaml'
-#   dateList:
-#     items:
-#       $ref: 'orderDate.yaml'
+type: object
+description: Order object.
 required:
   - clientReference
   - side
   - orderQuantity
-  - financialInstrument
-  - currency
+  - baseInstrument
+  - quoteInstrument
   - executionType
   - timeInForce
   - numberOfAllocations
-type: object
-description: Order object.
 properties:
   id:
     type: string

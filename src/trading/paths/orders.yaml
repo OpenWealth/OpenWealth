@@ -1,0 +1,86 @@
+post:
+  tags:
+    - order
+  summary: Posts a new order
+  description: Posts a new order.
+  operationId: createOrder
+  parameters:
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Order.yaml
+        examples:
+          OrderCryptoAgainstCrypto:
+            externalValue: ../components/examples/orderCreateCryptoAgainstCrypto.json
+  responses:
+    '202':
+      description: Order accepted for further processing.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Order.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+get:
+  tags:
+    - order
+  summary: Returns a list of open orders
+  description: >
+    Returns all open orders to which the user of the API has access to. Paging
+    is done based on the order object,
+
+    i.e. if limit is set to 1, then 1 order will be returned per page.
+  operationId: getOrders
+  parameters:
+    - $ref: ../../generics/components/parameters/cursor.yaml
+    - $ref: ../../generics/components/parameters/limit.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  responses:
+    '200':
+      description: Order list.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+        X-nextCursor:
+          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Order.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
