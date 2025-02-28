@@ -1,12 +1,12 @@
 headers:
   Content-Type:
-    $ref: '../Headers/Problem-Content-Type.yaml'
+    $ref: '../headers/Problem-Content-Type.yaml'
   Content-Language:
-    $ref: '../Headers/Content-Language.yaml'
+    $ref: '../headers/Content-Language.yaml'
   X-Correlation-Id:
-    $ref: '../Headers/X-Correlation-Id.yaml'
+    $ref: '../headers/X-Correlation-Id.yaml'
 description: Gateway Timeout - The server did not get a response in time that it needed in order to complete the request.
 content:
   application/problem+json:
     schema:
-      $ref: "CommonErrorResponse.yaml"
+      $ref: 'CommonErrorResponse.yaml'
