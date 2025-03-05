@@ -7,12 +7,14 @@
     "value": 12
   },
   "baseInstrument": {
+    "type": "identified",
     "identification": {
       "identifier": "ETH",
       "type": "tickerSymbol"
     }
   },
   "quoteInstrument": {
+    "type": "identified",
     "identification": {
       "identifier": "BTC",
       "type": "tickerSymbol"

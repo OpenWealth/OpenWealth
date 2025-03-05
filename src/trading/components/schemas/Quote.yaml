@@ -1,0 +1,21 @@
+type: object
+required:
+  - baseInstrument
+  - quoteInstrument
+  - side
+properties:
+  id:
+    type: string
+    example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+    description: Unique identifier of given quote
+    readOnly: true
+  baseInstrument:
+    $ref: 'IdentifiedFinancialInstrument.yaml'
+  quoteInstrument:
+    $ref: 'IdentifiedFinancialInstrument.yaml'
+  offeredValue:
+    description: Rate for order with requested parameters, for spot and forward contracts
+    type: number
+    readOnly: true
+  side:
+    $ref: 'OrderSide.yaml'

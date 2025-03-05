@@ -43,6 +43,10 @@ paths:
     $ref: paths/orders_{orderId}_executions_{executionId}.yaml
   /orders/{orderId}/statuses:
     $ref: paths/orders_{orderId}_statuses.yaml
+  /quote-request:
+    $ref: paths/quote.yaml
+  /contract-request:
+    $ref: paths/contract-proposal.yaml
   /event-subscriptions:
     $ref: paths/event-subscriptions.yaml
   /event-subscriptions/{eventSubscriptionId}:

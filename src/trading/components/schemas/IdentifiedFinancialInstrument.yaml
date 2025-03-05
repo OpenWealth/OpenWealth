@@ -1,0 +1,4 @@
+title: Listed financial instrument
+description: Listed financial instrument
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'

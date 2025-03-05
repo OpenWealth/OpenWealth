@@ -1,0 +1,39 @@
+post:
+  tags:
+    - quote
+  summary: Request a quote
+  description: Request quote an FX or crypto product
+  operationId: requestQuote
+  parameters:
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/Quote.yaml'
+  responses:
+    '200':
+      description: Returns quote for the given request.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Quote.yaml'
+    '400':
+      $ref: '../../generics/components/responses/400.yaml'
+    '401':
+      $ref: '../../generics/components/responses/401.yaml'
+    '403':
+      $ref: '../../generics/components/responses/403.yaml'
+    '404':
+      $ref: '../../generics/components/responses/404.yaml'
+    '405':
+      $ref: '../../generics/components/responses/405.yaml'
+    '500':
+      $ref: '../../generics/components/responses/500.yaml'
+    '501':
+      $ref: '../../generics/components/responses/501.yaml'
+    '503':
+      $ref: '../../generics/components/responses/503.yaml'

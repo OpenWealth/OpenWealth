@@ -1,0 +1,11 @@
+title: ContractRequest
+type: object
+description: Contract request object.
+oneOf:
+  - $ref: 'FxForwardProposal.yaml'
+  - $ref: 'FxSwapProposal.yaml'
+discriminator:
+  propertyName: type
+  mapping:
+    fxForwardRequest: 'FxForwardProposal.yaml'
+    fxSwapRequest: 'FxSwapProposal.yaml'

@@ -1,0 +1,16 @@
+title: Listed financial instrument
+description: Listed financial instrument
+allOf:
+  - $ref: ContractProposalBase.yaml
+  - type: object
+    properties:
+      side:
+        $ref: OrderSide.yaml
+      baseQuantity:
+        $ref: Quantity.yaml
+      baseCurrency:
+        $ref: ../../../generics/components/schemas/Currency.yaml
+      quoteCurrency:
+        $ref: ../../../generics/components/schemas/Currency.yaml
+      settlementDate:
+        $ref: ../../../generics/components/schemas/Date.yaml
