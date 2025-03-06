@@ -1,5 +1,5 @@
-title: Listed financial instrument
-description: Listed financial instrument
+title: Fx forward contract proposal
+description: Fx forward contract proposal
 allOf:
   - $ref: ContractProposalBase.yaml
   - type: object

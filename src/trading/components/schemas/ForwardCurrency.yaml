@@ -1,5 +1,5 @@
-title: Listed financial instrument
-description: Listed financial instrument
+title: Forward Currency
+description: Forward Currency Instrument
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object

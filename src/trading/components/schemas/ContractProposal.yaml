@@ -1,6 +1,6 @@
 title: ContractRequest
 type: object
-description: Contract request object.
+description: Contract proposal object.
 oneOf:
   - $ref: 'FxForwardProposal.yaml'
   - $ref: 'FxSwapProposal.yaml'

@@ -1,6 +1,6 @@
 post:
   tags:
-    - contract request
+    - contract proposal
   summary: Creates an OTC contract
   description: Creates a proposal for an OTC contract.
   operationId: requestContract

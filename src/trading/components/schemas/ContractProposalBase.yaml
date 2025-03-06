@@ -1,5 +1,5 @@
 type: object
-description: Contract request object.
+description: Contract proposal object.
 required:
   - type
 properties:
@@ -17,7 +17,4 @@ properties:
       - currencySwap
   expiryDateTime:
     $ref: '../../../generics/components/schemas/DateTime.yaml'
-    readOnly: true
-  financialInstrument:
-    $ref: 'FinancialInstrument.yaml'
     readOnly: true

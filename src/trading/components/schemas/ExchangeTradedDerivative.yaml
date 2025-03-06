@@ -1,5 +1,5 @@
-title: Listed financial instrument
-description: Listed financial instrument
+title: Exchange traded derivativ
+description: Schema of an exchange traded derivativ
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
