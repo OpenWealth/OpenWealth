@@ -1,0 +1,8 @@
+title: Standard quote
+description: Standard quote
+allOf:
+  - $ref: QuoteBase.yaml
+  - type: object
+    properties:
+      quotedContract:
+        $ref: 'FinancialInstrument.yaml'

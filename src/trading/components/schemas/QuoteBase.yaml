@@ -1,0 +1,43 @@
+type: object
+required:
+  - type
+  - kind
+properties:
+  id:
+    type: string
+    example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+    description: Unique identifier of given quote
+    readOnly: true
+  kind:
+    type: string
+    description: |
+      Kind of quote requested.
+      - Price quote TBD
+      - Contract quote TBD
+    example: buy
+    enum:
+      - priceQuote
+      - contractQuote
+  type:
+    type: string
+    description: |
+      Type of quote requested.
+      - An indicative quote is used to inform a counterparty of a market. An indicative quote does not result directly in a trade.
+      - A tradeable quote is submitted to a market and will result directly in a trade against other orders and quotes in a market.
+      - A restricted tradeable quote is submitted to a market and within a certain restriction (possibly based upon price or quantity) will automatically trade against orders.
+        Order that do not comply with restrictions are sent to the quote issuer who can choose to accept or decline the order.
+      - A counter quote is used in the negotiation model. See Volume 7 - "Product: Fixed Income" for example usage.
+    example: buy
+    enum:
+      - indicative
+      - tradable
+      - restrictedTradable
+      - counter
+  side:
+    $ref: OrderSide.yaml
+  baseQuantity:
+    $ref: Quantity.yaml
+  baseInstrument:
+    $ref: 'FinancialInstrument.yaml'
+  quoteInstrument:
+    $ref: 'FinancialInstrument.yaml'

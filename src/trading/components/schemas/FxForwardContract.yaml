@@ -1,0 +1,20 @@
+title: Fx Forward Contract
+description: An fx forward contract is a customized contract between two parties to buy or sell currencies at a specified price on a future date.
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    required:
+      - amountPaid
+      - amountReceived
+      - settlementDate
+    properties:
+      amountPaid:
+        description: Amount paid at the maturity of a contract (i.e. FX forward).
+        $ref: 'Amount.yaml'
+      amountReceived:
+        description: Amount received at the maturity of a contract (i.e. FX forward).
+        $ref: 'Amount.yaml'
+      settlementDate:
+        description: |
+          Planned date, when the contract will be settled.
+        $ref: '../../../generics/components/schemas/Date.yaml'

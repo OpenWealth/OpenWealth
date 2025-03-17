@@ -9,6 +9,9 @@ properties:
     enum:
       - identified
       - forwardCurrency
-      - etd
+      - currencySwap
+      - fxForwardContract
+      - fxSwapContract
+      - exchangeTradedDerivative
   identification:
     $ref: FinancialInstrumentIdentification.yaml

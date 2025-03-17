@@ -1,0 +1,33 @@
+title: Fx Swap Contract
+description: |
+  A foreign currency swap contract is an agreement between two foreign parties to swap interest payments on a loan made in one currency
+  for interest payments on a loan made in another currency.
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    required:
+      - nearAmountPaid
+      - nearAmountReceived
+      - farAmountPaid
+      - farAmountReceived
+      - nearSettlementDate
+      - farSettlementDate
+    properties:
+      nearAmountPaid:
+        description: Amount paid at the earlier part of an FX swap.
+        $ref: 'Amount.yaml'
+      nearAmountReceived:
+        description: Amount received at the earlier part of an FX swap.
+        $ref: 'Amount.yaml'
+      farAmountPaid:
+        description: Amount paid at the maturity of an FX swap.
+        $ref: 'Amount.yaml'
+      farAmountReceived:
+        description: Amount received at the maturity of an FX swap.
+        $ref: 'Amount.yaml'
+      nearSettlementDate:
+        description: Date of the settlement of the near leg.
+        $ref: '../../../generics/components/schemas/Date.yaml'
+      farSettlementDate:
+        description: Date of the settlement of the far leg.
+        $ref: '../../../generics/components/schemas/Date.yaml'

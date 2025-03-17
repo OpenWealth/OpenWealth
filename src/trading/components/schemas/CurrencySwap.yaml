@@ -1,0 +1,10 @@
+title: Forward Currency
+description: Forward Currency Instrument
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    properties:
+      nearSettlementDate:
+        $ref: ../../../generics/components/schemas/Date.yaml
+      farSettlementDate:
+        $ref: ../../../generics/components/schemas/Date.yaml
