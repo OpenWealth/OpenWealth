@@ -41,3 +41,6 @@ properties:
     $ref: 'FinancialInstrument.yaml'
   quoteInstrument:
     $ref: 'FinancialInstrument.yaml'
+  expiryDateTime:
+    description: DateTime when quote expires.
+    $ref: '../../../generics/components/schemas/DateTime.yaml'
