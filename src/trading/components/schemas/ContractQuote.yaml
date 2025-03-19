@@ -5,4 +5,5 @@ allOf:
   - type: object
     properties:
       quotedContract:
+        description: The fully defined financial contract proposed by the quoting party.
         $ref: 'FinancialInstrument.yaml'

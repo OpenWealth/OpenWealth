@@ -6,23 +6,23 @@ allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
     required:
-      - nearAmountPaid
-      - nearAmountReceived
-      - farAmountPaid
-      - farAmountReceived
+      - nearAmountSold
+      - nearAmountBought
+      - farAmountSold
+      - farAmountBought
       - nearSettlementDate
       - farSettlementDate
     properties:
-      nearAmountPaid:
+      nearAmountSold:
         description: Amount paid at the earlier part of an FX swap.
         $ref: 'Amount.yaml'
-      nearAmountReceived:
+      nearAmountBought:
         description: Amount received at the earlier part of an FX swap.
         $ref: 'Amount.yaml'
-      farAmountPaid:
+      farAmountSold:
         description: Amount paid at the maturity of an FX swap.
         $ref: 'Amount.yaml'
-      farAmountReceived:
+      farAmountBought:
         description: Amount received at the maturity of an FX swap.
         $ref: 'Amount.yaml'
       nearSettlementDate:

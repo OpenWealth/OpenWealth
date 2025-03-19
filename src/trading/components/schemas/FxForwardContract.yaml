@@ -8,10 +8,10 @@ allOf:
       - amountReceived
       - settlementDate
     properties:
-      amountPaid:
+      amountSold:
         description: Amount paid at the maturity of a contract (i.e. FX forward).
         $ref: 'Amount.yaml'
-      amountReceived:
+      amountBought:
         description: Amount received at the maturity of a contract (i.e. FX forward).
         $ref: 'Amount.yaml'
       settlementDate:
