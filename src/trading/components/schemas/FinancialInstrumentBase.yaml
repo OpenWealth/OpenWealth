@@ -7,7 +7,7 @@ properties:
     description: Type of ordered instrument
     type: string
     enum:
-      - identified
+      - basic
       - forwardCurrency
       - currencySwap
       - fxForwardContract
