@@ -1,7 +1,7 @@
 get:
   tags:
     - accounts
-  summary: Returns an account by id for a specific customer
+  summary: Returns an account by id
   description: Returns an account by id for a specific customer.
   operationId: getCustomerAccountById
   parameters:
@@ -14,8 +14,6 @@ get:
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-Id.yaml
-        nextCursor:
-          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
       content:
         application/json:
           schema:

@@ -1,8 +1,8 @@
 get:
   tags:
     - positions
-  summary: Returns a positions by id for a specific account
-  description: Returns a positions for a specific account.
+  summary: Returns a position by id for a specific account
+  description: Returns a position by id for a specific account.
   operationId: getAccountPositionById
   parameters:
     - $ref: ../../generics/components/parameters/path_accountId.yaml

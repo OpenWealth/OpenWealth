@@ -1,8 +1,8 @@
 get:
   tags:
     - positions
-  summary: Returns a positions by id for a specific customer
-  description: Returns a positions for a specific customer.
+  summary: Returns a position by id for a specific customer
+  description: Returns a position by id for a specific customer.
   operationId: getCustomerPositionById
   parameters:
     - $ref: ../../generics/components/parameters/path_customerId.yaml

@@ -1,8 +1,8 @@
 get:
   tags:
     - transactions
-  summary: Returns a transaction for a specific customer
-  description: Returns a transaction instance by id.
+  summary: Returns a transaction by id for a specific customer
+  description: Returns a transaction instance by id for a specific customer.
   operationId: getTransactionByTransactionId
   parameters:
     - $ref: ../../generics/components/parameters/path_customerId.yaml
