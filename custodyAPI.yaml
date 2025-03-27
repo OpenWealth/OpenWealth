@@ -35,7 +35,8 @@ paths:
         - customers
       summary: Returns all customers (business partners) accessible for the logged in user
       description: |
-        This endpoint returns a highlevel list of customers accessible for the logged in user. Paging is done based on the customer object,
+        This endpoint returns a highlevel list of customers accessible for the
+        logged in user. Paging is done based on the customer object,
         i.e. if limit is set to 1, then 1 customer will be returned per page.
       operationId: getCustomers
       parameters:
@@ -76,9 +77,9 @@ paths:
     get:
       tags:
         - customers
-      summary: Returns a specific customer accessible for the logged in user
-      description: This endpoint returns a single customer.
-      operationId: getCustomersByCustomerId
+      summary: Returns a specific customer by id
+      description: Returns a specific customer by id accessible for the requesting user.
+      operationId: getCustomerById
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -112,9 +113,10 @@ paths:
     get:
       tags:
         - accounts
-      summary: Returns the accounts for a specific customer accessible to the querying user
+      summary: Returns the accounts for a specific customer
       description: |
-        Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1,
+        Returns all accounts for a specific customer accessible to the querying user.
+        Paging is done based on the account object, i.e. if limit is set to 1,
         then 1 account will be returned per page.
       operationId: getCustomerAccountsByCustomerId
       parameters:
@@ -156,7 +158,7 @@ paths:
     get:
       tags:
         - accounts
-      summary: Returns an account by id for a specific customer
+      summary: Returns an account by id
       description: Returns an account by id for a specific customer.
       operationId: getCustomerAccountById
       parameters:
@@ -169,8 +171,6 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
@@ -197,9 +197,10 @@ paths:
         - positions
       summary: Returns the positions for a specific customer
       description: |
-        Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1,
-        then 1 position will be returned per page.
-      operationId: getCustomerPositionByCustomerId
+        Returns all positions for a specific customer.
+        Paging is done based on the position object,
+        i.e. if limit is set to 1, then 1 position will be returned per page.
+      operationId: getCustomerPositionsByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/date'
@@ -241,8 +242,8 @@ paths:
     get:
       tags:
         - positions
-      summary: Returns a positions by id for a specific customer
-      description: Returns a positions for a specific customer.
+      summary: Returns a position by id for a specific customer
+      description: Returns a position by id for a specific customer.
       operationId: getCustomerPositionById
       parameters:
         - $ref: '#/components/parameters/path_customerId'
@@ -282,9 +283,10 @@ paths:
         - positions
       summary: Returns the positions for a specific account
       description: |
-        Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1,
+        Returns all positions for a specific account.
+        Paging is done based on the position object, i.e. if limit is set to 1,
         then 1 position will be returned per page.
-      operationId: getAccountPositionByAccountId
+      operationId: getAccountPositionsByAccountId
       parameters:
         - $ref: '#/components/parameters/path_accountId'
         - $ref: '#/components/parameters/date'
@@ -326,8 +328,8 @@ paths:
     get:
       tags:
         - positions
-      summary: Returns a positions by id for a specific account
-      description: Returns a positions for a specific account.
+      summary: Returns a position by id for a specific account
+      description: Returns a position by id for a specific account.
       operationId: getAccountPositionById
       parameters:
         - $ref: '#/components/parameters/path_accountId'
@@ -365,11 +367,12 @@ paths:
     get:
       tags:
         - transactions
-      summary: Returns a transactions for a specific customer
+      summary: Returns all transactions for a specific customer
       description: |
-        Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1,
-        then 1 transaction will be returned per page.
-      operationId: getTransactionByCustomerId
+        Returns all transactions for a specific customer.
+        Paging is done based on the transaction object,
+        i.e. if limit is set to 1, then 1 transaction will be returned per page.
+      operationId: getTransactionsByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/date'
@@ -411,8 +414,8 @@ paths:
     get:
       tags:
         - transactions
-      summary: Returns a transaction for a specific customer
-      description: Returns a transaction instance by id.
+      summary: Returns a transaction by id for a specific customer
+      description: Returns a transaction instance by id for a specific customer.
       operationId: getTransactionByTransactionId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
