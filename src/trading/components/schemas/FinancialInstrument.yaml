@@ -8,6 +8,7 @@ oneOf:
   - $ref: 'FxForwardContract.yaml'
   - $ref: 'FxSwapContract.yaml'
   - $ref: 'ExchangeTradedDerivative.yaml'
+  - $ref: 'PreciousMetal.yaml'
 discriminator:
   propertyName: type
   mapping:
@@ -17,3 +18,4 @@ discriminator:
     fxForwardContract: 'FxForwardContract.yaml'
     fxSwapContract: 'FxSwapContract.yaml'
     etd: 'ExchangeTradedDerivative.yaml'
+    preciousMetal: 'PreciousMetal.yaml'

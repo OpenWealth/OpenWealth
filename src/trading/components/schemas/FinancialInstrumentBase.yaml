@@ -13,5 +13,6 @@ properties:
       - fxForwardContract
       - fxSwapContract
       - exchangeTradedDerivative
+      - preciousMetal
   identification:
     $ref: FinancialInstrumentIdentification.yaml

@@ -1093,6 +1093,7 @@ components:
             - fxForwardContract
             - fxSwapContract
             - exchangeTradedDerivative
+            - preciousMetal
         identification:
           $ref: '#/components/schemas/FinancialInstrumentIdentification'
     ForwardCurrency:
@@ -1187,6 +1188,21 @@ components:
               $ref: '#/components/schemas/Price'
             underlyingFinancialInstrument:
               $ref: '#/components/schemas/FinancialInstrumentBase'
+    PreciousMetal:
+      title: Precious Metal
+      description: Schema of a precious metal instrument
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - unitType
+          properties:
+            unitType:
+              type: string
+              enum:
+                - g
+                - kg
+                - oz
     FinancialInstrumentIdentification:
       type: object
       required:
@@ -1297,6 +1313,7 @@ components:
         - $ref: '#/components/schemas/FxForwardContract'
         - $ref: '#/components/schemas/FxSwapContract'
         - $ref: '#/components/schemas/ExchangeTradedDerivative'
+        - $ref: '#/components/schemas/PreciousMetal'
       discriminator:
         propertyName: type
         mapping:
@@ -1306,6 +1323,7 @@ components:
           fxForwardContract: '#/components/schemas/FxForwardContract'
           fxSwapContract: '#/components/schemas/FxSwapContract'
           etd: '#/components/schemas/ExchangeTradedDerivative'
+          preciousMetal: '#/components/schemas/PreciousMetal'
     PlaceOfTrade:
       type: object
       description: Market in which a trade transaction is to be or has been executed.
