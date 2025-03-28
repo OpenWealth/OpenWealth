@@ -13,6 +13,7 @@ properties:
     description: List of market executions, that contributed to the allocated quantity.
     items:
       type: string
+      maxLength: 128
       description: Unambiguous identifier for the execution.
   billingDetails:
     $ref: 'BillingDetails.yaml'

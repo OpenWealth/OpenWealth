@@ -5,11 +5,12 @@ properties:
   identification:
     type: object
     required:
-      - identification
+      - identifier
       - type
     properties:
       identifier:
         type: string
+        maxLength: 128
         example: CH0012005267
         description: Instrument identification.
       type:

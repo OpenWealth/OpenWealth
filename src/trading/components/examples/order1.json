@@ -7,15 +7,10 @@
     "statusDateTime": "2018-04-13T16:00:00Z"
   },
   "side": "buy",
-  "orderQuantity": {
+  "quantity": {
     "type": "unit",
     "value": 5
   },
-  "displayQuantity": {
-    "type": "unit",
-    "value": 5
-  },
-  "numberOfAllocations": 2,
   "baseInstrument": {
     "identification": {
       "identifier": "CH0012005267",
@@ -46,7 +41,7 @@
         "type": "safekeepingAccount",
         "number": "1234-12"
       },
-      "requestedQuantity": {
+      "quantity": {
         "type": "unit",
         "value": 3
       },
@@ -54,7 +49,7 @@
         "type": "unit",
         "value": 0
       },
-      "price": {
+      "averagePrice": {
         "type": "actual",
         "value": 10.8,
         "currency": "CHF"
@@ -123,7 +118,7 @@
         "type": "safekeepingAccount",
         "number": "1234-42"
       },
-      "requestedQuantity": {
+      "quantity": {
         "type": "unit",
         "value": 2
       },

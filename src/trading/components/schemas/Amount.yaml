@@ -2,8 +2,8 @@ title: Amount
 type: object
 description: Amount entity.
 required:
-  - type
   - value
+  - currency
 properties:
   value:
     type: number

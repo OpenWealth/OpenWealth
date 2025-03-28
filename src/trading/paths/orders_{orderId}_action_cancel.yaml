@@ -1,29 +1,22 @@
-get:
+post:
   tags:
-    - order-status
-  summary: Returns list of order statuses for a given order
-  description: |
-    Returns list of order statuses for a given order. Paging is done based on
-    the order status object, i.e. if limit is set to 1, then 1 order status
-    object will be returned per page.
-  operationId: getOrderStatuses
+    - order
+  summary: Cancellation of a specific order
+  description: Places the cancellation request for a specific order.
+  operationId: cancelOrderById
   parameters:
     - $ref: ../components/parameters/orderId.yaml
-    - $ref: ../../generics/components/parameters/cursor.yaml
-    - $ref: ../../generics/components/parameters/limit.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   responses:
-    '200':
-      description: Returns list of accounts the requestor has access to.
+    '202':
+      description: Order cancellation received for further processing.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: ../components/schemas/OrderStatus.yaml
+            $ref: ../components/schemas/Order.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

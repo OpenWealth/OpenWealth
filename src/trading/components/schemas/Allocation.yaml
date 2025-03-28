@@ -3,17 +3,19 @@ description: Extended details regarding the allocations including validity of th
 required:
   - id
   - orderId
-  - cashAccount
-  - safekeepingAccount
-  - requestedQuantity
+  - creditAccount
+  - debitAccount
+  - quantity
 properties:
   id:
     type: string
+    maxLength: 128
     description: Unambiguous identifier for the allocation, as assigned by the confirming party.
     example: 08ca53e9-d78e-4e8c-9d7a-5e1ec900b1a0
     readOnly: true
   orderId:
     type: string
+    maxLength: 128
     description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
     example: e6751a48-0819-4482-98a4-760453ba770d
     readOnly: true
@@ -23,8 +25,8 @@ properties:
   debitAccount:
     description: Account that is debited when executing the trade.
     $ref: 'Account.yaml'
-  requestedQuantity:
-    description: Quantity to be allocated to specific safekeeping account.
+  quantity:
+    description: The requested quantity to be allocated to specific safekeeping account.
     $ref: 'Quantity.yaml'
   remainingQuantity:
     description: |

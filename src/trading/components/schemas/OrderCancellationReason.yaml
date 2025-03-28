@@ -9,12 +9,12 @@ properties:
       - cancelledByHub
       - cancelledByInstructingParty
       - cancelledByOther
-      - cannotContainMarketIdentificationAndMarketDescription
+      - cannotContainMarketIdentificationCodeAndMarketDescription
       - currencyNotSupportedForFinancialInstrument
-      - displayQuantityNotImplemented
       - endOfLife
       - executionTypeInconsequential
       - executionTypeNotSupported
+      - executionTypeNotSupportedByMarket
       - expiryDateTimeInThePast
       - expiryDateTimeMissing
       - expiryDateTimeNotAllowed
@@ -36,16 +36,14 @@ properties:
       - orderQuantityDeviatesFromSumOfAllocationQuantities
       - orderQuantityTooHigh
       - orderQuantityTooSmall
-      - orderQuantityTypeNotImplemented
+      - orderQuantityTypeNotSupported
       - orderQuantityTypeWrong
-      - orderTypeNotSupportedByMarket
-      - placeOfTradeNotImplemented
       - placeOfTradeNotSupported
       - productExpired
-      - selectedTimeInForceNotImplemented
+      - selectedTimeInForceNotSupported
       - stopPriceMissingForExecutionType
       - stopPriceNotAllowedForExecutionType
-      - timeInForceAndExpiryDateInconsistent
+      - timeInForceAndExpiryDateTimeInconsistent
       - valueTooHigh
       - wrongDenomination
       - other

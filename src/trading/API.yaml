@@ -35,6 +35,8 @@ paths:
     $ref: paths/orders.yaml
   /orders/{orderId}:
     $ref: paths/orders_{orderId}.yaml
+  /orders/{orderId}/action/cancel:
+    $ref: paths/orders_{orderId}_action_cancel.yaml
   /orders/{orderId}/executions:
     $ref: paths/orders_{orderId}_executions.yaml
   /orders/{orderId}/executions/{executionId}:

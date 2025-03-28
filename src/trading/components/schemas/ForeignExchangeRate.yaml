@@ -1,6 +1,8 @@
 title: ForeignExchangeRate
 type: object
-description: An exchange rate is a rate at which one currency will be exchanged for another currency.
+description: |
+  Indicates the rate of a fx transaction for one source currency unit to the target currency.
+  E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
 required:
   - value
   - sourceCurrency

@@ -19,42 +19,7 @@ get:
             $ref: ../components/schemas/Order.yaml
           examples:
             Order1:
-              externalValue: ./components/examples/order1.json
-    '400':
-      $ref: ../../generics/components/responses/400.yaml
-    '401':
-      $ref: ../../generics/components/responses/401.yaml
-    '403':
-      $ref: ../../generics/components/responses/403.yaml
-    '404':
-      $ref: ../../generics/components/responses/404.yaml
-    '405':
-      $ref: ../../generics/components/responses/405.yaml
-    '500':
-      $ref: ../../generics/components/responses/500.yaml
-    '501':
-      $ref: ../../generics/components/responses/501.yaml
-    '503':
-      $ref: ../../generics/components/responses/503.yaml
-delete:
-  tags:
-    - order
-  summary: Cancellation of a specific order
-  description: Places the cancellation request for a specific order.
-  operationId: deleteOrderById
-  parameters:
-    - $ref: ../components/parameters/orderId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
-  responses:
-    '202':
-      description: Order cancellation received for further processing.
-      headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Order.yaml
+              externalValue: ../components/examples/order1.json
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

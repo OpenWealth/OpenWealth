@@ -17,8 +17,6 @@ properties:
       - pretradeCheckFailed
       - safekeepingAccountMissing
       - safekeepingAccountNotFound
-      - tooManyCashAccountsIndicated
-      - tooManySafekeepingAccounts
       - valueTooHigh
       - zeroQuantity
       - other

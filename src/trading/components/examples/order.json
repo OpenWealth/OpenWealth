@@ -1,0 +1,178 @@
+{
+  "id": "e6751a48-0819-4482-98a4-760453ba770d",
+  "clientOrderIdentification": "123-123123",
+  "orderDateTime": "2018-04-13T11:11:11Z",
+  "status": "partiallyFilled",
+  "side": "buy",
+  "orderQuantity": {
+    "type": "unit",
+    "value": 12000
+  },
+  "financialInstrument": {
+    "identification": {
+      "identifier": "CH0012005267",
+      "type": "isin"
+    }
+  },
+  "placeOfTrade": {
+    "marketIdentificationCode": "XSWX",
+    "marketDescription": "OTC"
+  },
+  "currency": "CHF",
+  "executionType": "limit",
+  "limitPrice": {
+    "type": "percentage",
+    "value": 100.23,
+    "currency": "CHF"
+  },
+  "stopPrice": {
+    "type": "percentage",
+    "value": 100.23,
+    "currency": "CHF"
+  },
+  "timeInForce": "day",
+  "expiryDateTime": "2018-04-13T16:00:00Z",
+  "allocationList": [
+    {
+      "id": "08ca53e9-d78e-4e8c-9d7a-5e1ec900b1a0",
+      "orderId": "e6751a48-0819-4482-98a4-760453ba770d",
+      "cashAccount": {
+        "number": "8765-43219",
+        "type": "safekeepingAccount"
+      },
+      "safekeepingAccount": {
+        "number": "8765-43219",
+        "type": "safekeepingAccount"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 12000
+      },
+      "remainingQuantity": {
+        "type": "unit",
+        "value": 0
+      },
+      "averagePrice": {
+        "type": "percentage",
+        "value": 100.23,
+        "currency": "CHF"
+      },
+      "executionAllocationList": [
+        {
+          "allocationId": "08ca53e9-d78e-4e8c-9d7a-5e1ec900b1a0",
+          "allocatedQuantity": {
+            "type": "unit",
+            "value": 12000
+          },
+          "price": {
+            "type": "percentage",
+            "value": 100.23,
+            "currency": "CHF"
+          },
+          "executionList": [
+            {
+              "reference": "MTIzLTk4ODc3NTY=",
+              "weightedQuantity": 0.6,
+              "executionDateTime": "2018-04-13T16:00:00Z",
+              "price": {
+                "type": "percentage",
+                "value": 100.23,
+                "currency": "CHF"
+              },
+              "placeOfTrade": {
+                "marketIdentificationCode": "XSWX",
+                "marketDescription": "OTC"
+              }
+            }
+          ],
+          "billingDetails": {
+            "grossTradeAmount": {
+              "value": 12000,
+              "currency": "CHF",
+              "foreignExchangeRate": {
+                "value": 0.98,
+                "sourceCurrency": "CHF",
+                "targetCurrency": "CHF"
+              }
+            },
+            "grossSettlementAmount": {
+              "value": 12000,
+              "currency": "CHF",
+              "foreignExchangeRate": {
+                "value": 0.98,
+                "sourceCurrency": "CHF",
+                "targetCurrency": "CHF"
+              }
+            },
+            "netSettlementAmount": {
+              "value": 12000,
+              "currency": "CHF",
+              "foreignExchangeRate": {
+                "value": 0.98,
+                "sourceCurrency": "CHF",
+                "targetCurrency": "CHF"
+              }
+            },
+            "netBillingAmount": {
+              "value": 12000,
+              "currency": "CHF",
+              "foreignExchangeRate": {
+                "value": 0.98,
+                "sourceCurrency": "CHF",
+                "targetCurrency": "CHF"
+              }
+            },
+            "accruedInterests": {
+              "numberDaysAccrued": 28,
+              "amount": 0,
+              "currency": "CHF",
+              "foreignExchangeRate": {
+                "value": 0.98,
+                "sourceCurrency": "CHF",
+                "targetCurrency": "CHF"
+              }
+            },
+            "stampDuty": {
+              "value": 12000,
+              "currency": "CHF",
+              "foreignExchangeRate": {
+                "value": 0.98,
+                "sourceCurrency": "CHF",
+                "targetCurrency": "CHF"
+              }
+            },
+            "brokerageFee": {
+              "value": 12000,
+              "currency": "CHF",
+              "foreignExchangeRate": {
+                "value": 0.98,
+                "sourceCurrency": "CHF",
+                "targetCurrency": "CHF"
+              }
+            },
+            "exchangeFee": {
+              "value": 12000,
+              "currency": "CHF",
+              "foreignExchangeRate": {
+                "value": 0.98,
+                "sourceCurrency": "CHF",
+                "targetCurrency": "CHF"
+              }
+            }
+          },
+          "transactionId": "OTg3Ni01NDMyMQ"
+        }
+      ]
+    }
+  ],
+  "orderCancellationReasonList": [
+    {
+      "code": "endOfLife",
+      "proprietary": "Cancelled by client"
+    }
+  ],
+  "executedQuantity": {
+    "type": "unit",
+    "value": 12000
+  }
+}

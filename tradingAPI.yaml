@@ -41,7 +41,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
           description: Returns list of accounts the requestor has access to.
@@ -53,7 +53,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/account'
+                  $ref: '#/components/schemas/Account'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -78,7 +78,7 @@ paths:
       description: Posts a new order.
       operationId: createOrder
       parameters:
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       requestBody:
         content:
           application/json:
@@ -90,21 +90,17 @@ paths:
                   clientReference: 123-123124
                   orderDateTime: '2018-04-13T11:11:11Z'
                   side: buy
-                  orderQuantity:
+                  quantity:
                     type: unit
                     value: 12
-                  displayQuantity:
-                    type: unit
-                    value: 12
-                  numberOfAllocations: 1
                   baseInstrument:
                     identification:
                       identifier: ETH
-                      type: cryptoCurrency
+                      type: tickerSymbol
                   quoteInstrument:
                     identification:
                       identifier: BTC
-                      type: cryptoCurrency
+                      type: tickerSymbol
                   executionType: stopLimit
                   timeInForce: goodTillDate
                   expiryDateTime: '2018-04-13T18:00:00Z'
@@ -127,7 +123,7 @@ paths:
                         id: safe-1
                         type: safekeepingAccount
                         number: 1234-12
-                      requestedQuantity:
+                      quantity:
                         type: unit
                         value: 12
       responses:
@@ -139,7 +135,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/order'
+                $ref: '#/components/schemas/Order'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -167,7 +163,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
           description: Order list.
@@ -207,7 +203,7 @@ paths:
       operationId: getOrderById
       parameters:
         - $ref: '#/components/parameters/orderId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
           description: Receive a specific order with the corresponding allocations and status.
@@ -217,7 +213,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/order'
+                $ref: '#/components/schemas/Order'
               examples:
                 Order1:
                   value:
@@ -228,13 +224,9 @@ paths:
                       status: executed
                       statusDateTime: '2018-04-13T16:00:00Z'
                     side: buy
-                    orderQuantity:
+                    quantity:
                       type: unit
                       value: 5
-                    displayQuantity:
-                      type: unit
-                      value: 5
-                    numberOfAllocations: 2
                     baseInstrument:
                       identification:
                         identifier: CH0012005267
@@ -258,13 +250,13 @@ paths:
                           id: safe-1
                           type: safekeepingAccount
                           number: 1234-12
-                        requestedQuantity:
+                        quantity:
                           type: unit
                           value: 3
                         remainingQuantity:
                           type: unit
                           value: 0
-                        price:
+                        averagePrice:
                           type: actual
                           value: 10.8
                           currency: CHF
@@ -314,7 +306,7 @@ paths:
                           id: safe-2
                           type: safekeepingAccount
                           number: 1234-42
-                        requestedQuantity:
+                        quantity:
                           type: unit
                           value: 2
                         remainingQuantity:
@@ -378,15 +370,16 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-    delete:
+  /orders/{orderId}/action/cancel:
+    post:
       tags:
         - order
       summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
-      operationId: deleteOrderById
+      operationId: cancelOrderById
       parameters:
         - $ref: '#/components/parameters/orderId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '202':
           description: Order cancellation received for further processing.
@@ -396,7 +389,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/order'
+                $ref: '#/components/schemas/Order'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -425,7 +418,7 @@ paths:
         - $ref: '#/components/parameters/orderId'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
           description: Execution list.
@@ -502,7 +495,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/orderId'
         - $ref: '#/components/parameters/executionId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
           description: Receive a specific order with the corresponding allocations and status.
@@ -513,42 +506,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Execution'
-              examples:
-                Order1:
-                  value:
-                    - id: exec-1
-                      orderId: order-1
-                      reference: exec-1
-                      quantity: 2
-                      executionDateTime: '2018-04-13T14:00:00Z'
-                      price:
-                        type: actual
-                        value: 10
-                        currency: CHF
-                      placeOfTrade:
-                        marketIdentificationCode: XSWX
-                    - id: exec-2
-                      orderId: order-1
-                      reference: exec-2
-                      quantity: 2
-                      executionDateTime: '2018-04-13T15:00:00Z'
-                      price:
-                        type: actual
-                        value: 11
-                        currency: CHF
-                      placeOfTrade:
-                        marketIdentificationCode: XBRN
-                    - id: exec-3
-                      orderId: order-1
-                      reference: exec-3
-                      quantity: 1
-                      executionDateTime: '2018-04-13T16:00:00Z'
-                      price:
-                        type: actual
-                        value: 12
-                        currency: CHF
-                      placeOfTrade:
-                        marketIdentificationCode: XFRA
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -571,14 +528,15 @@ paths:
         - order-status
       summary: Returns list of order statuses for a given order
       description: |
-        Returns list of order statuses for a given order. Paging is done based on the order status
-        object, i.e. if limit is set to 1, then 1 order status object will be returned per page.
+        Returns list of order statuses for a given order. Paging is done based on
+        the order status object, i.e. if limit is set to 1, then 1 order status
+        object will be returned per page.
       operationId: getOrderStatuses
       parameters:
         - $ref: '#/components/parameters/orderId'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
           description: Returns list of accounts the requestor has access to.
@@ -615,7 +573,7 @@ paths:
       description: Allows TPP to subscribe to specific events for the API.
       operationId: postEventSubscription
       parameters:
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       requestBody:
         content:
           application/json:
@@ -658,7 +616,7 @@ paths:
       description: Allows TPP to view the event subscriptions.
       operationId: getEventSubscriptions
       parameters:
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
           description: Event Subscription read.
@@ -698,7 +656,7 @@ paths:
       operationId: getEventSubscriptionByEventSubscriptionId
       parameters:
         - $ref: '#/components/parameters/path_eventSubscriptionId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
           description: Event Subscription read.
@@ -735,13 +693,13 @@ paths:
       operationId: changeEventSubscriptionByEventSubscriptionId
       parameters:
         - $ref: '#/components/parameters/path_eventSubscriptionId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/eventSubscription'
+              $ref: '#/components/schemas/EventSubscription'
       responses:
         '200':
           description: Event subscription changed
@@ -751,7 +709,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/eventSubscription'
+                $ref: '#/components/schemas/EventSubscription'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -778,7 +736,7 @@ paths:
       operationId: deleteEventSubscriptionsByEventSubscriptionId
       parameters:
         - $ref: '#/components/parameters/path_eventSubscriptionId'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '204':
           description: Event subscription deleted.
@@ -815,7 +773,7 @@ paths:
         - $ref: '#/components/parameters/fromEventDateTime'
         - $ref: '#/components/parameters/afterEventId'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
           description: aggregated event-notification list.
@@ -832,15 +790,6 @@ paths:
           $ref: '#/components/responses/404'
 components:
   parameters:
-    limit:
-      in: query
-      name: limit
-      description: Maximum number of items to return.
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
     cursor:
       in: query
       name: cursor
@@ -848,7 +797,16 @@ components:
       schema:
         type: string
       description: An opaque string value used for pagination.
-    correlation_in_header:
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      description: Maximum number of items to return.
+    x_correlation_id_in_header:
       in: header
       name: X-Correlation-ID
       required: true
@@ -923,12 +881,12 @@ components:
       schema:
         type: string
   schemas:
-    account:
+    Account:
       type: object
       properties:
         id:
           type: string
-          maxLength: 35
+          maxLength: 128
           example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
           description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
         type:
@@ -1019,6 +977,7 @@ components:
             - expired
             - partiallyExpired
             - marketExpired
+            - restated
           example: partiallyFilled
         statusDateTime:
           description: |
@@ -1046,6 +1005,34 @@ components:
           type: number
           example: 12000
           description: Signed decimal number.
+    OrderSide:
+      type: string
+      description: Side taken by a party on an order.
+      example: buy
+      enum:
+        - buy
+        - sell
+        - subscribe
+        - redeem
+    UnitReference:
+      type: string
+      description: |
+        indicates whether the order quantity is expressed in base instrument or quote instrument.
+        BaseInstrument by default.
+      enum:
+        - baseInstrument
+        - quoteInstrument
+      default: baseInstrument
+    PositionEffect:
+      type: string
+      description: |
+        Indicates whether the resulting position after a trade should be an opening position or closing position. 
+        sed for omnibus accounting - where accounts are held on a gross basis instead of being netted together.
+      enum:
+        - open
+        - close
+        - rolled
+        - fifo
     FinancialInstrument:
       type: object
       required:
@@ -1054,11 +1041,12 @@ components:
         identification:
           type: object
           required:
-            - identification
+            - identifier
             - type
           properties:
             identifier:
               type: string
+              maxLength: 128
               example: CH0012005267
               description: Instrument identification.
             type:
@@ -1089,13 +1077,14 @@ components:
       properties:
         marketIdentificationCode:
           type: string
-          maxLength: 4
+          pattern: ^[A-Z0-9]{4}$
           description: |
             Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
             Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
           example: XSWX
         marketDescription:
           type: string
+          maxLength: 128
           description: Description of the market when no Market Identification Code is available.
           example: OTC
     Currency:
@@ -1124,32 +1113,6 @@ components:
           description: Signed decimal number.
         currency:
           $ref: '#/components/schemas/Currency'
-    Account:
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 35
-          example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
-          description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
-        type:
-          type: string
-          description: Indicates the type of the account.
-          example: safekeepingAccount
-          enum:
-            - cashAccount
-            - safekeepingAccount
-            - other
-        iban:
-          type: string
-          description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
-          maxLength: 34
-          example: CH1234567891234
-        number:
-          type: string
-          description: Contains the accounts custody proprietary account number for an account if available.
-          maxLength: 70
-          example: 123-1234-234
     allocationCancellationReason:
       type: object
       properties:
@@ -1170,8 +1133,6 @@ components:
             - pretradeCheckFailed
             - safekeepingAccountMissing
             - safekeepingAccountNotFound
-            - tooManyCashAccountsIndicated
-            - tooManySafekeepingAccounts
             - valueTooHigh
             - zeroQuantity
             - other
@@ -1183,7 +1144,9 @@ components:
     ForeignExchangeRate:
       title: ForeignExchangeRate
       type: object
-      description: An exchange rate is a rate at which one currency will be exchanged for another currency.
+      description: |
+        Indicates the rate of a fx transaction for one source currency unit to the target currency.
+        E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
       required:
         - value
         - sourceCurrency
@@ -1202,8 +1165,8 @@ components:
       type: object
       description: Amount entity.
       required:
-        - type
         - value
+        - currency
       properties:
         value:
           type: number
@@ -1282,6 +1245,7 @@ components:
           description: List of market executions, that contributed to the allocated quantity.
           items:
             type: string
+            maxLength: 128
             description: Unambiguous identifier for the execution.
         billingDetails:
           $ref: '#/components/schemas/BillingDetails'
@@ -1296,17 +1260,19 @@ components:
       required:
         - id
         - orderId
-        - cashAccount
-        - safekeepingAccount
-        - requestedQuantity
+        - creditAccount
+        - debitAccount
+        - quantity
       properties:
         id:
           type: string
+          maxLength: 128
           description: Unambiguous identifier for the allocation, as assigned by the confirming party.
           example: 08ca53e9-d78e-4e8c-9d7a-5e1ec900b1a0
           readOnly: true
         orderId:
           type: string
+          maxLength: 128
           description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
           example: e6751a48-0819-4482-98a4-760453ba770d
           readOnly: true
@@ -1316,8 +1282,8 @@ components:
         debitAccount:
           description: Account that is debited when executing the trade.
           $ref: '#/components/schemas/Account'
-        requestedQuantity:
-          description: Quantity to be allocated to specific safekeeping account.
+        quantity:
+          description: The requested quantity to be allocated to specific safekeeping account.
           $ref: '#/components/schemas/Quantity'
         remainingQuantity:
           description: |
@@ -1352,12 +1318,12 @@ components:
             - cancelledByHub
             - cancelledByInstructingParty
             - cancelledByOther
-            - cannotContainMarketIdentificationAndMarketDescription
+            - cannotContainMarketIdentificationCodeAndMarketDescription
             - currencyNotSupportedForFinancialInstrument
-            - displayQuantityNotImplemented
             - endOfLife
             - executionTypeInconsequential
             - executionTypeNotSupported
+            - executionTypeNotSupportedByMarket
             - expiryDateTimeInThePast
             - expiryDateTimeMissing
             - expiryDateTimeNotAllowed
@@ -1379,16 +1345,14 @@ components:
             - orderQuantityDeviatesFromSumOfAllocationQuantities
             - orderQuantityTooHigh
             - orderQuantityTooSmall
-            - orderQuantityTypeNotImplemented
+            - orderQuantityTypeNotSupported
             - orderQuantityTypeWrong
-            - orderTypeNotSupportedByMarket
-            - placeOfTradeNotImplemented
             - placeOfTradeNotSupported
             - productExpired
-            - selectedTimeInForceNotImplemented
+            - selectedTimeInForceNotSupported
             - stopPriceMissingForExecutionType
             - stopPriceNotAllowedForExecutionType
-            - timeInForceAndExpiryDateInconsistent
+            - timeInForceAndExpiryDateTimeInconsistent
             - valueTooHigh
             - wrongDenomination
             - other
@@ -1398,28 +1362,36 @@ components:
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
           example: Cancelled by client
     Order:
+      type: object
+      description: Order object.
       required:
         - clientReference
         - side
-        - orderQuantity
-        - financialInstrument
-        - currency
+        - quantity
+        - baseInstrument
+        - quoteInstrument
         - executionType
         - timeInForce
-        - numberOfAllocations
-      type: object
-      description: Order object.
       properties:
         id:
           type: string
-          description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
+          maxLength: 128
+          description: |
+            Unambiguous identifier for the bulk order,
+            as assigned by the confirming party (i.e. Custodian).
           example: e6751a48-0819-4482-98a4-760453ba770d
           readOnly: true
         clientReference:
           type: string
+          maxLength: 128
           example: 123-123123
-          description: Reference of the order, as assigned by the instructing party.
-          maxLength: 20
+          description: |
+            Reference of the order (unique identification),
+            as assigned by the instructing party (i.e. TPP).
+        groupReference:
+          type: string
+          maxLength: 128
+          description: Optional reference to link orders, i.e. multi-leg orders.
         orderDateTime:
           type: string
           format: date-time
@@ -1429,23 +1401,19 @@ components:
         status:
           $ref: '#/components/schemas/OrderStatus'
           readOnly: true
+        quantity:
+          description: The total quantity of the order. The unit of this field is defined by the quantity schema.
+          $ref: '#/components/schemas/Quantity'
         side:
-          type: string
-          description: Side taken by a party on an order.
-          example: buy
-          enum:
-            - buy
-            - sell
-        orderQuantity:
-          description: Ordered quantity.
-          $ref: '#/components/schemas/Quantity'
-        displayQuantity:
-          $ref: '#/components/schemas/Quantity'
-        numberOfAllocations:
-          type: number
-          format: integer
-          example: 5
-          description: Indicates number of orders to be combined for average pricing and allocation.
+          $ref: '#/components/schemas/OrderSide'
+        unitReference:
+          $ref: '#/components/schemas/UnitReference'
+        positionEffect:
+          $ref: '#/components/schemas/PositionEffect'
+        bestEffortExecution:
+          description: TBD
+          type: boolean
+          default: false
         baseInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
         quoteInstrument:
@@ -1465,7 +1433,9 @@ components:
           description: Limit price per unit of quantity (e.g. per share)
           $ref: '#/components/schemas/Price'
         stopPrice:
-          description: Stop price per unit of quantity (e.g. per share)
+          description: |
+            Price per unit of quantity (e.g. per share).
+            Required for executionType 'stop' or 'stopLimit'.
           $ref: '#/components/schemas/Price'
         timeInForce:
           type: string
@@ -1487,6 +1457,12 @@ components:
             - goodForMonth
         expiryDateTime:
           $ref: '#/components/schemas/DateTime'
+        exposureDuration:
+          description: |
+            This is the time in seconds of a 'goodForTime' TimeInForce.
+            Positive integer value which represents the time is seconds in which the new order
+            remains active in the market before it is automatically cancelled (e.g. expired).
+          type: integer
         allocationList:
           type: array
           items:
@@ -1499,119 +1475,27 @@ components:
         executedQuantity:
           $ref: '#/components/schemas/Quantity'
           readOnly: true
-    order:
-      required:
-        - clientReference
-        - side
-        - orderQuantity
-        - financialInstrument
-        - currency
-        - executionType
-        - timeInForce
-        - numberOfAllocations
-      type: object
-      description: Order object.
-      properties:
-        id:
-          type: string
-          description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
-          example: e6751a48-0819-4482-98a4-760453ba770d
-          readOnly: true
-        clientReference:
-          type: string
-          example: 123-123123
-          description: Reference of the order, as assigned by the instructing party.
-          maxLength: 20
-        orderDateTime:
-          type: string
-          format: date-time
-          example: '2018-04-13T11:11:11Z'
-          description: Date and time the order has been received. In accordance with ISO 8601.
-          readOnly: true
-        status:
-          $ref: '#/components/schemas/OrderStatus'
-          readOnly: true
-        side:
-          type: string
-          description: Side taken by a party on an order.
-          example: buy
-          enum:
-            - buy
-            - sell
-        orderQuantity:
-          description: Ordered quantity.
-          $ref: '#/components/schemas/Quantity'
-        displayQuantity:
-          $ref: '#/components/schemas/Quantity'
-        numberOfAllocations:
-          type: number
-          format: integer
-          example: 5
-          description: Indicates number of orders to be combined for average pricing and allocation.
-        baseInstrument:
-          $ref: '#/components/schemas/FinancialInstrument'
-        quoteInstrument:
-          $ref: '#/components/schemas/FinancialInstrument'
-        requestedPlaceOfTrade:
-          $ref: '#/components/schemas/PlaceOfTrade'
-        executionType:
-          type: string
-          description: Type of the execution of the order.
-          example: limit
-          enum:
-            - market
-            - limit
-            - stop
-            - stopLimit
-        limitPrice:
-          description: Limit price per unit of quantity (e.g. per share)
-          $ref: '#/components/schemas/Price'
-        stopPrice:
-          description: Stop price per unit of quantity (e.g. per share)
-          $ref: '#/components/schemas/Price'
-        timeInForce:
-          type: string
-          description: Specifies how long the order remains in effect.
-          example: day
-          enum:
-            - day
-            - goodTillCancel
-            - atTheOpening
-            - immediateOrCancel
-            - fillOrKill
-            - goodTillCrossing
-            - goodTillDate
-            - atTheClose
-            - goodThroughCrossing
-            - atCrossing
-            - goodForTime
-            - goodForAuction
-            - goodForMonth
-        expiryDateTime:
-          $ref: '#/components/schemas/DateTime'
-        allocationList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Allocation'
-        orderCancellationReasonList:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderCancellationReason'
-          readOnly: true
-        executedQuantity:
+        cancelledQuantity:
           $ref: '#/components/schemas/Quantity'
           readOnly: true
+        additionalDetails:
+          type: string
+          maxLength: 512
+          description: Provides additional details on the order which can not be included within the structured fields of the message.
+          example: at pre Market and today
     Execution:
       type: object
       description: Entity describing a market execution
       properties:
         id:
           type: string
+          maxLength: 128
           description: Unambiguous identifier for the execution.
           example: b7469157-02ea-4938-a485-bc3d9ff43f4d
           readOnly: true
         orderId:
           type: string
+          maxLength: 128
           description: Unambiguous identifier for the order, as assigned by the confirming party.
           example: e6751a48-0819-4482-98a4-760453ba770d
           readOnly: true
@@ -1678,6 +1562,25 @@ components:
       required:
         - callbackUrl
       properties:
+        callbackUrl:
+          description: |
+            Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL
+            to send event notifications to.
+          type: string
+          format: uri
+          example: https://examplecallbackuri.com
+        eventTypes:
+          description: Array of event types the subscription applies to. An empty list indicates that no notifications are sent.
+          type: array
+          items:
+            $ref: '#/components/schemas/eventType'
+    EventSubscription:
+      type: object
+      required:
+        - eventSubscriptionId
+      properties:
+        eventSubscriptionId:
+          $ref: '#/components/schemas/eventSubscriptionId'
         callbackUrl:
           description: |
             Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL

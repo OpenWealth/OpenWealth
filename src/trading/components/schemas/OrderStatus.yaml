@@ -22,6 +22,7 @@ properties:
       - expired
       - partiallyExpired
       - marketExpired
+      - restated
     example: partiallyFilled
   statusDateTime:
     description: |

@@ -3,23 +3,31 @@ description: Order object.
 required:
   - clientReference
   - side
-  - orderQuantity
+  - quantity
   - baseInstrument
   - quoteInstrument
   - executionType
   - timeInForce
-  - numberOfAllocations
 properties:
   id:
     type: string
-    description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
+    maxLength: 128
+    description: |
+      Unambiguous identifier for the bulk order,
+      as assigned by the confirming party (i.e. Custodian).
     example: e6751a48-0819-4482-98a4-760453ba770d
     readOnly: true
   clientReference:
     type: string
+    maxLength: 128
     example: 123-123123
-    description: Reference of the order, as assigned by the instructing party.
-    maxLength: 20
+    description: |
+      Reference of the order (unique identification),
+      as assigned by the instructing party (i.e. TPP).
+  groupReference:
+    type: string
+    maxLength: 128
+    description: Optional reference to link orders, i.e. multi-leg orders.
   orderDateTime:
     type: string
     format: date-time
@@ -29,23 +37,19 @@ properties:
   status:
     $ref: 'OrderStatus.yaml'
     readOnly: true
+  quantity:
+    description: The total quantity of the order. The unit of this field is defined by the quantity schema.
+    $ref: 'Quantity.yaml'
   side:
-    type: string
-    description: Side taken by a party on an order.
-    example: buy
-    enum:
-      - buy
-      - sell
-  orderQuantity:
-    description: Ordered quantity.
-    $ref: 'Quantity.yaml'
-  displayQuantity:
-    $ref: 'Quantity.yaml'
-  numberOfAllocations:
-    type: number
-    format: integer
-    example: 5
-    description: Indicates number of orders to be combined for average pricing and allocation.
+    $ref: 'OrderSide.yaml'
+  unitReference:
+    $ref: 'UnitReference.yaml'
+  positionEffect:
+    $ref: 'PositionEffect.yaml'
+  bestEffortExecution:
+    description: TBD
+    type: boolean
+    default: false
   baseInstrument:
     $ref: 'FinancialInstrument.yaml'
   quoteInstrument:
@@ -65,7 +69,9 @@ properties:
     description: Limit price per unit of quantity (e.g. per share)
     $ref: 'Price.yaml'
   stopPrice:
-    description: Stop price per unit of quantity (e.g. per share)
+    description: |
+      Price per unit of quantity (e.g. per share).
+      Required for executionType 'stop' or 'stopLimit'.
     $ref: 'Price.yaml'
   timeInForce:
     type: string
@@ -87,6 +93,12 @@ properties:
       - goodForMonth
   expiryDateTime:
     $ref: '../../../generics/components/schemas/DateTime.yaml'
+  exposureDuration:
+    description: |
+      This is the time in seconds of a 'goodForTime' TimeInForce.
+      Positive integer value which represents the time is seconds in which the new order
+      remains active in the market before it is automatically cancelled (e.g. expired).
+    type: integer
   allocationList:
     type: array
     items:
@@ -99,3 +111,11 @@ properties:
   executedQuantity:
     $ref: 'Quantity.yaml'
     readOnly: true
+  cancelledQuantity:
+    $ref: 'Quantity.yaml'
+    readOnly: true
+  additionalDetails:
+    type: string
+    maxLength: 512
+    description: Provides additional details on the order which can not be included within the structured fields of the message.
+    example: at pre Market and today

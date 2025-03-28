@@ -1,0 +1,8 @@
+type: string
+description: |
+  indicates whether the order quantity is expressed in base instrument or quote instrument.
+  BaseInstrument by default.
+enum:
+  - baseInstrument
+  - quoteInstrument
+default: baseInstrument
