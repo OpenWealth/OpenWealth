@@ -1,4 +1,0 @@
-title: Identified financial instrument
-description: Identified financial instrument
-allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'

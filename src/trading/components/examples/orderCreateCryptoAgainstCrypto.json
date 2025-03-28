@@ -7,17 +7,17 @@
     "value": 12
   },
   "baseInstrument": {
-    "type": "identified",
+    "type": "basic",
     "identification": {
       "identifier": "ETH",
-      "type": "tickerSymbol"
+      "type": "cryptoCurrency"
     }
   },
   "quoteInstrument": {
-    "type": "identified",
+    "type": "basic",
     "identification": {
       "identifier": "BTC",
-      "type": "tickerSymbol"
+      "type": "cryptoCurrency"
     }
   },
   "executionType": "stopLimit",

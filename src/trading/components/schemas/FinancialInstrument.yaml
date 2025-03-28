@@ -2,7 +2,7 @@ title: FinancialInstrument
 type: object
 description: Financial instrument entity.
 oneOf:
-  - $ref: 'FinancialInstrument.yaml'
+  - $ref: 'FinancialInstrumentBase.yaml'
   - $ref: 'ForwardCurrency.yaml'
   - $ref: 'CurrencySwap.yaml'
   - $ref: 'FxForwardContract.yaml'
@@ -11,7 +11,7 @@ oneOf:
 discriminator:
   propertyName: type
   mapping:
-    identified: 'FinancialInstrument.yaml'
+    basic: 'FinancialInstrumentBase.yaml'
     forwardCurrency: 'ForwardCurrency.yaml'
     currencySwap: 'CurrencySwap.yaml'
     fxForwardContract: 'FxForwardContract.yaml'

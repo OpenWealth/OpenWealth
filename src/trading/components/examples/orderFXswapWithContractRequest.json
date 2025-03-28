@@ -1,7 +1,7 @@
 {
   "clientReference": "123-123123",
   "side": "buy",
-  "orderQuantity": {
+  "quantity": {
     "type": "unit",
     "value": 1
   },
@@ -29,7 +29,7 @@
     "nearSettlementDate": "2018-07-13",
     "farSettlementDate": "2018-07-13"
   },
-  "contractRequestId": "id-of-the-quote",
+  "quoteId": "id-of-the-quote",
   "timeInForce": "goodTillDate",
   "expiryDateTime": "2018-04-13T18:00:00Z"
 }

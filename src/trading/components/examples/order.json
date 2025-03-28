@@ -8,10 +8,18 @@
     "type": "unit",
     "value": 12000
   },
-  "financialInstrument": {
+  "baseInstrument": {
+    "type": "basic",
     "identification": {
       "identifier": "CH0012005267",
       "type": "isin"
+    }
+  },
+  "quoteInstrument": {
+    "type": "basic",
+    "identification": {
+      "identifier": "CHF",
+      "type": "iso4217"
     }
   },
   "placeOfTrade": {

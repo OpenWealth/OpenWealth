@@ -94,13 +94,15 @@ paths:
                     type: unit
                     value: 12
                   baseInstrument:
+                    type: basic
                     identification:
                       identifier: ETH
-                      type: tickerSymbol
+                      type: cryptoCurrency
                   quoteInstrument:
+                    type: basic
                     identification:
                       identifier: BTC
-                      type: tickerSymbol
+                      type: cryptoCurrency
                   executionType: stopLimit
                   timeInForce: goodTillDate
                   expiryDateTime: '2018-04-13T18:00:00Z'
@@ -228,10 +230,12 @@ paths:
                       type: unit
                       value: 5
                     baseInstrument:
+                      type: basic
                       identification:
                         identifier: CH0012005267
                         type: isin
                     quoteInstrument:
+                      type: basic
                       identification:
                         identifier: CHF
                         type: iso4217
@@ -549,6 +553,46 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/OrderStatus'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /quotes:
+    post:
+      tags:
+        - quote
+      summary: Request a quote
+      description: Request quote an FX or crypto product
+      operationId: requestQuote
+      parameters:
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quote'
+      responses:
+        '200':
+          description: Returns quote for the given request.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -1033,114 +1077,160 @@ components:
         - close
         - rolled
         - fifo
-    FinancialInstrument:
+    FinancialInstrumentBase:
       type: object
       required:
+        - type
         - identification
       properties:
+        type:
+          description: Type of ordered instrument
+          type: string
+          enum:
+            - basic
+            - forwardCurrency
+            - currencySwap
+            - fxForwardContract
+            - fxSwapContract
+            - exchangeTradedDerivative
         identification:
-          type: object
-          required:
-            - identifier
-            - type
+          $ref: '#/components/schemas/FinancialInstrumentIdentification'
+    ForwardCurrency:
+      title: Forward Currency
+      description: Forward Currency Instrument
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
           properties:
-            identifier:
-              type: string
-              maxLength: 128
-              example: CH0012005267
-              description: Instrument identification.
-            type:
-              type: string
-              example: isin
-              description: Type of the instrument identification.
-              enum:
-                - isin
-                - sedol
-                - cusip
-                - ric
-                - tickerSymbol
-                - bloomberg
-                - cta
-                - quick
-                - wertpapier
-                - dutch
-                - valoren
-                - sicovam
-                - belgian
-                - common
-                - cryptocurrency
-                - iso4217
-                - otherProprietaryIdentification
-    PlaceOfTrade:
+            settlementDate:
+              $ref: '#/components/schemas/Date'
+    CurrencySwap:
+      title: Forward Currency
+      description: Forward Currency Instrument
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          properties:
+            nearSettlementDate:
+              $ref: '#/components/schemas/Date'
+            farSettlementDate:
+              $ref: '#/components/schemas/Date'
+    FxForwardContract:
+      title: Fx Forward Contract
+      description: An fx forward contract is a customized contract between two parties to buy or sell currencies at a specified price on a future date.
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - amountPaid
+            - amountReceived
+            - settlementDate
+          properties:
+            amountSold:
+              description: Amount paid at the maturity of a contract (i.e. FX forward).
+              $ref: '#/components/schemas/Amount'
+            amountBought:
+              description: Amount received at the maturity of a contract (i.e. FX forward).
+              $ref: '#/components/schemas/Amount'
+            settlementDate:
+              description: |
+                Planned date, when the contract will be settled.
+              $ref: '#/components/schemas/Date'
+    FxSwapContract:
+      title: Fx Swap Contract
+      description: |
+        A foreign currency swap contract is an agreement between two foreign parties to swap interest payments on a loan made in one currency
+        for interest payments on a loan made in another currency.
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - nearAmountSold
+            - nearAmountBought
+            - farAmountSold
+            - farAmountBought
+            - nearSettlementDate
+            - farSettlementDate
+          properties:
+            nearAmountSold:
+              description: Amount paid at the earlier part of an FX swap.
+              $ref: '#/components/schemas/Amount'
+            nearAmountBought:
+              description: Amount received at the earlier part of an FX swap.
+              $ref: '#/components/schemas/Amount'
+            farAmountSold:
+              description: Amount paid at the maturity of an FX swap.
+              $ref: '#/components/schemas/Amount'
+            farAmountBought:
+              description: Amount received at the maturity of an FX swap.
+              $ref: '#/components/schemas/Amount'
+            nearSettlementDate:
+              description: Date of the settlement of the near leg.
+              $ref: '#/components/schemas/Date'
+            farSettlementDate:
+              description: Date of the settlement of the far leg.
+              $ref: '#/components/schemas/Date'
+    ExchangeTradedDerivative:
+      title: Exchange traded derivativ
+      description: Schema of an exchange traded derivativ
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          properties:
+            expiryDate:
+              description: |
+                Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
+                date at which it becomes due and has to be repaid.
+              $ref: '#/components/schemas/Date'
+            exercisePrice:
+              description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
+              $ref: '#/components/schemas/Price'
+            underlyingFinancialInstrument:
+              $ref: '#/components/schemas/FinancialInstrumentBase'
+    FinancialInstrumentIdentification:
       type: object
-      description: Market in which a trade transaction is to be or has been executed.
+      required:
+        - identifier
+        - type
       properties:
-        marketIdentificationCode:
+        identifier:
           type: string
-          pattern: ^[A-Z0-9]{4}$
-          description: |
-            Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
-            Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
-          example: XSWX
-        marketDescription:
+          example: CH0012005267
+          description: Instrument identification.
+        type:
           type: string
-          maxLength: 128
-          description: Description of the market when no Market Identification Code is available.
-          example: OTC
+          example: isin
+          description: Type of the instrument identification.
+          enum:
+            - isin
+            - sedol
+            - cusip
+            - ric
+            - tickerSymbol
+            - bloomberg
+            - cta
+            - quick
+            - wertpapier
+            - dutch
+            - valoren
+            - sicovam
+            - belgian
+            - common
+            - cryptoCurrency
+            - iso4217
+            - otherProprietaryIdentification
+    Date:
+      title: Date
+      type: string
+      description: Date according to ISO 8601.
+      format: date
+      example: '2018-04-13'
     Currency:
       title: Currency
       type: string
       description: ISO 4217 code.
       pattern: ^[A-Z]{3}$
       example: CHF
-    Price:
-      type: object
-      description: Price entity.
-      required:
-        - type
-        - value
-      properties:
-        type:
-          type: string
-          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
-          example: percentage
-          enum:
-            - actual
-            - percentage
-        value:
-          type: number
-          example: 100.23
-          description: Signed decimal number.
-        currency:
-          $ref: '#/components/schemas/Currency'
-    allocationCancellationReason:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Cancelled reason expressed as a code.
-          enum:
-            - accountIdentificationMissing
-            - accountInvalidForOrderPlacement
-            - accountTypeMissing
-            - accountTypeNotMatchingAccount
-            - allocationQuantityTooHigh
-            - cashAccountMissing
-            - cashAccountNotFound
-            - insufficientBuyingPower
-            - insufficientQuantityAvailable
-            - invalidCurrencyForAccount
-            - pretradeCheckFailed
-            - safekeepingAccountMissing
-            - safekeepingAccountNotFound
-            - valueTooHigh
-            - zeroQuantity
-            - other
-          example: zeroQuantity
-        proprietary:
-          type: string
-          description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
-          example: Cancelled by client.
     ForeignExchangeRate:
       title: ForeignExchangeRate
       type: object
@@ -1176,6 +1266,90 @@ components:
           $ref: '#/components/schemas/Currency'
         foreignExchangeRate:
           $ref: '#/components/schemas/ForeignExchangeRate'
+    Price:
+      type: object
+      description: Price entity.
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+          example: percentage
+          enum:
+            - actual
+            - percentage
+        value:
+          type: number
+          example: 100.23
+          description: Signed decimal number.
+        currency:
+          $ref: '#/components/schemas/Currency'
+    FinancialInstrument:
+      title: FinancialInstrument
+      type: object
+      description: Financial instrument entity.
+      oneOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - $ref: '#/components/schemas/ForwardCurrency'
+        - $ref: '#/components/schemas/CurrencySwap'
+        - $ref: '#/components/schemas/FxForwardContract'
+        - $ref: '#/components/schemas/FxSwapContract'
+        - $ref: '#/components/schemas/ExchangeTradedDerivative'
+      discriminator:
+        propertyName: type
+        mapping:
+          basic: '#/components/schemas/FinancialInstrumentBase'
+          forwardCurrency: '#/components/schemas/ForwardCurrency'
+          currencySwap: '#/components/schemas/CurrencySwap'
+          fxForwardContract: '#/components/schemas/FxForwardContract'
+          fxSwapContract: '#/components/schemas/FxSwapContract'
+          etd: '#/components/schemas/ExchangeTradedDerivative'
+    PlaceOfTrade:
+      type: object
+      description: Market in which a trade transaction is to be or has been executed.
+      properties:
+        marketIdentificationCode:
+          type: string
+          pattern: ^[A-Z0-9]{4}$
+          description: |
+            Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
+            Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
+          example: XSWX
+        marketDescription:
+          type: string
+          maxLength: 128
+          description: Description of the market when no Market Identification Code is available.
+          example: OTC
+    allocationCancellationReason:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Cancelled reason expressed as a code.
+          enum:
+            - accountIdentificationMissing
+            - accountInvalidForOrderPlacement
+            - accountTypeMissing
+            - accountTypeNotMatchingAccount
+            - allocationQuantityTooHigh
+            - cashAccountMissing
+            - cashAccountNotFound
+            - insufficientBuyingPower
+            - insufficientQuantityAvailable
+            - invalidCurrencyForAccount
+            - pretradeCheckFailed
+            - safekeepingAccountMissing
+            - safekeepingAccountNotFound
+            - valueTooHigh
+            - zeroQuantity
+            - other
+          example: zeroQuantity
+        proprietary:
+          type: string
+          description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
+          example: Cancelled by client.
     AccruedInterest:
       type: object
       properties:
@@ -1463,6 +1637,9 @@ components:
             Positive integer value which represents the time is seconds in which the new order
             remains active in the market before it is automatically cancelled (e.g. expired).
           type: integer
+        quoteId:
+          type: string
+          description: Unambiguous identifier for the quote that was provided by the confirming party.
         allocationList:
           type: array
           items:
@@ -1515,6 +1692,92 @@ components:
           $ref: '#/components/schemas/Price'
         placeOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
+    PriceQuote:
+      title: Price quote
+      description: Price quote
+      allOf:
+        - $ref: '#/components/schemas/QuoteBase'
+        - type: object
+          required:
+            - priceType
+            - price
+          properties:
+            priceType:
+              type: string
+              description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+              enum:
+                - actual
+                - percentage
+              readOnly: true
+            price:
+              type: number
+              description: |
+                - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+                - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+              readOnly: true
+    ContractQuote:
+      title: Standard quote
+      description: Standard quote
+      allOf:
+        - $ref: '#/components/schemas/QuoteBase'
+        - type: object
+          properties:
+            quotedContract:
+              description: The fully defined financial contract proposed by the quoting party.
+              $ref: '#/components/schemas/FinancialInstrument'
+    QuoteBase:
+      type: object
+      required:
+        - type
+        - kind
+      properties:
+        id:
+          type: string
+          example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+          description: Unique identifier of given quote
+          readOnly: true
+        type:
+          type: string
+          description: |
+            Type of quote requested.
+            - An indicative quote is used to inform a counterparty of a market. An indicative quote does not result directly in a trade.
+            - A tradeable quote is submitted to a market and will result directly in a trade against other orders and quotes in a market.
+          enum:
+            - indicative
+            - tradable
+        kind:
+          type: string
+          description: |
+            Kind of quote requested.
+            - Price quote TBD
+            - Contract quote TBD
+          example: buy
+          enum:
+            - priceQuote
+            - contractQuote
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        quantity:
+          $ref: '#/components/schemas/Quantity'
+        baseInstrument:
+          $ref: '#/components/schemas/FinancialInstrument'
+        quoteInstrument:
+          $ref: '#/components/schemas/FinancialInstrument'
+        expiryDateTime:
+          description: DateTime when quote expires.
+          $ref: '#/components/schemas/DateTime'
+    Quote:
+      title: Quote
+      type: object
+      description: Schema of a quote entity.
+      oneOf:
+        - $ref: '#/components/schemas/PriceQuote'
+        - $ref: '#/components/schemas/ContractQuote'
+      discriminator:
+        propertyName: kind
+        mapping:
+          priceQuote: '#/components/schemas/PriceQuote'
+          contractQuote: '#/components/schemas/ContractQuote'
     eventSubscriptionId:
       description: |
         Unique identification as assigned by the API exposing party to uniquely

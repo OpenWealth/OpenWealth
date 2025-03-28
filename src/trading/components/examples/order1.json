@@ -12,14 +12,14 @@
     "value": 5
   },
   "baseInstrument": {
-    "type": "identified",
+    "type": "basic",
     "identification": {
       "identifier": "CH0012005267",
       "type": "isin"
     }
   },
   "quoteInstrument": {
-    "type": "identified",
+    "type": "basic",
     "identification": {
       "identifier": "CHF",
       "type": "iso4217"
