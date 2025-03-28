@@ -1,0 +1,24 @@
+title: Digital Asset
+description: Schema of a digital asset.
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    required:
+      - tokenType
+    properties:
+      tokenType:
+        type: string
+        description: |
+          Type of digital asset or token
+        enum:
+          - paymentToken
+          - utilityToken
+          - securityToken
+          - nonFungibleToken
+          - platformToken
+          - rewardToken
+          - governanceToken
+          - fanToken
+          - gamingToken
+          - socialToken
+          - otherToken

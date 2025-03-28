@@ -10,6 +10,7 @@ enum:
   - assignment
   - assimilation
   - bonus
+  - burning
   - buy
   - buyToClose
   - capitalIncrease
@@ -28,6 +29,7 @@ enum:
   - expiration
   - fees
   - finalLiquidationPayment
+  - forking
   - fxSpot
   - increasePrincipal
   - inflowCash
@@ -36,6 +38,7 @@ enum:
   - internalTransfer
   - liquidationPayment
   - merger
+  - minting
   - openContract
   - other
   - outflowCash
@@ -48,10 +51,12 @@ enum:
   - redemptionPrior
   - reductionOfNominal
   - resetPayment
+  - reward
   - rightDistribution
   - sell
   - sellToOpen
   - spinOff
+  - staking
   - stockSplit
   - subscription
   - taxCorrections

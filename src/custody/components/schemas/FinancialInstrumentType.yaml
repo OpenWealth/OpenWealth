@@ -23,5 +23,5 @@ enum:
   - interestRateSwap
   - totalReturnSwap
   - creditDefaultSwap
-  - cryptoAsset
+  - digitalAsset
   - other
