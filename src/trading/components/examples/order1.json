@@ -47,10 +47,6 @@
         "type": "unit",
         "value": 3
       },
-      "remainingQuantity": {
-        "type": "unit",
-        "value": 0
-      },
       "averagePrice": {
         "type": "actual",
         "value": 10.8,
@@ -123,10 +119,6 @@
       "quantity": {
         "type": "unit",
         "value": 2
-      },
-      "remainingQuantity": {
-        "type": "unit",
-        "value": 0
       },
       "averagePrice": {
         "type": "actual",

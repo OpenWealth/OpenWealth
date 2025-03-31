@@ -1,7 +1,6 @@
 type: string
 description: |
-  Indicates whether the resulting position after a trade should be an opening position or closing position. 
-  sed for omnibus accounting - where accounts are held on a gross basis instead of being netted together.
+  Indicates whether the resulting position after a trade should be an opening position or closing position.
 enum:
   - open
   - close

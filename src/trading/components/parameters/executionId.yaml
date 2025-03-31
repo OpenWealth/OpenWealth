@@ -3,5 +3,5 @@ name: executionId
 required: true
 schema:
   type: string
-  maxLength: 20
-description: The executionId as given py the API provider.
+  maxLength: 128
+description: The execution ID as given by the API provider.

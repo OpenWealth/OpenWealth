@@ -4,8 +4,8 @@ allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
     required:
-      - amountPaid
-      - amountReceived
+      - amountSold
+      - amountBought
       - settlementDate
     properties:
       amountSold:

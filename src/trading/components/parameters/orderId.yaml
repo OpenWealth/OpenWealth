@@ -4,4 +4,4 @@ required: true
 schema:
   type: string
   maxLength: 20
-description: The orderId as given py the API provider.
+description: The order ID as given by the API provider.

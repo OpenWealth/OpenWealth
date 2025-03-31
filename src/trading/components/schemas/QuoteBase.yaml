@@ -23,7 +23,7 @@ properties:
       Kind of quote requested.
       - Price quote TBD
       - Contract quote TBD
-    example: buy
+    example: priceQuote
     enum:
       - priceQuote
       - contractQuote

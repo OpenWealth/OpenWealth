@@ -1,5 +1,5 @@
-title: Standard quote
-description: Standard quote
+title: Contract quote
+description: Contract quote
 allOf:
   - $ref: QuoteBase.yaml
   - type: object
@@ -7,3 +7,4 @@ allOf:
       quotedContract:
         description: The fully defined financial contract proposed by the quoting party.
         $ref: 'FinancialInstrument.yaml'
+        readOnly: true

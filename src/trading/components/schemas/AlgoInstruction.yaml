@@ -1,0 +1,54 @@
+type: object
+required:
+  - type
+  - identification
+properties:
+  type:
+    description: Type of ordered instrument
+    type: string
+    enum:
+      - VWAP
+      - TWAP
+      - POV
+      - MOC
+      - TMOC
+      - LIQGRAB
+      - currencySwap
+      - fxForwardContract
+      - fxSwapContract
+      - exchangeTradedDerivative
+      - preciousMetal
+  identification:
+    $ref: FinancialInstrumentIdentification.yaml
+  StartTime:
+    type: DateTime
+  StopTime:
+    type: DateTime
+  VolumeCap:
+    type: number
+  ParticipateInOpening:
+    type: boolean
+  ParticipateInClosing:
+    type: boolean
+  WouldPrice:
+    type: number
+  WouldPercent:
+    type: number
+  WouldStyle:
+    type: string
+    enum:
+      - allVenues
+      - litOnly
+      - darkOnly
+  TargetRate: #POV mandatory
+    type: number
+  Urgency:
+    type: string
+    enum:
+      - ultraPassive
+      - passive
+      - neutral
+      - aggressive
+      - superAggressive
+  DarkOnly:
+    type: string

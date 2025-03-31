@@ -99,9 +99,12 @@ properties:
       Positive integer value which represents the time is seconds in which the new order
       remains active in the market before it is automatically cancelled (e.g. expired).
     type: integer
+    example: 86400
   quoteId:
     type: string
+    maxLength: 128
     description: Unambiguous identifier for the quote that was provided by the confirming party.
+    example: 6dca5123-e370-4272-8ef4-68d421f52f6e
   allocationList:
     type: array
     items:
@@ -117,6 +120,14 @@ properties:
   cancelledQuantity:
     $ref: 'Quantity.yaml'
     readOnly: true
+  orderPlacer:
+    type: string
+    maxLength: 128
+    description: TBD
+  decisionMaker:
+    type: string
+    maxLength: 128
+    description: TBD
   additionalDetails:
     type: string
     maxLength: 512

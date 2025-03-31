@@ -257,9 +257,6 @@ paths:
                         quantity:
                           type: unit
                           value: 3
-                        remainingQuantity:
-                          type: unit
-                          value: 0
                         averagePrice:
                           type: actual
                           value: 10.8
@@ -313,9 +310,6 @@ paths:
                         quantity:
                           type: unit
                           value: 2
-                        remainingQuantity:
-                          type: unit
-                          value: 0
                         averagePrice:
                           type: actual
                           value: 10.8
@@ -864,15 +858,15 @@ components:
       schema:
         type: string
         maxLength: 20
-      description: The orderId as given py the API provider.
+      description: The order ID as given by the API provider.
     executionId:
       in: path
       name: executionId
       required: true
       schema:
         type: string
-        maxLength: 20
-      description: The executionId as given py the API provider.
+        maxLength: 128
+      description: The execution ID as given by the API provider.
     path_eventSubscriptionId:
       in: path
       name: eventSubscriptionId
@@ -1070,8 +1064,7 @@ components:
     PositionEffect:
       type: string
       description: |
-        Indicates whether the resulting position after a trade should be an opening position or closing position. 
-        sed for omnibus accounting - where accounts are held on a gross basis instead of being netted together.
+        Indicates whether the resulting position after a trade should be an opening position or closing position.
       enum:
         - open
         - close
@@ -1106,8 +1099,8 @@ components:
             settlementDate:
               $ref: '#/components/schemas/Date'
     CurrencySwap:
-      title: Forward Currency
-      description: Forward Currency Instrument
+      title: Currency Swap
+      description: Currency Swap Instrument
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
@@ -1123,8 +1116,8 @@ components:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
         - type: object
           required:
-            - amountPaid
-            - amountReceived
+            - amountSold
+            - amountBought
             - settlementDate
           properties:
             amountSold:
@@ -1477,16 +1470,15 @@ components:
         quantity:
           description: The requested quantity to be allocated to specific safekeeping account.
           $ref: '#/components/schemas/Quantity'
-        remainingQuantity:
-          description: |
-            Quantity open for further execution.
-            If the status is cancelled, expired, or rejected (in which case the order is no longer active)
-            then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
-          $ref: '#/components/schemas/Quantity'
-          readOnly: true
         averagePrice:
           description: The average price for quantity that was traded.
           $ref: '#/components/schemas/Price'
+          readOnly: true
+        executedQuantity:
+          $ref: '#/components/schemas/Quantity'
+          readOnly: true
+        cancelledQuantity:
+          $ref: '#/components/schemas/Quantity'
           readOnly: true
         allocationCancellationReasonList:
           type: array
@@ -1655,9 +1647,12 @@ components:
             Positive integer value which represents the time is seconds in which the new order
             remains active in the market before it is automatically cancelled (e.g. expired).
           type: integer
+          example: 86400
         quoteId:
           type: string
+          maxLength: 128
           description: Unambiguous identifier for the quote that was provided by the confirming party.
+          example: 6dca5123-e370-4272-8ef4-68d421f52f6e
         allocationList:
           type: array
           items:
@@ -1673,6 +1668,14 @@ components:
         cancelledQuantity:
           $ref: '#/components/schemas/Quantity'
           readOnly: true
+        orderPlacer:
+          type: string
+          maxLength: 128
+          description: TBD
+        decisionMaker:
+          type: string
+          maxLength: 128
+          description: TBD
         additionalDetails:
           type: string
           maxLength: 512
@@ -1734,8 +1737,8 @@ components:
                 - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
               readOnly: true
     ContractQuote:
-      title: Standard quote
-      description: Standard quote
+      title: Contract quote
+      description: Contract quote
       allOf:
         - $ref: '#/components/schemas/QuoteBase'
         - type: object
@@ -1743,6 +1746,7 @@ components:
             quotedContract:
               description: The fully defined financial contract proposed by the quoting party.
               $ref: '#/components/schemas/FinancialInstrument'
+              readOnly: true
     QuoteBase:
       type: object
       required:
@@ -1769,7 +1773,7 @@ components:
             Kind of quote requested.
             - Price quote TBD
             - Contract quote TBD
-          example: buy
+          example: priceQuote
           enum:
             - priceQuote
             - contractQuote

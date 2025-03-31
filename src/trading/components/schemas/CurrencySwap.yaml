@@ -1,5 +1,5 @@
-title: Forward Currency
-description: Forward Currency Instrument
+title: Currency Swap
+description: Currency Swap Instrument
 allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
