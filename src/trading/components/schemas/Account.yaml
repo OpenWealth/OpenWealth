@@ -23,3 +23,10 @@ properties:
     description: Contains the accounts custody proprietary account number for an account if available.
     maxLength: 70
     example: 123-1234-234
+  accessType:
+    type: string
+    description: Indicates what type of access the requestor has for the specified account.
+    enum:
+      - read
+      - write
+    example: read
