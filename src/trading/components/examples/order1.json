@@ -73,11 +73,7 @@
               "value": 32.4,
               "currency": "CHF"
             },
-            "grossSettlementAmount": {
-              "value": 32.4,
-              "currency": "CHF"
-            },
-            "netSettlementAmount": {
+            "settlementAmount": {
               "value": 35.4,
               "currency": "CHF"
             },
@@ -146,11 +142,7 @@
               "value": 21.6,
               "currency": "CHF"
             },
-            "grossSettlementAmount": {
-              "value": 21.6,
-              "currency": "CHF"
-            },
-            "netSettlementAmount": {
+            "settlementAmount": {
               "value": 24.6,
               "currency": "CHF"
             },

@@ -1,10 +1,12 @@
 type: object
 properties:
   grossTradeAmount:
+    description: Principal amount of a trade (price multiplied by quantity).
     $ref: 'Amount.yaml'
-  grossSettlementAmount:
-    $ref: 'Amount.yaml'
-  netSettlementAmount:
+  settlementAmount:
+    description: |
+      Total amount of money to be paid or received in exchange for the securities.
+      The amount includes the principal with any commissions and fees or accrued interest.
     $ref: 'Amount.yaml'
   netBillingAmount:
     $ref: 'Amount.yaml'

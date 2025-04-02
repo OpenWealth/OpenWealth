@@ -279,10 +279,7 @@ paths:
                               grossTradeAmount:
                                 value: 32.4
                                 currency: CHF
-                              grossSettlementAmount:
-                                value: 32.4
-                                currency: CHF
-                              netSettlementAmount:
+                              settlementAmount:
                                 value: 35.4
                                 currency: CHF
                               netBillingAmount:
@@ -332,10 +329,7 @@ paths:
                               grossTradeAmount:
                                 value: 21.6
                                 currency: CHF
-                              grossSettlementAmount:
-                                value: 21.6
-                                currency: CHF
-                              netSettlementAmount:
+                              settlementAmount:
                                 value: 24.6
                                 currency: CHF
                               netBillingAmount:
@@ -1409,10 +1403,12 @@ components:
       type: object
       properties:
         grossTradeAmount:
+          description: Principal amount of a trade (price multiplied by quantity).
           $ref: '#/components/schemas/Amount'
-        grossSettlementAmount:
-          $ref: '#/components/schemas/Amount'
-        netSettlementAmount:
+        settlementAmount:
+          description: |
+            Total amount of money to be paid or received in exchange for the securities.
+            The amount includes the principal with any commissions and fees or accrued interest.
           $ref: '#/components/schemas/Amount'
         netBillingAmount:
           $ref: '#/components/schemas/Amount'

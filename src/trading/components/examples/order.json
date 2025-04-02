@@ -103,16 +103,7 @@
                 "targetCurrency": "CHF"
               }
             },
-            "grossSettlementAmount": {
-              "value": 12000,
-              "currency": "CHF",
-              "foreignExchangeRate": {
-                "value": 0.98,
-                "sourceCurrency": "CHF",
-                "targetCurrency": "CHF"
-              }
-            },
-            "netSettlementAmount": {
+            "settlementAmount": {
               "value": 12000,
               "currency": "CHF",
               "foreignExchangeRate": {
