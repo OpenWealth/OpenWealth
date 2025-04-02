@@ -78,6 +78,7 @@ paths:
       description: Posts a new order.
       operationId: createOrder
       parameters:
+        - $ref: '#/components/parameters/expandOrder'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       requestBody:
         content:
@@ -205,6 +206,7 @@ paths:
       operationId: getOrderById
       parameters:
         - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/expandOrder'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
@@ -851,6 +853,26 @@ components:
       schema:
         type: string
       description: Unique ID (defined by the caller) which will be reflected back in the response.
+    expandOrder:
+      name: expand
+      in: query
+      description: |
+        Expand related resources. Comma-separated values, supporting:
+        - `allocationList`: Include allocationList details.
+        - `allocationList.executionAllocationList`: Include executionAllocationList details on the allocation.
+        - `allocationList.allocationCancellationReasonList`: Include allocationCancellationReasonList details on the allocation.
+        - `orderCancellationReasonList`: Include orderCancellationReasonList
+      schema:
+        type: string
+        items:
+          type: string
+          enum:
+            - allocationList
+            - allocationList.executionAllocationList
+            - allocationList.allocationCancellationReasonList
+            - orderCancellationReasonList
+      style: form
+      explode: false
     orderId:
       in: path
       name: orderId
@@ -945,6 +967,13 @@ components:
           description: Contains the accounts custody proprietary account number for an account if available.
           maxLength: 70
           example: 123-1234-234
+        accessType:
+          type: string
+          description: Indicates what type of access the requestor has for the specified account.
+          enum:
+            - read
+            - write
+          example: read
     CommonErrorType:
       title: Common Error Type
       description: Error Types for CommonErrorResponse.

@@ -5,6 +5,7 @@ post:
   description: Posts a new order.
   operationId: createOrder
   parameters:
+    - $ref: ../components/parameters/expandOrder.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   requestBody:
     content:

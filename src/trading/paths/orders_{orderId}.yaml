@@ -6,6 +6,7 @@ get:
   operationId: getOrderById
   parameters:
     - $ref: ../components/parameters/orderId.yaml
+    - $ref: ../components/parameters/expandOrder.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   responses:
     '200':
