@@ -282,9 +282,6 @@ paths:
                               settlementAmount:
                                 value: 35.4
                                 currency: CHF
-                              netBillingAmount:
-                                value: 35.4
-                                currency: CHF
                               stampDuty:
                                 value: 1
                                 currency: CHF
@@ -330,9 +327,6 @@ paths:
                                 value: 21.6
                                 currency: CHF
                               settlementAmount:
-                                value: 24.6
-                                currency: CHF
-                              netBillingAmount:
                                 value: 24.6
                                 currency: CHF
                               stampDuty:
@@ -1409,8 +1403,6 @@ components:
           description: |
             Total amount of money to be paid or received in exchange for the securities.
             The amount includes the principal with any commissions and fees or accrued interest.
-          $ref: '#/components/schemas/Amount'
-        netBillingAmount:
           $ref: '#/components/schemas/Amount'
         accruedInterests:
           $ref: '#/components/schemas/AccruedInterest'

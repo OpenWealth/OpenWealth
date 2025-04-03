@@ -112,15 +112,6 @@
                 "targetCurrency": "CHF"
               }
             },
-            "netBillingAmount": {
-              "value": 12000,
-              "currency": "CHF",
-              "foreignExchangeRate": {
-                "value": 0.98,
-                "sourceCurrency": "CHF",
-                "targetCurrency": "CHF"
-              }
-            },
             "accruedInterests": {
               "numberDaysAccrued": 28,
               "amount": 0,
