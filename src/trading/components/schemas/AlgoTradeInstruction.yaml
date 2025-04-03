@@ -1,7 +1,6 @@
 type: object
 required:
-  - type
-  - identification
+  - tradingStrategy
 properties:
   tradingStrategy:
     description: Name of the Strategy (i.e. volumeWeightedAveragePrice).
