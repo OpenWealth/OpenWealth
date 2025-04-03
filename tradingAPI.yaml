@@ -1562,6 +1562,96 @@ components:
           type: string
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
           example: Cancelled by client
+    AlgoTradeInstruction:
+      type: object
+      required:
+        - type
+        - identification
+      properties:
+        tradingStrategy:
+          description: Name of the Strategy (i.e. volumeWeightedAveragePrice).
+          type: string
+          enum:
+            - volumeWeightedAveragePrice
+            - timeWeightedAveragePrice
+            - percentageOfVolume
+            - marketOnClose
+            - targetMarketOnClose
+            - liquidityGrabber
+            - darkOnly
+            - custom
+        startTime:
+          description: |
+            UTC timestamp as entered by the client,
+            defines the time from when the electronic algorithm is allowed to run.
+          type: string
+          format: DateTime
+        stopTime:
+          description: |
+            UTC timestamp as entered by the client,
+            defines the time until when the electronic algorithm is allowed to run.
+          type: string
+          format: DateTime
+        volumeCap:
+          description: |
+            Participation rate under which the electronic algorithm will try to always stay.
+            The participation rate is calculated by the electronic algorithm on the periods
+            where it is allowed to work (respecting start/stop time).
+          type: number
+        participateInOpening:
+          description: |
+            Indicates, that the electronic algorithm can participate in the opening auction.
+          type: boolean
+        participateInClosing:
+          description: |
+            Indicates, that the electronic algorithm can participate in the closing auction.
+          type: boolean
+        wouldPrice:
+          description: |
+            Indicates the price at which the client is willing to fill the entire order,
+            or the percentage provided in WouldPercentage.
+            WouldPrice is always associated with the values provided with "wouldPercentage" and "wouldStyle".
+          type: number
+        wouldPercentage:
+          description: |
+            "wouldPercentage" can only be selected if parameter "wouldPrice" contains a valid value.
+            Parameter is always associated with "wouldPrice" and "wouldStyle".
+          type: number
+        wouldStyle:
+          description: |
+            WouldStyle can only be selected if parameter WouldPrice contains a valid value.
+            Parameter is always associated with "wouldPrice" and "wouldPercentage".
+          type: string
+          enum:
+            - allVenues
+            - litOnly
+            - darkOnly
+        targetRate:
+          description: |
+            Global participation rate in % that the electronic algorithm will try to achieve.
+            The public size is calculated on the periods where the electronic algorithm
+            is allowed to work (respecting StartTime/StopTime).
+          type: number
+        urgency:
+          description: |
+            Indicates the degree of urgency for execution as defined by the client.
+          type: string
+          enum:
+            - ultraPassive
+            - passive
+            - neutral
+            - aggressive
+            - superAggressive
+        maxLength:
+          description: |
+            Sets the minimum fill size in dark venues client may want.
+          type: number
+        primaryOnly:
+          description: TBD.
+          type: boolean
+        customInstruction:
+          description: TBD.
+          type: string
     Order:
       type: object
       description: Order object.
@@ -1693,6 +1783,8 @@ components:
           type: string
           maxLength: 128
           description: TBD
+        algoTradeInstruction:
+          $ref: '#/components/schemas/AlgoTradeInstruction'
         additionalDetails:
           type: string
           maxLength: 512

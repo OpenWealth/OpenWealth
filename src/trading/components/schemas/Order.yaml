@@ -128,6 +128,8 @@ properties:
     type: string
     maxLength: 128
     description: TBD
+  algoTradeInstruction:
+    $ref: 'AlgoTradeInstruction.yaml'
   additionalDetails:
     type: string
     maxLength: 512
