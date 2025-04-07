@@ -48,7 +48,7 @@ post:
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   tags:
-    - Event Subscription
+    - event-subscription
   requestBody:
     content:
       application/json:

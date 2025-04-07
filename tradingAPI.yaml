@@ -644,7 +644,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       tags:
-        - Event Subscription
+        - event-subscription
       requestBody:
         content:
           application/json:
