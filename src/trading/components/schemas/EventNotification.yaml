@@ -1,0 +1,24 @@
+type: object
+properties:
+  id:
+    type: string
+    readOnly: true
+    maxLength: 36
+    example: 120066c9-58a1-432b-aa60-712fae7f143e
+  version:
+    type: string
+    example: '1.0'
+  eventType:
+    type: string
+    example: Order:Partially_Filled
+  eventSubscriptionId:
+    type: string
+    readOnly: true
+    maxLength: 36
+    example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
+  resourceLink:
+    type: string
+    example: /api/bankingservices/b-link/order-placement/v1/orders/abcd1234
+  createdAt:
+    type: string
+    example: 2022-10-26T07:58:30.996+0100

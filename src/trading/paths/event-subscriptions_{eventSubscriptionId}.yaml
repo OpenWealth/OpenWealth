@@ -1,58 +1,16 @@
+parameters:
+  - $ref: ../components/parameters/path_eventSubscriptionId.yaml
 get:
-  tags:
-    - event-subscription
-  summary: View Subscription
-  description: Allows TPP to view the event subscription.
-  operationId: getEventSubscriptionByEventSubscriptionId
+  summary: Get event subscription
+  description: Get event subscription by id.
   parameters:
-    - $ref: ../components/parameters/path_eventSubscriptionId.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  operationId: getEventSubscription
+  tags:
+    - Event Subscription
   responses:
     '200':
-      description: Event Subscription read.
-      headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/eventSubscription.yaml
-    '400':
-      $ref: ../../generics/components/responses/400.yaml
-    '401':
-      $ref: ../../generics/components/responses/401.yaml
-    '403':
-      $ref: ../../generics/components/responses/403.yaml
-    '404':
-      $ref: ../../generics/components/responses/404.yaml
-    '405':
-      $ref: ../../generics/components/responses/405.yaml
-    '500':
-      $ref: ../../generics/components/responses/500.yaml
-    '501':
-      $ref: ../../generics/components/responses/501.yaml
-    '503':
-      $ref: ../../generics/components/responses/503.yaml
-    '504':
-      $ref: ../../generics/components/responses/504.yaml
-put:
-  tags:
-    - event-subscription
-  summary: Change event subscription
-  description: Changes event subscription.
-  operationId: changeEventSubscriptionByEventSubscriptionId
-  parameters:
-    - $ref: ../components/parameters/path_eventSubscriptionId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: ../components/schemas/EventSubscription.yaml
-  responses:
-    '200':
-      description: Event subscription changed
+      description: EventSubscription
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
@@ -68,8 +26,6 @@ put:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
-    '405':
-      $ref: ../../generics/components/responses/405.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '501':
@@ -78,18 +34,27 @@ put:
       $ref: ../../generics/components/responses/503.yaml
     '504':
       $ref: ../../generics/components/responses/504.yaml
-delete:
-  tags:
-    - event-subscription
-  summary: Delete event subscription
-  description: Deletes event subscriptions.
-  operationId: deleteEventSubscriptionsByEventSubscriptionId
+put:
+  summary: Update event subscription
+  description: Update event subscription.
+  operationId: updateEventSubscription
   parameters:
-    - $ref: ../components/parameters/path_eventSubscriptionId.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  tags:
+    - Event Subscription
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EventSubscription.yaml
+        example:
+          eventTypes:
+            - Order:Created
+            - Order:Partially_Filled
+          callbackUrl: /ttpAPI/notifications/order-placement/
   responses:
     '204':
-      description: Event subscription deleted.
+      description: Successfully updated (empty response)
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
@@ -101,8 +66,36 @@ delete:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
-    '405':
-      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+    '504':
+      $ref: ../../generics/components/responses/504.yaml
+delete:
+  summary: Delete event subscription
+  description: Delete event subscription by id.
+  operationId: deleteEventSubscription
+  parameters:
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  tags:
+    - Event Subscription
+  responses:
+    '204':
+      description: Successfully deleted
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '501':

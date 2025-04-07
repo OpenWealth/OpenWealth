@@ -594,29 +594,33 @@ paths:
         '503':
           $ref: '#/components/responses/503'
   /event-subscriptions:
-    post:
-      tags:
-        - event-subscription
-      summary: Subscribe to Events
-      description: Allows TPP to subscribe to specific events for the API.
-      operationId: postEventSubscription
+    get:
+      summary: Get event subscriptions
+      description: Get list of event subscriptions.
+      operationId: getEventSubscriptions
       parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/eventSubscriptionRequest'
+      tags:
+        - Event Subscription
       responses:
-        '201':
-          description: Subscription created.
+        '200':
+          description: List of EventSubscriptions
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
+            x-nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/eventSubscription'
+                type: object
+                properties:
+                  eventNotifications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EventSubscription'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -625,8 +629,52 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    post:
+      summary: Create event subscription
+      description: Create event subscription
+      operationId: createEventSubscription
+      parameters:
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      tags:
+        - Event Subscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSubscription'
+      responses:
+        '201':
+          description: EventSubscription created
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSubscription'
+          links:
+            GetSubscriptionById:
+              description: |
+                The `eventSubscriptionId` value returned in the response can be used as the `eventSubscriptionId` parameter in `GET /event-subscriptions/{eventSubscriptionId}`.
+              operationId: getEventSubscription
+              parameters:
+                documentId: $response.body#/eventSubscriptionId
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
         '409':
           $ref: '#/components/responses/409'
         '500':
@@ -637,100 +685,20 @@ paths:
           $ref: '#/components/responses/503'
         '504':
           $ref: '#/components/responses/504'
-    get:
-      tags:
-        - event-subscription
-      summary: View Subscriptions
-      description: Allows TPP to view the event subscriptions.
-      operationId: getEventSubscriptions
-      parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
-      responses:
-        '200':
-          description: Event Subscription read.
-          headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/eventSubscription'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '500':
-          $ref: '#/components/responses/500'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
-        '504':
-          $ref: '#/components/responses/504'
   /event-subscriptions/{eventSubscriptionId}:
+    parameters:
+      - $ref: '#/components/parameters/path_eventSubscriptionId'
     get:
-      tags:
-        - event-subscription
-      summary: View Subscription
-      description: Allows TPP to view the event subscription.
-      operationId: getEventSubscriptionByEventSubscriptionId
+      summary: Get event subscription
+      description: Get event subscription by id.
       parameters:
-        - $ref: '#/components/parameters/path_eventSubscriptionId'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
+      operationId: getEventSubscription
+      tags:
+        - Event Subscription
       responses:
         '200':
-          description: Event Subscription read.
-          headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/eventSubscription'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '500':
-          $ref: '#/components/responses/500'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
-        '504':
-          $ref: '#/components/responses/504'
-    put:
-      tags:
-        - event-subscription
-      summary: Change event subscription
-      description: Changes event subscription.
-      operationId: changeEventSubscriptionByEventSubscriptionId
-      parameters:
-        - $ref: '#/components/parameters/path_eventSubscriptionId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EventSubscription'
-      responses:
-        '200':
-          description: Event subscription changed
+          description: EventSubscription
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -746,8 +714,6 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -756,18 +722,27 @@ paths:
           $ref: '#/components/responses/503'
         '504':
           $ref: '#/components/responses/504'
-    delete:
-      tags:
-        - event-subscription
-      summary: Delete event subscription
-      description: Deletes event subscriptions.
-      operationId: deleteEventSubscriptionsByEventSubscriptionId
+    put:
+      summary: Update event subscription
+      description: Update event subscription.
+      operationId: updateEventSubscription
       parameters:
-        - $ref: '#/components/parameters/path_eventSubscriptionId'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
+      tags:
+        - Event Subscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSubscription'
+            example:
+              eventTypes:
+                - Order:Created
+                - Order:Partially_Filled
+              callbackUrl: /ttpAPI/notifications/order-placement/
       responses:
         '204':
-          description: Event subscription deleted.
+          description: Successfully updated (empty response)
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -779,8 +754,36 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    delete:
+      summary: Delete event subscription
+      description: Delete event subscription by id.
+      operationId: deleteEventSubscription
+      parameters:
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      tags:
+        - Event Subscription
+      responses:
+        '204':
+          description: Successfully deleted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -790,32 +793,54 @@ paths:
         '504':
           $ref: '#/components/responses/504'
   /event-subscriptions/{eventSubscriptionId}/event-notifications:
+    parameters:
+      - $ref: '#/components/parameters/path_eventSubscriptionId'
+      - $ref: '#/components/parameters/fromEventDateTime'
+      - $ref: '#/components/parameters/cursor'
+      - $ref: '#/components/parameters/limit'
     get:
-      tags:
-        - event-notification
-      summary: Get event notifications
+      summary: Get event notifications list
       description: Get aggregated event-notification list.
-      operationId: geteventNotificationsByEventSubscriptionId
+      operationId: getEventNotifications
       parameters:
-        - $ref: '#/components/parameters/path_eventSubscriptionId'
-        - $ref: '#/components/parameters/fromEventDateTime'
-        - $ref: '#/components/parameters/afterEventId'
-        - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
+      tags:
+        - Event Notifications
       responses:
         '200':
-          description: aggregated event-notification list.
+          description: aggregated event-notification list
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
+            x-nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/notificationOrderPlacement'
+                type: object
+                properties:
+                  eventNotifications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
 components:
   parameters:
     cursor:
@@ -896,12 +921,6 @@ components:
         format: date-time
       description: Date from which events are considered.
       example: 2022-10-26T07:58:30.996+0100
-    afterEventId:
-      in: query
-      name: afterEventId
-      schema:
-        $ref: '#/components/schemas/eventSubscriptionId'
-      description: Event Id after which events are considered.
   headers:
     X-Correlation-ID:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
@@ -981,6 +1000,7 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
+        - /problems/TOO_MANY_REQUESTS
       example: /problems/TECHNICAL_ERROR
     CommonErrorResponse:
       title: CommonErrorResponse
@@ -1562,11 +1582,108 @@ components:
           type: string
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
           example: Cancelled by client
-    AlgoTradeInstruction:
+    AlgoTradeWAG:
+      title: Weighted Average Price Algo Trade
+      description: Schema of a Weighted Average Price Algo Trade
+      allOf:
+        - $ref: '#/components/schemas/AlgoTradeBase'
+        - type: object
+          required:
+            - tradingStrategy
+          properties:
+            startTime:
+              description: |
+                UTC timestamp as entered by the client,
+                defines the time from when the electronic algorithm is allowed to run.
+              type: string
+              format: DateTime
+            stopTime:
+              description: |
+                UTC timestamp as entered by the client,
+                defines the time until when the electronic algorithm is allowed to run.
+              type: string
+              format: DateTime
+            volumeCap:
+              description: |
+                Participation rate under which the electronic algorithm will try to always stay.
+                The participation rate is calculated by the electronic algorithm on the periods
+                where it is allowed to work (respecting start/stop time).
+              type: number
+            participateInOpening:
+              description: |
+                Indicates, that the electronic algorithm can participate in the opening auction.
+              type: boolean
+            participateInClosing:
+              description: |
+                Indicates, that the electronic algorithm can participate in the closing auction.
+              type: boolean
+            wouldPrice:
+              description: |
+                Indicates the price at which the client is willing to fill the entire order,
+                or the percentage provided in WouldPercentage.
+                WouldPrice is always associated with the values provided with "wouldPercentage" and "wouldStyle".
+              type: number
+            wouldPercentage:
+              description: |
+                "wouldPercentage" can only be selected if parameter "wouldPrice" contains a valid value.
+                Parameter is always associated with "wouldPrice" and "wouldStyle".
+              type: number
+            wouldStyle:
+              description: |
+                WouldStyle can only be selected if parameter WouldPrice contains a valid value.
+                Parameter is always associated with "wouldPrice" and "wouldPercentage".
+              type: string
+              enum:
+                - allVenues
+                - litOnly
+                - darkOnly
+    AlgoTradePOV:
+      title: Percentage of Volume Algo Trade
+      description: Schema of a Percentage of Volume Algo Trade
+      allOf:
+        - $ref: '#/components/schemas/AlgoTradeBase'
+        - type: object
+          required:
+            - targetRate
+          properties:
+            targetRate:
+              description: |
+                Global participation rate in % that the electronic algorithm will try to achieve.
+                The public size is calculated on the periods where the electronic algorithm
+                is allowed to work (respecting StartTime/StopTime).
+              type: number
+            participateInOpening:
+              description: |
+                Indicates, that the electronic algorithm can participate in the opening auction.
+              type: boolean
+            participateInClosing:
+              description: |
+                Indicates, that the electronic algorithm can participate in the closing auction.
+              type: boolean
+            wouldPrice:
+              description: |
+                Indicates the price at which the client is willing to fill the entire order,
+                or the percentage provided in WouldPercentage.
+                WouldPrice is always associated with the values provided with "wouldPercentage" and "wouldStyle".
+              type: number
+            wouldPercentage:
+              description: |
+                "wouldPercentage" can only be selected if parameter "wouldPrice" contains a valid value.
+                Parameter is always associated with "wouldPrice" and "wouldStyle".
+              type: number
+            wouldStyle:
+              description: |
+                WouldStyle can only be selected if parameter WouldPrice contains a valid value.
+                Parameter is always associated with "wouldPrice" and "wouldPercentage".
+              type: string
+              enum:
+                - allVenues
+                - litOnly
+                - darkOnly
+    AlgoTradeBase:
       type: object
       required:
-        - type
-        - identification
+        - tradingStrategy
       properties:
         tradingStrategy:
           description: Name of the Strategy (i.e. volumeWeightedAveragePrice).
@@ -1592,66 +1709,85 @@ components:
             defines the time until when the electronic algorithm is allowed to run.
           type: string
           format: DateTime
-        volumeCap:
-          description: |
-            Participation rate under which the electronic algorithm will try to always stay.
-            The participation rate is calculated by the electronic algorithm on the periods
-            where it is allowed to work (respecting start/stop time).
-          type: number
-        participateInOpening:
-          description: |
-            Indicates, that the electronic algorithm can participate in the opening auction.
-          type: boolean
-        participateInClosing:
-          description: |
-            Indicates, that the electronic algorithm can participate in the closing auction.
-          type: boolean
-        wouldPrice:
-          description: |
-            Indicates the price at which the client is willing to fill the entire order,
-            or the percentage provided in WouldPercentage.
-            WouldPrice is always associated with the values provided with "wouldPercentage" and "wouldStyle".
-          type: number
-        wouldPercentage:
-          description: |
-            "wouldPercentage" can only be selected if parameter "wouldPrice" contains a valid value.
-            Parameter is always associated with "wouldPrice" and "wouldStyle".
-          type: number
-        wouldStyle:
-          description: |
-            WouldStyle can only be selected if parameter WouldPrice contains a valid value.
-            Parameter is always associated with "wouldPrice" and "wouldPercentage".
-          type: string
-          enum:
-            - allVenues
-            - litOnly
-            - darkOnly
-        targetRate:
-          description: |
-            Global participation rate in % that the electronic algorithm will try to achieve.
-            The public size is calculated on the periods where the electronic algorithm
-            is allowed to work (respecting StartTime/StopTime).
-          type: number
-        urgency:
-          description: |
-            Indicates the degree of urgency for execution as defined by the client.
-          type: string
-          enum:
-            - ultraPassive
-            - passive
-            - neutral
-            - aggressive
-            - superAggressive
-        maxLength:
-          description: |
-            Sets the minimum fill size in dark venues client may want.
-          type: number
-        primaryOnly:
-          description: TBD.
-          type: boolean
-        customInstruction:
-          description: TBD.
-          type: string
+    AlgoTradeLiqGrab:
+      title: Liquidity Grabber Algo Trade
+      description: Schema of a liquidity grabber Algo Trade
+      allOf:
+        - $ref: '#/components/schemas/AlgoTradeBase'
+        - type: object
+          required:
+            - targetRate
+          properties:
+            urgency:
+              description: |
+                Indicates the degree of urgency for execution as defined by the client.
+              type: string
+              enum:
+                - ultraPassive
+                - passive
+                - neutral
+                - aggressive
+                - superAggressive
+    AlgoTradeDarkOnly:
+      title: Dark only Algo Trade
+      description: Schema of a Dark Only Algo Trade
+      allOf:
+        - $ref: '#/components/schemas/AlgoTradeBase'
+        - type: object
+          required:
+            - targetRate
+          properties:
+            urgency:
+              description: |
+                Indicates the degree of urgency for execution as defined by the client.
+              type: string
+              enum:
+                - ultraPassive
+                - passive
+                - neutral
+                - aggressive
+                - superAggressive
+            minQty:
+              description: |
+                Sets the minimum fill size in dark venues client may want.
+              type: number
+            primaryOnly:
+              description: TBD.
+              type: boolean
+    AlgoTradeCustom:
+      title: Custom Algo Trade
+      description: Schema of a custom algo trade
+      allOf:
+        - $ref: '#/components/schemas/AlgoTradeBase'
+        - type: object
+          required:
+            - customInstruction
+          properties:
+            customInstruction:
+              description: TBD.
+              type: string
+    AlgoTrade:
+      title: AlgoTradeInstruction
+      type: object
+      description: Schema of a algoTradeInstruction entity.
+      oneOf:
+        - $ref: '#/components/schemas/AlgoTradeWAG'
+        - $ref: '#/components/schemas/AlgoTradePOV'
+        - $ref: '#/components/schemas/AlgoTradeBase'
+        - $ref: '#/components/schemas/AlgoTradeLiqGrab'
+        - $ref: '#/components/schemas/AlgoTradeDarkOnly'
+        - $ref: '#/components/schemas/AlgoTradeCustom'
+      discriminator:
+        propertyName: tradingStrategy
+        mapping:
+          volumeWeightedAveragePrice: '#/components/schemas/AlgoTradeWAG'
+          timeWeightedAveragePrice: '#/components/schemas/AlgoTradeWAG'
+          percentageOfVolume: '#/components/schemas/AlgoTradePOV'
+          marketOnClose: '#/components/schemas/AlgoTradeBase'
+          targetMarketOnClose: '#/components/schemas/AlgoTradeBase'
+          liquidityGrabber: '#/components/schemas/AlgoTradeLiqGrab'
+          darkOnly: '#/components/schemas/AlgoTradeDarkOnly'
+          custom: '#/components/schemas/AlgoTradeCustom'
     Order:
       type: object
       description: Order object.
@@ -1756,9 +1892,9 @@ components:
           type: integer
           example: 86400
         quoteId:
+          description: Unambiguous identifier for the quote that was provided by the confirming party.
           type: string
           maxLength: 128
-          description: Unambiguous identifier for the quote that was provided by the confirming party.
           example: 6dca5123-e370-4272-8ef4-68d421f52f6e
         allocationList:
           type: array
@@ -1776,15 +1912,25 @@ components:
           $ref: '#/components/schemas/Quantity'
           readOnly: true
         orderPlacer:
+          description: |
+            The entity physically transmitting the order to the execution venue.
+            This role is often fulfilled by:
+              - Investment firms or brokers executing trades on behalf of clients.
+              - Systematic internalisers or trading venues handling order transmission.
+              - In some cases, the order placer may also be the decision maker if no third-party authorization exists.
           type: string
           maxLength: 128
-          description: TBD
         decisionMaker:
+          description: |
+            The party legally authorized to make investment decisions on behalf of a client.
+            This typically includes:
+            - Individuals or entities acting under a power of attorney (e.g., attorneys managing accounts).
+            - Discretionary investment managers executing trades without prior client approval.
+            - In cases like funds, the fund manager is generally considered the decision maker.
           type: string
           maxLength: 128
-          description: TBD
         algoTradeInstruction:
-          $ref: '#/components/schemas/AlgoTradeInstruction'
+          $ref: '#/components/schemas/AlgoTrade'
         additionalDetails:
           type: string
           maxLength: 512
@@ -1909,162 +2055,30 @@ components:
         mapping:
           priceQuote: '#/components/schemas/PriceQuote'
           contractQuote: '#/components/schemas/ContractQuote'
-    eventSubscriptionId:
-      description: |
-        Unique identification as assigned by the API exposing party to uniquely
-        identify the callback URL resource.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: 3v3n7subscr1p70n
-    eventType:
-      description: Event type the subscription should apply to AND reason why a notification is sent.
-      type: string
-      enum:
-        - heartbeat
-        - order:doneForDay
-        - order:orderStatusUpdated
-        - order:pendingReplace
-        - order:replaced
-        - order:restated
-        - order:suspended
-        - order:trade
-        - order:tradeCancel
-        - order:tradeCorrect
-      example: order:orderStatusUpdated
-    eventSubscription:
-      type: object
-      required:
-        - eventSubscriptionId
-      properties:
-        eventSubscriptionId:
-          $ref: '#/components/schemas/eventSubscriptionId'
-        callbackUrl:
-          description: |
-            Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL
-            to send event notifications to.
-          type: string
-          format: uri
-          example: https://examplecallbackuri.com
-        eventTypes:
-          description: Array of event types the subscription applies to. An empty list indicates that no notifications are sent.
-          type: array
-          items:
-            $ref: '#/components/schemas/eventType'
-    eventSubscriptionRequest:
-      type: object
-      required:
-        - callbackUrl
-      properties:
-        callbackUrl:
-          description: |
-            Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL
-            to send event notifications to.
-          type: string
-          format: uri
-          example: https://examplecallbackuri.com
-        eventTypes:
-          description: Array of event types the subscription applies to. An empty list indicates that no notifications are sent.
-          type: array
-          items:
-            $ref: '#/components/schemas/eventType'
     EventSubscription:
       type: object
       required:
-        - eventSubscriptionId
+        - eventTypes
       properties:
-        eventSubscriptionId:
-          $ref: '#/components/schemas/eventSubscriptionId'
-        callbackUrl:
-          description: |
-            Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL
-            to send event notifications to.
+        id:
           type: string
-          format: uri
-          example: https://examplecallbackuri.com
+          readOnly: true
+          maxLength: 36
+          example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
         eventTypes:
-          description: Array of event types the subscription applies to. An empty list indicates that no notifications are sent.
           type: array
           items:
-            $ref: '#/components/schemas/eventType'
-    EventSubscriptionId:
-      description: |
-        Unique identification as assigned by the API exposing party to uniquely
-        identify the callback URL resource.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: 3v3n7subscr1p70n
-    Version:
-      description: Indicates to which version of the respective API the notification is belonging to.
-      type: string
-      enum:
-        - v1
-        - v2
-        - v3
-      example: v2
-    EventType:
-      description: Event type the subscription should apply to AND reason why a notification is sent.
-      type: string
-      enum:
-        - heartbeat
-        - order:doneForDay
-        - order:orderStatusUpdated
-        - order:pendingReplace
-        - order:replaced
-        - order:restated
-        - order:suspended
-        - order:trade
-        - order:tradeCancel
-        - order:tradeCorrect
-      example: order:orderStatusUpdated
-    NotificationId:
-      description: Identification of the notification.
-      type: string
-      example: 120066c9-58a1-432b-aa60-712fae7f143e
-    notificationOrderPlacement:
-      description: Notification for the order placement API that is pushed to the TPP.
-      type: object
-      properties:
-        eventSubscriptionId:
-          $ref: '#/components/schemas/EventSubscriptionId'
-        version:
-          $ref: '#/components/schemas/Version'
-        eventType:
-          $ref: '#/components/schemas/EventType'
-        resourceLink:
-          description: Link to resource that triggered the event notification.
+            type: string
+            enum:
+              - Order:Created
+              - Order:Partially_Filled
+          example:
+            - Order:Created
+            - Order:Partially_Filled
+        callbackUrl:
           type: string
-          example: /api/openwealth/order-placement/v2/orders/abcd1234
-        created:
-          description: Timestamp - Date and time including timezone on which the notification has been created, according to ISO8601
-          $ref: '#/components/schemas/DateTime'
-        id:
-          description: Identification (UUID) of this notification.
-          $ref: '#/components/schemas/NotificationId'
-        predecessorId:
-          description: Identification (UUID) of the notification that predeceeds this notification.
-          $ref: '#/components/schemas/NotificationId'
-        orderStatus:
-          description: Status of the requested resource notification.
-          $ref: '#/components/schemas/OrderStatus'
-        executedQuantity:
-          description: Total quantity (e.g. number of shares) filled.
-          $ref: '#/components/schemas/Quantity'
-        averagePrice:
-          description: Calculated average price of all fills on this order.
-          $ref: '#/components/schemas/Price'
-        remainingQuantity:
-          description: |
-            Quantity open for further execution.
-            If the status is cancelled,  expired, or rejected (in which case the order is no longer active) then remainingQuantity could be 0, otherwise remainingQuantity = orderQuantity - executedQuantity.
-          $ref: '#/components/schemas/Quantity'
-        lastQuantity:
-          description: Quantity (e.g. shares) bought/sold on this (last) fill.
-          $ref: '#/components/schemas/Quantity'
-        lastPrice:
-          description: Price of this (last) fill.
-          $ref: '#/components/schemas/Price'
+          example: https://ttp.com/API/notifications/order-placement/
+          description: Not to be used in bLink
   responses:
     '400':
       headers:
@@ -2150,6 +2164,23 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+    '429':
+      headers:
+        X-Correlation-ID:
+          $ref: '#/components/headers/X-Correlation-ID'
+      description: |
+        When an SU sends too many lookup or polling requests in a given amount of time the SP shall 
+        respond with HTTP 429 (Too many requests). This response may contain a Retry-After header 
+        indicating how long the SU must wait before making a new request. (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+          example:
+            type: /problems/TOO_MANY_REQUESTS
+            title: resource not found
+            detail: ...
+            instance: path/to/corresponding/resource
     '500':
       headers:
         Content-Type:

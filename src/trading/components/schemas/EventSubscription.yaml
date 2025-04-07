@@ -1,18 +1,23 @@
 type: object
 required:
-  - eventSubscriptionId
+  - eventTypes
 properties:
-  eventSubscriptionId:
-    $ref: 'eventSubscriptionId.yaml'
-  callbackUrl:
-    description: |
-      Callback URL for a TPP hosted service. Will be used by API exposing party, in conjunction with the resource name, to construct a URL
-      to send event notifications to.
+  id:
     type: string
-    format: uri
-    example: 'https://examplecallbackuri.com'
+    readOnly: true
+    maxLength: 36
+    example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
   eventTypes:
-    description: Array of event types the subscription applies to. An empty list indicates that no notifications are sent.
     type: array
     items:
-      $ref: 'eventType.yaml'
+      type: string
+      enum:
+        - Order:Created
+        - Order:Partially_Filled
+    example:
+      - Order:Created
+      - Order:Partially_Filled
+  callbackUrl:
+    type: string
+    example: https://ttp.com/API/notifications/order-placement/
+    description: Not to be used in bLink

@@ -1,26 +1,30 @@
-post:
-  tags:
-    - event-subscription
-  summary: Subscribe to Events
-  description: Allows TPP to subscribe to specific events for the API.
-  operationId: postEventSubscription
+get:
+  summary: Get event subscriptions
+  description: Get list of event subscriptions.
+  operationId: getEventSubscriptions
   parameters:
+    - $ref: ../../generics/components/parameters/cursor.yaml
+    - $ref: ../../generics/components/parameters/limit.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: ../components/schemas/eventSubscriptionRequest.yaml
+  tags:
+    - Event Subscription
   responses:
-    '201':
-      description: Subscription created.
+    '200':
+      description: List of EventSubscriptions
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+        x-nextCursor:
+          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/eventSubscription.yaml
+            type: object
+            properties:
+              eventNotifications:
+                type: array
+                items:
+                  $ref: ../components/schemas/EventSubscription.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -29,10 +33,6 @@ post:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
-    '405':
-      $ref: ../../generics/components/responses/405.yaml
-    '409':
-      $ref: ../../generics/components/responses/409.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '501':
@@ -41,26 +41,38 @@ post:
       $ref: ../../generics/components/responses/503.yaml
     '504':
       $ref: ../../generics/components/responses/504.yaml
-get:
-  tags:
-    - event-subscription
-  summary: View Subscriptions
-  description: Allows TPP to view the event subscriptions.
-  operationId: getEventSubscriptions
+post:
+  summary: Create event subscription
+  description: Create event subscription
+  operationId: createEventSubscription
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  tags:
+    - Event Subscription
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EventSubscription.yaml
   responses:
-    '200':
-      description: Event Subscription read.
+    '201':
+      description: EventSubscription created
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: ../components/schemas/eventSubscription.yaml
+            $ref: ../components/schemas/EventSubscription.yaml
+      links:
+        GetSubscriptionById:
+          description: >
+            The `eventSubscriptionId` value returned in the response can be used
+            as the `eventSubscriptionId` parameter in `GET
+            /event-subscriptions/{eventSubscriptionId}`.
+          operationId: getEventSubscription
+          parameters:
+            documentId: $response.body#/eventSubscriptionId
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -69,8 +81,8 @@ get:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
-    '405':
-      $ref: ../../generics/components/responses/405.yaml
+    '409':
+      $ref: ../../generics/components/responses/409.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '501':
