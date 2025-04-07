@@ -603,7 +603,7 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       tags:
-        - Event Subscription
+        - event-subscription
       responses:
         '200':
           description: List of EventSubscriptions
@@ -695,7 +695,7 @@ paths:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       operationId: getEventSubscription
       tags:
-        - Event Subscription
+        - event-subscription
       responses:
         '200':
           description: EventSubscription
@@ -729,7 +729,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       tags:
-        - Event Subscription
+        - event-subscription
       requestBody:
         content:
           application/json:
@@ -769,7 +769,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       tags:
-        - Event Subscription
+        - event-subscription
       responses:
         '204':
           description: Successfully deleted
@@ -805,7 +805,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       tags:
-        - Event Notifications
+        - event-notification
       responses:
         '200':
           description: aggregated event-notification list

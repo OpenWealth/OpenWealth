@@ -7,7 +7,7 @@ get:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   operationId: getEventSubscription
   tags:
-    - Event Subscription
+    - event-subscription
   responses:
     '200':
       description: EventSubscription
@@ -41,7 +41,7 @@ put:
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   tags:
-    - Event Subscription
+    - event-subscription
   requestBody:
     content:
       application/json:
@@ -81,7 +81,7 @@ delete:
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   tags:
-    - Event Subscription
+    - event-subscription
   responses:
     '204':
       description: Successfully deleted

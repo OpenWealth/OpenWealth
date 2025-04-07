@@ -10,7 +10,7 @@ get:
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   tags:
-    - Event Notifications
+    - event-notification
   responses:
     '200':
       description: aggregated event-notification list
