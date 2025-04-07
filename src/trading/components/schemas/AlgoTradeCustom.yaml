@@ -1,0 +1,11 @@
+title: Custom Algo Trade
+description: Schema of a custom algo trade
+allOf:
+  - $ref: AlgoTradeBase.yaml
+  - type: object
+    required:
+      - customInstruction
+    properties:
+      customInstruction:
+        description: TBD.
+        type: string

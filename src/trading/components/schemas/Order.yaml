@@ -101,9 +101,9 @@ properties:
     type: integer
     example: 86400
   quoteId:
+    description: Unambiguous identifier for the quote that was provided by the confirming party.
     type: string
     maxLength: 128
-    description: Unambiguous identifier for the quote that was provided by the confirming party.
     example: 6dca5123-e370-4272-8ef4-68d421f52f6e
   allocationList:
     type: array
@@ -121,15 +121,25 @@ properties:
     $ref: 'Quantity.yaml'
     readOnly: true
   orderPlacer:
+    description: |
+      The entity physically transmitting the order to the execution venue.
+      This role is often fulfilled by:
+        - Investment firms or brokers executing trades on behalf of clients.
+        - Systematic internalisers or trading venues handling order transmission.
+        - In some cases, the order placer may also be the decision maker if no third-party authorization exists.
     type: string
     maxLength: 128
-    description: TBD
   decisionMaker:
+    description: |
+      The party legally authorized to make investment decisions on behalf of a client.
+      This typically includes:
+      - Individuals or entities acting under a power of attorney (e.g., attorneys managing accounts).
+      - Discretionary investment managers executing trades without prior client approval.
+      - In cases like funds, the fund manager is generally considered the decision maker.
     type: string
     maxLength: 128
-    description: TBD
   algoTradeInstruction:
-    $ref: 'AlgoTradeInstruction.yaml'
+    $ref: 'AlgoTrade.yaml'
   additionalDetails:
     type: string
     maxLength: 512

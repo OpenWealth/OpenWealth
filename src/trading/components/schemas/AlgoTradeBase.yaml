@@ -1,0 +1,28 @@
+type: object
+required:
+  - tradingStrategy
+properties:
+  tradingStrategy:
+    description: Name of the Strategy (i.e. volumeWeightedAveragePrice).
+    type: string
+    enum:
+      - volumeWeightedAveragePrice
+      - timeWeightedAveragePrice
+      - percentageOfVolume
+      - marketOnClose
+      - targetMarketOnClose
+      - liquidityGrabber
+      - darkOnly
+      - custom
+  startTime:
+    description: |
+      UTC timestamp as entered by the client,
+      defines the time from when the electronic algorithm is allowed to run.
+    type: string
+    format: DateTime
+  stopTime:
+    description: |
+      UTC timestamp as entered by the client,
+      defines the time until when the electronic algorithm is allowed to run.
+    type: string
+    format: DateTime

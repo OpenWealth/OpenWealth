@@ -1,0 +1,21 @@
+title: AlgoTradeInstruction
+type: object
+description: Schema of a algoTradeInstruction entity.
+oneOf:
+  - $ref: 'AlgoTradeWAG.yaml'
+  - $ref: 'AlgoTradePOV.yaml'
+  - $ref: 'AlgoTradeBase.yaml'
+  - $ref: 'AlgoTradeLiqGrab.yaml'
+  - $ref: 'AlgoTradeDarkOnly.yaml'
+  - $ref: 'AlgoTradeCustom.yaml'
+discriminator:
+  propertyName: tradingStrategy
+  mapping:
+    volumeWeightedAveragePrice: 'AlgoTradeWAG.yaml'
+    timeWeightedAveragePrice: 'AlgoTradeWAG.yaml'
+    percentageOfVolume: 'AlgoTradePOV.yaml'
+    marketOnClose: 'AlgoTradeBase.yaml'
+    targetMarketOnClose: 'AlgoTradeBase.yaml'
+    liquidityGrabber: 'AlgoTradeLiqGrab.yaml'
+    darkOnly: 'AlgoTradeDarkOnly.yaml'
+    custom: 'AlgoTradeCustom.yaml'
