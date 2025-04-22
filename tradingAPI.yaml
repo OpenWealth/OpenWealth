@@ -29,6 +29,86 @@ externalDocs:
   description: Find out more about OpenWealth API specifications.
   url: https://openwealth.ch
 paths:
+  /customers:
+    get:
+      tags:
+        - customers
+      summary: Returns all customers (business partners) accessible for the logged in user
+      description: |
+        This endpoint returns a highlevel list of customers accessible for the
+        logged in user. Paging is done based on the customer object,
+        i.e. if limit is set to 1, then 1 customer will be returned per page.
+      operationId: getCustomers
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Returns a list with all customers.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}:
+    get:
+      tags:
+        - customers
+      summary: Returns a specific customer by id
+      description: Returns a specific customer by id accessible for the requesting user.
+      operationId: getCustomerById
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Returns a the specified customer.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
   /accounts:
     get:
       tags:
@@ -85,50 +165,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Order'
-            examples:
-              OrderCryptoAgainstCrypto:
-                value:
-                  clientReference: 123-123124
-                  orderDateTime: '2018-04-13T11:11:11Z'
-                  side: buy
-                  quantity:
-                    type: unit
-                    value: 12
-                  baseInstrument:
-                    type: basic
-                    identification:
-                      identifier: ETH
-                      type: cryptoCurrency
-                  quoteInstrument:
-                    type: basic
-                    identification:
-                      identifier: BTC
-                      type: cryptoCurrency
-                  executionType: stopLimit
-                  timeInForce: goodTillDate
-                  expiryDateTime: '2018-04-13T18:00:00Z'
-                  limitPrice:
-                    type: actual
-                    value: 0.001
-                    currency: CHF
-                  stopPrice:
-                    type: actual
-                    value: 0.002
-                    currency: CHF
-                  allocationList:
-                    - id: allocation-1
-                      orderId: order-2
-                      debitAccount:
-                        id: safe-1
-                        type: safekeepingAccount
-                        number: 1234-12
-                      creditAccount:
-                        id: safe-1
-                        type: safekeepingAccount
-                        number: 1234-12
-                      quantity:
-                        type: unit
-                        value: 12
       responses:
         '202':
           description: Order accepted for further processing.
@@ -218,130 +254,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-              examples:
-                Order1:
-                  value:
-                    id: order-1
-                    clientReference: 123-123123
-                    orderDateTime: '2018-04-13T11:11:11Z'
-                    status:
-                      status: executed
-                      statusDateTime: '2018-04-13T16:00:00Z'
-                    side: buy
-                    quantity:
-                      type: unit
-                      value: 5
-                    baseInstrument:
-                      type: basic
-                      identification:
-                        identifier: CH0012005267
-                        type: isin
-                    quoteInstrument:
-                      type: basic
-                      identification:
-                        identifier: CHF
-                        type: iso4217
-                    executionType: market
-                    timeInForce: goodTillDate
-                    expiryDateTime: '2018-04-13T18:00:00Z'
-                    allocationList:
-                      - id: allocation-1
-                        orderId: order-1
-                        debitAccount:
-                          id: cash-acc-1
-                          type: cashAccount
-                          number: 1234-1234
-                          iban: CH1234567891234
-                        creditAccount:
-                          id: safe-1
-                          type: safekeepingAccount
-                          number: 1234-12
-                        quantity:
-                          type: unit
-                          value: 3
-                        averagePrice:
-                          type: actual
-                          value: 10.8
-                          currency: CHF
-                        executionAllocationList:
-                          - allocatedQuantity:
-                              type: unit
-                              value: 3
-                            price:
-                              type: actual
-                              value: 10.8
-                              currency: CHF
-                            executionIds:
-                              - exec-1
-                              - exec-2
-                              - exec-3
-                            billingDetails:
-                              grossTradeAmount:
-                                value: 32.4
-                                currency: CHF
-                              settlementAmount:
-                                value: 35.4
-                                currency: CHF
-                              stampDuty:
-                                value: 1
-                                currency: CHF
-                              brokerageFee:
-                                value: 1
-                                currency: CHF
-                              exchangeFee:
-                                value: 1
-                                currency: CHF
-                            transactionId: trx-1
-                      - id: allocation-2
-                        orderId: order-1
-                        debitAccount:
-                          id: cash-acc-2
-                          type: cashAccount
-                          number: 1234-4321
-                          iban: CH1234567894321
-                        creditAccount:
-                          id: safe-2
-                          type: safekeepingAccount
-                          number: 1234-42
-                        quantity:
-                          type: unit
-                          value: 2
-                        averagePrice:
-                          type: actual
-                          value: 10.8
-                          currency: CHF
-                        executionAllocationList:
-                          - allocatedQuantity:
-                              type: unit
-                              value: 2
-                            price:
-                              type: actual
-                              value: 10.8
-                              currency: CHF
-                            executionIds:
-                              - exec-1
-                              - exec-2
-                              - exec-3
-                            billingDetails:
-                              grossTradeAmount:
-                                value: 21.6
-                                currency: CHF
-                              settlementAmount:
-                                value: 24.6
-                                currency: CHF
-                              stampDuty:
-                                value: 1
-                                currency: CHF
-                              brokerageFee:
-                                value: 1
-                                currency: CHF
-                              exchangeFee:
-                                value: 1
-                                currency: CHF
-                            transactionId: trx-2
-                    executedQuantity:
-                      type: unit
-                      value: 5
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -666,7 +578,7 @@ paths:
                 The `eventSubscriptionId` value returned in the response can be used as the `eventSubscriptionId` parameter in `GET /event-subscriptions/{eventSubscriptionId}`.
               operationId: getEventSubscription
               parameters:
-                documentId: $response.body#/eventSubscriptionId
+                eventSubscriptionId: $response.body#/id
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -866,6 +778,17 @@ components:
       schema:
         type: string
       description: Unique ID (defined by the caller) which will be reflected back in the response.
+    path_customerId:
+      in: path
+      name: customerId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: 123123-456
+        description: Unique and unambiguous identification used by the bank for the customer.
+      description: Customer ID Parameter.
     expandOrder:
       name: expand
       in: query
@@ -922,21 +845,6 @@ components:
       description: Date from which events are considered.
       example: 2022-10-26T07:58:30.996+0100
   headers:
-    X-Correlation-ID:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    Problem-Content-Type:
-      description: application/problem+json; charset=utf-8 according to RFC7807.
-      schema:
-        type: string
-        example: application/problem+json
-    Content-Language:
-      description: Response language - always en.
-      schema:
-        type: string
-        example: en
     X-Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
@@ -947,40 +855,39 @@ components:
       required: false
       schema:
         type: string
+    Problem-Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807.
+      schema:
+        type: string
+        example: application/problem+json
+    Content-Language:
+      description: Response language - always en.
+      schema:
+        type: string
+        example: en
+    X-Correlation-ID:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   schemas:
-    Account:
+    Customer:
+      title: Customer
       type: object
+      description: Overview of the customer with the respective accounts.
+      required:
+        - id
       properties:
         id:
           type: string
           maxLength: 128
-          example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
-          description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
-        type:
-          type: string
-          description: Indicates the type of the account.
-          example: safekeepingAccount
-          enum:
-            - cashAccount
-            - safekeepingAccount
-            - other
-        iban:
-          type: string
-          description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
-          maxLength: 34
-          example: CH1234567891234
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+          example: MTIzNDUtNg
         number:
           type: string
-          description: Contains the accounts custody proprietary account number for an account if available.
+          description: Contains the customers custody proprietary customer number if available.
           maxLength: 70
-          example: 123-1234-234
-        accessType:
-          type: string
-          description: Indicates what type of access the requestor has for the specified account.
-          enum:
-            - read
-            - write
-          example: read
+          example: 12345-6
     CommonErrorType:
       title: Common Error Type
       description: Error Types for CommonErrorResponse.
@@ -1021,6 +928,91 @@ components:
           type: string
           description: Entity instance that threw the error.
           example: path/to/corresponding/resource
+    Account:
+      type: object
+      required:
+        - type
+        - iban
+        - number
+        - customerId
+        - accessType
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
+          description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
+        type:
+          type: string
+          description: Indicates the type of the account.
+          example: safekeepingAccount
+          enum:
+            - cashAccount
+            - safekeepingAccount
+            - other
+        iban:
+          type: string
+          description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
+          maxLength: 34
+          example: CH1234567891234
+        number:
+          type: string
+          description: Contains the accounts custody proprietary account number for an account if available.
+          maxLength: 70
+          example: 123-1234-234
+        customerId:
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+          type: string
+          maxLength: 128
+          example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+        accessType:
+          type: string
+          description: Indicates what type of access the requestor has for the specified account.
+          enum:
+            - read
+            - write
+          example: read
+    OrderSingleleg:
+      title: Single Leg order
+      type: object
+      description: Schema of a single leg order entity.
+      allOf:
+        - $ref: '#/components/schemas/OrderBase'
+        - type: object
+          required:
+            - legInfo
+          properties:
+            legInfo:
+              $ref: '#/components/schemas/OrderLeg'
+    OrderSwapleg:
+      title: Swap Leg order
+      type: object
+      description: Schema of a swap leg order entity.
+      allOf:
+        - $ref: '#/components/schemas/OrderBase'
+        - type: object
+          required:
+            - nearLeg
+            - farLeg
+          properties:
+            nearLeg:
+              $ref: '#/components/schemas/OrderLeg'
+            farLeg:
+              $ref: '#/components/schemas/OrderLeg'
+    OrderMultileg:
+      title: Multi leg order
+      type: object
+      description: Schema of a multi leg order entity.
+      allOf:
+        - $ref: '#/components/schemas/OrderBase'
+        - type: object
+          required:
+            - legList
+          properties:
+            legList:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrderLeg'
     DateTime:
       title: DateTime
       type: string
@@ -1059,6 +1051,48 @@ components:
             Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp). In accordance
             with ISO 8601.
           $ref: '#/components/schemas/DateTime'
+    PlaceOfTrade:
+      type: object
+      description: Market in which a trade transaction is to be or has been executed.
+      properties:
+        marketIdentificationCode:
+          type: string
+          pattern: ^[A-Z0-9]{4}$
+          description: |
+            Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
+            Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
+          example: XSWX
+        marketDescription:
+          type: string
+          maxLength: 128
+          description: Description of the market when no Market Identification Code is available.
+          example: OTC
+    Currency:
+      title: Currency
+      type: string
+      description: ISO 4217 code.
+      pattern: ^[A-Z]{3}$
+      example: CHF
+    Price:
+      type: object
+      description: Price entity.
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+          example: percentage
+          enum:
+            - actual
+            - percentage
+        value:
+          type: number
+          example: 100.23
+          description: Signed decimal number.
+        currency:
+          $ref: '#/components/schemas/Currency'
     Quantity:
       title: Quantity
       type: object
@@ -1080,203 +1114,34 @@ components:
           type: number
           example: 12000
           description: Signed decimal number.
-    OrderSide:
-      type: string
-      description: Side taken by a party on an order.
-      example: buy
-      enum:
-        - buy
-        - sell
-        - subscribe
-        - redeem
-    UnitReference:
-      type: string
-      description: |
-        indicates whether the order quantity is expressed in base instrument or quote instrument.
-        BaseInstrument by default.
-      enum:
-        - baseInstrument
-        - quoteInstrument
-      default: baseInstrument
-    PositionEffect:
-      type: string
-      description: |
-        Indicates whether the resulting position after a trade should be an opening position or closing position.
-      enum:
-        - open
-        - close
-        - rolled
-        - fifo
-    FinancialInstrumentBase:
+    allocationCancellationReason:
       type: object
-      required:
-        - type
-        - identification
       properties:
-        type:
-          description: Type of ordered instrument
+        code:
           type: string
+          description: Cancelled reason expressed as a code.
           enum:
-            - basic
-            - forwardCurrency
-            - currencySwap
-            - fxForwardContract
-            - fxSwapContract
-            - exchangeTradedDerivative
-            - preciousMetal
-        identification:
-          $ref: '#/components/schemas/FinancialInstrumentIdentification'
-    ForwardCurrency:
-      title: Forward Currency
-      description: Forward Currency Instrument
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-        - type: object
-          properties:
-            settlementDate:
-              $ref: '#/components/schemas/Date'
-    CurrencySwap:
-      title: Currency Swap
-      description: Currency Swap Instrument
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-        - type: object
-          properties:
-            nearSettlementDate:
-              $ref: '#/components/schemas/Date'
-            farSettlementDate:
-              $ref: '#/components/schemas/Date'
-    FxForwardContract:
-      title: Fx Forward Contract
-      description: An fx forward contract is a customized contract between two parties to buy or sell currencies at a specified price on a future date.
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-        - type: object
-          required:
-            - amountSold
-            - amountBought
-            - settlementDate
-          properties:
-            amountSold:
-              description: Amount paid at the maturity of a contract (i.e. FX forward).
-              $ref: '#/components/schemas/Amount'
-            amountBought:
-              description: Amount received at the maturity of a contract (i.e. FX forward).
-              $ref: '#/components/schemas/Amount'
-            settlementDate:
-              description: |
-                Planned date, when the contract will be settled.
-              $ref: '#/components/schemas/Date'
-    FxSwapContract:
-      title: Fx Swap Contract
-      description: |
-        A foreign currency swap contract is an agreement between two foreign parties to swap interest payments on a loan made in one currency
-        for interest payments on a loan made in another currency.
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-        - type: object
-          required:
-            - nearAmountSold
-            - nearAmountBought
-            - farAmountSold
-            - farAmountBought
-            - nearSettlementDate
-            - farSettlementDate
-          properties:
-            nearAmountSold:
-              description: Amount paid at the earlier part of an FX swap.
-              $ref: '#/components/schemas/Amount'
-            nearAmountBought:
-              description: Amount received at the earlier part of an FX swap.
-              $ref: '#/components/schemas/Amount'
-            farAmountSold:
-              description: Amount paid at the maturity of an FX swap.
-              $ref: '#/components/schemas/Amount'
-            farAmountBought:
-              description: Amount received at the maturity of an FX swap.
-              $ref: '#/components/schemas/Amount'
-            nearSettlementDate:
-              description: Date of the settlement of the near leg.
-              $ref: '#/components/schemas/Date'
-            farSettlementDate:
-              description: Date of the settlement of the far leg.
-              $ref: '#/components/schemas/Date'
-    ExchangeTradedDerivative:
-      title: Exchange traded derivativ
-      description: Schema of an exchange traded derivativ
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-        - type: object
-          properties:
-            expiryDate:
-              description: |
-                Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
-                date at which it becomes due and has to be repaid.
-              $ref: '#/components/schemas/Date'
-            exercisePrice:
-              description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
-              $ref: '#/components/schemas/Price'
-            underlyingFinancialInstrument:
-              $ref: '#/components/schemas/FinancialInstrumentBase'
-    PreciousMetal:
-      title: Precious Metal
-      description: Schema of a precious metal instrument
-      allOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-        - type: object
-          required:
-            - unitType
-          properties:
-            unitType:
-              type: string
-              enum:
-                - g
-                - kg
-                - oz
-    FinancialInstrumentIdentification:
-      type: object
-      required:
-        - identifier
-        - type
-      properties:
-        identifier:
+            - accountIdentificationMissing
+            - accountInvalidForOrderPlacement
+            - accountTypeMissing
+            - accountTypeNotMatchingAccount
+            - allocationQuantityTooHigh
+            - cashAccountMissing
+            - cashAccountNotFound
+            - insufficientBuyingPower
+            - insufficientQuantityAvailable
+            - invalidCurrencyForAccount
+            - pretradeCheckFailed
+            - safekeepingAccountMissing
+            - safekeepingAccountNotFound
+            - valueTooHigh
+            - zeroQuantity
+            - other
+          example: zeroQuantity
+        proprietary:
           type: string
-          example: CH0012005267
-          description: Instrument identification.
-        type:
-          type: string
-          example: isin
-          description: Type of the instrument identification.
-          enum:
-            - isin
-            - sedol
-            - cusip
-            - ric
-            - tickerSymbol
-            - bloomberg
-            - cta
-            - quick
-            - wertpapier
-            - dutch
-            - valoren
-            - sicovam
-            - belgian
-            - common
-            - cryptoCurrency
-            - iso4217
-            - otherProprietaryIdentification
-    Date:
-      title: Date
-      type: string
-      description: Date according to ISO 8601.
-      format: date
-      example: '2018-04-13'
-    Currency:
-      title: Currency
-      type: string
-      description: ISO 4217 code.
-      pattern: ^[A-Z]{3}$
-      example: CHF
+          description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
+          example: Cancelled by client.
     ForeignExchangeRate:
       title: ForeignExchangeRate
       type: object
@@ -1312,92 +1177,6 @@ components:
           $ref: '#/components/schemas/Currency'
         foreignExchangeRate:
           $ref: '#/components/schemas/ForeignExchangeRate'
-    Price:
-      type: object
-      description: Price entity.
-      required:
-        - type
-        - value
-      properties:
-        type:
-          type: string
-          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
-          example: percentage
-          enum:
-            - actual
-            - percentage
-        value:
-          type: number
-          example: 100.23
-          description: Signed decimal number.
-        currency:
-          $ref: '#/components/schemas/Currency'
-    FinancialInstrument:
-      title: FinancialInstrument
-      type: object
-      description: Financial instrument entity.
-      oneOf:
-        - $ref: '#/components/schemas/FinancialInstrumentBase'
-        - $ref: '#/components/schemas/ForwardCurrency'
-        - $ref: '#/components/schemas/CurrencySwap'
-        - $ref: '#/components/schemas/FxForwardContract'
-        - $ref: '#/components/schemas/FxSwapContract'
-        - $ref: '#/components/schemas/ExchangeTradedDerivative'
-        - $ref: '#/components/schemas/PreciousMetal'
-      discriminator:
-        propertyName: type
-        mapping:
-          basic: '#/components/schemas/FinancialInstrumentBase'
-          forwardCurrency: '#/components/schemas/ForwardCurrency'
-          currencySwap: '#/components/schemas/CurrencySwap'
-          fxForwardContract: '#/components/schemas/FxForwardContract'
-          fxSwapContract: '#/components/schemas/FxSwapContract'
-          etd: '#/components/schemas/ExchangeTradedDerivative'
-          preciousMetal: '#/components/schemas/PreciousMetal'
-    PlaceOfTrade:
-      type: object
-      description: Market in which a trade transaction is to be or has been executed.
-      properties:
-        marketIdentificationCode:
-          type: string
-          pattern: ^[A-Z0-9]{4}$
-          description: |
-            Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
-            Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
-          example: XSWX
-        marketDescription:
-          type: string
-          maxLength: 128
-          description: Description of the market when no Market Identification Code is available.
-          example: OTC
-    allocationCancellationReason:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Cancelled reason expressed as a code.
-          enum:
-            - accountIdentificationMissing
-            - accountInvalidForOrderPlacement
-            - accountTypeMissing
-            - accountTypeNotMatchingAccount
-            - allocationQuantityTooHigh
-            - cashAccountMissing
-            - cashAccountNotFound
-            - insufficientBuyingPower
-            - insufficientQuantityAvailable
-            - invalidCurrencyForAccount
-            - pretradeCheckFailed
-            - safekeepingAccountMissing
-            - safekeepingAccountNotFound
-            - valueTooHigh
-            - zeroQuantity
-            - other
-          example: zeroQuantity
-        proprietary:
-          type: string
-          description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
-          example: Cancelled by client.
     AccruedInterest:
       type: object
       properties:
@@ -1582,105 +1361,7 @@ components:
           type: string
           description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
           example: Cancelled by client
-    AlgoTradeWAG:
-      title: Weighted Average Price Algo Trade
-      description: Schema of a Weighted Average Price Algo Trade
-      allOf:
-        - $ref: '#/components/schemas/AlgoTradeBase'
-        - type: object
-          required:
-            - tradingStrategy
-          properties:
-            startTime:
-              description: |
-                UTC timestamp as entered by the client,
-                defines the time from when the electronic algorithm is allowed to run.
-              type: string
-              format: DateTime
-            stopTime:
-              description: |
-                UTC timestamp as entered by the client,
-                defines the time until when the electronic algorithm is allowed to run.
-              type: string
-              format: DateTime
-            volumeCap:
-              description: |
-                Participation rate under which the electronic algorithm will try to always stay.
-                The participation rate is calculated by the electronic algorithm on the periods
-                where it is allowed to work (respecting start/stop time).
-              type: number
-            participateInOpening:
-              description: |
-                Indicates, that the electronic algorithm can participate in the opening auction.
-              type: boolean
-            participateInClosing:
-              description: |
-                Indicates, that the electronic algorithm can participate in the closing auction.
-              type: boolean
-            wouldPrice:
-              description: |
-                Indicates the price at which the client is willing to fill the entire order,
-                or the percentage provided in WouldPercentage.
-                WouldPrice is always associated with the values provided with "wouldPercentage" and "wouldStyle".
-              type: number
-            wouldPercentage:
-              description: |
-                "wouldPercentage" can only be selected if parameter "wouldPrice" contains a valid value.
-                Parameter is always associated with "wouldPrice" and "wouldStyle".
-              type: number
-            wouldStyle:
-              description: |
-                WouldStyle can only be selected if parameter WouldPrice contains a valid value.
-                Parameter is always associated with "wouldPrice" and "wouldPercentage".
-              type: string
-              enum:
-                - allVenues
-                - litOnly
-                - darkOnly
-    AlgoTradePOV:
-      title: Percentage of Volume Algo Trade
-      description: Schema of a Percentage of Volume Algo Trade
-      allOf:
-        - $ref: '#/components/schemas/AlgoTradeBase'
-        - type: object
-          required:
-            - targetRate
-          properties:
-            targetRate:
-              description: |
-                Global participation rate in % that the electronic algorithm will try to achieve.
-                The public size is calculated on the periods where the electronic algorithm
-                is allowed to work (respecting StartTime/StopTime).
-              type: number
-            participateInOpening:
-              description: |
-                Indicates, that the electronic algorithm can participate in the opening auction.
-              type: boolean
-            participateInClosing:
-              description: |
-                Indicates, that the electronic algorithm can participate in the closing auction.
-              type: boolean
-            wouldPrice:
-              description: |
-                Indicates the price at which the client is willing to fill the entire order,
-                or the percentage provided in WouldPercentage.
-                WouldPrice is always associated with the values provided with "wouldPercentage" and "wouldStyle".
-              type: number
-            wouldPercentage:
-              description: |
-                "wouldPercentage" can only be selected if parameter "wouldPrice" contains a valid value.
-                Parameter is always associated with "wouldPrice" and "wouldStyle".
-              type: number
-            wouldStyle:
-              description: |
-                WouldStyle can only be selected if parameter WouldPrice contains a valid value.
-                Parameter is always associated with "wouldPrice" and "wouldPercentage".
-              type: string
-              enum:
-                - allVenues
-                - litOnly
-                - darkOnly
-    AlgoTradeBase:
+    AlgoTrade:
       type: object
       required:
         - tradingStrategy
@@ -1709,94 +1390,71 @@ components:
             defines the time until when the electronic algorithm is allowed to run.
           type: string
           format: DateTime
-    AlgoTradeLiqGrab:
-      title: Liquidity Grabber Algo Trade
-      description: Schema of a liquidity grabber Algo Trade
-      allOf:
-        - $ref: '#/components/schemas/AlgoTradeBase'
-        - type: object
-          required:
-            - targetRate
-          properties:
-            urgency:
-              description: |
-                Indicates the degree of urgency for execution as defined by the client.
-              type: string
-              enum:
-                - ultraPassive
-                - passive
-                - neutral
-                - aggressive
-                - superAggressive
-    AlgoTradeDarkOnly:
-      title: Dark only Algo Trade
-      description: Schema of a Dark Only Algo Trade
-      allOf:
-        - $ref: '#/components/schemas/AlgoTradeBase'
-        - type: object
-          required:
-            - targetRate
-          properties:
-            urgency:
-              description: |
-                Indicates the degree of urgency for execution as defined by the client.
-              type: string
-              enum:
-                - ultraPassive
-                - passive
-                - neutral
-                - aggressive
-                - superAggressive
-            minQty:
-              description: |
-                Sets the minimum fill size in dark venues client may want.
-              type: number
-            primaryOnly:
-              description: TBD.
-              type: boolean
-    AlgoTradeCustom:
-      title: Custom Algo Trade
-      description: Schema of a custom algo trade
-      allOf:
-        - $ref: '#/components/schemas/AlgoTradeBase'
-        - type: object
-          required:
-            - customInstruction
-          properties:
-            customInstruction:
-              description: TBD.
-              type: string
-    AlgoTrade:
-      title: AlgoTradeInstruction
-      type: object
-      description: Schema of a algoTradeInstruction entity.
-      oneOf:
-        - $ref: '#/components/schemas/AlgoTradeWAG'
-        - $ref: '#/components/schemas/AlgoTradePOV'
-        - $ref: '#/components/schemas/AlgoTradeBase'
-        - $ref: '#/components/schemas/AlgoTradeLiqGrab'
-        - $ref: '#/components/schemas/AlgoTradeDarkOnly'
-        - $ref: '#/components/schemas/AlgoTradeCustom'
-      discriminator:
-        propertyName: tradingStrategy
-        mapping:
-          volumeWeightedAveragePrice: '#/components/schemas/AlgoTradeWAG'
-          timeWeightedAveragePrice: '#/components/schemas/AlgoTradeWAG'
-          percentageOfVolume: '#/components/schemas/AlgoTradePOV'
-          marketOnClose: '#/components/schemas/AlgoTradeBase'
-          targetMarketOnClose: '#/components/schemas/AlgoTradeBase'
-          liquidityGrabber: '#/components/schemas/AlgoTradeLiqGrab'
-          darkOnly: '#/components/schemas/AlgoTradeDarkOnly'
-          custom: '#/components/schemas/AlgoTradeCustom'
-    Order:
+        volumeCap:
+          description: |
+            Participation rate under which the electronic algorithm will try to always stay.
+            The participation rate is calculated by the electronic algorithm on the periods
+            where it is allowed to work (respecting start/stop time).
+          type: number
+        targetRate:
+          description: |
+            Global participation rate in % that the electronic algorithm will try to achieve.
+            The public size is calculated on the periods where the electronic algorithm
+            is allowed to work (respecting StartTime/StopTime).
+          type: number
+        participateInOpening:
+          description: |
+            Indicates, that the electronic algorithm can participate in the opening auction.
+          type: boolean
+        participateInClosing:
+          description: |
+            Indicates, that the electronic algorithm can participate in the closing auction.
+          type: boolean
+        wouldPrice:
+          description: |
+            Indicates the price at which the client is willing to fill the entire order,
+            or the percentage provided in WouldPercentage.
+            WouldPrice is always associated with the values provided with "wouldPercentage" and "wouldStyle".
+          type: number
+        wouldPercentage:
+          description: |
+            "wouldPercentage" can only be selected if parameter "wouldPrice" contains a valid value.
+            Parameter is always associated with "wouldPrice" and "wouldStyle".
+          type: number
+        wouldStyle:
+          description: |
+            WouldStyle can only be selected if parameter WouldPrice contains a valid value.
+            Parameter is always associated with "wouldPrice" and "wouldPercentage".
+          type: string
+          enum:
+            - allVenues
+            - litOnly
+            - darkOnly
+        urgency:
+          description: |
+            Indicates the degree of urgency for execution as defined by the client.
+          type: string
+          enum:
+            - ultraPassive
+            - passive
+            - neutral
+            - aggressive
+            - superAggressive
+        minQty:
+          description: |
+            Sets the minimum fill size in dark venues client may want.
+          type: number
+        primaryOnly:
+          description: TBD.
+          type: boolean
+        customInstruction:
+          description: TBD.
+          type: string
+    OrderBase:
       type: object
       description: Order object.
       required:
         - clientReference
-        - side
-        - quantity
-        - baseInstrument
-        - quoteInstrument
         - executionType
         - timeInForce
       properties:
@@ -1825,26 +1483,25 @@ components:
           example: '2018-04-13T11:11:11Z'
           description: Date and time the order has been received. In accordance with ISO 8601.
           readOnly: true
+        kind:
+          type: string
+          description: |
+            Kind of order requested.
+            - Single leg order
+            - Swap leg Order
+            - Multi leg order
+          example: priceQuote
+          enum:
+            - singlelegOrder
+            - swaplegOrder
+            - multilegOrder
         status:
           $ref: '#/components/schemas/OrderStatus'
           readOnly: true
-        quantity:
-          description: The total quantity of the order. The unit of this field is defined by the quantity schema.
-          $ref: '#/components/schemas/Quantity'
-        side:
-          $ref: '#/components/schemas/OrderSide'
-        unitReference:
-          $ref: '#/components/schemas/UnitReference'
-        positionEffect:
-          $ref: '#/components/schemas/PositionEffect'
         bestEffortExecution:
           description: TBD
           type: boolean
           default: false
-        baseInstrument:
-          $ref: '#/components/schemas/FinancialInstrument'
-        quoteInstrument:
-          $ref: '#/components/schemas/FinancialInstrument'
         requestedPlaceOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
         executionType:
@@ -1905,12 +1562,6 @@ components:
           items:
             $ref: '#/components/schemas/OrderCancellationReason'
           readOnly: true
-        executedQuantity:
-          $ref: '#/components/schemas/Quantity'
-          readOnly: true
-        cancelledQuantity:
-          $ref: '#/components/schemas/Quantity'
-          readOnly: true
         orderPlacer:
           description: |
             The entity physically transmitting the order to the execution venue.
@@ -1936,6 +1587,251 @@ components:
           maxLength: 512
           description: Provides additional details on the order which can not be included within the structured fields of the message.
           example: at pre Market and today
+    OrderSide:
+      type: string
+      description: Side taken by a party on an order.
+      example: buy
+      enum:
+        - buy
+        - sell
+        - subscribe
+        - redeem
+    UnitReference:
+      type: string
+      description: |
+        indicates whether the order quantity is expressed in base instrument or quote instrument.
+        BaseInstrument by default.
+      enum:
+        - baseInstrument
+        - quoteInstrument
+      default: baseInstrument
+    PositionEffect:
+      type: string
+      description: |
+        Indicates whether the resulting position after a trade should be an opening position or closing position.
+      enum:
+        - open
+        - close
+        - rolled
+        - fifo
+    FinancialInstrumentBase:
+      type: object
+      required:
+        - type
+        - identification
+      properties:
+        type:
+          description: Type of ordered instrument
+          type: string
+          enum:
+            - basic
+            - forward
+            - swap
+            - exchangeTradedDerivative
+            - preciousMetal
+            - preciousMetalForward
+            - preciousMetalSwap
+        identification:
+          $ref: '#/components/schemas/FinancialInstrumentIdentification'
+    FinancialInstrumentForward:
+      title: Financial instrument forward settlement agreement
+      description: Schema of a financial instrument forward settlement agreement
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - sttlementDate
+          properties:
+            settlementDate:
+              $ref: '#/components/schemas/Date'
+    FinancialInstrumentSwap:
+      title: Financial instrument swap agreement
+      description: Schema of a financial instrument swap agreement
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - nearSettlementDate
+            - farSettlementDate
+          properties:
+            nearSettlementDate:
+              $ref: '#/components/schemas/Date'
+            farSettlementDate:
+              $ref: '#/components/schemas/Date'
+    ExchangeTradedDerivative:
+      title: Exchange traded derivativ
+      description: Schema of an exchange traded derivativ
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          properties:
+            expiryDate:
+              description: |
+                Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
+                date at which it becomes due and has to be repaid.
+              $ref: '#/components/schemas/Date'
+            exercisePrice:
+              description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
+              $ref: '#/components/schemas/Price'
+            underlyingFinancialInstrument:
+              $ref: '#/components/schemas/FinancialInstrumentBase'
+    PreciousMetal:
+      title: Precious Metal
+      description: Schema of a precious metal instrument
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - unitType
+          properties:
+            unitType:
+              type: string
+              enum:
+                - g
+                - kg
+                - oz
+    FinancialInstrumentIdentification:
+      type: object
+      required:
+        - identifier
+        - type
+      properties:
+        identifier:
+          type: string
+          example: CH0012005267
+          description: Instrument identification.
+        type:
+          type: string
+          example: isin
+          description: Type of the instrument identification.
+          enum:
+            - isin
+            - sedol
+            - cusip
+            - ric
+            - tickerSymbol
+            - bloomberg
+            - cta
+            - quick
+            - wertpapier
+            - dutch
+            - valoren
+            - sicovam
+            - belgian
+            - common
+            - cryptoCurrency
+            - iso4217
+            - otherProprietaryIdentification
+    Date:
+      title: Date
+      type: string
+      description: Date according to ISO 8601.
+      format: date
+      example: '2018-04-13'
+    PreciousMetalForward:
+      title: Financial instrument forward settlement agreement
+      description: Schema of a financial instrument forward settlement agreement
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - unitType
+            - settlementDate
+          properties:
+            unitType:
+              type: string
+              enum:
+                - g
+                - kg
+                - oz
+            settlementDate:
+              $ref: '#/components/schemas/Date'
+    PreciousMetalSwap:
+      title: Financial instrument swap agreement
+      description: Schema of a financial instrument swap agreement
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - unitType
+            - nearSettlementDate
+            - farSettlementDate
+          properties:
+            unitType:
+              type: string
+              enum:
+                - g
+                - kg
+                - oz
+            nearSettlementDate:
+              $ref: '#/components/schemas/Date'
+            farSettlementDate:
+              $ref: '#/components/schemas/Date'
+    FinancialInstrument:
+      title: FinancialInstrument
+      type: object
+      description: Financial instrument entity.
+      oneOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - $ref: '#/components/schemas/FinancialInstrumentForward'
+        - $ref: '#/components/schemas/FinancialInstrumentSwap'
+        - $ref: '#/components/schemas/ExchangeTradedDerivative'
+        - $ref: '#/components/schemas/PreciousMetal'
+        - $ref: '#/components/schemas/PreciousMetalForward'
+        - $ref: '#/components/schemas/PreciousMetalSwap'
+      discriminator:
+        propertyName: type
+        mapping:
+          basic: '#/components/schemas/FinancialInstrumentBase'
+          forward: '#/components/schemas/FinancialInstrumentForward'
+          swap: '#/components/schemas/FinancialInstrumentSwap'
+          etd: '#/components/schemas/ExchangeTradedDerivative'
+          preciousMetal: '#/components/schemas/PreciousMetal'
+          preciousMetalForward: '#/components/schemas/FinancialInstrumentForward'
+          preciousMetalSwap: '#/components/schemas/FinancialInstrumentSwap'
+    OrderLeg:
+      type: object
+      description: Order object.
+      required:
+        - side
+        - unitReference
+        - quantity
+        - baseInstrument
+        - quoteInstrument
+      properties:
+        quantity:
+          description: The total quantity of the order. The unit of this field is defined by the quantity schema.
+          $ref: '#/components/schemas/Quantity'
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        unitReference:
+          $ref: '#/components/schemas/UnitReference'
+        positionEffect:
+          $ref: '#/components/schemas/PositionEffect'
+        baseInstrument:
+          $ref: '#/components/schemas/FinancialInstrument'
+        quoteInstrument:
+          $ref: '#/components/schemas/FinancialInstrument'
+        executedQuantity:
+          $ref: '#/components/schemas/Quantity'
+          readOnly: true
+        cancelledQuantity:
+          $ref: '#/components/schemas/Quantity'
+          readOnly: true
+    Order:
+      title: Order
+      type: object
+      description: Schema of a order entity.
+      oneOf:
+        - $ref: '#/components/schemas/OrderSingleleg'
+        - $ref: '#/components/schemas/OrderSwapleg'
+        - $ref: '#/components/schemas/OrderMultileg'
+      discriminator:
+        propertyName: kind
+        mapping:
+          singlelegOrder: '#/components/schemas/OrderSingleleg'
+          swaplegOrder: '#/components/schemas/OrderSwapleg'
+          multilegOrder: '#/components/schemas/OrderMultileg'
     Execution:
       type: object
       description: Entity describing a market execution
@@ -1968,40 +1864,43 @@ components:
           $ref: '#/components/schemas/Price'
         placeOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
-    PriceQuote:
-      title: Price quote
-      description: Price quote
+    QuoteSingleleg:
+      title: Single leg quote
+      description: Schema of a single leg quote
       allOf:
         - $ref: '#/components/schemas/QuoteBase'
         - type: object
           required:
-            - priceType
-            - price
+            - legInfo
           properties:
-            priceType:
-              type: string
-              description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
-              enum:
-                - actual
-                - percentage
-              readOnly: true
-            price:
-              type: number
-              description: |
-                - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
-                - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
-              readOnly: true
-    ContractQuote:
-      title: Contract quote
-      description: Contract quote
+            legInfo:
+              $ref: '#/components/schemas/QuoteLeg'
+    QuoteSwapleg:
+      title: Swap leg quote
+      description: Swap leg quote
       allOf:
         - $ref: '#/components/schemas/QuoteBase'
         - type: object
+          required:
+            - nearLeg
+            - farLeg
           properties:
-            quotedContract:
-              description: The fully defined financial contract proposed by the quoting party.
-              $ref: '#/components/schemas/FinancialInstrument'
-              readOnly: true
+            nearLeg:
+              $ref: '#/components/schemas/QuoteLeg'
+            farLeg:
+              $ref: '#/components/schemas/QuoteLeg'
+    QuoteMultileg:
+      title: Multi leg quote
+      description: Schema of a multi leg quote
+      allOf:
+        - $ref: '#/components/schemas/QuoteBase'
+        - type: object
+          required:
+            - legList
+          properties:
+            legList:
+              items:
+                $ref: '#/components/schemas/QuoteLeg'
     QuoteBase:
       type: object
       required:
@@ -2026,12 +1925,30 @@ components:
           type: string
           description: |
             Kind of quote requested.
-            - Price quote TBD
-            - Contract quote TBD
-          example: priceQuote
+          example: singlelegQuote
           enum:
-            - priceQuote
-            - contractQuote
+            - singlelegQuote
+            - swaplegQuote
+            - multilegQuote
+        expiryDateTime:
+          description: DateTime when quote expires.
+          $ref: '#/components/schemas/DateTime'
+          readOnly: true
+        customerIds:
+          description: List of unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+          type: array
+          items:
+            type: string
+            maxLength: 128
+            example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+    QuoteLeg:
+      type: object
+      required:
+        - side
+        - quantity
+        - baseInstrument
+        - quoteInstrument
+      properties:
         side:
           $ref: '#/components/schemas/OrderSide'
         quantity:
@@ -2040,21 +1957,33 @@ components:
           $ref: '#/components/schemas/FinancialInstrument'
         quoteInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
-        expiryDateTime:
-          description: DateTime when quote expires.
-          $ref: '#/components/schemas/DateTime'
+        priceType:
+          type: string
+          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+          enum:
+            - actual
+            - percentage
+          readOnly: true
+        price:
+          type: number
+          description: |
+            - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+            - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+          readOnly: true
     Quote:
       title: Quote
       type: object
       description: Schema of a quote entity.
       oneOf:
-        - $ref: '#/components/schemas/PriceQuote'
-        - $ref: '#/components/schemas/ContractQuote'
+        - $ref: '#/components/schemas/QuoteSingleleg'
+        - $ref: '#/components/schemas/QuoteSwapleg'
+        - $ref: '#/components/schemas/QuoteMultileg'
       discriminator:
         propertyName: kind
         mapping:
-          priceQuote: '#/components/schemas/PriceQuote'
-          contractQuote: '#/components/schemas/ContractQuote'
+          singlelegQuote: '#/components/schemas/QuoteSingleleg'
+          swaplegQuote: '#/components/schemas/QuoteSwapleg'
+          multilegQuote: '#/components/schemas/QuoteMultileg'
     EventSubscription:
       type: object
       required:
