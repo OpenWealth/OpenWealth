@@ -1,26 +1,22 @@
 get:
   tags:
-    - order
-  summary: Returns a single order
-  description: Returns a specific security order.
-  operationId: getOrderById
+    - customers
+  summary: Returns a specific customer by id
+  description: Returns a specific customer by id accessible for the requesting user.
+  operationId: getCustomerById
   parameters:
-    - $ref: ../components/parameters/orderId.yaml
-    - $ref: ../components/parameters/expandOrder.yaml
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   responses:
     '200':
-      description: Receive a specific order with the corresponding allocations and status.
+      description: Returns a the specified customer.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Order.yaml
-          # examples:
-          #   Order1:
-          #     externalValue: ../components/examples/order1.json
+            $ref: ../components/schemas/Customer.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

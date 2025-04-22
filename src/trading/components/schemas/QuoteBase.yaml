@@ -21,20 +21,19 @@ properties:
     type: string
     description: |
       Kind of quote requested.
-      - Price quote TBD
-      - Contract quote TBD
-    example: priceQuote
+    example: singlelegQuote
     enum:
-      - priceQuote
-      - contractQuote
-  side:
-    $ref: OrderSide.yaml
-  quantity:
-    $ref: Quantity.yaml
-  baseInstrument:
-    $ref: 'FinancialInstrument.yaml'
-  quoteInstrument:
-    $ref: 'FinancialInstrument.yaml'
+      - singlelegQuote
+      - swaplegQuote
+      - multilegQuote
   expiryDateTime:
     description: DateTime when quote expires.
     $ref: '../../../generics/components/schemas/DateTime.yaml'
+    readOnly: true
+  customerIds:
+    description: List of unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+    type: array
+    items:
+      type: string
+      maxLength: 128
+      example: 6dca5123-e370-4272-8ef4-68d421f52f6e

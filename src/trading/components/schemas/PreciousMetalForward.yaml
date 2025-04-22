@@ -1,0 +1,17 @@
+title: Financial instrument forward settlement agreement
+description: Schema of a financial instrument forward settlement agreement
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    required:
+      - unitType
+      - settlementDate
+    properties:
+      unitType:
+        type: string
+        enum:
+          - g
+          - kg
+          - oz
+      settlementDate:
+        $ref: '../../../generics/components/schemas/Date.yaml'

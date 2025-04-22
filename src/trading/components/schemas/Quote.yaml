@@ -2,10 +2,12 @@ title: Quote
 type: object
 description: Schema of a quote entity.
 oneOf:
-  - $ref: 'PriceQuote.yaml'
-  - $ref: 'ContractQuote.yaml'
+  - $ref: 'QuoteSingleleg.yaml'
+  - $ref: 'QuoteSwapleg.yaml'
+  - $ref: 'QuoteMultileg.yaml'
 discriminator:
   propertyName: kind
   mapping:
-    priceQuote: 'PriceQuote.yaml'
-    contractQuote: 'ContractQuote.yaml'
+    singlelegQuote: 'QuoteSingleleg.yaml'
+    swaplegQuote: 'QuoteSwapleg.yaml'
+    multilegQuote: 'QuoteMultileg.yaml'

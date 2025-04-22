@@ -1,0 +1,11 @@
+title: Multi leg quote
+description: Schema of a multi leg quote
+allOf:
+  - $ref: QuoteBase.yaml
+  - type: object
+    required:
+      - legList
+    properties:
+      legList:
+        items:
+          $ref: 'QuoteLeg.yaml'

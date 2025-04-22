@@ -12,9 +12,9 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/Order.yaml
-        examples:
-          OrderCryptoAgainstCrypto:
-            externalValue: ../components/examples/orderCreateCryptoAgainstCrypto.json
+        # examples:
+        #   OrderCryptoAgainstCrypto:
+        #     externalValue: ../components/examples/orderCreateCryptoAgainstCrypto.json
   responses:
     '202':
       description: Order accepted for further processing.

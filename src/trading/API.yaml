@@ -29,6 +29,10 @@ externalDocs:
   description: Find out more about OpenWealth API specifications.
   url: https://openwealth.ch
 paths:
+  /customers:
+    $ref: paths/customers.yaml
+  /customers/{customerId}:
+    $ref: paths/customers_{customerId}.yaml
   /accounts:
     $ref: paths/accounts.yaml
   /orders:

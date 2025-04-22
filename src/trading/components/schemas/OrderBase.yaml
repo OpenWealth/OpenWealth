@@ -1,0 +1,136 @@
+type: object
+description: Order object.
+required:
+  - clientReference
+  - executionType
+  - timeInForce
+properties:
+  id:
+    type: string
+    maxLength: 128
+    description: |
+      Unambiguous identifier for the bulk order,
+      as assigned by the confirming party (i.e. Custodian).
+    example: e6751a48-0819-4482-98a4-760453ba770d
+    readOnly: true
+  clientReference:
+    type: string
+    maxLength: 128
+    example: 123-123123
+    description: |
+      Reference of the order (unique identification),
+      as assigned by the instructing party (i.e. TPP).
+  groupReference:
+    type: string
+    maxLength: 128
+    description: Optional reference to link orders, i.e. multi-leg orders.
+  orderDateTime:
+    type: string
+    format: date-time
+    example: 2018-04-13T11:11:11Z
+    description: Date and time the order has been received. In accordance with ISO 8601.
+    readOnly: true
+  kind:
+    type: string
+    description: |
+      Kind of order requested.
+      - Single leg order
+      - Swap leg Order
+      - Multi leg order
+    example: priceQuote
+    enum:
+      - singlelegOrder
+      - swaplegOrder
+      - multilegOrder
+  status:
+    $ref: 'OrderStatus.yaml'
+    readOnly: true
+  bestEffortExecution:
+    description: TBD
+    type: boolean
+    default: false
+  requestedPlaceOfTrade:
+    $ref: 'PlaceOfTrade.yaml'
+  executionType:
+    type: string
+    description: Type of the execution of the order.
+    example: limit
+    enum:
+      - market
+      - limit
+      - stop
+      - stopLimit
+  limitPrice:
+    description: Limit price per unit of quantity (e.g. per share)
+    $ref: 'Price.yaml'
+  stopPrice:
+    description: |
+      Price per unit of quantity (e.g. per share).
+      Required for executionType 'stop' or 'stopLimit'.
+    $ref: 'Price.yaml'
+  timeInForce:
+    type: string
+    description: Specifies how long the order remains in effect.
+    example: day
+    enum:
+      - day
+      - goodTillCancel
+      - atTheOpening
+      - immediateOrCancel
+      - fillOrKill
+      - goodTillCrossing
+      - goodTillDate
+      - atTheClose
+      - goodThroughCrossing
+      - atCrossing
+      - goodForTime
+      - goodForAuction
+      - goodForMonth
+  expiryDateTime:
+    $ref: '../../../generics/components/schemas/DateTime.yaml'
+  exposureDuration:
+    description: |
+      This is the time in seconds of a 'goodForTime' TimeInForce.
+      Positive integer value which represents the time is seconds in which the new order
+      remains active in the market before it is automatically cancelled (e.g. expired).
+    type: integer
+    example: 86400
+  quoteId:
+    description: Unambiguous identifier for the quote that was provided by the confirming party.
+    type: string
+    maxLength: 128
+    example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+  allocationList:
+    type: array
+    items:
+      $ref: 'Allocation.yaml'
+  orderCancellationReasonList:
+    type: array
+    items:
+      $ref: 'OrderCancellationReason.yaml'
+    readOnly: true
+  orderPlacer:
+    description: |
+      The entity physically transmitting the order to the execution venue.
+      This role is often fulfilled by:
+        - Investment firms or brokers executing trades on behalf of clients.
+        - Systematic internalisers or trading venues handling order transmission.
+        - In some cases, the order placer may also be the decision maker if no third-party authorization exists.
+    type: string
+    maxLength: 128
+  decisionMaker:
+    description: |
+      The party legally authorized to make investment decisions on behalf of a client.
+      This typically includes:
+      - Individuals or entities acting under a power of attorney (e.g., attorneys managing accounts).
+      - Discretionary investment managers executing trades without prior client approval.
+      - In cases like funds, the fund manager is generally considered the decision maker.
+    type: string
+    maxLength: 128
+  algoTradeInstruction:
+    $ref: 'AlgoTrade.yaml'
+  additionalDetails:
+    type: string
+    maxLength: 512
+    description: Provides additional details on the order which can not be included within the structured fields of the message.
+    example: at pre Market and today

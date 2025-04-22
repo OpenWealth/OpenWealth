@@ -1,0 +1,16 @@
+title: Customer
+type: object
+description: Overview of the customer with the respective accounts.
+required:
+  - id
+properties:
+  id:
+    type: string
+    maxLength: 128
+    description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+    example: MTIzNDUtNg
+  number:
+    type: string
+    description: Contains the customers custody proprietary customer number if available.
+    maxLength: 70
+    example: 12345-6

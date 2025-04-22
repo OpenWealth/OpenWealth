@@ -8,11 +8,11 @@ properties:
     type: string
     enum:
       - basic
-      - forwardCurrency
-      - currencySwap
-      - fxForwardContract
-      - fxSwapContract
+      - forward
+      - swap
       - exchangeTradedDerivative
       - preciousMetal
+      - preciousMetalForward
+      - preciousMetalSwap
   identification:
     $ref: FinancialInstrumentIdentification.yaml

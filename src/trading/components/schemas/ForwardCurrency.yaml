@@ -1,8 +1,0 @@
-title: Forward Currency
-description: Forward Currency Instrument
-allOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
-  - type: object
-    properties:
-      settlementDate:
-        $ref: '../../../generics/components/schemas/Date.yaml'

@@ -1,0 +1,11 @@
+title: Single Leg order
+type: object
+description: Schema of a single leg order entity.
+allOf:
+  - $ref: 'OrderBase.yaml'
+  - type: object
+    required:
+      - legInfo
+    properties:
+      legInfo:
+        $ref: 'OrderLeg.yaml'

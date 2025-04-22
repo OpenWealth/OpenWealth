@@ -3,19 +3,19 @@ type: object
 description: Financial instrument entity.
 oneOf:
   - $ref: 'FinancialInstrumentBase.yaml'
-  - $ref: 'ForwardCurrency.yaml'
-  - $ref: 'CurrencySwap.yaml'
-  - $ref: 'FxForwardContract.yaml'
-  - $ref: 'FxSwapContract.yaml'
+  - $ref: 'FinancialInstrumentForward.yaml'
+  - $ref: 'FinancialInstrumentSwap.yaml'
   - $ref: 'ExchangeTradedDerivative.yaml'
   - $ref: 'PreciousMetal.yaml'
+  - $ref: 'PreciousMetalForward.yaml'
+  - $ref: 'PreciousMetalSwap.yaml'
 discriminator:
   propertyName: type
   mapping:
     basic: 'FinancialInstrumentBase.yaml'
-    forwardCurrency: 'ForwardCurrency.yaml'
-    currencySwap: 'CurrencySwap.yaml'
-    fxForwardContract: 'FxForwardContract.yaml'
-    fxSwapContract: 'FxSwapContract.yaml'
+    forward: 'FinancialInstrumentForward.yaml'
+    swap: 'FinancialInstrumentSwap.yaml'
     etd: 'ExchangeTradedDerivative.yaml'
     preciousMetal: 'PreciousMetal.yaml'
+    preciousMetalForward: 'FinancialInstrumentForward.yaml'
+    preciousMetalSwap: 'FinancialInstrumentSwap.yaml'

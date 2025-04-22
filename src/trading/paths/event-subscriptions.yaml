@@ -72,7 +72,7 @@ post:
             /event-subscriptions/{eventSubscriptionId}`.
           operationId: getEventSubscription
           parameters:
-            documentId: $response.body#/eventSubscriptionId
+            eventSubscriptionId: $response.body#/id
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

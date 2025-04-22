@@ -1,0 +1,13 @@
+title: Multi leg order
+type: object
+description: Schema of a multi leg order entity.
+allOf:
+  - $ref: 'OrderBase.yaml'
+  - type: object
+    required:
+      - legList
+    properties:
+      legList:
+        type: array
+        items:
+          $ref: 'OrderLeg.yaml'

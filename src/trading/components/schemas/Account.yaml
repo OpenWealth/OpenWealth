@@ -1,4 +1,10 @@
 type: object
+required:
+  - type
+  - iban
+  - number
+  - customerId
+  - accessType
 properties:
   id:
     type: string
@@ -23,6 +29,11 @@ properties:
     description: Contains the accounts custody proprietary account number for an account if available.
     maxLength: 70
     example: 123-1234-234
+  customerId:
+    description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+    type: string
+    maxLength: 128
+    example: 6dca5123-e370-4272-8ef4-68d421f52f6e
   accessType:
     type: string
     description: Indicates what type of access the requestor has for the specified account.
