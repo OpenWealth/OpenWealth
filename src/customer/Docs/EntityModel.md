@@ -37,6 +37,7 @@ erDiagram
         string name
         string referenceCurrency
         string segment
+        object externalAssetManager
     }
     Person {
         string id
@@ -44,6 +45,10 @@ erDiagram
         string externalReference
         object countryOfDomicile
         object[] taxDomicileList
+        enum politicalStatus
+        object[] employmentList
+        object[] educationList
+        object fatca
     }
     CustomerPersonRelation {
         string id
@@ -51,6 +56,8 @@ erDiagram
         string cardinality
         string personId
         string relatedCustomerId
+        string purposeOfRelationship
+        boolean soleBeneficialOwner
     }
     PersonPersonRelation {
         string id
@@ -81,53 +88,107 @@ erDiagram
     }
     KYC {
         string id
-        string personId
+        object[] personList
         string purposeOfRelationship
-        boolean soleBeneficialOwner
-        enum politicalStatus
         object fundFlows
-        object[] sourceOfWealthList
+        object sourceOfWealthInformation
         object totalWealth
         object totalIncome
-        object employment
-        object education
+        object employmentInformation
+        object educationInformation
+        object politicalStatus
         object fatca
         object[] corporateInsiderList
-        object[] corporateInsiderRelationList
         object[] majorShareholderList
-        object[] majorShareholderRelationList
         object externalAssetManager
     }
-    SourceOfWealth {}
-    FundFlows {}
-    TotalWealth {}
-    TotalIncome {}
-    Employment {}
-    Education {}
-    Fatca {}
-    CorporateInsider {}
-    CorporateInsiderRelation {}
-    MajorShareholdet {}
-    MajorShareholderRelation {}
-    ExternalAssetManager {}
+    SourceOfWealth {
+        string id
+        string type
+        object amount
+        object[] countriesOfOrigin
+        object additionalProperties "type specific properties"
+    }
+    FundFlows {
+        object amountExpectedInflows
+        object amountPlannedTotalAssets
+        object amountExpectedTurnover
+        integer numberOfInflows
+        integer numberOfOutflows
+        object[] recurringCounterpartyList
+        object[] initialAmountList
+        object[] expectedFundFlowList
+    }
+    TotalWealth {
+        object amountTotalNetAssets
+        object referenceYear
+        object[] assetAllocation
+    }
+    TotalIncome {
+        object amountYearlyIncome
+        object referenceYear
+        object[] sourceOfIncomeList
+    }
+    Employment {
+        string companyName
+        object companyDomicile
+        object[] companyCountriesOfBusinessList
+        string companyDetail
+        integer companyNumberOfEmployees
+        number companyAnnualTurnover
+        string industry
+        object roleOrPosition
+        profession profession
+        string domicile
+        number shareholdingInPercent
+        object period
+        integer yearOfRetirement
+        integer sharedholderSinceYear
+        string mandate
+        string additionalInformation
+    }
+    Education {
+        string highestDiploma
+        integer graduationYear
+        string institute
+        string studyProgramme
+    }
+    Fatca {
+        boolean status
+        boolean domicile
+        boolean birthplace
+        boolean greenCard
+        boolean substantialPresenceTest
+        boolean otherReasons
+    }
+    CorporateInsider {
+        string corporateInsiderAssociation
+        string relation
+        object position
+        string companyName
+        string isin
+    }
+    MajorShareholder {
+        string majorShareholderAssociation
+        string relation
+        string companyName
+        string isin
+    }
     Customer ||--|{ CustomerPersonRelation : hasMultiple
     Customer ||--o{ Document : hasMultiple
+    Customer ||--o{ KYC : hasMultiple
     CustomerPersonRelation }o--|| Person : hasMultiple
     PersonPersonRelation }o--|| Person : hasMultiple
     PersonPersonRelation }o--|| Person : isRelatedPerson
     Person ||--o{ Address : hasMultiple
     Person ||--o{ Contact : hasMultiple
-    Person ||--o{ KYC : hasMultiple
     Person ||--o{ SourceOfWealth : hasMultiple
+    Person ||--o| Employment : hasOne
+    Person ||--o| Education : hasOne
+    Person ||--o| Fatca : hasOne
+    Person ||--o{ CorporateInsider : hasMultiple
+    Person ||--o{ MajorShareholder : hasMultiple
     KYC ||--o{ FundFlows : hasMultiple
     KYC ||--o| TotalWealth : hasOne
     KYC ||--o| TotalIncome : hasOne
-    KYC ||--o| Employment : hasOne
-    KYC ||--o| Education : hasOne
-    KYC ||--o| Fatca : hasOne
-    KYC ||--o{ CorporateInsider : hasMultiple
-    KYC ||--o{ CorporateInsiderRelation : hasMultiple
-    KYC ||--o{ MajorShareholdet : hasMultiple
-    KYC ||--o{ MajorShareholderRelation : hasMultiple
-    KYC ||--o| ExternalAssetManager : hasOne
 ```
