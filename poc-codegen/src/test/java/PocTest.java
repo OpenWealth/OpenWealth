@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.swissquote.poc.model.Equity;
 import com.swissquote.poc.model.FinancialInstrument;
-import com.swissquote.poc.model.FinancialInstrumentType;
 import com.swissquote.poc.model.InterestRateSwap;
 
 public class PocTest {
@@ -14,15 +14,23 @@ public class PocTest {
 	void test() throws JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		FinancialInstrument swap = new InterestRateSwap();
 
-		String swapString = objectMapper.writeValueAsString(swap);
-		System.out.println(swapString);
+		//we create concrete class for IRS
+		FinancialInstrument irsObject = new InterestRateSwap();
+		//we serialize it to string
+		String irsString = objectMapper.writeValueAsString(irsObject);
+		//we see that the output contains property "type" indicating concrete type
+		System.out.println(irsString);
 
-		FinancialInstrument financialInstrument = objectMapper.readValue(swapString, FinancialInstrument.class);
+		//we take the json string for the irs
+		//and deserialize it using top level interface FinancialInstrument (behind is concrete class)
+		FinancialInstrument financialInstrument = objectMapper.readValue(irsString, FinancialInstrument.class);
 
+		//the type is IRS
 		System.out.println(financialInstrument.getType());
-		System.out.println("Deserialized object is equity: " + financialInstrument.getType().equals(FinancialInstrumentType.EQUITY));
-		System.out.println("Deserialized object is IRS: " + financialInstrument.getType().equals(FinancialInstrumentType.INTEREST_RATE_SWAP));
+		//the concrete deserialized class is not equity
+		System.out.println("Deserialized object is equity: " + (financialInstrument instanceof Equity));
+		//the concrete deserialized class is IRS
+		System.out.println("Deserialized object is IRS: " + (financialInstrument instanceof InterestRateSwap));
 	}
 }
