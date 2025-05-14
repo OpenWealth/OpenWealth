@@ -1,4 +1,7 @@
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -30,7 +33,9 @@ public class PocTest {
 		System.out.println(financialInstrument.getType());
 		//the concrete deserialized class is not equity
 		System.out.println("Deserialized object is equity: " + (financialInstrument instanceof Equity));
+		assertFalse(financialInstrument instanceof Equity);
 		//the concrete deserialized class is IRS
 		System.out.println("Deserialized object is IRS: " + (financialInstrument instanceof InterestRateSwap));
+		assertTrue(financialInstrument instanceof InterestRateSwap);
 	}
 }
