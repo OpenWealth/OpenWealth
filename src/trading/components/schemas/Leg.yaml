@@ -17,8 +17,12 @@ properties:
   positionEffect:
     $ref: 'PositionEffect.yaml'
   baseInstrument:
+    description: Instrument subject to sale or purchase.
     $ref: 'FinancialInstrument.yaml'
   quoteInstrument:
+    description: |
+      Instrument (i.e. currency) which is paid resp. recieved in exchange
+      for the purchase resp. sell of the baseInstrument.
     $ref: 'FinancialInstrument.yaml'
   executedQuantity:
     $ref: 'Quantity.yaml'

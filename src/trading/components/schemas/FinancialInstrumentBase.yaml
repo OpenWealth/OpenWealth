@@ -9,10 +9,8 @@ properties:
     enum:
       - basic
       - forward
-      - swap
       - exchangeTradedDerivative
       - preciousMetal
       - preciousMetalForward
-      - preciousMetalSwap
   identification:
     $ref: FinancialInstrumentIdentification.yaml

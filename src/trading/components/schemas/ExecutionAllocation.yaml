@@ -1,10 +1,8 @@
 type: object
 description: Execution allocation
 properties:
-  # allocationId:
-  #   type: string
-  #   example: 08ca53e9-d78e-4e8c-9d7a-5e1ec900b1a0
-  allocatedQuantity:
+  quantity:
+    description: Executed quantity allocated to the given client.
     $ref: 'Quantity.yaml'
   price:
     description: The price for the allocated quantity.
@@ -22,6 +20,6 @@ properties:
     maxLength: 128
     example: OTg3Ni01NDMyMQ
     description: Indicates the transaction identification for an allocated execution.
-  # bookingDate:
-  #   description: Indicates the booking date for an order or allocation.
-  #   $ref: '../../../generics/components/schemas/Date.yaml'
+  bookingDate:
+    description: Indicates the booking date for an allocated execution of the order.
+    $ref: '../../../generics/components/schemas/Date.yaml'

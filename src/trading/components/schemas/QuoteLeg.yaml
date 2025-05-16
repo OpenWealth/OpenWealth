@@ -10,8 +10,12 @@ properties:
   quantity:
     $ref: Quantity.yaml
   baseInstrument:
+    description: Instrument subject to intended sale or purchase.
     $ref: 'FinancialInstrument.yaml'
   quoteInstrument:
+    description: |
+      Instrument (i.e. currency) for which the quote is requested in exchange
+      for the purchase resp. sell of the baseInstrument.
     $ref: 'FinancialInstrument.yaml'
   priceType:
     type: string

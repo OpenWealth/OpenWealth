@@ -4,7 +4,7 @@ allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - type: object
     required:
-      - sttlementDate
+      - settlementDate
     properties:
       settlementDate:
         $ref: '../../../generics/components/schemas/Date.yaml'

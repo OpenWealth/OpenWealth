@@ -27,7 +27,7 @@ properties:
     $ref: 'Account.yaml'
   quantity:
     description: The requested quantity to be allocated to specific safekeeping account.
-    $ref: 'Quantity.yaml'
+    type: number
   averagePrice:
     description: The average price for quantity that was traded.
     $ref: 'Price.yaml'

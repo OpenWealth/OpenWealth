@@ -14,18 +14,18 @@ properties:
       - liquidityGrabber
       - darkOnly
       - custom
-  startTime:
-    description: |
-      UTC timestamp as entered by the client,
-      defines the time from when the electronic algorithm is allowed to run.
-    type: string
-    format: DateTime
-  stopTime:
-    description: |
-      UTC timestamp as entered by the client,
-      defines the time until when the electronic algorithm is allowed to run.
-    type: string
-    format: DateTime
+  # startTime:
+  #   description: |
+  #     UTC timestamp as entered by the client,
+  #     defines the time from when the electronic algorithm is allowed to run.
+  #   type: string
+  #   format: DateTime
+  # stopTime:
+  #   description: |
+  #     UTC timestamp as entered by the client,
+  #     defines the time until when the electronic algorithm is allowed to run.
+  #   type: string
+  #   format: DateTime
   volumeCap:
     description: |
       Participation rate under which the electronic algorithm will try to always stay.

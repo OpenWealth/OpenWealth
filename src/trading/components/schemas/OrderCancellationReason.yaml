@@ -5,50 +5,22 @@ properties:
     type: string
     description: Cancelled reason expressed as a code.
     enum:
-      - allocationInvalid
-      - cancelledByHub
-      - cancelledByInstructingParty
-      - cancelledByOther
-      - cannotContainMarketIdentificationCodeAndMarketDescription
-      - currencyNotSupportedForFinancialInstrument
-      - endOfLife
-      - executionTypeInconsequential
-      - executionTypeNotSupported
-      - executionTypeNotSupportedByMarket
-      - expiryDateTimeInThePast
-      - expiryDateTimeMissing
-      - expiryDateTimeNotAllowed
-      - financialInstrumentIdentificationNotUnique
-      - financialInstrumentIdentificationTypeNotSupported
-      - financialInstrumentNotAllowedViaInterface
-      - financialInstrumentNotFound
-      - financialInstrumentNotTradedOnMarket
-      - icebergOrderTooLarge
-      - invalidPrices
-      - limitPriceMissingForExecutionType
-      - limitPriceNotAllowedForExecutionType
-      - marketCurrentlyBlockedForTrading
-      - marketQuoteNotAvailableForProduct
-      - maximumNumberOfAllocationsExceeded
-      - numberOfAllocationsDeviateFromAllocationsProvided
-      - numberOfAllocationsEmpty
-      - numberOfAllocationsZero
-      - orderQuantityDeviatesFromSumOfAllocationQuantities
-      - orderQuantityTooHigh
-      - orderQuantityTooSmall
-      - orderQuantityTypeNotSupported
-      - orderQuantityTypeWrong
-      - placeOfTradeNotSupported
-      - productExpired
-      - selectedTimeInForceNotSupported
-      - stopPriceMissingForExecutionType
-      - stopPriceNotAllowedForExecutionType
-      - timeInForceAndExpiryDateTimeInconsistent
-      - valueTooHigh
-      - wrongDenomination
+      - orderNotSupported
+      - orderInvalid
+      - orderRejected
       - other
     example: endOfLife
-  proprietary:
+  details:
     type: string
     description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
     example: Cancelled by client
+  affectedFields:
+    type: array
+    items:
+      properties:
+        property:
+          type: string
+          description: Pattern indication affected property
+        issueDetails:
+          type: string
+          description: Description of problem with field
