@@ -29,7 +29,7 @@ properties:
       - multilegQuote
   expiryDateTime:
     description: DateTime when quote expires.
-    $ref: '../../../generics/components/schemas/DateTime.yaml'
+    $ref: ../../../generics/components/schemas/DateTime.yaml
     readOnly: true
   customerIds:
     description: List of unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
@@ -40,4 +40,4 @@ properties:
       example: 6dca5123-e370-4272-8ef4-68d421f52f6e
   legList:
     items:
-      $ref: 'QuoteLeg.yaml'
+      $ref: QuoteLeg.yaml

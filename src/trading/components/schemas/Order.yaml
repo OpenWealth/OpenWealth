@@ -2,8 +2,10 @@ type: object
 description: Order object.
 required:
   - clientReference
+  - type
   - executionType
   - timeInForce
+  - allocationList
 properties:
   id:
     type: string
@@ -20,37 +22,22 @@ properties:
     description: |
       Reference of the order (unique identification),
       as assigned by the instructing party (i.e. TPP).
-  groupReference:
-    type: string
-    maxLength: 128
-    description: Optional reference to link orders, i.e. multi-leg orders.
-  orderDateTime:
-    type: string
-    format: date-time
-    example: 2018-04-13T11:11:11Z
-    description: Date and time the order has been received. In accordance with ISO 8601.
-    readOnly: true
-  kind:
+  type:
     type: string
     description: |
-      Kind of order requested.
-      - Single leg order
-      - Swap leg Order
-      - Multi leg order
-    example: priceQuote
+      Type of order requested.
+    example: singleOrder
     enum:
-      - singlelegOrder
-      - swaplegOrder
-      - multilegOrder
-  status:
-    $ref: 'OrderStatus.yaml'
-    readOnly: true
-  bestEffortExecution:
-    description: TBD
-    type: boolean
-    default: false
-  requestedPlaceOfTrade:
-    $ref: 'PlaceOfTrade.yaml'
+      - singleOrder
+      - multiLegOrder
+      - fxSpot
+      - fxForward
+      - fxSwap
+      - preciousMetalSpot
+      - preciousMetalForward
+      - preciousMetalSwap
+      - exchangeTradedDerivative
+      - other
   executionType:
     type: string
     description: Type of the execution of the order.
@@ -60,14 +47,6 @@ properties:
       - limit
       - stop
       - stopLimit
-  limitPrice:
-    description: Limit price per unit of quantity (e.g. per share)
-    $ref: 'Price.yaml'
-  stopPrice:
-    description: |
-      Price per unit of quantity (e.g. per share).
-      Required for executionType 'stop' or 'stopLimit'.
-    $ref: 'Price.yaml'
   timeInForce:
     type: string
     description: Specifies how long the order remains in effect.
@@ -86,8 +65,19 @@ properties:
       - goodForTime
       - goodForAuction
       - goodForMonth
+  groupReference:
+    type: string
+    maxLength: 128
+    description: Optional reference to link orders, i.e. multi-leg orders.
+    readOnly: true
+  bestEffortExecution:
+    description: TBD
+    type: boolean
+    default: false
+  requestedPlaceOfTrade:
+    $ref: PlaceOfTrade.yaml
   expiryDateTime:
-    $ref: '../../../generics/components/schemas/DateTime.yaml'
+    $ref: ../../../generics/components/schemas/DateTime.yaml
   exposureDuration:
     description: |
       This is the time in seconds of a 'goodForTime' TimeInForce.
@@ -110,16 +100,12 @@ properties:
         The first item refers to the near leg and the second to the far leg.
       - A multi-leg order consist of the according amount of involved instruments.
     items:
-      $ref: 'Leg.yaml'
+      $ref: OrderLeg.yaml
+    minItems: 1
   allocationList:
     type: array
     items:
-      $ref: 'Allocation.yaml'
-  orderCancellationReasonList:
-    type: array
-    items:
-      $ref: 'OrderCancellationReason.yaml'
-    readOnly: true
+      $ref: Allocation.yaml
   orderPlacer:
     description: |
       The entity physically transmitting the order to the execution venue.
@@ -138,10 +124,18 @@ properties:
       - In cases like funds, the fund manager is generally considered the decision maker.
     type: string
     maxLength: 128
-  algoTradeInstruction:
-    $ref: 'AlgoTrade.yaml'
-  additionalDetails:
+  traderInstruction:
+    $ref: TraderInstruction.yaml
+  orderDateTime:
     type: string
-    maxLength: 512
-    description: Provides additional details on the order which can not be included within the structured fields of the message.
-    example: at pre Market and today
+    format: date-time
+    example: 2018-04-13T11:11:11Z
+    description: Date and time the order has been received. In accordance with ISO 8601.
+    readOnly: true
+  status:
+    $ref: OrderStatus.yaml
+  orderCancellationReasonList:
+    type: array
+    items:
+      $ref: OrderCancellationReason.yaml
+    readOnly: true

@@ -2,39 +2,39 @@ type: object
 properties:
   grossTradeAmount:
     description: Principal amount of a trade (price multiplied by quantity).
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   settlementAmount:
     description: |
       Total amount of money to be paid or received in exchange for the securities.
       The amount includes the principal with any commissions and fees or accrued interest.
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   accruedInterests:
     $ref: 'AccruedInterest.yaml'
   stampDuty:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   withholdingTax:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   capitalGainTax:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   financialTransactionTax:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   otherTaxes:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   transactionFee:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   brokerageFee:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   managementFee:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   courtage:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   custodyFee:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   exchangeFee:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   thirdPartyFee:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   otherFee:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml
   others:
-    $ref: 'Amount.yaml'
+    $ref: Amount.yaml

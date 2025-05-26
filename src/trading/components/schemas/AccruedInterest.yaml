@@ -9,6 +9,6 @@ properties:
     type: number
     description: TBD.
   currency:
-    $ref: '../../../generics/components/schemas/Currency.yaml'
+    $ref: ../../../generics/components/schemas/Currency.yaml
   foreignExchangeRate:
-    $ref: 'ForeignExchangeRate.yaml'
+    $ref: ForeignExchangeRate.yaml

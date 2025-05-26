@@ -1,12 +1,15 @@
 type: object
-description: Price entity.
+description: Schema of a order price schema.
 required:
   - type
   - value
 properties:
   type:
     type: string
-    description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+    description: |
+      - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+      - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+      Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
     example: percentage
     enum:
       - actual
@@ -15,5 +18,3 @@ properties:
     type: number
     example: 100.23
     description: Signed decimal number.
-  currency:
-    $ref: '../../../generics/components/schemas/Currency.yaml'

@@ -1,11 +1,7 @@
 type: object
-description: Extended details regarding the allocations including validity of the allocation and billing details.
+description: Extended details regarding the allocations.
 required:
-  - id
-  - orderId
-  - creditAccount
-  - debitAccount
-  - quantity
+  - legList
 properties:
   id:
     type: string
@@ -19,32 +15,12 @@ properties:
     description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
     example: e6751a48-0819-4482-98a4-760453ba770d
     readOnly: true
-  creditAccount:
-    description: Account that is credited when executing the trade.
-    $ref: 'Account.yaml'
-  debitAccount:
-    description: Account that is debited when executing the trade.
-    $ref: 'Account.yaml'
-  quantity:
-    description: The requested quantity to be allocated to specific safekeeping account.
-    type: number
-  averagePrice:
-    description: The average price for quantity that was traded.
-    $ref: 'Price.yaml'
-    readOnly: true
-  executedQuantity:
-    $ref: 'Quantity.yaml'
-    readOnly: true
-  cancelledQuantity:
-    $ref: 'Quantity.yaml'
-    readOnly: true
-  allocationCancellationReasonList:
+  legList:
     type: array
     items:
-      $ref: 'allocationCancellationReason.yaml'
-    readOnly: true
-  executionAllocationList:
-    type: array
-    items:
-      $ref: 'executionAllocation.yaml'
+      $ref: allocationLeg.yaml
+    minItems: 1
+  cancelled:
+    type: boolean
+    description: True if specific allocation has been cancelled in a best effort execution order.
     readOnly: true

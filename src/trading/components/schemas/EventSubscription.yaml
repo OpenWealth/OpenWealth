@@ -10,13 +10,7 @@ properties:
   eventTypes:
     type: array
     items:
-      type: string
-      enum:
-        - Order:Created
-        - Order:Partially_Filled
-    example:
-      - Order:Created
-      - Order:Partially_Filled
+      $ref: EventType.yaml
   callbackUrl:
     type: string
     example: https://ttp.com/API/notifications/order-placement/

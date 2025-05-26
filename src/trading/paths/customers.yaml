@@ -1,6 +1,6 @@
 get:
   tags:
-    - customers
+    - customer
   summary: Returns all customers (business partners) accessible for the logged in user
   description: |
     This endpoint returns a highlevel list of customers accessible for the

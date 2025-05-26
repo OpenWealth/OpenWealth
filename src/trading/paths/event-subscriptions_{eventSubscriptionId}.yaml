@@ -49,8 +49,7 @@ put:
           $ref: ../components/schemas/EventSubscription.yaml
         example:
           eventTypes:
-            - Order:Created
-            - Order:Partially_Filled
+            - order:restated
           callbackUrl: /ttpAPI/notifications/order-placement/
   responses:
     '204':

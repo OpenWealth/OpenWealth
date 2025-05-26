@@ -1,6 +1,6 @@
 get:
   tags:
-    - customers
+    - customer
   summary: Returns a specific customer by id
   description: Returns a specific customer by id accessible for the requesting user.
   operationId: getCustomerById

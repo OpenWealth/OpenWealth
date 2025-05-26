@@ -13,6 +13,6 @@ properties:
     description: Current rate as decimal.
     example: 0.98
   sourceCurrency:
-    $ref: '../../../generics/components/schemas/Currency.yaml'
+    $ref: ../../../generics/components/schemas/Currency.yaml
   targetCurrency:
-    $ref: '../../../generics/components/schemas/Currency.yaml'
+    $ref: ../../../generics/components/schemas/Currency.yaml

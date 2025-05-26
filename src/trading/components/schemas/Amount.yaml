@@ -10,6 +10,6 @@ properties:
     example: 12000
     description: Signed decimal number.
   currency:
-    $ref: '../../../generics/components/schemas/Currency.yaml'
+    $ref: ../../../generics/components/schemas/Currency.yaml
   foreignExchangeRate:
     $ref: 'ForeignExchangeRate.yaml'

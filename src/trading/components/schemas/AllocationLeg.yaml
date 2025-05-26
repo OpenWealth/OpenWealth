@@ -1,0 +1,31 @@
+type: object
+description: Extended details regarding the allocations including validity of the allocation and billing details.
+required:
+  - creditAccount
+  - debitAccount
+  - quantity
+properties:
+  creditAccount:
+    description: Account that is credited when executing the trade.
+    $ref: Account.yaml
+  debitAccount:
+    description: Account that is debited when executing the trade.
+    $ref: Account.yaml
+  quantity:
+    description: The requested quantity of the baseInstrument to be allocated to specific account.
+    type: number
+  averagePrice:
+    description: The average price for quantity that was traded.
+    $ref: Price.yaml
+    readOnly: true
+  executedQuantity:
+    $ref: Quantity.yaml
+    readOnly: true
+  cancelledQuantity:
+    $ref: Quantity.yaml
+    readOnly: true
+  executionAllocationList:
+    type: array
+    items:
+      $ref: ExecutionAllocation.yaml
+    readOnly: true

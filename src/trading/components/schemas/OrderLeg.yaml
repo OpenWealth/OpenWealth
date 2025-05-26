@@ -1,0 +1,43 @@
+type: object
+description: Order object.
+required:
+  - side
+  - unitReference
+  - quantity
+  - baseInstrument
+  - quoteInstrument
+properties:
+  quantity:
+    description: The total quantity of the order. The unit of this field is defined by the quantity schema.
+    $ref: Quantity.yaml
+  side:
+    $ref: OrderSide.yaml
+  unitReference:
+    $ref: UnitReference.yaml
+  positionEffect:
+    $ref: PositionEffect.yaml
+  baseInstrument:
+    description: Instrument subject to sale or purchase.
+    $ref: FinancialInstrument.yaml
+  quoteInstrument:
+    description: |
+      Instrument (i.e. currency) which is paid resp. recieved in exchange
+      for the purchase resp. sell of the baseInstrument.
+    $ref: FinancialInstrument.yaml
+  limitPrice:
+    description: |
+      Limit price per unit of baseInstrument (e.g. per share) in number of quote instrument.
+    $ref: Price.yaml
+  stopPrice:
+    description: |
+      Price per unit of baseInstrument (e.g. per share) in number of quote instrument.
+      Required for executionType 'stop' or 'stopLimit'.
+    $ref: Price.yaml
+  settlementDate:
+    $ref: ../../../generics/components/schemas/Date.yaml
+  executedQuantity:
+    $ref: Quantity.yaml
+    readOnly: true
+  cancelledQuantity:
+    $ref: Quantity.yaml
+    readOnly: true

@@ -1,6 +1,4 @@
 type: object
-required:
-  - tradingStrategy
 properties:
   tradingStrategy:
     description: Name of the Strategy (i.e. volumeWeightedAveragePrice).
@@ -50,17 +48,17 @@ properties:
     description: |
       Indicates the price at which the client is willing to fill the entire order,
       or the percentage provided in WouldPercentage.
-      WouldPrice is always associated with the values provided with "wouldPercentage" and "wouldStyle".
+      WouldPrice is always associated with the values provided with 'wouldPercentage' and 'wouldStyle'.
     type: number
   wouldPercentage:
     description: |
-      "wouldPercentage" can only be selected if parameter "wouldPrice" contains a valid value.
-      Parameter is always associated with "wouldPrice" and "wouldStyle".
+      'wouldPercentage' can only be selected if parameter 'wouldPrice' contains a valid value.
+      Parameter is always associated with 'wouldPrice' and 'wouldStyle'.
     type: number
   wouldStyle:
     description: |
       WouldStyle can only be selected if parameter WouldPrice contains a valid value.
-      Parameter is always associated with "wouldPrice" and "wouldPercentage".
+      Parameter is always associated with 'wouldPrice' and 'wouldPercentage'.
     type: string
     enum:
       - allVenues
@@ -83,6 +81,8 @@ properties:
   primaryOnly:
     description: TBD.
     type: boolean
-  customInstruction:
-    description: TBD.
+  additionalInstructions:
     type: string
+    maxLength: 512
+    description: Provides additional instructions on the order which cannot be included within the structured fields of the message.
+    example: at pre Market and today

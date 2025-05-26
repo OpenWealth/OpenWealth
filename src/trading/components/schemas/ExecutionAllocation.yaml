@@ -3,10 +3,10 @@ description: Execution allocation
 properties:
   quantity:
     description: Executed quantity allocated to the given client.
-    $ref: 'Quantity.yaml'
+    $ref: Quantity.yaml
   price:
     description: The price for the allocated quantity.
-    $ref: 'Price.yaml'
+    $ref: Price.yaml
   executionIds:
     description: List of market executions, that contributed to the allocated quantity.
     items:
@@ -14,7 +14,7 @@ properties:
       maxLength: 128
       description: Unambiguous identifier for the execution.
   billingDetails:
-    $ref: 'BillingDetails.yaml'
+    $ref: BillingDetails.yaml
   transactionId:
     type: string
     maxLength: 128
@@ -22,4 +22,4 @@ properties:
     description: Indicates the transaction identification for an allocated execution.
   bookingDate:
     description: Indicates the booking date for an allocated execution of the order.
-    $ref: '../../../generics/components/schemas/Date.yaml'
+    $ref: ../../../generics/components/schemas/Date.yaml

@@ -13,8 +13,12 @@ servers:
     url: https://www.openwealth.ch
 security: []
 tags:
+  - name: customer
+    description: Customer operations.
   - name: account
     description: Account operations.
+  - name: quote
+    description: Quote operations.
   - name: order
     description: Order operations.
   - name: execution

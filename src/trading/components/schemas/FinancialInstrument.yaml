@@ -1,17 +1,62 @@
-title: FinancialInstrument
 type: object
-description: Financial instrument entity.
-oneOf:
-  - $ref: 'FinancialInstrumentBase.yaml'
-  - $ref: 'FinancialInstrumentForward.yaml'
-  - $ref: 'ExchangeTradedDerivative.yaml'
-  - $ref: 'PreciousMetal.yaml'
-  - $ref: 'PreciousMetalForward.yaml'
-discriminator:
-  propertyName: type
-  mapping:
-    basic: 'FinancialInstrumentBase.yaml'
-    forward: 'FinancialInstrumentForward.yaml'
-    etd: 'ExchangeTradedDerivative.yaml'
-    preciousMetal: 'PreciousMetal.yaml'
-    preciousMetalForward: 'FinancialInstrumentForward.yaml'
+required:
+  - type
+  - identification
+properties:
+  type:
+    description: Type of ordered instrument.
+    type: string
+    enum:
+      - currency
+      - security
+      - preciousMetal
+      - derivative
+      - digitalAsset
+      - other
+  identification:
+    $ref: FinancialInstrumentIdentification.yaml
+  name:
+    description: Name of ordered instrument.
+    type: string
+  unitType:
+    type: string
+    enum:
+      - g
+      - kg
+      - oz
+  expiryDate:
+    description: |
+      Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
+      date at which it becomes due and has to be repaid.
+    $ref: ../../../generics/components/schemas/Date.yaml
+  contractSize:
+    title: ContractSize
+    type: number
+    description: Contract size of the instrument.
+    example: 100
+  exercisePrice:
+    description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
+    type: object
+    required:
+      - type
+      - value
+    properties:
+      type:
+        type: string
+        description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+        example: percentage
+        enum:
+          - actual
+          - percentage
+      value:
+        type: number
+        example: 100.23
+        description: Signed decimal number.
+      currency:
+        $ref: ../../../generics/components/schemas/Currency.yaml
+  excerciseStyle:
+    $ref: ExcerciseStyle.yaml
+  optionType:
+    $ref: OptionType.yaml
+  underlyingFinancialInstrument:
+    $ref: FinancialInstrument.yaml

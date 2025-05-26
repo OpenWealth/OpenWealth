@@ -26,6 +26,6 @@ properties:
     $ref: ../../../generics/components/schemas/DateTime.yaml
   price:
     description: The average price for quantity that has traded.
-    $ref: 'Price.yaml'
+    $ref: Price.yaml
   placeOfTrade:
-    $ref: 'PlaceOfTrade.yaml'
+    $ref: PlaceOfTrade.yaml

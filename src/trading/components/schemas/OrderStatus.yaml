@@ -28,4 +28,4 @@ properties:
     description: |
       Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp).
       In accordance with ISO 8601.
-    $ref: '../../../generics/components/schemas/DateTime.yaml'
+    $ref: ../../../generics/components/schemas/DateTime.yaml
