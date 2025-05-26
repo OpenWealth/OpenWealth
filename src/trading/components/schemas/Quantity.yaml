@@ -17,4 +17,4 @@ properties:
   value:
     type: number
     example: 12000
-    description: Signed decimal number.
+    description: Absolut decimal number.
