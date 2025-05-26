@@ -1,10 +1,14 @@
 type: object
 description: Extended details regarding the allocations including validity of the allocation and billing details.
 required:
+  - orderLegIndex
   - creditAccount
   - debitAccount
   - quantity
 properties:
+  orderLegIndex:
+    description: Integer referring the associated order leg in the order.
+    type: integer
   creditAccount:
     description: Account that is credited when executing the trade.
     $ref: Account.yaml

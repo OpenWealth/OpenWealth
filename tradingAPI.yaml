@@ -961,6 +961,15 @@ components:
       description: DateTime according to ISO 8601.
       format: date-time
       example: '2018-04-13T16:00:00Z'
+    OrderSide:
+      type: string
+      description: Side taken by a party on an order.
+      example: buy
+      enum:
+        - buy
+        - sell
+        - subscribe
+        - redeem
     Quantity:
       title: Quantity
       type: object
@@ -982,33 +991,6 @@ components:
           type: number
           example: 12000
           description: Absolut decimal number.
-    OrderSide:
-      type: string
-      description: Side taken by a party on an order.
-      example: buy
-      enum:
-        - buy
-        - sell
-        - subscribe
-        - redeem
-    UnitReference:
-      type: string
-      description: |
-        indicates whether the order quantity is expressed in base instrument or quote instrument.
-        BaseInstrument by default.
-      enum:
-        - baseInstrument
-        - quoteInstrument
-      default: baseInstrument
-    PositionEffect:
-      type: string
-      description: |
-        Indicates whether the resulting position after a trade should be an opening position or closing position.
-      enum:
-        - open
-        - close
-        - rolled
-        - fifo
     FinancialInstrumentIdentification:
       type: object
       required:
@@ -1136,6 +1118,24 @@ components:
           $ref: '#/components/schemas/OptionType'
         underlyingFinancialInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
+    UnitReference:
+      type: string
+      description: |
+        indicates whether the order quantity is expressed in base instrument or quote instrument.
+        BaseInstrument by default.
+      enum:
+        - baseInstrument
+        - quoteInstrument
+      default: baseInstrument
+    PositionEffect:
+      type: string
+      description: |
+        Indicates whether the resulting position after a trade should be an opening position or closing position.
+      enum:
+        - open
+        - close
+        - rolled
+        - fifo
     Price:
       type: object
       description: Schema of a order price schema.
@@ -1161,21 +1161,21 @@ components:
       type: object
       description: Order object.
       required:
+        - index
         - side
-        - unitReference
         - quantity
         - baseInstrument
         - quoteInstrument
+        - unitReference
       properties:
+        index:
+          description: Integer uniquely identifying the order leg in the list of legs (array index).
+          type: integer
+        side:
+          $ref: '#/components/schemas/OrderSide'
         quantity:
           description: The total quantity of the order. The unit of this field is defined by the quantity schema.
           $ref: '#/components/schemas/Quantity'
-        side:
-          $ref: '#/components/schemas/OrderSide'
-        unitReference:
-          $ref: '#/components/schemas/UnitReference'
-        positionEffect:
-          $ref: '#/components/schemas/PositionEffect'
         baseInstrument:
           description: Instrument subject to sale or purchase.
           $ref: '#/components/schemas/FinancialInstrument'
@@ -1184,6 +1184,10 @@ components:
             Instrument (i.e. currency) which is paid resp. recieved in exchange
             for the purchase resp. sell of the baseInstrument.
           $ref: '#/components/schemas/FinancialInstrument'
+        unitReference:
+          $ref: '#/components/schemas/UnitReference'
+        positionEffect:
+          $ref: '#/components/schemas/PositionEffect'
         limitPrice:
           description: |
             Limit price per unit of baseInstrument (e.g. per share) in number of quote instrument.
@@ -1322,10 +1326,14 @@ components:
       type: object
       description: Extended details regarding the allocations including validity of the allocation and billing details.
       required:
+        - orderLegIndex
         - creditAccount
         - debitAccount
         - quantity
       properties:
+        orderLegIndex:
+          description: Integer referring the associated order leg in the order.
+          type: integer
         creditAccount:
           description: Account that is credited when executing the trade.
           $ref: '#/components/schemas/Account'
