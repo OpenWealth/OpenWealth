@@ -1,0 +1,15 @@
+type: string
+description: |
+  Type of order requested.
+example: singleOrder
+enum:
+  - singleOrder
+  - multiLegOrder
+  - fxSpot
+  - fxForward
+  - fxSwap
+  - preciousMetalSpot
+  - preciousMetalForward
+  - preciousMetalSwap
+  - exchangeTradedDerivative
+  - other

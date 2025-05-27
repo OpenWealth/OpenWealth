@@ -939,6 +939,22 @@ components:
             - read
             - write
           example: read
+    OrderType:
+      type: string
+      description: |
+        Type of order requested.
+      example: singleOrder
+      enum:
+        - singleOrder
+        - multiLegOrder
+        - fxSpot
+        - fxForward
+        - fxSwap
+        - preciousMetalSpot
+        - preciousMetalForward
+        - preciousMetalSwap
+        - exchangeTradedDerivative
+        - other
     PlaceOfTrade:
       type: object
       description: Market in which a trade transaction is to be or has been executed.
@@ -1571,21 +1587,7 @@ components:
             Reference of the order (unique identification),
             as assigned by the instructing party (i.e. TPP).
         type:
-          type: string
-          description: |
-            Type of order requested.
-          example: singleOrder
-          enum:
-            - singleOrder
-            - multiLegOrder
-            - fxSpot
-            - fxForward
-            - fxSwap
-            - preciousMetalSpot
-            - preciousMetalForward
-            - preciousMetalSwap
-            - exchangeTradedDerivative
-            - other
+          $ref: '#/components/schemas/OrderType'
         executionType:
           type: string
           description: Type of the execution of the order.
@@ -1739,24 +1741,14 @@ components:
             Instrument (i.e. currency) for which the quote is requested in exchange
             for the purchase resp. sell of the baseInstrument.
           $ref: '#/components/schemas/FinancialInstrument'
-        priceType:
-          type: string
-          description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
-          enum:
-            - actual
-            - percentage
-          readOnly: true
         price:
-          type: number
-          description: |
-            - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
-            - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+          $ref: '#/components/schemas/Price'
           readOnly: true
     Quote:
       type: object
       required:
         - type
-        - kind
+        - orderType
         - legList
       properties:
         id:
@@ -1773,15 +1765,8 @@ components:
           enum:
             - indicative
             - tradable
-        kind:
-          type: string
-          description: |
-            Kind of quote requested.
-          example: singlelegQuote
-          enum:
-            - singlelegQuote
-            - swaplegQuote
-            - multilegQuote
+        orderType:
+          $ref: '#/components/schemas/OrderType'
         expiryDateTime:
           description: DateTime when quote expires.
           $ref: '#/components/schemas/DateTime'
@@ -1796,6 +1781,7 @@ components:
         legList:
           items:
             $ref: '#/components/schemas/QuoteLeg'
+          minItems: 1
     EventType:
       description: Event type the subscription should apply to AND reason why a notification is sent.
       type: string

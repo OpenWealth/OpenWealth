@@ -1,7 +1,7 @@
 type: object
 required:
   - type
-  - kind
+  - orderType
   - legList
 properties:
   id:
@@ -18,15 +18,8 @@ properties:
     enum:
       - indicative
       - tradable
-  kind:
-    type: string
-    description: |
-      Kind of quote requested.
-    example: singlelegQuote
-    enum:
-      - singlelegQuote
-      - swaplegQuote
-      - multilegQuote
+  orderType:
+    $ref: OrderType.yaml
   expiryDateTime:
     description: DateTime when quote expires.
     $ref: ../../../generics/components/schemas/DateTime.yaml
@@ -41,3 +34,4 @@ properties:
   legList:
     items:
       $ref: QuoteLeg.yaml
+    minItems: 1

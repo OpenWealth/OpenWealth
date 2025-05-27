@@ -23,21 +23,7 @@ properties:
       Reference of the order (unique identification),
       as assigned by the instructing party (i.e. TPP).
   type:
-    type: string
-    description: |
-      Type of order requested.
-    example: singleOrder
-    enum:
-      - singleOrder
-      - multiLegOrder
-      - fxSpot
-      - fxForward
-      - fxSwap
-      - preciousMetalSpot
-      - preciousMetalForward
-      - preciousMetalSwap
-      - exchangeTradedDerivative
-      - other
+    $ref: OrderType.yaml
   executionType:
     type: string
     description: Type of the execution of the order.
