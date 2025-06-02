@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.2.0-draft
+  version: 3.2.0
   title: Custody Services
   description: |
     This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
