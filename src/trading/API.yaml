@@ -39,6 +39,8 @@ paths:
     $ref: paths/customers_{customerId}.yaml
   /accounts:
     $ref: paths/accounts.yaml
+  /accounts/{accountId}:
+    $ref: paths/accounts_{accountId}.yaml
   /orders:
     $ref: paths/orders.yaml
   /orders/{orderId}:

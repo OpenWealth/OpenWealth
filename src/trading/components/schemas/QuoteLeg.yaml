@@ -8,7 +8,12 @@ properties:
   side:
     $ref: OrderSide.yaml
   quantity:
-    $ref: Quantity.yaml
+    description: |
+      The total quantity (e.g. number of shares) of the quote leg. 
+      The unit type of this field is defined by the quantityType property.
+    type: number
+  quantityType:
+    $ref: QuantityType.yaml
   baseInstrument:
     description: Instrument subject to intended sale or purchase.
     $ref: FinancialInstrument.yaml
@@ -18,5 +23,18 @@ properties:
       for the purchase resp. sell of the baseInstrument.
     $ref: FinancialInstrument.yaml
   price:
-    $ref: Price.yaml
+    description: |
+      If priceType is
+      - 'actual': Price offer as units of quoteInstrument per unit baseInstrument.
+      - 'percentage': Price offer as percentage of nominal value of the baseInstrument.
+    type: number
+    readOnly: true
+  priceType:
+    type: string
+    description: |
+      - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+      - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+    enum:
+      - actual
+      - percentage
     readOnly: true

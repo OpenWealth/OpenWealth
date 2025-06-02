@@ -1,7 +1,6 @@
 type: object
 required:
   - type
-  - orderType
   - legList
 properties:
   id:
@@ -18,8 +17,6 @@ properties:
     enum:
       - indicative
       - tradable
-  orderType:
-    $ref: OrderType.yaml
   expiryDateTime:
     description: DateTime when quote expires.
     $ref: ../../../generics/components/schemas/DateTime.yaml

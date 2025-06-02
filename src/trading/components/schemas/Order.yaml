@@ -2,10 +2,9 @@ type: object
 description: Order object.
 required:
   - clientReference
-  - type
   - executionType
   - timeInForce
-  - allocationList
+  - legList
 properties:
   id:
     type: string
@@ -22,8 +21,6 @@ properties:
     description: |
       Reference of the order (unique identification),
       as assigned by the instructing party (i.e. TPP).
-  type:
-    $ref: OrderType.yaml
   executionType:
     type: string
     description: Type of the execution of the order.
@@ -57,7 +54,14 @@ properties:
     description: Optional reference to link orders, i.e. multi-leg orders.
     readOnly: true
   bestEffortExecution:
-    description: TBD
+    description: |
+      If this flag is set to true, then the broker proceeds with the placement of the bulk order
+      in case if one or more clients identified within allocations list of the given order
+      by corresponding account id fail pre-trade checks and are thus excluded from the order.
+      The failed client allocations are excluded from the order before the actual moment of placement,
+      and total quantity of the order is adjusted accordingly to exclude quantities request for given client allocations.
+      If this flag is set to false (or equally, not explicitly passed),
+      then the order is rejected by the broker if at least one client fails pre-trade checks.
     type: boolean
     default: false
   requestedPlaceOfTrade:
@@ -92,6 +96,7 @@ properties:
     type: array
     items:
       $ref: Allocation.yaml
+    minItems: 1
   orderPlacer:
     description: |
       The entity physically transmitting the order to the execution venue.
@@ -120,8 +125,8 @@ properties:
     readOnly: true
   status:
     $ref: OrderStatus.yaml
-  orderCancellationReasonList:
+  cancellationReasonList:
     type: array
     items:
-      $ref: OrderCancellationReason.yaml
+      $ref: CancellationReason.yaml
     readOnly: true

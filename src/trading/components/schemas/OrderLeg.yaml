@@ -4,6 +4,7 @@ required:
   - index
   - side
   - quantity
+  - qunatityType
   - baseInstrument
   - quoteInstrument
   - unitReference
@@ -14,8 +15,19 @@ properties:
   side:
     $ref: OrderSide.yaml
   quantity:
-    description: The total quantity of the order. The unit of this field is defined by the quantity schema.
-    $ref: Quantity.yaml
+    description: |
+      The total quantity (e.g. number of shares) of the order leg.
+      The unit type of this field is defined by the quantityType property.
+    type: number
+    example: 12000
+  quantityType:
+    type: string
+    description: Specifies the type of the amount.
+    enum:
+      - unit
+      - faceAmount
+      - amortisedValue
+      - digitalTokenUnit
   baseInstrument:
     description: Instrument subject to sale or purchase.
     $ref: FinancialInstrument.yaml
@@ -28,20 +40,39 @@ properties:
     $ref: UnitReference.yaml
   positionEffect:
     $ref: PositionEffect.yaml
+  priceType:
+    type: string
+    description: |
+      - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+      - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+      Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
+    example: percentage
+    enum:
+      - actual
+      - percentage
   limitPrice:
     description: |
       Limit price per unit of baseInstrument (e.g. per share) in number of quote instrument.
-    $ref: Price.yaml
+      Required for executionType 'limit' or 'stopLimit'.
+      Type of price (actual or percentage) is defined py the priceType property.
+    type: number
   stopPrice:
     description: |
       Price per unit of baseInstrument (e.g. per share) in number of quote instrument.
       Required for executionType 'stop' or 'stopLimit'.
-    $ref: Price.yaml
+      Type of price (actual or percentage) is defined py the priceType property.
+    type: number
   settlementDate:
     $ref: ../../../generics/components/schemas/Date.yaml
   executedQuantity:
-    $ref: Quantity.yaml
+    description: |
+      Quantity of the baseInstrument that has been executed.
+      The unit type of this field is defined by the quantityType property.
+    type: number
     readOnly: true
   cancelledQuantity:
-    $ref: Quantity.yaml
+    description: |
+      Quantity of the baseInstrument that was cancelled.
+      The unit type of this field is defined by the quantityType property.
+    type: number
     readOnly: true

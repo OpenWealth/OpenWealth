@@ -2,31 +2,53 @@ type: object
 description: Extended details regarding the allocations including validity of the allocation and billing details.
 required:
   - orderLegIndex
-  - creditAccount
-  - debitAccount
+  - creditAccountId
+  - debitAccountId
   - quantity
+  - quantityType
 properties:
   orderLegIndex:
     description: Integer referring the associated order leg in the order.
     type: integer
-  creditAccount:
-    description: Account that is credited when executing the trade.
-    $ref: Account.yaml
-  debitAccount:
-    description: Account that is debited when executing the trade.
-    $ref: Account.yaml
+  creditAccountId:
+    description: Id of the account that is credited when executing the trade.
+    type: string
+  debitAccountId:
+    description: Id of the account that is debited when executing the trade.
+    type: string
   quantity:
-    description: The requested quantity of the baseInstrument to be allocated to specific account.
+    description: |
+      The requested quantity of the baseInstrument to be allocated to specific account.
+      The unit type of this field is defined by the quantityType property.
     type: number
-  averagePrice:
-    description: The average price for quantity that was traded.
-    $ref: Price.yaml
-    readOnly: true
+  quantityType:
+    $ref: QuantityType.yaml
   executedQuantity:
-    $ref: Quantity.yaml
+    description: |
+      Quantity of the baseInstrument that has been executed and allocated to specific account.
+      The unit type of this field is defined by the quantityType property.
+    type: number
     readOnly: true
   cancelledQuantity:
-    $ref: Quantity.yaml
+    description: |
+      Quantity of the baseInstrument that was cancelled for the allocation.
+      The unit type of this field is defined by the quantityType property.
+    type: number
+    readOnly: true
+  averagePrice:
+    description: |
+      The average price for quantity that was traded.
+      Type of price (actual or percentage) is defined py the priceType property.
+    type: number
+    readOnly: true
+  averagePriceType:
+    type: string
+    description: |
+      - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+      - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+    enum:
+      - actual
+      - percentage
     readOnly: true
   executionAllocationList:
     type: array

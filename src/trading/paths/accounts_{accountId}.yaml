@@ -1,28 +1,22 @@
 get:
   tags:
     - account
-  summary: Returns list of accounts the requestor has access to
-  description: |
-    Returns list of accounts the requestor has access to Paging is done based on
-    the account object, i.e. if limit is set to 1,
-    then 1 account object will be returned per page.
-  operationId: getAccounts
+  summary: Returns a specific accounts by id
+  description: Returns a specific account by id accessible for the requesting user.
+  operationId: getAccountById
   parameters:
-    - $ref: ../../generics/components/parameters/cursor.yaml
-    - $ref: ../../generics/components/parameters/limit.yaml
+    - $ref: ../../generics/components/parameters/path_accountId.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   responses:
     '200':
-      description: Returns list of accounts the requestor has access to.
+      description: Returns a the specified account.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Account.yaml
+            $ref: ../components/schemas/Account.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

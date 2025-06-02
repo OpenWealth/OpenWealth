@@ -1,0 +1,65 @@
+type: object
+description: Indicates the reason, why an order is invalid/cancelled/rejected.
+required:
+  - code
+properties:
+  code:
+    type: string
+    description: |
+      Cancelled reason expressed as a code.
+
+      - invalidListing: issue with listing, 
+        i.e. base/quote instrument pair are not available on market.
+
+      - invalidProperties: a property or property combination is not valid,
+        i.e. limit price mising for limit order.
+
+      - invalidInstrument: an instrument (base or quote) is not valid, i.e. invalid ISIN.
+
+      - invalidAccount: an account (credit or debit) is not valid, i.e. invalid IBAN
+
+      - invalidAllocation: an issue with a particular allocation,
+        i.e. the allocated quantity is invalid.
+
+      - other
+    enum:
+      - invalidListing
+      - invalidProperties
+      - invalidInstrument
+      - invalidAccount
+      - invalidAllocation
+      - other
+    example: invalidListing
+  details:
+    type: object
+    properties:
+      content:
+        type: string
+        description: |
+          Cancelled reason expressed as a proprietary description that provides more
+          details about the reason of the cancellation.
+        example: Cancelled by client
+      lang:
+        description: Response language code (ISO 639-1) - preferred 'en'.
+        type: string
+        example: en
+  affectedProperties:
+    type: array
+    items:
+      properties:
+        code:
+          type: string
+          description: Reason of error related to property.
+          enum:
+            - invalid
+            - required
+            - notEmpty
+            - notAllowed
+            - insufficientQuantity
+            - insufficientBuyingPower
+            - notFound
+            - notSupported
+            - other
+        propertyPath:
+          type: string
+          description: Path to affected property according to TBD

@@ -119,8 +119,9 @@ paths:
         - account
       summary: Returns list of accounts the requestor has access to
       description: |
-        Returns list of accounts the requestor has access to Paging is done based on the accountaccess
-        object, i.e. if limit is set to 1, then 1 account object will be returned per page.
+        Returns list of accounts the requestor has access to Paging is done based on
+        the account object, i.e. if limit is set to 1,
+        then 1 account object will be returned per page.
       operationId: getAccounts
       parameters:
         - $ref: '#/components/parameters/cursor'
@@ -154,6 +155,42 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
+  /accounts/{accountId}:
+    get:
+      tags:
+        - account
+      summary: Returns a specific accounts by id
+      description: Returns a specific account by id accessible for the requesting user.
+      operationId: getAccountById
+      parameters:
+        - $ref: '#/components/parameters/path_accountId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Returns a the specified account.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
   /orders:
     post:
       tags:
@@ -162,7 +199,6 @@ paths:
       description: Posts a new order.
       operationId: createOrder
       parameters:
-        - $ref: '#/components/parameters/expandOrder'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       requestBody:
         content:
@@ -200,10 +236,12 @@ paths:
         - order
       summary: Returns a list of open orders
       description: |
-        Returns all open orders to which the user of the API has access to. Paging is done based on the order object,
+        Returns all open orders to which the user of the API has access to. Paging
+        is done based on the order object,
         i.e. if limit is set to 1, then 1 order will be returned per page.
       operationId: getOrders
       parameters:
+        - $ref: '#/components/parameters/expandOrder'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -756,6 +794,15 @@ components:
         example: 123123-456
         description: Unique and unambiguous identification used by the bank for the customer.
       description: Customer ID Parameter.
+    path_accountId:
+      in: path
+      name: accountId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        description: The customer's account identification, this should NOT be an IBAN.
+      description: Account ID parameter.
     expandOrder:
       name: expand
       in: query
@@ -842,6 +889,9 @@ components:
       title: Customer
       type: object
       description: Overview of the customer with the respective accounts.
+      required:
+        - id
+        - number
       properties:
         id:
           type: string
@@ -898,17 +948,19 @@ components:
     Account:
       type: object
       required:
+        - id
         - type
-        - iban
         - number
         - customerId
-        - accessType
       properties:
         id:
           type: string
           maxLength: 128
           example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
-          description: Unique and unambiguous identification for the account. The IBAN should NOT be the account identifier.
+          description: |
+            Unique and unambiguous identification for the account. 
+            The IBAN should NOT be the account identifier.
+          readOnly: true
         type:
           type: string
           description: Indicates the type of the account.
@@ -939,22 +991,7 @@ components:
             - read
             - write
           example: read
-    OrderType:
-      type: string
-      description: |
-        Type of order requested.
-      example: singleOrder
-      enum:
-        - singleOrder
-        - multiLegOrder
-        - fxSpot
-        - fxForward
-        - fxSwap
-        - preciousMetalSpot
-        - preciousMetalForward
-        - preciousMetalSwap
-        - exchangeTradedDerivative
-        - other
+          readOnly: true
     PlaceOfTrade:
       type: object
       description: Market in which a trade transaction is to be or has been executed.
@@ -986,27 +1023,6 @@ components:
         - sell
         - subscribe
         - redeem
-    Quantity:
-      title: Quantity
-      type: object
-      description: Quantity entity.
-      required:
-        - type
-        - value
-      properties:
-        type:
-          type: string
-          description: Specifies the type of the amount.
-          example: unit
-          enum:
-            - unit
-            - faceAmount
-            - amortisedValue
-            - digitalTokenUnit
-        value:
-          type: number
-          example: 12000
-          description: Absolut decimal number.
     FinancialInstrumentIdentification:
       type: object
       required:
@@ -1077,16 +1093,6 @@ components:
         - type
         - identification
       properties:
-        type:
-          description: Type of ordered instrument.
-          type: string
-          enum:
-            - currency
-            - security
-            - preciousMetal
-            - derivative
-            - digitalAsset
-            - other
         identification:
           $ref: '#/components/schemas/FinancialInstrumentIdentification'
         name:
@@ -1152,27 +1158,6 @@ components:
         - close
         - rolled
         - fifo
-    Price:
-      type: object
-      description: Schema of a order price schema.
-      required:
-        - type
-        - value
-      properties:
-        type:
-          type: string
-          description: |
-            - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
-            - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
-            Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
-          example: percentage
-          enum:
-            - actual
-            - percentage
-        value:
-          type: number
-          example: 100.23
-          description: Signed decimal number.
     OrderLeg:
       type: object
       description: Order object.
@@ -1180,6 +1165,7 @@ components:
         - index
         - side
         - quantity
+        - qunatityType
         - baseInstrument
         - quoteInstrument
         - unitReference
@@ -1190,8 +1176,19 @@ components:
         side:
           $ref: '#/components/schemas/OrderSide'
         quantity:
-          description: The total quantity of the order. The unit of this field is defined by the quantity schema.
-          $ref: '#/components/schemas/Quantity'
+          description: |
+            The total quantity (e.g. number of shares) of the order leg.
+            The unit type of this field is defined by the quantityType property.
+          type: number
+          example: 12000
+        quantityType:
+          type: string
+          description: Specifies the type of the amount.
+          enum:
+            - unit
+            - faceAmount
+            - amortisedValue
+            - digitalTokenUnit
         baseInstrument:
           description: Instrument subject to sale or purchase.
           $ref: '#/components/schemas/FinancialInstrument'
@@ -1204,23 +1201,60 @@ components:
           $ref: '#/components/schemas/UnitReference'
         positionEffect:
           $ref: '#/components/schemas/PositionEffect'
+        priceType:
+          type: string
+          description: |
+            - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+            - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+            Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
+          example: percentage
+          enum:
+            - actual
+            - percentage
         limitPrice:
           description: |
             Limit price per unit of baseInstrument (e.g. per share) in number of quote instrument.
-          $ref: '#/components/schemas/Price'
+            Required for executionType 'limit' or 'stopLimit'.
+            Type of price (actual or percentage) is defined py the priceType property.
+          type: number
         stopPrice:
           description: |
             Price per unit of baseInstrument (e.g. per share) in number of quote instrument.
             Required for executionType 'stop' or 'stopLimit'.
-          $ref: '#/components/schemas/Price'
+            Type of price (actual or percentage) is defined py the priceType property.
+          type: number
         settlementDate:
           $ref: '#/components/schemas/Date'
         executedQuantity:
-          $ref: '#/components/schemas/Quantity'
+          description: |
+            Quantity of the baseInstrument that has been executed.
+            The unit type of this field is defined by the quantityType property.
+          type: number
           readOnly: true
         cancelledQuantity:
-          $ref: '#/components/schemas/Quantity'
+          description: |
+            Quantity of the baseInstrument that was cancelled.
+            The unit type of this field is defined by the quantityType property.
+          type: number
           readOnly: true
+    QuantityType:
+      type: string
+      description: Specifies the type of a quantity.
+      enum:
+        - unit
+        - faceAmount
+        - amortisedValue
+        - digitalTokenUnit
+    PriceType:
+      type: string
+      description: |
+        - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+        - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+        Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
+      example: percentage
+      enum:
+        - actual
+        - percentage
     ForeignExchangeRate:
       title: ForeignExchangeRate
       type: object
@@ -1317,11 +1351,15 @@ components:
       description: Execution allocation
       properties:
         quantity:
-          description: Executed quantity allocated to the given client.
-          $ref: '#/components/schemas/Quantity'
+          description: |
+            Executed quantity allocated to the given client.
+            The unit type of this field is defined by the quantityType property of the root order.
+          type: number
         price:
-          description: The price for the allocated quantity.
-          $ref: '#/components/schemas/Price'
+          description: The price for the executed and allocated quantity.
+          type: number
+        priceType:
+          $ref: '#/components/schemas/PriceType'
         executionIds:
           description: List of market executions, that contributed to the allocated quantity.
           items:
@@ -1343,31 +1381,53 @@ components:
       description: Extended details regarding the allocations including validity of the allocation and billing details.
       required:
         - orderLegIndex
-        - creditAccount
-        - debitAccount
+        - creditAccountId
+        - debitAccountId
         - quantity
+        - quantityType
       properties:
         orderLegIndex:
           description: Integer referring the associated order leg in the order.
           type: integer
-        creditAccount:
-          description: Account that is credited when executing the trade.
-          $ref: '#/components/schemas/Account'
-        debitAccount:
-          description: Account that is debited when executing the trade.
-          $ref: '#/components/schemas/Account'
+        creditAccountId:
+          description: Id of the account that is credited when executing the trade.
+          type: string
+        debitAccountId:
+          description: Id of the account that is debited when executing the trade.
+          type: string
         quantity:
-          description: The requested quantity of the baseInstrument to be allocated to specific account.
+          description: |
+            The requested quantity of the baseInstrument to be allocated to specific account.
+            The unit type of this field is defined by the quantityType property.
           type: number
-        averagePrice:
-          description: The average price for quantity that was traded.
-          $ref: '#/components/schemas/Price'
-          readOnly: true
+        quantityType:
+          $ref: '#/components/schemas/QuantityType'
         executedQuantity:
-          $ref: '#/components/schemas/Quantity'
+          description: |
+            Quantity of the baseInstrument that has been executed and allocated to specific account.
+            The unit type of this field is defined by the quantityType property.
+          type: number
           readOnly: true
         cancelledQuantity:
-          $ref: '#/components/schemas/Quantity'
+          description: |
+            Quantity of the baseInstrument that was cancelled for the allocation.
+            The unit type of this field is defined by the quantityType property.
+          type: number
+          readOnly: true
+        averagePrice:
+          description: |
+            The average price for quantity that was traded.
+            Type of price (actual or percentage) is defined py the priceType property.
+          type: number
+          readOnly: true
+        averagePriceType:
+          type: string
+          description: |
+            - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+            - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+          enum:
+            - actual
+            - percentage
           readOnly: true
         executionAllocationList:
           type: array
@@ -1466,12 +1526,12 @@ components:
             - neutral
             - aggressive
             - superAggressive
-        minQty:
+        minQuantity:
           description: |
             Sets the minimum fill size in dark venues client may want.
           type: number
         primaryOnly:
-          description: TBD.
+          description: Indicates that the order should be solely traded in primary market.
           type: boolean
         additionalInstructions:
           type: string
@@ -1510,7 +1570,7 @@ components:
             Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp).
             In accordance with ISO 8601.
           $ref: '#/components/schemas/DateTime'
-    OrderCancellationReason:
+    CancellationReason:
       type: object
       description: Indicates the reason, why an order is invalid/cancelled/rejected.
       required:
@@ -1518,25 +1578,44 @@ components:
       properties:
         code:
           type: string
-          description: Cancelled reason expressed as a code.
-          enum:
-            - cancelledByInstructingParty
-            - cancelledByOther
-            - invalidListing
-            - invalidProperty
-            - invalidInstrument
-            - invalidPropertyCombination
-            - invalidOrderQuantity
-            - invalidAccount
-            - invalidAllocationQuantity
-            - maximumNumberOfAllocationsExceeded
-            - preTradeCheckFailed
+          description: |
+            Cancelled reason expressed as a code.
+
+            - invalidListing: issue with listing, 
+              i.e. base/quote instrument pair are not available on market.
+
+            - invalidProperties: a property or property combination is not valid,
+              i.e. limit price mising for limit order.
+
+            - invalidInstrument: an instrument (base or quote) is not valid, i.e. invalid ISIN.
+
+            - invalidAccount: an account (credit or debit) is not valid, i.e. invalid IBAN
+
+            - invalidAllocation: an issue with a particular allocation,
+              i.e. the allocated quantity is invalid.
+
             - other
-          example: cancelledByInstructingParty
+          enum:
+            - invalidListing
+            - invalidProperties
+            - invalidInstrument
+            - invalidAccount
+            - invalidAllocation
+            - other
+          example: invalidListing
         details:
-          type: string
-          description: Cancelled reason expressed as a proprietary description that provides more details about the reason of the cancellation.
-          example: Cancelled by client
+          type: object
+          properties:
+            content:
+              type: string
+              description: |
+                Cancelled reason expressed as a proprietary description that provides more
+                details about the reason of the cancellation.
+              example: Cancelled by client
+            lang:
+              description: Response language code (ISO 639-1) - preferred 'en'.
+              type: string
+              example: en
         affectedProperties:
           type: array
           items:
@@ -1545,16 +1624,12 @@ components:
                 type: string
                 description: Reason of error related to property.
                 enum:
-                  - invalidDate
-                  - dateInPast
-                  - invalidValue
-                  - valueTooHigh
-                  - valueTooSmall
+                  - invalid
                   - required
-                  - itemsRequired
+                  - notEmpty
                   - notAllowed
-                  - wrongDenomination
-                  - insufficientFunds
+                  - insufficientQuantity
+                  - insufficientBuyingPower
                   - notFound
                   - notSupported
                   - other
@@ -1566,10 +1641,9 @@ components:
       description: Order object.
       required:
         - clientReference
-        - type
         - executionType
         - timeInForce
-        - allocationList
+        - legList
       properties:
         id:
           type: string
@@ -1586,8 +1660,6 @@ components:
           description: |
             Reference of the order (unique identification),
             as assigned by the instructing party (i.e. TPP).
-        type:
-          $ref: '#/components/schemas/OrderType'
         executionType:
           type: string
           description: Type of the execution of the order.
@@ -1621,7 +1693,14 @@ components:
           description: Optional reference to link orders, i.e. multi-leg orders.
           readOnly: true
         bestEffortExecution:
-          description: TBD
+          description: |
+            If this flag is set to true, then the broker proceeds with the placement of the bulk order
+            in case if one or more clients identified within allocations list of the given order
+            by corresponding account id fail pre-trade checks and are thus excluded from the order.
+            The failed client allocations are excluded from the order before the actual moment of placement,
+            and total quantity of the order is adjusted accordingly to exclude quantities request for given client allocations.
+            If this flag is set to false (or equally, not explicitly passed),
+            then the order is rejected by the broker if at least one client fails pre-trade checks.
           type: boolean
           default: false
         requestedPlaceOfTrade:
@@ -1656,6 +1735,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Allocation'
+          minItems: 1
         orderPlacer:
           description: |
             The entity physically transmitting the order to the execution venue.
@@ -1684,27 +1764,34 @@ components:
           readOnly: true
         status:
           $ref: '#/components/schemas/OrderStatus'
-        orderCancellationReasonList:
+        cancellationReasonList:
           type: array
           items:
-            $ref: '#/components/schemas/OrderCancellationReason'
+            $ref: '#/components/schemas/CancellationReason'
           readOnly: true
     Execution:
       type: object
       description: Entity describing a market execution
+      required:
+        - id
+        - orderId
+        - orderLegIndex
+        - reference
+        - quantity
       properties:
         id:
           type: string
           maxLength: 128
           description: Unambiguous identifier for the execution.
           example: b7469157-02ea-4938-a485-bc3d9ff43f4d
-          readOnly: true
         orderId:
           type: string
           maxLength: 128
           description: Unambiguous identifier for the order, as assigned by the confirming party.
           example: e6751a48-0819-4482-98a4-760453ba770d
-          readOnly: true
+        orderLegIndex:
+          description: Integer referring the associated order leg in the order.
+          type: integer
         reference:
           type: string
           description: |
@@ -1713,12 +1800,16 @@ components:
         quantity:
           description: Total quantity (e.g. number of shares) executed.
           type: number
+        quantityType:
+          $ref: '#/components/schemas/QuantityType'
         executionDateTime:
           description: DateTime of the single execution.
           $ref: '#/components/schemas/DateTime'
         price:
-          description: The average price for quantity that has traded.
-          $ref: '#/components/schemas/Price'
+          description: The price for quantity that has traded.
+          type: number
+        priceType:
+          $ref: '#/components/schemas/PriceType'
         placeOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
     QuoteLeg:
@@ -1732,7 +1823,12 @@ components:
         side:
           $ref: '#/components/schemas/OrderSide'
         quantity:
-          $ref: '#/components/schemas/Quantity'
+          description: |
+            The total quantity (e.g. number of shares) of the quote leg. 
+            The unit type of this field is defined by the quantityType property.
+          type: number
+        quantityType:
+          $ref: '#/components/schemas/QuantityType'
         baseInstrument:
           description: Instrument subject to intended sale or purchase.
           $ref: '#/components/schemas/FinancialInstrument'
@@ -1742,13 +1838,25 @@ components:
             for the purchase resp. sell of the baseInstrument.
           $ref: '#/components/schemas/FinancialInstrument'
         price:
-          $ref: '#/components/schemas/Price'
+          description: |
+            If priceType is
+            - 'actual': Price offer as units of quoteInstrument per unit baseInstrument.
+            - 'percentage': Price offer as percentage of nominal value of the baseInstrument.
+          type: number
+          readOnly: true
+        priceType:
+          type: string
+          description: |
+            - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+            - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+          enum:
+            - actual
+            - percentage
           readOnly: true
     Quote:
       type: object
       required:
         - type
-        - orderType
         - legList
       properties:
         id:
@@ -1765,8 +1873,6 @@ components:
           enum:
             - indicative
             - tradable
-        orderType:
-          $ref: '#/components/schemas/OrderType'
         expiryDateTime:
           description: DateTime when quote expires.
           $ref: '#/components/schemas/DateTime'
@@ -1782,21 +1888,6 @@ components:
           items:
             $ref: '#/components/schemas/QuoteLeg'
           minItems: 1
-    EventType:
-      description: Event type the subscription should apply to AND reason why a notification is sent.
-      type: string
-      enum:
-        - heartbeat
-        - order:doneForDay
-        - order:orderStatusUpdated
-        - order:pendingReplace
-        - order:replaced
-        - order:restated
-        - order:suspended
-        - order:trade
-        - order:tradeCancel
-        - order:tradeCorrect
-      example: order:orderStatusUpdated
     EventSubscription:
       type: object
       required:
@@ -1810,7 +1901,10 @@ components:
         eventTypes:
           type: array
           items:
-            $ref: '#/components/schemas/EventType'
+            type: string
+            example:
+              - order:created
+              - order:statusUpdated
         callbackUrl:
           type: string
           example: https://ttp.com/API/notifications/order-placement/

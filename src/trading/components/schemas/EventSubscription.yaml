@@ -10,7 +10,10 @@ properties:
   eventTypes:
     type: array
     items:
-      $ref: EventType.yaml
+      type: string
+      example:
+        - order:created
+        - order:statusUpdated
   callbackUrl:
     type: string
     example: https://ttp.com/API/notifications/order-placement/

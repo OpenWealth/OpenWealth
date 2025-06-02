@@ -74,12 +74,12 @@ properties:
       - neutral
       - aggressive
       - superAggressive
-  minQty:
+  minQuantity:
     description: |
       Sets the minimum fill size in dark venues client may want.
     type: number
   primaryOnly:
-    description: TBD.
+    description: Indicates that the order should be solely traded in primary market.
     type: boolean
   additionalInstructions:
     type: string

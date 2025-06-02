@@ -1,6 +1,9 @@
 title: Customer
 type: object
 description: Overview of the customer with the respective accounts.
+required:
+  - id
+  - number
 properties:
   id:
     type: string

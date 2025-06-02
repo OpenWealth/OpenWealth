@@ -5,7 +5,6 @@ post:
   description: Posts a new order.
   operationId: createOrder
   parameters:
-    - $ref: ../components/parameters/expandOrder.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   requestBody:
     content:
@@ -45,13 +44,13 @@ get:
   tags:
     - order
   summary: Returns a list of open orders
-  description: >
+  description: |
     Returns all open orders to which the user of the API has access to. Paging
     is done based on the order object,
-
     i.e. if limit is set to 1, then 1 order will be returned per page.
   operationId: getOrders
   parameters:
+    - $ref: ../components/parameters/expandOrder.yaml
     - $ref: ../../generics/components/parameters/cursor.yaml
     - $ref: ../../generics/components/parameters/limit.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml

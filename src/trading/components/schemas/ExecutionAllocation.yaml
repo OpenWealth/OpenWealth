@@ -2,11 +2,15 @@ type: object
 description: Execution allocation
 properties:
   quantity:
-    description: Executed quantity allocated to the given client.
-    $ref: Quantity.yaml
+    description: |
+      Executed quantity allocated to the given client.
+      The unit type of this field is defined by the quantityType property of the root order.
+    type: number
   price:
-    description: The price for the allocated quantity.
-    $ref: Price.yaml
+    description: The price for the executed and allocated quantity.
+    type: number
+  priceType:
+    $ref: PriceType.yaml
   executionIds:
     description: List of market executions, that contributed to the allocated quantity.
     items:

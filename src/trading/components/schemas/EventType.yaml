@@ -3,12 +3,5 @@ type: string
 enum:
   - heartbeat
   - order:doneForDay
-  - order:orderStatusUpdated
-  - order:pendingReplace
-  - order:replaced
-  - order:restated
-  - order:suspended
-  - order:trade
-  - order:tradeCancel
-  - order:tradeCorrect
-example: 'order:orderStatusUpdated' 
+  - order:statusUpdated
+example: order:statusUpdated

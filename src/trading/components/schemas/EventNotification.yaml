@@ -2,13 +2,13 @@ type: object
 properties:
   id:
     type: string
-    readOnly: true
-    maxLength: 36
     example: 120066c9-58a1-432b-aa60-712fae7f143e
   version:
-    $ref: Version.yaml
+    type: string
+    example: '1.0'
   eventType:
-    $ref: EventType.yaml
+    type: string
+    example: order:statusUpdated
   eventSubscriptionId:
     type: string
     readOnly: true

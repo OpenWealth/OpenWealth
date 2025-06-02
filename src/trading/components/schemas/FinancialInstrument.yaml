@@ -3,16 +3,6 @@ required:
   - type
   - identification
 properties:
-  type:
-    description: Type of ordered instrument.
-    type: string
-    enum:
-      - currency
-      - security
-      - preciousMetal
-      - derivative
-      - digitalAsset
-      - other
   identification:
     $ref: FinancialInstrumentIdentification.yaml
   name:
