@@ -6,7 +6,7 @@ get:
     Returns all transactions for a specific customer.
     Paging is done based on the transaction object,
     i.e. if limit is set to 1, then 1 transaction will be returned per page.
-  operationId: getTransactionsByCustomerId
+  operationId: getTransactionByCustomerId
   parameters:
     - $ref: ../../generics/components/parameters/path_customerId.yaml
     - $ref: ../../generics/components/parameters/date.yaml

@@ -79,7 +79,7 @@ paths:
         - customers
       summary: Returns a specific customer by id
       description: Returns a specific customer by id accessible for the requesting user.
-      operationId: getCustomerById
+      operationId: getCustomersByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -200,7 +200,7 @@ paths:
         Returns all positions for a specific customer.
         Paging is done based on the position object,
         i.e. if limit is set to 1, then 1 position will be returned per page.
-      operationId: getCustomerPositionsByCustomerId
+      operationId: getCustomerPositionByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/date'
@@ -244,7 +244,7 @@ paths:
         - positions
       summary: Returns a position by id for a specific customer
       description: Returns a position by id for a specific customer.
-      operationId: getCustomerPositionById
+      operationId: getAccountPositionById
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_positionId'
@@ -286,7 +286,7 @@ paths:
         Returns all positions for a specific account.
         Paging is done based on the position object, i.e. if limit is set to 1,
         then 1 position will be returned per page.
-      operationId: getAccountPositionsByAccountId
+      operationId: getAccountPositionByAccountId
       parameters:
         - $ref: '#/components/parameters/path_accountId'
         - $ref: '#/components/parameters/date'
@@ -330,7 +330,7 @@ paths:
         - positions
       summary: Returns a position by id for a specific account
       description: Returns a position by id for a specific account.
-      operationId: getAccountPositionById
+      operationId: getCustomerPositionById
       parameters:
         - $ref: '#/components/parameters/path_accountId'
         - $ref: '#/components/parameters/path_positionId'
@@ -372,7 +372,7 @@ paths:
         Returns all transactions for a specific customer.
         Paging is done based on the transaction object,
         i.e. if limit is set to 1, then 1 transaction will be returned per page.
-      operationId: getTransactionsByCustomerId
+      operationId: getTransactionByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/date'
@@ -453,7 +453,7 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code.
-      pattern: '^[A-Z]{3}$'
+      pattern: ^[A-Z]{3}$
       example: CHF
     Customer:
       title: Customer
@@ -996,7 +996,7 @@ components:
         Indicates the type of the financial instrument. Must follow the ISO 10962, which is also known as CFI (classification of
         financial instruments). At least indicate the CFI Category (1st character) and the CFI Group (2nd character). The CFI
         attributes 1-4 (3rd to 6th character in the string) are optional.
-      pattern: '^[A-Z]{2,6}$'
+      pattern: ^[A-Z]{2,6}$
       minLength: 2
       maxLength: 6
       example: ESVUFR
@@ -1255,12 +1255,12 @@ components:
           $ref: '#/components/schemas/Currency'
         safekeepingPlace:
           type: string
-          pattern: '^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$'
+          pattern: ^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$
           example: INSECHZZXXX
           description: BIC of the place where the securities are safe-kept, physically or notionally.
         additionalCustodianInformation:
           type: string
-          pattern: '^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$'
+          pattern: ^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$
           example: INSECHZZXXX
           description: |
             Used for special use cases where safekeepingPlace is not sufficient. BIC of the place where the securities are safe-kept,

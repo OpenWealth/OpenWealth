@@ -3,7 +3,7 @@ get:
     - customers
   summary: Returns a specific customer by id
   description: Returns a specific customer by id accessible for the requesting user.
-  operationId: getCustomerById
+  operationId: getCustomersByCustomerId
   parameters:
     - $ref: ../../generics/components/parameters/path_customerId.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml

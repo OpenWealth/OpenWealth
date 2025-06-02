@@ -3,7 +3,7 @@ get:
     - positions
   summary: Returns a position by id for a specific customer
   description: Returns a position by id for a specific customer.
-  operationId: getCustomerPositionById
+  operationId: getAccountPositionById
   parameters:
     - $ref: ../../generics/components/parameters/path_customerId.yaml
     - $ref: ../../generics/components/parameters/path_positionId.yaml
