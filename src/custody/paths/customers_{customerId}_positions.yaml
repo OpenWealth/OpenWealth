@@ -16,7 +16,7 @@ get:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   responses:
     '200':
-      description: Position List
+      description: Position List.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-Id.yaml
