@@ -6,9 +6,12 @@ function componentsOrder(options) {
   return {
     Components: {
       enter(operation, { report, location, type }) {
-        const sftiComponentsRef = ['schemas', 'parameters', 'securitySchemes', 'responses', 'headers']
-        const keys = Object.keys(operation)
+        let sftiComponentsRef = ['schemas', 'responses', 'parameters', 'headers', 'securitySchemes']
+        if (options.order) {
+          sftiComponentsRef = options.order;
+        }
 
+        const keys = Object.keys(operation)
         filteredKeys = keys.filter(item => sftiComponentsRef.includes(item))
         filteredRefs = sftiComponentsRef.filter(item => keys.includes(item))
 

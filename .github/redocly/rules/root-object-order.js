@@ -6,15 +6,19 @@ function checkObjectOrder(options) {
   return {
     Root: {
       enter(operation, { report, location, type }) {
-        const sftiOpenapiSpecRef = ['openapi', 'info', 'servers', 'security', 'tags', 'externalDocs', 'paths', 'components']
+        let sftiOpenapiSpecRef = ['openapi', 'info', 'servers', 'externalDocs', 'tags', 'security', 'paths', 'components']
+        if (options.order) {
+          sftiOpenapiSpecRef = options.order;
+        }
+
         const keys = Object.keys(operation)
         const missingKeys = sftiOpenapiSpecRef.filter(key => !keys.includes(key))
         // report missing elements
         for (const key of missingKeys) {
           report({
-            message: `The \`${key}\` key is missing in SFTI specification. Plase add \`${key}\` in the defined order (see GitHub Wiki).`,
+            message: `The \`${key}\` key is missing in SFTI specification. Please add \`${key}\` in the defined order (see GitHub Wiki).`,
             location: location.child([utils.get_common_prev_elem(sftiOpenapiSpecRef, keys, key)]).key(),
-            suggest: [`Include \`${key}\` object below \`${utils.get_common_prev_elem(sftiOpenapiSpecRef, keys, key)}\` object`],
+            suggest: [ `Include \`${key}\` object below \`${utils.get_common_prev_elem(sftiOpenapiSpecRef, keys, key)}\` object` ],
           });
         }
 
@@ -26,9 +30,9 @@ function checkObjectOrder(options) {
             filteredKeys = filteredKeys.filter(item => item !== key)
             filteredRefs = filteredRefs.filter(item => item !== key)
             report({
-              message: `The \`${key}\` key is misplaced in SFTI specification. Plase move \`${key}\` to its defined location (see GitHub Wiki).`,
+              message: `The \`${key}\` key is misplaced in SFTI specification. Please move \`${key}\` to its defined location (see GitHub Wiki).`,
               location: location.child([key]).key(),
-              suggest: [`Include \`${key}\` object below \`${sftiOpenapiSpecRef[sftiOpenapiSpecRef.indexOf(key) - 1]}\` object`],
+              suggest: [ `Include \`${key}\` object below \`${sftiOpenapiSpecRef[sftiOpenapiSpecRef.indexOf(key)-1]}\` object` ],
             });
           }
         }

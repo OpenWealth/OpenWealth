@@ -24,14 +24,6 @@ function checkPathParameter(options) {
                 suggest: [parameterObject.name+'Id'],
               });
             }
-            
-            if(parameterName !== 'path_'+parameterObject.name) {
-              report({
-                message: `Path parameter \`${parameterName}\` must start with \`path_\` followed by the paramter name.`,
-                location: location.child([parameterName]).key(),
-                suggest: ['path_'+parameterObject.name],
-              });
-            }
 
             if(parameterObject.required !== true) {
               report({
@@ -46,7 +38,7 @@ function checkPathParameter(options) {
     ParameterList: {
       enter(operation, { report, location, type }) {
         for (const op of operation) {
-          if(op.$ref === undefined && op.in === 'path') { // references are handeld within NamedParameters
+          if(op.$ref === undefined && op.in === 'path') {
             if(!utils.checkCasing(op.name, 'camelCase')) {
               report({
                 message: `\`${op.name}\` must use camelCase.`,
