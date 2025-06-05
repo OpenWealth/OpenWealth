@@ -1,4 +1,3 @@
-title: OptionType
 type: string
 description: |
   Specifies whether it is a Call option (right to purchase a specific underlying asset)

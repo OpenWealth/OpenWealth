@@ -1,5 +1,5 @@
 type: object
-description: Order object.
+description: Schema of an order enity.
 required:
   - clientReference
   - executionType
@@ -51,7 +51,7 @@ properties:
   groupReference:
     type: string
     maxLength: 128
-    description: Optional reference to link orders, i.e. multi-leg orders.
+    description: Optional reference to link orders, i.e. strategies.
     readOnly: true
   bestEffortExecution:
     description: |
@@ -94,6 +94,7 @@ properties:
     minItems: 1
   allocationList:
     type: array
+    description: List of allocations associated to the bulk order.
     items:
       $ref: Allocation.yaml
     minItems: 1
@@ -125,8 +126,9 @@ properties:
     readOnly: true
   status:
     $ref: OrderStatus.yaml
-  cancellationReasonList:
+  cancellationOrRejectionReasonList:
     type: array
+    description: List of reasons for the cancellation/rejection of the order.
     items:
-      $ref: CancellationReason.yaml
+      $ref: CancellationOrRejectionReason.yaml
     readOnly: true

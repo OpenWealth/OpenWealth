@@ -1,6 +1,5 @@
-title: Customer
 type: object
-description: Overview of the customer with the respective accounts.
+description: Schema of a customer entity.
 required:
   - id
   - number

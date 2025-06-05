@@ -1,9 +1,9 @@
 type: object
+description: Schema of an account entity.
 required:
   - id
   - type
   - number
-  - customerId
 properties:
   id:
     type: string
@@ -31,6 +31,10 @@ properties:
     description: Contains the accounts custody proprietary account number for an account if available.
     maxLength: 70
     example: 123-1234-234
+  referenceCurrency:
+    type: string
+    description: |
+      Reference currency of the account - currency for a cash account and reference currency for a safekeeping account.
   customerId:
     description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
     type: string

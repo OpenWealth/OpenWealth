@@ -1,4 +1,5 @@
 type: object
+description: Schema of a quote entity.
 required:
   - type
   - legList
@@ -6,7 +7,7 @@ properties:
   id:
     type: string
     example: 6dca5123-e370-4272-8ef4-68d421f52f6e
-    description: Unique identifier of given quote
+    description: Unique identifier of given quote.
     readOnly: true
   type:
     type: string
@@ -29,6 +30,7 @@ properties:
       maxLength: 128
       example: 6dca5123-e370-4272-8ef4-68d421f52f6e
   legList:
+    description: List of legs of the order quote.
     items:
       $ref: QuoteLeg.yaml
     minItems: 1

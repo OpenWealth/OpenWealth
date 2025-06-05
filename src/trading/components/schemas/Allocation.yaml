@@ -1,5 +1,5 @@
 type: object
-description: Extended details regarding the allocations.
+description: Schema of an allocation entity.
 required:
   - legList
 properties:
@@ -17,8 +17,9 @@ properties:
     readOnly: true
   legList:
     type: array
+    description: List of allocated order legs.
     items:
-      $ref: allocationLeg.yaml
+      $ref: AllocationLeg.yaml
     minItems: 1
   cancelled:
     type: boolean

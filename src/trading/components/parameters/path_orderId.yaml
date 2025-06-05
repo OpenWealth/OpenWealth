@@ -3,5 +3,5 @@ name: orderId
 required: true
 schema:
   type: string
-  maxLength: 20
+  maxLength: 128
 description: The order ID as given by the API provider.

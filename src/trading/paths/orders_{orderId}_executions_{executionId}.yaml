@@ -5,8 +5,8 @@ get:
   description: Returns a specific execution by order ID and execution ID.
   operationId: getExecutionById
   parameters:
-    - $ref: ../components/parameters/orderId.yaml
-    - $ref: ../components/parameters/executionId.yaml
+    - $ref: ../components/parameters/path_orderId.yaml
+    - $ref: ../components/parameters/path_executionId.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   responses:
     '200':

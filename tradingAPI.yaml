@@ -1,8 +1,30 @@
 openapi: 3.0.0
 info:
   version: 3.0.0-draft
-  title: Order Placement API
-  description: This API is used to place orders and check on the order status.
+  title: Trading API
+  description: |
+    ### OpenWealth Trading API - Standardised Order & Trade Lifecycle
+
+    The **Trading API** (previously *Order Placement API*) is the REST-based API defined by the
+    **OpenWealth Association** that enables wealth-management participants - portfolio-management systems,
+    robo-advisors, custodians, and brokers - to support the order lifecycle with a standard API.
+
+    #### What you can do with the API
+    1. **Discover entitled customers and accounts**  
+      * `GET /customers` & `GET /accounts` return the customers and accounts that the calling party is authorised to trade on.  
+    2. **Obtain executable prices**  
+      * `POST /quotes` lets you request *indicative* or *tradable* quotes (multi-leg FX, crypto, securities, etc.).  
+    3. **Place & manage orders**  
+      * `POST /orders` creates market, limit, stop, or stop-limit orders - single-leg, swap, or complex multi-leg
+      - with optional trader instructions, and best-effort execution flags.  
+      * `POST /orders/{orderId}/action/cancel` cancels an order.  
+    4. **Track status and execution**  
+      * `GET /orders`, `GET /orders/{orderId}`, `GET /orders/{orderId}/statuses` and `GET /orders/{orderId}/executions`
+      provide real-time transparency from *acknowledged* through *filled*,
+      including execution breakdown and billing details.  
+    5. **Subscribe to push events**  
+      * `POST /event-subscriptions` registers a callback URL so your application
+      receives webhook notifications (`order:created`, `order:statusUpdated`, …) instead of polling.
   contact:
     email: openwealth@synpulse.com
   license:
@@ -241,7 +263,7 @@ paths:
         i.e. if limit is set to 1, then 1 order will be returned per page.
       operationId: getOrders
       parameters:
-        - $ref: '#/components/parameters/expandOrder'
+        - $ref: '#/components/parameters/expand_order'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -283,8 +305,8 @@ paths:
       description: Returns a specific security order.
       operationId: getOrderById
       parameters:
-        - $ref: '#/components/parameters/orderId'
-        - $ref: '#/components/parameters/expandOrder'
+        - $ref: '#/components/parameters/path_orderId'
+        - $ref: '#/components/parameters/expand_order'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
@@ -320,7 +342,7 @@ paths:
       description: Places the cancellation request for a specific order.
       operationId: cancelOrderById
       parameters:
-        - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '202':
@@ -355,9 +377,9 @@ paths:
       summary: Returns a list of executions by order
       description: |
         Returns all executions by order ID
-      operationId: getOrderEcecutions
+      operationId: getOrderExecutions
       parameters:
-        - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -399,8 +421,8 @@ paths:
       description: Returns a specific execution by order ID and execution ID.
       operationId: getExecutionById
       parameters:
-        - $ref: '#/components/parameters/orderId'
-        - $ref: '#/components/parameters/executionId'
+        - $ref: '#/components/parameters/path_orderId'
+        - $ref: '#/components/parameters/path_executionId'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
@@ -439,7 +461,7 @@ paths:
         object will be returned per page.
       operationId: getOrderStatuses
       parameters:
-        - $ref: '#/components/parameters/orderId'
+        - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -611,7 +633,7 @@ paths:
       description: Get event subscription by id.
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
-      operationId: getEventSubscription
+      operationId: getEventSubscriptionById
       tags:
         - event-subscription
       responses:
@@ -655,7 +677,7 @@ paths:
               $ref: '#/components/schemas/EventSubscription'
             example:
               eventTypes:
-                - order:restated
+                - order:statusUpdated
               callbackUrl: /ttpAPI/notifications/order-placement/
       responses:
         '204':
@@ -712,13 +734,13 @@ paths:
   /event-subscriptions/{eventSubscriptionId}/event-notifications:
     parameters:
       - $ref: '#/components/parameters/path_eventSubscriptionId'
-      - $ref: '#/components/parameters/fromEventDateTime'
+      - $ref: '#/components/parameters/from_event_date_time'
       - $ref: '#/components/parameters/cursor'
       - $ref: '#/components/parameters/limit'
     get:
       summary: Get event notifications list
       description: Get aggregated event-notification list.
-      operationId: getEventNotifications
+      operationId: getEventNotificationsByEventSubscriptionId
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       tags:
@@ -739,7 +761,7 @@ paths:
                   eventNotifications:
                     type: array
                     items:
-                      $ref: '#/components/schemas/EventSubscription'
+                      $ref: '#/components/schemas/EventNotification'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -759,136 +781,10 @@ paths:
         '504':
           $ref: '#/components/responses/504'
 components:
-  parameters:
-    cursor:
-      in: query
-      name: cursor
-      required: false
-      schema:
-        type: string
-      description: An opaque string value used for pagination.
-    limit:
-      in: query
-      name: limit
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-      description: Maximum number of items to return.
-    x_correlation_id_in_header:
-      in: header
-      name: X-Correlation-ID
-      required: true
-      schema:
-        type: string
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-    path_customerId:
-      in: path
-      name: customerId
-      required: true
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 128
-        example: 123123-456
-        description: Unique and unambiguous identification used by the bank for the customer.
-      description: Customer ID Parameter.
-    path_accountId:
-      in: path
-      name: accountId
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-        description: The customer's account identification, this should NOT be an IBAN.
-      description: Account ID parameter.
-    expandOrder:
-      name: expand
-      in: query
-      description: |
-        Expand related resources. Comma-separated values, supporting:
-        - `allocationList`: Include allocationList details.
-        - `allocationList.executionAllocationList`: Include executionAllocationList details on the allocation.
-        - `allocationList.allocationCancellationReasonList`: Include allocationCancellationReasonList details on the allocation.
-        - `orderCancellationReasonList`: Include orderCancellationReasonList
-      schema:
-        type: string
-        items:
-          type: string
-          enum:
-            - allocationList
-            - allocationList.executionAllocationList
-            - allocationList.allocationCancellationReasonList
-            - orderCancellationReasonList
-      style: form
-      explode: false
-    orderId:
-      in: path
-      name: orderId
-      required: true
-      schema:
-        type: string
-        maxLength: 20
-      description: The order ID as given by the API provider.
-    executionId:
-      in: path
-      name: executionId
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-      description: The execution ID as given by the API provider.
-    path_eventSubscriptionId:
-      in: path
-      name: eventSubscriptionId
-      required: true
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 40
-      description: |
-        Unique identification as assigned by the API exposing party to uniquely
-        identify the callback URL resource.
-    fromEventDateTime:
-      in: query
-      name: fromEventDate
-      schema:
-        type: string
-        format: date-time
-      description: Date from which events are considered.
-      example: 2022-10-26T07:58:30.996+0100
-  headers:
-    X-Correlation-Id:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    X-Next-Cursor:
-      description: An opaque string value, or an empty string if there are no more results.
-      required: false
-      schema:
-        type: string
-    Problem-Content-Type:
-      description: application/problem+json; charset=utf-8 according to RFC7807.
-      schema:
-        type: string
-        example: application/problem+json
-    Content-Language:
-      description: Response language - always en.
-      schema:
-        type: string
-        example: en
-    X-Correlation-ID:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   schemas:
     Customer:
-      title: Customer
       type: object
-      description: Overview of the customer with the respective accounts.
+      description: Schema of a customer entity.
       required:
         - id
         - number
@@ -947,11 +843,11 @@ components:
           example: path/to/corresponding/resource
     Account:
       type: object
+      description: Schema of an account entity.
       required:
         - id
         - type
         - number
-        - customerId
       properties:
         id:
           type: string
@@ -979,6 +875,10 @@ components:
           description: Contains the accounts custody proprietary account number for an account if available.
           maxLength: 70
           example: 123-1234-234
+        referenceCurrency:
+          type: string
+          description: |
+            Reference currency of the account - currency for a cash account and reference currency for a safekeeping account.
         customerId:
           description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
           type: string
@@ -1025,6 +925,7 @@ components:
         - redeem
     FinancialInstrumentIdentification:
       type: object
+      description: Schema of an financial istrument identification object.
       required:
         - identifier
         - type
@@ -1052,9 +953,16 @@ components:
             - sicovam
             - belgian
             - common
-            - cryptoCurrency
+            - digitalAssetTicker
             - iso4217
             - otherProprietaryIdentification
+    UnitType:
+      description: Unit type of the measure of the instrument (i.e. prcious metal).
+      type: string
+      enum:
+        - g
+        - kg
+        - oz
     Date:
       title: Date
       type: string
@@ -1068,7 +976,6 @@ components:
       pattern: ^[A-Z]{3}$
       example: CHF
     ExcerciseStyle:
-      title: ExcerciseStyle
       type: string
       description: Specifies how the derivatice instrument can be exercised.
       example: american
@@ -1078,7 +985,6 @@ components:
         - bermudan
         - asian
     OptionType:
-      title: OptionType
       type: string
       description: |
         Specifies whether it is a Call option (right to purchase a specific underlying asset)
@@ -1089,8 +995,8 @@ components:
         - put
     FinancialInstrument:
       type: object
+      description: Schema of a financial instrument entity.
       required:
-        - type
         - identification
       properties:
         identification:
@@ -1099,11 +1005,7 @@ components:
           description: Name of ordered instrument.
           type: string
         unitType:
-          type: string
-          enum:
-            - g
-            - kg
-            - oz
+          $ref: '#/components/schemas/UnitType'
         expiryDate:
           description: |
             Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
@@ -1160,7 +1062,7 @@ components:
         - fifo
     OrderLeg:
       type: object
-      description: Order object.
+      description: Schema of an order leg.
       required:
         - index
         - side
@@ -1277,7 +1179,7 @@ components:
     Amount:
       title: Amount
       type: object
-      description: Amount entity.
+      description: Schema of an amount entity.
       required:
         - value
         - currency
@@ -1292,21 +1194,24 @@ components:
           $ref: '#/components/schemas/ForeignExchangeRate'
     AccruedInterest:
       type: object
+      description: Schema of an accrued interest object.
       properties:
         numberDaysAccrued:
-          type: number
-          format: integer
+          type: integer
           example: 28
           description: Specifies the number of days used for calculating the accrued interest amount.
         amount:
           type: number
-          description: TBD.
+          description: |
+            The monetary amount of interest that has been earned or accumulated on an account, investment,
+            or financial instrument up to a specific point in time, but has not yet been paid or received.
         currency:
           $ref: '#/components/schemas/Currency'
         foreignExchangeRate:
           $ref: '#/components/schemas/ForeignExchangeRate'
     BillingDetails:
       type: object
+      description: Schema of the billing details object associated to each allocation of an order.
       properties:
         grossTradeAmount:
           description: Principal amount of a trade (price multiplied by quantity).
@@ -1348,7 +1253,7 @@ components:
           $ref: '#/components/schemas/Amount'
     ExecutionAllocation:
       type: object
-      description: Execution allocation
+      description: Schema of an execution allocation.
       properties:
         quantity:
           description: |
@@ -1376,9 +1281,11 @@ components:
         bookingDate:
           description: Indicates the booking date for an allocated execution of the order.
           $ref: '#/components/schemas/Date'
-    allocationLeg:
+    AllocationLeg:
       type: object
-      description: Extended details regarding the allocations including validity of the allocation and billing details.
+      description: |
+        Schema of an allocation leg.
+        It describes how much of the associated order leg is allocated to a given client/account.
       required:
         - orderLegIndex
         - creditAccountId
@@ -1431,12 +1338,13 @@ components:
           readOnly: true
         executionAllocationList:
           type: array
+          description: List of allocated executions associated to the allocation leg.
           items:
             $ref: '#/components/schemas/ExecutionAllocation'
           readOnly: true
     Allocation:
       type: object
-      description: Extended details regarding the allocations.
+      description: Schema of an allocation entity.
       required:
         - legList
       properties:
@@ -1454,8 +1362,9 @@ components:
           readOnly: true
         legList:
           type: array
+          description: List of allocated order legs.
           items:
-            $ref: '#/components/schemas/allocationLeg'
+            $ref: '#/components/schemas/AllocationLeg'
           minItems: 1
         cancelled:
           type: boolean
@@ -1463,6 +1372,7 @@ components:
           readOnly: true
     TraderInstruction:
       type: object
+      description: Schema of the additional trader instruction object.
       properties:
         tradingStrategy:
           description: Name of the Strategy (i.e. volumeWeightedAveragePrice).
@@ -1570,7 +1480,7 @@ components:
             Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp).
             In accordance with ISO 8601.
           $ref: '#/components/schemas/DateTime'
-    CancellationReason:
+    CancellationOrRejectionReason:
       type: object
       description: Indicates the reason, why an order is invalid/cancelled/rejected.
       required:
@@ -1605,6 +1515,7 @@ components:
           example: invalidListing
         details:
           type: object
+          description: Frettext field to give a human readable description of the cancellation reason.
           properties:
             content:
               type: string
@@ -1617,8 +1528,11 @@ components:
               type: string
               example: en
         affectedProperties:
+          description: List of affected properties.
           type: array
           items:
+            type: object
+            description: Schema describing an affected property.
             properties:
               code:
                 type: string
@@ -1638,7 +1552,7 @@ components:
                 description: Path to affected property according to TBD
     Order:
       type: object
-      description: Order object.
+      description: Schema of an order enity.
       required:
         - clientReference
         - executionType
@@ -1690,7 +1604,7 @@ components:
         groupReference:
           type: string
           maxLength: 128
-          description: Optional reference to link orders, i.e. multi-leg orders.
+          description: Optional reference to link orders, i.e. strategies.
           readOnly: true
         bestEffortExecution:
           description: |
@@ -1733,6 +1647,7 @@ components:
           minItems: 1
         allocationList:
           type: array
+          description: List of allocations associated to the bulk order.
           items:
             $ref: '#/components/schemas/Allocation'
           minItems: 1
@@ -1764,14 +1679,15 @@ components:
           readOnly: true
         status:
           $ref: '#/components/schemas/OrderStatus'
-        cancellationReasonList:
+        cancellationOrRejectionReasonList:
           type: array
+          description: List of reasons for the cancellation/rejection of the order.
           items:
-            $ref: '#/components/schemas/CancellationReason'
+            $ref: '#/components/schemas/CancellationOrRejectionReason'
           readOnly: true
     Execution:
       type: object
-      description: Entity describing a market execution
+      description: Schema of a market execution entity.
       required:
         - id
         - orderId
@@ -1814,6 +1730,7 @@ components:
           $ref: '#/components/schemas/PlaceOfTrade'
     QuoteLeg:
       type: object
+      description: Schema of a quote leg object.
       required:
         - side
         - quantity
@@ -1855,6 +1772,7 @@ components:
           readOnly: true
     Quote:
       type: object
+      description: Schema of a quote entity.
       required:
         - type
         - legList
@@ -1862,7 +1780,7 @@ components:
         id:
           type: string
           example: 6dca5123-e370-4272-8ef4-68d421f52f6e
-          description: Unique identifier of given quote
+          description: Unique identifier of given quote.
           readOnly: true
         type:
           type: string
@@ -1885,30 +1803,172 @@ components:
             maxLength: 128
             example: 6dca5123-e370-4272-8ef4-68d421f52f6e
         legList:
+          description: List of legs of the order quote.
           items:
             $ref: '#/components/schemas/QuoteLeg'
           minItems: 1
+    EventType:
+      description: Event type the subscription should apply to AND reason why a notification is sent.
+      type: string
+      enum:
+        - heartbeat
+        - order:doneForDay
+        - order:statusUpdated
+      example: order:statusUpdated
     EventSubscription:
       type: object
+      description: Schema of an event subscription entity.
       required:
         - eventTypes
       properties:
         id:
           type: string
+          description: Unique and unambiguous identification (i.e. UUID) of the event subscription.
           readOnly: true
           maxLength: 36
           example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
         eventTypes:
           type: array
+          description: List of event types subject to subscription.
           items:
-            type: string
-            example:
-              - order:created
-              - order:statusUpdated
+            $ref: '#/components/schemas/EventType'
         callbackUrl:
           type: string
-          example: https://ttp.com/API/notifications/order-placement/
-          description: Not to be used in bLink
+          description: |
+            Endpoint provided by the client (subscriber) where the server (publisher)
+            can send asynchronous event notifications.
+          example: https://ttp.com/API/notifications/
+    EventNotification:
+      type: object
+      description: Schema of an event notification entity.
+      properties:
+        id:
+          type: string
+          description: Unique and unambiguous identification (i.e. UUID) of the event subscription.
+          example: 120066c9-58a1-432b-aa60-712fae7f143e
+        version:
+          type: string
+          description: Version of the notification schema.
+          example: '1.0'
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        eventSubscriptionId:
+          type: string
+          description: Id of the subscriptionthat caused the event to be triggered.
+          readOnly: true
+          maxLength: 36
+          example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
+        resourceLink:
+          type: string
+          description: |
+            The resourceLink is an absolute or relative URL reference to the specific resource or object that triggered the webhook event.
+            This link provides immediate access to the full details of the affected item in the source system.
+          example: /api/bankingservices/b-link/order-placement/v1/orders/abcd1234
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp of the creation of the event notification.
+          example: 2022-10-26T07:58:30.996+0100
+  parameters:
+    cursor:
+      in: query
+      name: cursor
+      required: false
+      schema:
+        type: string
+      description: An opaque string value used for pagination.
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      description: Maximum number of items to return.
+    x_correlation_id_in_header:
+      in: header
+      name: X-Correlation-ID
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+    path_customerId:
+      in: path
+      name: customerId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: 123123-456
+        description: Unique and unambiguous identification used by the bank for the customer.
+      description: Customer ID Parameter.
+    path_accountId:
+      in: path
+      name: accountId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        description: The customer's account identification, this should NOT be an IBAN.
+      description: Account ID parameter.
+    expand_order:
+      in: query
+      name: expand_order
+      schema:
+        type: string
+        items:
+          type: string
+          enum:
+            - allocationList
+            - allocationList.executionAllocationList
+            - allocationList.allocationCancellationReasonList
+            - orderCancellationReasonList
+      description: |
+        Expand related resources. Comma-separated values, supporting:
+        - `allocationList`: Include allocationList details.
+        - `allocationList.executionAllocationList`: Include executionAllocationList details on the allocation.
+        - `allocationList.allocationCancellationReasonList`: Include allocationCancellationReasonList details on the allocation.
+        - `orderCancellationReasonList`: Include orderCancellationReasonList
+      style: form
+      explode: false
+    path_orderId:
+      in: path
+      name: orderId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+      description: The order ID as given by the API provider.
+    path_executionId:
+      in: path
+      name: executionId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+      description: The execution ID as given by the API provider.
+    path_eventSubscriptionId:
+      in: path
+      name: eventSubscriptionId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 40
+      description: |
+        Unique identification as assigned by the API exposing party to uniquely
+        identify the callback URL resource.
+    from_event_date_time:
+      in: query
+      name: from_event_date_time
+      schema:
+        type: string
+        format: date-time
+      description: Date from which events are considered.
+      example: 2022-10-26T07:58:30.996+0100
+  securitySchemes: {}
   responses:
     '400':
       headers:
@@ -2063,3 +2123,29 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+  headers:
+    X-Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    X-Next-Cursor:
+      description: An opaque string value, or an empty string if there are no more results.
+      required: false
+      schema:
+        type: string
+    Problem-Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807.
+      schema:
+        type: string
+        example: application/problem+json
+    Content-Language:
+      description: Response language - always en.
+      schema:
+        type: string
+        example: en
+    X-Correlation-ID:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5

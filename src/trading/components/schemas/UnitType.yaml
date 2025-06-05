@@ -1,0 +1,6 @@
+description: Unit type of the measure of the instrument (i.e. prcious metal).
+type: string
+enum:
+  - g
+  - kg
+  - oz

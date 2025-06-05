@@ -32,6 +32,7 @@ properties:
     example: invalidListing
   details:
     type: object
+    description: Frettext field to give a human readable description of the cancellation reason.
     properties:
       content:
         type: string
@@ -44,8 +45,11 @@ properties:
         type: string
         example: en
   affectedProperties:
+    description: List of affected properties.
     type: array
     items:
+      type: object
+      description: Schema describing an affected property.
       properties:
         code:
           type: string

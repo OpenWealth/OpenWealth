@@ -1,8 +1,30 @@
 openapi: 3.0.0
 info:
   version: 3.0.0-draft
-  title: Order Placement API
-  description: This API is used to place orders and check on the order status.
+  title: Trading API
+  description: |
+    ### OpenWealth Trading API - Standardised Order & Trade Lifecycle
+
+    The **Trading API** (previously *Order Placement API*) is the REST-based API defined by the
+    **OpenWealth Association** that enables wealth-management participants - portfolio-management systems,
+    robo-advisors, custodians, and brokers - to support the order lifecycle with a standard API.
+
+    #### What you can do with the API
+    1. **Discover entitled customers and accounts**  
+      * `GET /customers` & `GET /accounts` return the customers and accounts that the calling party is authorised to trade on.  
+    2. **Obtain executable prices**  
+      * `POST /quotes` lets you request *indicative* or *tradable* quotes (multi-leg FX, crypto, securities, etc.).  
+    3. **Place & manage orders**  
+      * `POST /orders` creates market, limit, stop, or stop-limit orders - single-leg, swap, or complex multi-leg
+      - with optional trader instructions, and best-effort execution flags.  
+      * `POST /orders/{orderId}/action/cancel` cancels an order.  
+    4. **Track status and execution**  
+      * `GET /orders`, `GET /orders/{orderId}`, `GET /orders/{orderId}/statuses` and `GET /orders/{orderId}/executions`
+      provide real-time transparency from *acknowledged* through *filled*,
+      including execution breakdown and billing details.  
+    5. **Subscribe to push events**  
+      * `POST /event-subscriptions` registers a callback URL so your application
+      receives webhook notifications (`order:created`, `order:statusUpdated`, …) instead of polling.
   contact:
     email: openwealth@synpulse.com
   license:
@@ -61,3 +83,9 @@ paths:
     $ref: paths/event-subscriptions_{eventSubscriptionId}.yaml
   /event-subscriptions/{eventSubscriptionId}/event-notifications:
     $ref: paths/event-subscriptions_{eventSubscriptionId}_event-notifications.yaml
+components:
+  schemas: {}
+  parameters: {}
+  securitySchemes: {}
+  responses: {}
+  headers: {}

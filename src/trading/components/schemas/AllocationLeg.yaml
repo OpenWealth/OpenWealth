@@ -1,5 +1,7 @@
 type: object
-description: Extended details regarding the allocations including validity of the allocation and billing details.
+description: |
+  Schema of an allocation leg.
+  It describes how much of the associated order leg is allocated to a given client/account.
 required:
   - orderLegIndex
   - creditAccountId
@@ -52,6 +54,7 @@ properties:
     readOnly: true
   executionAllocationList:
     type: array
+    description: List of allocated executions associated to the allocation leg.
     items:
       $ref: ExecutionAllocation.yaml
     readOnly: true

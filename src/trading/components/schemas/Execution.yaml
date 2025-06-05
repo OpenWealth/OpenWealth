@@ -1,5 +1,5 @@
 type: object
-description: Entity describing a market execution
+description: Schema of a market execution entity.
 required:
   - id
   - orderId

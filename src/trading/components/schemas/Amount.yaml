@@ -1,6 +1,6 @@
 title: Amount
 type: object
-description: Amount entity.
+description: Schema of an amount entity.
 required:
   - value
   - currency

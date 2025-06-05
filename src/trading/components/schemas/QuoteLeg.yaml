@@ -1,4 +1,5 @@
 type: object
+description: Schema of a quote leg object.
 required:
   - side
   - quantity

@@ -4,9 +4,9 @@ get:
   summary: Returns a list of executions by order
   description: |
     Returns all executions by order ID
-  operationId: getOrderEcecutions
+  operationId: getOrderExecutions
   parameters:
-    - $ref: ../components/parameters/orderId.yaml
+    - $ref: ../components/parameters/path_orderId.yaml
     - $ref: ../../generics/components/parameters/cursor.yaml
     - $ref: ../../generics/components/parameters/limit.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml

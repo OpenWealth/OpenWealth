@@ -1,13 +1,15 @@
 type: object
+description: Schema of an accrued interest object.
 properties:
   numberDaysAccrued:
-    type: number
-    format: integer
+    type: integer
     example: 28
     description: Specifies the number of days used for calculating the accrued interest amount.
   amount:
     type: number
-    description: TBD.
+    description: |
+      The monetary amount of interest that has been earned or accumulated on an account, investment,
+      or financial instrument up to a specific point in time, but has not yet been paid or received.
   currency:
     $ref: ../../../generics/components/schemas/Currency.yaml
   foreignExchangeRate:

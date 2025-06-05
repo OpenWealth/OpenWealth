@@ -1,4 +1,5 @@
 type: object
+description: Schema of the additional trader instruction object.
 properties:
   tradingStrategy:
     description: Name of the Strategy (i.e. volumeWeightedAveragePrice).

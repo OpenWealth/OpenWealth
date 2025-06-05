@@ -5,7 +5,7 @@ get:
   description: Get event subscription by id.
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
-  operationId: getEventSubscription
+  operationId: getEventSubscriptionById
   tags:
     - event-subscription
   responses:
@@ -49,7 +49,7 @@ put:
           $ref: ../components/schemas/EventSubscription.yaml
         example:
           eventTypes:
-            - order:restated
+            - order:statusUpdated
           callbackUrl: /ttpAPI/notifications/order-placement/
   responses:
     '204':

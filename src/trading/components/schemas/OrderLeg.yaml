@@ -1,5 +1,5 @@
 type: object
-description: Order object.
+description: Schema of an order leg.
 required:
   - index
   - side
