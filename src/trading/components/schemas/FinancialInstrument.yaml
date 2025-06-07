@@ -8,6 +8,7 @@ properties:
   name:
     description: Name of ordered instrument.
     type: string
+    example: Apple Inc.
   unitType:
     $ref: UnitType.yaml
   expiryDate:

@@ -13,7 +13,7 @@ get:
     - event-notification
   responses:
     '200':
-      description: aggregated event-notification list
+      description: Returns a list of eventNotifications by eventSubscription.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml

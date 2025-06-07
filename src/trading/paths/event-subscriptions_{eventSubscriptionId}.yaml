@@ -10,7 +10,7 @@ get:
     - event-subscription
   responses:
     '200':
-      description: EventSubscription
+      description: Returns an eventSubscription.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
@@ -36,7 +36,7 @@ get:
       $ref: ../../generics/components/responses/504.yaml
 put:
   summary: Update event subscription
-  description: Update event subscription.
+  description: Update an event subscription.
   operationId: updateEventSubscription
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
@@ -53,7 +53,7 @@ put:
           callbackUrl: /ttpAPI/notifications/order-placement/
   responses:
     '204':
-      description: Successfully updated (empty response)
+      description: Successfully updated (empty response).
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
@@ -75,7 +75,7 @@ put:
       $ref: ../../generics/components/responses/504.yaml
 delete:
   summary: Delete event subscription
-  description: Delete event subscription by id.
+  description: Delete eventSubscription by id.
   operationId: deleteEventSubscription
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
@@ -83,7 +83,7 @@ delete:
     - event-subscription
   responses:
     '204':
-      description: Successfully deleted
+      description: Successfully deleted (empty response).
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml

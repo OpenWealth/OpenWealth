@@ -31,7 +31,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - description: Your server url
+  - description: Your server url.
     url: https://www.openwealth.ch
 security: []
 tags:
@@ -64,7 +64,7 @@ paths:
         This endpoint returns a highlevel list of customers accessible for the
         logged in user. Paging is done based on the customer object,
         i.e. if limit is set to 1, then 1 customer will be returned per page.
-      operationId: getCustomers
+      operationId: listCustomers
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
@@ -105,7 +105,7 @@ paths:
         - customer
       summary: Returns a specific customer by id
       description: Returns a specific customer by id accessible for the requesting user.
-      operationId: getCustomerById
+      operationId: getCustomer
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -144,7 +144,7 @@ paths:
         Returns list of accounts the requestor has access to Paging is done based on
         the account object, i.e. if limit is set to 1,
         then 1 account object will be returned per page.
-      operationId: getAccounts
+      operationId: listAccounts
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
@@ -183,7 +183,7 @@ paths:
         - account
       summary: Returns a specific accounts by id
       description: Returns a specific account by id accessible for the requesting user.
-      operationId: getAccountById
+      operationId: getAccount
       parameters:
         - $ref: '#/components/parameters/path_accountId'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -261,7 +261,7 @@ paths:
         Returns all open orders to which the user of the API has access to. Paging
         is done based on the order object,
         i.e. if limit is set to 1, then 1 order will be returned per page.
-      operationId: getOrders
+      operationId: listOrders
       parameters:
         - $ref: '#/components/parameters/expand_order'
         - $ref: '#/components/parameters/cursor'
@@ -303,7 +303,7 @@ paths:
         - order
       summary: Returns a single order
       description: Returns a specific security order.
-      operationId: getOrderById
+      operationId: getOrder
       parameters:
         - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/expand_order'
@@ -340,7 +340,7 @@ paths:
         - order
       summary: Cancellation of a specific order
       description: Places the cancellation request for a specific order.
-      operationId: cancelOrderById
+      operationId: actionCancelOrder
       parameters:
         - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -377,7 +377,7 @@ paths:
       summary: Returns a list of executions by order
       description: |
         Returns all executions by order ID
-      operationId: getOrderExecutions
+      operationId: listOrderExecutions
       parameters:
         - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/cursor'
@@ -419,7 +419,7 @@ paths:
         - execution
       summary: Returns a single execution
       description: Returns a specific execution by order ID and execution ID.
-      operationId: getExecutionById
+      operationId: getOrderExecution
       parameters:
         - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/path_executionId'
@@ -459,7 +459,7 @@ paths:
         Returns list of order statuses for a given order. Paging is done based on
         the order status object, i.e. if limit is set to 1, then 1 order status
         object will be returned per page.
-      operationId: getOrderStatuses
+      operationId: listOrderStatuses
       parameters:
         - $ref: '#/components/parameters/path_orderId'
         - $ref: '#/components/parameters/cursor'
@@ -498,8 +498,8 @@ paths:
       tags:
         - quote
       summary: Request a quote
-      description: Request quote an FX or crypto product
-      operationId: requestQuote
+      description: Request quote for a security (i.e. stock, bond, fund etc), FX or crypto product.
+      operationId: createQuote
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       requestBody:
@@ -537,7 +537,7 @@ paths:
     get:
       summary: Get event subscriptions
       description: Get list of event subscriptions.
-      operationId: getEventSubscriptions
+      operationId: listEventSubscriptions
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
@@ -546,7 +546,7 @@ paths:
         - event-subscription
       responses:
         '200':
-          description: List of EventSubscriptions
+          description: Returns a list of EventSubscriptions.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -579,7 +579,7 @@ paths:
           $ref: '#/components/responses/504'
     post:
       summary: Create event subscription
-      description: Create event subscription
+      description: Create an event subscription.
       operationId: createEventSubscription
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -592,7 +592,7 @@ paths:
               $ref: '#/components/schemas/EventSubscription'
       responses:
         '201':
-          description: EventSubscription created
+          description: Returns created EventSubscription.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -600,13 +600,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventSubscription'
-          links:
-            GetSubscriptionById:
-              description: |
-                The `eventSubscriptionId` value returned in the response can be used as the `eventSubscriptionId` parameter in `GET /event-subscriptions/{eventSubscriptionId}`.
-              operationId: getEventSubscription
-              parameters:
-                eventSubscriptionId: $response.body#/id
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -633,12 +626,12 @@ paths:
       description: Get event subscription by id.
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
-      operationId: getEventSubscriptionById
+      operationId: getEventSubscription
       tags:
         - event-subscription
       responses:
         '200':
-          description: EventSubscription
+          description: Returns an eventSubscription.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -664,7 +657,7 @@ paths:
           $ref: '#/components/responses/504'
     put:
       summary: Update event subscription
-      description: Update event subscription.
+      description: Update an event subscription.
       operationId: updateEventSubscription
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -681,7 +674,7 @@ paths:
               callbackUrl: /ttpAPI/notifications/order-placement/
       responses:
         '204':
-          description: Successfully updated (empty response)
+          description: Successfully updated (empty response).
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -703,7 +696,7 @@ paths:
           $ref: '#/components/responses/504'
     delete:
       summary: Delete event subscription
-      description: Delete event subscription by id.
+      description: Delete eventSubscription by id.
       operationId: deleteEventSubscription
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -711,7 +704,7 @@ paths:
         - event-subscription
       responses:
         '204':
-          description: Successfully deleted
+          description: Successfully deleted (empty response).
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -740,14 +733,14 @@ paths:
     get:
       summary: Get event notifications list
       description: Get aggregated event-notification list.
-      operationId: getEventNotificationsByEventSubscriptionId
+      operationId: listEventSubscriptionEventNotifications
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       tags:
         - event-notification
       responses:
         '200':
-          description: aggregated event-notification list
+          description: Returns a list of eventNotifications by eventSubscription.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -957,7 +950,7 @@ components:
             - iso4217
             - otherProprietaryIdentification
     UnitType:
-      description: Unit type of the measure of the instrument (i.e. prcious metal).
+      description: Unit type of the measure of the instrument (i.e. precious metal).
       type: string
       enum:
         - g
@@ -977,7 +970,7 @@ components:
       example: CHF
     ExcerciseStyle:
       type: string
-      description: Specifies how the derivatice instrument can be exercised.
+      description: Specifies how the derivative instrument can be exercised.
       example: american
       enum:
         - american
@@ -1386,6 +1379,24 @@ components:
             - liquidityGrabber
             - darkOnly
             - custom
+        startTime:
+          description: |
+            UTC timestamp as entered by the client,
+            defines the time from when the electronic algorithm is allowed to run.
+          type: string
+          format: DateTime
+        stopTime:
+          description: |
+            UTC timestamp as entered by the client,
+            defines the time until when the electronic algorithm is allowed to run.
+          type: string
+          format: DateTime
+        exposureDuration:
+          description: |
+            Positive integer value which represents the time is seconds in which the electronic algorithm
+            is allowed to run before it is automatically cancelled (e.g. expired).
+          type: integer
+          example: 86400
         volumeCap:
           description: |
             Participation rate under which the electronic algorithm will try to always stay.
@@ -1549,7 +1560,7 @@ components:
                   - other
               propertyPath:
                 type: string
-                description: Path to affected property according to TBD
+                description: JSONPath to affected property.
     Order:
       type: object
       description: Schema of an order enity.
@@ -1869,106 +1880,6 @@ components:
           format: date-time
           description: Timestamp of the creation of the event notification.
           example: 2022-10-26T07:58:30.996+0100
-  parameters:
-    cursor:
-      in: query
-      name: cursor
-      required: false
-      schema:
-        type: string
-      description: An opaque string value used for pagination.
-    limit:
-      in: query
-      name: limit
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-      description: Maximum number of items to return.
-    x_correlation_id_in_header:
-      in: header
-      name: X-Correlation-ID
-      required: true
-      schema:
-        type: string
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-    path_customerId:
-      in: path
-      name: customerId
-      required: true
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 128
-        example: 123123-456
-        description: Unique and unambiguous identification used by the bank for the customer.
-      description: Customer ID Parameter.
-    path_accountId:
-      in: path
-      name: accountId
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-        description: The customer's account identification, this should NOT be an IBAN.
-      description: Account ID parameter.
-    expand_order:
-      in: query
-      name: expand_order
-      schema:
-        type: string
-        items:
-          type: string
-          enum:
-            - allocationList
-            - allocationList.executionAllocationList
-            - allocationList.allocationCancellationReasonList
-            - orderCancellationReasonList
-      description: |
-        Expand related resources. Comma-separated values, supporting:
-        - `allocationList`: Include allocationList details.
-        - `allocationList.executionAllocationList`: Include executionAllocationList details on the allocation.
-        - `allocationList.allocationCancellationReasonList`: Include allocationCancellationReasonList details on the allocation.
-        - `orderCancellationReasonList`: Include orderCancellationReasonList
-      style: form
-      explode: false
-    path_orderId:
-      in: path
-      name: orderId
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-      description: The order ID as given by the API provider.
-    path_executionId:
-      in: path
-      name: executionId
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-      description: The execution ID as given by the API provider.
-    path_eventSubscriptionId:
-      in: path
-      name: eventSubscriptionId
-      required: true
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 40
-      description: |
-        Unique identification as assigned by the API exposing party to uniquely
-        identify the callback URL resource.
-    from_event_date_time:
-      in: query
-      name: from_event_date_time
-      schema:
-        type: string
-        format: date-time
-      description: Date from which events are considered.
-      example: 2022-10-26T07:58:30.996+0100
-  securitySchemes: {}
   responses:
     '400':
       headers:
@@ -2123,6 +2034,103 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+  parameters:
+    cursor:
+      in: query
+      name: cursor
+      required: false
+      schema:
+        type: string
+      description: An opaque string value used for pagination.
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      description: Maximum number of items to return.
+    x_correlation_id_in_header:
+      in: header
+      name: X-Correlation-ID
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+    path_customerId:
+      in: path
+      name: customerId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: 123123-456
+        description: Unique and unambiguous identification used by the bank for the customer.
+      description: Customer ID Parameter.
+    path_accountId:
+      in: path
+      name: accountId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        description: The customer's account identification, this should NOT be an IBAN.
+      description: Account ID parameter.
+    expand_order:
+      in: query
+      name: expand_order
+      schema:
+        type: string
+        items:
+          type: string
+          enum:
+            - allocationList
+            - allocationList.executionAllocationList
+            - cancellationOrRejectionReasonList
+      description: |
+        Expand related resources. Comma-separated values, supporting:
+        - `allocationList`: Include allocationList details.
+        - `allocationList.executionAllocationList`: Include executionAllocationList details on the allocation.
+        - `cancellationOrRejectionReasonList`: Include cancellationOrRejectionReasonList
+      style: form
+      explode: false
+    path_orderId:
+      in: path
+      name: orderId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+      description: The order ID as given by the API provider.
+    path_executionId:
+      in: path
+      name: executionId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+      description: The execution ID as given by the API provider.
+    path_eventSubscriptionId:
+      in: path
+      name: eventSubscriptionId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 40
+      description: |
+        Unique identification as assigned by the API exposing party to uniquely
+        identify the callback URL resource.
+    from_event_date_time:
+      in: query
+      name: from_event_date_time
+      schema:
+        type: string
+        format: date-time
+      description: Date from which events are considered.
+      example: 2022-10-26T07:58:30.996+0100
   headers:
     X-Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
@@ -2149,3 +2157,4 @@ components:
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+  securitySchemes: {}

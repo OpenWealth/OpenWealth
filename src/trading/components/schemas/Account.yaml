@@ -35,6 +35,7 @@ properties:
     type: string
     description: |
       Reference currency of the account - currency for a cash account and reference currency for a safekeeping account.
+    example: CHF
   customerId:
     description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
     type: string

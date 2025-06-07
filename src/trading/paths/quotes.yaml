@@ -2,7 +2,7 @@ post:
   tags:
     - quote
   summary: Request a quote
-  description: Request quote an FX or crypto product
+  description: Request quote for a security (i.e. stock, bond, fund etc), FX or crypto product.
   operationId: createQuote
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml

@@ -10,7 +10,7 @@ get:
     - event-subscription
   responses:
     '200':
-      description: List of EventSubscriptions
+      description: Returns a list of EventSubscriptions.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
@@ -43,7 +43,7 @@ get:
       $ref: ../../generics/components/responses/504.yaml
 post:
   summary: Create event subscription
-  description: Create event subscription
+  description: Create an event subscription.
   operationId: createEventSubscription
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
@@ -56,7 +56,7 @@ post:
           $ref: ../components/schemas/EventSubscription.yaml
   responses:
     '201':
-      description: EventSubscription created
+      description: Returns created EventSubscription.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
@@ -64,15 +64,6 @@ post:
         application/json:
           schema:
             $ref: ../components/schemas/EventSubscription.yaml
-      links:
-        GetSubscriptionById:
-          description: >
-            The `eventSubscriptionId` value returned in the response can be used
-            as the `eventSubscriptionId` parameter in `GET
-            /event-subscriptions/{eventSubscriptionId}`.
-          operationId: getEventSubscription
-          parameters:
-            eventSubscriptionId: $response.body#/id
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

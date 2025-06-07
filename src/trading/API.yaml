@@ -31,7 +31,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - description: Your server url
+  - description: Your server url.
     url: https://www.openwealth.ch
 security: []
 tags:
@@ -85,7 +85,7 @@ paths:
     $ref: paths/event-subscriptions_{eventSubscriptionId}_event-notifications.yaml
 components:
   schemas: {}
-  parameters: {}
-  securitySchemes: {}
   responses: {}
+  parameters: {}
   headers: {}
+  securitySchemes: {}
