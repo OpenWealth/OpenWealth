@@ -3,7 +3,7 @@ get:
     - execution
   summary: Returns a single execution
   description: Returns a specific execution by order ID and execution ID.
-  operationId: getExecutionById
+  operationId: getOrderExecution
   parameters:
     - $ref: ../components/parameters/path_orderId.yaml
     - $ref: ../components/parameters/path_executionId.yaml

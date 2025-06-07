@@ -5,7 +5,7 @@ get:
   description: Get event subscription by id.
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
-  operationId: getEventSubscriptionById
+  operationId: getEventSubscription
   tags:
     - event-subscription
   responses:

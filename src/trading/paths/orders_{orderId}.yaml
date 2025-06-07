@@ -3,7 +3,7 @@ get:
     - order
   summary: Returns a single order
   description: Returns a specific security order.
-  operationId: getOrderById
+  operationId: getOrder
   parameters:
     - $ref: ../components/parameters/path_orderId.yaml
     - $ref: ../components/parameters/expand_order.yaml
@@ -18,9 +18,6 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Order.yaml
-          # examples:
-          #   Order1:
-          #     externalValue: ../components/examples/order1.json
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

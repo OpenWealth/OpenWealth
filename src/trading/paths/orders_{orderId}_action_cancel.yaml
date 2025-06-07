@@ -3,7 +3,7 @@ post:
     - order
   summary: Cancellation of a specific order
   description: Places the cancellation request for a specific order.
-  operationId: cancelOrderById
+  operationId: actionCancelOrder
   parameters:
     - $ref: ../components/parameters/path_orderId.yaml
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml

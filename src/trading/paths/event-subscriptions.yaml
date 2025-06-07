@@ -1,7 +1,7 @@
 get:
   summary: Get event subscriptions
   description: Get list of event subscriptions.
-  operationId: getEventSubscriptions
+  operationId: listEventSubscriptions
   parameters:
     - $ref: ../../generics/components/parameters/cursor.yaml
     - $ref: ../../generics/components/parameters/limit.yaml

@@ -3,7 +3,7 @@ post:
     - quote
   summary: Request a quote
   description: Request quote an FX or crypto product
-  operationId: requestQuote
+  operationId: createQuote
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
   requestBody:
