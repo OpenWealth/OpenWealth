@@ -5,7 +5,7 @@ parameters:
   - $ref: ../../generics/components/parameters/limit.yaml
 get:
   summary: Get event notifications list
-  description: Get aggregated event-notification list.
+  description: Get aggregated event notification list by event subscription.
   operationId: listEventSubscriptionEventNotifications
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
@@ -13,7 +13,7 @@ get:
     - event-notification
   responses:
     '200':
-      description: Returns a list of eventNotifications by eventSubscription.
+      description: Returns a list of event notifications by eventSubscription.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml

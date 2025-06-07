@@ -10,7 +10,7 @@ get:
     - event-subscription
   responses:
     '200':
-      description: Returns an eventSubscription.
+      description: Returns an event subscription.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
@@ -75,7 +75,7 @@ put:
       $ref: ../../generics/components/responses/504.yaml
 delete:
   summary: Delete event subscription
-  description: Delete eventSubscription by id.
+  description: Delete event subscription by id.
   operationId: deleteEventSubscription
   parameters:
     - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml

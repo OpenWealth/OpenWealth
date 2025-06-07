@@ -10,7 +10,7 @@ get:
     - event-subscription
   responses:
     '200':
-      description: Returns a list of EventSubscriptions.
+      description: Returns a list of event subscriptions.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
@@ -56,7 +56,7 @@ post:
           $ref: ../components/schemas/EventSubscription.yaml
   responses:
     '201':
-      description: Returns created EventSubscription.
+      description: Returns created event subscription.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml

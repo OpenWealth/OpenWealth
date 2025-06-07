@@ -48,7 +48,7 @@ tags:
   - name: order-status
     description: Order status operations.
   - name: event-subscription
-    description: Event notification subscription operations.
+    description: Event subscription operations.
   - name: event-notification
     description: Event notification operations.
 externalDocs:
@@ -334,7 +334,7 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-  /orders/{orderId}/action/cancel:
+  /orders/{orderId}/actions/cancel:
     post:
       tags:
         - order
@@ -546,7 +546,7 @@ paths:
         - event-subscription
       responses:
         '200':
-          description: Returns a list of EventSubscriptions.
+          description: Returns a list of event subscriptions.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -592,7 +592,7 @@ paths:
               $ref: '#/components/schemas/EventSubscription'
       responses:
         '201':
-          description: Returns created EventSubscription.
+          description: Returns created event subscription.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -631,7 +631,7 @@ paths:
         - event-subscription
       responses:
         '200':
-          description: Returns an eventSubscription.
+          description: Returns an event subscription.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -696,7 +696,7 @@ paths:
           $ref: '#/components/responses/504'
     delete:
       summary: Delete event subscription
-      description: Delete eventSubscription by id.
+      description: Delete event subscription by id.
       operationId: deleteEventSubscription
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -732,7 +732,7 @@ paths:
       - $ref: '#/components/parameters/limit'
     get:
       summary: Get event notifications list
-      description: Get aggregated event-notification list.
+      description: Get aggregated event notification list by event subscription.
       operationId: listEventSubscriptionEventNotifications
       parameters:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
@@ -740,7 +740,7 @@ paths:
         - event-notification
       responses:
         '200':
-          description: Returns a list of eventNotifications by eventSubscription.
+          description: Returns a list of event notifications by eventSubscription.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -872,6 +872,7 @@ components:
           type: string
           description: |
             Reference currency of the account - currency for a cash account and reference currency for a safekeeping account.
+          example: CHF
         customerId:
           description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
           type: string
@@ -997,6 +998,7 @@ components:
         name:
           description: Name of ordered instrument.
           type: string
+          example: Apple Inc.
         unitType:
           $ref: '#/components/schemas/UnitType'
         expiryDate:

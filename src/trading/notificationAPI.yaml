@@ -30,14 +30,14 @@ paths:
         - event-notification
       summary: Push notification towards TPP
       description: Push notficiations for subscribed event notifications.
-      operationId: postEventNotification
+      operationId: callbackEventNotification
       parameters:
-        - $ref: '#/components/parameters/correlation_in_header'
+        - $ref: ../generics/components/parameters/x_correlation_id_in_header.yaml
       requestBody:
         content:
           application/json:
             schema:
-              $ref: './components/schemas/notificationOrderPlacement.yaml'
+              $ref: './components/schemas/EventNotification.yaml'
 
       responses:
         '202':
@@ -50,13 +50,9 @@ paths:
           $ref: '../generics/V2/components/responses/400.yaml'
         '500':
           $ref: '../generics/V2/components/responses/500.yaml'
-
 components:
-  parameters:
-    correlation_in_header:
-      in: header
-      name: X-Correlation-ID
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-      required: true
-      schema:
-        type: string
+  schemas: {}
+  responses: {}
+  parameters: {}
+  headers: {}
+  securitySchemes: {}

@@ -48,7 +48,7 @@ tags:
   - name: order-status
     description: Order status operations.
   - name: event-subscription
-    description: Event notification subscription operations.
+    description: Event subscription operations.
   - name: event-notification
     description: Event notification operations.
 externalDocs:
@@ -67,8 +67,8 @@ paths:
     $ref: paths/orders.yaml
   /orders/{orderId}:
     $ref: paths/orders_{orderId}.yaml
-  /orders/{orderId}/action/cancel:
-    $ref: paths/orders_{orderId}_action_cancel.yaml
+  /orders/{orderId}/actions/cancel:
+    $ref: paths/orders_{orderId}_actions_cancel.yaml
   /orders/{orderId}/executions:
     $ref: paths/orders_{orderId}_executions.yaml
   /orders/{orderId}/executions/{executionId}:
