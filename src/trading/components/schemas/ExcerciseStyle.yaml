@@ -1,5 +1,5 @@
 type: string
-description: Specifies how the derivatice instrument can be exercised.
+description: Specifies how the derivative instrument can be exercised.
 example: american
 enum:
   - american

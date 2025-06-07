@@ -7,13 +7,11 @@ schema:
     enum:
       - allocationList
       - allocationList.executionAllocationList
-      - allocationList.allocationCancellationReasonList
-      - orderCancellationReasonList
+      - cancellationOrRejectionReasonList
 description: |
   Expand related resources. Comma-separated values, supporting:
   - `allocationList`: Include allocationList details.
   - `allocationList.executionAllocationList`: Include executionAllocationList details on the allocation.
-  - `allocationList.allocationCancellationReasonList`: Include allocationCancellationReasonList details on the allocation.
-  - `orderCancellationReasonList`: Include orderCancellationReasonList
+  - `cancellationOrRejectionReasonList`: Include cancellationOrRejectionReasonList
 style: form
 explode: false

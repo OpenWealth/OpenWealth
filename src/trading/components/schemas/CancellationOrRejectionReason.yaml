@@ -66,4 +66,4 @@ properties:
             - other
         propertyPath:
           type: string
-          description: Path to affected property according to TBD
+          description: JSONPath to affected property.

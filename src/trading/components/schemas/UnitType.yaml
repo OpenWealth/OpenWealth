@@ -1,4 +1,4 @@
-description: Unit type of the measure of the instrument (i.e. prcious metal).
+description: Unit type of the measure of the instrument (i.e. precious metal).
 type: string
 enum:
   - g
