@@ -13,6 +13,7 @@ properties:
       The total quantity (e.g. number of shares) of the quote leg. 
       The unit type of this field is defined by the quantityType property.
     type: number
+    example: 1000
   quantityType:
     $ref: QuantityType.yaml
   baseInstrument:
@@ -29,6 +30,7 @@ properties:
       - 'actual': Price offer as units of quoteInstrument per unit baseInstrument.
       - 'percentage': Price offer as percentage of nominal value of the baseInstrument.
     type: number
+    example: 157.50
     readOnly: true
   priceType:
     type: string
@@ -38,4 +40,5 @@ properties:
     enum:
       - actual
       - percentage
+    example: actual
     readOnly: true

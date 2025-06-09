@@ -787,7 +787,7 @@ components:
           description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
           maxLength: 128
           readOnly: true
-          example: MTIzNDUtNg
+          example: 4b765c02-2e5f-4c95-8b3d-5c7b26477b7a
         number:
           type: string
           description: Contains the customers custody proprietary customer number if available.
@@ -911,12 +911,21 @@ components:
     OrderSide:
       type: string
       description: Side taken by a party on an order.
-      example: buy
       enum:
         - buy
         - sell
         - subscribe
         - redeem
+      example: buy
+    QuantityType:
+      type: string
+      description: Specifies the type of a quantity.
+      enum:
+        - unit
+        - faceAmount
+        - amortisedValue
+        - digitalTokenUnit
+      example: unit
     FinancialInstrumentIdentification:
       type: object
       description: Schema of an financial istrument identification object.
@@ -957,6 +966,7 @@ components:
         - g
         - kg
         - oz
+      example: kg
     Date:
       title: Date
       type: string
@@ -983,10 +993,10 @@ components:
       description: |
         Specifies whether it is a Call option (right to purchase a specific underlying asset)
         or a Put option (right to sell a specific underlying asset).
-      example: call
       enum:
         - call
         - put
+      example: call
     FinancialInstrument:
       type: object
       description: Schema of a financial instrument entity.
@@ -1007,9 +1017,8 @@ components:
             date at which it becomes due and has to be repaid.
           $ref: '#/components/schemas/Date'
         contractSize:
-          title: ContractSize
-          type: number
           description: Contract size of the instrument.
+          type: number
           example: 100
         exercisePrice:
           description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
@@ -1046,6 +1055,7 @@ components:
         - baseInstrument
         - quoteInstrument
       default: baseInstrument
+      example: baseInstrument
     PositionEffect:
       type: string
       description: |
@@ -1055,6 +1065,7 @@ components:
         - close
         - rolled
         - fifo
+      example: open
     OrderLeg:
       type: object
       description: Schema of an order leg.
@@ -1070,6 +1081,7 @@ components:
         index:
           description: Integer uniquely identifying the order leg in the list of legs (array index).
           type: integer
+          example: 0
         side:
           $ref: '#/components/schemas/OrderSide'
         quantity:
@@ -1079,13 +1091,7 @@ components:
           type: number
           example: 12000
         quantityType:
-          type: string
-          description: Specifies the type of the amount.
-          enum:
-            - unit
-            - faceAmount
-            - amortisedValue
-            - digitalTokenUnit
+          $ref: '#/components/schemas/QuantityType'
         baseInstrument:
           description: Instrument subject to sale or purchase.
           $ref: '#/components/schemas/FinancialInstrument'
@@ -1104,7 +1110,7 @@ components:
             - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
             - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
             Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
-          example: percentage
+          example: actual
           enum:
             - actual
             - percentage
@@ -1114,12 +1120,14 @@ components:
             Required for executionType 'limit' or 'stopLimit'.
             Type of price (actual or percentage) is defined py the priceType property.
           type: number
+          example: 167.3
         stopPrice:
           description: |
             Price per unit of baseInstrument (e.g. per share) in number of quote instrument.
             Required for executionType 'stop' or 'stopLimit'.
             Type of price (actual or percentage) is defined py the priceType property.
           type: number
+          example: 167.3
         settlementDate:
           $ref: '#/components/schemas/Date'
         executedQuantity:
@@ -1127,33 +1135,26 @@ components:
             Quantity of the baseInstrument that has been executed.
             The unit type of this field is defined by the quantityType property.
           type: number
+          example: 500
           readOnly: true
         cancelledQuantity:
           description: |
             Quantity of the baseInstrument that was cancelled.
             The unit type of this field is defined by the quantityType property.
           type: number
+          example: 100
           readOnly: true
-    QuantityType:
-      type: string
-      description: Specifies the type of a quantity.
-      enum:
-        - unit
-        - faceAmount
-        - amortisedValue
-        - digitalTokenUnit
     PriceType:
       type: string
       description: |
         - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
         - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
         Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
-      example: percentage
       enum:
         - actual
         - percentage
+      example: percentage
     ForeignExchangeRate:
-      title: ForeignExchangeRate
       type: object
       description: |
         Indicates the rate of a fx transaction for one source currency unit to the target currency.
@@ -1200,6 +1201,7 @@ components:
           description: |
             The monetary amount of interest that has been earned or accumulated on an account, investment,
             or financial instrument up to a specific point in time, but has not yet been paid or received.
+          example: 105.3
         currency:
           $ref: '#/components/schemas/Currency'
         foreignExchangeRate:
@@ -1255,24 +1257,27 @@ components:
             Executed quantity allocated to the given client.
             The unit type of this field is defined by the quantityType property of the root order.
           type: number
+          example: 500
         price:
           description: The price for the executed and allocated quantity.
           type: number
+          example: 157.5
         priceType:
           $ref: '#/components/schemas/PriceType'
         executionIds:
           description: List of market executions, that contributed to the allocated quantity.
           items:
             type: string
-            maxLength: 128
             description: Unambiguous identifier for the execution.
+            maxLength: 128
+            example: 2f66d2c4-9575-4e16-a9ea-7eec3c7e382a
         billingDetails:
           $ref: '#/components/schemas/BillingDetails'
         transactionId:
           type: string
-          maxLength: 128
-          example: OTg3Ni01NDMyMQ
           description: Indicates the transaction identification for an allocated execution.
+          maxLength: 128
+          example: e3d556d9-3c88-4807-a1a4-6bc3b31e6c6b
         bookingDate:
           description: Indicates the booking date for an allocated execution of the order.
           $ref: '#/components/schemas/Date'
@@ -1291,17 +1296,21 @@ components:
         orderLegIndex:
           description: Integer referring the associated order leg in the order.
           type: integer
+          example: 0
         creditAccountId:
           description: Id of the account that is credited when executing the trade.
           type: string
+          example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
         debitAccountId:
           description: Id of the account that is debited when executing the trade.
           type: string
+          example: 8c17f3c9-4c9e-4d20-9d58-1a0389c3c9e7
         quantity:
           description: |
             The requested quantity of the baseInstrument to be allocated to specific account.
             The unit type of this field is defined by the quantityType property.
           type: number
+          example: 1000
         quantityType:
           $ref: '#/components/schemas/QuantityType'
         executedQuantity:
@@ -1309,18 +1318,21 @@ components:
             Quantity of the baseInstrument that has been executed and allocated to specific account.
             The unit type of this field is defined by the quantityType property.
           type: number
+          example: 500
           readOnly: true
         cancelledQuantity:
           description: |
             Quantity of the baseInstrument that was cancelled for the allocation.
             The unit type of this field is defined by the quantityType property.
           type: number
+          example: 100
           readOnly: true
         averagePrice:
           description: |
             The average price for quantity that was traded.
             Type of price (actual or percentage) is defined py the priceType property.
           type: number
+          example: 157.25
           readOnly: true
         averagePriceType:
           type: string
@@ -1330,6 +1342,7 @@ components:
           enum:
             - actual
             - percentage
+          example: actual
           readOnly: true
         executionAllocationList:
           type: array
@@ -1364,6 +1377,7 @@ components:
         cancelled:
           type: boolean
           description: True if specific allocation has been cancelled in a best effort execution order.
+          example: false
           readOnly: true
     TraderInstruction:
       type: object
@@ -1381,18 +1395,17 @@ components:
             - liquidityGrabber
             - darkOnly
             - custom
+          example: volumeWeightedAveragePrice
         startTime:
           description: |
             UTC timestamp as entered by the client,
             defines the time from when the electronic algorithm is allowed to run.
-          type: string
-          format: DateTime
+          $ref: '#/components/schemas/DateTime'
         stopTime:
           description: |
             UTC timestamp as entered by the client,
             defines the time until when the electronic algorithm is allowed to run.
-          type: string
-          format: DateTime
+          $ref: '#/components/schemas/DateTime'
         exposureDuration:
           description: |
             Positive integer value which represents the time is seconds in which the electronic algorithm
@@ -1405,31 +1418,37 @@ components:
             The participation rate is calculated by the electronic algorithm on the periods
             where it is allowed to work (respecting start/stop time).
           type: number
+          example: 90
         targetRate:
           description: |
             Global participation rate in % that the electronic algorithm will try to achieve.
             The public size is calculated on the periods where the electronic algorithm
             is allowed to work (respecting StartTime/StopTime).
           type: number
+          example: 90
         participateInOpening:
           description: |
             Indicates, that the electronic algorithm can participate in the opening auction.
           type: boolean
+          example: true
         participateInClosing:
           description: |
             Indicates, that the electronic algorithm can participate in the closing auction.
           type: boolean
+          example: true
         wouldPrice:
           description: |
             Indicates the price at which the client is willing to fill the entire order,
             or the percentage provided in WouldPercentage.
             WouldPrice is always associated with the values provided with 'wouldPercentage' and 'wouldStyle'.
           type: number
+          example: 95
         wouldPercentage:
           description: |
             'wouldPercentage' can only be selected if parameter 'wouldPrice' contains a valid value.
             Parameter is always associated with 'wouldPrice' and 'wouldStyle'.
           type: number
+          example: 90
         wouldStyle:
           description: |
             WouldStyle can only be selected if parameter WouldPrice contains a valid value.
@@ -1439,6 +1458,7 @@ components:
             - allVenues
             - litOnly
             - darkOnly
+          example: allVenues
         urgency:
           description: |
             Indicates the degree of urgency for execution as defined by the client.
@@ -1449,13 +1469,16 @@ components:
             - neutral
             - aggressive
             - superAggressive
+          example: neutral
         minQuantity:
           description: |
             Sets the minimum fill size in dark venues client may want.
           type: number
+          example: 500
         primaryOnly:
           description: Indicates that the order should be solely traded in primary market.
           type: boolean
+          example: true
         additionalInstructions:
           type: string
           maxLength: 512
@@ -1560,9 +1583,11 @@ components:
                   - notFound
                   - notSupported
                   - other
+                example: invalid
               propertyPath:
                 type: string
                 description: JSONPath to affected property.
+                example: $.timeInForce
     Order:
       type: object
       description: Schema of an order enity.
@@ -1573,33 +1598,32 @@ components:
         - legList
       properties:
         id:
-          type: string
-          maxLength: 128
           description: |
             Unambiguous identifier for the bulk order,
             as assigned by the confirming party (i.e. Custodian).
+          type: string
+          maxLength: 128
           example: e6751a48-0819-4482-98a4-760453ba770d
           readOnly: true
         clientReference:
-          type: string
-          maxLength: 128
-          example: 123-123123
           description: |
             Reference of the order (unique identification),
             as assigned by the instructing party (i.e. TPP).
-        executionType:
           type: string
+          maxLength: 128
+          example: 123-123123
+        executionType:
           description: Type of the execution of the order.
-          example: limit
+          type: string
           enum:
             - market
             - limit
             - stop
             - stopLimit
+          example: limit
         timeInForce:
-          type: string
           description: Specifies how long the order remains in effect.
-          example: day
+          type: string
           enum:
             - day
             - goodTillCancel
@@ -1614,10 +1638,12 @@ components:
             - goodForTime
             - goodForAuction
             - goodForMonth
+          example: day
         groupReference:
+          description: Optional reference to link orders, i.e. strategies.
           type: string
           maxLength: 128
-          description: Optional reference to link orders, i.e. strategies.
+          example: 3hYgM8QqzX7WLKDU
           readOnly: true
         bestEffortExecution:
           description: |
@@ -1630,6 +1656,7 @@ components:
             then the order is rejected by the broker if at least one client fails pre-trade checks.
           type: boolean
           default: false
+          example: false
         requestedPlaceOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
         expiryDateTime:
@@ -1673,6 +1700,7 @@ components:
               - In some cases, the order placer may also be the decision maker if no third-party authorization exists.
           type: string
           maxLength: 128
+          example: Max Muster
         decisionMaker:
           description: |
             The party legally authorized to make investment decisions on behalf of a client.
@@ -1682,6 +1710,7 @@ components:
             - In cases like funds, the fund manager is generally considered the decision maker.
           type: string
           maxLength: 128
+          example: Nina Meier
         traderInstruction:
           $ref: '#/components/schemas/TraderInstruction'
         orderDateTime:
@@ -1710,17 +1739,18 @@ components:
       properties:
         id:
           type: string
-          maxLength: 128
           description: Unambiguous identifier for the execution.
+          maxLength: 128
           example: b7469157-02ea-4938-a485-bc3d9ff43f4d
         orderId:
           type: string
-          maxLength: 128
           description: Unambiguous identifier for the order, as assigned by the confirming party.
+          maxLength: 128
           example: e6751a48-0819-4482-98a4-760453ba770d
         orderLegIndex:
           description: Integer referring the associated order leg in the order.
           type: integer
+          example: 0
         reference:
           type: string
           description: |
@@ -1729,6 +1759,7 @@ components:
         quantity:
           description: Total quantity (e.g. number of shares) executed.
           type: number
+          example: 1000
         quantityType:
           $ref: '#/components/schemas/QuantityType'
         executionDateTime:
@@ -1737,6 +1768,7 @@ components:
         price:
           description: The price for quantity that has traded.
           type: number
+          example: 157.5
         priceType:
           $ref: '#/components/schemas/PriceType'
         placeOfTrade:
@@ -1757,6 +1789,7 @@ components:
             The total quantity (e.g. number of shares) of the quote leg. 
             The unit type of this field is defined by the quantityType property.
           type: number
+          example: 1000
         quantityType:
           $ref: '#/components/schemas/QuantityType'
         baseInstrument:
@@ -1773,6 +1806,7 @@ components:
             - 'actual': Price offer as units of quoteInstrument per unit baseInstrument.
             - 'percentage': Price offer as percentage of nominal value of the baseInstrument.
           type: number
+          example: 157.5
           readOnly: true
         priceType:
           type: string
@@ -1782,6 +1816,7 @@ components:
           enum:
             - actual
             - percentage
+          example: actual
           readOnly: true
     Quote:
       type: object
@@ -1804,6 +1839,7 @@ components:
           enum:
             - indicative
             - tradable
+          example: tradable
         expiryDateTime:
           description: DateTime when quote expires.
           $ref: '#/components/schemas/DateTime'

@@ -6,3 +6,4 @@ enum:
   - baseInstrument
   - quoteInstrument
 default: baseInstrument
+example: baseInstrument

@@ -18,6 +18,7 @@ properties:
     enum:
       - indicative
       - tradable
+    example: tradable
   expiryDateTime:
     description: DateTime when quote expires.
     $ref: ../../../generics/components/schemas/DateTime.yaml

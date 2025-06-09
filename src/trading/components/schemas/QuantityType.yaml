@@ -5,3 +5,4 @@ enum:
   - faceAmount
   - amortisedValue
   - digitalTokenUnit
+example: unit

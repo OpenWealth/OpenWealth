@@ -9,7 +9,7 @@ properties:
     description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
     maxLength: 128
     readOnly: true
-    example: MTIzNDUtNg
+    example: 4b765c02-2e5f-4c95-8b3d-5c7b26477b7a
   number:
     type: string
     description: Contains the customers custody proprietary customer number if available.

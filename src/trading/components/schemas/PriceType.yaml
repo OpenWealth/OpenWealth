@@ -3,7 +3,7 @@ description: |
   - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
   - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
   Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
-example: percentage
 enum:
   - actual
   - percentage
+example: percentage

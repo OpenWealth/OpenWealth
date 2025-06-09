@@ -64,6 +64,8 @@ properties:
             - notFound
             - notSupported
             - other
+          example: invalid
         propertyPath:
           type: string
           description: JSONPath to affected property.
+          example: $.timeInForce

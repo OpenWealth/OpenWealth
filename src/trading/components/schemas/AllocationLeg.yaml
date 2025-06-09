@@ -12,17 +12,21 @@ properties:
   orderLegIndex:
     description: Integer referring the associated order leg in the order.
     type: integer
+    example: 0
   creditAccountId:
     description: Id of the account that is credited when executing the trade.
     type: string
+    example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
   debitAccountId:
     description: Id of the account that is debited when executing the trade.
     type: string
+    example: 8c17f3c9-4c9e-4d20-9d58-1a0389c3c9e7
   quantity:
     description: |
       The requested quantity of the baseInstrument to be allocated to specific account.
       The unit type of this field is defined by the quantityType property.
     type: number
+    example: 1000
   quantityType:
     $ref: QuantityType.yaml
   executedQuantity:
@@ -30,18 +34,21 @@ properties:
       Quantity of the baseInstrument that has been executed and allocated to specific account.
       The unit type of this field is defined by the quantityType property.
     type: number
+    example: 500
     readOnly: true
   cancelledQuantity:
     description: |
       Quantity of the baseInstrument that was cancelled for the allocation.
       The unit type of this field is defined by the quantityType property.
     type: number
+    example: 100
     readOnly: true
   averagePrice:
     description: |
       The average price for quantity that was traded.
       Type of price (actual or percentage) is defined py the priceType property.
     type: number
+    example: 157.25
     readOnly: true
   averagePriceType:
     type: string
@@ -51,6 +58,7 @@ properties:
     enum:
       - actual
       - percentage
+    example: actual
     readOnly: true
   executionAllocationList:
     type: array

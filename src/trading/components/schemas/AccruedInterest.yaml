@@ -10,6 +10,7 @@ properties:
     description: |
       The monetary amount of interest that has been earned or accumulated on an account, investment,
       or financial instrument up to a specific point in time, but has not yet been paid or received.
+    example: 105.30
   currency:
     $ref: ../../../generics/components/schemas/Currency.yaml
   foreignExchangeRate:

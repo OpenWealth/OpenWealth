@@ -1,8 +1,8 @@
 type: string
 description: Side taken by a party on an order.
-example: buy
 enum:
   - buy
   - sell
   - subscribe
   - redeem
+example: buy

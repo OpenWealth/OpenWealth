@@ -24,4 +24,5 @@ properties:
   cancelled:
     type: boolean
     description: True if specific allocation has been cancelled in a best effort execution order.
+    example: false
     readOnly: true

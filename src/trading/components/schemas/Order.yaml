@@ -7,33 +7,32 @@ required:
   - legList
 properties:
   id:
-    type: string
-    maxLength: 128
     description: |
       Unambiguous identifier for the bulk order,
       as assigned by the confirming party (i.e. Custodian).
+    type: string
+    maxLength: 128
     example: e6751a48-0819-4482-98a4-760453ba770d
     readOnly: true
   clientReference:
-    type: string
-    maxLength: 128
-    example: 123-123123
     description: |
       Reference of the order (unique identification),
       as assigned by the instructing party (i.e. TPP).
-  executionType:
     type: string
+    maxLength: 128
+    example: 123-123123
+  executionType:
     description: Type of the execution of the order.
-    example: limit
+    type: string
     enum:
       - market
       - limit
       - stop
       - stopLimit
+    example: limit
   timeInForce:
-    type: string
     description: Specifies how long the order remains in effect.
-    example: day
+    type: string
     enum:
       - day
       - goodTillCancel
@@ -48,10 +47,12 @@ properties:
       - goodForTime
       - goodForAuction
       - goodForMonth
+    example: day
   groupReference:
+    description: Optional reference to link orders, i.e. strategies.
     type: string
     maxLength: 128
-    description: Optional reference to link orders, i.e. strategies.
+    example: 3hYgM8QqzX7WLKDU
     readOnly: true
   bestEffortExecution:
     description: |
@@ -64,6 +65,7 @@ properties:
       then the order is rejected by the broker if at least one client fails pre-trade checks.
     type: boolean
     default: false
+    example: false
   requestedPlaceOfTrade:
     $ref: PlaceOfTrade.yaml
   expiryDateTime:
@@ -107,6 +109,7 @@ properties:
         - In some cases, the order placer may also be the decision maker if no third-party authorization exists.
     type: string
     maxLength: 128
+    example: Max Muster
   decisionMaker:
     description: |
       The party legally authorized to make investment decisions on behalf of a client.
@@ -116,6 +119,7 @@ properties:
       - In cases like funds, the fund manager is generally considered the decision maker.
     type: string
     maxLength: 128
+    example: Nina Meier
   traderInstruction:
     $ref: TraderInstruction.yaml
   orderDateTime:

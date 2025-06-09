@@ -17,9 +17,8 @@ properties:
       date at which it becomes due and has to be repaid.
     $ref: ../../../generics/components/schemas/Date.yaml
   contractSize:
-    title: ContractSize
-    type: number
     description: Contract size of the instrument.
+    type: number
     example: 100
   exercisePrice:
     description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.

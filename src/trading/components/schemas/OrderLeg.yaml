@@ -12,6 +12,7 @@ properties:
   index:
     description: Integer uniquely identifying the order leg in the list of legs (array index).
     type: integer
+    example: 0
   side:
     $ref: OrderSide.yaml
   quantity:
@@ -21,13 +22,7 @@ properties:
     type: number
     example: 12000
   quantityType:
-    type: string
-    description: Specifies the type of the amount.
-    enum:
-      - unit
-      - faceAmount
-      - amortisedValue
-      - digitalTokenUnit
+    $ref: QuantityType.yaml
   baseInstrument:
     description: Instrument subject to sale or purchase.
     $ref: FinancialInstrument.yaml
@@ -46,7 +41,7 @@ properties:
       - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
       - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
       Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
-    example: percentage
+    example: actual
     enum:
       - actual
       - percentage
@@ -56,12 +51,14 @@ properties:
       Required for executionType 'limit' or 'stopLimit'.
       Type of price (actual or percentage) is defined py the priceType property.
     type: number
+    example: 167.30
   stopPrice:
     description: |
       Price per unit of baseInstrument (e.g. per share) in number of quote instrument.
       Required for executionType 'stop' or 'stopLimit'.
       Type of price (actual or percentage) is defined py the priceType property.
     type: number
+    example: 167.30
   settlementDate:
     $ref: ../../../generics/components/schemas/Date.yaml
   executedQuantity:
@@ -69,10 +66,12 @@ properties:
       Quantity of the baseInstrument that has been executed.
       The unit type of this field is defined by the quantityType property.
     type: number
+    example: 500
     readOnly: true
   cancelledQuantity:
     description: |
       Quantity of the baseInstrument that was cancelled.
       The unit type of this field is defined by the quantityType property.
     type: number
+    example: 100
     readOnly: true
