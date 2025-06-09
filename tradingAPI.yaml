@@ -892,7 +892,7 @@ components:
       properties:
         marketIdentificationCode:
           type: string
-          pattern: '^[A-Z0-9]{4}$'
+          pattern: ^[A-Z0-9]{4}$
           description: |
             Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
             Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
@@ -977,7 +977,7 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code.
-      pattern: '^[A-Z]{3}$'
+      pattern: ^[A-Z]{3}$
       example: CHF
     ExcerciseStyle:
       type: string
