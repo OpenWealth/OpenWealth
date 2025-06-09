@@ -2006,7 +2006,7 @@ components:
     '429':
       headers:
         X-Correlation-ID:
-          $ref: '#/components/headers/X-Correlation-ID'
+          $ref: '#/components/headers/X-Correlation-Id'
       description: |
         When an SU sends too many lookup or polling requests in a given amount of time the SP shall 
         respond with HTTP 429 (Too many requests). This response may contain a Retry-After header 
