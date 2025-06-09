@@ -16,7 +16,7 @@ get:
       description: Returns a list of event notifications by eventSubscription.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
         x-nextCursor:
           $ref: ../../generics/components/headers/X-Next-Cursor.yaml
       content:

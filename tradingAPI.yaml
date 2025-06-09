@@ -154,7 +154,7 @@ paths:
           description: Returns list of accounts the requestor has access to.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -192,7 +192,7 @@ paths:
           description: Returns a the specified account.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -232,7 +232,7 @@ paths:
           description: Order accepted for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -272,7 +272,7 @@ paths:
           description: Order list.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
             X-nextCursor:
               $ref: '#/components/headers/X-Next-Cursor'
           content:
@@ -313,7 +313,7 @@ paths:
           description: Receive a specific order with the corresponding allocations and status.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -349,7 +349,7 @@ paths:
           description: Order cancellation received for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -388,7 +388,7 @@ paths:
           description: Execution list.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
             X-nextCursor:
               $ref: '#/components/headers/X-Next-Cursor'
           content:
@@ -429,7 +429,7 @@ paths:
           description: Receive a specific order with the corresponding allocations and status.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -470,7 +470,7 @@ paths:
           description: Returns list of accounts the requestor has access to.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -512,7 +512,7 @@ paths:
           description: Returns quote for the given request.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -549,7 +549,7 @@ paths:
           description: Returns a list of event subscriptions.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
             x-nextCursor:
               $ref: '#/components/headers/X-Next-Cursor'
           content:
@@ -595,7 +595,7 @@ paths:
           description: Returns created event subscription.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -634,7 +634,7 @@ paths:
           description: Returns an event subscription.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
           content:
             application/json:
               schema:
@@ -677,7 +677,7 @@ paths:
           description: Successfully updated (empty response).
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -707,7 +707,7 @@ paths:
           description: Successfully deleted (empty response).
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -743,7 +743,7 @@ paths:
           description: Returns a list of event notifications by eventSubscription.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+              $ref: '#/components/headers/X-Correlation-Id'
             x-nextCursor:
               $ref: '#/components/headers/X-Next-Cursor'
           content:
@@ -2190,9 +2190,4 @@ components:
       schema:
         type: string
         example: en
-    X-Correlation-ID:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   securitySchemes: {}

@@ -12,7 +12,7 @@ get:
       description: Returns a the specified account.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
       content:
         application/json:
           schema:

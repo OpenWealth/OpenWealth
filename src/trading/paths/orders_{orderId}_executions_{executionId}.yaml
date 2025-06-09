@@ -13,7 +13,7 @@ get:
       description: Receive a specific order with the corresponding allocations and status.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
       content:
         application/json:
           schema:

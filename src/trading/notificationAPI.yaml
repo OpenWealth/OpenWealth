@@ -44,7 +44,7 @@ paths:
           description: Notification accepted.
           headers:
             X-Correlation-ID:
-              $ref: '../generics/V2/components/headers/X-Correlation-ID.yaml'
+              $ref: '../generics/V2/components/headers/X-Correlation-Id.yaml'
 
         '400':
           $ref: '../generics/V2/components/responses/400.yaml'

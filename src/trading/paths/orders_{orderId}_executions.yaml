@@ -15,7 +15,7 @@ get:
       description: Execution list.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
         X-nextCursor:
           $ref: ../../generics/components/headers/X-Next-Cursor.yaml
       content:

@@ -16,7 +16,7 @@ post:
       description: Returns quote for the given request.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
       content:
         application/json:
           schema:
