@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  version: 2.2.1
-  title: OpenWealth Order Placement Event Notification API - TPP Endpoint
-  description: API for Receiving Event Notification for OpenWealth APIs.
+  version: 3.0.0-draft
+  title: OpenWealth trading event notification API - TPP Endpoint
+  description: API for receiving event notification for OpenWealth APIs.
   contact:
     email: openwealth@synpulse.com
   license:
@@ -10,7 +10,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  - description: Your server url
+  - description: Your server url.
     url: https://www.openwealth.ch
 
 externalDocs:
@@ -30,7 +30,7 @@ paths:
         - event-notification
       summary: Push notification towards TPP
       description: Push notficiations for subscribed event notifications.
-      operationId: callbackEventNotification
+      operationId: pushEventNotification
       parameters:
         - $ref: ../generics/components/parameters/x_correlation_id_in_header.yaml
       requestBody:
@@ -44,12 +44,12 @@ paths:
           description: Notification accepted.
           headers:
             X-Correlation-ID:
-              $ref: '../generics/V2/components/headers/X-Correlation-Id.yaml'
+              $ref: '../generics/components/headers/X-Correlation-Id.yaml'
 
         '400':
-          $ref: '../generics/V2/components/responses/400.yaml'
+          $ref: '../generics/components/responses/400.yaml'
         '500':
-          $ref: '../generics/V2/components/responses/500.yaml'
+          $ref: '../generics/components/responses/500.yaml'
 components:
   schemas: {}
   responses: {}
