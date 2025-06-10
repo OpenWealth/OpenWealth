@@ -117,9 +117,9 @@ rules:
       - 'openapi'
       - 'info'
       - 'servers'
-      - 'externalDocs'
-      - 'tags'
       - 'security'
+      - 'tags'
+      - 'externalDocs'
       - 'paths'
       - 'components'
   sfti/openapi-version:
