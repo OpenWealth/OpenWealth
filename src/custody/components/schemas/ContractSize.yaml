@@ -2,4 +2,3 @@ title: ContractSize
 type: number
 description: Contract size of the instrument.
 example: 100
-default: 1
