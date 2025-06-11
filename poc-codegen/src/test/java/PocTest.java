@@ -19,7 +19,7 @@ public class PocTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-		FinancialInstrument fixedDeposit = new MoneyMarket().type(FinancialInstrumentType.FIXED_DEPOSIT);
+		FinancialInstrument fixedDeposit = new FixedDeposit();
 		String fixedDepositString = objectMapper.writeValueAsString(fixedDeposit);
 		System.out.println(fixedDepositString);
 		/*

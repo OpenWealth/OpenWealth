@@ -838,6 +838,11 @@ components:
                 Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
                 is repaid by the issuer to the investor.
               $ref: '#/components/schemas/Date'
+    FixedDeposit:
+      title: Fixed Deposit
+      description: The fixed deposit schema covers  fixed deposits.
+      allOf:
+        - $ref: '#/components/schemas/MoneyMarket'
     InterestRateSwap:
       title: InterestRateSwap
       description: |
@@ -1153,6 +1158,7 @@ components:
         - $ref: '#/components/schemas/Mortgage'
         - $ref: '#/components/schemas/Credit'
         - $ref: '#/components/schemas/MoneyMarket'
+        - $ref: '#/components/schemas/FixedDeposit'
         - $ref: '#/components/schemas/InterestRateSwap'
         - $ref: '#/components/schemas/TotalReturnSwap'
         - $ref: '#/components/schemas/CreditDefaultSwap'
@@ -1175,7 +1181,7 @@ components:
           mortgage: '#/components/schemas/Mortgage'
           credit: '#/components/schemas/Credit'
           fixedLoan: '#/components/schemas/MoneyMarket'
-          fixedDeposit: '#/components/schemas/MoneyMarket'
+          fixedDeposit: '#/components/schemas/FixedDeposit'
           callableLoan: '#/components/schemas/MoneyMarket'
           callableDeposit: '#/components/schemas/MoneyMarket'
           interestRateSwap: '#/components/schemas/InterestRateSwap'

@@ -18,6 +18,7 @@ import com.jackson.poc.model.CurrencyAmount;
 import com.jackson.poc.model.Equity;
 import com.jackson.poc.model.FinancialInstrumentIdentification;
 import com.jackson.poc.model.FinancialInstrumentType;
+import com.jackson.poc.model.FixedDeposit;
 import com.jackson.poc.model.Fund;
 import com.jackson.poc.model.Future;
 import com.jackson.poc.model.FxForward;
@@ -68,7 +69,7 @@ import javax.annotation.Generated;
   @JsonSubTypes.Type(value = CreditDefaultSwap.class, name = "creditDefaultSwap"),
   @JsonSubTypes.Type(value = CryptoAsset.class, name = "cryptoAsset"),
   @JsonSubTypes.Type(value = Equity.class, name = "equity"),
-  @JsonSubTypes.Type(value = MoneyMarket.class, name = "fixedDeposit"),
+  @JsonSubTypes.Type(value = FixedDeposit.class, name = "fixedDeposit"),
   @JsonSubTypes.Type(value = MoneyMarket.class, name = "fixedLoan"),
   @JsonSubTypes.Type(value = Fund.class, name = "fund"),
   @JsonSubTypes.Type(value = Future.class, name = "future"),
@@ -88,6 +89,7 @@ import javax.annotation.Generated;
   @JsonSubTypes.Type(value = CreditDefaultSwap.class, name = "CreditDefaultSwap"),
   @JsonSubTypes.Type(value = CryptoAsset.class, name = "CryptoAsset"),
   @JsonSubTypes.Type(value = Equity.class, name = "Equity"),
+  @JsonSubTypes.Type(value = FixedDeposit.class, name = "FixedDeposit"),
   @JsonSubTypes.Type(value = Fund.class, name = "Fund"),
   @JsonSubTypes.Type(value = Future.class, name = "Future"),
   @JsonSubTypes.Type(value = FxForward.class, name = "FxForward"),
@@ -102,7 +104,7 @@ import javax.annotation.Generated;
   @JsonSubTypes.Type(value = TotalReturnSwap.class, name = "TotalReturnSwap")
 })
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-06-11T20:28:41.461831241+02:00[Europe/Zurich]", comments = "Generator version: 7.12.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-06-11T20:52:16.917303731+02:00[Europe/Zurich]", comments = "Generator version: 7.12.0")
 public interface FinancialInstrument {
     public FinancialInstrumentType getType();
 }
