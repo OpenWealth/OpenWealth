@@ -5,7 +5,7 @@ get:
   parameters:
     - $ref: ../../generics/components/parameters/cursor.yaml
     - $ref: ../../generics/components/parameters/limit.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
     - event-subscription
   responses:
@@ -13,9 +13,9 @@ get:
       description: Returns a list of event subscriptions.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
         x-nextCursor:
-          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+          $ref: ../../generics/components/headers/Next-Cursor.yaml
       content:
         application/json:
           schema:
@@ -46,7 +46,7 @@ post:
   description: Create an event subscription.
   operationId: createEventSubscription
   parameters:
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
     - event-subscription
   requestBody:
@@ -59,7 +59,7 @@ post:
       description: Returns created event subscription.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:

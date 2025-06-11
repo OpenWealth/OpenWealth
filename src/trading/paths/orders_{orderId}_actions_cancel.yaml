@@ -5,14 +5,14 @@ post:
   description: Places the cancellation request for a specific order.
   operationId: actionCancelOrder
   parameters:
-    - $ref: ../components/parameters/path_orderId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../components/parameters/order_id.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '202':
       description: Order cancellation received for further processing.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:

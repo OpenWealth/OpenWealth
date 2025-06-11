@@ -1,10 +1,10 @@
 parameters:
-  - $ref: ../components/parameters/path_eventSubscriptionId.yaml
+  - $ref: ../components/parameters/event_subscription_id.yaml
 get:
   summary: Get event subscription
   description: Get event subscription by id.
   parameters:
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   operationId: getEventSubscription
   tags:
     - event-subscription
@@ -13,7 +13,7 @@ get:
       description: Returns an event subscription.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
@@ -39,7 +39,7 @@ put:
   description: Update an event subscription.
   operationId: updateEventSubscription
   parameters:
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
     - event-subscription
   requestBody:
@@ -56,7 +56,7 @@ put:
       description: Successfully updated (empty response).
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -78,7 +78,7 @@ delete:
   description: Delete event subscription by id.
   operationId: deleteEventSubscription
   parameters:
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
     - event-subscription
   responses:
@@ -86,7 +86,7 @@ delete:
       description: Successfully deleted (empty response).
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

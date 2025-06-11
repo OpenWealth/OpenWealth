@@ -6,18 +6,18 @@ get:
     Returns all executions by order ID
   operationId: listOrderExecutions
   parameters:
-    - $ref: ../components/parameters/path_orderId.yaml
+    - $ref: ../components/parameters/order_id.yaml
     - $ref: ../../generics/components/parameters/cursor.yaml
     - $ref: ../../generics/components/parameters/limit.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '200':
       description: Execution list.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
         X-nextCursor:
-          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+          $ref: ../../generics/components/headers/Next-Cursor.yaml
       content:
         application/json:
           schema:

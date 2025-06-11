@@ -5,7 +5,7 @@ post:
   description: Posts a new order.
   operationId: createOrder
   parameters:
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   requestBody:
     content:
       application/json:
@@ -16,7 +16,7 @@ post:
       description: Order accepted for further processing.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
@@ -50,15 +50,15 @@ get:
     - $ref: ../components/parameters/expand_order.yaml
     - $ref: ../../generics/components/parameters/cursor.yaml
     - $ref: ../../generics/components/parameters/limit.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '200':
       description: Order list.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
         X-nextCursor:
-          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+          $ref: ../../generics/components/headers/Next-Cursor.yaml
       content:
         application/json:
           schema:

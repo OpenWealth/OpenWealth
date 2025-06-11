@@ -32,7 +32,7 @@ paths:
       description: Push notficiations for subscribed event notifications.
       operationId: pushEventNotification
       parameters:
-        - $ref: ../generics/components/parameters/x_correlation_id_in_header.yaml
+        - $ref: ../generics/components/parameters/correlation_id.yaml
       requestBody:
         content:
           application/json:
@@ -44,7 +44,7 @@ paths:
           description: Notification accepted.
           headers:
             X-Correlation-ID:
-              $ref: '../generics/components/headers/X-Correlation-Id.yaml'
+              $ref: '../generics/components/headers/Correlation-Id.yaml'
 
         '400':
           $ref: '../generics/components/responses/400.yaml'

@@ -1,5 +1,5 @@
 parameters:
-  - $ref: ../components/parameters/path_eventSubscriptionId.yaml
+  - $ref: ../components/parameters/event_subscription_id.yaml
   - $ref: ../components/parameters/from_event_date_time.yaml
   - $ref: ../../generics/components/parameters/cursor.yaml
   - $ref: ../../generics/components/parameters/limit.yaml
@@ -8,7 +8,7 @@ get:
   description: Get aggregated event notification list by event subscription.
   operationId: listEventSubscriptionEventNotifications
   parameters:
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
     - event-notification
   responses:
@@ -16,9 +16,9 @@ get:
       description: Returns a list of event notifications by eventSubscription.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
         x-nextCursor:
-          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+          $ref: ../../generics/components/headers/Next-Cursor.yaml
       content:
         application/json:
           schema:

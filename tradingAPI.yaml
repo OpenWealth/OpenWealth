@@ -68,15 +68,15 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Returns a list with all customers.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
             nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -108,13 +108,13 @@ paths:
       operationId: getCustomer
       parameters:
         - $ref: '#/components/parameters/path_customerId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Returns a the specified customer.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -148,13 +148,13 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Returns list of accounts the requestor has access to.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -186,13 +186,13 @@ paths:
       operationId: getAccount
       parameters:
         - $ref: '#/components/parameters/path_accountId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Returns a the specified account.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -221,7 +221,7 @@ paths:
       description: Posts a new order.
       operationId: createOrder
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -232,7 +232,7 @@ paths:
           description: Order accepted for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -266,15 +266,15 @@ paths:
         - $ref: '#/components/parameters/expand_order'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Order list.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
             X-nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -305,15 +305,15 @@ paths:
       description: Returns a specific security order.
       operationId: getOrder
       parameters:
-        - $ref: '#/components/parameters/path_orderId'
+        - $ref: '#/components/parameters/order_id'
         - $ref: '#/components/parameters/expand_order'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Receive a specific order with the corresponding allocations and status.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -342,14 +342,14 @@ paths:
       description: Places the cancellation request for a specific order.
       operationId: actionCancelOrder
       parameters:
-        - $ref: '#/components/parameters/path_orderId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/order_id'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '202':
           description: Order cancellation received for further processing.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -379,18 +379,18 @@ paths:
         Returns all executions by order ID
       operationId: listOrderExecutions
       parameters:
-        - $ref: '#/components/parameters/path_orderId'
+        - $ref: '#/components/parameters/order_id'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Execution list.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
             X-nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -421,15 +421,15 @@ paths:
       description: Returns a specific execution by order ID and execution ID.
       operationId: getOrderExecution
       parameters:
-        - $ref: '#/components/parameters/path_orderId'
-        - $ref: '#/components/parameters/path_executionId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/order_id'
+        - $ref: '#/components/parameters/execution_id'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Receive a specific order with the corresponding allocations and status.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -461,16 +461,16 @@ paths:
         object will be returned per page.
       operationId: listOrderStatuses
       parameters:
-        - $ref: '#/components/parameters/path_orderId'
+        - $ref: '#/components/parameters/order_id'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Returns list of accounts the requestor has access to.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -501,7 +501,7 @@ paths:
       description: Request quote for a security (i.e. stock, bond, fund etc), FX or crypto product.
       operationId: createQuote
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -512,7 +512,7 @@ paths:
           description: Returns quote for the given request.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -541,7 +541,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       tags:
         - event-subscription
       responses:
@@ -549,9 +549,9 @@ paths:
           description: Returns a list of event subscriptions.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
             x-nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -582,7 +582,7 @@ paths:
       description: Create an event subscription.
       operationId: createEventSubscription
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       tags:
         - event-subscription
       requestBody:
@@ -595,7 +595,7 @@ paths:
           description: Returns created event subscription.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -620,12 +620,12 @@ paths:
           $ref: '#/components/responses/504'
   /event-subscriptions/{eventSubscriptionId}:
     parameters:
-      - $ref: '#/components/parameters/path_eventSubscriptionId'
+      - $ref: '#/components/parameters/event_subscription_id'
     get:
       summary: Get event subscription
       description: Get event subscription by id.
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       operationId: getEventSubscription
       tags:
         - event-subscription
@@ -634,7 +634,7 @@ paths:
           description: Returns an event subscription.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -660,7 +660,7 @@ paths:
       description: Update an event subscription.
       operationId: updateEventSubscription
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       tags:
         - event-subscription
       requestBody:
@@ -677,7 +677,7 @@ paths:
           description: Successfully updated (empty response).
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -699,7 +699,7 @@ paths:
       description: Delete event subscription by id.
       operationId: deleteEventSubscription
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       tags:
         - event-subscription
       responses:
@@ -707,7 +707,7 @@ paths:
           description: Successfully deleted (empty response).
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -726,7 +726,7 @@ paths:
           $ref: '#/components/responses/504'
   /event-subscriptions/{eventSubscriptionId}/event-notifications:
     parameters:
-      - $ref: '#/components/parameters/path_eventSubscriptionId'
+      - $ref: '#/components/parameters/event_subscription_id'
       - $ref: '#/components/parameters/from_event_date_time'
       - $ref: '#/components/parameters/cursor'
       - $ref: '#/components/parameters/limit'
@@ -735,7 +735,7 @@ paths:
       description: Get aggregated event notification list by event subscription.
       operationId: listEventSubscriptionEventNotifications
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       tags:
         - event-notification
       responses:
@@ -743,9 +743,9 @@ paths:
           description: Returns a list of event notifications by eventSubscription.
           headers:
             X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+              $ref: '#/components/headers/Correlation-Id'
             x-nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -2089,9 +2089,9 @@ components:
         format: int32
         minimum: 1
       description: Maximum number of items to return.
-    x_correlation_id_in_header:
+    correlation_id:
       in: header
-      name: X-Correlation-ID
+      name: Correlation-Id
       required: true
       schema:
         type: string
@@ -2134,7 +2134,7 @@ components:
         - `cancellationOrRejectionReasonList`: Include cancellationOrRejectionReasonList
       style: form
       explode: false
-    path_orderId:
+    order_id:
       in: path
       name: orderId
       required: true
@@ -2142,7 +2142,7 @@ components:
         type: string
         maxLength: 128
       description: The order ID as given by the API provider.
-    path_executionId:
+    execution_id:
       in: path
       name: executionId
       required: true
@@ -2150,7 +2150,7 @@ components:
         type: string
         maxLength: 128
       description: The execution ID as given by the API provider.
-    path_eventSubscriptionId:
+    event_subscription_id:
       in: path
       name: eventSubscriptionId
       required: true
@@ -2170,12 +2170,12 @@ components:
       description: Date from which events are considered.
       example: 2022-10-26T07:58:30.996+0100
   headers:
-    X-Correlation-Id:
+    Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    X-Next-Cursor:
+    Next-Cursor:
       description: An opaque string value, or an empty string if there are no more results.
       required: false
       schema:
@@ -2190,4 +2190,9 @@ components:
       schema:
         type: string
         example: en
+    X-Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   securitySchemes: {}

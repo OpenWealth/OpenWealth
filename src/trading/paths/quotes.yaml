@@ -5,7 +5,7 @@ post:
   description: Request quote for a security (i.e. stock, bond, fund etc), FX or crypto product.
   operationId: createQuote
   parameters:
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   requestBody:
     content:
       application/json:
@@ -16,7 +16,7 @@ post:
       description: Returns quote for the given request.
       headers:
         X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
