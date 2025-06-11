@@ -59,11 +59,12 @@ public class PocTest {
 		System.out.println(deserializedObject);
 
 
-		//this is NOT fixed deposit : result string does not contain the type name for fixed deposit
-		assertFalse(fixedDepositString.contains("fixedDeposit"));
-
-		// .. it is serialized to first type  in the mapping on FinancialInstrument
-		assertTrue(fixedDepositString.contains("callableDeposit"));
+		//We would expect the fixed deposit type to be included into the string
+		//THIS WILL FAIL
+		assertTrue(fixedDepositString.contains("fixedDeposit"));
+		// .. and the object to be of correct type
+		//THIS WILL FAIL TOO
+		assertTrue(deserializedObject.getType() == FinancialInstrumentType.FIXED_DEPOSIT);
 
 	}
 }
