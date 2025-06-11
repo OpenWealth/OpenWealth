@@ -125,8 +125,8 @@
 								${project.basedir}/src/main/resources/Custody Services API.yaml
 							</inputSpec>
 							<generatorName>spring</generatorName>
-							<apiPackage>com.swissquote.poc.api</apiPackage>
-							<modelPackage>com.swissquote.poc.model</modelPackage>
+							<apiPackage>com.jackson.poc.api</apiPackage>
+							<modelPackage>com.jackson.poc.model</modelPackage>
 							<supportingFilesToGenerate>
 								ApiUtil.java
 							</supportingFilesToGenerate>
