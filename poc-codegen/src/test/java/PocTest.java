@@ -2,14 +2,15 @@
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.jackson.poc.model.*;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.jackson.poc.model.Equity;
-import com.jackson.poc.model.FinancialInstrument;
-import com.jackson.poc.model.InterestRateSwap;
+
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.AssertTrue;
 
 public class PocTest {
 
@@ -18,24 +19,51 @@ public class PocTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-		//we create concrete class for IRS
-		FinancialInstrument irsObject = new InterestRateSwap();
-		//we serialize it to string
-		String irsString = objectMapper.writeValueAsString(irsObject);
-		//we see that the output contains property "type" indicating concrete type
-		System.out.println(irsString);
+		FinancialInstrument fixedDeposit = new MoneyMarket().type(FinancialInstrumentType.FIXED_DEPOSIT);
+		String fixedDepositString = objectMapper.writeValueAsString(fixedDeposit);
+		System.out.println(fixedDepositString);
+		/*
+		{
+  "type" : "callableDeposit",
+  "name" : null,
+  "identificationList" : [ ],
+  "cfiCode" : null,
+  "currencyOfDenomination" : null,
+  "hasFactor" : null,
+  "factor" : null,
+  "additionalDetails" : null,
+  "principalAmount" : null,
+  "interestRate" : null,
+  "maturityDate" : null
+}
+		 */
 
-		//we take the json string for the irs
-		//and deserialize it using top level interface FinancialInstrument (behind is concrete class)
-		FinancialInstrument financialInstrument = objectMapper.readValue(irsString, FinancialInstrument.class);
 
-		//the type is IRS
-		System.out.println(financialInstrument.getType());
-		//the concrete deserialized class is not equity
-		System.out.println("Deserialized object is equity: " + (financialInstrument instanceof Equity));
-		assertFalse(financialInstrument instanceof Equity);
-		//the concrete deserialized class is IRS
-		System.out.println("Deserialized object is IRS: " + (financialInstrument instanceof InterestRateSwap));
-		assertTrue(financialInstrument instanceof InterestRateSwap);
+		FinancialInstrument deserializedObject  = objectMapper.readValue(fixedDepositString, FinancialInstrument.class);
+		/* deserialized object is:
+
+		class MoneyMarket {
+    type: callableDeposit
+    name: null
+    identificationList: []
+    cfiCode: null
+    currencyOfDenomination: null
+    hasFactor: null
+    factor: null
+    additionalDetails: null
+    principalAmount: null
+    interestRate: null
+    maturityDate: null
+}
+		 */
+		System.out.println(deserializedObject);
+
+
+		//this is NOT fixed deposit : result string does not contain the type name for fixed deposit
+		assertFalse(fixedDepositString.contains("fixedDeposit"));
+
+		// .. it is serialized to first type  in the mapping on FinancialInstrument
+		assertTrue(fixedDepositString.contains("callableDeposit"));
+
 	}
 }
