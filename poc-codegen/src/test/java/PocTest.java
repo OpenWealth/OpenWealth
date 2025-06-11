@@ -19,7 +19,7 @@ public class PocTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-		FinancialInstrument fixedDeposit = new FixedDeposit();
+		FinancialInstrument fixedDeposit = new FixedDeposit().type(FinancialInstrumentType.FIXED_DEPOSIT);
 		String fixedDepositString = objectMapper.writeValueAsString(fixedDeposit);
 		System.out.println(fixedDepositString);
 /*
@@ -63,5 +63,44 @@ class FixedDeposit {
 		assertTrue(deserializedObject.getType() == FinancialInstrumentType.FIXED_DEPOSIT);
 		assertTrue(deserializedObject instanceof FixedDeposit);
 
+
+		FinancialInstrument fixedLoan = new MoneyMarket().type(FinancialInstrumentType.FIXED_LOAN);
+		String fixedLoanString = objectMapper.writeValueAsString(fixedLoan);
+		/* would print WRONG :
+		{
+  "type" : "callableDeposit",
+  "name" : null,
+  "identificationList" : [ ],
+  "cfiCode" : null,
+  "currencyOfDenomination" : null,
+  "hasFactor" : null,
+  "factor" : null,
+  "additionalDetails" : null,
+  "principalAmount" : null,
+  "interestRate" : null,
+  "maturityDate" : null
+}
+		 */
+		System.out.println(fixedLoanString);
+
+
+		FinancialInstrument deserializedFixedLoan  = objectMapper.readValue(fixedLoanString, FinancialInstrument.class);
+
+		System.out.println(deserializedFixedLoan);
+/*  Would also print WRONG
+class MoneyMarket {
+    type: callableDeposit
+    name: null
+    identificationList: []
+    cfiCode: null
+    currencyOfDenomination: null
+    hasFactor: null
+    factor: null
+    additionalDetails: null
+    principalAmount: null
+    interestRate: null
+    maturityDate: null
+}
+ */
 	}
 }
