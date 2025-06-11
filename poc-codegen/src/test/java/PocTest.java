@@ -22,9 +22,9 @@ public class PocTest {
 		FinancialInstrument fixedDeposit = new FixedDeposit();
 		String fixedDepositString = objectMapper.writeValueAsString(fixedDeposit);
 		System.out.println(fixedDepositString);
-		/*
-		{
-  "type" : "callableDeposit",
+/*
+{
+  "type" : "fixedDeposit",
   "name" : null,
   "identificationList" : [ ],
   "cfiCode" : null,
@@ -36,14 +36,14 @@ public class PocTest {
   "interestRate" : null,
   "maturityDate" : null
 }
-		 */
-
+ */
 
 		FinancialInstrument deserializedObject  = objectMapper.readValue(fixedDepositString, FinancialInstrument.class);
-		/* deserialized object is:
 
-		class MoneyMarket {
-    type: callableDeposit
+		System.out.println(deserializedObject);
+/*
+class FixedDeposit {
+    type: fixedDeposit
     name: null
     identificationList: []
     cfiCode: null
@@ -55,16 +55,13 @@ public class PocTest {
     interestRate: null
     maturityDate: null
 }
-		 */
-		System.out.println(deserializedObject);
-
+ */
 
 		//We would expect the fixed deposit type to be included into the string
-		//THIS WILL FAIL
 		assertTrue(fixedDepositString.contains("fixedDeposit"));
 		// .. and the object to be of correct type
-		//THIS WILL FAIL TOO
 		assertTrue(deserializedObject.getType() == FinancialInstrumentType.FIXED_DEPOSIT);
+		assertTrue(deserializedObject instanceof FixedDeposit);
 
 	}
 }
