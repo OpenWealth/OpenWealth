@@ -3,8 +3,10 @@ description: Schema of a quote leg object.
 required:
   - side
   - quantity
+  - quantityType
   - baseInstrument
   - quoteInstrument
+  - unitReference
 properties:
   side:
     $ref: OrderSide.yaml
@@ -24,6 +26,10 @@ properties:
       Instrument (i.e. currency) for which the quote is requested in exchange
       for the purchase resp. sell of the baseInstrument.
     $ref: FinancialInstrument.yaml
+  unitReference:
+    $ref: UnitReference.yaml
+  settlementDate:
+    $ref: ../../../generics/components/schemas/Date.yaml
   price:
     description: |
       If priceType is

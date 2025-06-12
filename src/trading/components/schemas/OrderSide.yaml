@@ -1,5 +1,7 @@
 type: string
-description: Side taken by a party on an order.
+description: |
+  Side taken by a party on an order.
+  The side always relates to the base instrument of an order leg.
 enum:
   - buy
   - sell

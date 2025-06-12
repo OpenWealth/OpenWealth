@@ -1,5 +1,6 @@
 type: object
 description: Provides the status of the order was at the given timestamp.
+readOnly: true
 properties:
   status:
     type: string
