@@ -56,6 +56,11 @@ properties:
   settlementDate:
     description: Date and time at which the securities are to be delivered or received.
     $ref: '../../../generics/components/schemas/Date.yaml'
+  exDate:
+    description: |
+      Date as from which trading (including exchange and OTC trading) occurs
+      on the underlying security without the benefit.
+    $ref: '../../../generics/components/schemas/Date.yaml'
   triggeringFinancialInstrument:
     $ref: 'FinancialInstrument.yaml'
   triggeringQuantity:

@@ -21,7 +21,7 @@ function infoStructure(options) {
         }
         if (operation.license.url !== 'https://www.apache.org/licenses/LICENSE-2.0.html') {
           report({
-            message: `Use offical Apache 2.0 license refrence.`,
+            message: `Use official Apache 2.0 license reference.`,
             location: location.child(['license', 'url']),
             suggest: [ 'https://www.apache.org/licenses/LICENSE-2.0.html' ],
           });

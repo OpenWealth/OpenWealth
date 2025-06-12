@@ -1,4 +1,4 @@
-module.exports = { checkCasing, checkDescription, get_common_prev_elem }
+module.exports = { checkCasing, checkDescription, checkSummary, get_common_prev_elem }
 
 function checkCasing(str, caseName) {
   const casingRegexes = {
@@ -9,7 +9,7 @@ function checkCasing(str, caseName) {
     MACRO_CASE: /^([A-Z][A-Z0-9]*)(_[A-Z0-9]+)*$/g,
     'COBOL-CASE': /^([A-Z][A-Z0-9]*)(-[A-Z0-9]+)*$/g,
     flatcase: /^[a-z][a-z0-9]+$/g,
-    'Train-Case' : /^([A-Z][a-zA-Z0-9]*)(-[A-Z][a-zA-Z0-9]*)*$/g,
+    'Train-Case': /^([A-Z][a-zA-Z0-9]*)(-[A-Z][a-zA-Z0-9]*)*$/g,
   };
 
   return casingRegexes[caseName].test(str)
@@ -30,9 +30,9 @@ function checkDescription(options) {
           message: `Parameter object description must be non-empty string.`,
           location: location.child(['description']),
         });
-      } 
+      }
 
-      else if(!(operation.description.endsWith(".") || /\n/.test(operation.description))) {
+      else if (!(operation.description.endsWith(".") || /\n/.test(operation.description))) {
         report({
           message: `Description must end with a full stop (Exception multiline listings).`,
           location: location.child(['description']).key(),
@@ -42,10 +42,23 @@ function checkDescription(options) {
   };
 }
 
+function checkSummary(options) {
+  return {
+    enter(operation, { report, location, type }) {
+      if (operation.summary && operation.summary.endsWith(".")) {
+        report({
+          message: `Summary must not end with a full stop.`,
+          location: location.child(['summary']).key(),
+        });
+      }
+    }
+  };
+}
+
 function get_common_prev_elem(defined, spec, key) {
   for (let i = defined.indexOf(key) - 1; i >= 0; i--) {
     if (spec.includes(defined[i])) {
-        return defined[i];
+      return defined[i];
     }
   }
   return spec[0];

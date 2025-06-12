@@ -2,6 +2,7 @@
   "id": "trx-002-01",
   "type": "dividendCash",
   "transactionDate": "2023-05-31",
+  "exDate": "2023-05-26",
   "customerId": "123456",
   "reversalIndicator": false,
   "endOfDayIndicator": true,

@@ -61,12 +61,6 @@ jobs:
       - name: Bundle API docs
         run: redocly bundle ${{ steps.var.outputs.API_FILE }} --output ${{ steps.var.outputs.API_BUNDLED_FILE }}
 
-      # Postprocess bundled API spec
-      - name: Postprocess bundled API spec
-        # for some strange reason single quotes are removed during 'redocly bundle' from the pattern property if it start with lieral '^'
-        run: |
-          sed -i -E "s/pattern: (\\^[^ ]*)/pattern: '\1'/g" ${{ steps.var.outputs.API_BUNDLED_FILE }}
-
       # Configure Git
       - name: Configure Git
         run: |

@@ -29,14 +29,14 @@ function checkExternalDocsSFTI(options) {
       enter(operation, { report, location }) {
         if (operation.description !== 'Find out more about SFTI API specifications.') {
           report({
-            message: `Use offical SFTI reference string.`,
+            message: `Use official SFTI reference string.`,
             location: location.child(['description']),
             suggest: [ 'Find out more about SFTI API specifications.' ],
           });
         }
         if (operation.url !== 'https://www.common-api.ch') {
           report({
-            message: `Use offical Common API url.`,
+            message: `Use official Common API url.`,
             location: location.child(['url']),
             suggest: [ 'https://www.common-api.ch' ],
           });

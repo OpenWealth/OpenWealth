@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.1.0
+  version: 3.2.0
   title: Custody Services
   description: |
     This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems).
@@ -13,7 +13,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - description: Your Server URL
+  - description: Your Server URL.
     url: https://api.openwealth.ch
 security: []
 tags:
@@ -35,7 +35,8 @@ paths:
         - customers
       summary: Returns all customers (business partners) accessible for the logged in user
       description: |
-        This endpoint returns a highlevel list of customers accessible for the logged in user. Paging is done based on the customer object,
+        This endpoint returns a highlevel list of customers accessible for the
+        logged in user. Paging is done based on the customer object,
         i.e. if limit is set to 1, then 1 customer will be returned per page.
       operationId: getCustomers
       parameters:
@@ -76,8 +77,8 @@ paths:
     get:
       tags:
         - customers
-      summary: Returns a specific customer accessible for the logged in user
-      description: This endpoint returns a single customer.
+      summary: Returns a specific customer by id
+      description: Returns a specific customer by id accessible for the requesting user.
       operationId: getCustomersByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
@@ -112,9 +113,10 @@ paths:
     get:
       tags:
         - accounts
-      summary: Returns the accounts for a specific customer accessible to the querying user
+      summary: Returns the accounts for a specific customer
       description: |
-        Returns all accounts for a specific customer. Paging is done based on the account object, i.e. if limit is set to 1,
+        Returns all accounts for a specific customer accessible to the querying user.
+        Paging is done based on the account object, i.e. if limit is set to 1,
         then 1 account will be returned per page.
       operationId: getCustomerAccountsByCustomerId
       parameters:
@@ -124,7 +126,7 @@ paths:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
-          description: Account List
+          description: Account List.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
@@ -156,7 +158,7 @@ paths:
     get:
       tags:
         - accounts
-      summary: Returns an account by id for a specific customer
+      summary: Returns an account by id
       description: Returns an account by id for a specific customer.
       operationId: getCustomerAccountById
       parameters:
@@ -165,12 +167,10 @@ paths:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
-          description: Account
+          description: Account.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
           content:
             application/json:
               schema:
@@ -197,8 +197,9 @@ paths:
         - positions
       summary: Returns the positions for a specific customer
       description: |
-        Returns all positions for a specific customer. Paging is done based on the position object, i.e. if limit is set to 1,
-        then 1 position will be returned per page.
+        Returns all positions for a specific customer.
+        Paging is done based on the position object,
+        i.e. if limit is set to 1, then 1 position will be returned per page.
       operationId: getCustomerPositionByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
@@ -209,7 +210,7 @@ paths:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
-          description: Position List
+          description: Position List.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
@@ -241,8 +242,8 @@ paths:
     get:
       tags:
         - positions
-      summary: Returns a positions by id for a specific customer
-      description: Returns a positions for a specific customer.
+      summary: Returns a position by id for a specific customer
+      description: Returns a position by id for a specific customer.
       operationId: getCustomerPositionById
       parameters:
         - $ref: '#/components/parameters/path_customerId'
@@ -252,7 +253,7 @@ paths:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
-          description: Position
+          description: Position.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
@@ -282,7 +283,8 @@ paths:
         - positions
       summary: Returns the positions for a specific account
       description: |
-        Returns all positions for a specific account. Paging is done based on the position object, i.e. if limit is set to 1,
+        Returns all positions for a specific account.
+        Paging is done based on the position object, i.e. if limit is set to 1,
         then 1 position will be returned per page.
       operationId: getAccountPositionByAccountId
       parameters:
@@ -294,7 +296,7 @@ paths:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
-          description: Position List
+          description: Position List.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
@@ -326,8 +328,8 @@ paths:
     get:
       tags:
         - positions
-      summary: Returns a positions by id for a specific account
-      description: Returns a positions for a specific account.
+      summary: Returns a position by id for a specific account
+      description: Returns a position by id for a specific account.
       operationId: getAccountPositionById
       parameters:
         - $ref: '#/components/parameters/path_accountId'
@@ -337,7 +339,7 @@ paths:
         - $ref: '#/components/parameters/x_correlation_id_in_header'
       responses:
         '200':
-          description: Position
+          description: Position.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-Id'
@@ -365,10 +367,11 @@ paths:
     get:
       tags:
         - transactions
-      summary: Returns a transactions for a specific customer
+      summary: Returns all transactions for a specific customer
       description: |
-        Returns all transactions for the a specific customer. Paging is done based on the transaction object, i.e. if limit is set to 1,
-        then 1 transaction will be returned per page.
+        Returns all transactions for a specific customer.
+        Paging is done based on the transaction object,
+        i.e. if limit is set to 1, then 1 transaction will be returned per page.
       operationId: getTransactionByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
@@ -411,8 +414,8 @@ paths:
     get:
       tags:
         - transactions
-      summary: Returns a transaction for a specific customer
-      description: Returns a transaction instance by id.
+      summary: Returns a transaction by id for a specific customer
+      description: Returns a transaction instance by id for a specific customer.
       operationId: getTransactionByTransactionId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
@@ -450,7 +453,7 @@ components:
       title: Currency
       type: string
       description: ISO 4217 code.
-      pattern: '^[A-Z]{3}$'
+      pattern: ^[A-Z]{3}$
       example: CHF
     Customer:
       title: Customer
@@ -993,7 +996,7 @@ components:
         Indicates the type of the financial instrument. Must follow the ISO 10962, which is also known as CFI (classification of
         financial instruments). At least indicate the CFI Category (1st character) and the CFI Group (2nd character). The CFI
         attributes 1-4 (3rd to 6th character in the string) are optional.
-      pattern: '^[A-Z]{2,6}$'
+      pattern: ^[A-Z]{2,6}$
       minLength: 2
       maxLength: 6
       example: ESVUFR
@@ -1184,7 +1187,6 @@ components:
       type: number
       description: Contract size of the instrument.
       example: 100
-      default: 1
     OptionType:
       title: OptionType
       type: string
@@ -1252,12 +1254,12 @@ components:
           $ref: '#/components/schemas/Currency'
         safekeepingPlace:
           type: string
-          pattern: '^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$'
+          pattern: ^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$
           example: INSECHZZXXX
           description: BIC of the place where the securities are safe-kept, physically or notionally.
         additionalCustodianInformation:
           type: string
-          pattern: '^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$'
+          pattern: ^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$
           example: INSECHZZXXX
           description: |
             Used for special use cases where safekeepingPlace is not sufficient. BIC of the place where the securities are safe-kept,
@@ -1622,6 +1624,11 @@ components:
         settlementDate:
           description: Date and time at which the securities are to be delivered or received.
           $ref: '#/components/schemas/Date'
+        exDate:
+          description: |
+            Date as from which trading (including exchange and OTC trading) occurs
+            on the underlying security without the benefit.
+          $ref: '#/components/schemas/Date'
         triggeringFinancialInstrument:
           $ref: '#/components/schemas/FinancialInstrument'
         triggeringQuantity:
@@ -1645,93 +1652,6 @@ components:
           maxLength: 70
           description: Provides additional details on the transaction which can not be included within the structured fields of the message.
           example: Replaces transaction nr. 12234567489
-  parameters:
-    cursor:
-      in: query
-      name: cursor
-      required: false
-      schema:
-        type: string
-      description: An opaque string value used for pagination.
-    limit:
-      in: query
-      name: limit
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-      description: Maximum number of items to return.
-    x_correlation_id_in_header:
-      in: header
-      name: X-Correlation-ID
-      required: true
-      schema:
-        type: string
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-    path_customerId:
-      in: path
-      name: customerId
-      required: true
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 128
-        example: 123123-456
-        description: Unique and unambiguous identification used by the bank for the customer.
-      description: Customer ID Parameter.
-    path_accountId:
-      in: path
-      name: accountId
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-        description: The customer's account identification, this should NOT be an IBAN.
-      description: Account ID parameter.
-    date:
-      in: query
-      name: date
-      required: true
-      schema:
-        type: string
-        format: date
-        description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
-        example: '2019-12-31'
-      description: A date value.
-    end_of_day_indicator:
-      in: query
-      name: end_of_day_indicator
-      required: false
-      schema:
-        type: boolean
-        example: true
-      description: |
-        Indicates if the resources (positions & transactions) have been confirmed by the end-of-day (eod) processing.
-        - If the parameter is not set, all resources will be delivered.
-        - If the parameter is set to true, only resources with with the particular property set to true will be delivered.
-        - If the parameter is set to false, only resources with with the particular property set to false will be delivered.
-    path_positionId:
-      in: path
-      name: positionId
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-        description: Identification for the position given by the bank.
-        example: 1234566-12-1
-      description: Position ID parameter.
-    path_transactionId:
-      in: path
-      name: transactionId
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-        description: Identification for the transaction given by the bank.
-        example: 1234566-12-7
-      description: Transaction ID.
-  securitySchemes: {}
   responses:
     '400':
       headers:
@@ -1843,6 +1763,92 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+  parameters:
+    cursor:
+      in: query
+      name: cursor
+      required: false
+      schema:
+        type: string
+      description: An opaque string value used for pagination.
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      description: Maximum number of items to return.
+    x_correlation_id_in_header:
+      in: header
+      name: X-Correlation-ID
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+    path_customerId:
+      in: path
+      name: customerId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: 123123-456
+        description: Unique and unambiguous identification used by the bank for the customer.
+      description: Customer ID Parameter.
+    path_accountId:
+      in: path
+      name: accountId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        description: The customer's account identification, this should NOT be an IBAN.
+      description: Account ID parameter.
+    date:
+      in: query
+      name: date
+      required: true
+      schema:
+        type: string
+        format: date
+        description: Full-date according to ISO 8601 i.e. YYYY-MM-DD format.
+        example: '2019-12-31'
+      description: A date value.
+    end_of_day_indicator:
+      in: query
+      name: end_of_day_indicator
+      required: false
+      schema:
+        type: boolean
+        example: true
+      description: |
+        Indicates if the resources (positions & transactions) have been confirmed by the end-of-day (eod) processing.
+        - If the parameter is not set, all resources will be delivered.
+        - If the parameter is set to true, only resources with with the particular property set to true will be delivered.
+        - If the parameter is set to false, only resources with with the particular property set to false will be delivered.
+    path_positionId:
+      in: path
+      name: positionId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        description: Identification for the position given by the bank.
+        example: 1234566-12-1
+      description: Position ID parameter.
+    path_transactionId:
+      in: path
+      name: transactionId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        description: Identification for the transaction given by the bank.
+        example: 1234566-12-7
+      description: Transaction ID.
   headers:
     X-Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
@@ -1864,3 +1870,4 @@ components:
       schema:
         type: string
         example: en
+  securitySchemes: {}
