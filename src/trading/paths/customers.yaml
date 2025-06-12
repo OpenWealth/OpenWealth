@@ -15,7 +15,7 @@ get:
     '200':
       description: Returns a list with all customers.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
         nextCursor:
           $ref: ../../generics/components/headers/Next-Cursor.yaml

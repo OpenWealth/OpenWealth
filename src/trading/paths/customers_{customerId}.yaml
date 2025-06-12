@@ -11,7 +11,7 @@ get:
     '200':
       description: Returns a the specified customer.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
