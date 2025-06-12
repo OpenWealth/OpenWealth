@@ -12,9 +12,9 @@ get:
     '200':
       description: Returns a list of event subscriptions.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
-        x-nextCursor:
+        Next-Cursor:
           $ref: ../../generics/components/headers/Next-Cursor.yaml
       content:
         application/json:
@@ -58,7 +58,7 @@ post:
     '201':
       description: Returns created event subscription.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:

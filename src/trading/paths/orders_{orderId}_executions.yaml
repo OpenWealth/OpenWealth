@@ -14,7 +14,7 @@ get:
     '200':
       description: Execution list.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
         X-nextCursor:
           $ref: ../../generics/components/headers/Next-Cursor.yaml

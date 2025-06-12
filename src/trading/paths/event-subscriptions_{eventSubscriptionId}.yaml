@@ -1,9 +1,8 @@
-parameters:
-  - $ref: ../components/parameters/event_subscription_id.yaml
 get:
   summary: Get event subscription
   description: Get event subscription by id.
   parameters:
+    - $ref: ../components/parameters/event_subscription_id.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   operationId: getEventSubscription
   tags:
@@ -12,7 +11,7 @@ get:
     '200':
       description: Returns an event subscription.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
@@ -39,6 +38,7 @@ put:
   description: Update an event subscription.
   operationId: updateEventSubscription
   parameters:
+    - $ref: ../components/parameters/event_subscription_id.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
     - event-subscription
@@ -50,12 +50,12 @@ put:
         example:
           eventTypes:
             - order:statusUpdated
-          callbackUrl: /ttpAPI/notifications/order-placement/
+          callbackUrl: /ttpAPI-path-to-notifications
   responses:
     '204':
       description: Successfully updated (empty response).
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
@@ -78,6 +78,7 @@ delete:
   description: Delete event subscription by id.
   operationId: deleteEventSubscription
   parameters:
+    - $ref: ../components/parameters/event_subscription_id.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
     - event-subscription
@@ -85,7 +86,7 @@ delete:
     '204':
       description: Successfully deleted (empty response).
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml

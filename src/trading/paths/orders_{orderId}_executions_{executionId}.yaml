@@ -12,7 +12,7 @@ get:
     '200':
       description: Receive a specific order with the corresponding allocations and status.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:

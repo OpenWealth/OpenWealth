@@ -15,7 +15,7 @@ post:
     '202':
       description: Order accepted for further processing.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
@@ -55,7 +55,7 @@ get:
     '200':
       description: Order list.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
         X-nextCursor:
           $ref: ../../generics/components/headers/Next-Cursor.yaml

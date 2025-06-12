@@ -11,7 +11,7 @@ post:
     '202':
       description: Order cancellation received for further processing.
       headers:
-        X-Correlation-ID:
+        Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:

@@ -10,8 +10,8 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  - description: Your server url.
-    url: https://www.openwealth.ch
+  - description: The TPP webhook server url.
+    url: https://www.tpp-url.ch
 
 externalDocs:
   description: Find out more about OpenWealth API specifications.
@@ -43,7 +43,7 @@ paths:
         '202':
           description: Notification accepted.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '../generics/components/headers/Correlation-Id.yaml'
 
         '400':
