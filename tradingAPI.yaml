@@ -910,7 +910,9 @@ components:
       example: '2018-04-13T16:00:00Z'
     OrderSide:
       type: string
-      description: Side taken by a party on an order.
+      description: |
+        Side taken by a party on an order.
+        The side always relates to the base instrument of an order leg.
       enum:
         - buy
         - sell
@@ -1487,6 +1489,7 @@ components:
     OrderStatus:
       type: object
       description: Provides the status of the order was at the given timestamp.
+      readOnly: true
       properties:
         status:
           type: string
@@ -1660,6 +1663,9 @@ components:
         requestedPlaceOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
         expiryDateTime:
+          description: |
+            DateTime when order expires.
+            Applies if required by timeInForce value.
           $ref: '#/components/schemas/DateTime'
         exposureDuration:
           description: |
@@ -1779,8 +1785,10 @@ components:
       required:
         - side
         - quantity
+        - quantityType
         - baseInstrument
         - quoteInstrument
+        - unitReference
       properties:
         side:
           $ref: '#/components/schemas/OrderSide'
@@ -1800,6 +1808,10 @@ components:
             Instrument (i.e. currency) for which the quote is requested in exchange
             for the purchase resp. sell of the baseInstrument.
           $ref: '#/components/schemas/FinancialInstrument'
+        unitReference:
+          $ref: '#/components/schemas/UnitReference'
+        settlementDate:
+          $ref: '#/components/schemas/Date'
         price:
           description: |
             If priceType is
@@ -1841,17 +1853,24 @@ components:
             - tradable
           example: tradable
         expiryDateTime:
-          description: DateTime when quote expires.
-          $ref: '#/components/schemas/DateTime'
+          description: DateTime when quote expires according to ISO 8601.
+          type: string
+          format: date-time
+          example: '2018-04-13T16:00:00Z'
           readOnly: true
         customerIds:
-          description: List of unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+          description: |
+            List of unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+            Depending on the custodian the customer context may be relvant to provide a tradeable quote.
+            If multiple customerIds are provided a common practice is to return the max/min quote among
+            the customer list.
           type: array
           items:
             type: string
             maxLength: 128
             example: 6dca5123-e370-4272-8ef4-68d421f52f6e
         legList:
+          type: array
           description: List of legs of the order quote.
           items:
             $ref: '#/components/schemas/QuoteLeg'

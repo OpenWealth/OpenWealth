@@ -9,8 +9,8 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - description: Your server url.
-    url: https://www.openwealth.ch
+  - description: The TPP webhook server url.
+    url: https://www.tpp-url.ch
 security: []
 tags:
   - name: event-notification
@@ -27,7 +27,7 @@ paths:
       description: Push notficiations for subscribed event notifications.
       operationId: pushEventNotification
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -37,8 +37,8 @@ paths:
         '202':
           description: Notification accepted.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '500':
@@ -56,6 +56,11 @@ components:
     EventNotification:
       type: object
       description: Schema of an event notification entity.
+      required:
+        - id
+        - eventType
+        - eventSubscriptionId
+        - resourceLink
       properties:
         id:
           type: string
@@ -78,8 +83,8 @@ components:
           description: |
             The resourceLink is an absolute or relative URL reference to the specific resource or object that triggered the webhook event.
             This link provides immediate access to the full details of the affected item in the source system.
-          example: /api/bankingservices/b-link/order-placement/v1/orders/abcd1234
-        createdAt:
+          example: /orders/e6751a48-0819-4482-98a4-760453ba770d
+        creationDateTime:
           type: string
           format: date-time
           description: Timestamp of the creation of the event notification.
@@ -154,15 +159,15 @@ components:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
   parameters:
-    x_correlation_id_in_header:
+    correlation_id:
       in: header
-      name: X-Correlation-ID
+      name: Correlation-Id
       required: true
       schema:
         type: string
       description: Unique ID (defined by the caller) which will be reflected back in the response.
   headers:
-    X-Correlation-Id:
+    Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
@@ -177,4 +182,9 @@ components:
       schema:
         type: string
         example: en
+    X-Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   securitySchemes: {}
