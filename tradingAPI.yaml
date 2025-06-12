@@ -73,7 +73,7 @@ paths:
         '200':
           description: Returns a list with all customers.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
             nextCursor:
               $ref: '#/components/headers/Next-Cursor'
@@ -113,7 +113,7 @@ paths:
         '200':
           description: Returns a the specified customer.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -153,7 +153,7 @@ paths:
         '200':
           description: Returns list of accounts the requestor has access to.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -181,7 +181,7 @@ paths:
     get:
       tags:
         - account
-      summary: Returns a specific accounts by id
+      summary: Returns a specific account by id
       description: Returns a specific account by id accessible for the requesting user.
       operationId: getAccount
       parameters:
@@ -191,7 +191,7 @@ paths:
         '200':
           description: Returns a the specified account.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -231,7 +231,7 @@ paths:
         '202':
           description: Order accepted for further processing.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -271,7 +271,7 @@ paths:
         '200':
           description: Order list.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
             X-nextCursor:
               $ref: '#/components/headers/Next-Cursor'
@@ -312,7 +312,7 @@ paths:
         '200':
           description: Receive a specific order with the corresponding allocations and status.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -348,7 +348,7 @@ paths:
         '202':
           description: Order cancellation received for further processing.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -387,7 +387,7 @@ paths:
         '200':
           description: Execution list.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
             X-nextCursor:
               $ref: '#/components/headers/Next-Cursor'
@@ -428,7 +428,7 @@ paths:
         '200':
           description: Receive a specific order with the corresponding allocations and status.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -469,7 +469,7 @@ paths:
         '200':
           description: Returns list of accounts the requestor has access to.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -511,7 +511,7 @@ paths:
         '200':
           description: Returns quote for the given request.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -548,9 +548,9 @@ paths:
         '200':
           description: Returns a list of event subscriptions.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
-            x-nextCursor:
+            Next-Cursor:
               $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
@@ -594,7 +594,7 @@ paths:
         '201':
           description: Returns created event subscription.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -619,12 +619,11 @@ paths:
         '504':
           $ref: '#/components/responses/504'
   /event-subscriptions/{eventSubscriptionId}:
-    parameters:
-      - $ref: '#/components/parameters/event_subscription_id'
     get:
       summary: Get event subscription
       description: Get event subscription by id.
       parameters:
+        - $ref: '#/components/parameters/event_subscription_id'
         - $ref: '#/components/parameters/correlation_id'
       operationId: getEventSubscription
       tags:
@@ -633,7 +632,7 @@ paths:
         '200':
           description: Returns an event subscription.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
@@ -660,6 +659,7 @@ paths:
       description: Update an event subscription.
       operationId: updateEventSubscription
       parameters:
+        - $ref: '#/components/parameters/event_subscription_id'
         - $ref: '#/components/parameters/correlation_id'
       tags:
         - event-subscription
@@ -671,12 +671,12 @@ paths:
             example:
               eventTypes:
                 - order:statusUpdated
-              callbackUrl: /ttpAPI/notifications/order-placement/
+              callbackUrl: /ttpAPI-path-to-notifications
       responses:
         '204':
           description: Successfully updated (empty response).
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
@@ -699,6 +699,7 @@ paths:
       description: Delete event subscription by id.
       operationId: deleteEventSubscription
       parameters:
+        - $ref: '#/components/parameters/event_subscription_id'
         - $ref: '#/components/parameters/correlation_id'
       tags:
         - event-subscription
@@ -706,7 +707,7 @@ paths:
         '204':
           description: Successfully deleted (empty response).
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
@@ -725,16 +726,15 @@ paths:
         '504':
           $ref: '#/components/responses/504'
   /event-subscriptions/{eventSubscriptionId}/event-notifications:
-    parameters:
-      - $ref: '#/components/parameters/event_subscription_id'
-      - $ref: '#/components/parameters/from_event_date_time'
-      - $ref: '#/components/parameters/cursor'
-      - $ref: '#/components/parameters/limit'
     get:
       summary: Get event notifications list
       description: Get aggregated event notification list by event subscription.
       operationId: listEventSubscriptionEventNotifications
       parameters:
+        - $ref: '#/components/parameters/event_subscription_id'
+        - $ref: '#/components/parameters/from_event_date_time'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/correlation_id'
       tags:
         - event-notification
@@ -742,9 +742,9 @@ paths:
         '200':
           description: Returns a list of event notifications by eventSubscription.
           headers:
-            X-Correlation-ID:
+            Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
-            x-nextCursor:
+            Next-Cursor:
               $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
@@ -1909,6 +1909,11 @@ components:
     EventNotification:
       type: object
       description: Schema of an event notification entity.
+      required:
+        - id
+        - eventType
+        - eventSubscriptionId
+        - resourceLink
       properties:
         id:
           type: string
@@ -1931,8 +1936,8 @@ components:
           description: |
             The resourceLink is an absolute or relative URL reference to the specific resource or object that triggered the webhook event.
             This link provides immediate access to the full details of the affected item in the source system.
-          example: /api/bankingservices/b-link/order-placement/v1/orders/abcd1234
-        createdAt:
+          example: /orders/e6751a48-0819-4482-98a4-760453ba770d
+        creationDateTime:
           type: string
           format: date-time
           description: Timestamp of the creation of the event notification.
