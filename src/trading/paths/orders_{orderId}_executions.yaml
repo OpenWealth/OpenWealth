@@ -16,7 +16,7 @@ get:
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
-        X-nextCursor:
+        Next-Cursor:
           $ref: ../../generics/components/headers/Next-Cursor.yaml
       content:
         application/json:

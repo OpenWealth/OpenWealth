@@ -273,7 +273,7 @@ paths:
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
-            X-nextCursor:
+            Next-Cursor:
               $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
@@ -389,7 +389,7 @@ paths:
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
-            X-nextCursor:
+            Next-Cursor:
               $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
@@ -1949,8 +1949,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
         as malformed request syntax.
@@ -1964,8 +1964,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
       content:
         application/problem+json:
@@ -1977,8 +1977,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Forbidden - The server understood the request but refuses to authorize it.
       content:
         application/problem+json:
@@ -1990,8 +1990,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Not Found - The origin server did not find a current representation for the target resource
         or is not willing to disclose that one exists.
@@ -2005,8 +2005,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Method Not Allowed - The method received in the request-line is known by the origin server
         but not supported by the target resource.
@@ -2020,8 +2020,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Conflict - The request conflicts with the current state of the target resource.
       content:
         application/problem+json:
@@ -2029,8 +2029,8 @@ components:
             $ref: '#/components/schemas/CommonErrorResponse'
     '429':
       headers:
-        X-Correlation-ID:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         When an SU sends too many lookup or polling requests in a given amount of time the SP shall 
         respond with HTTP 429 (Too many requests). This response may contain a Retry-After header 
@@ -2050,8 +2050,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
@@ -2063,8 +2063,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Not Implemented - The server does not support the functionality required to fulfill the request.
       content:
         application/problem+json:
@@ -2076,8 +2076,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
       content:
         application/problem+json:
@@ -2089,8 +2089,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Gateway Timeout - The server did not get a response in time that it needed in order to complete the request.
       content:
         application/problem+json:
@@ -2214,9 +2214,4 @@ components:
       schema:
         type: string
         example: en
-    X-Correlation-Id:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   securitySchemes: {}

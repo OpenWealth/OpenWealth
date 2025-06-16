@@ -3,8 +3,8 @@ headers:
     $ref: '../headers/Problem-Content-Type.yaml'
   Content-Language:
     $ref: '../headers/Content-Language.yaml'
-  X-Correlation-Id:
-    $ref: '../headers/X-Correlation-Id.yaml'
+  Correlation-Id:
+    $ref: '../headers/Correlation-Id.yaml'
 description: Gateway Timeout - The server did not get a response in time that it needed in order to complete the request.
 content:
   application/problem+json:

@@ -1,6 +1,6 @@
 headers:
-  X-Correlation-ID:
-    $ref: ../headers/X-Correlation-Id.yaml
+  Correlation-Id:
+    $ref: ../headers/Correlation-Id.yaml
 description: >
   When an SU sends too many lookup or polling requests in a given amount of time
   the SP shall 
