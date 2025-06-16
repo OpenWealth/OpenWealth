@@ -19,7 +19,7 @@ A comprehensive guide for naming `operationId` in RESTful API design to ensure c
 ### 1. Use Verb-Noun Patterns
 Structure your operationIds with a clear verb followed by the resource noun:
 
-| Opration Description | ✅ **Good** | ❌ **Avoid** |
+| Operation Description | ✅ **Good** | ❌ **Avoid** |
 |-------------|-------------------|----------|
 | Get all users | `getUsers` | `users` |
 | Create a new order | `createOrder` | `addOrder` |
@@ -31,7 +31,7 @@ Structure your operationIds with a clear verb followed by the resource noun:
 ### 2. Be Descriptive and Specific
 Make operationIds self-documenting:
 
-| Opration Description | ✅ **Good** | ❌ **Avoid** |
+| Operation Description | ✅ **Good** | ❌ **Avoid** |
 |-------------|-------------------|----------|
 | Get all active products | `listActiveProducts` | `getProducts` |
 | Open a new user account | `createUserAccount` | `createUser` |
@@ -57,7 +57,7 @@ Use standard HTTP method verbs consistently:
 ### CamelCase Format
 Use camelCase for consistency with most programming languages:
 
-| Opration Description | ✅ **Good** | ❌ **Avoid** |
+| Operation Description | ✅ **Good** | ❌ **Avoid** |
 |-------------|-------------------|----------|
 | Get user by tin | `getUserByTin` | `get_user_by_tin`, `GetUserByTin` |
 | Create an order item | `createOrderItem` | `create-order-item` |
