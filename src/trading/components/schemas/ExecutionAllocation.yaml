@@ -30,3 +30,8 @@ properties:
   bookingDate:
     description: Indicates the booking date for an allocated execution of the order.
     $ref: ../../../generics/components/schemas/Date.yaml
+  valueDate:
+    description: |
+      Date when calculating economic benefit for a cash amount of an allocated execution of the order,
+      if applicable.
+    $ref: ../../../generics/components/schemas/Date.yaml
