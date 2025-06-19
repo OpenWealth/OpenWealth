@@ -1,0 +1,27 @@
+{
+  "type": "tradable",
+  "legList": [
+    {
+      "side": "buy",
+      "quantity": 100000,
+      "quantityType": "faceAmount",
+      "baseInstrument": {
+        "identification": {
+          "identifier": "CH0012005267",
+          "type": "isin"
+        }
+      },
+      "quoteInstrument": {
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    }
+  ],
+  "customerIds": [
+    "customer-1",
+    "customer-2"
+  ]
+}

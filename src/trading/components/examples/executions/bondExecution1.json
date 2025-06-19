@@ -1,0 +1,13 @@
+{
+  "id": "bond-exec-1",
+  "orderId": "bond-order-1",
+  "orderLegIndex": 0,
+  "reference": "market-ref-exec-1",
+  "quantity": 100000,
+  "executionDateTime": "2018-04-13T11:30:00Z",
+  "price": 100.335,
+  "priceType": "percentage",
+  "placeOfTrade": {
+    "marketIdentificationCode": "XSWX"
+  }
+}
