@@ -1,0 +1,45 @@
+{
+  "type": "tradable",
+  "legList": [
+    {
+      "side": "buy",
+      "quantity": 100000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    },
+    {
+      "side": "sell",
+      "quantity": 100000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument",
+      "settlementDate": "2025-07-31"
+    }
+  ],
+  "customerIds": [
+    "customer-1"
+  ]
+}

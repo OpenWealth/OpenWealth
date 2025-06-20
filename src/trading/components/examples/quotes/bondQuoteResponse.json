@@ -1,6 +1,6 @@
 {
   "id": "bond-quote-1",
-  "type": "tradable",
+  "type": "indicative",
   "legList": [
     {
       "side": "buy",
@@ -22,9 +22,5 @@
       "priceType": "percentage",
       "price": 100.35
     }
-  ],
-  "customerIds": [
-    "customer-1",
-    "customer-2"
   ]
 }

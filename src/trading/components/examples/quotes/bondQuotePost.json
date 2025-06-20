@@ -1,5 +1,5 @@
 {
-  "type": "tradable",
+  "type": "indicative",
   "legList": [
     {
       "side": "buy",
@@ -19,9 +19,5 @@
       },
       "unitReference": "baseInstrument"
     }
-  ],
-  "customerIds": [
-    "customer-1",
-    "customer-2"
   ]
 }

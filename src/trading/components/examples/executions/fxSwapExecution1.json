@@ -1,0 +1,13 @@
+{
+  "id": "execution-fxswap-1",
+  "orderId": "order-fx-swap-1",
+  "orderLegIndex": 0,
+  "reference": "market-ref-fx-swap-exec-1",
+  "quantity": 100000,
+  "executionDateTime": "2025-04-27T11:30:00Z",
+  "price": 0.9745,
+  "priceType": "actual",
+  "placeOfTrade": {
+    "marketIdentificationCode": "XSWX"
+  }
+}

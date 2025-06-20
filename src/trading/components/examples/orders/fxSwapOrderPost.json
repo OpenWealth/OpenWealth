@@ -1,0 +1,67 @@
+{
+  "clientReference": "123-123125",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "quoteId": "fx-swap-quote-1",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 100000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    },
+    {
+      "index": 1,
+      "side": "sell",
+      "quantity": 100000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument",
+      "settlementDate": "2025-07-31"
+    }
+  ],
+  "allocationList": [
+    {
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-CHF-1",
+          "creditAccountId": "cash-EUR-1",
+          "quantity": 100000,
+          "quantityType": "unit"
+        },
+        {
+          "orderLegIndex": 1,
+          "debitAccountId": "cash-EUR-1",
+          "creditAccountId": "cash-CHF-1",
+          "quantity": 100000,
+          "quantityType": "unit"
+        }
+      ]
+    }
+  ]
+}
