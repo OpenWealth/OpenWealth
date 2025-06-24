@@ -40,8 +40,8 @@ properties:
         description: Signed decimal number.
       currency:
         $ref: ../../../generics/components/schemas/Currency.yaml
-  excerciseStyle:
-    $ref: ExcerciseStyle.yaml
+  exerciseStyle:
+    $ref: ExerciseStyle.yaml
   optionType:
     $ref: OptionType.yaml
   underlyingFinancialInstrument:

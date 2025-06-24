@@ -1,12 +1,12 @@
 get:
   tags:
-    - order-status
-  summary: Returns list of order statuses for a given order
+    - order-state
+  summary: Returns list of order states for a given order
   description: |
-    Returns list of order statuses for a given order. Paging is done based on
-    the order status object, i.e. if limit is set to 1, then 1 order status
+    Returns list of order states for a given order. Paging is done based on
+    the order state object, i.e. if limit is set to 1, then 1 order state
     object will be returned per page.
-  operationId: listOrderStatuses
+  operationId: listOrderStates
   parameters:
     - $ref: ../components/parameters/order_id.yaml
     - $ref: ../../generics/components/parameters/cursor.yaml
@@ -14,7 +14,7 @@ get:
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '200':
-      description: Returns list of accounts the requestor has access to.
+      description: Returns the list of order states for a given order.
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
@@ -23,7 +23,7 @@ get:
           schema:
             type: array
             items:
-              $ref: ../components/schemas/OrderStatus.yaml
+              $ref: ../components/schemas/OrderState.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

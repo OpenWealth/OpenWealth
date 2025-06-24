@@ -18,7 +18,7 @@ properties:
     $ref: EventType.yaml
   eventSubscriptionId:
     type: string
-    description: Id of the subscriptionthat caused the event to be triggered.
+    description: Id of the subscription that caused the event to be triggered.
     readOnly: true
     maxLength: 36
     example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f

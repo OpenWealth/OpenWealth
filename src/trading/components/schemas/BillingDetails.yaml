@@ -9,8 +9,8 @@ properties:
       Total amount of money to be paid or received in exchange for the securities.
       The amount includes the principal with any commissions and fees or accrued interest.
     $ref: Amount.yaml
-  accruedInterests:
-    $ref: 'AccruedInterest.yaml'
+  accruedInterest:
+    $ref: 'Amount.yaml'
   stampDuty:
     $ref: Amount.yaml
   withholdingTax:
@@ -18,8 +18,6 @@ properties:
   capitalGainTax:
     $ref: Amount.yaml
   financialTransactionTax:
-    $ref: Amount.yaml
-  otherTaxes:
     $ref: Amount.yaml
   transactionFee:
     $ref: Amount.yaml
@@ -35,7 +33,14 @@ properties:
     $ref: Amount.yaml
   thirdPartyFee:
     $ref: Amount.yaml
-  otherFee:
-    $ref: Amount.yaml
   others:
-    $ref: Amount.yaml
+    type: array
+    items:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the additional amount.
+          example: Foreign stamp duty
+        amount:
+          $ref: Amount.yaml

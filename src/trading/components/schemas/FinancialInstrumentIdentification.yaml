@@ -1,5 +1,5 @@
 type: object
-description: Schema of an financial istrument identification object.
+description: Schema of an financial instrument identification object.
 required:
   - identifier
   - type

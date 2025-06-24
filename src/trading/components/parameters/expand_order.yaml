@@ -1,7 +1,7 @@
 in: query
 name: expand_order
 schema:
-  type: string
+  type: array
   items:
     type: string
     enum:

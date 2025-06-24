@@ -4,7 +4,7 @@ required:
   - index
   - side
   - quantity
-  - qunatityType
+  - quantityType
   - baseInstrument
   - quoteInstrument
   - unitReference
@@ -28,7 +28,7 @@ properties:
     $ref: FinancialInstrument.yaml
   quoteInstrument:
     description: |
-      Instrument (i.e. currency) which is paid resp. recieved in exchange
+      Instrument (i.e. currency) which is paid resp. received in exchange
       for the purchase resp. sell of the baseInstrument.
     $ref: FinancialInstrument.yaml
   unitReference:
@@ -60,6 +60,9 @@ properties:
     type: number
     example: 167.30
   settlementDate:
+    description: |
+      Date when order leg should be settled.
+      This is relevant amongst others for forwards and swaps.
     $ref: ../../../generics/components/schemas/Date.yaml
   executedQuantity:
     description: |

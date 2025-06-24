@@ -3,7 +3,7 @@ get:
     - customer
   summary: Returns all customers (business partners) accessible for the logged in user
   description: |
-    This endpoint returns a highlevel list of customers accessible for the
+    This endpoint returns a list of customers accessible for the
     logged in user. Paging is done based on the customer object,
     i.e. if limit is set to 1, then 1 customer will be returned per page.
   operationId: listCustomers

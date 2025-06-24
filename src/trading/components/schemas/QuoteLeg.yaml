@@ -12,7 +12,7 @@ properties:
     $ref: OrderSide.yaml
   quantity:
     description: |
-      The total quantity (e.g. number of shares) of the quote leg. 
+      The total quantity (e.g. number of shares) of the quote leg.
       The unit type of this field is defined by the quantityType property.
     type: number
     example: 1000
