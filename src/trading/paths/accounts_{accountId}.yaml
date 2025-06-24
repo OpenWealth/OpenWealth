@@ -5,7 +5,7 @@ get:
   description: Returns a specific account by id accessible for the requesting user.
   operationId: getAccount
   parameters:
-    - $ref: ../../generics/components/parameters/path_accountId.yaml
+    - $ref: ../../generics/components/parameters/account_id.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '200':

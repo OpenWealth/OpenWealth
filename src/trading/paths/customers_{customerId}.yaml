@@ -5,7 +5,7 @@ get:
   description: Returns a specific customer by id accessible for the requesting user.
   operationId: getCustomer
   parameters:
-    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/customer_id.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '200':
