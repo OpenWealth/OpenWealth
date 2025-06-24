@@ -45,7 +45,7 @@ tags:
     description: Order operations.
   - name: execution
     description: Execution operations.
-  - name: order-status
+  - name: order-state
     description: Order status operations.
   - name: event-subscription
     description: Event subscription operations.

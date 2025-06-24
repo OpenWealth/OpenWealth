@@ -10,21 +10,21 @@ info:
     robo-advisors, custodians, and brokers - to support the order lifecycle with a standard API.
 
     #### What you can do with the API
-    1. **Discover entitled customers and accounts**  
-      * `GET /customers` & `GET /accounts` return the customers and accounts that the calling party is authorised to trade on.  
-    2. **Obtain executable prices**  
-      * `POST /quotes` lets you request *indicative* or *tradable* quotes (multi-leg FX, crypto, securities, etc.).  
-    3. **Place & manage orders**  
-      * `POST /orders` creates market, limit, stop, or stop-limit orders - single-leg, swap, or complex multi-leg
-      - with optional trader instructions, and best-effort execution flags.  
-      * `POST /orders/{orderId}/action/cancel` cancels an order.  
-    4. **Track status and execution**  
-      * `GET /orders`, `GET /orders/{orderId}`, `GET /orders/{orderId}/statuses` and `GET /orders/{orderId}/executions`
-      provide real-time transparency from *acknowledged* through *filled*,
-      including execution breakdown and billing details.  
-    5. **Subscribe to push events**  
-      * `POST /event-subscriptions` registers a callback URL so your application
-      receives webhook notifications (`order:created`, `order:statusUpdated`, …) instead of polling.
+    1. **Discover entitled customers and accounts**
+    * `GET /customers` & `GET /accounts` return the customers and accounts that the calling party is authorised to trade on.
+    2. **Obtain executable prices**
+    * `POST /quotes` lets you request *indicative* or *tradable* quotes (multi-leg FX, crypto, securities, etc.).
+    3. **Place & manage orders**
+    * `POST /orders` creates market, limit, stop, or stop-limit orders - single-leg, swap, or complex multi-leg
+    - with optional trader instructions, and best-effort execution flags.
+    * `POST /orders/{orderId}/action/cancel` cancels an order.
+    4. **Track status and execution**
+    * `GET /orders`, `GET /orders/{orderId}`, `GET /orders/{orderId}/states` and `GET /orders/{orderId}/executions
+    provide real-time transparency from *acknowledged* through *filled*,
+    including execution breakdown and billing details.
+    5. **Subscribe to push events**
+    * `POST /event-subscriptions` registers a callback URL so your application
+    receives webhook notifications (`order:created`, `order:statusUpdated`, …) instead of polling.
   contact:
     email: openwealth@synpulse.com
   license:
@@ -45,7 +45,7 @@ tags:
     description: Order operations.
   - name: execution
     description: Execution operations.
-  - name: order-status
+  - name: order-state
     description: Order status operations.
   - name: event-subscription
     description: Event subscription operations.
@@ -61,7 +61,7 @@ paths:
         - customer
       summary: Returns all customers (business partners) accessible for the logged in user
       description: |
-        This endpoint returns a highlevel list of customers accessible for the
+        This endpoint returns a list of customers accessible for the
         logged in user. Paging is done based on the customer object,
         i.e. if limit is set to 1, then 1 customer will be returned per page.
       operationId: listCustomers
@@ -107,7 +107,7 @@ paths:
       description: Returns a specific customer by id accessible for the requesting user.
       operationId: getCustomer
       parameters:
-        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/customer_id'
         - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
@@ -185,7 +185,7 @@ paths:
       description: Returns a specific account by id accessible for the requesting user.
       operationId: getAccount
       parameters:
-        - $ref: '#/components/parameters/path_accountId'
+        - $ref: '#/components/parameters/account_id'
         - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
@@ -453,13 +453,13 @@ paths:
   /orders/{orderId}/statuses:
     get:
       tags:
-        - order-status
-      summary: Returns list of order statuses for a given order
+        - order-state
+      summary: Returns list of order states for a given order
       description: |
-        Returns list of order statuses for a given order. Paging is done based on
-        the order status object, i.e. if limit is set to 1, then 1 order status
+        Returns list of order states for a given order. Paging is done based on
+        the order state object, i.e. if limit is set to 1, then 1 order state
         object will be returned per page.
-      operationId: listOrderStatuses
+      operationId: listOrderStates
       parameters:
         - $ref: '#/components/parameters/order_id'
         - $ref: '#/components/parameters/cursor'
@@ -467,7 +467,7 @@ paths:
         - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
-          description: Returns list of accounts the requestor has access to.
+          description: Returns the list of order states for a given order.
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
@@ -476,7 +476,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/OrderStatus'
+                  $ref: '#/components/schemas/OrderState'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -930,7 +930,7 @@ components:
       example: unit
     FinancialInstrumentIdentification:
       type: object
-      description: Schema of an financial istrument identification object.
+      description: Schema of an financial instrument identification object.
       required:
         - identifier
         - type
@@ -981,7 +981,7 @@ components:
       description: ISO 4217 code.
       pattern: ^[A-Z]{3}$
       example: CHF
-    ExcerciseStyle:
+    ExerciseStyle:
       type: string
       description: Specifies how the derivative instrument can be exercised.
       example: american
@@ -1042,8 +1042,8 @@ components:
               description: Signed decimal number.
             currency:
               $ref: '#/components/schemas/Currency'
-        excerciseStyle:
-          $ref: '#/components/schemas/ExcerciseStyle'
+        exerciseStyle:
+          $ref: '#/components/schemas/ExerciseStyle'
         optionType:
           $ref: '#/components/schemas/OptionType'
         underlyingFinancialInstrument:
@@ -1075,7 +1075,7 @@ components:
         - index
         - side
         - quantity
-        - qunatityType
+        - quantityType
         - baseInstrument
         - quoteInstrument
         - unitReference
@@ -1099,7 +1099,7 @@ components:
           $ref: '#/components/schemas/FinancialInstrument'
         quoteInstrument:
           description: |
-            Instrument (i.e. currency) which is paid resp. recieved in exchange
+            Instrument (i.e. currency) which is paid resp. received in exchange
             for the purchase resp. sell of the baseInstrument.
           $ref: '#/components/schemas/FinancialInstrument'
         unitReference:
@@ -1131,6 +1131,9 @@ components:
           type: number
           example: 167.3
         settlementDate:
+          description: |
+            Date when order leg should be settled.
+            This is relevant amongst others for forwards and swaps.
           $ref: '#/components/schemas/Date'
         executedQuantity:
           description: |
@@ -1190,24 +1193,6 @@ components:
           $ref: '#/components/schemas/Currency'
         foreignExchangeRate:
           $ref: '#/components/schemas/ForeignExchangeRate'
-    AccruedInterest:
-      type: object
-      description: Schema of an accrued interest object.
-      properties:
-        numberDaysAccrued:
-          type: integer
-          example: 28
-          description: Specifies the number of days used for calculating the accrued interest amount.
-        amount:
-          type: number
-          description: |
-            The monetary amount of interest that has been earned or accumulated on an account, investment,
-            or financial instrument up to a specific point in time, but has not yet been paid or received.
-          example: 105.3
-        currency:
-          $ref: '#/components/schemas/Currency'
-        foreignExchangeRate:
-          $ref: '#/components/schemas/ForeignExchangeRate'
     BillingDetails:
       type: object
       description: Schema of the billing details object associated to each allocation of an order.
@@ -1220,8 +1205,8 @@ components:
             Total amount of money to be paid or received in exchange for the securities.
             The amount includes the principal with any commissions and fees or accrued interest.
           $ref: '#/components/schemas/Amount'
-        accruedInterests:
-          $ref: '#/components/schemas/AccruedInterest'
+        accruedInterest:
+          $ref: '#/components/schemas/Amount'
         stampDuty:
           $ref: '#/components/schemas/Amount'
         withholdingTax:
@@ -1229,8 +1214,6 @@ components:
         capitalGainTax:
           $ref: '#/components/schemas/Amount'
         financialTransactionTax:
-          $ref: '#/components/schemas/Amount'
-        otherTaxes:
           $ref: '#/components/schemas/Amount'
         transactionFee:
           $ref: '#/components/schemas/Amount'
@@ -1246,10 +1229,17 @@ components:
           $ref: '#/components/schemas/Amount'
         thirdPartyFee:
           $ref: '#/components/schemas/Amount'
-        otherFee:
-          $ref: '#/components/schemas/Amount'
         others:
-          $ref: '#/components/schemas/Amount'
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                description: Description of the additional amount.
+                example: Foreign stamp duty
+              amount:
+                $ref: '#/components/schemas/Amount'
     ExecutionAllocation:
       type: object
       description: Schema of an execution allocation.
@@ -1267,6 +1257,7 @@ components:
         priceType:
           $ref: '#/components/schemas/PriceType'
         executionIds:
+          type: array
           description: List of market executions, that contributed to the allocated quantity.
           items:
             type: string
@@ -1492,38 +1483,28 @@ components:
           description: Provides additional instructions on the order which cannot be included within the structured fields of the message.
           example: at pre Market and today
     OrderStatus:
-      type: object
-      description: Provides the status of the order was at the given timestamp.
-      readOnly: true
-      properties:
-        status:
-          type: string
-          description: Shows in which stage of its life cycle an order is.
-          enum:
-            - acknowledged
-            - accepted
-            - customerRelease
-            - placed
-            - partiallyFilled
-            - filled
-            - executed
-            - cancelled
-            - partiallyCancelled
-            - marketCancelled
-            - pendingCancel
-            - rejected
-            - partiallyRejected
-            - marketRejected
-            - expired
-            - partiallyExpired
-            - marketExpired
-            - restated
-          example: partiallyFilled
-        statusDateTime:
-          description: |
-            Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp).
-            In accordance with ISO 8601.
-          $ref: '#/components/schemas/DateTime'
+      type: string
+      description: Shows in which stage of its life cycle an order is.
+      enum:
+        - acknowledged
+        - accepted
+        - customerRelease
+        - placed
+        - partiallyFilled
+        - filled
+        - executed
+        - cancelled
+        - partiallyCancelled
+        - marketCancelled
+        - pendingCancel
+        - rejected
+        - partiallyRejected
+        - marketRejected
+        - expired
+        - partiallyExpired
+        - marketExpired
+        - restated
+      example: partiallyFilled
     CancellationOrRejectionReason:
       type: object
       description: Indicates the reason, why an order is invalid/cancelled/rejected.
@@ -1535,18 +1516,18 @@ components:
           description: |
             Cancelled reason expressed as a code.
 
-            - invalidListing: issue with listing, 
-              i.e. base/quote instrument pair are not available on market.
+            - invalidListing: issue with listing,
+            i.e. base/quote instrument pair are not available on market.
 
             - invalidProperties: a property or property combination is not valid,
-              i.e. limit price mising for limit order.
+            i.e. limit price missing for limit order.
 
             - invalidInstrument: an instrument (base or quote) is not valid, i.e. invalid ISIN.
 
-            - invalidAccount: an account (credit or debit) is not valid, i.e. invalid IBAN
+            - invalidAccount: an account (credit or debit) is not valid, i.e. invalid IBAN.
 
             - invalidAllocation: an issue with a particular allocation,
-              i.e. the allocated quantity is invalid.
+            i.e. the allocated quantity is invalid.
 
             - other
           enum:
@@ -1559,7 +1540,7 @@ components:
           example: invalidListing
         details:
           type: object
-          description: Frettext field to give a human readable description of the cancellation reason.
+          description: Freetext field to give a human readable description of the cancellation reason.
           properties:
             content:
               type: string
@@ -1598,7 +1579,7 @@ components:
                 example: $.timeInForce
     Order:
       type: object
-      description: Schema of an order enity.
+      description: Schema of an order entity.
       required:
         - clientReference
         - executionType
@@ -1691,7 +1672,7 @@ components:
             Note that:
             - A single-leg order contains exactly 1 item in the array
             - A swap (fx, interest rate, etc) must contain exactly 2 items.
-              The first item refers to the near leg and the second to the far leg.
+            The first item refers to the near leg and the second to the far leg.
             - A multi-leg order consist of the according amount of involved instruments.
           items:
             $ref: '#/components/schemas/OrderLeg'
@@ -1706,9 +1687,9 @@ components:
           description: |
             The entity physically transmitting the order to the execution venue.
             This role is often fulfilled by:
-              - Investment firms or brokers executing trades on behalf of clients.
-              - Systematic internalisers or trading venues handling order transmission.
-              - In some cases, the order placer may also be the decision maker if no third-party authorization exists.
+            - Investment firms or brokers executing trades on behalf of clients.
+            - Systematic internalisers or trading venues handling order transmission.
+            - In some cases, the order placer may also be the decision maker if no third-party authorization exists.
           type: string
           maxLength: 128
           example: Max Muster
@@ -1727,11 +1708,13 @@ components:
         orderDateTime:
           type: string
           format: date-time
-          example: '2018-04-13T11:11:11Z'
+          example: '2025-04-13T11:11:11Z'
           description: Date and time the order has been received. In accordance with ISO 8601.
           readOnly: true
         status:
           $ref: '#/components/schemas/OrderStatus'
+        statusDateTime:
+          $ref: '#/components/schemas/DateTime'
         cancellationOrRejectionReasonList:
           type: array
           description: List of reasons for the cancellation/rejection of the order.
@@ -1784,6 +1767,19 @@ components:
           $ref: '#/components/schemas/PriceType'
         placeOfTrade:
           $ref: '#/components/schemas/PlaceOfTrade'
+    OrderState:
+      type: object
+      description: |
+        Provides the status of the order and the timestamp of transition to the given status.
+      readOnly: true
+      properties:
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        statusDateTime:
+          description: |
+            Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp).
+            In accordance with ISO 8601.
+          $ref: '#/components/schemas/DateTime'
     QuoteLeg:
       type: object
       description: Schema of a quote leg object.
@@ -1799,7 +1795,7 @@ components:
           $ref: '#/components/schemas/OrderSide'
         quantity:
           description: |
-            The total quantity (e.g. number of shares) of the quote leg. 
+            The total quantity (e.g. number of shares) of the quote leg.
             The unit type of this field is defined by the quantityType property.
           type: number
           example: 1000
@@ -1857,16 +1853,22 @@ components:
             - indicative
             - tradable
           example: tradable
-        expiryDateTime:
-          description: DateTime when quote expires according to ISO 8601.
+        creationDateTime:
+          description: DateTime when quote was created, format according to ISO 8601.
           type: string
           format: date-time
-          example: '2018-04-13T16:00:00Z'
+          example: '2025-04-13T16:00:00Z'
+          readOnly: true
+        expiryDateTime:
+          description: DateTime when quote expires, format according to ISO 8601.
+          type: string
+          format: date-time
+          example: '2025-04-13T16:00:00Z'
           readOnly: true
         customerIds:
           description: |
             List of unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
-            Depending on the custodian the customer context may be relvant to provide a tradeable quote.
+            Depending on the custodian the customer context may be relevant to provide a tradeable quote.
             If multiple customerIds are provided a common practice is to return the max/min quote among
             the customer list.
           type: array
@@ -1932,7 +1934,7 @@ components:
           $ref: '#/components/schemas/EventType'
         eventSubscriptionId:
           type: string
-          description: Id of the subscriptionthat caused the event to be triggered.
+          description: Id of the subscription that caused the event to be triggered.
           readOnly: true
           maxLength: 36
           example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
@@ -2037,9 +2039,10 @@ components:
         Correlation-Id:
           $ref: '#/components/headers/Correlation-Id'
       description: |
-        When an SU sends too many lookup or polling requests in a given amount of time the SP shall 
-        respond with HTTP 429 (Too many requests). This response may contain a Retry-After header 
-        indicating how long the SU must wait before making a new request. (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429).
+        When an SU sends too many lookup or polling requests in a given amount of time
+        the SP shall respond with HTTP 429 (Too many requests). This response may contain a
+        Retry-After header indicating how long the SU must wait before making a new request.
+        (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429).
       content:
         application/problem+json:
           schema:
@@ -2125,7 +2128,7 @@ components:
       schema:
         type: string
       description: Unique ID (defined by the caller) which will be reflected back in the response.
-    path_customerId:
+    customer_id:
       in: path
       name: customerId
       required: true
@@ -2136,7 +2139,7 @@ components:
         example: 123123-456
         description: Unique and unambiguous identification used by the bank for the customer.
       description: Customer ID Parameter.
-    path_accountId:
+    account_id:
       in: path
       name: accountId
       required: true
@@ -2149,7 +2152,7 @@ components:
       in: query
       name: expand_order
       schema:
-        type: string
+        type: array
         items:
           type: string
           enum:
