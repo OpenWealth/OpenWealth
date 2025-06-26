@@ -6,6 +6,7 @@ required:
 properties:
   id:
     type: string
+    maxLength: 128
     example: 6dca5123-e370-4272-8ef4-68d421f52f6e
     description: Unique identifier of given quote.
     readOnly: true

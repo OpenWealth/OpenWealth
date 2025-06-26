@@ -46,7 +46,7 @@ tags:
   - name: execution
     description: Execution operations.
   - name: order-state
-    description: Order status operations.
+    description: Order state operations.
   - name: event-subscription
     description: Event subscription operations.
   - name: event-notification
@@ -450,7 +450,7 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-  /orders/{orderId}/statuses:
+  /orders/{orderId}/states:
     get:
       tags:
         - order-state
@@ -847,7 +847,7 @@ components:
           maxLength: 128
           example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
           description: |
-            Unique and unambiguous identification for the account. 
+            Unique and unambiguous identification for the account.
             The IBAN should NOT be the account identifier.
           readOnly: true
         type:
@@ -937,6 +937,7 @@ components:
       properties:
         identifier:
           type: string
+          maxLength: 128
           example: CH0012005267
           description: Instrument identification.
         type:
@@ -1840,6 +1841,7 @@ components:
       properties:
         id:
           type: string
+          maxLength: 128
           example: 6dca5123-e370-4272-8ef4-68d421f52f6e
           description: Unique identifier of given quote.
           readOnly: true

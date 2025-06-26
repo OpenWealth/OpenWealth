@@ -46,7 +46,7 @@ tags:
   - name: execution
     description: Execution operations.
   - name: order-state
-    description: Order status operations.
+    description: Order state operations.
   - name: event-subscription
     description: Event subscription operations.
   - name: event-notification
@@ -73,7 +73,7 @@ paths:
     $ref: paths/orders_{orderId}_executions.yaml
   /orders/{orderId}/executions/{executionId}:
     $ref: paths/orders_{orderId}_executions_{executionId}.yaml
-  /orders/{orderId}/statuses:
+  /orders/{orderId}/states:
     $ref: paths/orders_{orderId}_states.yaml
   /quotes:
     $ref: paths/quotes.yaml
