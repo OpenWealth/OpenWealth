@@ -74,7 +74,7 @@ components:
           $ref: '#/components/schemas/EventType'
         eventSubscriptionId:
           type: string
-          description: Id of the subscriptionthat caused the event to be triggered.
+          description: Id of the subscription that caused the event to be triggered.
           readOnly: true
           maxLength: 36
           example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
@@ -136,8 +136,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
         as malformed request syntax.
@@ -151,8 +151,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
@@ -182,9 +182,4 @@ components:
       schema:
         type: string
         example: en
-    X-Correlation-Id:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   securitySchemes: {}
