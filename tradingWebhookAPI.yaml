@@ -24,7 +24,7 @@ paths:
       tags:
         - event-notification
       summary: Push notification towards TPP
-      description: Push notficiations for subscribed event notifications.
+      description: Push notification for subscribed event notifications.
       operationId: pushEventNotification
       parameters:
         - $ref: '#/components/parameters/correlation_id'

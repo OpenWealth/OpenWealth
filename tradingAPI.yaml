@@ -1516,20 +1516,14 @@ components:
           type: string
           description: |
             Cancelled reason expressed as a code.
-
             - invalidListing: issue with listing,
             i.e. base/quote instrument pair are not available on market.
-
             - invalidProperties: a property or property combination is not valid,
             i.e. limit price missing for limit order.
-
             - invalidInstrument: an instrument (base or quote) is not valid, i.e. invalid ISIN.
-
             - invalidAccount: an account (credit or debit) is not valid, i.e. invalid IBAN.
-
             - invalidAllocation: an issue with a particular allocation,
             i.e. the allocated quantity is invalid.
-
             - other
           enum:
             - invalidListing
