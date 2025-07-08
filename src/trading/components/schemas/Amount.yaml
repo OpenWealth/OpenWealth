@@ -1,0 +1,15 @@
+title: Amount
+type: object
+description: Schema of an amount entity.
+required:
+  - value
+  - currency
+properties:
+  value:
+    type: number
+    example: 12000
+    description: Signed decimal number.
+  currency:
+    $ref: ../../../generics/components/schemas/Currency.yaml
+  foreignExchangeRate:
+    $ref: 'ForeignExchangeRate.yaml'

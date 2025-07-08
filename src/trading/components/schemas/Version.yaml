@@ -1,0 +1,7 @@
+description: Indicates to which version of the respective API the notification is belonging to.
+type: string
+enum:
+  - v1
+  - v2
+  - v3
+example: v2

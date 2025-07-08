@@ -1,0 +1,8 @@
+type: string
+description: Specifies how the derivative instrument can be exercised.
+example: american
+enum:
+  - american
+  - european
+  - bermudan
+  - asian

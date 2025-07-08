@@ -1,0 +1,35 @@
+post:
+  tags:
+    - order
+  summary: Cancellation of a specific order
+  description: Places the cancellation request for a specific order.
+  operationId: actionCancelOrder
+  parameters:
+    - $ref: ../components/parameters/order_id.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  responses:
+    '202':
+      description: Order cancellation received for further processing.
+      headers:
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Order.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

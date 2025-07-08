@@ -1,7 +1,0 @@
-type: object
-description: Provides the status of the order was at a certain time in its lifecycle.
-properties:
-  status:
-    $ref: 'orderStatus.yaml'
-  statusDateTime:
-    $ref: 'statusDateTime.yaml'

@@ -1,0 +1,17 @@
+type: object
+description: |
+  Indicates the rate of a fx transaction for one source currency unit to the target currency.
+  E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
+required:
+  - value
+  - sourceCurrency
+  - targetCurrency
+properties:
+  value:
+    type: number
+    description: Current rate as decimal.
+    example: 0.98
+  sourceCurrency:
+    $ref: ../../../generics/components/schemas/Currency.yaml
+  targetCurrency:
+    $ref: ../../../generics/components/schemas/Currency.yaml

@@ -3,8 +3,8 @@ headers:
     $ref: '../headers/Problem-Content-Type.yaml'
   Content-Language:
     $ref: '../headers/Content-Language.yaml'
-  X-Correlation-Id:
-    $ref: '../headers/X-Correlation-Id.yaml'
+  Correlation-Id:
+    $ref: '../headers/Correlation-Id.yaml'
 description: Forbidden - The server understood the request but refuses to authorize it.
 content:
   application/problem+json:

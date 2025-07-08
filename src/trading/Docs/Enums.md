@@ -97,7 +97,6 @@
 | cancelledByOther | Any other party than instructing party or hub cancelled the order (e.g. exchange, broker, etc.) |
 | cannotContainMarketIdentificationAndMarketDescription | Place of trade cannot contain market identification and market description at the same time |
 | currencyNotSupportedForFinancialInstrument | The chosen currency is not available for the selected financialInstrument |
-| displayQuantityNotImplemented | This attribute is not supported by the receiving party |
 | endOfLife | Order reached the endOfLife (e.g. due to expiry) |
 | executionTypeInconsequential | Inconsequencial executionType |
 | executionTypeNotSupported | Execution type not supported |
@@ -122,14 +121,13 @@
 | orderQuantityDeviatesFromSumOfAllocationQuantities | The total quantity of the order differs from the sum of all allocation amounts |
 | orderQuantityTooHigh | The order quantity is higher than what the financial institution accepts |
 | orderQuantityTooSmall | The amount of the orderQuantity does not fulfill the minimum size of the selected financialInstrument |
-| orderQuantityTypeNotImplemented | The selected type of the orderQuantity is not implemented |
+| orderQuantityTypeNotSupported | The selected type of the orderQuantity is not supported |
 | orderQuantityTypeWrong | The selected type of the orderQuantity does not match the selected financialInstrument |
 | orderTypeNotSupportedByMarket | Given order type is not valid for given market |
 | other | Order has been cancelled due to a different reason |
-| placeOfTradeNotImplemented | PlaceOfTrade and its subattributes are not implemented |
 | placeOfTradeNotSupported | PlaceOfTrade is not supported |
 | productExpired | Product indicated in the order is expired |
-| selectedTimeInForceNotImplemented | The selected timeInForce instruction is not implemented/supported |
+| selectedTimeInForceNotSupported | The selected timeInForce instruction is not supported |
 | stopPriceMissingForExecutionType | StopPrice is missing (for executionTypes stop and stopLimit) |
 | stopPriceNotAllowedForExecutionType | StopPrice is not allowed for executionType market or limit |
 | timeInForceAndExpiryDateInconsistent | Time in force for day not consistent with expiry date (if both attributes are delivered in the request) |

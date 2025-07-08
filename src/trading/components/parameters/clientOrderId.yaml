@@ -1,7 +1,0 @@
-in: path
-name: clientOrderId
-required: true
-schema:
-  type: string
-  maxLength: 20
-description: The security order id. This Id corresponds with the clientOrderIdentification.

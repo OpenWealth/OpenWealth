@@ -1,0 +1,84 @@
+get:
+  summary: Get event subscriptions
+  description: Get list of event subscriptions.
+  operationId: listEventSubscriptions
+  parameters:
+    - $ref: ../../generics/components/parameters/cursor.yaml
+    - $ref: ../../generics/components/parameters/limit.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  tags:
+    - event-subscription
+  responses:
+    '200':
+      description: Returns a list of event subscriptions.
+      headers:
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+        Next-Cursor:
+          $ref: ../../generics/components/headers/Next-Cursor.yaml
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              eventNotifications:
+                type: array
+                items:
+                  $ref: ../components/schemas/EventSubscription.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+    '504':
+      $ref: ../../generics/components/responses/504.yaml
+post:
+  summary: Create event subscription
+  description: Create an event subscription.
+  operationId: createEventSubscription
+  parameters:
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  tags:
+    - event-subscription
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EventSubscription.yaml
+  responses:
+    '201':
+      description: Returns created event subscription.
+      headers:
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EventSubscription.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '409':
+      $ref: ../../generics/components/responses/409.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+    '504':
+      $ref: ../../generics/components/responses/504.yaml

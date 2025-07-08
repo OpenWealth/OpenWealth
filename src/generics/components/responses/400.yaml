@@ -3,8 +3,8 @@ headers:
     $ref: '../headers/Problem-Content-Type.yaml'
   Content-Language:
     $ref: '../headers/Content-Language.yaml'
-  X-Correlation-Id:
-    $ref: '../headers/X-Correlation-Id.yaml'
+  Correlation-Id:
+    $ref: '../headers/Correlation-Id.yaml'
 description: |
   Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
   as malformed request syntax.

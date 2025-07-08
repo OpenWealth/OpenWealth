@@ -1,0 +1,45 @@
+type: object
+description: Schema of a market execution entity.
+required:
+  - id
+  - orderId
+  - orderLegIndex
+  - reference
+  - quantity
+properties:
+  id:
+    type: string
+    description: Unambiguous identifier for the execution.
+    maxLength: 128
+    example: b7469157-02ea-4938-a485-bc3d9ff43f4d
+  orderId:
+    type: string
+    description: Unambiguous identifier for the order, as assigned by the confirming party.
+    maxLength: 128
+    example: e6751a48-0819-4482-98a4-760453ba770d
+  orderLegIndex:
+    description: Integer referring the associated order leg in the order.
+    type: integer
+    example: 0
+  reference:
+    type: string
+    description: |
+      Identification or reference of the executed trade.
+    example: MTIzLTk4ODc3NTY=
+  quantity:
+    description: Total quantity (e.g. number of shares) executed.
+    type: number
+    example: 1000
+  quantityType:
+    $ref: QuantityType.yaml
+  executionDateTime:
+    description: DateTime of the single execution.
+    $ref: ../../../generics/components/schemas/DateTime.yaml
+  price:
+    description: The price for quantity that has traded.
+    type: number
+    example: 157.50
+  priceType:
+    $ref: PriceType.yaml
+  placeOfTrade:
+    $ref: PlaceOfTrade.yaml

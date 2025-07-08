@@ -1,0 +1,47 @@
+get:
+  summary: Get event notifications list
+  description: Get aggregated event notification list by event subscription.
+  operationId: listEventSubscriptionEventNotifications
+  parameters:
+    - $ref: ../components/parameters/event_subscription_id.yaml
+    - $ref: ../components/parameters/from_event_date_time.yaml
+    - $ref: ../../generics/components/parameters/cursor.yaml
+    - $ref: ../../generics/components/parameters/limit.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  tags:
+    - event-notification
+  responses:
+    '200':
+      description: Returns a list of event notifications by eventSubscription.
+      headers:
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+        Next-Cursor:
+          $ref: ../../generics/components/headers/Next-Cursor.yaml
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              eventNotifications:
+                type: array
+                items:
+                  $ref: ../components/schemas/EventNotification.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '429':
+      $ref: ../../generics/components/responses/429.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+    '504':
+      $ref: ../../generics/components/responses/504.yaml

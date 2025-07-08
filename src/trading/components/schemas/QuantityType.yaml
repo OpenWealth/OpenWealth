@@ -1,0 +1,8 @@
+type: string
+description: Specifies the type of a quantity.
+enum:
+  - unit
+  - faceAmount
+  - amortisedValue
+  - digitalTokenUnit
+example: unit

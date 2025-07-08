@@ -1,0 +1,42 @@
+get:
+  tags:
+    - order-state
+  summary: Returns list of order states for a given order
+  description: |
+    Returns list of order states for a given order. Paging is done based on
+    the order state object, i.e. if limit is set to 1, then 1 order state
+    object will be returned per page.
+  operationId: listOrderStates
+  parameters:
+    - $ref: ../components/parameters/order_id.yaml
+    - $ref: ../../generics/components/parameters/cursor.yaml
+    - $ref: ../../generics/components/parameters/limit.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  responses:
+    '200':
+      description: Returns the list of order states for a given order.
+      headers:
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/OrderState.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

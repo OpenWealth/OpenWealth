@@ -1,0 +1,56 @@
+{
+  "clientReference": "123-123124",
+  "orderDateTime": "2018-04-13T11:11:11Z",
+  "side": "buy",
+  "quantity": {
+    "type": "unit",
+    "value": 12
+  },
+  "baseInstrument": {
+    "type": "basic",
+    "identification": {
+      "identifier": "ETH",
+      "type": "cryptoCurrency"
+    }
+  },
+  "quoteInstrument": {
+    "type": "basic",
+    "identification": {
+      "identifier": "BTC",
+      "type": "cryptoCurrency"
+    }
+  },
+  "executionType": "stopLimit",
+  "timeInForce": "goodTillDate",
+  "expiryDateTime": "2018-04-13T18:00:00Z",
+  "limitPrice": {
+    "type": "actual",
+    "value": 0.001,
+    "currency": "CHF"
+  },
+  "stopPrice": {
+    "type": "actual",
+    "value": 0.002,
+    "currency": "CHF"
+  },
+  "allocationList": [
+    {
+      "id": "allocation-1",
+      "orderId": "order-2",
+      "debitAccount": {
+        "id": "safe-1",
+        "type": "safekeepingAccount",
+        "number": "1234-12"
+      },
+      "creditAccount": {
+        "id": "safe-1",
+        "type": "safekeepingAccount",
+        "number": "1234-12"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 12
+      }
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+type: object
+description: Schema of an order leg.
+required:
+  - index
+  - side
+  - quantity
+  - quantityType
+  - baseInstrument
+  - quoteInstrument
+  - unitReference
+properties:
+  index:
+    description: Integer uniquely identifying the order leg in the list of legs (array index).
+    type: integer
+    example: 0
+  side:
+    $ref: OrderSide.yaml
+  quantity:
+    description: |
+      The total quantity (e.g. number of shares) of the order leg.
+      The unit type of this field is defined by the quantityType property.
+    type: number
+    example: 12000
+  quantityType:
+    $ref: QuantityType.yaml
+  baseInstrument:
+    description: Instrument subject to sale or purchase.
+    $ref: FinancialInstrument.yaml
+  quoteInstrument:
+    description: |
+      Instrument (i.e. currency) which is paid resp. received in exchange
+      for the purchase resp. sell of the baseInstrument.
+    $ref: FinancialInstrument.yaml
+  unitReference:
+    $ref: UnitReference.yaml
+  positionEffect:
+    $ref: PositionEffect.yaml
+  priceType:
+    type: string
+    description: |
+      - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+      - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+      Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
+    example: actual
+    enum:
+      - actual
+      - percentage
+  limitPrice:
+    description: |
+      Limit price per unit of baseInstrument (e.g. per share) in number of quote instrument.
+      Required for executionType 'limit' or 'stopLimit'.
+      Type of price (actual or percentage) is defined py the priceType property.
+    type: number
+    example: 167.30
+  stopPrice:
+    description: |
+      Price per unit of baseInstrument (e.g. per share) in number of quote instrument.
+      Required for executionType 'stop' or 'stopLimit'.
+      Type of price (actual or percentage) is defined py the priceType property.
+    type: number
+    example: 167.30
+  settlementDate:
+    description: |
+      Date when order leg should be settled.
+      This is relevant amongst others for forwards and swaps.
+    $ref: ../../../generics/components/schemas/Date.yaml
+  executedQuantity:
+    description: |
+      Quantity of the baseInstrument that has been executed.
+      The unit type of this field is defined by the quantityType property.
+    type: number
+    example: 500
+    readOnly: true
+  cancelledQuantity:
+    description: |
+      Quantity of the baseInstrument that was cancelled.
+      The unit type of this field is defined by the quantityType property.
+    type: number
+    example: 100
+    readOnly: true

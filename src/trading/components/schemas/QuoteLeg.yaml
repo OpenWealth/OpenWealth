@@ -1,0 +1,50 @@
+type: object
+description: Schema of a quote leg object.
+required:
+  - side
+  - quantity
+  - quantityType
+  - baseInstrument
+  - quoteInstrument
+  - unitReference
+properties:
+  side:
+    $ref: OrderSide.yaml
+  quantity:
+    description: |
+      The total quantity (e.g. number of shares) of the quote leg.
+      The unit type of this field is defined by the quantityType property.
+    type: number
+    example: 1000
+  quantityType:
+    $ref: QuantityType.yaml
+  baseInstrument:
+    description: Instrument subject to intended sale or purchase.
+    $ref: FinancialInstrument.yaml
+  quoteInstrument:
+    description: |
+      Instrument (i.e. currency) for which the quote is requested in exchange
+      for the purchase resp. sell of the baseInstrument.
+    $ref: FinancialInstrument.yaml
+  unitReference:
+    $ref: UnitReference.yaml
+  settlementDate:
+    $ref: ../../../generics/components/schemas/Date.yaml
+  price:
+    description: |
+      If priceType is
+      - 'actual': Price offer as units of quoteInstrument per unit baseInstrument.
+      - 'percentage': Price offer as percentage of nominal value of the baseInstrument.
+    type: number
+    example: 157.50
+    readOnly: true
+  priceType:
+    type: string
+    description: |
+      - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+      - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+    enum:
+      - actual
+      - percentage
+    example: actual
+    readOnly: true

@@ -1,0 +1,8 @@
+type: string
+description: |
+  Specifies whether it is a Call option (right to purchase a specific underlying asset)
+  or a Put option (right to sell a specific underlying asset).
+enum:
+  - call
+  - put
+example: call

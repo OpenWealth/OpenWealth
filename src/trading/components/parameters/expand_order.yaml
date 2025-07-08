@@ -1,0 +1,17 @@
+in: query
+name: expand_order
+schema:
+  type: array
+  items:
+    type: string
+    enum:
+      - allocationList
+      - allocationList.executionAllocationList
+      - cancellationOrRejectionReasonList
+description: |
+  Expand related resources. Comma-separated values, supporting:
+  - `allocationList`: Include allocationList details.
+  - `allocationList.executionAllocationList`: Include executionAllocationList details on the allocation.
+  - `cancellationOrRejectionReasonList`: Include cancellationOrRejectionReasonList
+style: form
+explode: false

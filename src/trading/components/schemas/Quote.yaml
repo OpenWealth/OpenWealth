@@ -1,0 +1,51 @@
+type: object
+description: Schema of a quote entity.
+required:
+  - type
+  - legList
+properties:
+  id:
+    type: string
+    maxLength: 128
+    example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+    description: Unique identifier of given quote.
+    readOnly: true
+  type:
+    type: string
+    description: |
+      Type of quote requested.
+      - An indicative quote is used to inform a counterparty of a market. An indicative quote does not result directly in a trade.
+      - A tradeable quote is submitted to a market and will result directly in a trade against other orders and quotes in a market.
+    enum:
+      - indicative
+      - tradable
+    example: tradable
+  creationDateTime:
+    description: DateTime when quote was created, format according to ISO 8601.
+    type: string
+    format: date-time
+    example: 2025-04-13T16:00:00Z
+    readOnly: true
+  expiryDateTime:
+    description: DateTime when quote expires, format according to ISO 8601.
+    type: string
+    format: date-time
+    example: 2025-04-13T16:00:00Z
+    readOnly: true
+  customerIds:
+    description: |
+      List of unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+      Depending on the custodian the customer context may be relevant to provide a tradeable quote.
+      If multiple customerIds are provided a common practice is to return the max/min quote among
+      the customer list.
+    type: array
+    items:
+      type: string
+      maxLength: 128
+      example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+  legList:
+    type: array
+    description: List of legs of the order quote.
+    items:
+      $ref: QuoteLeg.yaml
+    minItems: 1

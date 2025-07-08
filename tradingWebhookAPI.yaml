@@ -1,0 +1,185 @@
+openapi: 3.0.0
+info:
+  version: 3.0.0-draft
+  title: OpenWealth trading event notification API - TPP Endpoint
+  description: API for receiving event notification for OpenWealth APIs.
+  contact:
+    email: openwealth@synpulse.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - description: The TPP webhook server url.
+    url: https://www.tpp-url.ch
+security: []
+tags:
+  - name: event-notification
+    description: Order event notifications.
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
+paths:
+  /event-notifications:
+    post:
+      tags:
+        - event-notification
+      summary: Push notification towards TPP
+      description: Push notification for subscribed event notifications.
+      operationId: pushEventNotification
+      parameters:
+        - $ref: '#/components/parameters/correlation_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventNotification'
+      responses:
+        '202':
+          description: Notification accepted.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+components:
+  schemas:
+    EventType:
+      description: Event type the subscription should apply to AND reason why a notification is sent.
+      type: string
+      enum:
+        - heartbeat
+        - order:doneForDay
+        - order:statusUpdated
+      example: order:statusUpdated
+    EventNotification:
+      type: object
+      description: Schema of an event notification entity.
+      required:
+        - id
+        - eventType
+        - eventSubscriptionId
+        - resourceLink
+      properties:
+        id:
+          type: string
+          description: Unique and unambiguous identification (i.e. UUID) of the event subscription.
+          example: 120066c9-58a1-432b-aa60-712fae7f143e
+        version:
+          type: string
+          description: Version of the notification schema.
+          example: '1.0'
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        eventSubscriptionId:
+          type: string
+          description: Id of the subscription that caused the event to be triggered.
+          readOnly: true
+          maxLength: 36
+          example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
+        resourceLink:
+          type: string
+          description: |
+            The resourceLink is an absolute or relative URL reference to the specific resource or object that triggered the webhook event.
+            This link provides immediate access to the full details of the affected item in the source system.
+          example: /orders/e6751a48-0819-4482-98a4-760453ba770d
+        creationDateTime:
+          type: string
+          format: date-time
+          description: Timestamp of the creation of the event notification.
+          example: 2022-10-26T07:58:30.996+0100
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for CommonErrorResponse.
+      type: string
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+        - /problems/TOO_MANY_REQUESTS
+      example: /problems/TECHNICAL_ERROR
+    CommonErrorResponse:
+      title: CommonErrorResponse
+      type: object
+      description: Common error response.
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
+          type: string
+          description: Title of the error response.
+          example: This is the general problem description
+        detail:
+          type: string
+          description: Detailed description of the error response.
+          example: Detailed problem description with respect to the current request
+        instance:
+          type: string
+          description: Entity instance that threw the error.
+          example: path/to/corresponding/resource
+  responses:
+    '400':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
+        as malformed request syntax.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '500':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+  parameters:
+    correlation_id:
+      in: header
+      name: Correlation-Id
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+  headers:
+    Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    Problem-Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807.
+      schema:
+        type: string
+        example: application/problem+json
+    Content-Language:
+      description: Response language - always en.
+      schema:
+        type: string
+        example: en
+  securitySchemes: {}

@@ -1,0 +1,51 @@
+type: object
+description: Schema of an account entity.
+required:
+  - id
+  - type
+  - number
+properties:
+  id:
+    type: string
+    maxLength: 128
+    example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
+    description: |
+      Unique and unambiguous identification for the account.
+      The IBAN should NOT be the account identifier.
+    readOnly: true
+  type:
+    type: string
+    description: Indicates the type of the account.
+    example: safekeepingAccount
+    enum:
+      - cashAccount
+      - safekeepingAccount
+      - other
+  iban:
+    type: string
+    description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
+    maxLength: 34
+    example: CH1234567891234
+  number:
+    type: string
+    description: Contains the accounts custody proprietary account number for an account if available.
+    maxLength: 70
+    example: 123-1234-234
+  referenceCurrency:
+    type: string
+    description: |
+      Reference currency of the account - currency for a cash account and reference currency for a safekeeping account.
+    example: CHF
+  customerId:
+    description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+    type: string
+    maxLength: 128
+    example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+  accessType:
+    type: string
+    description: Indicates what type of access the requestor has for the specified account.
+    enum:
+      - read
+      - write
+    example: read
+    readOnly: true

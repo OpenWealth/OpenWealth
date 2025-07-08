@@ -1,0 +1,2221 @@
+openapi: 3.0.0
+info:
+  version: 3.0.0-draft
+  title: Trading API
+  description: |
+    ### OpenWealth Trading API - Standardised Order & Trade Lifecycle
+
+    The **Trading API** (previously *Order Placement API*) is the REST-based API defined by the
+    **OpenWealth Association** that enables wealth-management participants - portfolio-management systems,
+    robo-advisors, custodians, and brokers - to support the order lifecycle with a standard API.
+
+    #### What you can do with the API
+    1. **Discover entitled customers and accounts**
+    * `GET /customers` & `GET /accounts` return the customers and accounts that the calling party is authorised to trade on.
+    2. **Obtain executable prices**
+    * `POST /quotes` lets you request *indicative* or *tradable* quotes (multi-leg FX, crypto, securities, etc.).
+    3. **Place & manage orders**
+    * `POST /orders` creates market, limit, stop, or stop-limit orders - single-leg, swap, or complex multi-leg
+    - with optional trader instructions, and best-effort execution flags.
+    * `POST /orders/{orderId}/action/cancel` cancels an order.
+    4. **Track status and execution**
+    * `GET /orders`, `GET /orders/{orderId}`, `GET /orders/{orderId}/states` and `GET /orders/{orderId}/executions
+    provide real-time transparency from *acknowledged* through *filled*,
+    including execution breakdown and billing details.
+    5. **Subscribe to push events**
+    * `POST /event-subscriptions` registers a callback URL so your application
+    receives webhook notifications (`order:created`, `order:statusUpdated`, …) instead of polling.
+  contact:
+    email: openwealth@synpulse.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - description: Your server url.
+    url: https://www.openwealth.ch
+security: []
+tags:
+  - name: customer
+    description: Customer operations.
+  - name: account
+    description: Account operations.
+  - name: quote
+    description: Quote operations.
+  - name: order
+    description: Order operations.
+  - name: execution
+    description: Execution operations.
+  - name: order-state
+    description: Order state operations.
+  - name: event-subscription
+    description: Event subscription operations.
+  - name: event-notification
+    description: Event notification operations.
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
+paths:
+  /customers:
+    get:
+      tags:
+        - customer
+      summary: Returns all customers (business partners) accessible for the logged in user
+      description: |
+        This endpoint returns a list of customers accessible for the
+        logged in user. Paging is done based on the customer object,
+        i.e. if limit is set to 1, then 1 customer will be returned per page.
+      operationId: listCustomers
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '200':
+          description: Returns a list with all customers.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}:
+    get:
+      tags:
+        - customer
+      summary: Returns a specific customer by id
+      description: Returns a specific customer by id accessible for the requesting user.
+      operationId: getCustomer
+      parameters:
+        - $ref: '#/components/parameters/customer_id'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '200':
+          description: Returns a the specified customer.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /accounts:
+    get:
+      tags:
+        - account
+      summary: Returns list of accounts the requestor has access to
+      description: |
+        Returns list of accounts the requestor has access to Paging is done based on
+        the account object, i.e. if limit is set to 1,
+        then 1 account object will be returned per page.
+      operationId: listAccounts
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '200':
+          description: Returns list of accounts the requestor has access to.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /accounts/{accountId}:
+    get:
+      tags:
+        - account
+      summary: Returns a specific account by id
+      description: Returns a specific account by id accessible for the requesting user.
+      operationId: getAccount
+      parameters:
+        - $ref: '#/components/parameters/account_id'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '200':
+          description: Returns a the specified account.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /orders:
+    post:
+      tags:
+        - order
+      summary: Posts a new order
+      description: Posts a new order.
+      operationId: createOrder
+      parameters:
+        - $ref: '#/components/parameters/correlation_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '202':
+          description: Order accepted for further processing.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    get:
+      tags:
+        - order
+      summary: Returns a list of open orders
+      description: |
+        Returns all open orders to which the user of the API has access to. Paging
+        is done based on the order object,
+        i.e. if limit is set to 1, then 1 order will be returned per page.
+      operationId: listOrders
+      parameters:
+        - $ref: '#/components/parameters/expand_order'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '200':
+          description: Order list.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /orders/{orderId}:
+    get:
+      tags:
+        - order
+      summary: Returns a single order
+      description: Returns a specific security order.
+      operationId: getOrder
+      parameters:
+        - $ref: '#/components/parameters/order_id'
+        - $ref: '#/components/parameters/expand_order'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '200':
+          description: Receive a specific order with the corresponding allocations and status.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /orders/{orderId}/actions/cancel:
+    post:
+      tags:
+        - order
+      summary: Cancellation of a specific order
+      description: Places the cancellation request for a specific order.
+      operationId: actionCancelOrder
+      parameters:
+        - $ref: '#/components/parameters/order_id'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '202':
+          description: Order cancellation received for further processing.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /orders/{orderId}/executions:
+    get:
+      tags:
+        - execution
+      summary: Returns a list of executions by order
+      description: |
+        Returns all executions by order ID
+      operationId: listOrderExecutions
+      parameters:
+        - $ref: '#/components/parameters/order_id'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '200':
+          description: Execution list.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Execution'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /orders/{orderId}/executions/{executionId}:
+    get:
+      tags:
+        - execution
+      summary: Returns a single execution
+      description: Returns a specific execution by order ID and execution ID.
+      operationId: getOrderExecution
+      parameters:
+        - $ref: '#/components/parameters/order_id'
+        - $ref: '#/components/parameters/execution_id'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '200':
+          description: Receive a specific order with the corresponding allocations and status.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Execution'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /orders/{orderId}/states:
+    get:
+      tags:
+        - order-state
+      summary: Returns list of order states for a given order
+      description: |
+        Returns list of order states for a given order. Paging is done based on
+        the order state object, i.e. if limit is set to 1, then 1 order state
+        object will be returned per page.
+      operationId: listOrderStates
+      parameters:
+        - $ref: '#/components/parameters/order_id'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_id'
+      responses:
+        '200':
+          description: Returns the list of order states for a given order.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderState'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /quotes:
+    post:
+      tags:
+        - quote
+      summary: Request a quote
+      description: Request quote for a security (i.e. stock, bond, fund etc), FX or crypto product.
+      operationId: createQuote
+      parameters:
+        - $ref: '#/components/parameters/correlation_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quote'
+      responses:
+        '200':
+          description: Returns quote for the given request.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /event-subscriptions:
+    get:
+      summary: Get event subscriptions
+      description: Get list of event subscriptions.
+      operationId: listEventSubscriptions
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_id'
+      tags:
+        - event-subscription
+      responses:
+        '200':
+          description: Returns a list of event subscriptions.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eventNotifications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    post:
+      summary: Create event subscription
+      description: Create an event subscription.
+      operationId: createEventSubscription
+      parameters:
+        - $ref: '#/components/parameters/correlation_id'
+      tags:
+        - event-subscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSubscription'
+      responses:
+        '201':
+          description: Returns created event subscription.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+  /event-subscriptions/{eventSubscriptionId}:
+    get:
+      summary: Get event subscription
+      description: Get event subscription by id.
+      parameters:
+        - $ref: '#/components/parameters/event_subscription_id'
+        - $ref: '#/components/parameters/correlation_id'
+      operationId: getEventSubscription
+      tags:
+        - event-subscription
+      responses:
+        '200':
+          description: Returns an event subscription.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSubscription'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    put:
+      summary: Update event subscription
+      description: Update an event subscription.
+      operationId: updateEventSubscription
+      parameters:
+        - $ref: '#/components/parameters/event_subscription_id'
+        - $ref: '#/components/parameters/correlation_id'
+      tags:
+        - event-subscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSubscription'
+            example:
+              eventTypes:
+                - order:statusUpdated
+              callbackUrl: /ttpAPI-path-to-notifications
+      responses:
+        '204':
+          description: Successfully updated (empty response).
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+    delete:
+      summary: Delete event subscription
+      description: Delete event subscription by id.
+      operationId: deleteEventSubscription
+      parameters:
+        - $ref: '#/components/parameters/event_subscription_id'
+        - $ref: '#/components/parameters/correlation_id'
+      tags:
+        - event-subscription
+      responses:
+        '204':
+          description: Successfully deleted (empty response).
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+  /event-subscriptions/{eventSubscriptionId}/event-notifications:
+    get:
+      summary: Get event notifications list
+      description: Get aggregated event notification list by event subscription.
+      operationId: listEventSubscriptionEventNotifications
+      parameters:
+        - $ref: '#/components/parameters/event_subscription_id'
+        - $ref: '#/components/parameters/from_event_date_time'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/correlation_id'
+      tags:
+        - event-notification
+      responses:
+        '200':
+          description: Returns a list of event notifications by eventSubscription.
+          headers:
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eventNotifications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EventNotification'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+components:
+  schemas:
+    Customer:
+      type: object
+      description: Schema of a customer entity.
+      required:
+        - id
+        - number
+      properties:
+        id:
+          type: string
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+          maxLength: 128
+          readOnly: true
+          example: 4b765c02-2e5f-4c95-8b3d-5c7b26477b7a
+        number:
+          type: string
+          description: Contains the customers custody proprietary customer number if available.
+          maxLength: 70
+          readOnly: true
+          example: 12345-6
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for CommonErrorResponse.
+      type: string
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+        - /problems/TOO_MANY_REQUESTS
+      example: /problems/TECHNICAL_ERROR
+    CommonErrorResponse:
+      title: CommonErrorResponse
+      type: object
+      description: Common error response.
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
+          type: string
+          description: Title of the error response.
+          example: This is the general problem description
+        detail:
+          type: string
+          description: Detailed description of the error response.
+          example: Detailed problem description with respect to the current request
+        instance:
+          type: string
+          description: Entity instance that threw the error.
+          example: path/to/corresponding/resource
+    Account:
+      type: object
+      description: Schema of an account entity.
+      required:
+        - id
+        - type
+        - number
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
+          description: |
+            Unique and unambiguous identification for the account.
+            The IBAN should NOT be the account identifier.
+          readOnly: true
+        type:
+          type: string
+          description: Indicates the type of the account.
+          example: safekeepingAccount
+          enum:
+            - cashAccount
+            - safekeepingAccount
+            - other
+        iban:
+          type: string
+          description: Contains the accounts International Banking Account Number (IBAN) for an account if available.
+          maxLength: 34
+          example: CH1234567891234
+        number:
+          type: string
+          description: Contains the accounts custody proprietary account number for an account if available.
+          maxLength: 70
+          example: 123-1234-234
+        referenceCurrency:
+          type: string
+          description: |
+            Reference currency of the account - currency for a cash account and reference currency for a safekeeping account.
+          example: CHF
+        customerId:
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+          type: string
+          maxLength: 128
+          example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+        accessType:
+          type: string
+          description: Indicates what type of access the requestor has for the specified account.
+          enum:
+            - read
+            - write
+          example: read
+          readOnly: true
+    PlaceOfTrade:
+      type: object
+      description: Market in which a trade transaction is to be or has been executed.
+      properties:
+        marketIdentificationCode:
+          type: string
+          pattern: ^[A-Z0-9]{4}$
+          description: |
+            Market Identifier Code. Identification of a financial market, as stipulated in the norm ISOMarket Identifier Code.
+            Identification of a financial market, as stipulated in the norm ISO 10383 "Codes for exchanges and market identifications".
+          example: XSWX
+        marketDescription:
+          type: string
+          maxLength: 128
+          description: Description of the market when no Market Identification Code is available.
+          example: OTC
+    DateTime:
+      title: DateTime
+      type: string
+      description: DateTime according to ISO 8601.
+      format: date-time
+      example: '2018-04-13T16:00:00Z'
+    OrderSide:
+      type: string
+      description: |
+        Side taken by a party on an order.
+        The side always relates to the base instrument of an order leg.
+      enum:
+        - buy
+        - sell
+        - subscribe
+        - redeem
+      example: buy
+    QuantityType:
+      type: string
+      description: Specifies the type of a quantity.
+      enum:
+        - unit
+        - faceAmount
+        - amortisedValue
+        - digitalTokenUnit
+      example: unit
+    FinancialInstrumentIdentification:
+      type: object
+      description: Schema of an financial instrument identification object.
+      required:
+        - identifier
+        - type
+      properties:
+        identifier:
+          type: string
+          maxLength: 128
+          example: CH0012005267
+          description: Instrument identification.
+        type:
+          type: string
+          example: isin
+          description: Type of the instrument identification.
+          enum:
+            - isin
+            - sedol
+            - cusip
+            - ric
+            - tickerSymbol
+            - bloomberg
+            - cta
+            - quick
+            - wertpapier
+            - dutch
+            - valoren
+            - sicovam
+            - belgian
+            - common
+            - digitalAssetTicker
+            - iso4217
+            - otherProprietaryIdentification
+    UnitType:
+      description: Unit type of the measure of the instrument (i.e. precious metal).
+      type: string
+      enum:
+        - g
+        - kg
+        - oz
+      example: kg
+    Date:
+      title: Date
+      type: string
+      description: Date according to ISO 8601.
+      format: date
+      example: '2018-04-13'
+    Currency:
+      title: Currency
+      type: string
+      description: ISO 4217 code.
+      pattern: ^[A-Z]{3}$
+      example: CHF
+    ExerciseStyle:
+      type: string
+      description: Specifies how the derivative instrument can be exercised.
+      example: american
+      enum:
+        - american
+        - european
+        - bermudan
+        - asian
+    OptionType:
+      type: string
+      description: |
+        Specifies whether it is a Call option (right to purchase a specific underlying asset)
+        or a Put option (right to sell a specific underlying asset).
+      enum:
+        - call
+        - put
+      example: call
+    FinancialInstrument:
+      type: object
+      description: Schema of a financial instrument entity.
+      required:
+        - identification
+      properties:
+        identification:
+          $ref: '#/components/schemas/FinancialInstrumentIdentification'
+        name:
+          description: Name of ordered instrument.
+          type: string
+          example: Apple Inc.
+        unitType:
+          $ref: '#/components/schemas/UnitType'
+        expiryDate:
+          description: |
+            Date on which an order, a privilege, an entitlement or an offer terminates. For an interest bearing asset, it is the
+            date at which it becomes due and has to be repaid.
+          $ref: '#/components/schemas/Date'
+        contractSize:
+          description: Contract size of the instrument.
+          type: number
+          example: 100
+        exercisePrice:
+          description: Predetermined price at which the holder of a derivative will buy or sell the underlying instrument.
+          type: object
+          required:
+            - type
+            - value
+          properties:
+            type:
+              type: string
+              description: Indicates whether the price amount is depicted as actual currency amount per unit or as percentage.
+              example: percentage
+              enum:
+                - actual
+                - percentage
+            value:
+              type: number
+              example: 100.23
+              description: Signed decimal number.
+            currency:
+              $ref: '#/components/schemas/Currency'
+        exerciseStyle:
+          $ref: '#/components/schemas/ExerciseStyle'
+        optionType:
+          $ref: '#/components/schemas/OptionType'
+        underlyingFinancialInstrument:
+          $ref: '#/components/schemas/FinancialInstrument'
+    UnitReference:
+      type: string
+      description: |
+        indicates whether the order quantity is expressed in base instrument or quote instrument.
+        BaseInstrument by default.
+      enum:
+        - baseInstrument
+        - quoteInstrument
+      default: baseInstrument
+      example: baseInstrument
+    PositionEffect:
+      type: string
+      description: |
+        Indicates whether the resulting position after a trade should be an opening position or closing position.
+      enum:
+        - open
+        - close
+        - rolled
+        - fifo
+      example: open
+    OrderLeg:
+      type: object
+      description: Schema of an order leg.
+      required:
+        - index
+        - side
+        - quantity
+        - quantityType
+        - baseInstrument
+        - quoteInstrument
+        - unitReference
+      properties:
+        index:
+          description: Integer uniquely identifying the order leg in the list of legs (array index).
+          type: integer
+          example: 0
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        quantity:
+          description: |
+            The total quantity (e.g. number of shares) of the order leg.
+            The unit type of this field is defined by the quantityType property.
+          type: number
+          example: 12000
+        quantityType:
+          $ref: '#/components/schemas/QuantityType'
+        baseInstrument:
+          description: Instrument subject to sale or purchase.
+          $ref: '#/components/schemas/FinancialInstrument'
+        quoteInstrument:
+          description: |
+            Instrument (i.e. currency) which is paid resp. received in exchange
+            for the purchase resp. sell of the baseInstrument.
+          $ref: '#/components/schemas/FinancialInstrument'
+        unitReference:
+          $ref: '#/components/schemas/UnitReference'
+        positionEffect:
+          $ref: '#/components/schemas/PositionEffect'
+        priceType:
+          type: string
+          description: |
+            - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+            - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+            Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
+          example: actual
+          enum:
+            - actual
+            - percentage
+        limitPrice:
+          description: |
+            Limit price per unit of baseInstrument (e.g. per share) in number of quote instrument.
+            Required for executionType 'limit' or 'stopLimit'.
+            Type of price (actual or percentage) is defined py the priceType property.
+          type: number
+          example: 167.3
+        stopPrice:
+          description: |
+            Price per unit of baseInstrument (e.g. per share) in number of quote instrument.
+            Required for executionType 'stop' or 'stopLimit'.
+            Type of price (actual or percentage) is defined py the priceType property.
+          type: number
+          example: 167.3
+        settlementDate:
+          description: |
+            Date when order leg should be settled.
+            This is relevant amongst others for forwards and swaps.
+          $ref: '#/components/schemas/Date'
+        executedQuantity:
+          description: |
+            Quantity of the baseInstrument that has been executed.
+            The unit type of this field is defined by the quantityType property.
+          type: number
+          example: 500
+          readOnly: true
+        cancelledQuantity:
+          description: |
+            Quantity of the baseInstrument that was cancelled.
+            The unit type of this field is defined by the quantityType property.
+          type: number
+          example: 100
+          readOnly: true
+    PriceType:
+      type: string
+      description: |
+        - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+        - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+        Note: The currency of a price in the case of 'actual' is defined by the quote instrument being a currency.
+      enum:
+        - actual
+        - percentage
+      example: percentage
+    ForeignExchangeRate:
+      type: object
+      description: |
+        Indicates the rate of a fx transaction for one source currency unit to the target currency.
+        E.g. 1GBP=xxxEUR, where the source currency is GBP and the target currency is EUR.
+      required:
+        - value
+        - sourceCurrency
+        - targetCurrency
+      properties:
+        value:
+          type: number
+          description: Current rate as decimal.
+          example: 0.98
+        sourceCurrency:
+          $ref: '#/components/schemas/Currency'
+        targetCurrency:
+          $ref: '#/components/schemas/Currency'
+    Amount:
+      title: Amount
+      type: object
+      description: Schema of an amount entity.
+      required:
+        - value
+        - currency
+      properties:
+        value:
+          type: number
+          example: 12000
+          description: Signed decimal number.
+        currency:
+          $ref: '#/components/schemas/Currency'
+        foreignExchangeRate:
+          $ref: '#/components/schemas/ForeignExchangeRate'
+    BillingDetails:
+      type: object
+      description: Schema of the billing details object associated to each allocation of an order.
+      properties:
+        grossTradeAmount:
+          description: Principal amount of a trade (price multiplied by quantity).
+          $ref: '#/components/schemas/Amount'
+        settlementAmount:
+          description: |
+            Total amount of money to be paid or received in exchange for the securities.
+            The amount includes the principal with any commissions and fees or accrued interest.
+          $ref: '#/components/schemas/Amount'
+        accruedInterest:
+          $ref: '#/components/schemas/Amount'
+        stampDuty:
+          $ref: '#/components/schemas/Amount'
+        withholdingTax:
+          $ref: '#/components/schemas/Amount'
+        capitalGainTax:
+          $ref: '#/components/schemas/Amount'
+        financialTransactionTax:
+          $ref: '#/components/schemas/Amount'
+        transactionFee:
+          $ref: '#/components/schemas/Amount'
+        brokerageFee:
+          $ref: '#/components/schemas/Amount'
+        managementFee:
+          $ref: '#/components/schemas/Amount'
+        courtage:
+          $ref: '#/components/schemas/Amount'
+        custodyFee:
+          $ref: '#/components/schemas/Amount'
+        exchangeFee:
+          $ref: '#/components/schemas/Amount'
+        thirdPartyFee:
+          $ref: '#/components/schemas/Amount'
+        others:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+                description: Description of the additional amount.
+                example: Foreign stamp duty
+              amount:
+                $ref: '#/components/schemas/Amount'
+    ExecutionAllocation:
+      type: object
+      description: Schema of an execution allocation.
+      properties:
+        quantity:
+          description: |
+            Executed quantity allocated to the given client.
+            The unit type of this field is defined by the quantityType property of the root order.
+          type: number
+          example: 500
+        price:
+          description: The price for the executed and allocated quantity.
+          type: number
+          example: 157.5
+        priceType:
+          $ref: '#/components/schemas/PriceType'
+        executionIds:
+          type: array
+          description: List of market executions, that contributed to the allocated quantity.
+          items:
+            type: string
+            description: Unambiguous identifier for the execution.
+            maxLength: 128
+            example: 2f66d2c4-9575-4e16-a9ea-7eec3c7e382a
+        billingDetails:
+          $ref: '#/components/schemas/BillingDetails'
+        transactionId:
+          type: string
+          description: Indicates the transaction identification for an allocated execution.
+          maxLength: 128
+          example: e3d556d9-3c88-4807-a1a4-6bc3b31e6c6b
+        bookingDate:
+          description: Indicates the booking date for an allocated execution of the order.
+          $ref: '#/components/schemas/Date'
+        valueDate:
+          description: |
+            Date when calculating economic benefit for a cash amount of an allocated execution of the order,
+            if applicable.
+          $ref: '#/components/schemas/Date'
+    AllocationLeg:
+      type: object
+      description: |
+        Schema of an allocation leg.
+        It describes how much of the associated order leg is allocated to a given client/account.
+      required:
+        - orderLegIndex
+        - creditAccountId
+        - debitAccountId
+        - quantity
+        - quantityType
+      properties:
+        orderLegIndex:
+          description: Integer referring the associated order leg in the order.
+          type: integer
+          example: 0
+        creditAccountId:
+          description: Id of the account that is credited when executing the trade.
+          type: string
+          example: a8fcbd1b-d5b8-44ea-9862-0ab24318e7f1
+        debitAccountId:
+          description: Id of the account that is debited when executing the trade.
+          type: string
+          example: 8c17f3c9-4c9e-4d20-9d58-1a0389c3c9e7
+        quantity:
+          description: |
+            The requested quantity of the baseInstrument to be allocated to specific account.
+            The unit type of this field is defined by the quantityType property.
+          type: number
+          example: 1000
+        quantityType:
+          $ref: '#/components/schemas/QuantityType'
+        executedQuantity:
+          description: |
+            Quantity of the baseInstrument that has been executed and allocated to specific account.
+            The unit type of this field is defined by the quantityType property.
+          type: number
+          example: 500
+          readOnly: true
+        cancelledQuantity:
+          description: |
+            Quantity of the baseInstrument that was cancelled for the allocation.
+            The unit type of this field is defined by the quantityType property.
+          type: number
+          example: 100
+          readOnly: true
+        averagePrice:
+          description: |
+            The average price for quantity that was traded.
+            Type of price (actual or percentage) is defined py the priceType property.
+          type: number
+          example: 157.25
+          readOnly: true
+        averagePriceType:
+          type: string
+          description: |
+            - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+            - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+          enum:
+            - actual
+            - percentage
+          example: actual
+          readOnly: true
+        executionAllocationList:
+          type: array
+          description: List of allocated executions associated to the allocation leg.
+          items:
+            $ref: '#/components/schemas/ExecutionAllocation'
+          readOnly: true
+    Allocation:
+      type: object
+      description: Schema of an allocation entity.
+      required:
+        - legList
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: Unambiguous identifier for the allocation, as assigned by the confirming party.
+          example: 08ca53e9-d78e-4e8c-9d7a-5e1ec900b1a0
+          readOnly: true
+        orderId:
+          type: string
+          maxLength: 128
+          description: Unambiguous identifier for the bulk order, as assigned by the confirming party.
+          example: e6751a48-0819-4482-98a4-760453ba770d
+          readOnly: true
+        legList:
+          type: array
+          description: List of allocated order legs.
+          items:
+            $ref: '#/components/schemas/AllocationLeg'
+          minItems: 1
+        cancelled:
+          type: boolean
+          description: True if specific allocation has been cancelled in a best effort execution order.
+          example: false
+          readOnly: true
+    TraderInstruction:
+      type: object
+      description: Schema of the additional trader instruction object.
+      properties:
+        tradingStrategy:
+          description: Name of the Strategy (i.e. volumeWeightedAveragePrice).
+          type: string
+          enum:
+            - volumeWeightedAveragePrice
+            - timeWeightedAveragePrice
+            - percentageOfVolume
+            - marketOnClose
+            - targetMarketOnClose
+            - liquidityGrabber
+            - darkOnly
+            - custom
+          example: volumeWeightedAveragePrice
+        startTime:
+          description: |
+            UTC timestamp as entered by the client,
+            defines the time from when the electronic algorithm is allowed to run.
+          $ref: '#/components/schemas/DateTime'
+        stopTime:
+          description: |
+            UTC timestamp as entered by the client,
+            defines the time until when the electronic algorithm is allowed to run.
+          $ref: '#/components/schemas/DateTime'
+        exposureDuration:
+          description: |
+            Positive integer value which represents the time is seconds in which the electronic algorithm
+            is allowed to run before it is automatically cancelled (e.g. expired).
+          type: integer
+          example: 86400
+        volumeCap:
+          description: |
+            Participation rate under which the electronic algorithm will try to always stay.
+            The participation rate is calculated by the electronic algorithm on the periods
+            where it is allowed to work (respecting start/stop time).
+          type: number
+          example: 90
+        targetRate:
+          description: |
+            Global participation rate in % that the electronic algorithm will try to achieve.
+            The public size is calculated on the periods where the electronic algorithm
+            is allowed to work (respecting StartTime/StopTime).
+          type: number
+          example: 90
+        participateInOpening:
+          description: |
+            Indicates, that the electronic algorithm can participate in the opening auction.
+          type: boolean
+          example: true
+        participateInClosing:
+          description: |
+            Indicates, that the electronic algorithm can participate in the closing auction.
+          type: boolean
+          example: true
+        wouldPrice:
+          description: |
+            Indicates the price at which the client is willing to fill the entire order,
+            or the percentage provided in WouldPercentage.
+            WouldPrice is always associated with the values provided with 'wouldPercentage' and 'wouldStyle'.
+          type: number
+          example: 95
+        wouldPercentage:
+          description: |
+            'wouldPercentage' can only be selected if parameter 'wouldPrice' contains a valid value.
+            Parameter is always associated with 'wouldPrice' and 'wouldStyle'.
+          type: number
+          example: 90
+        wouldStyle:
+          description: |
+            WouldStyle can only be selected if parameter WouldPrice contains a valid value.
+            Parameter is always associated with 'wouldPrice' and 'wouldPercentage'.
+          type: string
+          enum:
+            - allVenues
+            - litOnly
+            - darkOnly
+          example: allVenues
+        urgency:
+          description: |
+            Indicates the degree of urgency for execution as defined by the client.
+          type: string
+          enum:
+            - ultraPassive
+            - passive
+            - neutral
+            - aggressive
+            - superAggressive
+          example: neutral
+        minQuantity:
+          description: |
+            Sets the minimum fill size in dark venues client may want.
+          type: number
+          example: 500
+        primaryOnly:
+          description: Indicates that the order should be solely traded in primary market.
+          type: boolean
+          example: true
+        additionalInstructions:
+          type: string
+          maxLength: 512
+          description: Provides additional instructions on the order which cannot be included within the structured fields of the message.
+          example: at pre Market and today
+    OrderStatus:
+      type: string
+      description: Shows in which stage of its life cycle an order is.
+      enum:
+        - acknowledged
+        - accepted
+        - customerRelease
+        - placed
+        - partiallyFilled
+        - filled
+        - executed
+        - cancelled
+        - partiallyCancelled
+        - marketCancelled
+        - pendingCancel
+        - rejected
+        - partiallyRejected
+        - marketRejected
+        - expired
+        - partiallyExpired
+        - marketExpired
+        - restated
+      example: partiallyFilled
+    CancellationOrRejectionReason:
+      type: object
+      description: Indicates the reason, why an order is invalid/cancelled/rejected.
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          description: |
+            Cancelled reason expressed as a code.
+            - invalidListing: issue with listing,
+            i.e. base/quote instrument pair are not available on market.
+            - invalidProperties: a property or property combination is not valid,
+            i.e. limit price missing for limit order.
+            - invalidInstrument: an instrument (base or quote) is not valid, i.e. invalid ISIN.
+            - invalidAccount: an account (credit or debit) is not valid, i.e. invalid IBAN.
+            - invalidAllocation: an issue with a particular allocation,
+            i.e. the allocated quantity is invalid.
+            - other
+          enum:
+            - invalidListing
+            - invalidProperties
+            - invalidInstrument
+            - invalidAccount
+            - invalidAllocation
+            - other
+          example: invalidListing
+        details:
+          type: object
+          description: Freetext field to give a human readable description of the cancellation reason.
+          properties:
+            content:
+              type: string
+              description: |
+                Cancelled reason expressed as a proprietary description that provides more
+                details about the reason of the cancellation.
+              example: Cancelled by client
+            lang:
+              description: Response language code (ISO 639-1) - preferred 'en'.
+              type: string
+              example: en
+        affectedProperties:
+          description: List of affected properties.
+          type: array
+          items:
+            type: object
+            description: Schema describing an affected property.
+            properties:
+              code:
+                type: string
+                description: Reason of error related to property.
+                enum:
+                  - invalid
+                  - required
+                  - notEmpty
+                  - notAllowed
+                  - insufficientQuantity
+                  - insufficientBuyingPower
+                  - notFound
+                  - notSupported
+                  - other
+                example: invalid
+              propertyPath:
+                type: string
+                description: JSONPath to affected property.
+                example: $.timeInForce
+    Order:
+      type: object
+      description: Schema of an order entity.
+      required:
+        - clientReference
+        - executionType
+        - timeInForce
+        - legList
+      properties:
+        id:
+          description: |
+            Unambiguous identifier for the bulk order,
+            as assigned by the confirming party (i.e. Custodian).
+          type: string
+          maxLength: 128
+          example: e6751a48-0819-4482-98a4-760453ba770d
+          readOnly: true
+        clientReference:
+          description: |
+            Reference of the order (unique identification),
+            as assigned by the instructing party (i.e. TPP).
+          type: string
+          maxLength: 128
+          example: 123-123123
+        executionType:
+          description: Type of the execution of the order.
+          type: string
+          enum:
+            - market
+            - limit
+            - stop
+            - stopLimit
+          example: limit
+        timeInForce:
+          description: Specifies how long the order remains in effect.
+          type: string
+          enum:
+            - day
+            - goodTillCancel
+            - atTheOpening
+            - immediateOrCancel
+            - fillOrKill
+            - goodTillCrossing
+            - goodTillDate
+            - atTheClose
+            - goodThroughCrossing
+            - atCrossing
+            - goodForTime
+            - goodForAuction
+            - goodForMonth
+          example: day
+        groupReference:
+          description: Optional reference to link orders, i.e. strategies.
+          type: string
+          maxLength: 128
+          example: 3hYgM8QqzX7WLKDU
+          readOnly: true
+        bestEffortExecution:
+          description: |
+            If this flag is set to true, then the broker proceeds with the placement of the bulk order
+            in case if one or more clients identified within allocations list of the given order
+            by corresponding account id fail pre-trade checks and are thus excluded from the order.
+            The failed client allocations are excluded from the order before the actual moment of placement,
+            and total quantity of the order is adjusted accordingly to exclude quantities request for given client allocations.
+            If this flag is set to false (or equally, not explicitly passed),
+            then the order is rejected by the broker if at least one client fails pre-trade checks.
+          type: boolean
+          default: false
+          example: false
+        requestedPlaceOfTrade:
+          $ref: '#/components/schemas/PlaceOfTrade'
+        expiryDateTime:
+          description: |
+            DateTime when order expires.
+            Applies if required by timeInForce value.
+          $ref: '#/components/schemas/DateTime'
+        exposureDuration:
+          description: |
+            This is the time in seconds of a 'goodForTime' TimeInForce.
+            Positive integer value which represents the time is seconds in which the new order
+            remains active in the market before it is automatically cancelled (e.g. expired).
+          type: integer
+          example: 86400
+        quoteId:
+          description: Unambiguous identifier for the quote that was provided by the confirming party.
+          type: string
+          maxLength: 128
+          example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+        legList:
+          type: array
+          description: |
+            List of single components of a multi-part order.
+            Note that:
+            - A single-leg order contains exactly 1 item in the array
+            - A swap (fx, interest rate, etc) must contain exactly 2 items.
+            The first item refers to the near leg and the second to the far leg.
+            - A multi-leg order consist of the according amount of involved instruments.
+          items:
+            $ref: '#/components/schemas/OrderLeg'
+          minItems: 1
+        allocationList:
+          type: array
+          description: List of allocations associated to the bulk order.
+          items:
+            $ref: '#/components/schemas/Allocation'
+          minItems: 1
+        orderPlacer:
+          description: |
+            The entity physically transmitting the order to the execution venue.
+            This role is often fulfilled by:
+            - Investment firms or brokers executing trades on behalf of clients.
+            - Systematic internalisers or trading venues handling order transmission.
+            - In some cases, the order placer may also be the decision maker if no third-party authorization exists.
+          type: string
+          maxLength: 128
+          example: Max Muster
+        decisionMaker:
+          description: |
+            The party legally authorized to make investment decisions on behalf of a client.
+            This typically includes:
+            - Individuals or entities acting under a power of attorney (e.g., attorneys managing accounts).
+            - Discretionary investment managers executing trades without prior client approval.
+            - In cases like funds, the fund manager is generally considered the decision maker.
+          type: string
+          maxLength: 128
+          example: Nina Meier
+        traderInstruction:
+          $ref: '#/components/schemas/TraderInstruction'
+        orderDateTime:
+          type: string
+          format: date-time
+          example: '2025-04-13T11:11:11Z'
+          description: Date and time the order has been received. In accordance with ISO 8601.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        statusDateTime:
+          $ref: '#/components/schemas/DateTime'
+        cancellationOrRejectionReasonList:
+          type: array
+          description: List of reasons for the cancellation/rejection of the order.
+          items:
+            $ref: '#/components/schemas/CancellationOrRejectionReason'
+          readOnly: true
+    Execution:
+      type: object
+      description: Schema of a market execution entity.
+      required:
+        - id
+        - orderId
+        - orderLegIndex
+        - reference
+        - quantity
+      properties:
+        id:
+          type: string
+          description: Unambiguous identifier for the execution.
+          maxLength: 128
+          example: b7469157-02ea-4938-a485-bc3d9ff43f4d
+        orderId:
+          type: string
+          description: Unambiguous identifier for the order, as assigned by the confirming party.
+          maxLength: 128
+          example: e6751a48-0819-4482-98a4-760453ba770d
+        orderLegIndex:
+          description: Integer referring the associated order leg in the order.
+          type: integer
+          example: 0
+        reference:
+          type: string
+          description: |
+            Identification or reference of the executed trade.
+          example: MTIzLTk4ODc3NTY=
+        quantity:
+          description: Total quantity (e.g. number of shares) executed.
+          type: number
+          example: 1000
+        quantityType:
+          $ref: '#/components/schemas/QuantityType'
+        executionDateTime:
+          description: DateTime of the single execution.
+          $ref: '#/components/schemas/DateTime'
+        price:
+          description: The price for quantity that has traded.
+          type: number
+          example: 157.5
+        priceType:
+          $ref: '#/components/schemas/PriceType'
+        placeOfTrade:
+          $ref: '#/components/schemas/PlaceOfTrade'
+    OrderState:
+      type: object
+      description: |
+        Provides the status of the order and the timestamp of transition to the given status.
+      readOnly: true
+      properties:
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        statusDateTime:
+          description: |
+            Indicates the date and time at which the status has been updated into the status indicated under "status" (UTC Timestamp).
+            In accordance with ISO 8601.
+          $ref: '#/components/schemas/DateTime'
+    QuoteLeg:
+      type: object
+      description: Schema of a quote leg object.
+      required:
+        - side
+        - quantity
+        - quantityType
+        - baseInstrument
+        - quoteInstrument
+        - unitReference
+      properties:
+        side:
+          $ref: '#/components/schemas/OrderSide'
+        quantity:
+          description: |
+            The total quantity (e.g. number of shares) of the quote leg.
+            The unit type of this field is defined by the quantityType property.
+          type: number
+          example: 1000
+        quantityType:
+          $ref: '#/components/schemas/QuantityType'
+        baseInstrument:
+          description: Instrument subject to intended sale or purchase.
+          $ref: '#/components/schemas/FinancialInstrument'
+        quoteInstrument:
+          description: |
+            Instrument (i.e. currency) for which the quote is requested in exchange
+            for the purchase resp. sell of the baseInstrument.
+          $ref: '#/components/schemas/FinancialInstrument'
+        unitReference:
+          $ref: '#/components/schemas/UnitReference'
+        settlementDate:
+          $ref: '#/components/schemas/Date'
+        price:
+          description: |
+            If priceType is
+            - 'actual': Price offer as units of quoteInstrument per unit baseInstrument.
+            - 'percentage': Price offer as percentage of nominal value of the baseInstrument.
+          type: number
+          example: 157.5
+          readOnly: true
+        priceType:
+          type: string
+          description: |
+            - priceType 'actual': Amount offered in units of quoteInstrument per unit baseInstrument.
+            - priceType 'percentage': Percentage of nominal value of the baseInstrument offered.
+          enum:
+            - actual
+            - percentage
+          example: actual
+          readOnly: true
+    Quote:
+      type: object
+      description: Schema of a quote entity.
+      required:
+        - type
+        - legList
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+          description: Unique identifier of given quote.
+          readOnly: true
+        type:
+          type: string
+          description: |
+            Type of quote requested.
+            - An indicative quote is used to inform a counterparty of a market. An indicative quote does not result directly in a trade.
+            - A tradeable quote is submitted to a market and will result directly in a trade against other orders and quotes in a market.
+          enum:
+            - indicative
+            - tradable
+          example: tradable
+        creationDateTime:
+          description: DateTime when quote was created, format according to ISO 8601.
+          type: string
+          format: date-time
+          example: '2025-04-13T16:00:00Z'
+          readOnly: true
+        expiryDateTime:
+          description: DateTime when quote expires, format according to ISO 8601.
+          type: string
+          format: date-time
+          example: '2025-04-13T16:00:00Z'
+          readOnly: true
+        customerIds:
+          description: |
+            List of unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+            Depending on the custodian the customer context may be relevant to provide a tradeable quote.
+            If multiple customerIds are provided a common practice is to return the max/min quote among
+            the customer list.
+          type: array
+          items:
+            type: string
+            maxLength: 128
+            example: 6dca5123-e370-4272-8ef4-68d421f52f6e
+        legList:
+          type: array
+          description: List of legs of the order quote.
+          items:
+            $ref: '#/components/schemas/QuoteLeg'
+          minItems: 1
+    EventType:
+      description: Event type the subscription should apply to AND reason why a notification is sent.
+      type: string
+      enum:
+        - heartbeat
+        - order:doneForDay
+        - order:statusUpdated
+      example: order:statusUpdated
+    EventSubscription:
+      type: object
+      description: Schema of an event subscription entity.
+      required:
+        - eventTypes
+      properties:
+        id:
+          type: string
+          description: Unique and unambiguous identification (i.e. UUID) of the event subscription.
+          readOnly: true
+          maxLength: 36
+          example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
+        eventTypes:
+          type: array
+          description: List of event types subject to subscription.
+          items:
+            $ref: '#/components/schemas/EventType'
+        callbackUrl:
+          type: string
+          description: |
+            Endpoint provided by the client (subscriber) where the server (publisher)
+            can send asynchronous event notifications.
+          example: https://ttp.com/API/notifications/
+    EventNotification:
+      type: object
+      description: Schema of an event notification entity.
+      required:
+        - id
+        - eventType
+        - eventSubscriptionId
+        - resourceLink
+      properties:
+        id:
+          type: string
+          description: Unique and unambiguous identification (i.e. UUID) of the event subscription.
+          example: 120066c9-58a1-432b-aa60-712fae7f143e
+        version:
+          type: string
+          description: Version of the notification schema.
+          example: '1.0'
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        eventSubscriptionId:
+          type: string
+          description: Id of the subscription that caused the event to be triggered.
+          readOnly: true
+          maxLength: 36
+          example: 7c5f40fc-1b29-4263-a2dd-e127a22a947f
+        resourceLink:
+          type: string
+          description: |
+            The resourceLink is an absolute or relative URL reference to the specific resource or object that triggered the webhook event.
+            This link provides immediate access to the full details of the affected item in the source system.
+          example: /orders/e6751a48-0819-4482-98a4-760453ba770d
+        creationDateTime:
+          type: string
+          format: date-time
+          description: Timestamp of the creation of the event notification.
+          example: 2022-10-26T07:58:30.996+0100
+  responses:
+    '400':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
+        as malformed request syntax.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '401':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '403':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Forbidden - The server understood the request but refuses to authorize it.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '404':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Not Found - The origin server did not find a current representation for the target resource
+        or is not willing to disclose that one exists.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '405':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Method Not Allowed - The method received in the request-line is known by the origin server
+        but not supported by the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '409':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Conflict - The request conflicts with the current state of the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '429':
+      headers:
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        When an SU sends too many lookup or polling requests in a given amount of time
+        the SP shall respond with HTTP 429 (Too many requests). This response may contain a
+        Retry-After header indicating how long the SU must wait before making a new request.
+        (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+          example:
+            type: /problems/TOO_MANY_REQUESTS
+            title: resource not found
+            detail: ...
+            instance: path/to/corresponding/resource
+    '500':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '501':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Not Implemented - The server does not support the functionality required to fulfill the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '503':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '504':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Gateway Timeout - The server did not get a response in time that it needed in order to complete the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+  parameters:
+    cursor:
+      in: query
+      name: cursor
+      required: false
+      schema:
+        type: string
+      description: An opaque string value used for pagination.
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      description: Maximum number of items to return.
+    correlation_id:
+      in: header
+      name: Correlation-Id
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+    customer_id:
+      in: path
+      name: customerId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: 123123-456
+        description: Unique and unambiguous identification used by the bank for the customer.
+      description: Customer ID Parameter.
+    account_id:
+      in: path
+      name: accountId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        description: The customer's account identification, this should NOT be an IBAN.
+      description: Account ID parameter.
+    expand_order:
+      in: query
+      name: expand_order
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - allocationList
+            - allocationList.executionAllocationList
+            - cancellationOrRejectionReasonList
+      description: |
+        Expand related resources. Comma-separated values, supporting:
+        - `allocationList`: Include allocationList details.
+        - `allocationList.executionAllocationList`: Include executionAllocationList details on the allocation.
+        - `cancellationOrRejectionReasonList`: Include cancellationOrRejectionReasonList
+      style: form
+      explode: false
+    order_id:
+      in: path
+      name: orderId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+      description: The order ID as given by the API provider.
+    execution_id:
+      in: path
+      name: executionId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+      description: The execution ID as given by the API provider.
+    event_subscription_id:
+      in: path
+      name: eventSubscriptionId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 40
+      description: |
+        Unique identification as assigned by the API exposing party to uniquely
+        identify the callback URL resource.
+    from_event_date_time:
+      in: query
+      name: from_event_date_time
+      schema:
+        type: string
+        format: date-time
+      description: Date from which events are considered.
+      example: 2022-10-26T07:58:30.996+0100
+  headers:
+    Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    Next-Cursor:
+      description: An opaque string value, or an empty string if there are no more results.
+      required: false
+      schema:
+        type: string
+    Problem-Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807.
+      schema:
+        type: string
+        example: application/problem+json
+    Content-Language:
+      description: Response language - always en.
+      schema:
+        type: string
+        example: en
+  securitySchemes: {}

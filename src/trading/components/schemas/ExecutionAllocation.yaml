@@ -1,0 +1,38 @@
+type: object
+description: Schema of an execution allocation.
+properties:
+  quantity:
+    description: |
+      Executed quantity allocated to the given client.
+      The unit type of this field is defined by the quantityType property of the root order.
+    type: number
+    example: 500
+  price:
+    description: The price for the executed and allocated quantity.
+    type: number
+    example: 157.50
+  priceType:
+    $ref: PriceType.yaml
+  executionIds:
+    type: array
+    description: List of market executions, that contributed to the allocated quantity.
+    items:
+      type: string
+      description: Unambiguous identifier for the execution.
+      maxLength: 128
+      example: 2f66d2c4-9575-4e16-a9ea-7eec3c7e382a
+  billingDetails:
+    $ref: BillingDetails.yaml
+  transactionId:
+    type: string
+    description: Indicates the transaction identification for an allocated execution.
+    maxLength: 128
+    example: e3d556d9-3c88-4807-a1a4-6bc3b31e6c6b
+  bookingDate:
+    description: Indicates the booking date for an allocated execution of the order.
+    $ref: ../../../generics/components/schemas/Date.yaml
+  valueDate:
+    description: |
+      Date when calculating economic benefit for a cash amount of an allocated execution of the order,
+      if applicable.
+    $ref: ../../../generics/components/schemas/Date.yaml
