@@ -19,6 +19,7 @@ get:
       content:
         application/json:
           schema:
+            type: array
             items:
               $ref: ../components/schemas/EventSubscription.yaml
     '400':
