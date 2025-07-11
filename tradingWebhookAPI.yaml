@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.0.0
+  version: 3.0.1
   title: OpenWealth trading event notification API - TPP Endpoint
   description: API for receiving event notification for OpenWealth APIs.
   contact:

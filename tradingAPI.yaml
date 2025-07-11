@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 3.0.0
+  version: 3.0.1
   title: Trading API
   description: |
     ### OpenWealth Trading API - Standardised Order & Trade Lifecycle
@@ -555,12 +555,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  eventNotifications:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/EventSubscription'
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventSubscription'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -749,12 +746,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  eventNotifications:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/EventNotification'
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventNotification'
         '400':
           $ref: '#/components/responses/400'
         '401':

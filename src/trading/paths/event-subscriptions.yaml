@@ -19,12 +19,9 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              eventNotifications:
-                type: array
-                items:
-                  $ref: ../components/schemas/EventSubscription.yaml
+            type: array
+            items:
+              $ref: ../components/schemas/EventSubscription.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
