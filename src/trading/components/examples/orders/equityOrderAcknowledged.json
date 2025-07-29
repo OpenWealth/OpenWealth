@@ -1,0 +1,56 @@
+{
+  "id": "order-equity-1",
+  "clientReference": "123-123123",
+  "orderDateTime": "2025-04-10T11:11:11Z",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "status": "acknowledged",
+  "statusDateTime": "2025-04-13T11:11:11Z",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 5,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "identification": {
+          "identifier": "CH0010570759",
+          "type": "isin"
+        }
+      },
+      "quoteInstrument": {
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    }
+  ],
+  "allocationList": [
+    {
+      "legList": [
+        {
+          "id": "allocation-1-order-equity-1",
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-CHF-1",
+          "creditAccountId": "safe-1",
+          "quantity": 3,
+          "quantityType": "unit"
+        }
+      ]
+    },
+    {
+      "legList": [
+        {
+          "id": "allocation-2-order-equity-1",
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-CHF-2",
+          "creditAccountId": "safe-2",
+          "quantity": 2,
+          "quantityType": "unit"
+        }
+      ]
+    }
+  ]
+}
