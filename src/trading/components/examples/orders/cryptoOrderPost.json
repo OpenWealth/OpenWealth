@@ -1,0 +1,39 @@
+{
+  "clientReference": "123-123127",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 0.001,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "identification": {
+          "identifier": "ETH",
+          "type": "digitalAssetTicker"
+        }
+      },
+      "quoteInstrument": {
+        "identification": {
+          "identifier": "BTC",
+          "type": "digitalAssetTicker"
+        }
+      },
+      "unitReference": "baseInstrument"
+    }
+  ],
+  "allocationList": [
+    {
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "safe-1",
+          "creditAccountId": "safe-1",
+          "quantity": 0.001,
+          "quantityType": "unit"
+        }
+      ]
+    }
+  ]
+}
