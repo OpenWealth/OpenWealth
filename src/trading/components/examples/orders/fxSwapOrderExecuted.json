@@ -1,14 +1,12 @@
 {
-  "id": "order-fx-swap-1",
+  "id": "order-fxswap-1",
   "clientReference": "123-123125",
   "orderDateTime": "2025-04-27T11:11:11Z",
   "executionType": "market",
   "timeInForce": "goodTillCancel",
-  "quoteId": "fx-swap-quote-1",
-  "status": {
-    "status": "executed",
-    "statusDateTime": "2025-04-27T12:10:00Z"
-  },
+  "quoteId": "quote-fxswap-1",
+  "status": "executed",
+  "statusDateTime": "2025-04-27T12:10:00Z",
   "legList": [
     {
       "index": 0,
@@ -52,6 +50,7 @@
   ],
   "allocationList": [
     {
+      "id": "allocation-1-order-fxswap-1",
       "legList": [
         {
           "orderLegIndex": 0,

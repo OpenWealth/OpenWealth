@@ -2,7 +2,7 @@
   "clientReference": "123-123125",
   "executionType": "market",
   "timeInForce": "goodTillCancel",
-  "quoteId": "fx-swap-quote-1",
+  "quoteId": "quote-fxswap-1",
   "legList": [
     {
       "index": 0,
