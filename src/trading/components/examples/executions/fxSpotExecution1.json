@@ -1,0 +1,10 @@
+{
+  "id": "execution-fxspot-1",
+  "orderId": "order-fxspot-1",
+  "orderLegIndex": 0,
+  "reference": "market-ref-fxspot-exec-1",
+  "quantity": 200000,
+  "executionDateTime": "2025-04-27T11:14:00Z",
+  "price": 0.9745,
+  "priceType": "actual"
+}

@@ -1,0 +1,50 @@
+{
+  "clientReference": "123-123126",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 200000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    }
+  ],
+  "allocationList": [
+    {
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-CHF-1",
+          "creditAccountId": "cash-EUR-1",
+          "quantity": 100000,
+          "quantityType": "unit"
+        }
+      ]
+    },
+    {
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-CHF-2",
+          "creditAccountId": "cash-EUR-2",
+          "quantity": 100000,
+          "quantityType": "unit"
+        }
+      ]
+    }
+  ]
+}

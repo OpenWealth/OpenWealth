@@ -1,0 +1,56 @@
+{
+  "id": "order-fxspot-1",
+  "clientReference": "123-123126",
+  "orderDateTime": "2025-04-27T11:11:11Z",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "status": "acknowledged",
+  "statusDateTime": "2025-04-27T11:11:11Z",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 200000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    }
+  ],
+  "allocationList": [
+    {
+      "id": "allocation-1-order-fxspot-1",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-CHF-1",
+          "creditAccountId": "cash-EUR-1",
+          "quantity": 100000,
+          "quantityType": "unit"
+        }
+      ]
+    },
+    {
+      "id": "allocation-2-order-fxspot-1",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-CHF-2",
+          "creditAccountId": "cash-EUR-2",
+          "quantity": 100000,
+          "quantityType": "unit"
+        }
+      ]
+    }
+  ]
+}
