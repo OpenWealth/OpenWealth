@@ -1,0 +1,10 @@
+[
+  {
+    "id": "120066c9-58a1-432b-aa60-712fae7f143e",
+    "version": "1.0",
+    "eventType": "order:statusUpdated",
+    "eventSubscriptionId": "7c5f40fc-1b29-4263-a2dd-e127a22a947f",
+    "resourceLink": "/orders/e6751a48-0819-4482-98a4-760453ba770d",
+    "creationDateTime": "2022-10-26T07:58:30.996+0100"
+  }
+]
