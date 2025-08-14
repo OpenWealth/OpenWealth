@@ -18,6 +18,21 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Order.yaml
+          examples:
+            bondOrder:
+              $ref: ../components/examples/orders/bond-order-executed.yaml
+            equitySimpleOrder:
+              $ref: ../components/examples/orders/equity-simple-order-executed.yaml
+            equityOrder:
+              $ref: ../components/examples/orders/equity-order-executed.yaml
+            equityOrderPartiallyFilled:
+              $ref: ../components/examples/orders/equity-order-partially-filled.yaml
+            fxSpotOrder:
+              $ref: ../components/examples/orders/fx-spot-order-executed.yaml
+            fxSwapOrder:
+              $ref: ../components/examples/orders/fx-swap-order-executed.yaml
+            cryptoOrder:
+              $ref: ../components/examples/orders/crypto-order-executed.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

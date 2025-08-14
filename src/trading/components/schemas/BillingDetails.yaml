@@ -1,3 +1,4 @@
+additionalProperties: false
 type: object
 description: Schema of the billing details object associated to each allocation of an order.
 properties:

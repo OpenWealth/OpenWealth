@@ -18,6 +18,79 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Transaction.yaml
+          examples:
+            CashIncome:
+              $ref: ../components/examples/transactions/000-cash-inflow.yaml
+            FxSpot:
+              $ref: ../components/examples/transactions/000-fx-spot.yaml
+            BondBuy:
+              $ref: ../components/examples/transactions/001-bond-buy.yaml
+            BondCoupon:
+              $ref: ../components/examples/transactions/001-bond-coupon.yaml
+            BondMaturity:
+              $ref: ../components/examples/transactions/001-bond-maturity.yaml
+            EquityBuxFx:
+              $ref: ../components/examples/transactions/002-equity-buy-with-fx.yaml
+            EquityBuy:
+              $ref: ../components/examples/transactions/002-equity-buy.yaml
+            EquityCashDividendFx:
+              $ref: ../components/examples/transactions/002-equity-cash-dividend-with-fx.yaml
+            EquityCashDividend:
+              $ref: ../components/examples/transactions/002-equity-cash-dividend.yaml
+            EquityPublicOffer:
+              $ref: ../components/examples/transactions/002-equity-public-offer.yaml
+            EquityPublicOfferAcceptance:
+              $ref: ../components/examples/transactions/002-equity-public-offer-acceptance.yaml
+            EquityPublicExpiry:
+              $ref: ../components/examples/transactions/002-equity-public-offer-expiry.yaml
+            FundBuy:
+              $ref: ../components/examples/transactions/003-fund-buy.yaml
+            FundAccumulation:
+              $ref: ../components/examples/transactions/003-fund-accumulation.yaml
+            FundSubscription:
+              $ref: ../components/examples/transactions/003-fund-subscription.yaml
+            FundPrepaymentSubstitution:
+              $ref: ../components/examples/transactions/003-fund-prepayment-substitution.yaml
+            OptionPutBuyFx:
+              $ref: ../components/examples/transactions/006-option-put-buy-with-fx.yaml
+            FxForwardOpen:
+              $ref: ../components/examples/transactions/008-fx-forward-open-contract.yaml
+            FxForwardClose:
+              $ref: ../components/examples/transactions/008-fx-forward-close-contract.yaml
+            FxSwapOpen:
+              $ref: ../components/examples/transactions/009-fx-swap-open-contract.yaml
+            FxSwapClose:
+              $ref: ../components/examples/transactions/009-fx-swap-close-contract.yaml
+            FxOptionBuy:
+              $ref: ../components/examples/transactions/010-fx-option-buy.yaml
+            CallableDepositOpen:
+              $ref: ../components/examples/transactions/011-callable-deposit-open.yaml
+            CallableDepositDecreasePrinciple:
+              $ref: ../components/examples/transactions/011-callable-deposit-decrease-principle.yaml
+            CallableDepositInterestPayment:
+              $ref: ../components/examples/transactions/011-callable-deposit-interest-payment.yaml
+            CallableDepositClose:
+              $ref: ../components/examples/transactions/011-callable-deposit-close.yaml
+            FixedDepositOpen:
+              $ref: ../components/examples/transactions/012-fixed-deposit-open-contract.yaml
+            FixedDepositClose:
+              $ref: ../components/examples/transactions/012-fixed-deposit-close-contract.yaml
+            InterestRateSwapOpenContract:
+              $ref: ../components/examples/transactions/013-interest-rate-swap-open-contract.yaml
+            InterestRateSwapAdditionalPayment:
+              $ref: ../components/examples/transactions/013-interest-rate-swap-additional-payment.yaml
+            InterestRateSwapInterestPayment:
+              $ref: ../components/examples/transactions/013-interest-rate-swap-interest-payment.yaml
+            InterestRateSwapCloseContract:
+              $ref: ../components/examples/transactions/013-interest-rate-swap-close-contract.yaml
+            InterestRateSwapUnwind:
+              $ref: ../components/examples/transactions/013-interest-rate-swap-unwind.yaml
+            TotalreturnSwapOpenContract:
+              $ref: ../components/examples/transactions/014-total-return-swap-open-contract.yaml
+            CreditOpen:
+              $ref: ../components/examples/transactions/015-credit-open.yaml
+            CreditInterestAndAmortization:
+              $ref: ../components/examples/transactions/015-credit-amortisation-and-interest-payment.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

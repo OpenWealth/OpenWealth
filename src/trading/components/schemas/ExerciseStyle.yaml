@@ -1,3 +1,4 @@
+additionalProperties: false
 type: string
 description: Specifies how the derivative instrument can be exercised.
 example: american

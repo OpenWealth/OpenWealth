@@ -1,3 +1,4 @@
+additionalProperties: false
 title: InterestRate
 type: object
 description: Per annum ratio of interest received or paid to the principal amount of the contract for a specific period of time.

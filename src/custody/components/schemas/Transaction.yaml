@@ -1,3 +1,4 @@
+additionalProperties: false
 title: Transaction
 type: object
 description: Transaction entity.

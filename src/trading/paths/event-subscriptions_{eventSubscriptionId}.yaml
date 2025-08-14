@@ -17,6 +17,9 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/EventSubscription.yaml
+          examples:
+            eventSubscription:
+              $ref: ../components/examples/event-subscriptions/event-subscription.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

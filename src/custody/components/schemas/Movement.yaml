@@ -1,3 +1,4 @@
+additionalProperties: false
 title: Movement
 type: object
 description: Describes a single movement/booking/flow within a transaction. Every transaction contains in the minimum one movement.

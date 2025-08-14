@@ -1,3 +1,4 @@
+additionalProperties: false
 type: object
 description: |
   Indicates the rate of a fx transaction for one source currency unit to the target currency.

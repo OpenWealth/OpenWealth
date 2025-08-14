@@ -1,3 +1,4 @@
+additionalProperties: false
 type: object
 description: Schema of the additional trader instruction object.
 properties:

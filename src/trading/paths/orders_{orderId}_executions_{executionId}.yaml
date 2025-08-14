@@ -18,6 +18,23 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Execution.yaml
+          examples:
+            bondExecution:
+              $ref: ../components/examples/executions/bond-execution-1.yaml
+            equitySimpleExecution:
+              $ref: ../components/examples/executions/equity-simple-execution-1.yaml
+            equityExecution1:
+              $ref: ../components/examples/executions/equity-execution-1.yaml
+            equityExecution2:
+              $ref: ../components/examples/executions/equity-execution-2.yaml
+            fxSpotExecution:
+              $ref: ../components/examples/executions/fx-spot-execution-1.yaml
+            fxSwapExecution1:
+              $ref: ../components/examples/executions/fx-swap-execution-1.yaml
+            fxSwapExecution2:
+              $ref: ../components/examples/executions/fx-swap-execution-2.yaml
+            cryptoExecution:
+              $ref: ../components/examples/executions/crypto-execution-1.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

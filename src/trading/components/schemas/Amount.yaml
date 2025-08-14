@@ -1,3 +1,4 @@
+additionalProperties: false
 title: Amount
 type: object
 description: Schema of an amount entity.

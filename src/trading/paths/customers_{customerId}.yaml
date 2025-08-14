@@ -17,6 +17,11 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Customer.yaml
+          examples:
+            customer1:
+              $ref: ../components/examples/customers/customer-1.yaml
+            customer2:
+              $ref: ../components/examples/customers/customer-2.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

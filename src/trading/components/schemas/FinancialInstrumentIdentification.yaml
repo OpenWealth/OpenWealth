@@ -1,3 +1,4 @@
+additionalProperties: false
 type: object
 description: Schema of an financial instrument identification object.
 required:

@@ -24,6 +24,9 @@ get:
             type: array
             items:
               $ref: ../components/schemas/EventNotification.yaml
+          examples:
+            eventNotifications:
+              $ref: ../components/examples/event-notifications/event-notifications.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

@@ -20,6 +20,33 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/ValuatedPosition.yaml
+          examples:
+            CashAccountCHF:
+              $ref: ../components/examples/positions/000-cash-account-chf.yaml
+            BondCHF:
+              $ref: ../components/examples/positions/001-bond.yaml
+            Equity:
+              $ref: ../components/examples/positions/002-equity.yaml
+            EquityWithFx:
+              $ref: ../components/examples/positions/002-equity-with-fx.yaml
+            Fund:
+              $ref: ../components/examples/positions/003-fund.yaml
+            PutOptionWithFx:
+              $ref: ../components/examples/positions/006-option-put-with-fx.yaml
+            FxForward:
+              $ref: ../components/examples/positions/008-fx-forward.yaml
+            FxSwap:
+              $ref: ../components/examples/positions/009-fx-swap.yaml
+            CallableDeposit:
+              $ref: ../components/examples/positions/011-callable-deposit.yaml
+            FixedDeposit:
+              $ref: ../components/examples/positions/012-fixed-deposit.yaml
+            InterestRateSwap:
+              $ref: ../components/examples/positions/013-interest-rate-swap.yaml
+            TotalReturnSwap:
+              $ref: ../components/examples/positions/014-total-return-swap.yaml
+            Credit:
+              $ref: ../components/examples/positions/015-credit.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

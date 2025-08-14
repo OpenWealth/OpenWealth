@@ -1,3 +1,4 @@
+additionalProperties: false
 title: Quantity
 type: object
 description: Quantity entity.

@@ -1,3 +1,4 @@
+additionalProperties: false
 title: PostingAmount
 type: object
 description: Total amount of money that is to be/was posted to the account in the account currency.

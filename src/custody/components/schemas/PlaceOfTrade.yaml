@@ -1,3 +1,4 @@
+additionalProperties: false
 title: PlaceOfTrade
 type: object
 description: Market in which a trade transaction is to be or has been executed.

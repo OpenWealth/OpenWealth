@@ -11,6 +11,19 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/Order.yaml
+        examples:
+          bondOrder:
+            $ref: ../components/examples/orders/bond-order-post.yaml
+          equitySimpleOrder:
+            $ref: ../components/examples/orders/equity-simple-order-post.yaml
+          equityOrder:
+            $ref: ../components/examples/orders/equity-order-post.yaml
+          fxSpotOrder:
+            $ref: ../components/examples/orders/fx-spot-order-post.yaml
+          fxSwapOrder:
+            $ref: ../components/examples/orders/fx-swap-order-post.yaml
+          cryptoOrder:
+            $ref: ../components/examples/orders/crypto-order-post.yaml
   responses:
     '202':
       description: Order accepted for further processing.
@@ -21,6 +34,19 @@ post:
         application/json:
           schema:
             $ref: ../components/schemas/Order.yaml
+          examples:
+            bondOrder:
+              $ref: ../components/examples/orders/bond-order-acknowledged.yaml
+            equityOrder:
+              $ref: ../components/examples/orders/equity-order-acknowledged.yaml
+            equitySimpleOrder:
+              $ref: ../components/examples/orders/equity-simple-order-acknowledged.yaml
+            fxSpotOrder:
+              $ref: ../components/examples/orders/fx-spot-order-acknowledged.yaml
+            fxSwapOrder:
+              $ref: ../components/examples/orders/fx-swap-order-acknowledged.yaml
+            cryptoOrder:
+              $ref: ../components/examples/orders/crypto-order-acknowledged.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

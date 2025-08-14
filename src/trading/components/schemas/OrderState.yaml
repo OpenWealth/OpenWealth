@@ -1,3 +1,4 @@
+additionalProperties: false
 type: object
 description: |
   Provides the status of the order and the timestamp of transition to the given status.

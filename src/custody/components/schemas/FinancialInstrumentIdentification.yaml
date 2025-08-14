@@ -1,3 +1,4 @@
+additionalProperties: false
 title: FinancialInstrumentIdentification
 type: object
 description: Financial instrument identification in the form of a key value pair.

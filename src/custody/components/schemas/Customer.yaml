@@ -1,3 +1,4 @@
+additionalProperties: false
 title: Customer
 type: object
 description: Overview of the customer with the respective accounts.
