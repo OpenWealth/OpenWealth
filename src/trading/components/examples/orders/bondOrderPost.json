@@ -9,13 +9,15 @@
       "quantity": 100000,
       "quantityType": "faceAmount",
       "baseInstrument": {
+        "name": "Schweizerische Eidgenossenschaft 0,5% 15/30",
         "identification": {
-          "identifier": "CH0012005267",
+          "identifier": "CH0224397171",
           "type": "isin"
         }
       },
       "quoteInstrument": {
         "identification": {
+          "name": "Swiss franc",
           "identifier": "CHF",
           "type": "iso4217"
         }

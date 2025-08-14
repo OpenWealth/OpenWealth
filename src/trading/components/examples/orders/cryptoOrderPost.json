@@ -10,12 +10,14 @@
       "quantityType": "unit",
       "baseInstrument": {
         "identification": {
+          "name": "Ether",
           "identifier": "ETH",
           "type": "digitalAssetTicker"
         }
       },
       "quoteInstrument": {
         "identification": {
+          "name": "Bitcoin",
           "identifier": "BTC",
           "type": "digitalAssetTicker"
         }

@@ -9,12 +9,14 @@
       "quantity": 5,
       "quantityType": "unit",
       "baseInstrument": {
+        "name": "Lindt N",
         "identification": {
           "identifier": "CH0010570759",
           "type": "isin"
         }
       },
       "quoteInstrument": {
+        "name": "Swiss franc",
         "identification": {
           "identifier": "CHF",
           "type": "iso4217"

@@ -14,12 +14,14 @@
       "quantity": 100000,
       "quantityType": "unit",
       "baseInstrument": {
+        "name": "Euro",
         "identification": {
           "identifier": "EUR",
           "type": "iso4217"
         }
       },
       "quoteInstrument": {
+        "name": "Swiss franc",
         "identification": {
           "identifier": "CHF",
           "type": "iso4217"
@@ -33,12 +35,14 @@
       "quantity": 100000,
       "quantityType": "unit",
       "baseInstrument": {
+        "name": "Euro",
         "identification": {
           "identifier": "EUR",
           "type": "iso4217"
         }
       },
       "quoteInstrument": {
+        "name": "Swiss franc",
         "identification": {
           "identifier": "CHF",
           "type": "iso4217"
