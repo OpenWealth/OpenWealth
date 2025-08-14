@@ -1,17 +1,16 @@
 {
-  "id": "order-fxswap-1",
-  "clientReference": "123-123125",
+  "id": "order-fxspot-1",
+  "clientReference": "123-123126",
   "orderDateTime": "2025-04-27T11:11:11Z",
   "executionType": "market",
   "timeInForce": "goodTillCancel",
-  "quoteId": "quote-fxswap-1",
   "status": "executed",
-  "statusDateTime": "2025-04-27T12:10:00Z",
+  "statusDateTime": "2025-04-27T11:15:00Z",
   "legList": [
     {
       "index": 0,
       "side": "buy",
-      "quantity": 100000,
+      "quantity": 200000,
       "quantityType": "unit",
       "baseInstrument": {
         "name": "Euro",
@@ -28,33 +27,11 @@
         }
       },
       "unitReference": "baseInstrument"
-    },
-    {
-      "index": 1,
-      "side": "sell",
-      "quantity": 100000,
-      "quantityType": "unit",
-      "baseInstrument": {
-        "name": "Euro",
-        "identification": {
-          "identifier": "EUR",
-          "type": "iso4217"
-        }
-      },
-      "quoteInstrument": {
-        "name": "Swiss franc",
-        "identification": {
-          "identifier": "CHF",
-          "type": "iso4217"
-        }
-      },
-      "unitReference": "baseInstrument",
-      "settlementDate": "2025-07-31"
     }
   ],
   "allocationList": [
     {
-      "id": "allocation-1-order-fxswap-1",
+      "id": "allocation-1-order-fxspot-1",
       "legList": [
         {
           "orderLegIndex": 0,
@@ -71,7 +48,7 @@
               "price": 0.9745,
               "priceType": "actual",
               "executionIds": [
-                "execution-fxswap-1"
+                "execution-fxspot-1"
               ],
               "billingDetails": {
                 "grossTradeAmount": {
@@ -83,16 +60,21 @@
                   "currency": "CHF"
                 }
               },
-              "transactionId": "transaction-3",
-              "bookingDate": "2025-04-28",
-              "valueDate": "2025-04-30"
+              "transactionId": "transaction-5",
+              "bookingDate": "2025-04-27",
+              "valueDate": "2025-04-29"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "allocation-2-order-fxspot-1",
+      "legList": [
         {
-          "orderLegIndex": 1,
-          "debitAccountId": "cash-EUR-1",
-          "creditAccountId": "cash-CHF-1",
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-CHF-2",
+          "creditAccountId": "cash-EUR-2",
           "quantity": 100000,
           "quantityType": "unit",
           "executedQuantity": 100000,
@@ -101,24 +83,24 @@
           "executionAllocationList": [
             {
               "quantity": 100000,
-              "price": 0.9834,
+              "price": 0.9745,
               "priceType": "actual",
               "executionIds": [
-                "execution-fxswap-2"
+                "execution-fxspot-1"
               ],
               "billingDetails": {
                 "grossTradeAmount": {
-                  "value": 98340,
+                  "value": -97450,
                   "currency": "CHF"
                 },
                 "settlementAmount": {
-                  "value": 98340,
+                  "value": -97450,
                   "currency": "CHF"
                 }
               },
-              "transactionId": "transaction-4",
-              "bookingDate": "2025-07-31",
-              "valueDate": "2025-08-01"
+              "transactionId": "transaction-6",
+              "bookingDate": "2025-04-27",
+              "valueDate": "2025-04-29"
             }
           ]
         }

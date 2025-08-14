@@ -1,0 +1,6 @@
+{
+  "eventTypes": [
+    "order:statusUpdated"
+  ],
+  "callbackUrl": "https://my-ttp-url.com/API/notifications/"
+}

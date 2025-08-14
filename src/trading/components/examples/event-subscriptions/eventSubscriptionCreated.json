@@ -1,0 +1,7 @@
+{
+  "id": "7c5f40fc-1b29-4263-a2dd-e127a22a947f",
+  "eventTypes": [
+    "order:statusUpdated"
+  ],
+  "callbackUrl": "https://my-ttp-url.com/API/notifications/"
+}
