@@ -11,6 +11,11 @@ post:
       application/json:
         schema:
           $ref: '../components/schemas/Quote.yaml'
+        examples:
+          bondQuote:
+            $ref: ../components/examples/quotes/bond-quote-post.yaml
+          fxSwapQuote:
+            $ref: ../components/examples/quotes/fx-swap-quote-post.yaml
   responses:
     '200':
       description: Returns quote for the given request.
@@ -21,6 +26,11 @@ post:
         application/json:
           schema:
             $ref: '../components/schemas/Quote.yaml'
+          examples:
+            bondQuote:
+              $ref: ../components/examples/quotes/bond-quote-response.yaml
+            fxSwapQuote:
+              $ref: ../components/examples/quotes/fx-swap-quote-response.yaml
     '400':
       $ref: '../../generics/components/responses/400.yaml'
     '401':

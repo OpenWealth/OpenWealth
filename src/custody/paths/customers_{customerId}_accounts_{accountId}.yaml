@@ -18,6 +18,15 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Account.yaml
+          examples:
+            AccountCHF:
+              $ref: ../components/examples/accounts/cash-account-chf.yaml
+            AccountEUR:
+              $ref: ../components/examples/accounts/cash-account-eur.yaml
+            AccountUSD:
+              $ref: ../components/examples/accounts/cash-account-usd.yaml
+            SafekeepingAccount:
+              $ref: ../components/examples/accounts/safekeeping-account.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
