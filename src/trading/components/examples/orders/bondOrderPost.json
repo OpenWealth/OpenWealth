@@ -16,8 +16,8 @@
         }
       },
       "quoteInstrument": {
+        "name": "Swiss franc",
         "identification": {
-          "name": "Swiss franc",
           "identifier": "CHF",
           "type": "iso4217"
         }

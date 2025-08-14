@@ -9,15 +9,15 @@
       "quantity": 0.001,
       "quantityType": "unit",
       "baseInstrument": {
+        "name": "Ether",
         "identification": {
-          "name": "Ether",
           "identifier": "ETH",
           "type": "digitalAssetTicker"
         }
       },
       "quoteInstrument": {
+        "name": "Bitcoin",
         "identification": {
-          "name": "Bitcoin",
           "identifier": "BTC",
           "type": "digitalAssetTicker"
         }

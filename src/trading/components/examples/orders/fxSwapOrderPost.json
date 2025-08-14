@@ -10,6 +10,7 @@
       "quantity": 100000,
       "quantityType": "unit",
       "baseInstrument": {
+        "name": "Euro",
         "identification": {
           "identifier": "EUR",
           "type": "iso4217"
