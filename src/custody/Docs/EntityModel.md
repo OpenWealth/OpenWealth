@@ -72,9 +72,12 @@ OpenWealth requires a unique identification of the position. However it is up to
 erDiagram
     Account ||--|{ Position : contains
     Account {
-        string accountIdentification
-        string accountType
-        string accountReferenceCurrency
+        string id
+        string type
+        string name
+        string referenceCurrency
+        string iban
+        string number
         object portfolioInformation
     }
     Position }|--|| FinancialInstrument : references
@@ -89,9 +92,9 @@ erDiagram
         object valuation
     }
     FinancialInstrument {
-        string financialInstrumentIdentification
-        string financialInstrumentName
-        string financialInstrumentType
+        string type
+        string name
+        object[] identificationList
     }
     Portfolio ||--|{ Account : contains
     Portfolio {
@@ -126,15 +129,18 @@ erDiagram
         object financialInstrument
     }
     Account {
-        string accountIdentification
-        string accountType
+        string id
+        string type
+        string name
         string referenceCurrency
+        string iban
+        string number
     }
     Movement }|--o| FinancialInstrument : references
     FinancialInstrument {
-        string financialInstrumentType      
+        string type
         string name
-        string identification
+        object[] identificationList
     }
     Portfolio ||--|{ Account : contains
     Portfolio {
@@ -146,3 +152,49 @@ erDiagram
 ## Movement
 
 A movement is an entity that describes a change in units of a particular financial instrument in a given account. Typically a prize is associated with the movement, for example, the purchase price of a security. A transaction encloses one or more movements of one or more financial instruments. A purchase of a stock for example can consist of the purches units of the particular stock and a number of movements on the associated cash account, such as gross amount (units * price), brokerage fee, stamp and/or other local taxes.
+
+## Credit Limit
+
+TBD
+
+**Entity Relationships of a credit limt**
+
+```mermaid
+erDiagram
+    CreditLimit o|--|{ Collateral : containsMultiple
+    CreditLimit {
+        string id
+        string type
+        string referenceCurrency
+        number limit "Maximum principal amount allowed by the credit contract."
+        number lendingValue "The maximum amount the lender is willing to lend based on the collateral's value."
+        number usage "Maximum principal amount allowed by the credit contract."
+        object[] collateralList "The actual asset(s) provided by the borrower to secure the loan."
+        object valuation
+    }
+    Collateral ||--|o FinancialInstrument : references
+    Collateral {
+        enum type "account, instrument, other"
+        string name
+        number quantity "Number of units of the associated asset."
+        number marketValue "Current market value of the associated asset. In the currency of the associated limit."
+        number lendingValueRatio "Maximum loan amount as a percentage of the asset's current market value."
+        string positionId "Unique identification of the associated position."
+        object account "The single account (position) that is part of the pledge/collateral."
+        object financialInstrument "The single instrument (position) that is part of the pledge/collateral."
+    }
+    FinancialInstrument {
+        string type
+        string name
+        object[] identificationList
+    }
+    Account |o--|| Collateral : references
+    Account {
+        string id
+        string type
+        string name
+        string referenceCurrency
+        string iban
+        string number
+    }
+```
