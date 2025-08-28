@@ -170,7 +170,6 @@ erDiagram
         number lendingValue "The maximum amount the lender is willing to lend based on the collateral's value."
         number usage "Maximum principal amount allowed by the credit contract."
         object[] collateralList "The actual asset(s) provided by the borrower to secure the loan."
-        object valuation
     }
     Collateral ||--|o FinancialInstrument : references
     Collateral {
