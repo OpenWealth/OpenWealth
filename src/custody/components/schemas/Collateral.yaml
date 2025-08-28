@@ -1,0 +1,36 @@
+title: Collateral
+type: object
+description: Schema of a collateral item.
+required:
+  - type
+  - name
+  - quantity
+  - marketValue
+  - lendingValueRatio
+properties:
+  type:
+    type: string
+    enum:
+      - account
+      - instrument
+      - other
+  name:
+    type: string
+  quantity:
+    description: Number of units of the associated asset.
+    $ref: Quantity.yaml
+  marketValue:
+    description: Current market value of the associated asset.
+    type: number
+  lendingValueRatio:
+    description: Maximum loan amount as a percentage of the asset's current market value.
+    type: number
+  positionId:
+    description: Unique identification of the associated position.
+    type: string
+  account:
+    description: The single account (position) that is part of the pledge/collateral.
+    $ref: 'Account.yaml'
+  financialInstrument:
+    description: The single instrument (position) that is part of the pledge/collateral.
+    $ref: 'FinancialInstrument.yaml'

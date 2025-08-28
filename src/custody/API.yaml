@@ -49,6 +49,10 @@ paths:
     $ref: paths/customers_{customerId}_transactions.yaml
   /customers/{customerId}/transactions/{transactionId}:
     $ref: paths/customers_{customerId}_transactions_{transactionId}.yaml
+  /customers/{customerId}/limits:
+    $ref: paths/customers_{customerId}_limits.yaml
+  /customers/{customerId}/limits/{limitId}:
+    $ref: paths/customers_{customerId}_limits_{limitId}.yaml
 components:
   schemas: {}
   responses: {}

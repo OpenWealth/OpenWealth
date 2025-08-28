@@ -1,0 +1,8 @@
+in: path
+name: limitId
+required: true
+schema:
+  type: string
+  maxLength: 128
+  description: The customer's credit limit identification.
+description: Credit limit Id parameter.

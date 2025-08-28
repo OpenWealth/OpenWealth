@@ -11,9 +11,7 @@ allOf:
         $ref: 'CurrencyAmount.yaml'
       interestRate:
         $ref: 'InterestRate.yaml'
-      limit:
-        type: number
-        example: 100000
-        description: Maximum principal amount allowed by the credit contract.
-      underlyingFinancialInstrument:
-        $ref: 'FinancialInstrument.yaml'
+      limitId:
+        type: string
+        description: |
+          Unique and unambiguous identification of the associated credit limit.

@@ -1,0 +1,35 @@
+title: Credit limit
+description: Schema of a credit limit.
+required:
+  - id
+  - type
+  - referenceCurrency
+  - limit
+properties:
+  id:
+    type: string
+    maxLength: 128
+    description: Unique and unambiguous identification for the credit limit.
+  type:
+    type: string
+    enum:
+      - tbd
+  referenceCurrency:
+    description: Currency associated to the amounts defined by the credit limit.
+  limit:
+    description: Maximum principal amount allowed by the credit contract.
+    type: number
+    example: 100000
+  lendingValue:
+    description: The maximum amount the lender is willing to lend based on the collateral's value.
+    type: number
+    example: 100000
+  usage:
+    description: Maximum principal amount allowed by the credit contract.
+    type: number
+    example: 100000
+  collateralList:
+    description: The actual asset(s) provided by the borrower to secure the loan.
+    type: array
+    items:
+      $ref: Collateral.yaml
