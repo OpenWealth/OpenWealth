@@ -1,0 +1,80 @@
+{
+  "id": "order-equity-2",
+  "clientReference": "123-123124",
+  "orderDateTime": "2023-01-04T11:11:11Z",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "status": "acknowledged",
+  "statusDateTime": "2023-01-04T11:35:00Z",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 10000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "name": "CREDIT SUISSE GROUP AG",
+        "identification": {
+          "identifier": "CH0012138530",
+          "type": "isin"
+        }
+      },
+      "quoteInstrument": {
+        "name": "Swiss franc",
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    }
+  ],
+  "allocationList": [
+    {
+      "id": "allocation-1-order-equity-2",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-1",
+          "creditAccountId": "safekeeping-account-1",
+          "quantity": 10000,
+          "quantityType": "unit",
+          "executedQuantity": 10000,
+          "averagePrice": 10,
+          "averagePriceType": "actual",
+          "executionAllocationList": [
+            {
+              "quantity": 10000,
+              "price": 10,
+              "priceType": "actual",
+              "executionIds": [
+                "execution-equity-2"
+              ],
+              "billingDetails": {
+                "grossTradeAmount": {
+                  "value": -100000,
+                  "currency": "CHF"
+                },
+                "settlementAmount": {
+                  "value": -100472.75,
+                  "currency": "CHF"
+                },
+                "brokerageFee": {
+                  "value": -397.75,
+                  "currency": "CHF"
+                },
+                "stampDuty": {
+                  "value": -75,
+                  "currency": "CHF"
+                }
+              },
+              "transactionId": "trx-002-00",
+              "bookingDate": "2023-01-04",
+              "valueDate": "2023-01-04"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

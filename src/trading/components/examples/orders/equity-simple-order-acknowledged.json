@@ -1,0 +1,46 @@
+{
+  "id": "order-equity-2",
+  "clientReference": "123-123124",
+  "orderDateTime": "2023-01-04T11:11:11Z",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "status": "acknowledged",
+  "statusDateTime": "2023-01-04T11:11:11Z",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 10000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "name": "CREDIT SUISSE GROUP AG",
+        "identification": {
+          "identifier": "CH0012138530",
+          "type": "isin"
+        }
+      },
+      "quoteInstrument": {
+        "name": "Swiss franc",
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    }
+  ],
+  "allocationList": [
+    {
+      "id": "allocation-1-order-equity-2",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-1",
+          "creditAccountId": "safekeeping-account-1",
+          "quantity": 10000,
+          "quantityType": "unit"
+        }
+      ]
+    }
+  ]
+}

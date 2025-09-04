@@ -1,5 +1,7 @@
 bondExecution:
   externalValue: ./executions/bond-execution-1.json
+equitySimpleExecution:
+  externalValue: ./executions/equity-simple-execution-1.json
 equityExecution1:
   externalValue: ./executions/equity-execution-1.json
 equityExecution2:
