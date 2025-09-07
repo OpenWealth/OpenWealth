@@ -28,7 +28,7 @@
   },
   "triggeringQuantity": {
     "type": "unit",
-    "value": -300
+    "value": 300
   },
   "movementList": [
     {

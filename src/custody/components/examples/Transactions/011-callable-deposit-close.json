@@ -1,12 +1,12 @@
 {
   "id": "trx-011-03",
   "type": "closeContract",
-  "transactionDate": "2019-02-25",
+  "transactionDate": "2023-02-25",
   "customerId": "customer-1",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "reference": "callableDepositContract1",
-  "tradeDate": "2019-02-25",
+  "tradeDate": "2023-02-25",
   "triggeringFinancialInstrument": {
     "type": "callableDeposit",
     "name": "Call Deposit CHF",
@@ -23,13 +23,13 @@
     },
     "interestRate": {
       "type": "fixed",
-      "value": 0.021
+      "value": 0.0005
     }
   },
   "movementList": [
     {
       "type": "asset",
-      "movementDate": "2019-02-25",
+      "movementDate": "2023-02-25",
       "financialInstrument": {
         "type": "callableDeposit",
         "name": "Call Deposit CHF",
@@ -61,11 +61,11 @@
       },
       "positionId": "pos-011",
       "positionCurrency": "CHF",
-      "valueDate": "2019-02-25"
+      "valueDate": "2023-02-25"
     },
     {
       "type": "cash",
-      "movementDate": "2019-02-25",
+      "movementDate": "2023-02-25",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss franc",
@@ -90,11 +90,11 @@
       },
       "positionId": "pos-000",
       "positionCurrency": "CHF",
-      "valueDate": "2019-02-25"
+      "valueDate": "2023-02-25"
     },
     {
       "type": "interest",
-      "movementDate": "2019-02-25",
+      "movementDate": "2023-02-25",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss franc",
@@ -119,12 +119,12 @@
       },
       "positionId": "pos-000",
       "positionCurrency": "CHF",
-      "valueDate": "2019-02-25"
+      "valueDate": "2023-02-25"
     }
   ],
   "postingAmountList": [
     {
-      "amount": 120133.33,
+      "amount": 2900133.33,
       "currency": "CHF",
       "account": {
         "id": "cash-account-chf-1",

@@ -4,7 +4,7 @@
   "positionDate": "2022-12-31",
   "financialInstrument": {
     "type": "callableDeposit",
-    "name": "Callable Deposit 6'00'000 CHF",
+    "name": "Callable Deposit 6'000'000 CHF",
     "identificationList": [
       {
         "identifier": "CallableDepositContract1",
