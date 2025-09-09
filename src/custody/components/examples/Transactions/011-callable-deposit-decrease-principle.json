@@ -1,0 +1,75 @@
+{
+  "id": "trx-011-01",
+  "type": "decreasePrincipal",
+  "transactionDate": "2022-12-06",
+  "customerId": "customer-1",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "reference": "callableDepositContract1",
+  "tradeDate": "2022-12-06",
+  "triggeringFinancialInstrument": {
+    "type": "callableDeposit",
+    "name": "Call Deposit CHF",
+    "identificationList": [
+      {
+        "identifier": "callableDepositContract1",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "currencyOfDenomination": "CHF",
+    "principalAmount": {
+      "amount": 2900000,
+      "currency": "CHF"
+    },
+    "interestRate": {
+      "type": "fixed",
+      "value": 0.0005,
+      "dayCountBasis": "act_360",
+      "paymentFrequency": "other"
+    }
+  },
+  "movementList": [
+    {
+      "type": "cash",
+      "movementDate": "2022-12-06",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss franc",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "iso3"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 3100000
+      },
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
+      "valueDate": "2022-12-06"
+    }
+  ],
+  "postingAmountList": [
+    {
+      "amount": 3100000,
+      "currency": "CHF",
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      }
+    }
+  ]
+}

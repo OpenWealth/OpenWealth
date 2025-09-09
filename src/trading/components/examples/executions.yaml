@@ -1,0 +1,16 @@
+bondExecution:
+  externalValue: ./executions/bond-execution-1.json
+equitySimpleExecution:
+  externalValue: ./executions/equity-simple-execution-1.json
+equityExecution1:
+  externalValue: ./executions/equity-execution-1.json
+equityExecution2:
+  externalValue: ./executions/equity-execution-2.json
+fxSpotExecution:
+  externalValue: ./executions/fx-spot-execution-1.json
+fxSwapExecution1:
+  externalValue: ./executions/fx-swap-execution-1.json
+fxSwapExecution2:
+  externalValue: ./executions/fx-swap-execution-2.json
+cryptoExecution:
+  externalValue: ./executions/crypto-execution-1.json

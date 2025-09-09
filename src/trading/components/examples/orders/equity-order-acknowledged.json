@@ -1,0 +1,58 @@
+{
+  "id": "order-equity-1",
+  "clientReference": "123-123123",
+  "orderDateTime": "2025-04-10T11:11:11Z",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "status": "acknowledged",
+  "statusDateTime": "2025-04-13T11:11:11Z",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 5,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "name": "Lindt N",
+        "identification": {
+          "identifier": "CH0010570759",
+          "type": "isin"
+        }
+      },
+      "quoteInstrument": {
+        "name": "Swiss franc",
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    }
+  ],
+  "allocationList": [
+    {
+      "id": "allocation-1-order-equity-1",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-1",
+          "creditAccountId": "safekeeping-account-1",
+          "quantity": 3,
+          "quantityType": "unit"
+        }
+      ]
+    },
+    {
+      "id": "allocation-2-order-equity-1",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-2",
+          "creditAccountId": "safekeeping-account-2",
+          "quantity": 2,
+          "quantityType": "unit"
+        }
+      ]
+    }
+  ]
+}

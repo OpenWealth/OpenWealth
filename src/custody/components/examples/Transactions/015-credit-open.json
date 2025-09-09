@@ -1,0 +1,111 @@
+{
+  "id": "trx-015-00",
+  "type": "openContract",
+  "transactionDate": "2025-06-04",
+  "customerId": "customer-1",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "reference": "credit1Open",
+  "triggeringFinancialInstrument": {
+    "type": "credit",
+    "name": "Credit 50'000 CHF",
+    "identificationList": [
+      {
+        "identifier": "credit1",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "principalAmount": {
+      "amount": 50000,
+      "currency": "CHF"
+    },
+    "limit": 100000,
+    "interestRate": {
+      "type": "fixed",
+      "value": 0.01,
+      "dayCountBasis": "act_360",
+      "paymentFrequency": "other"
+    }
+  },
+  "movementList": [
+    {
+      "type": "asset",
+      "movementDate": "2025-06-04",
+      "financialInstrument": {
+        "type": "credit",
+        "name": "Credit 50'000 CHF",
+        "identificationList": [
+          {
+            "identifier": "credit1",
+            "type": "otherProprietaryIdentification"
+          }
+        ],
+        "principalAmount": {
+          "amount": 50000,
+          "currency": "CHF"
+        },
+        "limit": 100000,
+        "interestRate": {
+          "type": "fixed",
+          "value": 0.01,
+          "dayCountBasis": "act_360",
+          "paymentFrequency": "other"
+        }
+      },
+      "account": {
+        "id": "safekeeping-account-1",
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 1
+      },
+      "positionId": "pos-015",
+      "positionCurrency": "CHF",
+      "valueDate": "2025-06-04"
+    },
+    {
+      "type": "cash",
+      "movementDate": "2025-06-04",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss franc",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "iso3"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 50000
+      },
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
+      "valueDate": "2025-06-04"
+    }
+  ],
+  "postingAmountList": [
+    {
+      "amount": 50000,
+      "currency": "CHF",
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "number": "1234-5-2",
+        "referenceCurrency": "CHF"
+      }
+    }
+  ]
+}

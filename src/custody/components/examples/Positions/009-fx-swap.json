@@ -3,32 +3,47 @@
   "endOfDayIndicator": true,
   "positionDate": "2023-01-04",
   "financialInstrument": {
-    "type": "fxForward",
-    "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",
+    "type": "fxSwap",
+    "name": "FX Swap, 200'000 USD to CHF",
     "identificationList": [
       {
-        "identifier": "fxForwardRef111",
+        "identifier": "fxSwapRef112",
         "type": "otherProprietaryIdentification"
       }
     ],
-    "amountPaid": {
+    "nearAmountPaid": {
+      "amount": 165000,
+      "currency": "CHF"
+    },
+    "nearAmountReceived": {
       "amount": 200000,
       "currency": "USD"
     },
-    "amountReceived": {
+    "farAmountPaid": {
+      "amount": 200000,
+      "currency": "USD"
+    },
+    "farAmountReceived": {
       "amount": 170000,
       "currency": "CHF"
     },
+    "nearMaturityDate": "2023-01-04",
     "maturityDate": "2023-06-27"
   },
   "account": {
-    "id": "123456-1",
+    "id": "safekeeping-account-1",
     "type": "safekeepingAccount",
     "referenceCurrency": "CHF"
   },
   "quantity": {
     "type": "unit",
     "value": 1
+  },
+  "foreignExchangeRate": {
+    "value": 0.9,
+    "sourceCurrency": "USD",
+    "targetCurrency": "CHF",
+    "rateDate": "2023-01-04"
   },
   "valuation": {
     "valueInPositionCurrency": {
@@ -38,12 +53,6 @@
     "valueInReferenceCurrency": {
       "amount": 10000,
       "currency": "CHF"
-    },
-    "foreignExchangeRate": {
-      "value": 0.9,
-      "sourceCurrency": "USD",
-      "targetCurrency": "CHF",
-      "rateDate": "2023-01-04"
     }
   },
   "name": "FX Swap, 200'000 USD to CHF",

@@ -2,7 +2,7 @@
   "id": "trx-001-01",
   "type": "coupon",
   "transactionDate": "2023-06-27",
-  "customerId": "123456",
+  "customerId": "customer-1",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "triggeringFinancialInstrument": {
@@ -31,7 +31,7 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"
@@ -59,7 +59,7 @@
         "currencyOfDenomination": "CHF"
       },
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"
@@ -78,7 +78,7 @@
       "amount": 665,
       "currency": "CHF",
       "account": {
-        "id": "1234-56",
+        "id": "cash-account-chf-1",
         "type": "cashAccount",
         "iban": "CH121212121212121212",
         "referenceCurrency": "CHF"

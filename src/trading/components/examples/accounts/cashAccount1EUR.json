@@ -1,7 +1,0 @@
-{
-  "id": "cash-EUR-1",
-  "type": "cashAccount",
-  "customerId": "customer-1",
-  "number": "1234-3",
-  "referenceCurrency": "EUR"
-}

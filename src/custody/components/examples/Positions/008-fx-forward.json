@@ -22,13 +22,19 @@
     "maturityDate": "2023-06-27"
   },
   "account": {
-    "id": "123456-1",
+    "id": "safekeeping-account-1",
     "type": "safekeepingAccount",
     "referenceCurrency": "CHF"
   },
   "quantity": {
     "type": "unit",
     "value": 1
+  },
+  "foreignExchangeRate": {
+    "value": 0.9,
+    "sourceCurrency": "USD",
+    "targetCurrency": "CHF",
+    "rateDate": "2023-01-04"
   },
   "valuation": {
     "valueInPositionCurrency": {
@@ -38,12 +44,6 @@
     "valueInReferenceCurrency": {
       "amount": 10000,
       "currency": "CHF"
-    },
-    "foreignExchangeRate": {
-      "value": 0.9,
-      "sourceCurrency": "USD",
-      "targetCurrency": "CHF",
-      "rateDate": "2023-01-04"
     }
   },
   "name": "FX Forward Sell, 200'000 USD at 170'000 CHF",

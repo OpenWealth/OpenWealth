@@ -2,7 +2,7 @@
   "id": "trx-012-00",
   "type": "openContract",
   "transactionDate": "2022-12-31",
-  "customerId": "123456",
+  "customerId": "customer-1",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
   "triggeringFinancialInstrument": {
@@ -38,14 +38,14 @@
         },
         "interestRate": {
           "type": "fixed",
-          "value": 0.9,
+          "value": 0.009,
           "dayCountBasis": "act_360",
           "paymentDate": "2023-06-27",
           "paymentFrequency": "atMaturity"
         }
       },
       "account": {
-        "id": "123456-1",
+        "id": "safekeeping-account-1",
         "type": "safekeepingAccount",
         "referenceCurrency": "CHF"
       },
@@ -71,7 +71,7 @@
         "currencyOfDenomination": "USD"
       },
       "account": {
-        "id": "1234-58",
+        "id": "cash-account-usd-1",
         "type": "cashAccount",
         "iban": "CH121212121212121214",
         "referenceCurrency": "USD"
@@ -90,7 +90,7 @@
       "amount": -100000,
       "currency": "USD",
       "account": {
-        "id": "1234-58",
+        "id": "cash-account-usd-1",
         "type": "cashAccount",
         "iban": "CH121212121212121214",
         "referenceCurrency": "USD"

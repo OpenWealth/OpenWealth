@@ -1,0 +1,160 @@
+{
+  "id": "trx-002-00",
+  "type": "buy",
+  "transactionDate": "2022-01-04",
+  "customerId": "customer-1",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "placeOfTrade": {
+    "marketIdentificationCode": "XSWX"
+  },
+  "triggeringFinancialInstrument": {
+    "type": "fund",
+    "name": "SILVERH AS L SQ GC",
+    "identificationList": [
+      {
+        "identifier": "LU1336212615",
+        "type": "isin"
+      }
+    ],
+    "currencyOfDenomination": "CHF"
+  },
+  "triggeringPrice": {
+    "type": "actual",
+    "value": 115.00,
+    "currency": "CHF"
+  },
+  "triggeringQuantity": {
+    "type": "unit",
+    "value": 9956.192
+  },
+  "movementList": [
+    {
+      "type": "asset",
+      "movementDate": "2022-01-04",
+      "financialInstrument": {
+        "type": "fund",
+        "name": "SILVERH AS L SQ GC",
+        "identificationList": [
+          {
+            "identifier": "LU1336212615",
+            "type": "isin"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "safekeeping-account-1",
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 9956.192
+      },
+      "positionId": "pos-003",
+      "positionCurrency": "CHF",
+      "price": {
+        "type": "actual",
+        "value": 115.00,
+        "currency": "CHF"
+      }
+    },
+    {
+      "type": "cash",
+      "movementDate": "2022-01-04",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "type": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": -1144962.08
+      },
+      "valueDate": "2022-01-04",
+      "positionId": "pos-000",
+      "positionCurrency": "CHF"
+    },
+    {
+      "type": "brokerageFee",
+      "movementDate": "2022-01-04",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "type": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": -1100
+      },
+      "valueDate": "2022-01-04",
+      "positionId": "pos-000",
+      "positionCurrency": "CHF"
+    },
+    {
+      "type": "stampDuty",
+      "movementDate": "2022-01-04",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss francs",
+        "identificationList": [
+          {
+            "type": "iso3",
+            "identifier": "CHF"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": -750
+      },
+      "valueDate": "2022-01-04",
+      "positionId": "pos-000",
+      "positionCurrency": "CHF"
+    }
+  ],
+  "postingAmountList": [
+    {
+      "amount": -1146812.08,
+      "currency": "CHF",
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
+      }
+    }
+  ]
+}

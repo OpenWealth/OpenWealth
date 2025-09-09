@@ -1,0 +1,129 @@
+{
+  "id": "order-bond-1",
+  "clientReference": "123-123124",
+  "orderDateTime": "2025-04-13T11:11:11Z",
+  "executionType": "limit",
+  "timeInForce": "goodTillCancel",
+  "status": "executed",
+  "statusDateTime": "2025-04-13T12:10:00Z",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 100000,
+      "quantityType": "faceAmount",
+      "baseInstrument": {
+        "name": "Schweizerische Eidgenossenschaft 0,5% 15/30",
+        "identification": {
+          "identifier": "CH0224397171",
+          "type": "isin"
+        }
+      },
+      "quoteInstrument": {
+        "name": "Swiss franc",
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument",
+      "priceType": "percentage",
+      "limitPrice": 100.4,
+      "executedQuantity": 100000
+    }
+  ],
+  "allocationList": [
+    {
+      "id": "allocation-1-order-bond-1",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-1",
+          "creditAccountId": "safekeeping-account-1",
+          "quantity": 40000,
+          "quantityType": "faceAmount",
+          "executedQuantity": 40000,
+          "averagePrice": 100.355,
+          "averagePriceType": "percentage",
+          "executionAllocationList": [
+            {
+              "quantity": 40000,
+              "price": 100.355,
+              "priceType": "percentage",
+              "executionIds": [
+                "execution-bond-1"
+              ],
+              "billingDetails": {
+                "grossTradeAmount": {
+                  "value": -40000,
+                  "currency": "CHF"
+                },
+                "settlementAmount": {
+                  "value": -40430,
+                  "currency": "CHF"
+                },
+                "accruedInterest": {
+                  "value": -400,
+                  "currency": "CHF"
+                },
+                "stampDuty": {
+                  "value": -30,
+                  "currency": "CHF"
+                }
+              },
+              "transactionId": "transaction-1",
+              "bookingDate": "2025-04-13",
+              "valueDate": "2025-04-13"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "allocation-2-order-bond-1",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-2",
+          "creditAccountId": "safekeeping-account-2",
+          "quantity": 60000,
+          "quantityType": "faceAmount",
+          "executedQuantity": 60000,
+          "averagePrice": 100.355,
+          "averagePriceType": "percentage",
+          "executionAllocationList": [
+            {
+              "quantity": 40000,
+              "price": 100.355,
+              "priceType": "percentage",
+              "executionIds": [
+                "execution-bond-1"
+              ],
+              "billingDetails": {
+                "grossTradeAmount": {
+                  "value": -60000,
+                  "currency": "CHF"
+                },
+                "settlementAmount": {
+                  "value": -60645,
+                  "currency": "CHF"
+                },
+                "accruedInterest": {
+                  "value": -600,
+                  "currency": "CHF"
+                },
+                "stampDuty": {
+                  "value": -45,
+                  "currency": "CHF"
+                }
+              },
+              "transactionId": "transaction-2",
+              "bookingDate": "2025-04-13",
+              "valueDate": "2025-04-13"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

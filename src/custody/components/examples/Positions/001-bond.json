@@ -23,7 +23,7 @@
     "minimumDenomination": 1000
   },
   "account": {
-    "id": "123456-1",
+    "id": "safekeeping-account-1",
     "type": "safekeepingAccount",
     "referenceCurrency": "CHF"
   },

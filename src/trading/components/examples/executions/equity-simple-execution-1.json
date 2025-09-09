@@ -1,0 +1,13 @@
+{
+  "id": "execution-equity-2",
+  "orderId": "order-equity-2",
+  "orderLegIndex": 0,
+  "reference": "market-ref-equity-exec-01",
+  "quantity": 10000,
+  "executionDateTime": "2023-01-04T11:30:00Z",
+  "price": 10,
+  "priceType": "actual",
+  "placeOfTrade": {
+    "marketIdentificationCode": "XSWX"
+  }
+}

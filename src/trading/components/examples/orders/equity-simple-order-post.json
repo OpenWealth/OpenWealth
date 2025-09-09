@@ -1,0 +1,41 @@
+{
+  "clientReference": "123-123124",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 10000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "name": "CREDIT SUISSE GROUP AG",
+        "identification": {
+          "identifier": "CH0012138530",
+          "type": "isin"
+        }
+      },
+      "quoteInstrument": {
+        "name": "Swiss franc",
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    }
+  ],
+  "allocationList": [
+    {
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-1",
+          "creditAccountId": "safekeeping-account-1",
+          "quantity": 10000,
+          "quantityType": "unit"
+        }
+      ]
+    }
+  ]
+}

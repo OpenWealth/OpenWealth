@@ -1,0 +1,53 @@
+{
+  "id": "pos-015",
+  "endOfDayIndicator": true,
+  "positionDate": "2025-12-30",
+  "financialInstrument": {
+    "type": "credit",
+    "name": "Credit 50'000 CHF",
+    "identificationList": [
+      {
+        "identifier": "credit1",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "principalAmount": {
+      "amount": 50000,
+      "currency": "CHF"
+    },
+    "limit": 100000,
+    "interestRate": {
+      "type": "fixed",
+      "value": 0.01,
+      "dayCountBasis": "act_360",
+      "paymentFrequency": "other"
+    }
+  },
+  "account": {
+    "id": "safekeeping-account-1",
+    "type": "safekeepingAccount",
+    "referenceCurrency": "CHF"
+  },
+  "quantity": {
+    "type": "unit",
+    "value": 1
+  },
+  "valuation": {
+    "valueInPositionCurrency": {
+      "amount": -50000,
+      "currency": "CHF"
+    },
+    "valueInReferenceCurrency": {
+      "amount": -50000,
+      "currency": "CHF"
+    }
+  },
+  "accruedInterest": {
+    "amount": -250,
+    "currency": "CHF"
+  },
+  "numberOfDaysAccrued": 180,
+  "name": "Credit 50'000 CHF",
+  "currency": "CHF",
+  "safekeepingPlace": "INSECHZZXXX"
+}

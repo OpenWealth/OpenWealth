@@ -1,0 +1,128 @@
+{
+  "id": "trx-012-01",
+  "type": "closeContract",
+  "transactionDate": "2023-06-27",
+  "customerId": "customer-1",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "triggeringFinancialInstrument": {
+    "type": "fixedDeposit",
+    "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
+    "identificationList": [
+      {
+        "identifier": "fixedDepositContract1",
+        "type": "otherProprietaryIdentification"
+      }
+    ],
+    "principalAmount": {
+      "amount": 0,
+      "currency": "USD"
+    }
+  },
+  "movementList": [
+    {
+      "type": "asset",
+      "movementDate": "2022-12-31",
+      "financialInstrument": {
+        "type": "fixedDeposit",
+        "name": "Fixed Deposit 100'000 USD, Expiry Date 2023-06-27",
+        "identificationList": [
+          {
+            "identifier": "fixedDepositContract1",
+            "type": "otherProprietaryIdentification"
+          }
+        ],
+        "principalAmount": {
+          "amount": 0,
+          "currency": "USD"
+        },
+        "interestRate": {
+          "type": "fixed",
+          "value": 0.009,
+          "dayCountBasis": "act_360",
+          "paymentDate": "2023-06-27",
+          "paymentFrequency": "atMaturity"
+        }
+      },
+      "account": {
+        "id": "safekeeping-account-1",
+        "type": "safekeepingAccount",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "value": -1,
+        "type": "unit"
+      },
+      "positionId": "pos-012",
+      "positionCurrency": "USD"
+    },
+    {
+      "type": "cash",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "US Dollars",
+        "identificationList": [
+          {
+            "type": "iso3",
+            "identifier": "USD"
+          }
+        ],
+        "currencyOfDenomination": "USD"
+      },
+      "account": {
+        "id": "cash-account-usd-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121214",
+        "referenceCurrency": "USD"
+      },
+      "quantity": {
+        "value": 100000,
+        "type": "unit"
+      },
+      "valueDate": "2023-06-28",
+      "positionId": "pos-000-2",
+      "positionCurrency": "USD"
+    },
+    {
+      "type": "accruedInterest",
+      "movementDate": "2023-06-27",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "US Dollars",
+        "identificationList": [
+          {
+            "type": "iso3",
+            "identifier": "USD"
+          }
+        ],
+        "currencyOfDenomination": "USD"
+      },
+      "account": {
+        "id": "cash-account-usd-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121214",
+        "referenceCurrency": "USD"
+      },
+      "quantity": {
+        "value": 130.4,
+        "type": "unit"
+      },
+      "valueDate": "2023-06-28",
+      "positionId": "pos-000-2",
+      "positionCurrency": "USD"
+    }
+  ],
+  "postingAmountList": [
+    {
+      "amount": 100130.4,
+      "currency": "USD",
+      "account": {
+        "id": "cash-account-usd-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121214",
+        "referenceCurrency": "USD"
+      }
+    }
+  ]
+}

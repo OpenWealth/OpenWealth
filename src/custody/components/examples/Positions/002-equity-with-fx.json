@@ -13,7 +13,7 @@
     ]
   },
   "account": {
-    "id": "123456-1",
+    "id": "safekeeping-account-1",
     "type": "safekeepingAccount",
     "referenceCurrency": "CHF"
   },
@@ -37,11 +37,11 @@
   },
   "valuation": {
     "valueInPositionCurrency": {
-      "value": 6000,
+      "amount": 6000,
       "currency": "USD"
     },
     "valueInReferenceCurrency": {
-      "value": 5100,
+      "amount": 5100,
       "currency": "CHF"
     }
   },
