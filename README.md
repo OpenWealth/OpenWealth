@@ -21,18 +21,19 @@ A detailed introduction into OpenWealth APIs and detailed documentation to each 
 All the API specification source files are contained in the `src` folder with a cantianed folder for each API and folder `generics` containing files shared among all APIs.
 An API folder contains the root `API.yaml` which references files in folders structured by the redocly convention:
 
-└──API.yaml
-└──paths
-└──components
-│ ├──headers
-│ ├──parameters
-│ ├──schemas
-│ ├──examples
+```md
+{name}
+├── API.yaml
+├── paths
+├── components
+│   ├── headers
+│   ├── parameters
+│   ├── schemas
+│   ├── examples
+```
 
-The budled and published API file is created and validated by `redocly cli`. Each Pull-Request will automatically trigger the bundling prozess. Details to the bundling and linting are found here:
-
-[API bundling](https://github.com/OpenWealth/OpenWealth/wiki/API-bundling)
+The budled and published API file is created and validated by `redocly cli` and committed to the root folder. Each Pull-Request will automatically trigger the bundling prozess. Details to the bundling and linting are found in the wiki (see link above)
 
 # Contribution
 
-TBD
+We welcome contributions to this repository and encourage collaboration to improve the YAML specification. All changes must adhere to the established schema structure and naming conventions. Before submitting a pull request, please open an issue to discuss your proposal. Contributions should be atomic, well-documented, and include relevant test cases or validation examples. The maintainers reserve the right to review, modify, or reject submissions that do not align with the project's goals or quality standards. For detailed guidelines, refer to the [Contribution](https://github.com/OpenWealth/OpenWealth/wiki/contribution) documentation.
