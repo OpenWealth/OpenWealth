@@ -32,7 +32,7 @@ An API folder contains the root `API.yaml` which references files in folders str
 │   ├── examples
 ```
 
-The budled and published API file is created and validated by `redocly cli` and committed to the root folder. Each Pull-Request to main branch will automatically trigger the bundling process. Details to the bundling and linting are found in the wiki (see link above)
+The budled and published API file is created and validated by `redocly cli` and committed to the root folder. Each Pull-Request to main branch with appropriate tag (api name - custody, customer, trading) will automatically trigger the bundling process. Details to the bundling and linting are found in the wiki (see link above)
 
 # Contribution
 
