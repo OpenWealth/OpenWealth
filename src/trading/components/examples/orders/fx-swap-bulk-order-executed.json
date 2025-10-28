@@ -1,0 +1,197 @@
+{
+  "id": "order-fxswap-2",
+  "clientReference": "123-123126",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "status": "executed",
+  "statusDateTime": "2025-04-27T12:10:00Z",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 100000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "name": "Euro",
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "name": "Swiss franc",
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    },
+    {
+      "index": 1,
+      "side": "sell",
+      "quantity": 100000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "name": "Euro",
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "name": "Swiss franc",
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument",
+      "settlementDate": "2025-07-31"
+    }
+  ],
+  "allocationList": [
+    {
+      "id": "allocation-1-order-fxswap-2",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-1",
+          "creditAccountId": "cash-account-eur-1",
+          "quantity": 60000,
+          "quantityType": "unit",
+          "executedQuantity": 60000,
+          "averagePrice": 0.9745,
+          "averagePriceType": "actual",
+          "executionAllocationList": [
+            {
+              "quantity": 60000,
+              "price": 0.9745,
+              "priceType": "actual",
+              "executionIds": [
+                "execution-fxswap-3"
+              ],
+              "billingDetails": {
+                "grossTradeAmount": {
+                  "value": -58470,
+                  "currency": "CHF"
+                },
+                "settlementAmount": {
+                  "value": -58470,
+                  "currency": "CHF"
+                }
+              },
+              "transactionId": "transaction-5",
+              "bookingDate": "2025-04-28",
+              "valueDate": "2025-04-30"
+            }
+          ]
+        },
+        {
+          "orderLegIndex": 1,
+          "debitAccountId": "cash-account-eur-1",
+          "creditAccountId": "cash-account-chf-1",
+          "quantity": 60000,
+          "quantityType": "unit",
+          "executedQuantity": 60000,
+          "averagePrice": 0.9834,
+          "averagePriceType": "actual",
+          "executionAllocationList": [
+            {
+              "quantity": 60000,
+              "price": 0.9834,
+              "priceType": "actual",
+              "executionIds": [
+                "execution-fxswap-4"
+              ],
+              "billingDetails": {
+                "grossTradeAmount": {
+                  "value": 59005,
+                  "currency": "CHF"
+                },
+                "settlementAmount": {
+                  "value": 59004,
+                  "currency": "CHF"
+                }
+              },
+              "transactionId": "transaction-6",
+              "bookingDate": "2025-07-31",
+              "valueDate": "2025-08-01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "allocation-2-order-fxswap-2",
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-2",
+          "creditAccountId": "cash-account-eur-2",
+          "quantity": 40000,
+          "quantityType": "unit",
+          "executedQuantity": 60000,
+          "averagePrice": 0.9745,
+          "averagePriceType": "actual",
+          "executionAllocationList": [
+            {
+              "quantity": 60000,
+              "price": 0.9745,
+              "priceType": "actual",
+              "executionIds": [
+                "execution-fxswap-3"
+              ],
+              "billingDetails": {
+                "grossTradeAmount": {
+                  "value": -38980,
+                  "currency": "CHF"
+                },
+                "settlementAmount": {
+                  "value": -38980,
+                  "currency": "CHF"
+                }
+              },
+              "transactionId": "transaction-5",
+              "bookingDate": "2025-04-28",
+              "valueDate": "2025-04-30"
+            }
+          ]
+        },
+        {
+          "orderLegIndex": 1,
+          "debitAccountId": "cash-account-eur-2",
+          "creditAccountId": "cash-account-chf-2",
+          "quantity": 40000,
+          "quantityType": "unit",
+          "executedQuantity": 40000,
+          "averagePrice": 0.9834,
+          "averagePriceType": "actual",
+          "executionAllocationList": [
+            {
+              "quantity": 40000,
+              "price": 0.9834,
+              "priceType": "actual",
+              "executionIds": [
+                "execution-fxswap-4"
+              ],
+              "billingDetails": {
+                "grossTradeAmount": {
+                  "value": 39336,
+                  "currency": "CHF"
+                },
+                "settlementAmount": {
+                  "value": 39336,
+                  "currency": "CHF"
+                }
+              },
+              "transactionId": "transaction-6",
+              "bookingDate": "2025-07-31",
+              "valueDate": "2025-08-01"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

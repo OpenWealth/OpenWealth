@@ -1,0 +1,89 @@
+{
+  "clientReference": "123-123126",
+  "executionType": "market",
+  "timeInForce": "goodTillCancel",
+  "quoteId": "quote-fxswap-2",
+  "legList": [
+    {
+      "index": 0,
+      "side": "buy",
+      "quantity": 100000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "name": "Euro",
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "name": "Swiss franc",
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument"
+    },
+    {
+      "index": 1,
+      "side": "sell",
+      "quantity": 100000,
+      "quantityType": "unit",
+      "baseInstrument": {
+        "name": "Euro",
+        "identification": {
+          "identifier": "EUR",
+          "type": "iso4217"
+        }
+      },
+      "quoteInstrument": {
+        "name": "Swiss franc",
+        "identification": {
+          "identifier": "CHF",
+          "type": "iso4217"
+        }
+      },
+      "unitReference": "baseInstrument",
+      "settlementDate": "2025-07-31"
+    }
+  ],
+  "allocationList": [
+    {
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-1",
+          "creditAccountId": "cash-account-eur-1",
+          "quantity": 60000,
+          "quantityType": "unit"
+        },
+        {
+          "orderLegIndex": 1,
+          "debitAccountId": "cash-account-eur-1",
+          "creditAccountId": "cash-account-chf-1",
+          "quantity": 60000,
+          "quantityType": "unit"
+        }
+      ]
+    },
+    {
+      "legList": [
+        {
+          "orderLegIndex": 0,
+          "debitAccountId": "cash-account-chf-2",
+          "creditAccountId": "cash-account-eur-2",
+          "quantity": 40000,
+          "quantityType": "unit"
+        },
+        {
+          "orderLegIndex": 1,
+          "debitAccountId": "cash-account-eur-2",
+          "creditAccountId": "cash-account-chf-2",
+          "quantity": 40000,
+          "quantityType": "unit"
+        }
+      ]
+    }
+  ]
+}
