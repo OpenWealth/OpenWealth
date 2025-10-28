@@ -15,23 +15,23 @@ Table of content:
 In the triangular relationship between custodian bank (custodian), the account holder and/or beneficial owner (the BO) and a third party financial service provider (the TPP) OpenWealth APIs define the <b>data contract</b> between the custodian and TPP - the technical terms by which a service provider is enabled and allowed to exchange data with the cutsodian: Think of a guide on how to build a <b>standardized plug</b> for digital interactions with between custodian banks and service providers.
 
 ```mermaid
-    C4Context
-      Boundary(b0, "OpenWealth eco System") {
-        Person(PartyA, "Account holder / Beneficial owner")
-        System(PartyB, "Third Party Provider", "- Wealth management<br>- Advisory<br>- Reporting etc.")
+C4Context
+    Boundary(b0, "OpenWealth eco System") {
+    Person(PartyA, "Account holder / Beneficial owner")
+    System(PartyB, "Third Party Provider", "- Wealth management<br>- Advisory<br>- Reporting etc.")
 
-        System(SystemA, "Custodian", "- Account management<br>- Safekeeping<br>- OTC etc.")
-      }
+    System(SystemA, "Custodian", "- Account management<br>- Safekeeping<br>- OTC etc.")
+    }
 
-      Rel(PartyA, PartyB, "uses", $offsetY="-20")
-      Rel(PartyA, SystemA, "Customer of", $offsetX="10")
-      BiRel(PartyB, SystemA, "API", "Data Contract", $offsetY="20")
-
-
-      UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+    Rel(PartyA, PartyB, "uses", "")
+    Rel(PartyA, SystemA, "Customer of")
+    BiRel(PartyB, SystemA, "API", "Data Contract")
 
 
-
+    UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+    UpdateRelStyle(PartyA, PartyB, $offsetX="-20", $offsetY="10")
+    UpdateRelStyle(PartyA, SystemA, $offsetX="-80")
+    UpdateRelStyle(PartyB, SystemA, $offsetY="30")
 ```
 
 The <b>custodian</b> is typically a bank that provides
