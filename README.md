@@ -25,13 +25,13 @@ C4Context
 
     Rel(PartyA, PartyB, "uses")
     Rel(PartyA, SystemA, "Customer of")
-    BiRel(PartyB, SystemA, "API - Data Contract<br>- Positions<br>- Transactions<br>- Orders<br>- KYC")
+    BiRel(PartyB, SystemA, "API - Data Contract<br>- Positions<br>- Transactions<br>- Orders<br>- KYC<br>-etc.")
 
 
     UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
     UpdateRelStyle(PartyA, PartyB, $offsetX="-20", $offsetY="10")
     UpdateRelStyle(PartyA, SystemA, $offsetX="-80")
-    UpdateRelStyle(PartyB, SystemA, $offsetY="30")
+    UpdateRelStyle(PartyB, SystemA, $offsetY="50")
 ```
 
 The <b>custodian</b> is typically a bank that provides
