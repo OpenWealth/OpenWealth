@@ -3,7 +3,7 @@
 The OpenWealth Association’s mission is to connect financial institutions, WealthTechs and other service providers to develop, maintain and distribute the Open API standard for a global wealth management community. Furthermore, the association aims to foster the exchange of expertise among its members and with third parties, as well as to cooperate with organizations of a similar nature.
 
 Table of content:
-* [OpenWealth eco-system](#openwealth-eco-system)
+* [OpenWealth eco system](#openwealth-eco-system)
 * [OpenWealth universe](#openwealth-universe)
 * [OpenWealth APIs](#openwealth-apis)
 * [Documentation](#documentation)
@@ -18,14 +18,14 @@ In the triangular relationship between custodian bank (custodian), the account h
     C4Context
       Boundary(b0, "OpenWealth eco System") {
         Person(PartyA, "Account holder / Beneficial owner")
-        Person(PartyB, "Third Party Provider", "- Wealth management<br>- Advisory<br>- Reporting etc.")
+        System(PartyB, "Third Party Provider", "- Wealth management<br>- Advisory<br>- Reporting etc.")
 
         System(SystemA, "Custodian", "- Account management<br>- Safekeeping<br>- OTC etc.")
       }
 
-      Rel(PartyA, PartyB, "Uses")
-      BiRel(PartyA, SystemA, "Customer of")
-      BiRel(PartyB, SystemA, "API", "Data Contract")
+      Rel(PartyA, PartyB, "uses", $offsetY="-20")
+      Rel(PartyA, SystemA, "Customer of", $offsetX="10")
+      BiRel(PartyB, SystemA, "API", "Data Contract", $offsetY="20")
 
 
       UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
@@ -34,13 +34,13 @@ In the triangular relationship between custodian bank (custodian), the account h
 
 ```
 
-The custodian is typically a bank that provides
+The <b>custodian</b> is typically a bank that provides
 * Account managment und payment services
 * Safekeeping, execution services and access to trading markets
 * Over-The-Counter (OTC) contracts and lending services
 * Etc
 
-The TPP may be
+The <b>TPP</b> may be
 * an external asset manager (EAM) who is providing wealth managment services such as wealth advisory advisory or managment to the BO
 * a service plattform providing applicatory services such as portfolio managament systems, wealth data aggregation, analysis & reporting etc.
 * a party providing execution and payment services on behalf of the BO or as part of the wealth managment mandate
@@ -65,33 +65,33 @@ The 3 APIs in scope - customer, custody and trading - serve and specify their is
 mindmap
   root((OpenWealth<br/>APIs))
     Custody API
-        Customer
-            Positions
-                Account
-                Instrument
-            Transactions
-                Movements
-                    Account
-                    Instrument
+        id(Customer)
+            id(Positions)
+                id(Account)
+                id(Instrument)
+            id(Transactions)
+                id(Movements)
+                    id(Account)
+                    id(Instrument)
     Trading API
-        Orders
-            Instrument
-            Allocations
-                Accounts
-            Executions 
-        Quotes
-            Instrument
-            Customer
+        id(Orders)
+            id(Instrument)
+            id(Allocations)
+                id(Accounts)
+            id(Executions)
+        id(Quotes)
+            id(Instrument)
+            id(Customer)
     Customer API
-        Customer
-            Mandates
-                Accounts
-                Persons
-            Persons
-                WealthProfile
-                RiskProfile
-                Job
-                Education
+        id(Customer)
+            id(Mandates)
+                id(Accounts)
+                id(Persons)
+            id(Persons)
+                id(WealthProfile)
+                id(RiskProfile)
+                id(Job)
+                id(Education)
 
 ```
 
