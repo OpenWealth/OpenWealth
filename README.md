@@ -23,9 +23,9 @@ C4Context
     System(SystemA, "Custodian", "- Account management<br>- Safekeeping<br>- OTC etc.")
     }
 
-    Rel(PartyA, PartyB, "uses", "")
+    Rel(PartyA, PartyB, "uses")
     Rel(PartyA, SystemA, "Customer of")
-    BiRel(PartyB, SystemA, "API", "Data Contract")
+    BiRel(PartyB, SystemA, "API - Data Contract<br>- Positions<br>- Transactions<br>- Orders<br>- KYC")
 
 
     UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
