@@ -10,14 +10,13 @@ Table of content:
 * [Repository structure](#repository-structure)
 * [Contribute](#contribute)
 
-## OpenWealth eco-system
+## OpenWealth eco system
 
 In the triangular relationship between custodian bank (custodian), the account holder and/or beneficial owner (the BO) and a third party financial service provider (the TPP) OpenWealth APIs define the <b>data contract</b> between the custodian and TPP - the technical terms by which a service provider is enabled and allowed to exchange data with the cutsodian: Think of a guide on how to build a <b>standardized plug</b> for digital interactions with between custodian banks and service providers.
 
 ```mermaid
     C4Context
-      title OpenWealth eco system
-      Boundary(b0, "Eco System") {
+      Boundary(b0, "OpenWealth eco System") {
         Person(PartyA, "Account holder / Beneficial owner")
         Person(PartyB, "Third Party Provider", "- Wealth management<br>- Advisory<br>- Reporting etc.")
 
