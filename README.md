@@ -19,9 +19,9 @@ In the triangular relationship between custodian bank (custodian), the account h
       title OpenWealth eco system
       Boundary(b0, "Eco System") {
         Person(PartyA, "Account holder / Beneficial owner")
-        Person(PartyB, "Third Party Provider", "Provides services:<br>- Wealth management<br>- Advisory<br>- Reporting<br>- etc")
+        Person(PartyB, "Third Party Provider", "- Wealth management<br>- Advisory<br>- Reporting etc.")
 
-        System(SystemA, "Custodian", "Banking services:<br>- Account management<br>- Safekeeping<br>- OTC..")
+        System(SystemA, "Custodian", "- Account management<br>- Safekeeping<br>- OTC etc.")
       }
 
       Rel(PartyA, PartyB, "Uses")
