@@ -96,7 +96,7 @@
           "quantity": 100000,
           "quantityType": "unit",
           "executedQuantity": 100000,
-          "averagePrice": 0.9745,
+          "averagePrice": 0.9834,
           "averagePriceType": "actual",
           "executionAllocationList": [
             {
