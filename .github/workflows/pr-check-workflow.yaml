@@ -1,0 +1,122 @@
+name: Pull Request Checks
+# description: Check specifications for SFTI's openapi rules.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled] # Trigger on PR actions like opening or updating a PR
+    branches:
+      - main # Only triggers for pull requests targeting the main branch
+env:
+  API_NAME: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  get_api_from_label:
+    runs-on: ubuntu-latest
+    outputs:
+      API: ${{ steps.apiName.outputs.API }}
+    steps:
+      - name: Set API to custody
+        if: contains(github.event.pull_request.labels.*.name, 'custody')
+        run: echo "API_NAME=custody" >> $GITHUB_ENV
+
+      - name: Set API to trading
+        if: contains(github.event.pull_request.labels.*.name, 'trading')
+        run: echo "API_NAME=trading" >> $GITHUB_ENV
+
+      - name: Set API to customer
+        if: contains(github.event.pull_request.labels.*.name, 'customer')
+        run: echo "API_NAME=customer" >> $GITHUB_ENV
+
+      - name: Get Pull Request Labels and set variables
+        id: apiName
+        run: |
+          echo "API"=$API_NAME >> $GITHUB_OUTPUT
+
+  bundle_and_lint_api:
+    if: needs.get_api_from_label.outputs.API
+    needs: get_api_from_label
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli
+
+      - name: Lint API
+        run: |
+          api=${{ needs.get_api_from_label.outputs.API }}
+          redocly lint --config=.github/redocly.yaml --format=stylish src/${api}/API.yaml
+
+      - name: Bundle API
+        run: |
+          api=${{ needs.get_api_from_label.outputs.API }}
+          redocly bundle src/${api}/API.yaml --output ${api}API.yaml
+
+      - name: Check for changes in bundled file
+        run: |
+          api=${{ needs.get_api_from_label.outputs.API }}
+          git diff --exit-code ${api}API.yaml || {
+            echo "Bundled file has changed. Failing the job."
+            exit 1
+          }
+
+  lint_examples:
+    if: needs.get_api_from_label.outputs.API
+    needs: get_api_from_label
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Check if example branch exists and checkout
+        run: |
+          FIXED_BRANCH="spec-including-examples"
+
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          # Check if remote branch exists
+          if git ls-remote --exit-code --heads origin "$FIXED_BRANCH"; then
+            echo "Branch '$FIXED_BRANCH' exists. Checking it out..."
+
+            # Fetch the fixed branch from origin
+            git fetch origin $FIXED_BRANCH
+
+            # Rebase it the PR source branch onto fixe brnch containing examples
+            git rebase origin/$FIXED_BRANCH || {
+              echo "Rebase failed due to conflicts."
+              git rebase --abort
+              exit 1
+            }
+          else
+            echo "Branch '$FIXED_BRANCH' does not exist. Failed linting examples."
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli
+
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli
+
+      - name: Lint API
+        run: |
+          api=${{ needs.get_api_from_label.outputs.API }}
+          redocly lint --config=.github/redocly.yaml --format=stylish src/${api}/API.yaml
