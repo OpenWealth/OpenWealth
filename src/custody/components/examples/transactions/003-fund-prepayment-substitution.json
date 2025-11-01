@@ -1,7 +1,7 @@
 {
   "id": "trx-006-02",
   "type": "prepaymentSubstitution",
-  "transactionDate": "2023-04-31",
+  "transactionDate": "2023-04-30",
   "customerId": "customer-1",
   "reversalIndicator": false,
   "endOfDayIndicator": true,
@@ -29,7 +29,7 @@
   "movementList": [
     {
       "type": "asset",
-      "movementDate": "2023-04-31",
+      "movementDate": "2023-04-30",
       "financialInstrument": {
         "type": "equity",
         "name": "FUND PRE-PAYM",
@@ -67,7 +67,7 @@
     },
     {
       "type": "asset",
-      "movementDate": "2023-04-31",
+      "movementDate": "2023-04-30",
       "financialInstrument": {
         "type": "fund",
         "name": "SILVERH AS L SQ GC",
@@ -99,7 +99,7 @@
     },
     {
       "type": "cash",
-      "movementDate": "2023-04-31",
+      "movementDate": "2023-04-30",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss franc",
@@ -122,11 +122,11 @@
       },
       "positionId": "pos-000",
       "positionCurrency": "CHF",
-      "valueDate": "2023-04-31"
+      "valueDate": "2023-04-30"
     },
     {
       "type": "reinvestmentAmount",
-      "movementDate": "2023-04-31",
+      "movementDate": "2023-04-30",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss franc",
@@ -149,11 +149,11 @@
       },
       "positionId": "pos-000",
       "positionCurrency": "CHF",
-      "valueDate": "2023-04-31"
+      "valueDate": "2023-04-30"
     },
     {
       "type": "brokerageFee",
-      "movementDate": "2023-04-31",
+      "movementDate": "2023-04-30",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss franc",
@@ -176,11 +176,11 @@
       },
       "positionId": "pos-000",
       "positionCurrency": "CHF",
-      "valueDate": "2023-04-31"
+      "valueDate": "2023-04-30"
     },
     {
       "type": "stampDuty",
-      "movementDate": "2023-04-31",
+      "movementDate": "2023-04-30",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss franc",
@@ -203,11 +203,11 @@
       },
       "positionId": "pos-000",
       "positionCurrency": "CHF",
-      "valueDate": "2023-04-31"
+      "valueDate": "2023-04-30"
     },
     {
       "type": "otherFee",
-      "movementDate": "2023-04-31",
+      "movementDate": "2023-04-30",
       "financialInstrument": {
         "type": "cash",
         "name": "Swiss franc",
@@ -230,7 +230,7 @@
       },
       "positionId": "pos-000",
       "positionCurrency": "CHF",
-      "valueDate": "2023-04-31"
+      "valueDate": "2023-04-30"
     }
   ],
   "postingAmountList": [
