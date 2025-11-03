@@ -17,21 +17,27 @@ In the triangular relationship between custodian bank (custodian), the account h
 ```mermaid
 C4Context
     Boundary(b0, "OpenWealth eco System") {
-    Person(PartyA, "Account holder / Beneficial owner")
-    System(PartyB, "Third Party Provider", "- Wealth management<br>- Advisory<br>- Reporting etc.")
-
-    System(SystemA, "Custodian", "- Account management<br>- Safekeeping<br>- OTC etc.")
+    Person(PartyBO, "Account holder / Beneficial owner")
+    Boundary(b1, "Data Exchange - Focus OpenWealth") {
+        Person(PartyFI, "Financial Institution")
+        Person(PartyEAM, "EAM") 
+        System(PartyTPP, "Third Party Provider")
+        }
     }
 
-    Rel(PartyA, PartyB, "uses")
-    Rel(PartyA, SystemA, "Customer of")
-    BiRel(PartyB, SystemA, "API - Data Contract<br>- Positions<br>- Transactions<br>- Orders<br>- KYC<br>-etc.")
+    BiRel(PartyBO, PartyEAM, "Wealth management mandate")
+    BiRel(PartyBO, PartyFI, "Banking Relation")
+    BiRel(PartyTPP, PartyFI, "APIs<br>Data Consumption")
+    BiRel(PartyFI, PartyEAM, "Framework<br>Agreement")
+    BiRel(PartyTPP, PartyEAM, "Consent for Data Consumption")
 
 
     UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
-    UpdateRelStyle(PartyA, PartyB, $offsetX="-20", $offsetY="10")
-    UpdateRelStyle(PartyA, SystemA, $offsetX="-80")
-    UpdateRelStyle(PartyB, SystemA, $offsetY="50")
+    UpdateRelStyle(PartyBO, PartyEAM, $offsetX="-20", $offsetY="-40")
+    UpdateRelStyle(PartyEAM, PartyTPP, $offsetX="-0", $offsetY="0")
+    UpdateRelStyle(PartyFI, PartyEAM, $offsetX="-30", $offsetY="-20")
+    UpdateRelStyle(PartyBO, PartyFI, $offsetX="-90", $offsetY="-30")
+    UpdateRelStyle(PartyTPP, PartyFI, $offsetX="-120")
 ```
 
 The <b>custodian</b> is typically a bank that provides
@@ -47,10 +53,10 @@ The <b>TPP</b> may be
 
 The OpenWealth Association provides
 * Definition, maintenance and publication of the API specifications (the actual data contracts) for the scope of the OpenWealth universe
-* Documentation of the specification and guides and best practices for implemntors - API providers and consumers
+* Documentation of the specification and guides and best practices for implementors - API providers and consumers
 * Sample data for a large set of use-cases
-* A sandbox environment for implementors to test and develop against
-* Q&As and support services for implemntors and interested parties
+* A sandbox environment for implemeentors to test and develop against
+* Q&As and support services for implementors and interested parties
 
 The OpenWealth Association <b>does not</b> provide
 * Infrastructure for hosting APIs
@@ -59,7 +65,7 @@ The OpenWealth Association <b>does not</b> provide
 ## OpenWealth universe
 ### Data objects, relations and context of APIs
 
-The 3 APIs in scope - customer, custody and trading - serve and specify their isolated use-cases. The APIs can be implemented independent of one-another - providing a custody API does not imply the necessity of implemnting the cutomer API etc.. However the APIs and the contained business object (data entities) have partly common, and API overarching significance. It is therefore of great benefit to provide consistency in terms of entity identification and core system data transformation in order to reduce confusion and implementation errors for the API consuming parties. The following graphic illustrates the main entities in scope:
+The 3 APIs in scope - customer, custody and trading - serve and specify their isolated use-cases. The APIs can be implemented independent of one-another - providing a custody API does not imply the necessity of implementing the cutomer API etc.. However the APIs and the contained business object (data entities) have partly common, and API overarching significance. It is therefore of great benefit to provide consistency in terms of entity identification and core system data transformation in order to reduce confusion and implementation errors for the API consuming parties. The following graphic illustrates the main entities in scope:
 
 ```mermaid
 mindmap
