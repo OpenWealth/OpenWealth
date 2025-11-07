@@ -15,38 +15,23 @@ Table of content:
 In the triangular relationship between custodian bank (custodian), the account holder and/or beneficial owner (the BO) and a third party financial service provider (the TPP) OpenWealth APIs define the <b>data contract</b> between the custodian and TPP - the technical terms by which a service provider is enabled and allowed to exchange data with the cutsodian: Think of a guide on how to build a <b>standardized plug</b> for digital interactions with between custodian banks and service providers.
 
 ```mermaid
-C4Context
-    Boundary(b0, "OpenWealth eco System") {
-    Person(PartyBO, "Account holder / Beneficial owner")
-    Boundary(b1, "Data Exchange - Focus OpenWealth") {
-        Person(PartyFI, "Financial Institution")
-        Person(PartyEAM, "EAM") 
-        System(PartyTPP, "Third Party Provider")
-        }
-    }
-
-    BiRel(PartyBO, PartyEAM, "Wealth management mandate")
-    BiRel(PartyBO, PartyFI, "Banking Relation")
-    BiRel(PartyTPP, PartyFI, "APIs<br>Data Consumption")
-    BiRel(PartyFI, PartyEAM, "Framework<br>Agreement")
-    BiRel(PartyTPP, PartyEAM, "Consent for Data Consumption")
-
-
-    UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
-    UpdateRelStyle(PartyBO, PartyEAM, $offsetX="-20", $offsetY="-40")
-    UpdateRelStyle(PartyEAM, PartyTPP, $offsetX="-0", $offsetY="0")
-    UpdateRelStyle(PartyFI, PartyEAM, $offsetX="-30", $offsetY="-20")
-    UpdateRelStyle(PartyBO, PartyFI, $offsetX="-90", $offsetY="-30")
-    UpdateRelStyle(PartyTPP, PartyFI, $offsetX="-120")
+flowchart TB
+    BO((Beneficial<br>Owner)) <-- Banking Relation --> FI((Financial<br>Institution))
+    BO <-- Management Mandate --> EAM((Wealth<br>Manager))
+    subgraph Data Exchange - OpenWealth
+        FI <-- APIs<br>Data Consumption --> TPP((Third Party<br>Provider))
+        FI <-- Framework<br>Agreement --> EAM
+        EAM <-- Consent for<br>Data Consumption --> TPP
+    end
 ```
 
-The <b>custodian</b> is typically a bank that provides
+The <b>Financial institution</b> is typically a bank that provides
 * Account managment und payment services
 * Safekeeping, execution services and access to trading markets
 * Over-The-Counter (OTC) contracts and lending services
 * Etc
 
-The <b>TPP</b> may be
+The <b>Third Party Provide - TPP</b> may be
 * an external asset manager (EAM) who is providing wealth managment services such as wealth advisory advisory or managment to the BO
 * a service plattform providing applicatory services such as portfolio managament systems, wealth data aggregation, analysis & reporting etc.
 * a party providing execution and payment services on behalf of the BO or as part of the wealth managment mandate
