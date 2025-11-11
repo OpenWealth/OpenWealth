@@ -19,11 +19,11 @@ flowchart TB
     BO((Beneficial<br>Owner)) <-- Banking Relation --> FI((Financial<br>Institution))
     BO <-- Management Mandate --> EAM((Wealth<br>Manager))
     subgraph Data Exchange - OpenWealth
-        FI <-- APIs for Data Consumption<br> inline with<br><b>OW Data Contract</b>--> TPP((Third Party<br>Provider))
+        FI <-- APIs for Data Consumption<br><b>OW Data Contract</b>--> TPP((Third Party<br>Provider))
         FI <-- Framework<br>Agreement --> EAM
         EAM <-- Consent for<br>Data Consumption --> TPP
     end
-    linkStyle 2 color:blue,backgound-color:green,font-size:1.5rem;
+    linkStyle 2 color:blue,backgound-color:green,font-size:1.2rem;
 ```
 
 The <b>Financial institution</b> is typically a bank that provides
