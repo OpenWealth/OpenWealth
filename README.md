@@ -19,10 +19,11 @@ flowchart TB
     BO((Beneficial<br>Owner)) <-- Banking Relation --> FI((Financial<br>Institution))
     BO <-- Management Mandate --> EAM((Wealth<br>Manager))
     subgraph Data Exchange - OpenWealth
-        FI <-- APIs<br>Data Consumption --> TPP((Third Party<br>Provider))
+        FI <-- APIs for Data Consumption<br> inline with<br><b>OW Data Contract</b>--> TPP((Third Party<br>Provider))
         FI <-- Framework<br>Agreement --> EAM
         EAM <-- Consent for<br>Data Consumption --> TPP
     end
+    linkStyle 2 color:blue,backgound-color:green,font-size:1.5rem;
 ```
 
 The <b>Financial institution</b> is typically a bank that provides
@@ -31,8 +32,9 @@ The <b>Financial institution</b> is typically a bank that provides
 * Over-The-Counter (OTC) contracts and lending services
 * Etc
 
+The <b>Wealth Manager</b> should be understood as an external asset manager (EAM) who is providing wealth managment services such as wealth advisory advisory or managment to the BO. In the segment of UHNWI this could also be a (multi-) family office providing a set of services.
+
 The <b>Third Party Provide - TPP</b> may be
-* an external asset manager (EAM) who is providing wealth managment services such as wealth advisory advisory or managment to the BO
 * a service plattform providing applicatory services such as portfolio managament systems, wealth data aggregation, analysis & reporting etc.
 * a party providing execution and payment services on behalf of the BO or as part of the wealth managment mandate
 
