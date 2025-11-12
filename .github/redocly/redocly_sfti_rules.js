@@ -17,7 +17,7 @@ const checkHeaderParameter = require('./rules/header-parameter');
 const checkQueryParameter = require('./rules/query-parameter');
 const checkTags = require('./rules/tags');
 
-module.exports = {
+module.exports = () => ({
   id: 'sfti',
   rules: {
     oas3: {
@@ -41,4 +41,4 @@ module.exports = {
       'tag': checkTags,
     }
   }
-};
+});

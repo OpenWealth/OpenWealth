@@ -10,7 +10,7 @@ rules:
   no-unresolved-refs: error
   no-unused-components: warn
   security-defined: error
-  spec: error
+  struct: error
   spec-components-invalid-map-name: error
   spec-strict-refs: error #
 
