@@ -38,8 +38,7 @@ jobs:
           echo "🔍 Linting ${{ matrix.spec-folder }}/API.yaml"
           redocly lint "${{ matrix.spec-folder }}/API.yaml" \
             --config=.github/redocly.yaml \
-            --format=stylish \
-            --fail-on=error
+            --format=stylish
 
   lint_api_with_examples:
     runs-on: ubuntu-latest
