@@ -13,6 +13,13 @@ permissions:
 jobs:
   lint_api:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # ensures all matrix jobs run even if one fails
+      matrix:
+        spec-folder:
+          - src/custody
+          - src/customer
+          - src/trading
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,13 +33,23 @@ jobs:
       - name: Install Redocly CLI
         run: npm install -g @redocly/cli
 
-      - name: Lint APIs
+      - name: Lint all OpenAPI specs
         run: |
-          api=${{ needs.get_api_from_label.outputs.API }}
-          find . -type f -name "API.yaml" -exec redocly lint {} --config=.github/redocly.yaml --format=stylish \;
+          echo "🔍 Linting ${{ matrix.spec-folder }}/API.yaml"
+          redocly lint "${{ matrix.spec-folder }}/API.yaml" \
+            --config=.github/redocly.yaml \
+            --format=stylish \
+            --fail-on=error
 
   lint_api_with_examples:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # ensures all matrix jobs run even if one fails
+      matrix:
+        spec-folder:
+          - src/custody
+          - src/customer
+          - src/trading
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -74,4 +91,8 @@ jobs:
 
       - name: Lint API
         run: |
-          find . -type f -name "API.yaml" -exec redocly lint {} --config=.github/redocly.yaml --format=stylish \;
+          echo "🔍 Linting ${{ matrix.spec-folder }}/API.yaml"
+          redocly lint "${{ matrix.spec-folder }}/API.yaml" \
+            --config=.github/redocly.yaml \
+            --format=stylish \
+            --fail-on=error
