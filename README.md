@@ -119,7 +119,11 @@ An API folder contains the root `API.yaml` which references files in folders str
 │   ├── examples
 ```
 
-The budled and published API file is created and validated by `redocly cli` and committed to the root folder. Each Pull-Request to main branch with appropriate tag (api name - custody, customer, trading) will automatically trigger the bundling process. Details to the bundling and linting are found in the wiki (see link above)
+For validation of all source files and bundling of a release artifact (complete API-file) `redocly cli` is used.
+Each Pull-Request will automatically trigger the linting prozess, which validates all files in the `src` folder.
+Each relase of an API triggers an API bundling process and updates the according API file on root level of the repository. The according commit will be tagged with the realease tag.
+
+> Note the the `/src` may get out of sync with the bundled file before releases!
 
 ## Contribution
 
