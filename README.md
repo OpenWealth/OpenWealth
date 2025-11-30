@@ -42,7 +42,7 @@ The OpenWealth Association provides
 * Definition, maintenance and publication of the API specifications (the actual data contracts) for the scope of the OpenWealth universe
 * Documentation of the specification and guides and best practices for implementors - API providers and consumers
 * Sample data for a large set of use-cases
-* A sandbox environment for implemeentors to test and develop against
+* A sandbox environment for implementors to test and develop against
 * Q&As and support services for implementors and interested parties
 
 The OpenWealth Association <b>does not</b> provide
@@ -52,7 +52,7 @@ The OpenWealth Association <b>does not</b> provide
 ## OpenWealth universe
 ### Data objects, relations and context of APIs
 
-The 3 APIs in scope - customer, custody and trading - serve and specify their isolated use-cases. The APIs can be implemented independent of one-another - providing a custody API does not imply the necessity of implementing the cutomer API etc.. However the APIs and the contained business object (data entities) have partly common, and API overarching significance. It is therefore of great benefit to provide consistency in terms of entity identification and core system data transformation in order to reduce confusion and implementation errors for the API consuming parties. The following graphic illustrates the main entities in scope:
+The 3 APIs in scope - customer, custody and trading - serve and specify their isolated use-cases. The APIs can be implemented independent of one-another - providing a custody API does not imply the necessity of implementing the customer API etc.. However the APIs and the contained business object (data entities) have partly common, and API overarching significance. It is therefore of great benefit to provide consistency in terms of entity identification and core system data transformation in order to reduce confusion and implementation errors for the API consuming parties. The following graphic illustrates the main entities in scope:
 
 ```mermaid
 mindmap
@@ -91,7 +91,7 @@ mindmap
 
 ## OpenWealth APIs
 
-Open Wealth defines, maintains and publishes 3 APIs:
+OpenWealth defines, maintains and publishes 3 APIs:
 
 - [Custody API](custodyAPI.yaml) - enabling customer life cycle managment, such as onboarding a new client, providing KYC information to the bank etc.
 - [Customer API](customerAPI.yaml) - receiving securities accounting including post-trade transaction data and position valuation
