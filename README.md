@@ -95,7 +95,11 @@ OpenWealth defines, maintains and publishes 3 APIs:
 
 - [Custody API](custodyAPI.yaml) - enabling customer life cycle managment, such as onboarding a new client, providing KYC information to the bank etc.
 - [Customer API](customerAPI.yaml) - receiving securities accounting including post-trade transaction data and position valuation
-- [Trading API](tradingAPI.yaml) - managing order placement and related processes for authorized accounts
+- [Trading API](tradingAPI.yaml) - managing order placement and related processes for authorized accounts.
+
+The above links point to the latest release in the form of a bundled OAS3 (OpenAPI Specification) file of the according API.
+
+> Note that this file may get out of sync with the source file unto the next release!
 
 ## Documentation
 
