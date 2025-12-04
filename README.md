@@ -12,7 +12,7 @@ Table of content:
 
 ## OpenWealth eco system
 
-In the triangular relationship between custodian bank (custodian), the account holder and/or beneficial owner (the BO) and a third party financial service provider (the TPP) OpenWealth APIs define the <b>data contract</b> between the custodian and TPP - the technical terms by which a service provider is enabled and allowed to exchange data with the cutsodian: Think of a guide on how to build a <b>standardized plug</b> for digital interactions with between custodian banks and service providers.
+In the triangular relationship between custodian bank (custodian), the account holder and/or beneficial owner (the BO) and a third party financial service provider (the TPP) OpenWealth APIs define the <b>data contract</b> between the custodian and TPP - the technical terms by which a service provider is enabled and allowed to exchange data with the custodian: Think of a guide on how to build a <b>standardized plug</b> for digital interactions with between custodian banks and service providers.
 
 ```mermaid
 flowchart TB
@@ -27,16 +27,16 @@ flowchart TB
 ```
 
 The <b>Financial institution</b> is typically a bank that provides
-* Account managment und payment services
+* Account management und payment services
 * Safekeeping, execution services and access to trading markets
 * Over-The-Counter (OTC) contracts and lending services
 * Etc
 
-The <b>Wealth Manager</b> should be understood as an external asset manager (EAM) who is providing wealth managment services such as wealth advisory advisory or managment to the BO. In the segment of UHNWI this could also be a (multi-) family office providing a set of services.
+The <b>Wealth Manager</b> should be understood as an external asset manager (EAM) who is providing wealth management services such as wealth advisory advisory or management to the BO. In the segment of UHNWI this could also be a (multi-) family office providing a set of services.
 
 The <b>Third Party Provide - TPP</b> may be
-* a service plattform providing applicatory services such as portfolio managament systems, wealth data aggregation, analysis & reporting etc.
-* a party providing execution and payment services on behalf of the BO or as part of the wealth managment mandate
+* a serviceplattform providing applicatory services such as portfolio management systems, wealth data aggregation, analysis & reporting etc.
+* a party providing execution and payment services on behalf of the BO or as part of the wealth management mandate
 
 The OpenWealth Association provides
 * Definition, maintenance and publication of the API specifications (the actual data contracts) for the scope of the OpenWealth universe
@@ -93,13 +93,13 @@ mindmap
 
 OpenWealth defines, maintains and publishes 3 APIs:
 
-- [Custody API](custodyAPI.yaml) - enabling customer life cycle managment, such as onboarding a new client, providing KYC information to the bank etc.
-- [Customer API](customerAPI.yaml) - receiving securities accounting including post-trade transaction data and position valuation
+- [Customer API](customerAPI.yaml) - enabling customer life cycle management, such as onboarding a new client, providing KYC information to the bank etc.
+- [Custody API](custodyAPI.yaml) - receiving securities accounting including post-trade transaction data and position valuation
 - [Trading API](tradingAPI.yaml) - managing order placement and related processes for authorized accounts.
 
 The above links point to the latest release in the form of a bundled OAS3 (OpenAPI Specification) file of the according API.
 
-> Note that this file may get out of sync with the source file unto the next release!
+> Note that this file may get out of sync with the source file until the next release!
 
 ## Documentation
 
@@ -109,7 +109,7 @@ A detailed introduction into OpenWealth APIs and detailed documentation to each 
 
 ## Repository structure
 
-All the API specification source files are contained in the `src` folder with a cantianed folder for each API and folder `generics` containing files shared among all APIs.
+All the API specification source files are contained in the `src` folder with a contained folder for each API and folder `generics` containing files shared among all APIs.
 An API folder contains the root `API.yaml` which references files in folders structured by the redocly convention:
 
 ```md
@@ -124,8 +124,8 @@ An API folder contains the root `API.yaml` which references files in folders str
 ```
 
 For validation of all source files and bundling of a release artifact (complete API-file) `redocly cli` is used.
-Each Pull-Request will automatically trigger the linting prozess, which validates all files in the `src` folder.
-Each relase of an API triggers an API bundling process and updates the according API file on root level of the repository. The according commit will be tagged with the realease tag.
+Each Pull-Request will automatically trigger the linting process, which validates all files in the `src` folder.
+Each release of an API triggers an API bundling process and updates the according API file on root level of the repository. The according commit will be tagged with the release tag.
 
 > Note the the `/src` may get out of sync with the bundled file before releases!
 
