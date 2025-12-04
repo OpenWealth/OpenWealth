@@ -99,7 +99,7 @@ OpenWealth defines, maintains and publishes 3 APIs:
 
 The above links point to the latest release in the form of a bundled OAS3 (OpenAPI Specification) file of the according API.
 
-> Note that this file may get out of sync with the source file until the next release!
+> Note that this file may get out of sync with the `/src` folder until the next release!
 
 ## Documentation
 
