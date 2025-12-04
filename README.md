@@ -3,51 +3,30 @@
 The OpenWealth Association’s mission is to connect financial institutions, WealthTechs and other service providers to develop, maintain and distribute the Open API standard for a global wealth management community. Furthermore, the association aims to foster the exchange of expertise among its members and with third parties, as well as to cooperate with organizations of a similar nature.
 
 Table of content:
-* [OpenWealth eco system](#openwealth-eco-system)
-* [OpenWealth universe](#openwealth-universe)
 * [OpenWealth APIs](#openwealth-apis)
 * [Documentation](#documentation)
+* [OpenWealth universe](#openwealth-universe)
+* [OpenWealth eco system](#openwealth-eco-system)
 * [Repository structure](#repository-structure)
 * [Contribute](#contribute)
 
-## OpenWealth eco system
+## OpenWealth APIs
 
-In the triangular relationship between custodian bank (custodian), the account holder and/or beneficial owner (the BO) and a third party financial service provider (the TPP) OpenWealth APIs define the <b>data contract</b> between the custodian and TPP - the technical terms by which a service provider is enabled and allowed to exchange data with the custodian: Think of a guide on how to build a <b>standardized plug</b> for digital interactions with between custodian banks and service providers.
+OpenWealth defines, maintains and publishes 3 APIs:
 
-```mermaid
-flowchart TB
-    BO((Beneficial<br>Owner)) <-- Banking Relation --> FI((Financial<br>Institution))
-    BO <-- Management Mandate --> EAM((Wealth<br>Manager))
-    subgraph Data Exchange - OpenWealth
-        FI <-- APIs for Data Consumption<br><b>OW Data Contract</b>--> TPP((Third Party<br>Provider))
-        FI <-- Framework<br>Agreement --> EAM
-        EAM <-- Consent for<br>Data Consumption --> TPP
-    end
-    linkStyle 2 color:blue,backgound-color:green,font-size:1.2rem;
-```
+- [Customer API](customerAPI.yaml) - enabling customer life cycle management, such as onboarding a new client, providing KYC information to the bank etc.
+- [Custody API](custodyAPI.yaml) - receiving securities accounting including post-trade transaction data and position valuation
+- [Trading API](tradingAPI.yaml) - managing order placement and related processes for authorized accounts.
 
-The <b>Financial institution</b> is typically a bank that provides
-* Account management und payment services
-* Safekeeping, execution services and access to trading markets
-* Over-The-Counter (OTC) contracts and lending services
-* Etc
+The above links point to the latest release in the form of a bundled OAS3 (OpenAPI Specification) file of the according API.
 
-The <b>Wealth Manager</b> should be understood as an external asset manager (EAM) who is providing wealth management services such as wealth advisory advisory or management to the BO. In the segment of UHNWI this could also be a (multi-) family office providing a set of services.
+> Note that this file may get out of sync with the `/src` folder until the next release!
 
-The <b>Third Party Provide - TPP</b> may be
-* a serviceplattform providing applicatory services such as portfolio management systems, wealth data aggregation, analysis & reporting etc.
-* a party providing execution and payment services on behalf of the BO or as part of the wealth management mandate
+## Documentation
 
-The OpenWealth Association provides
-* Definition, maintenance and publication of the API specifications (the actual data contracts) for the scope of the OpenWealth universe
-* Documentation of the specification and guides and best practices for implementors - API providers and consumers
-* Sample data for a large set of use-cases
-* A sandbox environment for implementors to test and develop against
-* Q&As and support services for implementors and interested parties
+A detailed introduction into OpenWealth APIs and detailed documentation to each API including guidelines, good practices, entitiy models and examples ar found in the wiki:
 
-The OpenWealth Association <b>does not</b> provide
-* Infrastructure for hosting APIs
-* Software/Frameworks for the integration and implementation with software of choice
+[OpenWealth Wiki](https://github.com/OpenWealth/OpenWealth/wiki)
 
 ## OpenWealth universe
 ### Data objects, relations and context of APIs
@@ -88,24 +67,44 @@ mindmap
 
 ```
 
+## OpenWealth eco system
 
-## OpenWealth APIs
+In the triangular relationship between custodian bank (custodian), the account holder and/or beneficial owner (the BO) and a third party financial service provider (the TPP) OpenWealth APIs define the <b>data contract</b> between the custodian and TPP - the technical terms by which a service provider is enabled and allowed to exchange data with the custodian: Think of a guide on how to build a <b>standardized plug</b> for digital interactions with between custodian banks and service providers.
 
-OpenWealth defines, maintains and publishes 3 APIs:
+```mermaid
+flowchart TB
+    BO((Beneficial<br>Owner)) <-- Banking Relation --> FI((Financial<br>Institution))
+    BO <-- Management Mandate --> EAM((Wealth<br>Manager))
+    subgraph Data Exchange - OpenWealth
+        FI <-- APIs for Data Consumption<br><b>OW Data Contract</b>--> TPP((Third Party<br>Provider))
+        FI <-- Framework<br>Agreement --> EAM
+        EAM <-- Consent for<br>Data Consumption --> TPP
+    end
+    linkStyle 2 color:blue,backgound-color:green,font-size:1.2rem;
+```
 
-- [Customer API](customerAPI.yaml) - enabling customer life cycle management, such as onboarding a new client, providing KYC information to the bank etc.
-- [Custody API](custodyAPI.yaml) - receiving securities accounting including post-trade transaction data and position valuation
-- [Trading API](tradingAPI.yaml) - managing order placement and related processes for authorized accounts.
+The <b>Financial institution</b> is typically a bank that provides
+* Account management und payment services
+* Safekeeping, execution services and access to trading markets
+* Over-The-Counter (OTC) contracts and lending services
+* Etc
 
-The above links point to the latest release in the form of a bundled OAS3 (OpenAPI Specification) file of the according API.
+The <b>Wealth Manager</b> should be understood as an external asset manager (EAM) who is providing wealth management services such as wealth advisory advisory or management to the BO. In the segment of UHNWI this could also be a (multi-) family office providing a set of services.
 
-> Note that this file may get out of sync with the `/src` folder until the next release!
+The <b>Third Party Provide - TPP</b> may be
+* a serviceplattform providing applicatory services such as portfolio management systems, wealth data aggregation, analysis & reporting etc.
+* a party providing execution and payment services on behalf of the BO or as part of the wealth management mandate
 
-## Documentation
+The OpenWealth Association provides
+* Definition, maintenance and publication of the API specifications (the actual data contracts) for the scope of the OpenWealth universe
+* Documentation of the specification and guides and best practices for implementors - API providers and consumers
+* Sample data for a large set of use-cases
+* A sandbox environment for implementors to test and develop against
+* Q&As and support services for implementors and interested parties
 
-A detailed introduction into OpenWealth APIs and detailed documentation to each API including guidelines, good practices, entitiy models and examples ar found in the wiki:
-
-[OpenWealth Wiki](https://github.com/OpenWealth/OpenWealth/wiki)
+The OpenWealth Association <b>does not</b> provide
+* Infrastructure for hosting APIs
+* Software/Frameworks for the integration and implementation with software of choice
 
 ## Repository structure
 
