@@ -33,7 +33,9 @@ info:
 servers:
   - description: Your server url.
     url: https://www.openwealth.ch
-security: []
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
 tags:
   - name: customer
     description: Customer operations.
@@ -51,9 +53,7 @@ tags:
     description: Event subscription operations.
   - name: event-notification
     description: Event notification operations.
-externalDocs:
-  description: Find out more about OpenWealth API specifications.
-  url: https://openwealth.ch
+security: []
 paths:
   /customers:
     $ref: paths/customers.yaml

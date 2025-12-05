@@ -1,0 +1,94 @@
+{
+  "id": "trx-002-001",
+  "type": "dividendCash",
+  "transactionDate": "2023-11-04",
+  "exDate": "2023-11-01",
+  "customerId": "customer-1",
+  "reversalIndicator": false,
+  "endOfDayIndicator": true,
+  "triggeringFinancialInstrument": {
+    "type": "equity",
+    "name": "CREDIT SUISSE GROUP AG",
+    "identificationList": [
+      {
+        "identifier": "CH0012138530",
+        "type": "isin"
+      }
+    ],
+    "currencyOfDenomination": "CHF"
+  },
+  "triggeringQuantity": {
+    "type": "unit",
+    "value": 10000
+  },
+  "movementList": [
+    {
+      "type": "cash",
+      "movementDate": "2023-11-04",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss franc",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "iso3"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": 6336
+      },
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
+      "valueDate": "2023-11-04"
+    },
+    {
+      "type": "reclaimableTax",
+      "movementDate": "2023-11-04",
+      "financialInstrument": {
+        "type": "cash",
+        "name": "Swiss franc",
+        "identificationList": [
+          {
+            "identifier": "CHF",
+            "type": "iso3"
+          }
+        ],
+        "currencyOfDenomination": "CHF"
+      },
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
+      },
+      "quantity": {
+        "type": "unit",
+        "value": -2217.6
+      },
+      "positionId": "pos-000",
+      "positionCurrency": "CHF",
+      "valueDate": "2023-11-04"
+    }
+  ],
+  "postingAmountList": [
+    {
+      "amount": 4118.4,
+      "currency": "CHF",
+      "account": {
+        "id": "cash-account-chf-1",
+        "type": "cashAccount",
+        "iban": "CH121212121212121212",
+        "referenceCurrency": "CHF"
+      }
+    }
+  ]
+}

@@ -1,8 +1,0 @@
-AccountCHF:
-  externalValue: './accounts/cash-account-CHF.json'
-AccountEUR:
-  externalValue: './accounts/cash-account-EUR.json'
-AccountUSD:
-  externalValue: './accounts/cash-account-USD.json'
-SafekeepingAccount:
-  externalValue: './accounts/safekeeping-account.json'
