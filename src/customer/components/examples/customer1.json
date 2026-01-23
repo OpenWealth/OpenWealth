@@ -1,0 +1,21 @@
+{
+  "id": "3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f",
+  "number": "12345-6",
+  "name": "string",
+  "type": "individual",
+  "status": "active",
+  "referenceCurrency": "CHF",
+  "openingDate": "2018-04-13",
+  "language": "EN",
+  "segment": "CLIENT FIM, EAM-MODELL",
+  "bankAdvisor": "Anna Beispiel PC8-AB",
+  "bankDeputyAdvisor": "Max Muster PC8-MM",
+  "bankPreviousAdvisor": "Peter Vergangenheit PC5-PV",
+  "personToCustomerRelationsList": [
+    {
+      "id": "6c4e1b92-5f7a-4d3c-8e9b-2a1f6d7c0e54",
+      "relationType": "accountOwner",
+      "personId": "3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f"
+    }
+  ]
+}

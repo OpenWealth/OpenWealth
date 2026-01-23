@@ -1,0 +1,34 @@
+{
+  "id": "c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa",
+  "personType": "naturalPerson",
+  "language": "EN",
+  "countryOfDomicile": "CH",
+  "openingDate": "2018-04-13",
+  "taxDomicileList": [
+    "CH"
+  ],
+  "givenName": "Anthony",
+  "middleName": "Edward",
+  "lastName": "Stark",
+  "title": "PhD",
+  "dateOfBirth": "2018-04-13",
+  "dateOfMarriage": "2018-04-13",
+  "gender": "male",
+  "nationalityList": [
+    "CH"
+  ],
+  "civilStatus": "married",
+  "tinList": [
+    {
+      "tinNumber": "123-12-1234",
+      "country": "CH"
+    }
+  ],
+  "countryOfBirth": "CH",
+  "personToPersonRelationsList": [
+    {
+      "relation": "isParentOf",
+      "relatedPersonId": "3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f"
+    }
+  ]
+}
