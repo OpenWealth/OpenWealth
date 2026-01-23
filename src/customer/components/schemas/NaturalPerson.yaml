@@ -1,6 +1,6 @@
 type: object
 allOf:
-  - $ref: 'personBase.yaml'
+  - $ref: 'PersonBase.yaml'
 required:
   - givenName
   - lastName

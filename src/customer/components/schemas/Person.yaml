@@ -1,7 +1,6 @@
 type: object
 oneOf:
-  - $ref: 'naturalPerson.yaml'
-  - $ref: 'legalPerson.yaml'
-  - $ref: 'personAssociation.yaml'
+  - $ref: 'NaturalPerson.yaml'
+  - $ref: 'LegalPerson.yaml'
 discriminator:
   propertyName: personType

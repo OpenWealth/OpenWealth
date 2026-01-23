@@ -1,0 +1,35 @@
+type: object
+required:
+  - relation
+properties:
+  relation:
+    type: string
+    description: Type of relation between two persons
+    example: isParentOf
+    enum:
+      - isParentOf
+      - isPartnerOf
+      - isChildOf
+      - isRelatedTo
+      - isSpouseOf
+      - isRegisteredPartnerOf
+      - isGuardianshipOf
+      - hasGuardianship
+      - isEmployeeOf
+      - isEmployerOf
+      - isIntermediaryOf
+      - hasIntermediary
+      - isFiduciaryOf
+      - hasFiduciary
+      - isHeirOf
+      - other
+  relatedPersonId:
+    type: string
+    description: Unique and unambiguous identification used by the bank for the related person.
+    example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+  additionalInformation:
+    type: string
+    description: |
+      Field indicates the person to person relation type. It shall only be used if the relation type is not
+      part of the ENUM of the attribute "relation" hence in exceptional cases (in case of relation type "other").
+    example: Is uncle of

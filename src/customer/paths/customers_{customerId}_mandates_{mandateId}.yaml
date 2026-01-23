@@ -1,0 +1,36 @@
+get:
+  tags:
+    - mandates
+  summary: Returns a mandate by id
+  description: Returns a mandate by id for a specific customer.
+  operationId: getMandateById
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/path_mandateId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  responses:
+    '200':
+      description: Mandate.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Mandate.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
