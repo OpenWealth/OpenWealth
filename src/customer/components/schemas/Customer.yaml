@@ -42,7 +42,7 @@ properties:
   openingDate:
     $ref: '../../../generics/components/schemas/Date.yaml'
   language:
-    $ref: 'language.yaml'
+    $ref: 'Language.yaml'
   segment:
     type: string
     maxLength: 35
