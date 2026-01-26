@@ -1,8 +1,8 @@
 {
-  "id": "customer-1",
-  "number": "12345-6",
-  "name": "Urs Muster",
-  "type": "individual",
+  "id": "customer-2",
+  "number": "12345-7",
+  "name": "Urs u/o Linda Muster",
+  "type": "groupOfIndividuals",
   "status": "active",
   "referenceCurrency": "CHF",
   "openingDate": "2018-04-13",
@@ -15,6 +15,10 @@
     {
       "relationType": "accountOwner",
       "personId": "person-1"
+    },
+    {
+      "relationType": "accountOwner",
+      "personId": "person-2"
     }
   ]
 }
