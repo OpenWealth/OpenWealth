@@ -1,0 +1,29 @@
+title: StructuredProductType
+type: string
+description: TBD.
+example: capialProtectionNoteWithParticipation
+enum:
+  - uncappedCapitalProtection ## Kapitalschutz-Zertifikat mit Partizipation
+  - cappedCapitalProtection ## nicht in CH Liste
+  - capirtalProtectionWithKnockOut ## Kapitalschutz-Zertifikat mit Barriere
+  - capitalProtectionNoteWithTwinWin ## nicht in Euro Liste
+  - capitalProtectionWithCoupon ## Kapitalschutz-Zertifikat mit Coupon
+  - discountCertificate ## Discount-Zertifikat
+  - barrierDiscountCertificate ## Discount-Zertifikat mit Barriere
+  - reverseConvertible ## Reverse Convertible
+  - barrierReverseConvertible ## Barrier Reverse Convertible
+  - cappedOutperformanceCertificate
+  - cappedBonusCertificate
+  - expressCertificate ## (Barrier) Reverse Convertible mit bedingtem Coupon 1255 & 1260
+  - trackerCertificate ## Tracker Zertifikat
+  - outperformanceCertificate ## Outpeformance zertifikat
+  - bonusCertificate ## Bonus-Zertifikat
+  - outperformanceBonusCertificate ## Bonus-Outperformance-Zertifikat
+  - twinWinCertificate ## TwinWin Zertifikat
+  - warrant ## Warrant
+  - spreadWarrant ## Spread-Warrant
+  - knockOutWarrant ## Warrant mit Knock-Out
+  - openEndKnockOutWarrant ## In CH in obiger Kat enthalten
+  - miniFuture ## Mini-Future
+  - constantLeverageCertificate ## Constant-Leverage Zertifikat
+  - otherStructuredProduct
