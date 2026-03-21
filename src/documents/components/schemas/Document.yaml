@@ -1,0 +1,27 @@
+type: object
+properties:
+  id:
+    type: string
+    minLength: 1
+    maxLength: 35
+    example: 9876-5af5wa5-e14a-fw5
+    description: Unique and unambiguous identification for the document
+    readOnly: true
+  createdAt:
+    readOnly: true
+    type: string
+    format: date-time
+    example: '2023-12-06T11:36:08.033Z'
+  lastUpdatedAt:
+    readOnly: true
+    type: string
+    format: date-time
+    example: '2023-12-06T11:36:08.033Z'
+  document15:
+    $ref: ./Document15.yaml
+  fileRevisions:
+    $ref: ./FileRevisions.yaml
+  businessMetadata:
+    type: object
+    additionalProperties:
+      type: string

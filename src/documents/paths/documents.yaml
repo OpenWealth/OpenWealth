@@ -1,0 +1,40 @@
+post:
+  summary: Add a New Document
+  description: Upload the metadata for a new file.
+  parameters:
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  operationId: addDocument
+  tags:
+    - Document
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Document.yaml
+        examples:
+          PDF Statement:
+            $ref: ../components/examples/PdfStatementForUpload.yaml
+  responses:
+    '201':
+      description: Document was accepted
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Document.yaml
+          examples:
+            PDF Statement:
+              $ref: ../components/examples/PdfStatementWithoutFiles.yaml
+    '400':
+      $ref: ../components/responses/standard400.yaml
+    '401':
+      $ref: ../components/responses/standard401.yaml
+    '403':
+      $ref: ../components/responses/standard403.yaml
+    '500':
+      $ref: ../components/responses/standard500.yaml
+    '503':
+      $ref: ../components/responses/standard503.yaml

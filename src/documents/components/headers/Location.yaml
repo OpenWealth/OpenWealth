@@ -1,0 +1,5 @@
+description: URL pointing to a related location
+schema:
+  type: string
+  maxLength: 1024
+  example: https://blink.six-group.com/api/v1/files/a89b6755f

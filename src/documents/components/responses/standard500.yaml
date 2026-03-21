@@ -1,0 +1,13 @@
+headers:
+  X-Correlation-ID:
+    $ref: ../headers/X-Correlation-ID.yaml
+description: Internal Server Error
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/commonErrorResponse.yaml
+    example:
+      type: /problems/TECHNICAL_ERROR
+      title: unexpected error occurred
+      detail: ...
+      instance: path/to/corresponding/resource

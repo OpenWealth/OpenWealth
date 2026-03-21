@@ -1,0 +1,18 @@
+type: array
+readOnly: true
+items:
+  type: object
+  properties:
+    uploadedAt:
+      type: string
+      format: date-time
+    uploadedBy:
+      type: string
+    fileId:
+      type: string
+    sizeBytes:
+      type: number
+    confirmations:
+      type: array
+      items:
+        $ref: ./Confirmation.yaml
