@@ -77,7 +77,6 @@ erDiagram
 %% Beziehungen
 
     Customer ||--|{ customer2personRelation : hasMultiple
-    Customer ||--o{ Document : hasMultiple
     Customer ||--o{ Mandate : hasMultiple
 
     Mandate ||--o{ mandate2personRelation : hasMultiple
@@ -116,6 +115,9 @@ erDiagram
     style customer2personRelation, mandate2personRelation, person2personRelation fill:#ffe0e0,stroke:#cc0000,stroke-width:1px
 ```
 
+```mermaid
+
+```
 
 
 

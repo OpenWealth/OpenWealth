@@ -1,5 +1,5 @@
 allOf:
-  - $ref: 'sourceBase.yaml'
+  - $ref: 'SourceBase.yaml'
 required:
   - nameOfGiftor
   - relationToGiftor
@@ -24,7 +24,7 @@ properties:
     description: Nature of the assets received
     example: Cash
   dateOfReception:
-    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    $ref: '../../../generics/components/schemas/Date.yaml'
     # description: Date when the gift was received
   additionalInformation:
-    $ref: 'additionalInformation.yaml'
+    $ref: 'AdditionalInformation.yaml'

@@ -5,9 +5,9 @@ required:
   - type
 properties:
   amount:
-    $ref: 'amount.yaml'
+    $ref: 'Amount.yaml'
   currency:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+    $ref: '../../../generics/components/schemas/Currency.yaml'
   type:
     type: string
     enum:
@@ -33,13 +33,13 @@ properties:
   originsOfAssetsList:
     type: array
     items:
-      $ref: 'country.yaml'
+      $ref: 'Country.yaml'
   nameOfBank:
     type: string
     maxLength: 140
     # Name of the bank of the counterparty
   domicileOfBank:
-    $ref: 'country.yaml'
+    $ref: 'Country.yaml'
     # Domicile of the bank of the counterparty
   additionalInformation:
-    $ref: 'additionalInformation.yaml'
+    $ref: 'AdditionalInformation.yaml'

@@ -1,7 +1,5 @@
 type: object
 required:
-  - id
-  - language
   - personType
   - countryOfDomicile
 properties:
@@ -10,8 +8,13 @@ properties:
     maxLength: 128
     description: Unique and unambiguous identification (i.e. UUID) used by the bank for the person.
     example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
-  language:
-    $ref: 'Language.yaml'
+  personType:
+    type: string
+    enum:
+      - naturalPerson
+      - legalPerson
+    example: naturalPerson
+    description: Indicates the person type (e.g. Natural Person) of the person object.
   countryOfDomicile:
     $ref: 'Country.yaml'
   openingDate:
@@ -20,10 +23,5 @@ properties:
     type: array
     items:
       $ref: 'Country.yaml'
-  personType:
-    type: string
-    enum:
-      - naturalPerson
-      - legalPerson
-    example: naturalPerson
-    description: Indicates the person type (e.g. Natural Person) of the person object
+  language:
+    $ref: 'Language.yaml'

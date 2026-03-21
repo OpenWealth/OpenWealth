@@ -41,14 +41,24 @@ properties:
     $ref: '../../../generics/components/schemas/Currency.yaml'
   openingDate:
     $ref: '../../../generics/components/schemas/Date.yaml'
-  language:
-    $ref: 'Language.yaml'
   segment:
     type: string
     maxLength: 35
     description: Customer segment of the customer at the custody bank (e.g. UHNWI Switzerland)
     example: CLIENT FIM, EAM-MODELL
     readOnly: true
+  mainAdress:
+    type: object
+    description: Main address of the customer for correspondence purposes.
+    $ref: Address.yaml
+  salutation:
+    type: object
+    description: Salutation details of the customer for correspondence purposes.
+    $ref: Salutation.yaml
+  language:
+    type: string
+    description: Preferred language of the customer for correspondence purposes, represented as ISO 639-1 alpha-2 code.
+    example: de
   bankAdvisor:
     type: string
     maxLength: 35

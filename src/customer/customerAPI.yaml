@@ -1,0 +1,812 @@
+openapi: 3.0.0
+info:
+  version: 3.0.0-draft
+  title: Customer API
+  description: |
+    This API is part of the OpenWealth APIs for the connectivity between custody banks and WealthTechs (e.g. Portfolio Management Systems
+    and CRMs). It facilitates the connection of CRMs to custody banks to automate customer onboarding and lifecycle management (Static Data
+    KYC & Documents). It enables the user to create, modify and consume customer data at/from custody banks.
+    This version of the API is focused solely on natural persons. The management of companies, complex structures as well as products is
+    currently not part of the scope of this API version.
+  contact:
+    email: openwealth@synpulse.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - description: Your Server URL.
+    url: https://api.openwealth.ch
+security: []
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
+paths:
+  /customers:
+    get:
+      tags:
+        - customers
+      summary: Returns all customers (business partners) accessible for the logged in user
+      description: |
+        This endpoint returns a highlevel list of customers accessible for the
+        logged in user. Paging is done based on the customer object,
+        i.e. if limit is set to 1, then 1 customer will be returned per page.
+      operationId: getCustomers
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Returns a list with all customers.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}:
+    get:
+      tags:
+        - customers
+      summary: Returns a specific customer by id
+      description: Returns a specific customer by id accessible for the requesting user.
+      operationId: getCustomersByCustomerId
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Returns a the specified customer.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/mandates:
+    get:
+      tags:
+        - mandates
+      summary: Returns the mandates for a specific customer
+      description: |
+        Returns all mandates for a specific customer accessible to the querying user.
+        Paging is done based on the return object, i.e. if limit is set to 1,
+        then 1 mandate will be returned per page.
+      operationId: getMandatesByCustomerId
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Mandates List.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Mandate'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/mandates/{mandateId}:
+    get:
+      tags:
+        - mandates
+      summary: Returns a mandate by id
+      description: Returns a mandate by id for a specific customer.
+      operationId: getMandateById
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Mandate.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mandate'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /persons:
+    get:
+      tags:
+        - persons
+      summary: Returns all persons accessible for the logged in user
+      description: |
+        This endpoint returns a highlevel list of persons accessible for the
+        logged in user. Paging is done based on the person object,
+        i.e. if limit is set to 1, then 1 person will be returned per page.
+      operationId: getPersons
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Returns a list with all persons.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /persons/{personId}:
+    get:
+      tags:
+        - persons
+      summary: Returns a specific person by id
+      description: Returns a specific person by id accessible for the requesting user.
+      operationId: getPersonsByPersonId
+      parameters:
+        - $ref: '#/components/parameters/path_personId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Returns a the specified person.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+components:
+  schemas:
+    Currency:
+      title: Currency
+      type: string
+      description: ISO 4217 code.
+      pattern: ^[A-Z]{3}$
+      example: CHF
+    Date:
+      title: Date
+      type: string
+      description: Date according to ISO 8601.
+      format: date
+      example: '2018-04-13'
+    Language:
+      type: string
+      pattern: '[A-Z]{2}'
+      description: 2-letter ISO 639-1 Language Code
+      example: EN
+    PersonToCustomerRelation:
+      type: object
+      required:
+        - id
+        - relationType
+        - personId
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the person.
+          example: 6c4e1b92-5f7a-4d3c-8e9b-2a1f6d7c0e54
+          readOnly: true
+        relationType:
+          type: string
+          description: Indicates the kind of relation the person has to this customer relationship.
+          example: accountOwner
+          enum:
+            - beneficialOwner
+            - externalAssetManagerFirm
+            - externalAssetManagerEmployee
+            - accountOwner
+            - registeredOwner
+            - authorisedSignatoryIndividual
+            - beneficiary
+            - authorisedSignatoryCollective
+            - ownerParentalAuthority
+            - other
+        personId:
+          type: string
+          description: Unique and unambiguous identification used by the bank for the person.
+          example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
+    Customer:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+          example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+          readOnly: true
+        number:
+          type: string
+          description: Contains the customers custody proprietary customer number if available.
+          maxLength: 70
+          example: 12345-6
+        name:
+          type: string
+          maxLength: 140
+        type:
+          type: string
+          enum:
+            - individual
+            - groupOfIndividuals
+            - legalEntity
+            - foundation
+            - insuranceCompany
+            - institutionalInvestor
+            - bank
+            - other
+          description: Type of customer relationship
+          example: individual
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+          description: Status of the customer relationship
+          example: active
+        referenceCurrency:
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          $ref: '#/components/schemas/Date'
+        language:
+          $ref: '#/components/schemas/Language'
+        segment:
+          type: string
+          maxLength: 35
+          description: Customer segment of the customer at the custody bank (e.g. UHNWI Switzerland)
+          example: CLIENT FIM, EAM-MODELL
+          readOnly: true
+        bankAdvisor:
+          type: string
+          maxLength: 35
+          description: Indicates the instruction/full name of the bank advisor on the side of the custody bank.
+          example: Anna Beispiel PC8-AB
+          readOnly: true
+        bankDeputyAdvisor:
+          type: string
+          maxLength: 35
+          description: Indicates the instruction/full name of the bank deputy advisor on the side of the custody bank.
+          example: Max Muster PC8-MM
+          readOnly: true
+        bankPreviousAdvisor:
+          type: string
+          maxLength: 35
+          description: Indicates the instruction/full name of the previous bank advisor on the side of the custody bank.
+          example: Peter Vergangenheit PC5-PV
+          readOnly: true
+        personToCustomerRelationsList:
+          items:
+            $ref: '#/components/schemas/PersonToCustomerRelation'
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for CommonErrorResponse.
+      type: string
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+        - /problems/TOO_MANY_REQUESTS
+      example: /problems/TECHNICAL_ERROR
+    CommonErrorResponse:
+      title: CommonErrorResponse
+      type: object
+      description: Common error response.
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
+          type: string
+          description: Title of the error response.
+          example: This is the general problem description
+        detail:
+          type: string
+          description: Detailed description of the error response.
+          example: Detailed problem description with respect to the current request
+        instance:
+          type: string
+          description: Entity instance that threw the error.
+          example: path/to/corresponding/resource
+    Mandate:
+      type: object
+      description: Mandate entity.
+      required:
+        - id
+        - type
+        - referenceCurrency
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
+          description: Unique and unambiguous identification for the mandate.
+        customerId:
+          type: string
+          description: Unique and unambiguous identification used by the bank for the customer.
+          example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+        type:
+          type: string
+          description: |
+            Indicates the type of the mandate.
+          example: discretionary
+          enum:
+            - executionOnly
+            - discretionary
+            - advisory
+            - other
+        name:
+          type: string
+          maxLength: 70
+          description: |
+            Name of the mandate.
+          example: Discretionary mandate for private investments
+        referenceCurrency:
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          $ref: '#/components/schemas/Date'
+    Country:
+      type: string
+      pattern: '[A-Z]{2}'
+      description: 2-Letter ISO 3166-2 Country Code
+      example: CH
+    PersonBase:
+      type: object
+      required:
+        - id
+        - language
+        - personType
+        - countryOfDomicile
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the person.
+          example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
+        language:
+          $ref: '#/components/schemas/Language'
+        countryOfDomicile:
+          $ref: '#/components/schemas/Country'
+        openingDate:
+          $ref: '#/components/schemas/Date'
+        taxDomicileList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+        personType:
+          type: string
+          enum:
+            - naturalPerson
+            - legalPerson
+          example: naturalPerson
+          description: Indicates the person type (e.g. Natural Person) of the person object
+    Tin:
+      type: object
+      properties:
+        tinNumber:
+          type: string
+          maxLength: 35
+          example: 123-12-1234
+          description: Taxpayer identification number / National ID
+        country:
+          $ref: '#/components/schemas/Country'
+    NaturalPerson:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PersonBase'
+      required:
+        - givenName
+        - lastName
+        - nationalityList
+        - dateOfBirth
+      properties:
+        givenName:
+          type: string
+          maxLength: 35
+          example: Anthony
+          description: Given name of the person. The primary name according to the passport should be indicated in that field and no abbreviations/common names (Dan instead of Daniel etc.) used.
+        middleName:
+          type: string
+          maxLength: 35
+          example: Edward
+          description: Middle name of the person. The middle name according to the passport should be indicated in that field and no abbreviations/common names (Dan instead of Daniel etc.) used.
+        lastName:
+          type: string
+          maxLength: 35
+          example: Stark
+          description: Last name(s) of the person. The last name(s) according to the passport should be indicated in that field (hyphenated and spaced names as well).
+        title:
+          type: string
+          maxLength: 35
+          example: PhD
+          description: Official title of the person
+        dateOfBirth:
+          $ref: '#/components/schemas/Date'
+        dateOfMarriage:
+          $ref: '#/components/schemas/Date'
+        dateOfDeath:
+          $ref: '#/components/schemas/Date'
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+            - divers
+          example: male
+          description: Gender of the person
+        nationalityList:
+          type: array
+          description: Country/Countries where a person was born or is legally accepted as belonging to the country. The first country in the list represents the main nationality.
+          items:
+            $ref: '#/components/schemas/Country'
+        civilStatus:
+          type: string
+          enum:
+            - divorced
+            - legallyDivorced
+            - married
+            - separated
+            - single
+            - stableUnion
+            - widow
+          example: married
+          description: Civil status of the person
+        tinList:
+          type: array
+          description: List with tax identification numbers of a person
+          items:
+            $ref: '#/components/schemas/Tin'
+        countryOfBirth:
+          $ref: '#/components/schemas/Country'
+    LegalPerson:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PersonBase'
+      required:
+        - organisationName
+        - legalForm
+        - lei
+        - domicilaryCompany
+      properties:
+        organisationName:
+          type: string
+          minLength: 1
+          maxLength: 35
+          description: Name by which the organisation is known and which is usually used to identify that organisation.
+          example: Stark Industries
+        legalForm:
+          type: string
+          maxLength: 35
+          description: Legal form of the company.
+          example: AG
+        lei:
+          type: string
+          maxLength: 35
+          example: 529900UVM8LC55IFAA52
+          description: Legal entity identifier. The LEI code is a twenty-digit alphanumeric company identifier that is established as an international standard for companies in the financial market. Each LEI code is assigned once and enables worldwide assignment to a specific company.
+          pattern: '[A-Z0-9]{18,18}[0-9]{2,2}'
+        domicilaryCompany:
+          type: boolean
+          description: Indicates whether the company is a domiciliary company
+          example: false
+    Person:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/NaturalPerson'
+        - $ref: '#/components/schemas/LegalPerson'
+      discriminator:
+        propertyName: personType
+  responses:
+    '400':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
+        as malformed request syntax.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '401':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '403':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Forbidden - The server understood the request but refuses to authorize it.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '404':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Not Found - The origin server did not find a current representation for the target resource
+        or is not willing to disclose that one exists.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '405':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Method Not Allowed - The method received in the request-line is known by the origin server
+        but not supported by the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '500':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '501':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Not Implemented - The server does not support the functionality required to fulfill the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '503':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+  parameters:
+    cursor:
+      in: query
+      name: cursor
+      required: false
+      schema:
+        type: string
+      description: An opaque string value used for pagination.
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      description: Maximum number of items to return.
+    x_correlation_id_in_header:
+      in: header
+      name: X-Correlation-ID
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+    path_customerId:
+      in: path
+      name: customerId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: 123123-456
+        description: Unique and unambiguous identification used by the bank for the customer.
+      description: Customer ID Parameter.
+    path_mandateId:
+      in: path
+      name: mandateId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
+        description: Unique and unambiguous identification used by the bank for the mandate.
+      description: Mandate ID Parameter.
+    path_personId:
+      in: path
+      name: personId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+        description: Unique and unambiguous identification used by the bank for the person.
+      description: Person ID Parameter.
+  headers:
+    X-Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    X-Next-Cursor:
+      description: An opaque string value, or an empty string if there are no more results.
+      required: false
+      schema:
+        type: string
+    Problem-Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807.
+      schema:
+        type: string
+        example: application/problem+json
+    Content-Language:
+      description: Response language - always en.
+      schema:
+        type: string
+        example: en
+    Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+  securitySchemes: {}

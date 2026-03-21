@@ -11,7 +11,7 @@ properties:
     maxLength: 140
     # Name of the EAM
   eamDomicile:
-    $ref: 'country.yaml'
+    $ref: 'Country.yaml'
     # Domicile of the EAM
   eamEmployee:
     type: string
@@ -26,5 +26,5 @@ properties:
     maxLength: 70
     description: How was the relationship between EAM and customer formed?
   eamRelationPeriod:
-    $ref: 'period.yaml'
+    $ref: 'Period.yaml'
     # How long does the relationship between customer and EAM already exist?

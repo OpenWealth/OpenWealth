@@ -20,4 +20,4 @@ properties:
   employmentDetailsList:
     type: array
     items:
-      $ref: 'employmentDetails.yaml'
+      $ref: 'EmploymentDetails.yaml'

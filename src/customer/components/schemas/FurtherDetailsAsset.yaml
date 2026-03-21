@@ -6,7 +6,7 @@ properties:
     maxLength: 140
     # Name of the bank where the assets are held if they are tradable financial assets (cash, securities etc.)
   domicileOfBank:
-    $ref: 'country.yaml'
+    $ref: 'Country.yaml'
     # Domicile of the bank where the assets are held if they are tradable financial assets (cash, securities etc.)
   typeOfProperty:
     type: string
@@ -33,7 +33,7 @@ properties:
     description: Place of the property
     example: Laax
   countryOfProperty:
-    $ref: 'country.yaml'
+    $ref: 'Country.yaml'
   nameOfCompany:
     type: string
     maxLength: 140
@@ -53,5 +53,5 @@ properties:
       - others
     description: Type of non-tradable assets
     example: cars
-  additonalInformation:
-    $ref: 'additionalInformation.yaml'
+  additionalInformation:
+    $ref: 'AdditionalInformation.yaml'

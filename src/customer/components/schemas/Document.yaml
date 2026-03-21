@@ -4,7 +4,7 @@ required:
   - mimeType
 properties:
   externalReference:
-    $ref: 'externalReference.yaml'
+    $ref: 'ExternalReference.yaml'
   documentId:
     type: string
     minLength: 1
@@ -72,7 +72,7 @@ properties:
     description: Unique document type ID
     example: US101 - e.g. as document type ID for the document type formW9
   issueDate:
-    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    $ref: '../../../generics/components/schemas/Date.yaml'
   languageCode:
     $ref: 'language.yaml'
     # language of document e.g. EN
@@ -85,4 +85,4 @@ properties:
     maxLength: 140
     # example: Name of the specific file e.g. E-banking Contract_Max Muster.pdf
   digitalSignature:
-    $ref: 'digitalSignature.yaml'
+    $ref: 'DigitalSignature.yaml'

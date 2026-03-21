@@ -8,7 +8,7 @@ properties:
     description: Highest degree of education
     example: Master of Science
   graduationYear:
-    $ref: 'year.yaml'
+    $ref: 'Year.yaml'
     # Year of graduation
   institute:
     type: string

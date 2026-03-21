@@ -34,3 +34,9 @@ properties:
     $ref: '../../../generics/components/schemas/Currency.yaml'
   openingDate:
     $ref: '../../../generics/components/schemas/Date.yaml'
+  correspondenceList:
+    items:
+      $ref: Correspondence.yaml
+  powerOfAttorneyList:
+    items:
+      $ref: Correspondence.yaml

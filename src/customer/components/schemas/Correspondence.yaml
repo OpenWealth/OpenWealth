@@ -1,0 +1,16 @@
+type: object
+required:
+  - salutation
+properties:
+  salutation:
+    type: object
+    description: Salutation details of the customer for correspondence purposes.
+    $ref: Salutation.yaml
+  address:
+    type: object
+    description: Address of the customer for correspondence purposes.
+    $ref: Address.yaml
+  communication:
+    type: object
+    description: Communication details of the customer for correspondence purposes.
+    $ref: Communication.yaml

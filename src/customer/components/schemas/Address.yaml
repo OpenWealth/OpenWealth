@@ -1,32 +1,34 @@
 type: object
 required:
-  - addressId
-  - isDomicile
-  - language
-  - isMailingAddress
-  - physicalAddress
+  - streetLine1
+  - postalCode
+  - city
+  - country
 properties:
-  addressId:
+  streetLine1:
     type: string
-    minLength: 1
-    maxLength: 35
-    readOnly: True
-    description: Unique address ID assigned by the custody bank
-    example: 12345678
-  externalReference:
-    $ref: 'externalReference.yaml'
-  addressName:
+    description: Primary street address and house number
+    example: 'Bahnhofstrasse 12'
+  streetLine2:
     type: string
-    description: Name of the address object
-    example: Mustergasse 15, 8001 Zürich, Schweiz
-  isDomicile:
-    type: boolean
-  language:
-    # description: Language of the address object
-    type: boolean
-  isMailingAddress:
-    type: boolean
-  salutationDetails:
-    $ref: 'salutationDetails.yaml'
-  physicalAddress:
-    $ref: 'physicalAddress.yaml'
+    description: Apartment, suite, unit, building, c/o
+    example: 'Apt 4B'
+  postalCode:
+    type: string
+    description: ZIP or postal code
+    example: '8001'
+  city:
+    type: string
+    example: 'Zürich'
+  stateProvince:
+    type: string
+    description: State, canton, or province
+    example: 'ZH'
+  country:
+    type: string
+    description: ISO 3166-1 alpha-2 country code preferred
+    example: 'CH'
+  countryName:
+    type: string
+    description: Optional full country name
+    example: 'Switzerland'
