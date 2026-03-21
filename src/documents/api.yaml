@@ -1,0 +1,26 @@
+openapi: 3.0.3
+info:
+  description: >
+    This is the specification of the bLink 'e-docs' plugin. It is intended to be
+    integrated into existing business-apis.
+  version: 0.8.0
+  title: e-docs plugin
+  contact:
+    name: SIX BBS AG
+    url: https://www.six-group.com/en/products-services/banking-services/blink.html
+servers:
+  - url: https://api-cert.six-group.com/api/<module>/<version>
+security: []
+paths:
+  /documents/search:
+    $ref: paths/documents_search.yaml
+  /documents:
+    $ref: paths/documents.yaml
+  /documents/{documentId}:
+    $ref: paths/documents_{documentId}.yaml
+  /files:
+    $ref: paths/files.yaml
+  /files/{fileId}:
+    $ref: paths/files_{fileId}.yaml
+  /files/{fileId}/confirmations:
+    $ref: paths/files_{fileId}_confirmations.yaml

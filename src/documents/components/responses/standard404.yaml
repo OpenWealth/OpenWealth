@@ -1,0 +1,15 @@
+headers:
+  X-Correlation-ID:
+    $ref: ../headers/X-Correlation-ID.yaml
+description: >-
+  Not Found - Either the endpoint does not exist or a requested resource is not
+  available
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/commonErrorResponse.yaml
+    example:
+      type: /problems/DOCUMENT_NOT_FOUND
+      title: resource not found
+      detail: ...
+      instance: path/to/corresponding/resource

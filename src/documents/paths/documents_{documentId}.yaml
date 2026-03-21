@@ -1,0 +1,96 @@
+parameters:
+  - $ref: ../components/parameters/documentId.yaml
+get:
+  operationId: getDocument
+  summary: Get the Metadata of a Document
+  parameters:
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  tags:
+    - Document
+  responses:
+    '200':
+      description: Got the document corresponding to the id
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Document.yaml
+          examples:
+            PDF Statement with File Revisions:
+              $ref: ../components/examples/PdfStatementWithFiles.yaml
+            PDF Statement:
+              $ref: ../components/examples/PdfStatementWithoutFiles.yaml
+    '400':
+      $ref: ../components/responses/standard400.yaml
+    '401':
+      $ref: ../components/responses/standard401.yaml
+    '403':
+      $ref: ../components/responses/standard403.yaml
+    '404':
+      $ref: ../components/responses/standard404.yaml
+    '500':
+      $ref: ../components/responses/standard500.yaml
+    '503':
+      $ref: ../components/responses/standard503.yaml
+patch:
+  operationId: patchDocument
+  summary: Amend the metadata of a document
+  parameters:
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  tags:
+    - Document
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            document15:
+              $ref: ../components/schemas/Document15.yaml
+            businessMetadata:
+              type: object
+              additionalProperties:
+                type: string
+        examples:
+          PDF Statement:
+            $ref: ../components/examples/PdfStatementForUpload.yaml
+  responses:
+    '204':
+      description: Amendment accepted
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Document.yaml
+    '400':
+      $ref: ../components/responses/standard400.yaml
+    '401':
+      $ref: ../components/responses/standard401.yaml
+    '403':
+      $ref: ../components/responses/standard403.yaml
+    '404':
+      $ref: ../components/responses/standard404.yaml
+    '500':
+      $ref: ../components/responses/standard500.yaml
+    '503':
+      $ref: ../components/responses/standard503.yaml
+delete:
+  operationId: deleteDocument
+  summary: Delete Document and all related Files
+  parameters:
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  tags:
+    - Document
+  responses:
+    '204':
+      description: Document deleted
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml

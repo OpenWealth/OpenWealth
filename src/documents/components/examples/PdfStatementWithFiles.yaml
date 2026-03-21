@@ -1,0 +1,37 @@
+value:
+  id: 9876-5af5wa5-e14a-fw5
+  createdAt: '2023-12-06T11:36:08.033Z'
+  lastUpdatedAt: '2023-12-06T11:36:08.033Z'
+  document15:
+    type:
+      code: CONT
+    identification: abd929b77341-4926-9690-87c05866149b
+    issueDate:
+      dateTime: '2023-12-30T15:59:59Z'
+    name: Account Statement ABC September 2023
+    languageCode: en
+    format:
+      code: DPDF
+    fileName: acct_stmt_ABC_23-09.pdf
+  businessMetadata:
+    type: accountStatement,
+    IBAN: CH9689144398794239671,
+    period: 2023-09
+  fileRevisions:
+    - fileId: file-2133k-545
+      uploadedBy: hans.muster@six-group.com
+      uploadedAt: '2023-12-30T15:59:59Z'
+      sizeBytes: 1024
+      confirmations:
+        - confirmedAt: '2023-12-30T17:59:59Z'
+          confirmedBy: vreni.muster@six-group.com
+          confirmedByIpAddress: 69.89.31.226
+          type: DOWNLOADED
+    - fileId: file-2133k-777
+      uploadedBy: hans.muster@six-group.com
+      uploadedAt: '2023-12-31T15:59:59Z'
+      sizeBytes: 1024
+      confirmations: []
+    - fileId: file-2133k-999
+      sizeBytes: 0
+      confirmations: []

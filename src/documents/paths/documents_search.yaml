@@ -1,0 +1,51 @@
+post:
+  parameters:
+    - $ref: ../components/parameters/cursor.yaml
+    - $ref: ../components/parameters/limit.yaml
+    - $ref: ../components/parameters/sort.yaml
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  summary: Get the List of Documents (Search)
+  description: >
+    Each document includes its metadata.
+
+    Search requests shall be executed as POST and not as GET requests.
+    Otherwise, search parameters containing CID could get logged.
+  operationId: searchDocuments
+  tags:
+    - Document
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DocumentSearch.yaml
+  responses:
+    '200':
+      description: Returns a list with all document metadata records.
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+        X-nextCursor:
+          $ref: ../components/headers/X-nextCursor.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DocumentSearchResponse.yaml
+      links:
+        GetDocumentById:
+          description: >
+            The `id` value returned in the response can be used as the
+            `documentId` parameter in `GET /documents/{documentId}`.
+          operationId: getDocument
+          parameters:
+            documentId: $response.body#/0/id
+    '400':
+      $ref: ../components/responses/standard400.yaml
+    '401':
+      $ref: ../components/responses/standard401.yaml
+    '403':
+      $ref: ../components/responses/standard403.yaml
+    '500':
+      $ref: ../components/responses/standard500.yaml
+    '503':
+      $ref: ../components/responses/standard503.yaml

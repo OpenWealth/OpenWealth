@@ -1,0 +1,73 @@
+parameters:
+  - $ref: ../components/parameters/fileId.yaml
+post:
+  operationId: submitDownloadConfirmation
+  summary: Submit Download Confirmation
+  parameters:
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  tags:
+    - Download Confirmation
+  responses:
+    '201':
+      description: Confirmation created
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+      content:
+        application/text:
+          example: ''
+    '400':
+      $ref: ../components/responses/standard400.yaml
+    '401':
+      $ref: ../components/responses/standard401.yaml
+    '403':
+      $ref: ../components/responses/standard403.yaml
+    '404':
+      $ref: ../components/responses/standard404.yaml
+    '500':
+      $ref: ../components/responses/standard500.yaml
+    '503':
+      $ref: ../components/responses/standard503.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Confirmation.yaml
+get:
+  operationId: getDownloadConfirmations
+  summary: Get Download Confirmations
+  parameters:
+    - $ref: ../components/parameters/cursor.yaml
+    - $ref: ../components/parameters/limit.yaml
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  tags:
+    - Download Confirmation
+  responses:
+    '200':
+      description: Loaded all confirmations for the given document
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              confirmations:
+                type: array
+                items:
+                  $ref: ../components/schemas/Confirmation.yaml
+    '400':
+      $ref: ../components/responses/standard400.yaml
+    '401':
+      $ref: ../components/responses/standard401.yaml
+    '403':
+      $ref: ../components/responses/standard403.yaml
+    '404':
+      $ref: ../components/responses/standard404.yaml
+    '500':
+      $ref: ../components/responses/standard500.yaml
+    '503':
+      $ref: ../components/responses/standard503.yaml

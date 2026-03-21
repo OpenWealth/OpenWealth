@@ -1,0 +1,122 @@
+parameters:
+  - $ref: ../components/parameters/fileId.yaml
+put:
+  summary: Upload a File Chunk
+  parameters:
+    - name: content-range
+      in: header
+      example: 0-1023/2048
+      description: >-
+        Add a Content-Range header to indicate that the current position in the
+        file is unknown. For example, set the Content-Range to */2000000 if your
+        total file length is 2,000,000 bytes. If you don't know the full size of
+        the file, set the Content-Range to */*.
+      schema:
+        type: string
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  operationId: uploadFileChunk
+  tags:
+    - File
+  requestBody:
+    content:
+      application/octet-stream:
+        schema:
+          type: string
+          format: binary
+  responses:
+    '200':
+      description: Last chunk and therefore the complete file has been accepted
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+        location:
+          $ref: ../components/headers/Location.yaml
+        content-length:
+          $ref: ../components/headers/Content-Length.yaml
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+    '201':
+      description: Chunk has been accepted.
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+        content-range:
+          $ref: ../components/headers/Content-Range.yaml
+    '400':
+      $ref: ../components/responses/standard400.yaml
+    '401':
+      $ref: ../components/responses/standard401.yaml
+    '403':
+      $ref: ../components/responses/standard403.yaml
+    '404':
+      $ref: ../components/responses/standard404.yaml
+    '500':
+      $ref: ../components/responses/standard500.yaml
+    '503':
+      $ref: ../components/responses/standard503.yaml
+get:
+  operationId: getFile
+  summary: Download File
+  parameters:
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  tags:
+    - File
+  responses:
+    '200':
+      description: Got file
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+        content-disposition:
+          $ref: ../components/headers/Content-Disposition.yaml
+      content:
+        application/octet-stream:
+          example: ''
+    '400':
+      $ref: ../components/responses/standard400.yaml
+    '401':
+      $ref: ../components/responses/standard401.yaml
+    '403':
+      $ref: ../components/responses/standard403.yaml
+    '404':
+      $ref: ../components/responses/standard404.yaml
+    '500':
+      $ref: ../components/responses/standard500.yaml
+    '503':
+      $ref: ../components/responses/standard503.yaml
+delete:
+  operationId: deleteFile
+  summary: Delete File
+  parameters:
+    - $ref: ../components/parameters/authorization_in_header.yaml
+    - $ref: ../components/parameters/correlation_in_header.yaml
+  tags:
+    - File
+  responses:
+    '204':
+      description: File deleted
+      headers:
+        X-Correlation-ID:
+          $ref: ../components/headers/X-Correlation-ID.yaml
+      content:
+        application/text:
+          example: ''
+    '400':
+      $ref: ../components/responses/standard400.yaml
+    '401':
+      $ref: ../components/responses/standard401.yaml
+    '403':
+      $ref: ../components/responses/standard403.yaml
+    '404':
+      $ref: ../components/responses/standard404.yaml
+    '500':
+      $ref: ../components/responses/standard500.yaml
+    '503':
+      $ref: ../components/responses/standard503.yaml
