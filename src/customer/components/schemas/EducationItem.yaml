@@ -1,0 +1,24 @@
+type: object
+required:
+  - diploma
+properties:
+  diploma:
+    type: string
+    maxLength: 35
+    description: Degree of education.
+    example: Master of Science
+  graduationYear:
+    type: string
+    pattern: '[0-9]{4}'
+    description: Year.
+    example: '1995'
+  institute:
+    type: string
+    maxLength: 35
+    description: Institute at which graduation took place.
+    example: University of Berlin
+  studyProgramme:
+    type: string
+    maxLength: 35
+    description: Field of study.
+    example: Economics

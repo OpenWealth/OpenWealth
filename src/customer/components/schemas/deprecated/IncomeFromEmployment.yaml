@@ -1,5 +1,5 @@
 allOf:
-  - $ref: 'sourceBase.yaml'
+  - $ref: 'SourceBase.yaml'
 required:
   - companyName
   - roleOrPosition
@@ -9,7 +9,7 @@ properties:
     maxLength: 140
     # description: Name of the company the income/savings came from
   companyDomicile:
-    $ref: 'country.yaml'
+    $ref: 'Country.yaml'
     # description: Domicile of the company e.g. CH
   companyBusinessActivity:
     type: string
@@ -21,16 +21,16 @@ properties:
     description: Number of employees of company.
     example: 5145
   companyAnnualTurnover:
-    $ref: 'amount.yaml'
+    $ref: 'Amount.yaml'
   currencyAnnualTurnover:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+    $ref: '../../../generics/components/schemas/Currency.yaml'
   companyAnnualProfit:
-    $ref: 'amount.yaml'
+    $ref: 'Amount.yaml'
   currencyAnnualProfit:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+    $ref: '../../../generics/components/schemas/Currency.yaml'
   roleOrPosition:
-    $ref: 'position.yaml'
+    $ref: 'Position.yaml'
   period:
-    $ref: 'period.yaml'
+    $ref: 'Period.yaml'
   additionalInformation:
-    $ref: 'additionalInformation.yaml'
+    $ref: 'AdditionalInformation.yaml'

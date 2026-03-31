@@ -1,0 +1,21 @@
+type: object
+required:
+  - totalYearlyIncome
+  - referenceYear
+properties:
+  totalYearlyIncome:
+    $ref: 'Amount.yaml'
+  referenceYear:
+    type: string
+    pattern: '[0-9]{4}'
+    description: Year
+    example: '1995'
+  additionalInformation:
+    type: string
+    maxLength: 2500
+    description: Free text field to provide additional information
+    example: This is additional information.
+  sourceOfIncomeList:
+    type: array
+    items:
+      $ref: 'sourceOfIncome.yaml'

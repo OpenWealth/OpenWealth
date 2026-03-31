@@ -8,19 +8,19 @@ properties:
     $ref: 'amount.yaml'
     # description: Expected amount of fund inflows in the next three months in customer reference currency
   currencyExpectedInflows:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+    $ref: '../../../generics/components/schemas/Currency.yaml'
     # description: Customer reference currency of expected fund inflows
   amountPlannedTotalAssets:
-    $ref: 'amount.yaml'
+    $ref: 'Amount.yaml'
     # description: Planned/expected amount of total assets in the next 12 months in customer reference currency
   currencyPlannedTotalAssets:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+    $ref: '../../../generics/components/schemas/Currency.yaml'
     # description: Customer reference currency of expected amount of total assets in the next 12 months
   amountExpectedTurnover:
     # description: 'Expected fund flows per year: Expected amount of account turnover (incoming money/outgoing money per year without initial deposit) in customer reference currency.'
-    $ref: 'amount.yaml'
+    $ref: 'Amount.yaml'
   currencyExpectedTurnover:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+    $ref: '../../../generics/components/schemas/Currency.yaml'
     # description: Customer reference currency of expected fund flows per year
   numberOfInflows:
     description: Number of expected annual inflows
@@ -33,12 +33,12 @@ properties:
   recurringCounterpartyList:
     type: array
     items:
-      $ref: 'recurringCounterparty.yaml'
+      $ref: 'RecurringCounterparty.yaml'
   initialAmountList:
     type: array
     items:
-      $ref: 'initialAmount.yaml'
+      $ref: 'InitialAmount.yaml'
   expectedFundFlowList:
     type: array
     items:
-      $ref: 'expectedFundFlow.yaml'
+      $ref: 'ExpectedFundFlow.yaml'

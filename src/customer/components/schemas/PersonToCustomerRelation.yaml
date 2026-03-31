@@ -1,0 +1,42 @@
+type: object
+required:
+  - relationType
+properties:
+  id:
+    type: string
+    maxLength: 128
+    description: Unique and unambiguous identification (i.e. UUID) used by the bank for the person.
+    example: 6c4e1b92-5f7a-4d3c-8e9b-2a1f6d7c0e54
+    readOnly: true
+  personId:
+    type: string
+    description: Unique and unambiguous identification used by the bank for the person.
+    example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
+  person:
+    $ref: Person.yaml
+  relationType: #is an array needed?
+    type: string
+    description: Indicates the kind of relation the person has to this customer relationship.
+    example: accountOwner
+    enum:
+      - beneficialOwner
+      - externalAssetManagerFirm
+      - externalAssetManagerEmployee
+      - accountOwner
+      - registeredOwner
+      - authorisedSignatoryIndividual
+      - beneficiary
+      - authorisedSignatoryCollective
+      - ownerParentalAuthority
+      - other
+  signatoryRight:
+    type: string
+    description: Defines the level of rights of the authorised signatory and indicates if the person has the right to sign individually or collectively (in twos, etc.)
+    example: individually
+    enum:
+      - individually
+      - inTwos
+      - inThrees
+      - fourway
+      - none
+      - other

@@ -1,0 +1,34 @@
+{
+  "id": "person-1",
+  "personType": "naturalPerson",
+  "language": "DE",
+  "countryOfDomicile": "CH",
+  "openingDate": "2018-04-13",
+  "taxDomicileList": [
+    "CH"
+  ],
+  "givenName": "Urs",
+  "middleName": "Stefan",
+  "lastName": "Muster",
+  "title": "PhD",
+  "dateOfBirth": "2075-04-13",
+  "dateOfMarriage": "2018-04-13",
+  "gender": "male",
+  "nationalityList": [
+    "CH"
+  ],
+  "civilStatus": "married",
+  "tinList": [
+    {
+      "tinNumber": "123-12-1234",
+      "country": "CH"
+    }
+  ],
+  "countryOfBirth": "CH",
+  "personToPersonRelationsList": [
+    {
+      "relation": "isSpouseOf",
+      "relatedPersonId": "person-2"
+    }
+  ]
+}

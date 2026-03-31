@@ -17,7 +17,17 @@ properties:
       - other
     description: Status of employment
     example: retired
-  employmentDetailsList:
+  profession:
+    type: string
+    maxLength: 35
+    description: Profession
+    example: Economist
+  yearOfRetirement:
+    type: string
+    pattern: '[0-9]{4}'
+    description: Year
+    example: '1995'
+  employmentItemList:
     type: array
     items:
-      $ref: 'employmentDetails.yaml'
+      $ref: 'EmploymentItem.yaml'

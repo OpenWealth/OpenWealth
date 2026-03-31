@@ -1,0 +1,17 @@
+type: object
+required:
+  - type
+properties:
+  type:
+    type: string
+    description: Indicates the kind of PoA the person has on this mandate.
+    example: externalAssetManagerFirm
+    enum:
+      - externalAssetManagerFirm
+      - externalAssetManagerEmployee
+      - beneficiary
+      - other
+  personId:
+    type: string
+    description: Unique and unambiguous identification used by the bank for the person.
+    example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa

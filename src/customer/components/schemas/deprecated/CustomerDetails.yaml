@@ -1,5 +1,5 @@
 allOf:
-  - $ref: 'customer.yaml'
+  - $ref: 'Customer.yaml'
 type: object
 required:
   - person2customerRelationList

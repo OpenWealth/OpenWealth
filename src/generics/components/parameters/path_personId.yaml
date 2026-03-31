@@ -1,0 +1,10 @@
+in: path
+name: personId
+required: true
+schema:
+  type: string
+  minLength: 1
+  maxLength: 128
+  example: person-1
+  description: Unique and unambiguous identification used by the bank for the person.
+description: Person ID Parameter.

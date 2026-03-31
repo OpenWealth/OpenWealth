@@ -1,17 +1,14 @@
 type: object
 required:
-  - documentId
   - mimeType
 properties:
-  externalReference:
-    $ref: 'externalReference.yaml'
-  documentId:
+  id:
     type: string
     minLength: 1
     maxLength: 35
     readOnly: true
     description: Unique document ID assigned by the custody bank
-    example: 654321
+    example: '654321'
   typeCategory:
     type: string
     enum:
@@ -23,7 +20,7 @@ properties:
       - clientCorrespondence
       - other
     description: Indicates the document category. The document category and type shall help to classify the document.
-    example: identification - e.g. document types like id, passport, driver license belong to this category.
+    example: identification
   type:
     type: string
     enum:
@@ -68,11 +65,11 @@ properties:
     example: created
   documentTypeId:
     type: string
-    maxLength: 35
+    maxLength: 70
     description: Unique document type ID
     example: US101 - e.g. as document type ID for the document type formW9
   issueDate:
-    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    $ref: '../../../generics/components/schemas/Date.yaml'
   languageCode:
     $ref: 'language.yaml'
     # language of document e.g. EN
@@ -84,5 +81,3 @@ properties:
     type: string
     maxLength: 140
     # example: Name of the specific file e.g. E-banking Contract_Max Muster.pdf
-  digitalSignature:
-    $ref: 'digitalSignature.yaml'

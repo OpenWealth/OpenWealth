@@ -1,20 +1,34 @@
 type: object
 required:
-  - customerId
   - name
 properties:
-  customerId:
+  id:
     type: string
-    minLength: 1
-    maxLength: 35
-    readOnly: True
-    description: Unique customer ID assigned by the custody bank
-    example: 987654321
-  externalReference:
-    $ref: 'externalReference.yaml'
+    maxLength: 128
+    description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+    example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+    readOnly: true
+  number:
+    type: string
+    description: Contains the customers custody proprietary customer number if available.
+    maxLength: 70
+    example: 12345-6
   name:
     type: string
     maxLength: 140
+  type:
+    type: string
+    enum:
+      - individual
+      - groupOfIndividuals
+      - legalEntity
+      - foundation
+      - insuranceCompany
+      - institutionalInvestor
+      - bank
+      - other
+    description: Type of customer relationship
+    example: individual
   status:
     type: string
     enum:
@@ -23,17 +37,30 @@ properties:
     description: Status of the customer relationship
     example: active
   referenceCurrency:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
+    $ref: '../../../generics/components/schemas/Currency.yaml'
   openingDate:
-    $ref: '../../../generics/V2/components/schemas/date.yaml'
-  language:
-    $ref: 'language.yaml'
-  customerSegment:
+    $ref: '../../../generics/components/schemas/Date.yaml'
+  segment:
     type: string
     maxLength: 35
     description: Customer segment of the customer at the custody bank (e.g. UHNWI Switzerland)
     example: CLIENT FIM, EAM-MODELL
     readOnly: true
+  mainAdress:
+    type: object
+    description: Main address of the customer for correspondence purposes.
+    $ref: Address.yaml
+  salutation:
+    type: object
+    description: Salutation details of the customer for correspondence purposes.
+    $ref: Salutation.yaml
+  language:
+    type: string
+    description: Preferred language of the customer for correspondence purposes, represented as ISO 639-1 alpha-2 code.
+    example: de
+  personToCustomerRelationList:
+    items:
+      $ref: PersonToCustomerRelation.yaml
   bankAdvisor:
     type: string
     maxLength: 35

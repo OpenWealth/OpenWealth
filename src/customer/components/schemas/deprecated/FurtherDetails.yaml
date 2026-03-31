@@ -6,4 +6,4 @@ properties:
     description: Information on family members and related persons.
     example: Anna Andrews is married with Mark Andrews. They have two children.
   additionalInformation:
-    $ref: 'additionalInformation.yaml'
+    $ref: 'AdditionalInformation.yaml'

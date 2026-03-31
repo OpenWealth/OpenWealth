@@ -1,0 +1,23 @@
+type: object
+required:
+  - position
+  - company
+properties:
+  position:
+    description: Function/position which the person helds at the company.
+    type: string
+    maxLength: 35
+    example: CEO
+  company:
+    $ref: 'Company.yaml'
+  period:
+    description: Period of time e.g. a job was held / a company owned.
+    type: string
+    maxLength: 70
+    example: 15.05.2011 - 05.02.2020
+    # Period during which the function/position/company was held
+  additionalInformation:
+    description: Free text field to provide additional information.
+    type: string
+    maxLength: 2500
+    example: This is additional information.

@@ -1,6 +1,6 @@
 type: object
 allOf:
-  - $ref: 'personBase.yaml'
+  - $ref: 'PersonBase.yaml'
 required:
   - givenName
   - lastName
@@ -28,11 +28,11 @@ properties:
     example: PhD
     description: Official title of the person
   dateOfBirth:
-    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    $ref: '../../../generics/components/schemas/Date.yaml'
   dateOfMarriage:
-    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    $ref: '../../../generics/components/schemas/Date.yaml'
   dateOfDeath:
-    $ref: '../../../generics/V2/components/schemas/date.yaml'
+    $ref: '../../../generics/components/schemas/Date.yaml'
   gender:
     type: string
     enum:
@@ -45,7 +45,7 @@ properties:
     type: array
     description: Country/Countries where a person was born or is legally accepted as belonging to the country. The first country in the list represents the main nationality.
     items:
-      $ref: 'country.yaml'
+      $ref: 'Country.yaml'
   civilStatus:
     type: string
     enum:
@@ -62,7 +62,19 @@ properties:
     type: array
     description: List with tax identification numbers of a person
     items:
-      $ref: 'tin.yaml'
+      $ref: 'Tin.yaml'
   countryOfBirth:
-    # description: Country where person was born
-    $ref: 'country.yaml'
+    description: Country where person was born
+    $ref: 'Country.yaml'
+  income:
+    $ref: 'Income.yaml'
+  wealth:
+    $ref: 'Wealth.yaml'
+  employment:
+    $ref: 'Employment.yaml'
+  education:
+    $ref: 'Education.yaml'
+  politicalStatus:
+    $ref: 'PoliticalStatus.yaml'
+  fatca:
+    $ref: 'Fatca.yaml'

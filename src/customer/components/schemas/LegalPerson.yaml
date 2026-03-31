@@ -1,10 +1,10 @@
 type: object
 allOf:
-  - $ref: 'personBase.yaml'
+  - $ref: 'PersonBase.yaml'
 required:
   - organisationName
   - legalForm
-  - LEI
+  - lei
   - domicilaryCompany
 properties:
   organisationName:
@@ -18,7 +18,7 @@ properties:
     maxLength: 35
     description: Legal form of the company.
     example: AG
-  LEI:
+  lei:
     type: string
     maxLength: 35
     example: 529900UVM8LC55IFAA52

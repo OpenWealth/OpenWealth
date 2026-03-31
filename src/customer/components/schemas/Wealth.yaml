@@ -1,0 +1,21 @@
+type: object
+required:
+  - totalWealth
+  - referenceYear
+properties:
+  totalWealth:
+    $ref: 'Amount.yaml'
+  referenceYear:
+    type: string
+    pattern: '[0-9]{4}'
+    description: Year
+    example: '1995'
+  sourceOfWealthList:
+    type: array
+    items:
+      $ref: 'SourceOfWealth.yaml'
+  additionalInformation:
+    description: 'Description of the most important milestones/economic activities; which form the basis for the assets of the customer'
+    type: string
+    maxLength: 2500
+    example: This is additional information.

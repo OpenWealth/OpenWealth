@@ -1,4 +1,0 @@
-type: string
-pattern: '[0-9]{4}'
-description: Year
-example: 1995

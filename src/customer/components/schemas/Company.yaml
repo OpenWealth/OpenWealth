@@ -1,0 +1,25 @@
+type: object
+required:
+  - name
+properties:
+  name:
+    description: Name of the company the person works/worked for.
+    type: string
+    maxLength: 140
+  domicile:
+    description: Domicile of the company e.g. CH
+    $ref: 'Country.yaml'
+  description:
+    description: Description of the business activity of the company and industry (e.g. NOGA Code).
+    type: string
+    maxLength: 250
+    example: The Beispiel AG trades with commodities (mainly crude oil). Noga Code "661200".
+  size:
+    description: Number of employees of company.
+    type: integer
+    example: 5145
+  industry:
+    description: Industry of the company / NOGA code of company.
+    type: string
+    maxLength: 35
+    example: Financial Services

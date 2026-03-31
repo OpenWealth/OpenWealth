@@ -1,0 +1,44 @@
+type: object
+description: Mandate entity.
+required:
+  - type
+  - referenceCurrency
+properties:
+  id:
+    type: string
+    maxLength: 128
+    example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
+    description: Unique and unambiguous identification for the mandate.
+    readOnly: true
+  customerId:
+    type: string
+    description: Unique and unambiguous identification used by the bank for the customer.
+    example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+  customer:
+    $ref: Customer.yaml
+  type:
+    type: string
+    description: |
+      Indicates the type of the mandate.
+    example: discretionary
+    enum:
+      - executionOnly
+      - discretionary
+      - advisory
+      - other
+  name:
+    type: string
+    maxLength: 70
+    description: |
+      Name of the mandate.
+    example: Discretionary mandate for private investments
+  referenceCurrency:
+    $ref: '../../../generics/components/schemas/Currency.yaml'
+  openingDate:
+    $ref: '../../../generics/components/schemas/Date.yaml'
+  correspondenceList:
+    items:
+      $ref: Correspondence.yaml
+  powerOfAttorneyList:
+    items:
+      $ref: Correspondence.yaml

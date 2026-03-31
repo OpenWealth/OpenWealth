@@ -1,0 +1,24 @@
+{
+  "id": "customer-2",
+  "number": "12345-7",
+  "name": "Urs u/o Linda Muster",
+  "type": "groupOfIndividuals",
+  "status": "active",
+  "referenceCurrency": "CHF",
+  "openingDate": "2018-04-13",
+  "language": "DE",
+  "segment": "CLIENT FIM",
+  "bankAdvisor": "Anna Beispiel PC8-AB",
+  "bankDeputyAdvisor": "Max Muster PC8-MM",
+  "bankPreviousAdvisor": "Peter Vergangenheit PC5-PV",
+  "personToCustomerRelationsList": [
+    {
+      "relationType": "accountOwner",
+      "personId": "person-1"
+    },
+    {
+      "relationType": "accountOwner",
+      "personId": "person-2"
+    }
+  ]
+}

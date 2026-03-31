@@ -1,5 +1,5 @@
 allOf:
-  - $ref: 'document.yaml'
+  - $ref: 'Document.yaml'
 type: object
 required:
   - enclosure

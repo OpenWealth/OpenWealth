@@ -1,16 +1,26 @@
 type: object
 required:
-  - source
+  - sourceType
   - amount
-  - currency
 properties:
-  source:
-    $ref: 'source.yaml'
+  sourceType:
+    type: string
+    enum:
+      - incomeFromEmployment
+      - incomeFromBusinessOwnership
+      - saleOfCompany
+      - saleOfNonFinancialAssets
+      - lifeInsurance
+      - pensionAssets
+      - inheritance
+      - gift
+      - loan
+      - saleOfFinancialAssets
+      - capitalGains
+      - otherSource
+    description: Original source of assets
+    example: saleOfCompany
   amount:
-    $ref: 'amount.yaml'
-  currency:
-    $ref: '../../../generics/V2/components/schemas/currency.yaml'
-  originsOfAssetsList:
-    type: array
-    items:
-      $ref: 'country.yaml'
+    $ref: 'Amount.yaml'
+  originCountry:
+    $ref: 'Country.yaml'

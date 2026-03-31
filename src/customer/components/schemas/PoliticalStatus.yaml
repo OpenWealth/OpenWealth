@@ -18,11 +18,14 @@ properties:
     example: false
   pepRelation:
     type: string
-    maxLength: 70
+    maxLength: 255
     description: Name and function of the PEP the person is associated to.
-    example: Chelsea Muster is the daughter of Anna Beispiel who is a member of the national council of Germany.
+    example: 'Chelsea Muster is the daughter of Anna Beispiel who is a member of the national council of Germany.'
   additionalInformation:
-    $ref: 'additionalInformation.yaml'
+    description: Free text field to provide additional information.
+    type: string
+    maxLength: 2500
+    example: This is additional information.
   sanctions:
     type: boolean
     description: Is the person subject to sanctions / on any sanction list?

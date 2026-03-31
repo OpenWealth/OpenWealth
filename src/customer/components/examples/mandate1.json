@@ -1,0 +1,8 @@
+{
+  "id": "mandate-1",
+  "customerId": "customer-1",
+  "type": "discretionary",
+  "name": "Discretionary mandate for private investments",
+  "referenceCurrency": "CHF",
+  "openingDate": "2018-04-13"
+}

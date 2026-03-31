@@ -1,0 +1,10 @@
+in: path
+name: mandateId
+required: true
+schema:
+  type: string
+  minLength: 1
+  maxLength: 128
+  example: mandate-1
+  description: Unique and unambiguous identification used by the bank for the mandate.
+description: Mandate ID Parameter.
