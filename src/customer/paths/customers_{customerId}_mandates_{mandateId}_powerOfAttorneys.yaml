@@ -1,0 +1,86 @@
+get:
+  tags:
+    - powerOfAttorneys
+  summary: Returns the powers of attorney for a specific mandate
+  description: |
+    Returns all powers of attorney associated with a specific mandate accessible to the querying user.
+    Paging is done based on the return object, i.e. if limit is set to 1,
+    then 1 power of attorney will be returned per page.
+  operationId: getPowerOfAttorneysByMandateId
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/path_mandateId.yaml
+    - $ref: ../../generics/components/parameters/cursor.yaml
+    - $ref: ../../generics/components/parameters/limit.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  responses:
+    '200':
+      description: Powers of Attorney List.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        nextCursor:
+          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/PowerOfAttorney.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+post:
+  tags:
+    - powerOfAttorneys
+  summary: Creates a new power of attorney for a specific mandate
+  description: Creates a new power of attorney associated with a specific mandate.
+  operationId: createPowerOfAttorneyByMandateId
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/path_mandateId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PowerOfAttorney.yaml
+  responses:
+    '201':
+      description: Power of Attorney successfully created.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PowerOfAttorney.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

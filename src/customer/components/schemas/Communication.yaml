@@ -13,19 +13,19 @@ properties:
       - website
       - socialMedia
       - others
-    description: Medium for contacting the customer
+    description: Medium for contacting the customer.
     example: phone
   mediumType:
     type: string
     enum:
       - private
       - business
-    description: Specifies the type of contact details
+    description: Specifies the type of contact details.
     example: private
   content:
     type: string
     maxLength: 70
-    description: Content of the contact detail, e.g. phone number, email-address, URL
+    description: Content of the contact detail, e.g. phone number, email-address, URL.
     example: '0041998887766'
   priority:
     type: string

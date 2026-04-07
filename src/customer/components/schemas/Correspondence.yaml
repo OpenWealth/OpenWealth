@@ -2,6 +2,17 @@ type: object
 required:
   - salutation
 properties:
+  id:
+    type: string
+    maxLength: 128
+    example: 550e8400-e29b-41d4-a716-446655440000
+    description: Unique and unambiguous identification for the correspondence.
+    readOnly: true
+  mandateId:
+    type: string
+    description: Unique and unambiguous identification used by the bank for the mandate.
+    example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
+    readOnly: true
   salutation:
     type: object
     description: Salutation details of the customer for correspondence purposes.

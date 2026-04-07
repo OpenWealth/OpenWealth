@@ -1,0 +1,4 @@
+type: string
+pattern: '[A-Z]{2}'
+description: 2-Letter ISO 3166-2 Country Code
+example: CH

@@ -71,7 +71,7 @@ properties:
   issueDate:
     $ref: '../../../generics/components/schemas/Date.yaml'
   languageCode:
-    $ref: 'language.yaml'
+    $ref: 'Language.yaml'
     # language of document e.g. EN
   mimeType:
     type: string

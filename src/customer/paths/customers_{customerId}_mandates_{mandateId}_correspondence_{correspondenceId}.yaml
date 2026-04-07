@@ -1,0 +1,112 @@
+get:
+  tags:
+    - correspondence
+  summary: Returns a correspondence entry by id
+  description: Returns a specific correspondence entry by id for a specific mandate.
+  operationId: getCorrespondenceById
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/path_mandateId.yaml
+    - $ref: ../../generics/components/parameters/path_correspondenceId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  responses:
+    '200':
+      description: Correspondence.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Correspondence.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+put:
+  tags:
+    - correspondence
+  summary: Updates a correspondence entry by id
+  description: Updates an existing correspondence entry by id for a specific mandate.
+  operationId: updateCorrespondenceById
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/path_mandateId.yaml
+    - $ref: ../../generics/components/parameters/path_correspondenceId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Correspondence.yaml
+  responses:
+    '200':
+      description: Correspondence successfully updated.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Correspondence.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+delete:
+  tags:
+    - correspondence
+  summary: Deletes a correspondence entry by id
+  description: Deletes a specific correspondence entry by id for a specific mandate.
+  operationId: deleteCorrespondenceById
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/path_mandateId.yaml
+    - $ref: ../../generics/components/parameters/path_correspondenceId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  responses:
+    '204':
+      description: Correspondence successfully deleted (empty response).
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

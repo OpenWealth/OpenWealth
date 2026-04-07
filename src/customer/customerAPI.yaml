@@ -21,6 +21,196 @@ externalDocs:
   description: Find out more about OpenWealth API specifications.
   url: https://openwealth.ch
 paths:
+  /cases:
+    get:
+      tags:
+        - cases
+      summary: Returns the cases
+      description: |
+        Returns all cases accessible to the querying user.
+        Paging is done based on the return object, i.e. if limit is set to 1,
+        then 1 case will be returned per page.
+      operationId: getCases
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Cases List.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Case'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - cases
+      summary: Creates a new case
+      description: Creates a new case (lifecycle process).
+      operationId: createCase
+      parameters:
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Case'
+      responses:
+        '201':
+          description: Case successfully created.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /cases/{caseId}:
+    get:
+      tags:
+        - cases
+      summary: Returns a case by id
+      description: Returns a specific case by id.
+      operationId: getCaseById
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Case.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      tags:
+        - cases
+      summary: Updates a case by id
+      description: Updates an existing case by id.
+      operationId: updateCaseById
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Case'
+      responses:
+        '200':
+          description: Case successfully updated.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    delete:
+      tags:
+        - cases
+      summary: Deletes a case by id
+      description: Deletes a specific case by id.
+      operationId: deleteCaseById
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '204':
+          description: Case successfully deleted (empty response).
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
   /customers:
     get:
       tags:
@@ -183,6 +373,406 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
+  /customers/{customerId}/mandates/{mandateId}/powerOfAttorneys:
+    get:
+      tags:
+        - powerOfAttorneys
+      summary: Returns the powers of attorney for a specific mandate
+      description: |
+        Returns all powers of attorney associated with a specific mandate accessible to the querying user.
+        Paging is done based on the return object, i.e. if limit is set to 1,
+        then 1 power of attorney will be returned per page.
+      operationId: getPowerOfAttorneysByMandateId
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Powers of Attorney List.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PowerOfAttorney'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - powerOfAttorneys
+      summary: Creates a new power of attorney for a specific mandate
+      description: Creates a new power of attorney associated with a specific mandate.
+      operationId: createPowerOfAttorneyByMandateId
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PowerOfAttorney'
+      responses:
+        '201':
+          description: Power of Attorney successfully created.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerOfAttorney'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/mandates/{mandateId}/powerOfAttorneys/{powerOfAttorneyId}:
+    get:
+      tags:
+        - powerOfAttorneys
+      summary: Returns a power of attorney by id
+      description: Returns a specific power of attorney by id for a specific mandate.
+      operationId: getPowerOfAttorneyById
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/path_powerOfAttorneyId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Power of Attorney.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerOfAttorney'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      tags:
+        - powerOfAttorneys
+      summary: Updates a power of attorney by id
+      description: Updates an existing power of attorney by id for a specific mandate.
+      operationId: updatePowerOfAttorneyById
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/path_powerOfAttorneyId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PowerOfAttorney'
+      responses:
+        '200':
+          description: Power of Attorney successfully updated.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerOfAttorney'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    delete:
+      tags:
+        - powerOfAttorneys
+      summary: Deletes a power of attorney by id
+      description: Deletes a specific power of attorney by id for a specific mandate.
+      operationId: deletePowerOfAttorneyById
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/path_powerOfAttorneyId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '204':
+          description: Power of Attorney successfully deleted (empty response).
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/mandates/{mandateId}/correspondence:
+    get:
+      tags:
+        - correspondence
+      summary: Returns the correspondence for a specific mandate
+      description: |
+        Returns all correspondence associated with a specific mandate accessible to the querying user.
+        Paging is done based on the return object, i.e. if limit is set to 1,
+        then 1 correspondence entry will be returned per page.
+      operationId: getCorrespondenceByMandateId
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Correspondence List.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Correspondence'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - correspondence
+      summary: Creates a new correspondence entry for a specific mandate
+      description: Creates a new correspondence entry associated with a specific mandate.
+      operationId: createCorrespondenceByMandateId
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Correspondence'
+      responses:
+        '201':
+          description: Correspondence successfully created.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Correspondence'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/mandates/{mandateId}/correspondence/{correspondenceId}:
+    get:
+      tags:
+        - correspondence
+      summary: Returns a correspondence entry by id
+      description: Returns a specific correspondence entry by id for a specific mandate.
+      operationId: getCorrespondenceById
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/path_correspondenceId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Correspondence.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Correspondence'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      tags:
+        - correspondence
+      summary: Updates a correspondence entry by id
+      description: Updates an existing correspondence entry by id for a specific mandate.
+      operationId: updateCorrespondenceById
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/path_correspondenceId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Correspondence'
+      responses:
+        '200':
+          description: Correspondence successfully updated.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Correspondence'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    delete:
+      tags:
+        - correspondence
+      summary: Deletes a correspondence entry by id
+      description: Deletes a specific correspondence entry by id for a specific mandate.
+      operationId: deleteCorrespondenceById
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_mandateId'
+        - $ref: '#/components/parameters/path_correspondenceId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '204':
+          description: Correspondence successfully deleted (empty response).
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
   /persons:
     get:
       tags:
@@ -265,12 +855,6 @@ paths:
           $ref: '#/components/responses/503'
 components:
   schemas:
-    Currency:
-      title: Currency
-      type: string
-      description: ISO 4217 code.
-      pattern: ^[A-Z]{3}$
-      example: CHF
     Date:
       title: Date
       type: string
@@ -282,111 +866,234 @@ components:
       pattern: '[A-Z]{2}'
       description: 2-letter ISO 639-1 Language Code
       example: EN
-    PersonToCustomerRelation:
+    Document:
       type: object
       required:
-        - id
-        - relationType
-        - personId
+        - mimeType
       properties:
         id:
           type: string
-          maxLength: 128
-          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the person.
-          example: 6c4e1b92-5f7a-4d3c-8e9b-2a1f6d7c0e54
+          minLength: 1
+          maxLength: 35
           readOnly: true
-        relationType:
+          description: Unique document ID assigned by the custody bank
+          example: '654321'
+        typeCategory:
           type: string
-          description: Indicates the kind of relation the person has to this customer relationship.
-          example: accountOwner
           enum:
-            - beneficialOwner
-            - externalAssetManagerFirm
-            - externalAssetManagerEmployee
-            - accountOwner
-            - registeredOwner
-            - authorisedSignatoryIndividual
-            - beneficiary
-            - authorisedSignatoryCollective
-            - ownerParentalAuthority
+            - identification
+            - basicDocuments
+            - products
+            - taxDocuments
+            - regulatoryDocuments
+            - clientCorrespondence
             - other
-        personId:
-          type: string
-          description: Unique and unambiguous identification used by the bank for the person.
-          example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
-    Customer:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          type: string
-          maxLength: 128
-          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
-          example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
-          readOnly: true
-        number:
-          type: string
-          description: Contains the customers custody proprietary customer number if available.
-          maxLength: 70
-          example: 12345-6
-        name:
-          type: string
-          maxLength: 140
+          description: Indicates the document category. The document category and type shall help to classify the document.
+          example: identification
         type:
           type: string
           enum:
-            - individual
-            - groupOfIndividuals
-            - legalEntity
-            - foundation
-            - insuranceCompany
-            - institutionalInvestor
-            - bank
+            - id
+            - passport
+            - identityCard
+            - residencePermit
+            - studentCard
+            - confirmationOfDomicile
+            - driverLicense
+            - basicContract
+            - powerOfAttorney
+            - declarationOfSolidarity
+            - termsAndConditions
+            - eamClientProfile
+            - eamPowerOfAttorney
+            - declarationOfConsent
+            - startOfBusinessRelationship
+            - ebankingContract
+            - formA
+            - formR
+            - formI
+            - selfDisclosureTaxClarification
+            - usWaiverAndCertification
+            - formW8ben
+            - formW9
+            - mailingInstructions
+            - specialShippingInstruction
+            - changeOfAdress
             - other
-          description: Type of customer relationship
-          example: individual
+          description: Indicates the specific document type e.g. Passport, ebanking contract, Form A etc.
+          example: ebankingContract
+        typeOverride:
+          type: string
+          maxLength: 70
+          description: Indicates the specific document type. Attribute shall only be used if the document type is not already part of the ENUM of the attribute "type" hence in exceptional cases (in case of document type "other").
+          example: Tax statement
+        status:
+          type: string
+          maxLength: 35
+          description: Status of document handling - Indicates current status of a document.
+          example: created
+        documentTypeId:
+          type: string
+          maxLength: 70
+          description: Unique document type ID
+          example: US101 - e.g. as document type ID for the document type formW9
+        issueDate:
+          $ref: '#/components/schemas/Date'
+        languageCode:
+          $ref: '#/components/schemas/Language'
+        mimeType:
+          type: string
+          description: A media type (also known as a Multipurpose Internet Mail Extensions or MIME type) indicates the nature and format of a document, file, or assortment of bytes.
+          example: image/png
+        fileName:
+          type: string
+          maxLength: 140
+    Case:
+      type: object
+      description: |
+        Represents a case (process) in the customer lifecycle management, such as mandate opening, address change,
+        account closure, or any other structured workflow. A case tracks the type, status, and type-specific content
+        of a lifecycle process.
+      required:
+        - type
+        - status
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the case.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - mandateOpening
+            - mandateClosing
+            - accountOpening
+            - accountClosing
+            - addressChange
+            - nameChange
+            - onboarding
+            - offboarding
+            - kycReview
+            - documentRequest
+            - riskReassessment
+            - powerOfAttorneyChange
+            - beneficiaryChange
+            - other
+          description: Indicates the type of lifecycle process this case represents.
+          example: mandateOpening
+        typeOverride:
+          type: string
+          maxLength: 70
+          description: Indicates the specific case type. Attribute shall only be used if the case type is not already part of the ENUM of the attribute "type" hence in exceptional cases (in case of type "other").
+          example: customProcess
         status:
           type: string
           enum:
-            - active
-            - inactive
-          description: Status of the customer relationship
-          example: active
-        referenceCurrency:
-          $ref: '#/components/schemas/Currency'
-        openingDate:
+            - draft
+            - open
+            - inProgress
+            - pendingApproval
+            - approved
+            - rejected
+            - completed
+            - cancelled
+          description: Indicates the current status of the case in its lifecycle.
+          example: open
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - urgent
+          description: Indicates the priority of the case.
+          example: medium
+        title:
+          type: string
+          maxLength: 140
+          description: A short descriptive title for the case.
+          example: Mandate Opening for Client Stark
+        description:
+          type: string
+          maxLength: 500
+          description: A detailed description providing additional context for the case.
+          example: Opening a new discretionary mandate for the client.
+        createdDate:
           $ref: '#/components/schemas/Date'
-        language:
-          $ref: '#/components/schemas/Language'
-        segment:
+        dueDate:
+          $ref: '#/components/schemas/Date'
+        completedDate:
+          $ref: '#/components/schemas/Date'
+        assignee:
           type: string
-          maxLength: 35
-          description: Customer segment of the customer at the custody bank (e.g. UHNWI Switzerland)
-          example: CLIENT FIM, EAM-MODELL
-          readOnly: true
-        bankAdvisor:
-          type: string
-          maxLength: 35
-          description: Indicates the instruction/full name of the bank advisor on the side of the custody bank.
+          maxLength: 70
+          description: The person or team responsible for handling this case.
           example: Anna Beispiel PC8-AB
-          readOnly: true
-        bankDeputyAdvisor:
+        initiatedBy:
           type: string
-          maxLength: 35
-          description: Indicates the instruction/full name of the bank deputy advisor on the side of the custody bank.
+          maxLength: 70
+          description: The person or system that initiated this case.
           example: Max Muster PC8-MM
+        content:
+          type: object
+          description: |
+            Type-specific content of the case. The structure of this object depends on the case type
+            and allows for flexible, type-specific data to be attached to the case.
+          additionalProperties: true
+        outputList:
+          type: array
+          description: Resources created or modified as a result of processing this case. Populated by the bank as the case progresses.
           readOnly: true
-        bankPreviousAdvisor:
-          type: string
-          maxLength: 35
-          description: Indicates the instruction/full name of the previous bank advisor on the side of the custody bank.
-          example: Peter Vergangenheit PC5-PV
-          readOnly: true
-        personToCustomerRelationsList:
           items:
-            $ref: '#/components/schemas/PersonToCustomerRelation'
+            type: object
+            required:
+              - resourceType
+              - resourceId
+            properties:
+              resourceType:
+                type: string
+                enum:
+                  - customer
+                  - person
+                  - mandate
+                  - document
+                description: The type of resource that was created or modified.
+                example: customer
+              resourceId:
+                type: string
+                maxLength: 128
+                description: The unique ID of the created or modified resource.
+                example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+              resourceUri:
+                type: string
+                maxLength: 256
+                description: Relative API path to the resource, allowing the initiator to retrieve it directly.
+                example: /customers/3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+        documentList:
+          type: array
+          description: List of documents associated with this case.
+          items:
+            $ref: '#/components/schemas/Document'
+        commentList:
+          type: array
+          description: List of comments or notes added to the case.
+          items:
+            type: object
+            properties:
+              author:
+                type: string
+                maxLength: 70
+                description: Author of the comment.
+                example: Anna Beispiel
+              date:
+                $ref: '#/components/schemas/Date'
+              text:
+                type: string
+                maxLength: 500
+                description: Content of the comment.
+                example: Initial review completed, awaiting client documents.
     CommonErrorType:
       title: Common Error Type
       description: Error Types for CommonErrorResponse.
@@ -427,43 +1134,96 @@ components:
           type: string
           description: Entity instance that threw the error.
           example: path/to/corresponding/resource
-    Mandate:
+    Currency:
+      title: Currency
+      type: string
+      description: ISO 4217 code.
+      pattern: ^[A-Z]{3}$
+      example: CHF
+    Address:
       type: object
-      description: Mandate entity.
       required:
-        - id
-        - type
-        - referenceCurrency
+        - streetLine1
+        - postalCode
+        - city
+        - country
       properties:
-        id:
+        streetLine1:
           type: string
-          maxLength: 128
-          example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
-          description: Unique and unambiguous identification for the mandate.
-        customerId:
+          description: Primary street address and house number
+          example: Bahnhofstrasse 12
+        streetLine2:
           type: string
-          description: Unique and unambiguous identification used by the bank for the customer.
-          example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
-        type:
+          description: Apartment, suite, unit, building, c/o
+          example: Apt 4B
+        postalCode:
           type: string
-          description: |
-            Indicates the type of the mandate.
-          example: discretionary
+          description: ZIP or postal code
+          example: '8001'
+        city:
+          type: string
+          example: Zürich
+        stateProvince:
+          type: string
+          description: State, canton, or province
+          example: ZH
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code preferred
+          example: CH
+        countryName:
+          type: string
+          description: Optional full country name
+          example: Switzerland
+    Salutation:
+      type: object
+      properties:
+        receptionRestriction:
+          type: string
+          maxLength: 35
+          description: Reception restrictions for the physical delivery of postal items
+          example: confidential
+        title:
+          type: string
+          maxLength: 35
+          description: Additional information that follows a person's name, e.g. qualifications/titles such as Doctor of Philosophy (PhD).
+          example: PhD
+        salutation:
+          type: string
           enum:
-            - executionOnly
-            - discretionary
-            - advisory
+            - ms
+            - mrs
+            - mr
+            - msAndMr
+            - mrsAndMr
+            - mrAndMs
+            - mrAndMrs
+            - sirOrMadam
+            - heirsOf
+            - ladies
+            - sirs
+            - ladiesAndGentlemen
+            - family
+            - siblings
+            - communityOfHeirs
             - other
-        name:
+          description: Salutation of the person
+          example: ms
+        salutationOverride:
           type: string
-          maxLength: 70
-          description: |
-            Name of the mandate.
-          example: Discretionary mandate for private investments
-        referenceCurrency:
-          $ref: '#/components/schemas/Currency'
-        openingDate:
-          $ref: '#/components/schemas/Date'
+          maxLength: 35
+          description: Field to indicate the salutation. It shall only be used if the salutation type is not part of the ENUM of the attribute "salutation" hence in exceptional cases (in case of salutation "other"). If the salutation is not listed in the ENUM of the attribute salutation then this field can be used.
+          example: Your Highness
+        careOf:
+          type: string
+          maxLength: 35
+          description: When the individual resides at another person's address, the name of the other person.
+          example: c/o Hans Muster
+        toTheAttentionOf:
+          type: string
+          maxLength: 35
+          description: When the mail should be distributed to a specific person within a company.
+          example: Anna Beispiel
     Country:
       type: string
       pattern: '[A-Z]{2}'
@@ -472,8 +1232,6 @@ components:
     PersonBase:
       type: object
       required:
-        - id
-        - language
         - personType
         - countryOfDomicile
       properties:
@@ -482,8 +1240,14 @@ components:
           maxLength: 128
           description: Unique and unambiguous identification (i.e. UUID) used by the bank for the person.
           example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
-        language:
-          $ref: '#/components/schemas/Language'
+          readOnly: true
+        personType:
+          type: string
+          enum:
+            - naturalPerson
+            - legalPerson
+          example: naturalPerson
+          description: Indicates the person type (e.g. Natural Person) of the person object.
         countryOfDomicile:
           $ref: '#/components/schemas/Country'
         openingDate:
@@ -492,13 +1256,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Country'
-        personType:
-          type: string
-          enum:
-            - naturalPerson
-            - legalPerson
-          example: naturalPerson
-          description: Indicates the person type (e.g. Natural Person) of the person object
+        language:
+          $ref: '#/components/schemas/Language'
     Tin:
       type: object
       properties:
@@ -509,6 +1268,256 @@ components:
           description: Taxpayer identification number / National ID
         country:
           $ref: '#/components/schemas/Country'
+    Amount:
+      title: Amount
+      type: object
+      description: Schema of an amount entity.
+      required:
+        - value
+        - currency
+      properties:
+        value:
+          type: number
+          example: 12000
+          description: Signed decimal number.
+        currency:
+          $ref: '#/components/schemas/Currency'
+    sourceOfIncome:
+      type: object
+      required:
+        - type
+        - amount
+      properties:
+        type:
+          type: string
+          enum:
+            - salaryOrBonuses
+            - selfEmploymentIncome
+            - pension
+            - incomeFromFinancialAssets
+            - incomeFromRealEstate
+            - dividendsFromShareholdings
+            - other
+          description: Type of source of income.
+          example: salaryOrBonuses
+        amount:
+          $ref: '#/components/schemas/Amount'
+        industry:
+          type: string
+          maxLength: 35
+          description: Industry of employment/source of income.
+          example: Financial Services
+        countryOfOrigin:
+          type: string
+          pattern: ^[A-Z]{2}$
+          description: Country of origin of the source of income, in ISO 3166-1 alpha-2 format.
+          example: US
+        additionalInformation:
+          type: string
+          maxLength: 2500
+          description: Free text field to provide additional information
+          example: This is additional information.
+    Income:
+      type: object
+      required:
+        - estimatedYearlyIncome
+        - referenceYear
+      properties:
+        estimatedYearlyIncome:
+          $ref: '#/components/schemas/Amount'
+        referenceYear:
+          type: string
+          pattern: '[0-9]{4}'
+          description: Year
+          example: '1995'
+        additionalInformation:
+          type: string
+          maxLength: 2500
+          description: Free text field to provide additional information
+          example: This is additional information.
+        sourceOfIncomeList:
+          type: array
+          items:
+            $ref: '#/components/schemas/sourceOfIncome'
+    SourceOfWealth:
+      type: object
+      required:
+        - sourceType
+        - amount
+      properties:
+        sourceType:
+          type: string
+          enum:
+            - incomeFromEmployment
+            - incomeFromBusinessOwnership
+            - saleOfCompany
+            - saleOfNonFinancialAssets
+            - lifeInsurance
+            - pensionAssets
+            - inheritance
+            - gift
+            - loan
+            - saleOfFinancialAssets
+            - capitalGains
+            - otherSource
+          description: Original source of assets
+          example: saleOfCompany
+        amount:
+          $ref: '#/components/schemas/Amount'
+        countryOfOrigin:
+          type: string
+          pattern: ^[A-Z]{2}$
+          description: Country of origin of the source of wealth, in ISO 3166-1 alpha-2 format.
+          example: US
+        additionalInformation:
+          description: Description of the most important milestones/economic activities; which form the basis for the assets of the customer
+          type: string
+          maxLength: 2500
+          example: This is additional information.
+    Wealth:
+      type: object
+      required:
+        - estimatedTotalWealth
+        - referenceYear
+      properties:
+        estimatedTotalWealth:
+          $ref: '#/components/schemas/Amount'
+        referenceYear:
+          type: string
+          pattern: '[0-9]{4}'
+          description: Year
+          example: '1995'
+        sourceOfWealthList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceOfWealth'
+        additionalInformation:
+          description: Description of the most important milestones/economic activities; which form the basis for the assets of the customer
+          type: string
+          maxLength: 2500
+          example: This is additional information.
+    Company:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          description: Name of the company the person works/worked for.
+          type: string
+          maxLength: 140
+        domicile:
+          description: Domicile of the company e.g. CH
+          $ref: '#/components/schemas/Country'
+        description:
+          description: Description of the business activity of the company and industry (e.g. NOGA Code).
+          type: string
+          maxLength: 250
+          example: The Beispiel AG trades with commodities (mainly crude oil). Noga Code "661200".
+        size:
+          description: Number of employees of company.
+          type: integer
+          example: 5145
+        industry:
+          description: Industry of the company / NOGA code of company.
+          type: string
+          maxLength: 35
+          example: Financial Services
+    EmploymentItem:
+      type: object
+      required:
+        - position
+        - company
+      properties:
+        position:
+          description: Function/position which the person helds at the company.
+          type: string
+          maxLength: 35
+          example: CEO
+        company:
+          $ref: '#/components/schemas/Company'
+        period:
+          description: Period of time e.g. a job was held / a company owned.
+          type: string
+          maxLength: 70
+          example: 15.05.2011 - 05.02.2020
+        additionalInformation:
+          description: Free text field to provide additional information.
+          type: string
+          maxLength: 2500
+          example: This is additional information.
+    Employment:
+      type: object
+      description: Provides information about the employment status and the employment itself (e.g. company)
+      required:
+        - employmentStatus
+      properties:
+        employmentStatus:
+          type: string
+          enum:
+            - employed
+            - selfEmployed
+            - retired
+            - student
+            - unemployed
+            - firmOwner
+            - privateEquityInvestor
+            - professionalInvestor
+            - other
+          description: Status of employment
+          example: retired
+        profession:
+          type: string
+          maxLength: 35
+          description: Profession
+          example: Economist
+        yearOfRetirement:
+          type: string
+          pattern: '[0-9]{4}'
+          description: Year
+          example: '1995'
+        employmentItemList:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmploymentItem'
+    EducationItem:
+      type: object
+      required:
+        - diploma
+      properties:
+        diploma:
+          type: string
+          maxLength: 35
+          description: Degree of education.
+          example: Master of Science
+        graduationYear:
+          type: string
+          pattern: '[0-9]{4}'
+          description: Year.
+          example: '1995'
+        institute:
+          type: string
+          maxLength: 35
+          description: Institute at which graduation took place.
+          example: University of Berlin
+        studyProgramme:
+          type: string
+          maxLength: 35
+          description: Field of study.
+          example: Economics
+    Education:
+      type: object
+      required:
+        - highestDiploma
+      properties:
+        highestDiploma:
+          type: string
+          maxLength: 35
+          description: Highest degree of education
+          example: Master of Science
+        educationItemList:
+          type: array
+          items:
+            $ref: '#/components/schemas/EducationItem'
     NaturalPerson:
       type: object
       allOf:
@@ -576,7 +1585,24 @@ components:
           items:
             $ref: '#/components/schemas/Tin'
         countryOfBirth:
+          description: Country where person was born
           $ref: '#/components/schemas/Country'
+        income:
+          $ref: '#/components/schemas/Income'
+        wealth:
+          $ref: '#/components/schemas/Wealth'
+        employment:
+          $ref: '#/components/schemas/Employment'
+        education:
+          $ref: '#/components/schemas/Education'
+        isPep:
+          type: boolean
+          description: Is this person a publically exposed person (PEP)?
+          example: false
+        isFatca:
+          type: boolean
+          description: Is this person subject to the US Foreign Account Tax Compliance Act (FATCA)?
+          example: false
     LegalPerson:
       type: object
       allOf:
@@ -615,6 +1641,365 @@ components:
         - $ref: '#/components/schemas/LegalPerson'
       discriminator:
         propertyName: personType
+    PersonToCustomerRelation:
+      type: object
+      required:
+        - relationType
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the person.
+          example: 6c4e1b92-5f7a-4d3c-8e9b-2a1f6d7c0e54
+          readOnly: true
+        customerId:
+          type: string
+          maxLength: 128
+          description: Unique and unambiguous identification used by the bank for the customer.
+          example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+          readOnly: true
+        personId:
+          type: string
+          description: Unique and unambiguous identification used by the bank for the person.
+          example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
+          readOnly: true
+        person:
+          $ref: '#/components/schemas/Person'
+        relationType:
+          type: string
+          description: Indicates the kind of relation the person has to this customer relationship.
+          example: accountOwner
+          enum:
+            - beneficialOwner
+            - externalAssetManagerFirm
+            - externalAssetManagerEmployee
+            - accountOwner
+            - registeredOwner
+            - authorisedSignatoryIndividual
+            - beneficiary
+            - authorisedSignatoryCollective
+            - ownerParentalAuthority
+            - other
+        signatoryRight:
+          type: string
+          description: Defines the level of rights of the authorised signatory and indicates if the person has the right to sign individually or collectively (in twos, etc.)
+          example: individually
+          enum:
+            - individually
+            - inTwos
+            - inThrees
+            - fourway
+            - none
+            - other
+    Customer:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+          example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+          readOnly: true
+        number:
+          type: string
+          description: Contains the customers custody proprietary customer number if available.
+          maxLength: 70
+          example: 12345-6
+        name:
+          type: string
+          maxLength: 140
+        type:
+          type: string
+          enum:
+            - individual
+            - groupOfIndividuals
+            - legalEntity
+            - foundation
+            - insuranceCompany
+            - institutionalInvestor
+            - bank
+            - other
+          description: Type of customer relationship
+          example: individual
+        status:
+          type: string
+          enum:
+            - active
+            - inactive
+          description: Status of the customer relationship
+          example: active
+        referenceCurrency:
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          $ref: '#/components/schemas/Date'
+        segment:
+          type: string
+          maxLength: 35
+          description: Customer segment of the customer at the custody bank (e.g. UHNWI Switzerland)
+          example: CLIENT FIM, EAM-MODELL
+          readOnly: true
+        mainAdress:
+          type: object
+          description: Main address of the customer for correspondence purposes.
+          $ref: '#/components/schemas/Address'
+        salutation:
+          type: object
+          description: Salutation details of the customer for correspondence purposes.
+          $ref: '#/components/schemas/Salutation'
+        language:
+          type: string
+          description: Preferred language of the customer for correspondence purposes, represented as ISO 639-1 alpha-2 code.
+          example: de
+        personToCustomerRelationList:
+          items:
+            $ref: '#/components/schemas/PersonToCustomerRelation'
+        bankAdvisor:
+          type: string
+          maxLength: 35
+          description: Indicates the instruction/full name of the bank advisor on the side of the custody bank.
+          example: Anna Beispiel PC8-AB
+          readOnly: true
+        bankDeputyAdvisor:
+          type: string
+          maxLength: 35
+          description: Indicates the instruction/full name of the bank deputy advisor on the side of the custody bank.
+          example: Max Muster PC8-MM
+          readOnly: true
+        bankPreviousAdvisor:
+          type: string
+          maxLength: 35
+          description: Indicates the instruction/full name of the previous bank advisor on the side of the custody bank.
+          example: Peter Vergangenheit PC5-PV
+          readOnly: true
+    Communication:
+      type: object
+      required:
+        - medium
+        - content
+      properties:
+        medium:
+          type: string
+          enum:
+            - email
+            - phone
+            - fax
+            - mobile
+            - website
+            - socialMedia
+            - others
+          description: Medium for contacting the customer.
+          example: phone
+        mediumType:
+          type: string
+          enum:
+            - private
+            - business
+          description: Specifies the type of contact details.
+          example: private
+        content:
+          type: string
+          maxLength: 70
+          description: Content of the contact detail, e.g. phone number, email-address, URL.
+          example: '0041998887766'
+        priority:
+          type: string
+          maxLength: 70
+          description: Field to indicate the priority of the contact detail; e.g. preferred/main contact detail.
+          example: Preferred phone number during summer
+        additionalInformation:
+          type: string
+          description: Used to indicate additional information regarding the contact detail.
+          example: Fixed line home Sidney Australia
+    Correspondence:
+      type: object
+      required:
+        - salutation
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          example: 550e8400-e29b-41d4-a716-446655440000
+          description: Unique and unambiguous identification for the correspondence.
+          readOnly: true
+        mandateId:
+          type: string
+          description: Unique and unambiguous identification used by the bank for the mandate.
+          example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
+          readOnly: true
+        salutation:
+          type: object
+          description: Salutation details of the customer for correspondence purposes.
+          $ref: '#/components/schemas/Salutation'
+        address:
+          type: object
+          description: Address of the customer for correspondence purposes.
+          $ref: '#/components/schemas/Address'
+        communication:
+          type: object
+          description: Communication details of the customer for correspondence purposes.
+          $ref: '#/components/schemas/Communication'
+    PowerOfAttorney:
+      type: object
+      required:
+        - type
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          description: Unique and unambiguous identification for the power of attorney.
+          readOnly: true
+        mandateId:
+          type: string
+          description: Unique and unambiguous identification used by the bank for the mandate.
+          example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
+          readOnly: true
+        type:
+          type: string
+          description: Indicates the kind of PoA the person has on this mandate.
+          example: general
+          enum:
+            - general
+            - limited
+            - informationOnly
+            - durable
+            - nonDurable
+            - springing
+            - other
+        personId:
+          type: string
+          description: Unique and unambiguous identification used by the bank for the person.
+          example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
+          readOnly: true
+        person:
+          $ref: '#/components/schemas/Person'
+        personFunction:
+          type: string
+          description: Indicates the function of the person in relation to the mandate.
+          example: tbd
+          enum:
+            - tbd
+            - other
+    ExpectedFundFlow:
+      type: object
+      required:
+        - type
+        - amount
+      properties:
+        status:
+          type: string
+          enum:
+            - expected
+            - actual
+          description: Indicates whether the fund flow is expected or already actual.
+          example: expected
+        type:
+          type: string
+          enum:
+            - inflow
+            - outflow
+          description: Type of account movement
+          example: inflow
+        amount:
+          $ref: '#/components/schemas/Amount'
+        dateReceivedOrSent:
+          $ref: '#/components/schemas/Date'
+        counterparty:
+          type: string
+          maxLength: 70
+          description: Name of the sender/receiver of the assets
+          example: Muster AG
+        purpose:
+          type: string
+          maxLength: 150
+          description: Purpose for the transfer
+          example: Monthly salary payment
+        frequency:
+          type: string
+          description: Frequency of payment/transfer
+          example: monthly
+          enum:
+            - oneTime
+            - daily
+            - weekly
+            - biweekly
+            - semimonthly
+            - monthly
+            - quarterly
+            - semiannually
+            - annually
+            - other
+        countryOfOrigin:
+          type: string
+          pattern: ^[A-Z]{2}$
+          description: Country of origin of the fund flow, in ISO 3166-1 alpha-2 format.
+          example: US
+        accountOfOrigin:
+          type: string
+          maxLength: 34
+          description: Account number of the sender/receiver of the assets, in IBAN format where applicable.
+          example: DE89370400440532013000
+        nameOfBank:
+          type: string
+          maxLength: 140
+        domicileOfBank:
+          $ref: '#/components/schemas/Country'
+        additionalInformation:
+          description: Free text field to provide additional information.
+          type: string
+          maxLength: 2500
+          example: This is additional information.
+    Mandate:
+      type: object
+      description: Mandate entity.
+      required:
+        - type
+        - referenceCurrency
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
+          description: Unique and unambiguous identification for the mandate.
+          readOnly: true
+        customerId:
+          type: string
+          description: Unique and unambiguous identification used by the bank for the customer.
+          example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+          readOnly: true
+        customer:
+          $ref: '#/components/schemas/Customer'
+        type:
+          type: string
+          description: |
+            Indicates the type of the mandate.
+          example: discretionary
+          enum:
+            - executionOnly
+            - discretionary
+            - advisory
+            - other
+        name:
+          type: string
+          maxLength: 70
+          description: |
+            Name of the mandate.
+          example: Discretionary mandate for private investments
+        referenceCurrency:
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          $ref: '#/components/schemas/Date'
+        correspondenceList:
+          items:
+            $ref: '#/components/schemas/Correspondence'
+        powerOfAttorneyList:
+          items:
+            $ref: '#/components/schemas/PowerOfAttorney'
+        expectedFundFlowList:
+          items:
+            $ref: '#/components/schemas/ExpectedFundFlow'
   responses:
     '400':
       headers:
@@ -750,6 +2135,17 @@ components:
       schema:
         type: string
       description: Unique ID (defined by the caller) which will be reflected back in the response.
+    path_caseId:
+      in: path
+      name: caseId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        description: Unique and unambiguous identification used by the bank for the case.
+      description: Case ID Parameter.
     path_customerId:
       in: path
       name: customerId
@@ -769,9 +2165,31 @@ components:
         type: string
         minLength: 1
         maxLength: 128
-        example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
+        example: mandate-1
         description: Unique and unambiguous identification used by the bank for the mandate.
       description: Mandate ID Parameter.
+    path_powerOfAttorneyId:
+      in: path
+      name: powerOfAttorneyId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+        description: Unique and unambiguous identification used by the bank for the power of attorney.
+      description: Power of Attorney ID Parameter.
+    path_correspondenceId:
+      in: path
+      name: correspondenceId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: 550e8400-e29b-41d4-a716-446655440000
+        description: Unique and unambiguous identification used by the bank for the correspondence.
+      description: Correspondence ID Parameter.
     path_personId:
       in: path
       name: personId
@@ -780,7 +2198,7 @@ components:
         type: string
         minLength: 1
         maxLength: 128
-        example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+        example: person-1
         description: Unique and unambiguous identification used by the bank for the person.
       description: Person ID Parameter.
   headers:

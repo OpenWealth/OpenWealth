@@ -1,0 +1,112 @@
+get:
+  tags:
+    - powerOfAttorneys
+  summary: Returns a power of attorney by id
+  description: Returns a specific power of attorney by id for a specific mandate.
+  operationId: getPowerOfAttorneyById
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/path_mandateId.yaml
+    - $ref: ../../generics/components/parameters/path_powerOfAttorneyId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  responses:
+    '200':
+      description: Power of Attorney.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PowerOfAttorney.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+put:
+  tags:
+    - powerOfAttorneys
+  summary: Updates a power of attorney by id
+  description: Updates an existing power of attorney by id for a specific mandate.
+  operationId: updatePowerOfAttorneyById
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/path_mandateId.yaml
+    - $ref: ../../generics/components/parameters/path_powerOfAttorneyId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PowerOfAttorney.yaml
+  responses:
+    '200':
+      description: Power of Attorney successfully updated.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PowerOfAttorney.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+delete:
+  tags:
+    - powerOfAttorneys
+  summary: Deletes a power of attorney by id
+  description: Deletes a specific power of attorney by id for a specific mandate.
+  operationId: deletePowerOfAttorneyById
+  parameters:
+    - $ref: ../../generics/components/parameters/path_customerId.yaml
+    - $ref: ../../generics/components/parameters/path_mandateId.yaml
+    - $ref: ../../generics/components/parameters/path_powerOfAttorneyId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  responses:
+    '204':
+      description: Power of Attorney successfully deleted (empty response).
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

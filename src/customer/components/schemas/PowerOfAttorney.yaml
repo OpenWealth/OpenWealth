@@ -2,16 +2,40 @@ type: object
 required:
   - type
 properties:
+  id:
+    type: string
+    maxLength: 128
+    example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+    description: Unique and unambiguous identification for the power of attorney.
+    readOnly: true
+  mandateId:
+    type: string
+    description: Unique and unambiguous identification used by the bank for the mandate.
+    example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
+    readOnly: true
   type:
     type: string
     description: Indicates the kind of PoA the person has on this mandate.
-    example: externalAssetManagerFirm
+    example: general
     enum:
-      - externalAssetManagerFirm
-      - externalAssetManagerEmployee
-      - beneficiary
+      - general
+      - limited
+      - informationOnly
+      - durable
+      - nonDurable
+      - springing
       - other
   personId:
     type: string
     description: Unique and unambiguous identification used by the bank for the person.
     example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
+    readOnly: true
+  person:
+    $ref: Person.yaml
+  personFunction:
+    type: string
+    description: Indicates the function of the person in relation to the mandate.
+    example: tbd
+    enum:
+      - tbd
+      - other

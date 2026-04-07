@@ -74,7 +74,11 @@ properties:
     $ref: 'Employment.yaml'
   education:
     $ref: 'Education.yaml'
-  politicalStatus:
-    $ref: 'PoliticalStatus.yaml'
-  fatca:
-    $ref: 'Fatca.yaml'
+  isPep:
+    type: boolean
+    description: Is this person a publically exposed person (PEP)?
+    example: false
+  isFatca:
+    type: boolean
+    description: Is this person subject to the US Foreign Account Tax Compliance Act (FATCA)?
+    example: false

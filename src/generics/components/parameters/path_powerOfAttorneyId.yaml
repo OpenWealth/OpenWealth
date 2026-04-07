@@ -1,0 +1,10 @@
+in: path
+name: powerOfAttorneyId
+required: true
+schema:
+  type: string
+  minLength: 1
+  maxLength: 128
+  example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+  description: Unique and unambiguous identification used by the bank for the power of attorney.
+description: Power of Attorney ID Parameter.

@@ -14,6 +14,7 @@ properties:
     type: string
     description: Unique and unambiguous identification used by the bank for the customer.
     example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+    readOnly: true
   customer:
     $ref: Customer.yaml
   type:
@@ -41,4 +42,7 @@ properties:
       $ref: Correspondence.yaml
   powerOfAttorneyList:
     items:
-      $ref: Correspondence.yaml
+      $ref: PowerOfAttorney.yaml
+  expectedFundFlowList:
+    items:
+      $ref: ExpectedFundFlow.yaml

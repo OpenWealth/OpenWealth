@@ -1,13 +1,15 @@
 type: object
 required:
-  - amount
-  - currency
   - type
+  - amount
 properties:
-  amount:
-    $ref: 'Amount.yaml'
-  currency:
-    $ref: '../../../generics/components/schemas/Currency.yaml'
+  status:
+    type: string
+    enum:
+      - expected
+      - actual
+    description: Indicates whether the fund flow is expected or already actual.
+    example: expected
   type:
     type: string
     enum:
@@ -15,6 +17,10 @@ properties:
       - outflow
     description: Type of account movement
     example: inflow
+  amount:
+    $ref: 'Amount.yaml'
+  dateReceivedOrSent:
+    $ref: '../../../generics/components/schemas/Date.yaml'
   counterparty:
     type: string
     maxLength: 70
@@ -27,13 +33,29 @@ properties:
     example: Monthly salary payment
   frequency:
     type: string
-    maxLength: 35
     description: Frequency of payment/transfer
-    example: Monthly
-  originsOfAssetsList:
-    type: array
-    items:
-      $ref: 'Country.yaml'
+    example: monthly
+    enum:
+      - oneTime
+      - daily
+      - weekly
+      - biweekly
+      - semimonthly
+      - monthly
+      - quarterly
+      - semiannually
+      - annually
+      - other
+  countryOfOrigin:
+    type: string
+    pattern: '^[A-Z]{2}$'
+    description: Country of origin of the fund flow, in ISO 3166-1 alpha-2 format.
+    example: US
+  accountOfOrigin:
+    type: string
+    maxLength: 34
+    description: Account number of the sender/receiver of the assets, in IBAN format where applicable.
+    example: DE89370400440532013000
   nameOfBank:
     type: string
     maxLength: 140
@@ -42,4 +64,7 @@ properties:
     $ref: 'Country.yaml'
     # Domicile of the bank of the counterparty
   additionalInformation:
-    $ref: 'AdditionalInformation.yaml'
+    description: Free text field to provide additional information.
+    type: string
+    maxLength: 2500
+    example: This is additional information.

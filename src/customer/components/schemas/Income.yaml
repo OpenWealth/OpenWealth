@@ -1,9 +1,9 @@
 type: object
 required:
-  - totalYearlyIncome
+  - estimatedYearlyIncome
   - referenceYear
 properties:
-  totalYearlyIncome:
+  estimatedYearlyIncome:
     $ref: 'Amount.yaml'
   referenceYear:
     type: string

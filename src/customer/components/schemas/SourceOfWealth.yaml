@@ -22,5 +22,13 @@ properties:
     example: saleOfCompany
   amount:
     $ref: 'Amount.yaml'
-  originCountry:
-    $ref: 'Country.yaml'
+  countryOfOrigin:
+    type: string
+    pattern: '^[A-Z]{2}$'
+    description: Country of origin of the source of wealth, in ISO 3166-1 alpha-2 format.
+    example: US
+  additionalInformation:
+    description: 'Description of the most important milestones/economic activities; which form the basis for the assets of the customer'
+    type: string
+    maxLength: 2500
+    example: This is additional information.

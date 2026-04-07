@@ -8,6 +8,7 @@ properties:
     maxLength: 128
     description: Unique and unambiguous identification (i.e. UUID) used by the bank for the person.
     example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
+    readOnly: true
   personType:
     type: string
     enum:
