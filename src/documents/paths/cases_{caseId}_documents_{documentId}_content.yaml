@@ -15,7 +15,7 @@ put:
           format: binary
   responses:
     '200':
-      description: Last chunk and therefore the complete file has been accepted
+      description: Successful upload of the document content.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
@@ -26,11 +26,6 @@ put:
             properties:
               success:
                 type: boolean
-    '201':
-      description: Chunk has been accepted.
-      headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -54,7 +49,7 @@ get:
     - Document
   responses:
     '200':
-      description: Got file
+      description: Get document content corresponding to the id.
       headers:
         X-Correlation-ID:
           $ref: ../../generics/components/headers/X-Correlation-ID.yaml
