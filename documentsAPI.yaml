@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   description: |
-    This is the specification of the bLink 'e-docs' plugin. It is intended to be
+    This is the specification of the documents API plugin. It is intended to be
     integrated into existing business-apis.
   version: 1.0.0-draft
   title: Documents API
@@ -9,8 +9,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   contact:
-    name: SIX BBS AG
-    url: https://www.six-group.com/en/products-services/banking-services/blink.html
+    email: openwealth@synpulse.com
 servers:
   - description: Your Server URL.
     url: https://example.org
@@ -418,7 +417,7 @@ paths:
               format: binary
       responses:
         '200':
-          description: Last chunk and therefore the complete file has been accepted
+          description: Successful upload of the document content.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
@@ -429,11 +428,6 @@ paths:
                 properties:
                   success:
                     type: boolean
-        '201':
-          description: Chunk has been accepted.
-          headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -457,7 +451,7 @@ paths:
         - Document
       responses:
         '200':
-          description: Got file
+          description: Get document content corresponding to the id.
           headers:
             X-Correlation-ID:
               $ref: '#/components/headers/X-Correlation-ID'
