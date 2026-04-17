@@ -1,0 +1,75 @@
+put:
+  summary: Upload binary document content
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/path_documentId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  operationId: uploadDocumentContent
+  tags:
+    - Document
+  requestBody:
+    content:
+      application/octet-stream:
+        schema:
+          type: string
+          format: binary
+  responses:
+    '200':
+      description: Last chunk and therefore the complete file has been accepted
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+    '201':
+      description: Chunk has been accepted.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+get:
+  operationId: getDocumentContent
+  summary: Download Document Content
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/path_documentId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  tags:
+    - Document
+  responses:
+    '200':
+      description: Got file
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+      content:
+        application/octet-stream:
+          example: ''
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

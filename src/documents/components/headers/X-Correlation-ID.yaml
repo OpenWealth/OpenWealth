@@ -1,7 +1,0 @@
-description: >-
-  Client defined ID from request to correlate HTTP requests between a client and
-  a server
-schema:
-  type: string
-  maxLength: 64
-  example: f058ebd6-02f7-4d3f-942e-904344e8cde5

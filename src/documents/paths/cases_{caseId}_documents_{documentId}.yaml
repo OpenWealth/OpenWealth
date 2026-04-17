@@ -1,0 +1,73 @@
+get:
+  operationId: getDocument
+  summary: Get the Metadata of a Document
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/path_documentId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  tags:
+    - Document
+  responses:
+    '200':
+      description: Got the document corresponding to the id
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Document.yaml
+          examples:
+            PDFStatement:
+              $ref: ../components/examples/PdfStatement.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+patch:
+  operationId: patchDocument
+  summary: Amend the metadata of a document
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/path_documentId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  tags:
+    - Document
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Document.yaml
+        examples:
+          PDFStatement:
+            $ref: ../components/examples/PdfStatement.yaml
+  responses:
+    '204':
+      description: Amendment accepted
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Document.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

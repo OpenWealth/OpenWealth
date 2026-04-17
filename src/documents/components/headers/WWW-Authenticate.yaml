@@ -1,3 +1,0 @@
-description: i.e. "Bearer error='invalid_token'" according to RFC6750 section-3
-schema:
-  type: string

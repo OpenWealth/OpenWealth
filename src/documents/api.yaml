@@ -1,26 +1,29 @@
 openapi: 3.0.3
 info:
-  description: >
-    This is the specification of the bLink 'e-docs' plugin. It is intended to be
+  description: |
+    This is the specification of the documents API plugin. It is intended to be
     integrated into existing business-apis.
-  version: 0.8.0
-  title: e-docs plugin
+  version: 1.0.0-draft
+  title: Documents API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
   contact:
-    name: SIX BBS AG
-    url: https://www.six-group.com/en/products-services/banking-services/blink.html
+    email: openwealth@synpulse.com
 servers:
-  - url: https://api-cert.six-group.com/api/<module>/<version>
+  - description: Your Server URL.
+    url: https://example.org
 security: []
 paths:
-  /documents/search:
-    $ref: paths/documents_search.yaml
-  /documents:
-    $ref: paths/documents.yaml
-  /documents/{documentId}:
-    $ref: paths/documents_{documentId}.yaml
-  /files:
-    $ref: paths/files.yaml
-  /files/{fileId}:
-    $ref: paths/files_{fileId}.yaml
-  /files/{fileId}/confirmations:
-    $ref: paths/files_{fileId}_confirmations.yaml
+  /cases:
+    $ref: paths/cases.yaml
+  /cases/{caseId}:
+    $ref: paths/cases_{caseId}.yaml
+  /cases/{caseId}/actions/{action}:
+    $ref: paths/cases_{caseId}_actions_{action}.yaml
+  /cases/{caseId}/documents:
+    $ref: paths/cases_{caseId}_documents.yaml
+  /cases/{caseId}/documents/{documentId}:
+    $ref: paths/cases_{caseId}_documents_{documentId}.yaml
+  /cases/{caseId}/documents/{documentId}/content:
+    $ref: paths/cases_{caseId}_documents_{documentId}_content.yaml
