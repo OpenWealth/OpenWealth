@@ -1,7 +1,0 @@
-description: >-
-  indicating that the content is expected to be displayed as an attachment, that
-  is downloaded and saved locally
-schema:
-  type: string
-  maxLength: 255
-  example: attachment; filename="filename.txt"

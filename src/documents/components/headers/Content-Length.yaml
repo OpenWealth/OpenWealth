@@ -1,5 +1,0 @@
-description: indicator for content length
-schema:
-  type: string
-  maxLength: 10
-  example: '2048'

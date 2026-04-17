@@ -1,8 +1,0 @@
-name: cursor
-in: query
-description: >-
-  An opaque string value used for pagination. (if omitted, the server assumes:
-  0)
-required: false
-schema:
-  type: string

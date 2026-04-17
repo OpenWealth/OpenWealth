@@ -1,0 +1,25 @@
+type: object
+description: Indicates the reason, why a case has the present status.
+readOnly: true
+required:
+  - description
+properties:
+  description:
+    type: string
+    description: Description of the reason.
+    example: Documents missing
+  affectedProperties:
+    description: List of affected properties.
+    type: array
+    items:
+      type: object
+      description: Schema describing an affected property.
+      properties:
+        description:
+          type: string
+          description: Reason of error related to property.
+          example: Invalid name
+        propertyPath:
+          type: string
+          description: JSONPath to affected property.
+          example: $.dueDate

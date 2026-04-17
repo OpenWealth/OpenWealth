@@ -1,0 +1,8 @@
+value:
+  type: CONT
+  identification: abd929b77341-4926-9690-87c05866149b
+  issueDate: '2023-12-30'
+  name: Account Statement ABC September 2023
+  languageCode: en
+  format: DPDF
+  fileName: acct_stmt_ABC_23-09.pdf

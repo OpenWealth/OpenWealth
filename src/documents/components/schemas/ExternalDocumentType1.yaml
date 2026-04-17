@@ -1,8 +1,0 @@
-type: object
-properties:
-  code:
-    $ref: ./ExternalDocumentType1Code.yaml
-  proprietary:
-    type: string
-    minLength: 1
-    maxLength: 35

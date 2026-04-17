@@ -1,12 +1,67 @@
 type: object
+required:
+  - type
+  - name
 properties:
   id:
     type: string
-    minLength: 1
     maxLength: 35
     example: 9876-5af5wa5-e14a-fw5
     description: Unique and unambiguous identification for the document
     readOnly: true
+  relatedResource:
+    $ref: './RelatedResource.yaml'
+    readOnly: true
+  type:
+    type: string
+    minLength: 1
+    maxLength: 4
+    example: CONT
+    description: |
+      Specifies the document type as published in an external document type code
+      list. External code sets can be downloaded from www.iso20022.org.
+  identification:
+    description: Identification of the document or template.
+    type: string
+    minLength: 1
+    maxLength: 35
+  issueDate:
+    description: Issue date of the document.
+    type: string
+    format: date
+    example: '2023-12-06'
+  expiryDate:
+    description: Expiry date of the document.
+    type: string
+    format: date
+    example: '2023-12-06'
+  name:
+    description: Name of document or transaction, for example, tax invoice.
+    type: string
+    minLength: 1
+    maxLength: 140
+  languageCode:
+    description: Unique identifier for a language used in the document.
+    type: string
+    minLength: 1
+    maxLength: 5
+    example: en
+  format:
+    type: string
+    minLength: 1
+    maxLength: 4
+    description: |
+      Format of the document or template, such as PDF, XML, XSLT.
+      Specifies the external document format code in the format of a character
+      string with a maximum length of 4 characters. The list of valid codes is an
+      external code list published separately. External code sets can be downloaded
+      from www.iso20022.org.
+    example: DPDF
+  fileName:
+    description: Technical name of the file.
+    type: string
+    minLength: 1
+    maxLength: 140
   createdAt:
     readOnly: true
     type: string
@@ -17,11 +72,3 @@ properties:
     type: string
     format: date-time
     example: '2023-12-06T11:36:08.033Z'
-  document15:
-    $ref: ./Document15.yaml
-  fileRevisions:
-    $ref: ./FileRevisions.yaml
-  businessMetadata:
-    type: object
-    additionalProperties:
-      type: string

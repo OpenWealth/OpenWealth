@@ -1,6 +1,0 @@
-name: fileId
-in: path
-required: true
-description: The file's ID
-schema:
-  type: string

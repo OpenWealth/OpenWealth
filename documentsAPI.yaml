@@ -1,0 +1,954 @@
+openapi: 3.0.3
+info:
+  description: |
+    This is the specification of the bLink 'e-docs' plugin. It is intended to be
+    integrated into existing business-apis.
+  version: 1.0.0-draft
+  title: Documents API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    name: SIX BBS AG
+    url: https://www.six-group.com/en/products-services/banking-services/blink.html
+servers:
+  - description: Your Server URL.
+    url: https://example.org
+security: []
+paths:
+  /cases:
+    get:
+      tags:
+        - cases
+      summary: Returns the cases
+      description: |
+        Returns all cases accessible to the querying user.
+        Paging is done based on the return object, i.e. if limit is set to 1,
+        then 1 case will be returned per page.
+      operationId: getCases
+      parameters:
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Cases List.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Case'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      tags:
+        - cases
+      summary: Creates a new case
+      description: Creates a new case (lifecycle process).
+      operationId: createCase
+      parameters:
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Case'
+      responses:
+        '201':
+          description: Case successfully created.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /cases/{caseId}:
+    get:
+      tags:
+        - cases
+      summary: Returns a case by id
+      description: Returns a specific case by id.
+      operationId: getCaseById
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Case.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      tags:
+        - cases
+      summary: Updates a case by id
+      description: Updates an existing case by id.
+      operationId: updateCaseById
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Case'
+      responses:
+        '200':
+          description: Case successfully updated.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    delete:
+      tags:
+        - cases
+      summary: Deletes a case by id
+      description: Deletes a specific case by id.
+      operationId: deleteCaseById
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '204':
+          description: Case successfully deleted (empty response).
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /cases/{caseId}/actions/{action}:
+    post:
+      tags:
+        - cases
+      summary: Action on a specific case
+      description: Places an action request for a specific case.
+      operationId: actionOnCase
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/action'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '202':
+          description: Action confirmed for the given case.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /cases/{caseId}/documents:
+    get:
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      summary: Get the List of Documents (Search)
+      description: |
+        Each document includes its metadata. Search requests shall be executed as POST and not as GET requests. Otherwise, search parameters containing CID could get logged.
+      operationId: getDocuments
+      tags:
+        - Document
+      responses:
+        '200':
+          description: Returns a list with all document metadata records.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+            X-Next-Cursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Document'
+          links:
+            GetDocumentById:
+              description: |
+                The `id` value returned in the response can be used as the `documentId` parameter in `GET /documents/{documentId}`.
+              operationId: getDocument
+              parameters:
+                documentId: $response.body#/0/id
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+    post:
+      summary: Add a New Document
+      description: Upload the metadata for a new file.
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      operationId: addDocument
+      tags:
+        - Document
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+            examples:
+              PDFStatement:
+                $ref: '#/components/examples/PdfStatement'
+      responses:
+        '201':
+          description: Document was accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+              examples:
+                PDFStatement:
+                  $ref: '#/components/examples/PdfStatement'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+  /cases/{caseId}/documents/{documentId}:
+    get:
+      operationId: getDocument
+      summary: Get the Metadata of a Document
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/path_documentId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      tags:
+        - Document
+      responses:
+        '200':
+          description: Got the document corresponding to the id
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+              examples:
+                PDFStatement:
+                  $ref: '#/components/examples/PdfStatement'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+    patch:
+      operationId: patchDocument
+      summary: Amend the metadata of a document
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/path_documentId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      tags:
+        - Document
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+            examples:
+              PDFStatement:
+                $ref: '#/components/examples/PdfStatement'
+      responses:
+        '204':
+          description: Amendment accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+  /cases/{caseId}/documents/{documentId}/content:
+    put:
+      summary: Upload binary document content
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/path_documentId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      operationId: uploadDocumentContent
+      tags:
+        - Document
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Last chunk and therefore the complete file has been accepted
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '201':
+          description: Chunk has been accepted.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+    get:
+      operationId: getDocumentContent
+      summary: Download Document Content
+      parameters:
+        - $ref: '#/components/parameters/path_caseId'
+        - $ref: '#/components/parameters/path_documentId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      tags:
+        - Document
+      responses:
+        '200':
+          description: Got file
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-ID'
+          content:
+            application/octet-stream:
+              example: ''
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+components:
+  parameters:
+    cursor:
+      in: query
+      name: cursor
+      required: false
+      schema:
+        type: string
+      description: An opaque string value used for pagination.
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      description: Maximum number of items to return.
+    x_correlation_id_in_header:
+      in: header
+      name: X-Correlation-ID
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+    path_caseId:
+      in: path
+      name: caseId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        description: Unique and unambiguous identification used by the bank for the case.
+      description: Case ID Parameter.
+    action:
+      in: path
+      name: action
+      schema:
+        type: string
+        enum:
+          - submit
+          - cancel
+      description: Parameter for the action requested for a given case.
+    path_documentId:
+      name: documentId
+      in: path
+      required: true
+      description: The document's ID
+      schema:
+        type: string
+  headers:
+    X-Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    X-Next-Cursor:
+      description: An opaque string value, or an empty string if there are no more results.
+      required: false
+      schema:
+        type: string
+    Problem-Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807.
+      schema:
+        type: string
+        example: application/problem+json
+    Content-Language:
+      description: Response language - always en.
+      schema:
+        type: string
+        example: en
+    Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    X-Correlation-ID:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+  schemas:
+    Date:
+      title: Date
+      type: string
+      description: Date according to ISO 8601.
+      format: date
+      example: '2018-04-13'
+    StatusReason:
+      type: object
+      description: Indicates the reason, why a case has the present status.
+      readOnly: true
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          description: Description of the reason.
+          example: Documents missing
+        affectedProperties:
+          description: List of affected properties.
+          type: array
+          items:
+            type: object
+            description: Schema describing an affected property.
+            properties:
+              description:
+                type: string
+                description: Reason of error related to property.
+                example: Invalid name
+              propertyPath:
+                type: string
+                description: JSONPath to affected property.
+                example: $.dueDate
+    RelatedResource:
+      type: object
+      readOnly: true
+      description: |
+        This object represents a resource that is related to the document, such as a case, customer, or mandate.
+        It provides the necessary information to identify and retrieve the related resource through the API.
+      required:
+        - type
+        - id
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: The unique ID of the created or modified resource.
+          example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+        type:
+          type: string
+          description: The type of resource that was created or modified.
+          example: customer
+        uri:
+          type: string
+          maxLength: 256
+          description: Relative API path to the resource, allowing the initiator to retrieve it directly.
+          example: /customers/3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+    Case:
+      type: object
+      description: |
+        Represents a case (process) in the customer lifecycle management, such as mandate opening, address change,
+        account closure, or any other structured workflow. A case tracks the type, status, and type-specific content
+        of a lifecycle process.
+      required:
+        - type
+        - status
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the case.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          readOnly: true
+        type:
+          type: string
+          description: Indicates the type of lifecycle process this case represents.
+          example: mandateOpening
+        status:
+          type: string
+          enum:
+            - draft
+            - open
+            - inProgress
+            - pendingApproval
+            - approved
+            - rejected
+            - completed
+            - cancelled
+          description: Indicates the current status of the case in its lifecycle.
+          example: open
+        title:
+          type: string
+          maxLength: 140
+          description: A short descriptive title for the case.
+          example: Mandate Opening for Client Stark
+        description:
+          type: string
+          maxLength: 500
+          description: A detailed description providing additional context for the case.
+          example: Opening a new discretionary mandate for the client.
+        createdDate:
+          description: The date when the case was created.
+          type: string
+          format: date
+          example: '2018-04-13'
+          readOnly: true
+        dueDate:
+          description: Target completion date for the case.
+          $ref: '#/components/schemas/Date'
+        completedDate:
+          description: Date when the case was completed or closed.
+          type: string
+          format: date
+          example: '2018-04-13'
+          readOnly: true
+        assignee:
+          type: string
+          maxLength: 70
+          description: The person or team responsible for handling this case.
+          example: Anna Beispiel PC8-AB
+        initiatedBy:
+          type: string
+          maxLength: 70
+          description: The person or system that initiated this case.
+          example: Max Muster PC8-MM
+        businessContext:
+          type: object
+          description: |
+            Type-specific context of the case. The structure of this object depends on the case type
+            and allows for flexible, type-specific data to be attached to the case.
+          additionalProperties: true
+        statusReason:
+          $ref: '#/components/schemas/StatusReason'
+        outputList:
+          type: array
+          description: Resources created or modified as a result of processing this case. Populated by the bank as the case progresses.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/RelatedResource'
+        commentList:
+          type: array
+          description: List of comments or notes added to the case.
+          items:
+            type: object
+            properties:
+              author:
+                type: string
+                maxLength: 70
+                description: Author of the comment.
+                example: Anna Beispiel
+              date:
+                $ref: '#/components/schemas/Date'
+              text:
+                type: string
+                maxLength: 500
+                description: Content of the comment.
+                example: Initial review completed, awaiting client documents.
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for CommonErrorResponse.
+      type: string
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+        - /problems/TOO_MANY_REQUESTS
+      example: /problems/TECHNICAL_ERROR
+    CommonErrorResponse:
+      title: CommonErrorResponse
+      type: object
+      description: Common error response.
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
+          type: string
+          description: Title of the error response.
+          example: This is the general problem description
+        detail:
+          type: string
+          description: Detailed description of the error response.
+          example: Detailed problem description with respect to the current request
+        instance:
+          type: string
+          description: Entity instance that threw the error.
+          example: path/to/corresponding/resource
+    Document:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        id:
+          type: string
+          maxLength: 35
+          example: 9876-5af5wa5-e14a-fw5
+          description: Unique and unambiguous identification for the document
+          readOnly: true
+        relatedResource:
+          $ref: '#/components/schemas/RelatedResource'
+          readOnly: true
+        type:
+          type: string
+          minLength: 1
+          maxLength: 4
+          example: CONT
+          description: |
+            Specifies the document type as published in an external document type code
+            list. External code sets can be downloaded from www.iso20022.org.
+        identification:
+          description: Identification of the document or template.
+          type: string
+          minLength: 1
+          maxLength: 35
+        issueDate:
+          description: Issue date of the document.
+          type: string
+          format: date
+          example: '2023-12-06'
+        expiryDate:
+          description: Expiry date of the document.
+          type: string
+          format: date
+          example: '2023-12-06'
+        name:
+          description: Name of document or transaction, for example, tax invoice.
+          type: string
+          minLength: 1
+          maxLength: 140
+        languageCode:
+          description: Unique identifier for a language used in the document.
+          type: string
+          minLength: 1
+          maxLength: 5
+          example: en
+        format:
+          type: string
+          minLength: 1
+          maxLength: 4
+          description: |
+            Format of the document or template, such as PDF, XML, XSLT.
+            Specifies the external document format code in the format of a character
+            string with a maximum length of 4 characters. The list of valid codes is an
+            external code list published separately. External code sets can be downloaded
+            from www.iso20022.org.
+          example: DPDF
+        fileName:
+          description: Technical name of the file.
+          type: string
+          minLength: 1
+          maxLength: 140
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+          example: '2023-12-06T11:36:08.033Z'
+        lastUpdatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+          example: '2023-12-06T11:36:08.033Z'
+  responses:
+    '400':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
+        as malformed request syntax.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '401':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '403':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Forbidden - The server understood the request but refuses to authorize it.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '404':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Not Found - The origin server did not find a current representation for the target resource
+        or is not willing to disclose that one exists.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '405':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Method Not Allowed - The method received in the request-line is known by the origin server
+        but not supported by the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '500':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '501':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Not Implemented - The server does not support the functionality required to fulfill the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '503':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+  examples:
+    PdfStatement:
+      value:
+        type: CONT
+        identification: abd929b77341-4926-9690-87c05866149b
+        issueDate: '2023-12-30'
+        name: Account Statement ABC September 2023
+        languageCode: en
+        format: DPDF
+        fileName: acct_stmt_ABC_23-09.pdf

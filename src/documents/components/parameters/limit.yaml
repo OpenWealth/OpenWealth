@@ -1,8 +1,0 @@
-name: limit
-in: query
-description: 'Maximum number of items to return. (if omitted, the server assumes: 1000)'
-required: false
-schema:
-  type: integer
-  format: int32
-  minimum: 1

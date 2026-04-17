@@ -1,5 +1,0 @@
-description: indicator for chunk location and size
-schema:
-  type: string
-  maxLength: 50
-  example: 1024-2047/2048

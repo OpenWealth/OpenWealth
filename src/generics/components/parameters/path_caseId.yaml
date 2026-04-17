@@ -1,0 +1,10 @@
+in: path
+name: caseId
+required: true
+schema:
+  type: string
+  minLength: 1
+  maxLength: 128
+  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  description: Unique and unambiguous identification used by the bank for the case.
+description: Case ID Parameter.

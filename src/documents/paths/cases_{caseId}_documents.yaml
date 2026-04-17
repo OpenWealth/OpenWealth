@@ -1,0 +1,85 @@
+get:
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/cursor.yaml
+    - $ref: ../../generics/components/parameters/limit.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  summary: Get the List of Documents (Search)
+  description: >
+    Each document includes its metadata.
+    Search requests shall be executed as POST and not as GET requests.
+    Otherwise, search parameters containing CID could get logged.
+  operationId: getDocuments
+  tags:
+    - Document
+  responses:
+    '200':
+      description: Returns a list with all document metadata records.
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+        X-Next-Cursor:
+          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: ../components/schemas/Document.yaml
+      links:
+        GetDocumentById:
+          description: >
+            The `id` value returned in the response can be used as the
+            `documentId` parameter in `GET /documents/{documentId}`.
+          operationId: getDocument
+          parameters:
+            documentId: $response.body#/0/id
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+post:
+  summary: Add a New Document
+  description: Upload the metadata for a new file.
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+  operationId: addDocument
+  tags:
+    - Document
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Document.yaml
+        examples:
+          PDFStatement:
+            $ref: ../components/examples/PdfStatement.yaml
+  responses:
+    '201':
+      description: Document was accepted
+      headers:
+        X-Correlation-ID:
+          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Document.yaml
+          examples:
+            PDFStatement:
+              $ref: ../components/examples/PdfStatement.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

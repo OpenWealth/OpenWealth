@@ -1,7 +1,0 @@
-name: sort
-in: query
-description: the sorting parameters
-required: false
-schema:
-  type: string
-example: createdAt:desc

@@ -1,0 +1,23 @@
+type: object
+readOnly: true
+description: |
+  This object represents a resource that is related to the document, such as a case, customer, or mandate.
+  It provides the necessary information to identify and retrieve the related resource through the API.
+required:
+  - type
+  - id
+properties:
+  id:
+    type: string
+    maxLength: 128
+    description: The unique ID of the created or modified resource.
+    example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+  type:
+    type: string
+    description: The type of resource that was created or modified.
+    example: customer
+  uri:
+    type: string
+    maxLength: 256
+    description: Relative API path to the resource, allowing the initiator to retrieve it directly.
+    example: /customers/3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
