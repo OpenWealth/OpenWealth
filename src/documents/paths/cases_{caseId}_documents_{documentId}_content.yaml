@@ -3,7 +3,7 @@ put:
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../../generics/components/parameters/path_documentId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   operationId: uploadDocumentContent
   tags:
     - Document
@@ -17,8 +17,8 @@ put:
     '200':
       description: Successful upload of the document content.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
@@ -44,15 +44,15 @@ get:
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../../generics/components/parameters/path_documentId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
     - Document
   responses:
     '200':
       description: Get document content corresponding to the id.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/octet-stream:
           example: ''

@@ -5,12 +5,13 @@ description: |
   of a lifecycle process.
 required:
   - type
-  - status
+  - title
 properties:
   id:
     type: string
     maxLength: 128
-    description: Unique and unambiguous identification (i.e. UUID) used by the bank for the case.
+    description: Unique and unambiguous identification (i.e. UUID) used by the bank
+      for the case.
     example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
     readOnly: true
   type:
@@ -30,6 +31,7 @@ properties:
       - cancelled
     description: Indicates the current status of the case in its lifecycle.
     example: open
+    readOnly: true
   title:
     type: string
     maxLength: 140
@@ -48,7 +50,10 @@ properties:
     readOnly: true
   dueDate:
     description: Target completion date for the case.
-    $ref: '../../../generics/components/schemas/Date.yaml'
+    type: string
+    format: date
+    example: 2018-04-13
+    readOnly: true
   completedDate:
     description: Date when the case was completed or closed.
     type: string
@@ -65,7 +70,8 @@ properties:
     maxLength: 70
     description: The person or system that initiated this case.
     example: Max Muster PC8-MM
-  businessContext: # find property name
+  businessContext:
+    # find property name
     type: object
     description: |
       Type-specific context of the case. The structure of this object depends on the case type
@@ -75,7 +81,8 @@ properties:
     $ref: ./StatusReason.yaml
   outputList:
     type: array
-    description: Resources created or modified as a result of processing this case. Populated by the bank as the case progresses.
+    description: Resources created or modified as a result of processing this case.
+      Populated by the bank as the case progresses.
     readOnly: true
     items:
       $ref: './RelatedResource.yaml'

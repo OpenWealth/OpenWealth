@@ -1,0 +1,20 @@
+[
+  {
+    "id": "123456789",
+    "type": "docPaymentFormument",
+    "format": "pdf",
+    "fileName": "Zahlungsauftrag.pdf"
+  },
+  {
+    "id": "987654321",
+    "type": "docSPVFormD",
+    "format": "pdf",
+    "fileName": "87560.SPV-AUS.dKaPtnFujUCUBMIN5EZf0g2.pdf"
+  },
+  {
+    "id": "666666666",
+    "type": "docPassportCopy",
+    "format": "pdf",
+    "fileName": "Demo_Passkopie_007.pdf"
+  }
+]

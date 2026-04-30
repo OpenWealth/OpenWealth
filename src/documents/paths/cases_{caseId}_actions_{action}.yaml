@@ -7,13 +7,13 @@ post:
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../components/parameters/action.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '202':
       description: Action confirmed for the given case.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:

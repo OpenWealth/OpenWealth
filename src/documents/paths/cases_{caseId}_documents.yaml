@@ -3,12 +3,10 @@ get:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../../generics/components/parameters/cursor.yaml
     - $ref: ../../generics/components/parameters/limit.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
-  summary: Get the List of Documents (Search)
-  description: >
-    Each document includes its metadata.
-    Search requests shall be executed as POST and not as GET requests.
-    Otherwise, search parameters containing CID could get logged.
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  summary: Get the List of Documents
+  description: |
+    Get a list of all documents related to a case.
   operationId: getDocuments
   tags:
     - Document
@@ -16,23 +14,15 @@ get:
     '200':
       description: Returns a list with all document metadata records.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
-        X-Next-Cursor:
-          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+        Next-Cursor:
+          $ref: ../../generics/components/headers/Next-Cursor.yaml
       content:
         application/json:
           schema:
             items:
               $ref: ../components/schemas/Document.yaml
-      links:
-        GetDocumentById:
-          description: >
-            The `id` value returned in the response can be used as the
-            `documentId` parameter in `GET /documents/{documentId}`.
-          operationId: getDocument
-          parameters:
-            documentId: $response.body#/0/id
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -48,7 +38,7 @@ post:
   description: Upload the metadata for a new file.
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   operationId: addDocument
   tags:
     - Document
@@ -64,8 +54,8 @@ post:
     '201':
       description: Document was accepted
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-ID.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
