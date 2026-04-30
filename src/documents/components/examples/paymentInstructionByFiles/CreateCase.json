@@ -1,0 +1,26 @@
+{
+  "type": "paymentInstruction",
+  "title": "Payment instruction for Client Stark",
+  "initiatedBy": "EAM Hansjörg Muster",
+  "businessContext": {
+    "client": {
+      "number": "00.000.0000",
+      "name": "Stark",
+      "iban": "CH93 0076 2011 6238 5295 7"
+    },
+    "beneficiary": {
+      "ddafulfillment": false,
+      "lastname": "Doe",
+      "firstname": "John",
+      "address": "Teststrasse 123",
+      "postalCode": "9490",
+      "city": "Vaduz",
+      "countryCode": "LI",
+      "nationality": [
+        "CH",
+        "LI"
+      ],
+      "dateOfBirth": "2020-01-01"
+    }
+  }
+}

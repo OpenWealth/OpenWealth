@@ -28,15 +28,15 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Cases List.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -66,7 +66,7 @@ paths:
       description: Creates a new case (lifecycle process).
       operationId: createCase
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -76,8 +76,8 @@ paths:
         '201':
           description: Case successfully created.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -107,13 +107,13 @@ paths:
       operationId: getCaseById
       parameters:
         - $ref: '#/components/parameters/path_caseId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Case.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -142,7 +142,7 @@ paths:
       operationId: updateCaseById
       parameters:
         - $ref: '#/components/parameters/path_caseId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -152,43 +152,12 @@ paths:
         '200':
           description: Case successfully updated.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Case'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '500':
-          $ref: '#/components/responses/500'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
-    delete:
-      tags:
-        - cases
-      summary: Deletes a case by id
-      description: Deletes a specific case by id.
-      operationId: deleteCaseById
-      parameters:
-        - $ref: '#/components/parameters/path_caseId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
-      responses:
-        '204':
-          description: Case successfully deleted (empty response).
-          headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -215,13 +184,13 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/action'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '202':
           description: Action confirmed for the given case.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -248,10 +217,10 @@ paths:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
-      summary: Get the List of Documents (Search)
+        - $ref: '#/components/parameters/correlation_id'
+      summary: Get the List of Documents
       description: |
-        Each document includes its metadata. Search requests shall be executed as POST and not as GET requests. Otherwise, search parameters containing CID could get logged.
+        Get a list of all documents related to a case.
       operationId: getDocuments
       tags:
         - Document
@@ -259,22 +228,15 @@ paths:
         '200':
           description: Returns a list with all document metadata records.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
-            X-Next-Cursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
                 items:
                   $ref: '#/components/schemas/Document'
-          links:
-            GetDocumentById:
-              description: |
-                The `id` value returned in the response can be used as the `documentId` parameter in `GET /documents/{documentId}`.
-              operationId: getDocument
-              parameters:
-                documentId: $response.body#/0/id
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -290,7 +252,7 @@ paths:
       description: Upload the metadata for a new file.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       operationId: addDocument
       tags:
         - Document
@@ -306,8 +268,8 @@ paths:
         '201':
           description: Document was accepted
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -332,15 +294,15 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       tags:
         - Document
       responses:
         '200':
           description: Got the document corresponding to the id
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -366,7 +328,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       tags:
         - Document
       requestBody:
@@ -381,8 +343,8 @@ paths:
         '204':
           description: Amendment accepted
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -405,7 +367,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       operationId: uploadDocumentContent
       tags:
         - Document
@@ -419,8 +381,8 @@ paths:
         '200':
           description: Successful upload of the document content.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -446,15 +408,15 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       tags:
         - Document
       responses:
         '200':
           description: Get document content corresponding to the id.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-ID'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/octet-stream:
               example: ''
@@ -488,9 +450,9 @@ components:
         format: int32
         minimum: 1
       description: Maximum number of items to return.
-    x_correlation_id_in_header:
+    correlation_id:
       in: header
-      name: X-Correlation-ID
+      name: Correlation-Id
       required: true
       schema:
         type: string
@@ -508,6 +470,7 @@ components:
       description: Case ID Parameter.
     action:
       in: path
+      required: true
       name: action
       schema:
         type: string
@@ -523,12 +486,12 @@ components:
       schema:
         type: string
   headers:
-    X-Correlation-Id:
+    Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    X-Next-Cursor:
+    Next-Cursor:
       description: An opaque string value, or an empty string if there are no more results.
       required: false
       schema:
@@ -543,23 +506,7 @@ components:
       schema:
         type: string
         example: en
-    Correlation-Id:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    X-Correlation-ID:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   schemas:
-    Date:
-      title: Date
-      type: string
-      description: Date according to ISO 8601.
-      format: date
-      example: '2018-04-13'
     StatusReason:
       type: object
       description: Indicates the reason, why a case has the present status.
@@ -593,8 +540,8 @@ components:
         This object represents a resource that is related to the document, such as a case, customer, or mandate.
         It provides the necessary information to identify and retrieve the related resource through the API.
       required:
-        - type
         - id
+        - type
       properties:
         id:
           type: string
@@ -610,6 +557,12 @@ components:
           maxLength: 256
           description: Relative API path to the resource, allowing the initiator to retrieve it directly.
           example: /customers/3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+    Date:
+      title: Date
+      type: string
+      description: Date according to ISO 8601.
+      format: date
+      example: '2018-04-13'
     Case:
       type: object
       description: |
@@ -618,7 +571,7 @@ components:
         of a lifecycle process.
       required:
         - type
-        - status
+        - title
       properties:
         id:
           type: string
@@ -643,6 +596,7 @@ components:
             - cancelled
           description: Indicates the current status of the case in its lifecycle.
           example: open
+          readOnly: true
         title:
           type: string
           maxLength: 140
@@ -661,7 +615,10 @@ components:
           readOnly: true
         dueDate:
           description: Target completion date for the case.
-          $ref: '#/components/schemas/Date'
+          type: string
+          format: date
+          example: '2018-04-13'
+          readOnly: true
         completedDate:
           description: Date when the case was completed or closed.
           type: string
@@ -754,17 +711,15 @@ components:
       type: object
       required:
         - type
-        - name
       properties:
         id:
           type: string
-          maxLength: 35
+          maxLength: 70
           example: 9876-5af5wa5-e14a-fw5
           description: Unique and unambiguous identification for the document
           readOnly: true
         relatedResource:
           $ref: '#/components/schemas/RelatedResource'
-          readOnly: true
         type:
           type: string
           minLength: 1
@@ -776,8 +731,7 @@ components:
         identification:
           description: Identification of the document or template.
           type: string
-          minLength: 1
-          maxLength: 35
+          maxLength: 70
         issueDate:
           description: Issue date of the document.
           type: string
@@ -813,14 +767,13 @@ components:
         fileName:
           description: Technical name of the file.
           type: string
-          minLength: 1
           maxLength: 140
         createdAt:
           readOnly: true
           type: string
           format: date-time
           example: '2023-12-06T11:36:08.033Z'
-        lastUpdatedAt:
+        updatedAt:
           readOnly: true
           type: string
           format: date-time

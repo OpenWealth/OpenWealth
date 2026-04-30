@@ -10,15 +10,15 @@ get:
   parameters:
     - $ref: ../../generics/components/parameters/cursor.yaml
     - $ref: ../../generics/components/parameters/limit.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '200':
       description: Cases List.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
-        nextCursor:
-          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+        Next-Cursor:
+          $ref: ../../generics/components/headers/Next-Cursor.yaml
       content:
         application/json:
           schema:
@@ -48,7 +48,7 @@ post:
   description: Creates a new case (lifecycle process).
   operationId: createCase
   parameters:
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   requestBody:
     content:
       application/json:
@@ -58,8 +58,8 @@ post:
     '201':
       description: Case successfully created.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
