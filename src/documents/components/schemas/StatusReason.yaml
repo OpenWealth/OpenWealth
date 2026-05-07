@@ -6,20 +6,20 @@ required:
 properties:
   description:
     type: string
-    description: Description of the reason.
-    example: Documents missing
-  affectedProperties:
-    description: List of affected properties.
-    type: array
-    items:
-      type: object
-      description: Schema describing an affected property.
-      properties:
-        description:
-          type: string
-          description: Reason of error related to property.
-          example: Invalid name
-        propertyPath:
-          type: string
-          description: JSONPath to affected property.
-          example: $.dueDate
+    description: Reason of error related to object.
+    example: Country of domicile missing on person object.
+  type:
+    type: string
+    description: Type of the reason related to the object. The value is taken from a
+      fixed list of reason types.
+    enum:
+      - missingValue
+      - invalidValue
+      - notAllowedValue
+      - missingDocument
+      - other
+    example: error
+  objectPath:
+    type: string
+    description: JsonPointer (RFC 6901) to affected property.
+    example: /businessContext/customer/customerToPersonRelationList/0/person/countryOfDomicile

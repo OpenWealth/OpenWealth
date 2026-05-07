@@ -77,8 +77,13 @@ properties:
       Type-specific context of the case. The structure of this object depends on the case type
       and allows for flexible, type-specific data to be attached to the case.
     additionalProperties: true
-  statusReason:
-    $ref: ./StatusReason.yaml
+  statusReasonList:
+    type: array
+    description: List of reasons explaining the current status of the case, such as
+      errors or missing information.
+    items:
+      $ref: './StatusReason.yaml'
+    readOnly: true
   outputList:
     type: array
     description: Resources created or modified as a result of processing this case.
