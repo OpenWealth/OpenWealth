@@ -1,0 +1,172 @@
+{
+  "type": "mandateOpening",
+  "priority": "medium",
+  "title": "Mandate Opening for Client Anna Muster",
+  "description": "Opening a new discretionary mandate for the client.",
+  "initiatedBy": "Anthony Stark",
+  "content": {
+    "customer": {
+      "name": "Anna Muster",
+      "type": "individual",
+      "referenceCurrency": "CHF",
+      "segment": "EAM-MODELL",
+      "mainAdress": {
+        "streetLine1": "Langasse 12",
+        "postalCode": "8048",
+        "city": "Zürich",
+        "stateProvince": "ZH",
+        "country": "CH",
+        "countryName": "Switzerland"
+      },
+      "salutation": {
+        "receptionRestriction": "confidential",
+        "title": "PhD",
+        "salutation": "ms"
+      },
+      "language": "de",
+      "personToCustomerRelationList": [
+        {
+          "person": {
+            "personType": "naturalPerson",
+            "openingDate": "2018-04-13",
+            "language": "DE",
+            "givenName": "Anna",
+            "lastName": "Muster",
+            "title": "PhD",
+            "dateOfBirth": "1981-04-13",
+            "gender": "female",
+            "nationalityList": [
+              "CH"
+            ],
+            "civilStatus": "married",
+            "tinList": [
+              {
+                "tinNumber": "123-12-1234",
+                "country": "CH"
+              }
+            ],
+            "countryOfBirth": "CH",
+            "income": {
+              "estimatedYearlyIncome": {
+                "value": 200000,
+                "currency": "CHF"
+              },
+              "referenceYear": "2018",
+              "sourceOfIncomeList": [
+                {
+                  "type": "salaryOrBonuses",
+                  "amount": {
+                    "value": 200000,
+                    "currency": "CHF"
+                  },
+                  "industry": "Financial Services",
+                  "countryOfOrigin": "US"
+                }
+              ]
+            },
+            "wealth": {
+              "estimatedTotalWealth": {
+                "value": 100000,
+                "currency": "CHF"
+              },
+              "referenceYear": "2018",
+              "sourceOfWealthList": [
+                {
+                  "sourceType": "incomeFromEmployment",
+                  "amount": {
+                    "value": 100000,
+                    "currency": "CHF"
+                  },
+                  "countryOfOrigin": "CH"
+                }
+              ]
+            },
+            "employment": {
+              "employmentStatus": "employed",
+              "profession": "Economist",
+              "employmentItemList": [
+                {
+                  "position": "CEO",
+                  "company": {
+                    "name": "string",
+                    "domicile": "CH",
+                    "description": "The Beispiel AG trades with commodities (mainly crude oil). Noga Code \"661200\".",
+                    "size": 5145,
+                    "industry": "Financial Services"
+                  },
+                  "period": "15.05.2011 - current"
+                }
+              ]
+            },
+            "education": {
+              "highestDiploma": "Master of Science",
+              "educationItemList": [
+                {
+                  "diploma": "Master of Science",
+                  "graduationYear": "2001",
+                  "institute": "University of Berlin",
+                  "studyProgramme": "Economics"
+                }
+              ]
+            },
+            "isPep": false,
+            "isFatca": false
+          },
+          "relationType": "accountOwner",
+          "signatoryRight": "individually"
+        }
+      ]
+    },
+    "type": "discretionary",
+    "name": "Discretionary mandate for private investments",
+    "referenceCurrency": "CHF",
+    "correspondenceList": [
+      {
+        "salutation": {
+          "receptionRestriction": "confidential",
+          "salutationOverride": "Anna Muster",
+          "careOf": "c/o Anthony Stark"
+        },
+        "address": {
+          "streetLine1": "Bahnhofstrasse 12",
+          "streetLine2": "Apt 4B",
+          "postalCode": "8001",
+          "city": "Zürich",
+          "stateProvince": "ZH",
+          "country": "CH",
+          "countryName": "Switzerland"
+        }
+      }
+    ],
+    "powerOfAttorneyList": [
+      {
+        "type": "limited",
+        "person": {
+          "personType": "naturalPerson",
+          "language": "DE",
+          "givenName": "Anthony",
+          "lastName": "Stark"
+        },
+        "personFunction": "External Asset Manager"
+      }
+    ],
+    "expectedFundFlowList": [
+      {
+        "status": "expected",
+        "type": "inflow",
+        "amount": {
+          "value": 500000,
+          "currency": "CHF"
+        },
+        "dateReceivedOrSent": "2026-04-13",
+        "counterparty": "Muster AG",
+        "purpose": "Cash In for mandate investment",
+        "frequency": "oneTime",
+        "countryOfOrigin": "CH",
+        "accountOfOrigin": "CH89370400440532013000",
+        "nameOfBank": "ZKB",
+        "domicileOfBank": "CH"
+      }
+    ]
+  }
+}
