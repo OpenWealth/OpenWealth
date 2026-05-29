@@ -3,4 +3,4 @@ oneOf:
   - $ref: 'NaturalPerson.yaml'
   - $ref: 'LegalPerson.yaml'
 discriminator:
-  propertyName: personType
+  propertyName: type

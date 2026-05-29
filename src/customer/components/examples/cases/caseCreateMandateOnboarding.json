@@ -1,15 +1,12 @@
 {
-  "type": "mandateOpening",
-  "priority": "medium",
+  "type": "addMandate",
   "title": "Mandate Opening for Client Anna Muster",
   "description": "Opening a new discretionary mandate for the client.",
-  "initiatedBy": "Anthony Stark",
   "content": {
     "customer": {
       "name": "Anna Muster",
       "type": "individual",
       "referenceCurrency": "CHF",
-      "segment": "EAM-MODELL",
       "mainAdress": {
         "streetLine1": "Langasse 12",
         "postalCode": "8048",
@@ -18,18 +15,14 @@
         "country": "CH",
         "countryName": "Switzerland"
       },
-      "salutation": {
-        "receptionRestriction": "confidential",
-        "title": "PhD",
-        "salutation": "ms"
-      },
+      "salutation": "ms",
       "language": "de",
       "personToCustomerRelationList": [
         {
           "person": {
-            "personType": "naturalPerson",
+            "type": "naturalPerson",
             "openingDate": "2018-04-13",
-            "language": "DE",
+            "language": "de",
             "givenName": "Anna",
             "lastName": "Muster",
             "title": "PhD",
@@ -122,11 +115,10 @@
     "referenceCurrency": "CHF",
     "correspondenceList": [
       {
-        "salutation": {
-          "receptionRestriction": "confidential",
-          "salutationOverride": "Anna Muster",
-          "careOf": "c/o Anthony Stark"
-        },
+        "salutation": "other",
+        "salutationOverride": "Anna Muster",
+        "careOf": "c/o Anthony Stark",
+        "receptionRestriction": "confidential",
         "address": {
           "streetLine1": "Bahnhofstrasse 12",
           "streetLine2": "Apt 4B",
@@ -142,12 +134,11 @@
       {
         "type": "limited",
         "person": {
-          "personType": "naturalPerson",
-          "language": "DE",
-          "givenName": "Anthony",
-          "lastName": "Stark"
+          "type": "legalPerson",
+          "organisationName": "Muster AG",
+          "additionalInformation": "The Muster AG is a family office managing the wealth of the Muster family"
         },
-        "personFunction": "External Asset Manager"
+        "personFunction": "other"
       }
     ],
     "expectedFundFlowList": [

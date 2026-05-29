@@ -5,37 +5,33 @@ description: |
   of a lifecycle process.
 required:
   - type
-  - status
 properties:
   id:
     type: string
     maxLength: 128
-    description: Unique and unambiguous identification (i.e. UUID) used by the bank for the case.
+    description: Unique and unambiguous identification (i.e. UUID) used by the bank
+      for the case.
     example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
     readOnly: true
   type:
     type: string
     enum:
-      - mandateOpening
-      - mandateClosing
-      - accountOpening
-      - accountClosing
-      - addressChange
-      - nameChange
-      - onboarding
-      - offboarding
-      - kycReview
-      - documentRequest
-      - riskReassessment
-      - powerOfAttorneyChange
-      - beneficiaryChange
+      - addCustomer
+      - addPerson
+      - addMandate
+      - addPowerOfAttorney
+      - addCorrespondence
+      - modifyObject
+      - removeObject
       - other
     description: Indicates the type of lifecycle process this case represents.
     example: mandateOpening
   typeOverride:
     type: string
     maxLength: 70
-    description: Indicates the specific case type. Attribute shall only be used if the case type is not already part of the ENUM of the attribute "type" hence in exceptional cases (in case of type "other").
+    description: Indicates the specific case type. Attribute shall only be used if
+      the case type is not already part of the ENUM of the attribute "type"
+      hence in exceptional cases (in case of type "other").
     example: customProcess
   status:
     type: string
@@ -50,15 +46,7 @@ properties:
       - cancelled
     description: Indicates the current status of the case in its lifecycle.
     example: open
-  priority:
-    type: string
-    enum:
-      - low
-      - medium
-      - high
-      - urgent
-    description: Indicates the priority of the case.
-    example: medium
+    readOnly: true
   title:
     type: string
     maxLength: 140
@@ -69,34 +57,38 @@ properties:
     maxLength: 500
     description: A detailed description providing additional context for the case.
     example: Opening a new discretionary mandate for the client.
-  createdDate:
-    $ref: '../../../generics/components/schemas/Date.yaml'
-    # Date when the case was created.
   dueDate:
     $ref: '../../../generics/components/schemas/Date.yaml'
     # Target completion date for the case.
-  completedDate:
-    $ref: '../../../generics/components/schemas/Date.yaml'
+  createdDateTime:
+    $ref: '../../../generics/components/schemas/DateTime.yaml'
+    # Date when the case was created.
+  updatedDateTime:
+    $ref: '../../../generics/components/schemas/DateTime.yaml'
+    # Date when the case was updated.
+  completedDateTime:
+    $ref: '../../../generics/components/schemas/DateTime.yaml'
     # Date when the case was completed or closed.
-  assignee:
-    type: string
-    maxLength: 70
-    description: The person or team responsible for handling this case.
-    example: Anna Beispiel PC8-AB
-  initiatedBy:
-    type: string
-    maxLength: 70
-    description: The person or system that initiated this case.
-    example: Max Muster PC8-MM
   content:
-    type: object
+    oneOf:
+      - $ref: './Customer.yaml'
+      - $ref: './Person.yaml'
+      - $ref: './Mandate.yaml'
+      - $ref: './PowerOfAttorney.yaml'
+      - $ref: './Correspondence.yaml'
+      - $ref: './ModifyContent.yaml'
+      - $ref: './RemoveContent.yaml'
+      - $ref: './OtherContent.yaml'
     description: |
       Type-specific content of the case. The structure of this object depends on the case type
-      and allows for flexible, type-specific data to be attached to the case.
-    additionalProperties: true
+      and allows for flexible, type-specific data to be attached to the case. The content schema
+      used for a specific case is determined by the case type and the operation performed (add,
+      modify, remove).
   outputList:
     type: array
-    description: Resources created or modified as a result of processing this case. Populated by the bank as the case progresses.
+    description: |
+      Resources created or modified as a result of processing this case.
+      Populated by the bank as the case progresses.
     readOnly: true
     items:
       type: object
@@ -121,28 +113,11 @@ properties:
         resourceUri:
           type: string
           maxLength: 256
-          description: Relative API path to the resource, allowing the initiator to retrieve it directly.
+          description: Relative API path to the resource, allowing the initiator to
+            retrieve it directly.
           example: /customers/3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
   documentList:
     type: array
     description: List of documents associated with this case.
     items:
       $ref: 'Document.yaml'
-  commentList:
-    type: array
-    description: List of comments or notes added to the case.
-    items:
-      type: object
-      properties:
-        author:
-          type: string
-          maxLength: 70
-          description: Author of the comment.
-          example: Anna Beispiel
-        date:
-          $ref: '../../../generics/components/schemas/Date.yaml'
-        text:
-          type: string
-          maxLength: 500
-          description: Content of the comment.
-          example: Initial review completed, awaiting client documents.

@@ -6,12 +6,9 @@
   "status": "active",
   "referenceCurrency": "CHF",
   "openingDate": "2018-04-13",
-  "language": "DE",
-  "segment": "CLIENT FIM",
+  "language": "de",
   "bankAdvisor": "Anna Beispiel PC8-AB",
-  "bankDeputyAdvisor": "Max Muster PC8-MM",
-  "bankPreviousAdvisor": "Peter Vergangenheit PC5-PV",
-  "personToCustomerRelationsList": [
+  "personToCustomerRelationList": [
     {
       "relationType": "accountOwner",
       "personId": "person-1"

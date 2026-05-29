@@ -1,5 +1,6 @@
 type: object
 required:
+  ##- type  to be checked
   - salutation
 properties:
   id:
@@ -13,10 +14,30 @@ properties:
     description: Unique and unambiguous identification used by the bank for the mandate.
     example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
     readOnly: true
+  receptionRestriction:
+    type: string
+    maxLength: 35
+    description: Reception restrictions for the physical delivery of postal items
+    example: confidential
   salutation:
-    type: object
-    description: Salutation details of the customer for correspondence purposes.
     $ref: Salutation.yaml
+  salutationOverride:
+    type: string
+    maxLength: 35
+    description: Field to indicate the salutation.
+    example: Your Highness
+  careOf:
+    type: string
+    maxLength: 35
+    description: |
+      When the individual resides at another person's address, the name
+      of the other person.
+    example: c/o Hans Muster
+  toTheAttentionOf:
+    type: string
+    maxLength: 35
+    description: When the mail should be distributed to a specific person within a company.
+    example: Anna Beispiel
   address:
     type: object
     description: Address of the customer for correspondence purposes.

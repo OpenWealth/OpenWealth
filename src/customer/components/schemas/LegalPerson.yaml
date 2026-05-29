@@ -3,15 +3,13 @@ allOf:
   - $ref: 'PersonBase.yaml'
 required:
   - organisationName
-  - legalForm
-  - lei
-  - domicilaryCompany
 properties:
   organisationName:
     type: string
     minLength: 1
     maxLength: 35
-    description: Name by which the organisation is known and which is usually used to identify that organisation.
+    description: Name by which the organisation is known and which is usually used
+      to identify that organisation.
     example: Stark Industries
   legalForm:
     type: string
@@ -22,9 +20,17 @@ properties:
     type: string
     maxLength: 35
     example: 529900UVM8LC55IFAA52
-    description: Legal entity identifier. The LEI code is a twenty-digit alphanumeric company identifier that is established as an international standard for companies in the financial market. Each LEI code is assigned once and enables worldwide assignment to a specific company.
+    description: Legal entity identifier. The LEI code is a twenty-digit
+      alphanumeric company identifier that is established as an international
+      standard for companies in the financial market. Each LEI code is assigned
+      once and enables worldwide assignment to a specific company.
     pattern: '[A-Z0-9]{18,18}[0-9]{2,2}'
   domicilaryCompany:
     type: boolean
     description: Indicates whether the company is a domiciliary company
     example: FALSE
+  additionalInformation:
+    type: string
+    description: Used to indicate additional information regarding the legal person.
+    example: Company is registered in the commercial register of Munich, Germany,
+      with the registration number HRB 12345.

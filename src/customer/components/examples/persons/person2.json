@@ -1,19 +1,18 @@
 {
-  "id": "person-1",
-  "personType": "naturalPerson",
-  "language": "DE",
+  "id": "person-2",
+  "type": "naturalPerson",
+  "language": "de",
   "countryOfDomicile": "CH",
   "openingDate": "2018-04-13",
   "taxDomicileList": [
     "CH"
   ],
-  "givenName": "Urs",
-  "middleName": "Stefan",
+  "givenName": "Linda",
   "lastName": "Muster",
   "title": "PhD",
-  "dateOfBirth": "2075-04-13",
+  "dateOfBirth": "1981-02-13",
   "dateOfMarriage": "2018-04-13",
-  "gender": "male",
+  "gender": "female",
   "nationalityList": [
     "CH"
   ],
@@ -25,10 +24,10 @@
     }
   ],
   "countryOfBirth": "CH",
-  "personToPersonRelationsList": [
+  "personToPersonRelationList": [
     {
       "relation": "isSpouseOf",
-      "relatedPersonId": "person-2"
+      "relatedPersonId": "person-1"
     }
   ]
 }

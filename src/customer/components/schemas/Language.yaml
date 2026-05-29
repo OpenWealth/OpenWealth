@@ -1,4 +1,4 @@
 type: string
-pattern: '[A-Z]{2}'
+pattern: '[a-z]{2}'
 description: 2-letter ISO 639-1 Language Code
-example: EN
+example: en

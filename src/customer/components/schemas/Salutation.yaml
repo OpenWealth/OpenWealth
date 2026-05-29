@@ -1,48 +1,20 @@
-type: object
-properties:
-  receptionRestriction:
-    type: string
-    maxLength: 35
-    description: Reception restrictions for the physical delivery of postal items
-    example: confidential
-  title:
-    type: string
-    maxLength: 35
-    description: Additional information that follows a person's name, e.g. qualifications/titles such as Doctor of Philosophy (PhD).
-    example: PhD
-  salutation:
-    type: string
-    enum:
-      - ms
-      - mrs
-      - mr
-      - msAndMr
-      - mrsAndMr
-      - mrAndMs
-      - mrAndMrs
-      - sirOrMadam
-      - heirsOf
-      - ladies
-      - sirs
-      - ladiesAndGentlemen
-      - family
-      - siblings
-      - communityOfHeirs
-      - other
-    description: Salutation of the person
-    example: ms
-  salutationOverride:
-    type: string
-    maxLength: 35
-    description: Field to indicate the salutation. It shall only be used if the salutation type is not part of the ENUM of the attribute "salutation" hence in exceptional cases (in case of salutation "other"). If the salutation is not listed in the ENUM of the attribute salutation then this field can be used.
-    example: Your Highness
-  careOf:
-    type: string
-    maxLength: 35
-    description: When the individual resides at another person's address, the name of the other person.
-    example: c/o Hans Muster
-  toTheAttentionOf:
-    type: string
-    maxLength: 35
-    description: When the mail should be distributed to a specific person within a company.
-    example: Anna Beispiel
+type: string
+enum:
+  - ms
+  - mrs
+  - mr
+  - msAndMr
+  - mrsAndMr
+  - mrAndMs
+  - mrAndMrs
+  - sirOrMadam
+  - heirsOf
+  - ladies
+  - sirs
+  - ladiesAndGentlemen
+  - family
+  - siblings
+  - communityOfHeirs
+  - other
+description: Salutation of the person
+example: ms

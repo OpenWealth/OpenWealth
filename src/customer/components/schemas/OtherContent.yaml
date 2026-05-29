@@ -1,0 +1,5 @@
+type: object
+description: |
+  Type-specific content of the case. The structure of this object depends on the case type
+  and allows for flexible, type-specific data to be attached to the case.
+additionalProperties: true

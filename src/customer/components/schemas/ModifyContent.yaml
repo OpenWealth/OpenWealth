@@ -1,0 +1,32 @@
+type: object
+description: |
+  Type-specific content of the case. The structure of this object defines the
+  data required for modifying a resource.
+properties:
+  resourceType:
+    type: string
+    enum:
+      - customer
+      - person
+      - mandate
+      - powerOfAttorney
+      - correspondence
+      - document
+      - other
+    description: The type of resource that is being modified as a result of
+      processing the case.
+    example: customer
+  resourceId:
+    type: string
+    description: |
+      The unique identifier of the resource that is being modified as a result of processing the case.
+  resourceUri:
+    type: string
+    description: |
+      The URI of the resource that is being modified as a result of processing the case.
+  jsonPatch:
+    $ref: './JsonPatch.yaml'
+    description: |
+      A JSON Patch document (RFC 6902) that describes the modifications to be applied to the resource.
+      This field is used when the case processing involves modifying an existing resource. The JSON Patch
+      document specifies the operations to be performed on the resource's data.

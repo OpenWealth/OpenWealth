@@ -5,7 +5,8 @@ properties:
   id:
     type: string
     maxLength: 128
-    description: Unique and unambiguous identification (i.e. UUID) used by the bank for the customer.
+    description: Unique and unambiguous identification (i.e. UUID) used by the bank
+      for the customer.
     example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
     readOnly: true
   number:
@@ -30,6 +31,7 @@ properties:
     description: Type of customer relationship
     example: individual
   status:
+    ## readonly?
     type: string
     enum:
       - active
@@ -39,43 +41,32 @@ properties:
   referenceCurrency:
     $ref: '../../../generics/components/schemas/Currency.yaml'
   openingDate:
+    ## readonly?
     $ref: '../../../generics/components/schemas/Date.yaml'
-  segment:
-    type: string
-    maxLength: 35
-    description: Customer segment of the customer at the custody bank (e.g. UHNWI Switzerland)
-    example: CLIENT FIM, EAM-MODELL
-    readOnly: true
   mainAdress:
     type: object
     description: Main address of the customer for correspondence purposes.
     $ref: Address.yaml
   salutation:
-    type: object
-    description: Salutation details of the customer for correspondence purposes.
     $ref: Salutation.yaml
+  salutationOverride:
+    type: string
+    maxLength: 35
+    description: Field to indicate the salutation.
+    example: Your Highness
   language:
     type: string
-    description: Preferred language of the customer for correspondence purposes, represented as ISO 639-1 alpha-2 code.
+    description: Preferred language of the customer for correspondence purposes,
+      represented as ISO 639-1 alpha-2 code.
     example: de
   personToCustomerRelationList:
     items:
       $ref: PersonToCustomerRelation.yaml
   bankAdvisor:
+    ##TODO add object
     type: string
     maxLength: 35
-    description: Indicates the instruction/full name of the bank advisor on the side of the custody bank.
+    description: Indicates the instruction/full name of the bank advisor on the side
+      of the custody bank.
     example: Anna Beispiel PC8-AB
-    readOnly: true
-  bankDeputyAdvisor:
-    type: string
-    maxLength: 35
-    description: Indicates the instruction/full name of the bank deputy advisor on the side of the custody bank.
-    example: Max Muster PC8-MM
-    readOnly: true
-  bankPreviousAdvisor:
-    type: string
-    maxLength: 35
-    description: Indicates the instruction/full name of the previous bank advisor on the side of the custody bank.
-    example: Peter Vergangenheit PC5-PV
     readOnly: true
