@@ -26,12 +26,12 @@ properties:
     description: Issue date of the document.
     type: string
     format: date
-    example: '2023-12-06'
+    example: 2023-12-06
   expiryDate:
     description: Expiry date of the document.
     type: string
     format: date
-    example: '2023-12-06'
+    example: 2023-12-06
   name:
     description: Name of document or transaction, for example, tax invoice.
     type: string
@@ -58,13 +58,15 @@ properties:
     description: Technical name of the file.
     type: string
     maxLength: 140
-  createdAt:
-    readOnly: true
+  createdDateTime:
+    description: The date time when the case was created.
     type: string
     format: date-time
-    example: '2023-12-06T11:36:08.033Z'
-  updatedAt:
+    example: 2023-12-06T11:36:08.033Z
     readOnly: true
+  updatedDateTime:
+    description: The date time when the case was last updated.
     type: string
     format: date-time
-    example: '2023-12-06T11:36:08.033Z'
+    example: 2023-12-06T11:36:08.033Z
+    readOnly: true

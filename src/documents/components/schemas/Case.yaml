@@ -10,7 +10,8 @@ properties:
   id:
     type: string
     maxLength: 128
-    description: Unique and unambiguous identification (i.e. UUID) used by the bank
+    description:
+      Unique and unambiguous identification (i.e. UUID) used by the bank
       for the case.
     example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
     readOnly: true
@@ -42,70 +43,48 @@ properties:
     maxLength: 500
     description: A detailed description providing additional context for the case.
     example: Opening a new discretionary mandate for the client.
-  createdDate:
-    description: The date when the case was created.
-    type: string
-    format: date
-    example: 2018-04-13
-    readOnly: true
   dueDate:
     description: Target completion date for the case.
     type: string
     format: date
     example: 2018-04-13
+  createdDateTime:
+    description: The date time when the case was created.
+    type: string
+    format: date-time
+    example: 2018-04-13T16:00:00Z
     readOnly: true
-  completedDate:
+  updatedDateTime:
+    description: The date time when the case was last updated.
+    type: string
+    format: date-time
+    example: 2018-04-13T16:00:00Z
+    readOnly: true
+  completedDateTime:
     description: Date when the case was completed or closed.
     type: string
-    format: date
-    example: 2018-04-13
+    format: date-time
+    example: 2018-04-13T16:00:00Z
     readOnly: true
-  assignee:
-    type: string
-    maxLength: 70
-    description: The person or team responsible for handling this case.
-    example: Anna Beispiel PC8-AB
-  initiatedBy:
-    type: string
-    maxLength: 70
-    description: The person or system that initiated this case.
-    example: Max Muster PC8-MM
-  businessContext:
-    # find property name
+  content:
     type: object
     description: |
-      Type-specific context of the case. The structure of this object depends on the case type
+      Type-specific content of the case. The structure of this object depends on the case type
       and allows for flexible, type-specific data to be attached to the case.
     additionalProperties: true
   statusReasonList:
     type: array
-    description: List of reasons explaining the current status of the case, such as
+    description:
+      List of reasons explaining the current status of the case, such as
       errors or missing information.
     items:
       $ref: './StatusReason.yaml'
     readOnly: true
   outputList:
     type: array
-    description: Resources created or modified as a result of processing this case.
+    description:
+      Resources created or modified as a result of processing this case.
       Populated by the bank as the case progresses.
     readOnly: true
     items:
       $ref: './RelatedResource.yaml'
-  commentList:
-    type: array
-    description: List of comments or notes added to the case.
-    items:
-      type: object
-      properties:
-        author:
-          type: string
-          maxLength: 70
-          description: Author of the comment.
-          example: Anna Beispiel
-        date:
-          $ref: '../../../generics/components/schemas/Date.yaml'
-        text:
-          type: string
-          maxLength: 500
-          description: Content of the comment.
-          example: Initial review completed, awaiting client documents.
