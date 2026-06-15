@@ -1,6 +1,6 @@
 type: object
 required:
-  - medium
+  - type
   - value
 properties:
   type:

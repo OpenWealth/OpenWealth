@@ -1,0 +1,70 @@
+put:
+  summary: Upload binary document content
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/path_documentId.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  operationId: uploadDocumentContent
+  tags:
+    - Document
+  requestBody:
+    content:
+      application/octet-stream:
+        schema:
+          type: string
+          format: binary
+  responses:
+    '200':
+      description: Successful upload of the document content.
+      headers:
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+get:
+  operationId: getDocumentContent
+  summary: Download Document Content
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/path_documentId.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  tags:
+    - Document
+  responses:
+    '200':
+      description: Get document content corresponding to the id.
+      headers:
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+      content:
+        application/octet-stream:
+          example: ''
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

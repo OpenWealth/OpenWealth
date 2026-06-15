@@ -1,0 +1,67 @@
+get:
+  operationId: getDocument
+  summary: Get the Metadata of a Document
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/path_documentId.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  tags:
+    - Document
+  responses:
+    '200':
+      description: Got the document corresponding to the id
+      headers:
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Document.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml
+patch:
+  operationId: patchDocument
+  summary: Amend the metadata of a document
+  parameters:
+    - $ref: ../../generics/components/parameters/path_caseId.yaml
+    - $ref: ../../generics/components/parameters/path_documentId.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
+  tags:
+    - Document
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Document.yaml
+  responses:
+    '204':
+      description: Amendment accepted
+      headers:
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Document.yaml
+    '400':
+      $ref: ../../generics/components/responses/400.yaml
+    '401':
+      $ref: ../../generics/components/responses/401.yaml
+    '403':
+      $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '500':
+      $ref: ../../generics/components/responses/500.yaml
+    '503':
+      $ref: ../../generics/components/responses/503.yaml

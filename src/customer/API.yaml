@@ -25,6 +25,14 @@ paths:
     $ref: paths/cases.yaml
   /cases/{caseId}:
     $ref: paths/cases_{caseId}.yaml
+  /cases/{caseId}/actions/{action}:
+    $ref: paths/cases_{caseId}_actions_{action}.yaml
+  /cases/{caseId}/documents:
+    $ref: paths/cases_{caseId}_documents.yaml
+  /cases/{caseId}/documents/{documentId}:
+    $ref: paths/cases_{caseId}_documents_{documentId}.yaml
+  /cases/{caseId}/documents/{documentId}/content:
+    $ref: paths/cases_{caseId}_documents_{documentId}_content.yaml
   /customers:
     $ref: paths/customers.yaml
   /customers/{customerId}:

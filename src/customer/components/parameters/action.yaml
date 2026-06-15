@@ -1,0 +1,9 @@
+in: path
+required: true
+name: action
+schema:
+  type: string
+  enum:
+    - submit
+    - cancel
+description: Parameter for the action requested for a given case.

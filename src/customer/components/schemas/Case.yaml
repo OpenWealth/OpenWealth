@@ -9,7 +9,8 @@ properties:
   id:
     type: string
     maxLength: 128
-    description: Unique and unambiguous identification (i.e. UUID) used by the bank
+    description:
+      Unique and unambiguous identification (i.e. UUID) used by the bank
       for the case.
     example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
     readOnly: true
@@ -25,11 +26,12 @@ properties:
       - removeObject
       - other
     description: Indicates the type of lifecycle process this case represents.
-    example: mandateOpening
+    example: addMandate
   typeOverride:
     type: string
     maxLength: 70
-    description: Indicates the specific case type. Attribute shall only be used if
+    description:
+      Indicates the specific case type. Attribute shall only be used if
       the case type is not already part of the ENUM of the attribute "type"
       hence in exceptional cases (in case of type "other").
     example: customProcess
@@ -84,6 +86,14 @@ properties:
       and allows for flexible, type-specific data to be attached to the case. The content schema
       used for a specific case is determined by the case type and the operation performed (add,
       modify, remove).
+  statusReasonList:
+    type: array
+    description:
+      List of reasons explaining the current status of the case, such as
+      errors or missing information.
+    items:
+      $ref: './StatusReason.yaml'
+    readOnly: true
   outputList:
     type: array
     description: |
@@ -113,7 +123,8 @@ properties:
         resourceUri:
           type: string
           maxLength: 256
-          description: Relative API path to the resource, allowing the initiator to
+          description:
+            Relative API path to the resource, allowing the initiator to
             retrieve it directly.
           example: /customers/3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
   documentList:
