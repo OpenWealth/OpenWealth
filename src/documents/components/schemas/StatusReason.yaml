@@ -2,15 +2,13 @@ type: object
 description: Indicates the reason, why a case has the present status.
 readOnly: true
 required:
+  - type
   - description
 properties:
-  description:
-    type: string
-    description: Reason of error related to object.
-    example: Country of domicile missing on person object.
   type:
     type: string
-    description: Type of the reason related to the object. The value is taken from a
+    description:
+      Type of the reason related to the object. The value is taken from a
       fixed list of reason types.
     enum:
       - missingValue
@@ -19,6 +17,10 @@ properties:
       - missingDocument
       - other
     example: error
+  description:
+    type: string
+    description: Reason of error related to object.
+    example: Country of domicile missing on person object.
   objectPath:
     type: string
     description: JsonPointer (RFC 6901) to affected property.
