@@ -1,15 +1,9 @@
 type: object
 required:
   - estimatedYearlyIncome
-  - referenceYear
 properties:
   estimatedYearlyIncome:
     $ref: 'Amount.yaml'
-  referenceYear:
-    type: string
-    pattern: '[0-9]{4}'
-    description: Year
-    example: '1995'
   additionalInformation:
     type: string
     maxLength: 2500

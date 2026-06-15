@@ -3,7 +3,7 @@ required:
   - medium
   - value
 properties:
-  medium:
+  type:
     type: string
     enum:
       - email
@@ -15,24 +15,11 @@ properties:
       - other
     description: Medium for contacting the customer.
     example: phone
-  mediumType:
-    type: string
-    enum:
-      - private
-      - business
-    description: Specifies the type of contact details.
-    example: private
   value:
     type: string
     maxLength: 70
     description: Content of the contact detail, e.g. phone number, email-address, URL.
     example: '0041998887766'
-  priority:
-    type: string
-    maxLength: 70
-    description: Field to indicate the priority of the contact detail; e.g.
-      preferred/main contact detail.
-    example: Preferred phone number during summer
   additionalInformation:
     type: string
     description: Used to indicate additional information regarding the contact detail.

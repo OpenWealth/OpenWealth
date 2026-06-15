@@ -3,13 +3,6 @@ required:
   - type
   - amount
 properties:
-  status:
-    type: string
-    enum:
-      - expected
-      - actual
-    description: Indicates whether the fund flow is expected or already actual.
-    example: expected
   type:
     type: string
     enum:
@@ -28,7 +21,7 @@ properties:
     example: Muster AG
   purpose:
     type: string
-    maxLength: 150
+    maxLength: 128
     description: Purpose for the transfer
     example: Monthly salary payment
   frequency:
@@ -54,11 +47,12 @@ properties:
   accountOfOrigin:
     type: string
     maxLength: 34
-    description: Account number of the sender/receiver of the assets, in IBAN format where applicable.
+    description: Account number of the sender/receiver of the assets, in IBAN format
+      where applicable.
     example: DE89370400440532013000
   nameOfBank:
     type: string
-    maxLength: 140
+    maxLength: 128
     # Name of the bank of the counterparty
   domicileOfBank:
     $ref: 'Country.yaml'

@@ -1,0 +1,18 @@
+type: object
+required:
+  ##- type  to be checked
+  - name
+properties:
+  salutation:
+    $ref: Salutation.yaml
+  name:
+    type: string
+    maxLength: 35
+    description: Field to indicate the name.
+    example: Jon Doe
+  address:
+    description: Address of the customer for correspondence purposes.
+    $ref: Address.yaml
+  communication:
+    description: Communication details of the customer for correspondence purposes.
+    $ref: Communication.yaml

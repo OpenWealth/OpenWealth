@@ -14,6 +14,16 @@ properties:
     description: Unique and unambiguous identification used by the bank for the mandate.
     example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
     readOnly: true
+  type:
+    type: string
+    enum:
+      - letter
+      - email
+      - phoneCall
+      - fax
+      - other
+    description: Type of the correspondence.
+    example: letter
   receptionRestriction:
     type: string
     maxLength: 35
@@ -23,8 +33,11 @@ properties:
     $ref: Salutation.yaml
   salutationOverride:
     type: string
-    maxLength: 35
-    description: Field to indicate the salutation.
+    maxLength: 128
+    description: |
+      Field to indicate the salutation override.
+      Should only be used when salutation enum value is 'other' and 
+      the salutation value is not sufficient to address the customer.
     example: Your Highness
   careOf:
     type: string
@@ -39,10 +52,8 @@ properties:
     description: When the mail should be distributed to a specific person within a company.
     example: Anna Beispiel
   address:
-    type: object
-    description: Address of the customer for correspondence purposes.
+    description: Physical address of the customer for correspondence purposes.
     $ref: Address.yaml
-  communication:
-    type: object
-    description: Communication details of the customer for correspondence purposes.
-    $ref: Communication.yaml
+  medium:
+    description: Medium details of the customer for correspondence purposes.
+    $ref: Medium.yaml

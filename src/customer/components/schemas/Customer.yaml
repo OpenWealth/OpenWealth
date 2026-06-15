@@ -51,8 +51,11 @@ properties:
     $ref: Salutation.yaml
   salutationOverride:
     type: string
-    maxLength: 35
-    description: Field to indicate the salutation.
+    maxLength: 128
+    description: |
+      Field to indicate the salutation override.
+      Should only be used when salutation enum value is 'other' and 
+      the salutation value is not sufficient to address the customer.
     example: Your Highness
   language:
     type: string
@@ -63,10 +66,6 @@ properties:
     items:
       $ref: PersonToCustomerRelation.yaml
   bankAdvisor:
-    ##TODO add object
-    type: string
-    maxLength: 35
     description: Indicates the instruction/full name of the bank advisor on the side
       of the custody bank.
-    example: Anna Beispiel PC8-AB
-    readOnly: true
+    $ref: Contact.yaml
