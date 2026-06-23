@@ -6,9 +6,9 @@ required:
 properties:
   id:
     type: string
+    description: Unique and unambiguous identification for the mandate.
     maxLength: 128
     example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
-    description: Unique and unambiguous identification for the mandate.
     readOnly: true
   customerId:
     type: string
@@ -19,30 +19,34 @@ properties:
     $ref: Customer.yaml
   type:
     type: string
-    description: |
-      Indicates the type of the mandate.
-    example: discretionary
+    description: Indicates the type of the mandate.
     enum:
       - executionOnly
       - discretionary
       - advisory
       - other
+    example: discretionary
   name:
     type: string
+    description: Name of the mandate.
     maxLength: 70
-    description: |
-      Name of the mandate.
     example: Discretionary mandate for private investments
   referenceCurrency:
     $ref: '../../../generics/components/schemas/Currency.yaml'
   openingDate:
     $ref: '../../../generics/components/schemas/Date.yaml'
   correspondenceList:
+    type: array
+    description: List of correspondence of the mandate.
     items:
       $ref: Correspondence.yaml
   powerOfAttorneyList:
+    type: array
+    description: List of power of attorney of the mandate.
     items:
       $ref: PowerOfAttorney.yaml
   expectedFundFlowList:
+    type: array
+    description: List of expected fund flows for the mandate.
     items:
       $ref: ExpectedFundFlow.yaml

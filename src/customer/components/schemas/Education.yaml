@@ -4,10 +4,11 @@ required:
 properties:
   highestDiploma:
     type: string
+    description: Highest degree of education attained by the person.
     maxLength: 35
-    description: Highest degree of education
     example: Master of Science
   educationItemList:
     type: array
+    description: List of education items of the person.
     items:
       $ref: 'EducationItem.yaml'

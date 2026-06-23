@@ -24,7 +24,7 @@ properties:
   additionalInformation:
     description: Free text field to provide additional information.
     type: string
-    maxLength: 2500
+    maxLength: 2048
     example: This is additional information.
   sanctions:
     type: boolean

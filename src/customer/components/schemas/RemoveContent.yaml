@@ -5,20 +5,27 @@ description: |
 properties:
   resourceType:
     type: string
+    description: The type of resource that is being modified as a result of
+      processing the case.
     enum:
       - customer
       - person
       - mandate
+      - powerOfAttorney
+      - correspondence
       - document
-    description: The type of resource that is being modified as a result of
-      processing the case.
+      - other
     example: customer
   resourceId:
     type: string
     description: |
       The unique identifier of the resource that is being removed as a result of processing the case.
+    maxLength: 128
+    example: 550e8400-e29b-41d4-a716-446
   resourceUri:
     type: string
     description: |
       The URI of the resource that is being created or modified as a result of processing the case.
       This field is populated by the bank as the case progresses and the resource is created.
+    maxLength: 2048
+    example: /customers/550e8400-e29b-41d4-a716-446

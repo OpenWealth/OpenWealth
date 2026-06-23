@@ -5,6 +5,7 @@ required:
 properties:
   type:
     type: string
+    description: Type of source of income.
     enum:
       - salaryOrBonuses
       - selfEmploymentIncome
@@ -13,14 +14,13 @@ properties:
       - incomeFromRealEstate
       - dividendsFromShareholdings
       - other
-    description: Type of source of income.
     example: salaryOrBonuses
   amount:
     $ref: 'Amount.yaml'
   industry:
     type: string
-    maxLength: 35
     description: Industry of employment/source of income.
+    maxLength: 35
     example: Financial Services
   countryOfOrigin:
     type: string
@@ -29,6 +29,6 @@ properties:
     example: US
   additionalInformation:
     type: string
-    maxLength: 2500
-    description: Free text field to provide additional information
+    description: Free text field to provide additional information.
+    maxLength: 2048
     example: This is additional information.

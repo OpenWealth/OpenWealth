@@ -6,10 +6,11 @@ properties:
     $ref: 'Amount.yaml'
   additionalInformation:
     type: string
-    maxLength: 2500
-    description: Free text field to provide additional information
+    description: Free text field to provide additional information.
+    maxLength: 2048
     example: This is additional information.
   sourceOfIncomeList:
     type: array
+    description: List of sources of income of the person.
     items:
       $ref: 'sourceOfIncome.yaml'

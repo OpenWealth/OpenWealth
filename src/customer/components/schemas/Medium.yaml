@@ -5,6 +5,7 @@ required:
 properties:
   type:
     type: string
+    description: Medium for contacting the customer.
     enum:
       - email
       - phone
@@ -13,14 +14,14 @@ properties:
       - website
       - socialMedia
       - other
-    description: Medium for contacting the customer.
     example: phone
   value:
     type: string
-    maxLength: 70
     description: Content of the contact detail, e.g. phone number, email-address, URL.
+    maxLength: 70
     example: '0041998887766'
   additionalInformation:
     type: string
     description: Used to indicate additional information regarding the contact detail.
     example: Fixed line home Sidney Australia
+    maxLength: 2048

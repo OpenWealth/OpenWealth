@@ -1,4 +1,5 @@
 type: string
+description: Salutation of the person
 enum:
   - ms
   - mrs
@@ -16,5 +17,4 @@ enum:
   - siblings
   - communityOfHeirs
   - other
-description: Salutation of the person
 example: ms

@@ -1314,7 +1314,7 @@ components:
           example: US
         additionalInformation:
           type: string
-          maxLength: 2500
+          maxLength: 2048
           description: Free text field to provide additional information
           example: This is additional information.
     Income:
@@ -1332,7 +1332,7 @@ components:
           example: '1995'
         additionalInformation:
           type: string
-          maxLength: 2500
+          maxLength: 2048
           description: Free text field to provide additional information
           example: This is additional information.
         sourceOfIncomeList:
@@ -1372,7 +1372,7 @@ components:
         additionalInformation:
           description: Description of the most important milestones/economic activities; which form the basis for the assets of the customer
           type: string
-          maxLength: 2500
+          maxLength: 2048
           example: This is additional information.
     Wealth:
       type: object
@@ -1394,7 +1394,7 @@ components:
         additionalInformation:
           description: Description of the most important milestones/economic activities; which form the basis for the assets of the customer
           type: string
-          maxLength: 2500
+          maxLength: 2048
           example: This is additional information.
     Company:
       type: object
@@ -1443,7 +1443,7 @@ components:
         additionalInformation:
           description: Free text field to provide additional information.
           type: string
-          maxLength: 2500
+          maxLength: 2048
           example: This is additional information.
     Employment:
       type: object
@@ -1949,7 +1949,7 @@ components:
         additionalInformation:
           description: Free text field to provide additional information.
           type: string
-          maxLength: 2500
+          maxLength: 2048
           example: This is additional information.
     Mandate:
       type: object

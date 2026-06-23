@@ -9,8 +9,9 @@ properties:
     items:
       $ref: 'SourceOfWealth.yaml'
   additionalInformation:
-    description: 'Description of the most important milestones/economic activities;
+    description:
+      'Description of the most important milestones/economic activities;
       which form the basis for the assets of the customer'
     type: string
-    maxLength: 2500
+    maxLength: 2048
     example: This is additional information.

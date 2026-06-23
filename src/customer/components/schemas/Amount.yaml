@@ -7,7 +7,7 @@ required:
 properties:
   value:
     type: number
-    example: 12000
     description: Signed decimal number.
+    example: 12000
   currency:
     $ref: ../../../generics/components/schemas/Currency.yaml

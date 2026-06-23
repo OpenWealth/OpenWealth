@@ -15,7 +15,7 @@ properties:
     example: Mr Meier is the business partner of Mr Muster.
   originOfAssetsOfLendor:
     type: string
-    maxLength: 2500
+    maxLength: 2048
     description: Original origin of the assets of the lendor - how was the wealth generated?
     example: Mr Max Meier is the CEO and founder of the firm XYZ AG.
   natureOfAssets:

@@ -15,7 +15,7 @@ properties:
     example: Anna Muster is a good friend.
   originOfAssetsOfGiftor:
     type: string
-    maxLength: 2500
+    maxLength: 2048
     description: Original origin of the assets of the giftor - how was the wealth generated?
     example: Anna Muster was CEO of a large bank in London from 1997-2005.
   natureOfAssets:

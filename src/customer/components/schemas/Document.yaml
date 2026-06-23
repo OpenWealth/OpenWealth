@@ -4,69 +4,69 @@ required:
 properties:
   id:
     type: string
+    description: Unique and unambiguous identification for the document.
     maxLength: 70
     example: 9876-5af5wa5-e14a-fw5
-    description: Unique and unambiguous identification for the document
     readOnly: true
   relatedResource:
     $ref: './RelatedResource.yaml'
   type:
     type: string
-    minLength: 1
-    maxLength: 4
-    example: CONT
     description: |
       Specifies the document type as published in an external document type code
       list. External code sets can be downloaded from www.iso20022.org.
+    minLength: 1
+    maxLength: 4
+    example: CONT
   identification:
-    description: Identification of the document or template.
     type: string
+    description: Identification of the document or template.
     maxLength: 70
   issueDate:
-    description: Issue date of the document.
     type: string
     format: date
+    description: Issue date of the document.
     example: 2023-12-06
   expiryDate:
-    description: Expiry date of the document.
     type: string
     format: date
+    description: Expiry date of the document.
     example: 2023-12-06
   name:
-    description: Name of document or transaction, for example, tax invoice.
     type: string
+    description: Name of document or transaction, for example, tax invoice.
     minLength: 1
     maxLength: 140
   languageCode:
-    description: Unique identifier for a language used in the document.
     type: string
-    minLength: 1
-    maxLength: 5
+    description: Unique identifier for a language used in the document.
+    minLength: 2
+    maxLength: 2
     example: en
   format:
     type: string
-    minLength: 1
-    maxLength: 4
     description: |
       Format of the document or template, such as PDF, XML, XSLT.
       Specifies the external document format code in the format of a character
       string with a maximum length of 4 characters. The list of valid codes is an
       external code list published separately. External code sets can be downloaded
       from www.iso20022.org.
+    minLength: 1
+    maxLength: 4
     example: DPDF
   fileName:
-    description: Technical name of the file.
     type: string
+    description: Technical name of the file.
     maxLength: 140
   createdDateTime:
-    description: The date time when the case was created.
     type: string
     format: date-time
+    description: The date time when the case was created.
     example: 2023-12-06T11:36:08.033Z
     readOnly: true
   updatedDateTime:
-    description: The date time when the case was last updated.
     type: string
     format: date-time
+    description: The date time when the case was last updated.
     example: 2023-12-06T11:36:08.033Z
     readOnly: true

@@ -1,9 +1,9 @@
 type: object
 properties:
-  tinNumber:
+  number:
+    description: Taxpayer identification number / National ID
     type: string
     maxLength: 35
     example: 123-12-1234
-    description: Taxpayer identification number / National ID
   country:
     $ref: 'Country.yaml'

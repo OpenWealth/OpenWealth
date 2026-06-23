@@ -7,28 +7,33 @@ required:
 properties:
   streetLine1:
     type: string
-    description: Primary street address and house number
+    description: Primary street address and house number.
+    maxLength: 70
     example: 'Bahnhofstrasse 12'
   streetLine2:
     type: string
     description: Apartment, suite, unit, building, c/o
+    maxLength: 70
     example: 'Apt 4B'
   postalCode:
     type: string
     description: ZIP or postal code
+    maxLength: 10
     example: '8001'
   city:
     type: string
+    description: City or town.
+    maxLength: 70
     example: 'Zürich'
   stateProvince:
     type: string
     description: State, canton, or province
+    maxLength: 70
     example: 'ZH'
   country:
-    type: string
-    description: ISO 3166-1 alpha-2 country code preferred
-    example: 'CH'
+    $ref: 'Country.yaml'
   countryName:
     type: string
-    description: Optional full country name
+    description: Optional full country name.
+    maxLength: 70
     example: 'Switzerland'

@@ -4,28 +4,40 @@ required:
 properties:
   id:
     type: string
-    maxLength: 128
-    description: Unique and unambiguous identification (i.e. UUID) used by the bank
+    description: |
+      Unique and unambiguous identification (i.e. UUID) used by the bank
       for the person.
+    maxLength: 128
     example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
     readOnly: true
   type:
     type: string
+    description: Indicates the person type (e.g. Natural Person) of the person object.
     enum:
       - naturalPerson
       - legalPerson
     example: naturalPerson
-    description: Indicates the person type (e.g. Natural Person) of the person object.
   countryOfDomicile:
     $ref: 'Country.yaml'
+  domicileAdress:
+    description: Domicile address of the person.
+    $ref: Address.yaml
   openingDate:
     $ref: '../../../generics/components/schemas/Date.yaml'
   taxDomicileList:
     type: array
+    description: List of countries where a person is subject to taxation.
     items:
       $ref: 'Country.yaml'
+  tinList:
+    type: array
+    description: List with tax identification numbers of a person.
+    items:
+      $ref: 'Tin.yaml'
   language:
     $ref: 'Language.yaml'
   personToPersonRelationList:
+    type: array
+    description: List of relations between persons.
     items:
       $ref: PersonToPersonRelation.yaml

@@ -5,10 +5,10 @@ required:
 properties:
   type:
     type: string
+    description: Type of account movement, either inflow or outflow of assets.
     enum:
       - inflow
       - outflow
-    description: Type of account movement
     example: inflow
   amount:
     $ref: 'Amount.yaml'
@@ -16,17 +16,17 @@ properties:
     $ref: '../../../generics/components/schemas/Date.yaml'
   counterparty:
     type: string
+    description: Name of the sender/receiver of the assets.
     maxLength: 70
-    description: Name of the sender/receiver of the assets
     example: Muster AG
   purpose:
     type: string
+    description: Purpose for the transfer.
     maxLength: 128
-    description: Purpose for the transfer
     example: Monthly salary payment
   frequency:
     type: string
-    description: Frequency of payment/transfer
+    description: Frequency of payment/transfer.
     example: monthly
     enum:
       - oneTime
@@ -41,24 +41,25 @@ properties:
       - other
   countryOfOrigin:
     type: string
-    pattern: '^[A-Z]{2}$'
     description: Country of origin of the fund flow, in ISO 3166-1 alpha-2 format.
+    pattern: '^[A-Z]{2}$'
     example: US
   accountOfOrigin:
     type: string
-    maxLength: 34
-    description: Account number of the sender/receiver of the assets, in IBAN format
+    description: |
+      Account number of the sender/receiver of the assets, in IBAN format
       where applicable.
+    maxLength: 34
     example: DE89370400440532013000
   nameOfBank:
     type: string
+    description: Name of the bank of the counterparty.
     maxLength: 128
-    # Name of the bank of the counterparty
   domicileOfBank:
+    description: Domicile of the bank of the counterparty
     $ref: 'Country.yaml'
-    # Domicile of the bank of the counterparty
   additionalInformation:
-    description: Free text field to provide additional information.
     type: string
-    maxLength: 2500
+    description: Free text field to provide additional information.
+    maxLength: 2048
     example: This is additional information.

@@ -22,8 +22,10 @@ items:
       description: JSON Pointer (RFC 6901) targeting the location in the document
       pattern: '^(/[^/~]*(~[01][^/~]*)*)*$'
     value:
-      description: The value to use for add, replace, or test operations
+      description: The value to use for add, replace, or test operations.
+      additionalProperties: true
     from:
       type: string
       description: JSON Pointer for the source location, used by move and copy
       pattern: '^(/[^/~]*(~[01][^/~]*)*)*$'
+      maxLength: 2048

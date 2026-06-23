@@ -9,24 +9,30 @@ required:
 properties:
   givenName:
     type: string
+    description: |
+      Given name of the person. The primary name according to the passport should be indicated in that
+      field and no abbreviations/common names (Dan instead of Daniel etc.) used.
     maxLength: 35
     example: Anthony
-    description: Given name of the person. The primary name according to the passport should be indicated in that field and no abbreviations/common names (Dan instead of Daniel etc.) used.
   middleName:
     type: string
+    description: |
+      Middle name of the person. The middle name according to the passport should be indicated in that
+      field and no abbreviations/common names (Dan instead of Daniel etc.) used.
     maxLength: 35
     example: Edward
-    description: Middle name of the person. The middle name according to the passport should be indicated in that field and no abbreviations/common names (Dan instead of Daniel etc.) used.
   lastName:
     type: string
+    description: |
+      Last name(s) of the person. The last name(s) according to the passport should be indicated in
+      that field (hyphenated and spaced names as well).
     maxLength: 35
     example: Stark
-    description: Last name(s) of the person. The last name(s) according to the passport should be indicated in that field (hyphenated and spaced names as well).
   title:
     type: string
+    description: Official title of the person.
     maxLength: 35
     example: PhD
-    description: Official title of the person
   dateOfBirth:
     $ref: '../../../generics/components/schemas/Date.yaml'
   dateOfMarriage:
@@ -35,19 +41,22 @@ properties:
     $ref: '../../../generics/components/schemas/Date.yaml'
   gender:
     type: string
+    description: Gender of the person
     enum:
       - male
       - female
       - divers
     example: male
-    description: Gender of the person
   nationalityList:
     type: array
-    description: Country/Countries where a person was born or is legally accepted as belonging to the country. The first country in the list represents the main nationality.
+    description: |
+      Country/Countries where a person was born or is legally accepted as belonging to the country.
+      The first country in the list represents the main nationality.
     items:
       $ref: 'Country.yaml'
   civilStatus:
     type: string
+    description: Civil status of the person.
     enum:
       - divorced
       - legallyDivorced
@@ -57,14 +66,7 @@ properties:
       - stableUnion
       - widow
     example: married
-    description: Civil status of the person
-  tinList:
-    type: array
-    description: List with tax identification numbers of a person
-    items:
-      $ref: 'Tin.yaml'
-  countryOfBirth:
-    description: Country where person was born
+  placeOfBirth:
     $ref: 'Country.yaml'
   income:
     $ref: 'Income.yaml'
@@ -76,9 +78,9 @@ properties:
     $ref: 'Education.yaml'
   isPep:
     type: boolean
-    description: Is this person a publically exposed person (PEP)?
+    description: Denotes if this person is a publically exposed person (PEP).
     example: false
   isFatca:
     type: boolean
-    description: Is this person subject to the US Foreign Account Tax Compliance Act (FATCA)?
+    description: Denotes if this person is subject to the US Foreign Account Tax Compliance Act (FATCA).
     example: false

@@ -1,10 +1,11 @@
 type: object
 description: Provides information about the employment status and the employment itself (e.g. company)
 required:
-  - employmentStatus
+  - status
 properties:
-  employmentStatus:
+  status:
     type: string
+    description: Status of employment
     enum:
       - employed
       - selfEmployed
@@ -15,19 +16,19 @@ properties:
       - privateEquityInvestor
       - professionalInvestor
       - other
-    description: Status of employment
     example: retired
   profession:
     type: string
-    maxLength: 35
     description: Profession
+    maxLength: 35
     example: Economist
   yearOfRetirement:
     type: string
     pattern: '[0-9]{4}'
-    description: Year
+    description: Year of retirement (if applicable).
     example: '1995'
   employmentItemList:
     type: array
+    description: List of employments of the person.
     items:
       $ref: 'EmploymentItem.yaml'

@@ -1,12 +1,15 @@
 type: object
 required:
   - name
+  - type
+  - mainAdress
 properties:
   id:
     type: string
-    maxLength: 128
-    description: Unique and unambiguous identification (i.e. UUID) used by the bank
+    description:
+      Unique and unambiguous identification (i.e. UUID) used by the bank
       for the customer.
+    maxLength: 128
     example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
     readOnly: true
   number:
@@ -14,11 +17,14 @@ properties:
     description: Contains the customers custody proprietary customer number if available.
     maxLength: 70
     example: 12345-6
+    readOnly: true
   name:
     type: string
+    description: Name of the customer.
     maxLength: 140
   type:
     type: string
+    description: Type of customer relationship
     enum:
       - individual
       - groupOfIndividuals
@@ -28,44 +34,42 @@ properties:
       - institutionalInvestor
       - bank
       - other
-    description: Type of customer relationship
     example: individual
+  mainAdress:
+    description: Main address of the customer for correspondence purposes.
+    $ref: Address.yaml
   status:
-    ## readonly?
     type: string
+    description: Status of the customer relationship
     enum:
       - active
       - inactive
-    description: Status of the customer relationship
     example: active
+    readOnly: true
   referenceCurrency:
     $ref: '../../../generics/components/schemas/Currency.yaml'
   openingDate:
-    ## readonly?
     $ref: '../../../generics/components/schemas/Date.yaml'
-  mainAdress:
-    type: object
-    description: Main address of the customer for correspondence purposes.
-    $ref: Address.yaml
   salutation:
     $ref: Salutation.yaml
   salutationOverride:
     type: string
-    maxLength: 128
     description: |
       Field to indicate the salutation override.
       Should only be used when salutation enum value is 'other' and 
       the salutation value is not sufficient to address the customer.
+    maxLength: 128
     example: Your Highness
   language:
-    type: string
-    description: Preferred language of the customer for correspondence purposes,
-      represented as ISO 639-1 alpha-2 code.
-    example: de
+    description: Preferred language of the customer.
+    $ref: Language.yaml
   personToCustomerRelationList:
+    type: array
+    description: List of relations between the customer and persons.
     items:
       $ref: PersonToCustomerRelation.yaml
   bankAdvisor:
-    description: Indicates the instruction/full name of the bank advisor on the side
+    description:
+      Indicates the instruction/full name of the bank advisor on the side
       of the custody bank.
     $ref: Contact.yaml
