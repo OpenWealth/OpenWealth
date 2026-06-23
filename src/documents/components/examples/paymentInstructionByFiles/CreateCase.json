@@ -1,10 +1,9 @@
 {
-  "type": "paymentInstruction",
+  "type": "SPVForm",
   "title": "Payment instruction for Client Stark",
-  "initiatedBy": "EAM Hansjörg Muster",
-  "businessContext": {
+  "content": {
     "client": {
-      "number": "00.000.0000",
+      "number": "0035260",
       "name": "Stark",
       "iban": "CH93 0076 2011 6238 5295 7"
     },
@@ -20,7 +19,23 @@
         "CH",
         "LI"
       ],
-      "dateOfBirth": "2020-01-01"
+      "dateOfBirth": "2020-01-01",
+      "legalEntityBeneficiary": false,
+      "naturalPersonFounder": true,
+      "naturalPersonMemberOfCounsilOrBoard": false,
+      "naturalPersonProtector": false,
+      "naturalPersonBeneficiary": false,
+      "naturalPersonDirectControl": false
+    },
+    "taxes": [
+      {
+        "countryCode": "LI",
+        "tin": "12345",
+        "reasonMissingTin": null
+      }
+    ],
+    "fiduciary": {
+      "name": "FIRST ADVISORY TRUST REG."
     }
   }
 }

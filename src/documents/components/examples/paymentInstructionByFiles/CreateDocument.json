@@ -1,5 +1,5 @@
 {
-  "type": "docPaymentFormument",
+  "type": "SPVFormT",
   "format": "pdf",
-  "fileName": "Zahlungsauftrag.pdf"
+  "fileName": "SPVFormT.pdf"
 }
