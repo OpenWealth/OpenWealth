@@ -34,17 +34,16 @@
             "civilStatus": "married",
             "tinList": [
               {
-                "tinNumber": "123-12-1234",
+                "number": "123-12-1234",
                 "country": "CH"
               }
             ],
-            "countryOfBirth": "CH",
+            "placeOfBirth": "CH",
             "income": {
               "estimatedYearlyIncome": {
                 "value": 200000,
                 "currency": "CHF"
               },
-              "referenceYear": "2018",
               "sourceOfIncomeList": [
                 {
                   "type": "salaryOrBonuses",
@@ -62,7 +61,6 @@
                 "value": 100000,
                 "currency": "CHF"
               },
-              "referenceYear": "2018",
               "sourceOfWealthList": [
                 {
                   "sourceType": "incomeFromEmployment",
@@ -75,14 +73,14 @@
               ]
             },
             "employment": {
-              "employmentStatus": "employed",
+              "status": "employed",
               "profession": "Economist",
               "employmentItemList": [
                 {
                   "position": "CEO",
                   "company": {
-                    "name": "string",
-                    "domicile": "CH",
+                    "name": "Beispiel AG",
+                    "countryOfDomicile": "CH",
                     "description": "The Beispiel AG trades with commodities (mainly crude oil). Noga Code \"661200\".",
                     "size": 5145,
                     "industry": "Financial Services"
@@ -143,7 +141,6 @@
     ],
     "expectedFundFlowList": [
       {
-        "status": "expected",
         "type": "inflow",
         "amount": {
           "value": 500000,

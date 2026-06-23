@@ -20,11 +20,11 @@
   "civilStatus": "married",
   "tinList": [
     {
-      "tinNumber": "123-12-1234",
+      "number": "123-12-1234",
       "country": "CH"
     }
   ],
-  "countryOfBirth": "CH",
+  "placeOfBirth": "CH",
   "personToPersonRelationList": [
     {
       "relation": "isSpouseOf",

@@ -3,11 +3,22 @@
   "number": "12345-6",
   "name": "Urs Muster",
   "type": "individual",
+  "mainAdress": {
+    "streetLine1": "Bahnhofstrasse 12",
+    "postalCode": "8001",
+    "city": "Zürich",
+    "stateProvince": "ZH",
+    "country": "CH",
+    "countryName": "Switzerland"
+  },
   "status": "active",
   "referenceCurrency": "CHF",
   "openingDate": "2018-04-13",
   "language": "de",
-  "bankAdvisor": "Anna Beispiel PC8-AB",
+  "bankAdvisor": {
+    "salutation": "ms",
+    "name": "Anna Beispiel"
+  },
   "personToCustomerRelationList": [
     {
       "relationType": "accountOwner",
