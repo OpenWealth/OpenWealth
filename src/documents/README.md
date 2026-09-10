@@ -18,7 +18,7 @@ The API is built around two core resources:
 Uploading documents follows a structured sequence:
 
 1. **Create a case** (`POST /cases`)
-   Start by creating a case that will act as the container for all related documents. Use the `businessContext` property to attach any type-specific, context-relevant information to the case — its structure is flexible and depends on the case type (e.g. mandate opening details, client identifiers, or workflow-specific fields).
+   Start by creating a case that will act as the container for all related documents. Use the `content` property to attach any type-specific, context-relevant information to the case — its structure is flexible and depends on the case type (e.g. mandate opening details, client identifiers, or workflow-specific fields).
 
 2. **Attach document metadata** (`POST /cases/{caseId}/documents`)
    For each document, create a metadata record linked to the case. This registers the document and returns a `documentId` that is used in subsequent steps. One or more documents can be attached to the same case.
@@ -78,7 +78,7 @@ src/documents/
 ├── API.yaml                                              # OpenAPI entry point
 └── paths/
     ├── cases.yaml                                        # GET /cases, POST /cases
-    ├── cases_{caseId}.yaml                               # GET/PUT/DELETE /cases/{caseId}
+    ├── cases_{caseId}.yaml                               # GET/PUT /cases/{caseId}
     ├── cases_{caseId}_actions_{action}.yaml              # POST /cases/{caseId}/actions/{action}
     ├── cases_{caseId}_documents.yaml                     # GET/POST /cases/{caseId}/documents
     ├── cases_{caseId}_documents_{documentId}.yaml        # GET/PATCH /cases/{caseId}/documents/{documentId}

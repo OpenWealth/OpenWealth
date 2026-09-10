@@ -6,7 +6,7 @@ put:
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   operationId: uploadDocumentContent
   tags:
-    - Document
+    - documents
   requestBody:
     content:
       application/octet-stream:
@@ -14,18 +14,11 @@ put:
           type: string
           format: binary
   responses:
-    '200':
-      description: Successful upload of the document content.
+    '204':
+      description: Successful upload of the document content (empty response).
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -34,8 +27,12 @@ put:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml
 get:
@@ -46,7 +43,7 @@ get:
     - $ref: ../../generics/components/parameters/path_documentId.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
-    - Document
+    - documents
   responses:
     '200':
       description: Get document content corresponding to the id.
@@ -55,7 +52,9 @@ get:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/octet-stream:
-          example: ''
+          schema:
+            type: string
+            format: binary
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -64,7 +63,11 @@ get:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml

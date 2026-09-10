@@ -6,7 +6,7 @@ get:
     - $ref: ../../generics/components/parameters/path_documentId.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
-    - Document
+    - documents
   responses:
     '200':
       description: Got the document corresponding to the id
@@ -28,8 +28,12 @@ get:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml
 patch:
@@ -40,7 +44,7 @@ patch:
     - $ref: ../../generics/components/parameters/path_documentId.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
-    - Document
+    - documents
   requestBody:
     content:
       application/json:
@@ -51,14 +55,10 @@ patch:
             $ref: ../components/examples/PdfStatement.yaml
   responses:
     '204':
-      description: Amendment accepted
+      description: Amendment accepted (empty response).
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Document.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -67,7 +67,11 @@ patch:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml

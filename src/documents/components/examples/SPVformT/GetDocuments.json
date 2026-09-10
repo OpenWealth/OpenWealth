@@ -1,8 +1,8 @@
 [
   {
     "id": "987654321",
-    "type": "SPVFormT",
-    "format": "pdf",
+    "type": "CONT",
+    "format": "DPDF",
     "fileName": "SPVFormT.pdf"
   }
 ]

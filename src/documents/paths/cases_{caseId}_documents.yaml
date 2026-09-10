@@ -9,7 +9,7 @@ get:
     Get a list of all documents related to a case.
   operationId: getDocuments
   tags:
-    - Document
+    - documents
   responses:
     '200':
       description: Returns a list with all document metadata records.
@@ -21,6 +21,7 @@ get:
       content:
         application/json:
           schema:
+            type: array
             items:
               $ref: ../components/schemas/Document.yaml
     '400':
@@ -29,8 +30,14 @@ get:
       $ref: ../../generics/components/responses/401.yaml
     '403':
       $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml
 post:
@@ -41,7 +48,7 @@ post:
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   operationId: addDocument
   tags:
-    - Document
+    - documents
   requestBody:
     content:
       application/json:
@@ -69,7 +76,13 @@ post:
       $ref: ../../generics/components/responses/401.yaml
     '403':
       $ref: ../../generics/components/responses/403.yaml
+    '404':
+      $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml

@@ -1,5 +1,5 @@
 {
-  "type": "SPVFormT",
-  "format": "pdf",
+  "type": "CONT",
+  "format": "DPDF",
   "fileName": "SPVFormT.pdf"
 }
