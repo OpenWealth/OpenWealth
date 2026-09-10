@@ -16,12 +16,14 @@ properties:
       - notAllowedValue
       - missingDocument
       - other
-    example: error
+    example: notAllowedValue
   description:
     type: string
+    maxLength: 256
     description: Reason of error related to object.
     example: Country of domicile missing on person object.
   objectPath:
     type: string
+    maxLength: 256
     description: JsonPointer (RFC 6901) to affected property.
-    example: /businessContext/customer/customerToPersonRelationList/0/person/countryOfDomicile
+    example: /content/customer/customerToPersonRelationList/0/person/countryOfDomicile

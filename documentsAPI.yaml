@@ -223,7 +223,7 @@ paths:
         Get a list of all documents related to a case.
       operationId: getDocuments
       tags:
-        - Document
+        - documents
       responses:
         '200':
           description: Returns a list with all document metadata records.
@@ -235,6 +235,7 @@ paths:
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/Document'
         '400':
@@ -243,8 +244,14 @@ paths:
           $ref: '#/components/responses/401'
         '403':
           $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
     post:
@@ -255,7 +262,7 @@ paths:
         - $ref: '#/components/parameters/correlation_id'
       operationId: addDocument
       tags:
-        - Document
+        - documents
       requestBody:
         content:
           application/json:
@@ -283,8 +290,14 @@ paths:
           $ref: '#/components/responses/401'
         '403':
           $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
   /cases/{caseId}/documents/{documentId}:
@@ -296,7 +309,7 @@ paths:
         - $ref: '#/components/parameters/path_documentId'
         - $ref: '#/components/parameters/correlation_id'
       tags:
-        - Document
+        - documents
       responses:
         '200':
           description: Got the document corresponding to the id
@@ -318,8 +331,12 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
     patch:
@@ -330,7 +347,7 @@ paths:
         - $ref: '#/components/parameters/path_documentId'
         - $ref: '#/components/parameters/correlation_id'
       tags:
-        - Document
+        - documents
       requestBody:
         content:
           application/json:
@@ -341,14 +358,10 @@ paths:
                 $ref: '#/components/examples/PdfStatement'
       responses:
         '204':
-          description: Amendment accepted
+          description: Amendment accepted (empty response).
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Document'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -357,8 +370,12 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
   /cases/{caseId}/documents/{documentId}/content:
@@ -370,7 +387,7 @@ paths:
         - $ref: '#/components/parameters/correlation_id'
       operationId: uploadDocumentContent
       tags:
-        - Document
+        - documents
       requestBody:
         content:
           application/octet-stream:
@@ -378,18 +395,11 @@ paths:
               type: string
               format: binary
       responses:
-        '200':
-          description: Successful upload of the document content.
+        '204':
+          description: Successful upload of the document content (empty response).
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -398,8 +408,12 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
     get:
@@ -410,7 +424,7 @@ paths:
         - $ref: '#/components/parameters/path_documentId'
         - $ref: '#/components/parameters/correlation_id'
       tags:
-        - Document
+        - documents
       responses:
         '200':
           description: Get document content corresponding to the id.
@@ -419,7 +433,9 @@ paths:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/octet-stream:
-              example: ''
+              schema:
+                type: string
+                format: binary
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -428,8 +444,12 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
 components:
@@ -512,27 +532,29 @@ components:
       description: Indicates the reason, why a case has the present status.
       readOnly: true
       required:
+        - type
         - description
       properties:
+        type:
+          type: string
+          description: Type of the reason related to the object. The value is taken from a fixed list of reason types.
+          enum:
+            - missingValue
+            - invalidValue
+            - notAllowedValue
+            - missingDocument
+            - other
+          example: notAllowedValue
         description:
           type: string
-          description: Description of the reason.
-          example: Documents missing
-        affectedProperties:
-          description: List of affected properties.
-          type: array
-          items:
-            type: object
-            description: Schema describing an affected property.
-            properties:
-              description:
-                type: string
-                description: Reason of error related to property.
-                example: Invalid name
-              propertyPath:
-                type: string
-                description: JSONPath to affected property.
-                example: $.dueDate
+          maxLength: 256
+          description: Reason of error related to object.
+          example: Country of domicile missing on person object.
+        objectPath:
+          type: string
+          maxLength: 256
+          description: JsonPointer (RFC 6901) to affected property.
+          example: /content/customer/customerToPersonRelationList/0/person/countryOfDomicile
     RelatedResource:
       type: object
       readOnly: true
@@ -550,6 +572,7 @@ components:
           example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
         type:
           type: string
+          maxLength: 35
           description: The type of resource that was created or modified.
           example: customer
         uri:
@@ -557,12 +580,6 @@ components:
           maxLength: 256
           description: Relative API path to the resource, allowing the initiator to retrieve it directly.
           example: /customers/3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
-    Date:
-      title: Date
-      type: string
-      description: Date according to ISO 8601.
-      format: date
-      example: '2018-04-13'
     Case:
       type: object
       description: |
@@ -607,66 +624,47 @@ components:
           maxLength: 500
           description: A detailed description providing additional context for the case.
           example: Opening a new discretionary mandate for the client.
-        createdDate:
-          description: The date when the case was created.
-          type: string
-          format: date
-          example: '2018-04-13'
-          readOnly: true
         dueDate:
           description: Target completion date for the case.
           type: string
           format: date
           example: '2018-04-13'
+        createdDateTime:
+          description: The date time when the case was created.
+          type: string
+          format: date-time
+          example: '2018-04-13T16:00:00Z'
           readOnly: true
-        completedDate:
+        updatedDateTime:
+          description: The date time when the case was last updated.
+          type: string
+          format: date-time
+          example: '2018-04-13T16:00:00Z'
+          readOnly: true
+        completedDateTime:
           description: Date when the case was completed or closed.
           type: string
-          format: date
-          example: '2018-04-13'
+          format: date-time
+          example: '2018-04-13T16:00:00Z'
           readOnly: true
-        assignee:
-          type: string
-          maxLength: 70
-          description: The person or team responsible for handling this case.
-          example: Anna Beispiel PC8-AB
-        initiatedBy:
-          type: string
-          maxLength: 70
-          description: The person or system that initiated this case.
-          example: Max Muster PC8-MM
-        businessContext:
+        content:
           type: object
           description: |
-            Type-specific context of the case. The structure of this object depends on the case type
+            Type-specific content of the case. The structure of this object depends on the case type
             and allows for flexible, type-specific data to be attached to the case.
           additionalProperties: true
-        statusReason:
-          $ref: '#/components/schemas/StatusReason'
+        statusReasonList:
+          type: array
+          description: List of reasons explaining the current status of the case, such as errors or missing information.
+          items:
+            $ref: '#/components/schemas/StatusReason'
+          readOnly: true
         outputList:
           type: array
           description: Resources created or modified as a result of processing this case. Populated by the bank as the case progresses.
           readOnly: true
           items:
             $ref: '#/components/schemas/RelatedResource'
-        commentList:
-          type: array
-          description: List of comments or notes added to the case.
-          items:
-            type: object
-            properties:
-              author:
-                type: string
-                maxLength: 70
-                description: Author of the comment.
-                example: Anna Beispiel
-              date:
-                $ref: '#/components/schemas/Date'
-              text:
-                type: string
-                maxLength: 500
-                description: Content of the comment.
-                example: Initial review completed, awaiting client documents.
     CommonErrorType:
       title: Common Error Type
       description: Error Types for CommonErrorResponse.
@@ -709,6 +707,7 @@ components:
           example: path/to/corresponding/resource
     Document:
       type: object
+      additionalProperties: true
       required:
         - type
       properties:
@@ -768,16 +767,18 @@ components:
           description: Technical name of the file.
           type: string
           maxLength: 140
-        createdAt:
-          readOnly: true
+        createdDateTime:
+          description: The date time when the case was created.
           type: string
           format: date-time
           example: '2023-12-06T11:36:08.033Z'
-        updatedAt:
           readOnly: true
+        updatedDateTime:
+          description: The date time when the case was last updated.
           type: string
           format: date-time
           example: '2023-12-06T11:36:08.033Z'
+          readOnly: true
   responses:
     '400':
       headers:
