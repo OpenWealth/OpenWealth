@@ -6,6 +6,7 @@ properties:
     type: string
     description: Name of the company the person works/worked for.
     maxLength: 140
+    example: Beispiel AG
   countryOfDomicile:
     $ref: 'Country.yaml'
   description:

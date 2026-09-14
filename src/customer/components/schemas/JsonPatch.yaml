@@ -1,5 +1,5 @@
 title: JSON Patch
-description: A JSON Patch document as defined by RFC 6902
+description: A JSON Patch document as defined by RFC 6902.
 type: array
 items:
   type: object
@@ -9,7 +9,8 @@ items:
   properties:
     op:
       type: string
-      description: The operation to perform
+      description: The operation to perform.
+      example: replace
       enum:
         - add
         - remove
@@ -19,13 +20,15 @@ items:
         - test
     path:
       type: string
-      description: JSON Pointer (RFC 6901) targeting the location in the document
+      description: JSON Pointer (RFC 6901) targeting the location in the document.
       pattern: '^(/[^/~]*(~[01][^/~]*)*)*$'
+      example: /status
     value:
       description: The value to use for add, replace, or test operations.
       additionalProperties: true
     from:
       type: string
-      description: JSON Pointer for the source location, used by move and copy
+      description: JSON Pointer for the source location, used by move and copy.
       pattern: '^(/[^/~]*(~[01][^/~]*)*)*$'
       maxLength: 2048
+      example: /oldStatus

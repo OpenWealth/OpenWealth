@@ -7,6 +7,16 @@
   "taxDomicileList": [
     "CH"
   ],
+  "communicationMediumList": [
+    {
+      "type": "phone",
+      "value": "0041998887766"
+    },
+    {
+      "type": "email",
+      "value": "urs.muster@example.com"
+    }
+  ],
   "givenName": "Urs",
   "middleName": "Stefan",
   "lastName": "Muster",

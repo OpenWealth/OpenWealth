@@ -22,6 +22,7 @@ properties:
     type: string
     description: Identification of the document or template.
     maxLength: 70
+    example: DOC-2023-000123
   issueDate:
     type: string
     format: date
@@ -37,6 +38,7 @@ properties:
     description: Name of document or transaction, for example, tax invoice.
     minLength: 1
     maxLength: 140
+    example: Tax invoice
   languageCode:
     type: string
     description: Unique identifier for a language used in the document.
@@ -57,6 +59,7 @@ properties:
   fileName:
     type: string
     description: Technical name of the file.
+    example: tax-invoice.pdf
     maxLength: 140
   createdDateTime:
     type: string

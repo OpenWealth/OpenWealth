@@ -1,5 +1,5 @@
 type: string
-description: Salutation of the person
+description: Salutation of the person.
 enum:
   - ms
   - mrs

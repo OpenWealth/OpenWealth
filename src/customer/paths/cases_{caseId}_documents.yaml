@@ -9,7 +9,7 @@ get:
     Get a list of all documents related to a case.
   operationId: getDocuments
   tags:
-    - Document
+    - documents
   responses:
     '200':
       description: Returns a list with all document metadata records.
@@ -41,7 +41,7 @@ post:
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   operationId: addDocument
   tags:
-    - Document
+    - documents
   requestBody:
     content:
       application/json:
@@ -49,7 +49,7 @@ post:
           $ref: ../components/schemas/Document.yaml
   responses:
     '201':
-      description: Document was accepted
+      description: Document was accepted.
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml

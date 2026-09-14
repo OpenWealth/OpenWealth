@@ -1,11 +1,11 @@
 type: object
-description: Provides information about the employment status and the employment itself (e.g. company)
+description: Provides information about the employment status and the employment itself (e.g. company).
 required:
   - status
 properties:
   status:
     type: string
-    description: Status of employment
+    description: Status of employment.
     enum:
       - employed
       - selfEmployed
@@ -19,7 +19,7 @@ properties:
     example: retired
   profession:
     type: string
-    description: Profession
+    description: Profession.
     maxLength: 35
     example: Economist
   yearOfRetirement:

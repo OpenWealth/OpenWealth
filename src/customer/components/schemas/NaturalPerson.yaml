@@ -41,7 +41,7 @@ properties:
     $ref: '../../../generics/components/schemas/Date.yaml'
   gender:
     type: string
-    description: Gender of the person
+    description: Gender of the person.
     enum:
       - male
       - female

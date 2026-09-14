@@ -4,7 +4,7 @@ required:
 properties:
   relation:
     type: string
-    description: Type of relation between two persons
+    description: Type of relation between two persons.
     enum:
       - isParentOf
       - isPartnerOf

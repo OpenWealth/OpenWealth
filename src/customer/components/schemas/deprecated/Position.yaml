@@ -1,4 +1,0 @@
-type: string
-maxLength: 35
-description: Function/position which the person helds at the company.
-example: CEO

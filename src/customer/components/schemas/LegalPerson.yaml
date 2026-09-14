@@ -27,7 +27,7 @@ properties:
     example: 529900UVM8LC55IFAA52
     pattern: '[A-Z0-9]{18,18}[0-9]{2,2}'
   domicilaryCompany:
-    description: Indicates whether the company is a domiciliary company
+    description: Indicates whether the company is a domiciliary company.
     type: boolean
     example: FALSE
   additionalInformation:

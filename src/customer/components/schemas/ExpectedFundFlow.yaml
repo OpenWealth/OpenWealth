@@ -55,6 +55,7 @@ properties:
     type: string
     description: Name of the bank of the counterparty.
     maxLength: 128
+    example: ZKB
   domicileOfBank:
     description: Domicile of the bank of the counterparty
     $ref: 'Country.yaml'

@@ -5,7 +5,7 @@ required:
 properties:
   sourceType:
     type: string
-    description: Original source of assets
+    description: Original source of assets.
     enum:
       - incomeFromEmployment
       - incomeFromBusinessOwnership
@@ -29,6 +29,6 @@ properties:
     example: US
   additionalInformation:
     type: string
-    description: 'Description of the most important milestones/economic activities; which form the basis for the assets of the customer'
+    description: 'Description of the most important milestones/economic activities; which form the basis for the assets of the customer.'
     maxLength: 2048
     example: This is additional information.

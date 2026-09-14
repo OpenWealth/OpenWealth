@@ -27,7 +27,7 @@ properties:
     example: letter
   receptionRestriction:
     type: string
-    description: Reception restrictions for the physical delivery of postal items
+    description: Reception restrictions for the physical delivery of postal items.
     maxLength: 35
     example: confidential
   salutation:

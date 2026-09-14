@@ -22,9 +22,10 @@ properties:
     type: string
     description: Name of the customer.
     maxLength: 140
+    example: Anna Muster
   type:
     type: string
-    description: Type of customer relationship
+    description: Type of customer relationship.
     enum:
       - individual
       - groupOfIndividuals
@@ -40,7 +41,7 @@ properties:
     $ref: Address.yaml
   status:
     type: string
-    description: Status of the customer relationship
+    description: Status of the customer relationship.
     enum:
       - active
       - inactive

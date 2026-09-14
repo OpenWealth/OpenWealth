@@ -6,10 +6,10 @@ get:
     - $ref: ../../generics/components/parameters/path_documentId.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
-    - Document
+    - documents
   responses:
     '200':
-      description: Got the document corresponding to the id
+      description: Got the document corresponding to the id.
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
@@ -37,7 +37,7 @@ patch:
     - $ref: ../../generics/components/parameters/path_documentId.yaml
     - $ref: ../../generics/components/parameters/correlation_id.yaml
   tags:
-    - Document
+    - documents
   requestBody:
     content:
       application/json:
@@ -45,7 +45,7 @@ patch:
           $ref: ../components/schemas/Document.yaml
   responses:
     '204':
-      description: Amendment accepted
+      description: Amendment accepted.
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml

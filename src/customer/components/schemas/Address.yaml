@@ -12,12 +12,12 @@ properties:
     example: 'Bahnhofstrasse 12'
   streetLine2:
     type: string
-    description: Apartment, suite, unit, building, c/o
+    description: Apartment, suite, unit, building, c/o.
     maxLength: 70
     example: 'Apt 4B'
   postalCode:
     type: string
-    description: ZIP or postal code
+    description: ZIP or postal code.
     maxLength: 10
     example: '8001'
   city:
@@ -27,7 +27,7 @@ properties:
     example: 'Zürich'
   stateProvince:
     type: string
-    description: State, canton, or province
+    description: State, canton, or province.
     maxLength: 70
     example: 'ZH'
   country:

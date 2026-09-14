@@ -36,6 +36,11 @@ properties:
       $ref: 'Tin.yaml'
   language:
     $ref: 'Language.yaml'
+  communicationMediumList:
+    type: array
+    description: List of communication media of the person.
+    items:
+      $ref: 'Medium.yaml'
   personToPersonRelationList:
     type: array
     description: List of relations between persons.

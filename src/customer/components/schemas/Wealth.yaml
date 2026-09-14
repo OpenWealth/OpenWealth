@@ -11,7 +11,7 @@ properties:
   additionalInformation:
     description:
       'Description of the most important milestones/economic activities;
-      which form the basis for the assets of the customer'
+      which form the basis for the assets of the customer.'
     type: string
     maxLength: 2048
     example: This is additional information.
