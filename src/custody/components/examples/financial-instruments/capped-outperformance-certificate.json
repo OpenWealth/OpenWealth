@@ -1,0 +1,65 @@
+{
+  "type": "structuredProduct",
+  "structuredProductType": "cappedOutperformanceCertificate",
+  "sspaCode": "1310",
+  "eusipaCode": "1310",
+  "name": "JB CAPPED OUTPERFORMANCE CERTIFICATE ON NESTLE SA",
+  "identificationList": [
+    {
+      "type": "isin",
+      "identifier": "CH1379724334"
+    },
+    {
+      "type": "valoren",
+      "identifier": "137972433"
+    },
+    {
+      "type": "tickerSymbol",
+      "identifier": "SBPKJB"
+    }
+  ],
+  "initialFixingDate": "2024-10-24",
+  "issuer": "Bank Julius Baer & Co. Ltd., Guernsey",
+  "issueDate": "2024-10-31",
+  "issuePrice": {
+    "type": "actual",
+    "value": 84.82
+  },
+  "currencyOfDenomination": "CHF",
+  "capPrice": {
+    "type": "actual",
+    "value": 110.266
+  },
+  "participationFactor": 200,
+  "excercisePrice": {
+    "type": "actual",
+    "value": 84.82
+  },
+  "maturityDate": "2026-11-02",
+  "underlyingFinancialInstrument": {
+    "type": "index",
+    "name": "Nestlé Ltd",
+    "identificationList": [
+      {
+        "type": "isin",
+        "identifier": "CH0038863350"
+      },
+      {
+        "type": "valoren",
+        "identifier": "3886335"
+      }
+    ],
+    "denominationCurrency": "CHF",
+    "initialLevel": {
+      "type": "actual",
+      "value": 84.82,
+      "currency": "CHF"
+    },
+    "excercisePrice": {
+      "type": "actual",
+      "value": 84.82,
+      "currency": "CHF"
+    }
+  },
+  "additionalDetails": "100.00% STRIKE - 200.00% PARTICIPATION - 130.00% CAP - CHF 135.71 MAX. REDEMPTION AMOUNT - 160.00% MAX. REDEMPTION - PHYSICAL SETTLEMENT - CHF"
+}

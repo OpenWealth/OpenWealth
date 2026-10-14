@@ -1,0 +1,196 @@
+{
+  "type": "structuredProduct",
+  "structuredProductType": "barrierReverseConvertible",
+  "sspaCode": "1230",
+  "eusipaCode": "1230",
+  "name": "10.00% P.A. JB CALLABLE MULTI BARRIER REVERSE CONVERTIBLE (55%) ON SWISS RE AG, SANDOZ GROUP AG, STADLER RAIL AG, SIKA AG",
+  "identificationList": [
+    {
+      "type": "isin",
+      "identifier": "CH1328718213"
+    },
+    {
+      "type": "valoren",
+      "identifier": "132871821"
+    },
+    {
+      "type": "symbol",
+      "identifier": "MCBBJB"
+    }
+  ],
+  "initialFixingDate": "2024-10-04",
+  "issuer": "Bank Julius Baer & Co. Ltd., Guernsey",
+  "issueDate": "2024-10-11",
+  "issuePrice": {
+    "type": "percent",
+    "value": 100
+  },
+  "currencyOfDenomination": "CHF",
+  "denomination": {
+    "amount": 1000,
+    "currency": "CHF"
+  },
+  "coupon": {
+    "type": "fixed",
+    "value": 0.1,
+    "paymentFrequency": "yearly"
+  },
+  "barrier": {
+    "price": {
+      "type": "percent",
+      "value": 55
+    },
+    "barrierEvent": "atOrBelow",
+    "observationType": "continuous",
+    "underlyingWatchType": "worstOf"
+  },
+  "settlementType": "cash",
+  "excercisePrice": {
+    "type": "percent",
+    "value": 100
+  },
+  "maturityDate": "2026-03-31",
+  "underlyingFinancialInstrumentList": [
+    {
+      "type": "equity",
+      "name": "Swiss Re Ltd",
+      "identificationList": [
+        {
+          "type": "isin",
+          "identifier": "CH0126881561"
+        },
+        {
+          "type": "valoren",
+          "identifier": "12688156"
+        }
+      ],
+      "currencyOfDenomination": "CHF",
+      "denomination": {
+        "amount": 1000,
+        "currency": "CHF"
+      },
+      "initialLevel": {
+        "type": "actual",
+        "value": 114.85,
+        "currency": "CHF"
+      },
+      "barrier": {
+        "price": {
+          "type": "actual",
+          "value": 63.1675,
+          "currency": "CHF"
+        },
+        "barrierEvent": "atOrBelow",
+        "observationType": "continuous"
+      },
+      "excercisePrice": {
+        "type": "actual",
+        "value": 114.85,
+        "currency": "CHF"
+      }
+    },
+    {
+      "type": "equity",
+      "name": "Sandoz Group AG",
+      "identificationList": [
+        {
+          "type": "isin",
+          "identifier": "CH1243598427"
+        },
+        {
+          "type": "valoren",
+          "identifier": "124359842"
+        }
+      ],
+      "currencyOfDenomination": "CHF",
+      "initialLevel": {
+        "type": "actual",
+        "value": 35.46,
+        "currency": "CHF"
+      },
+      "barrier": {
+        "price": {
+          "type": "actual",
+          "value": 19.503,
+          "currency": "CHF"
+        },
+        "barrierEvent": "atOrBelow",
+        "observationType": "continuous"
+      },
+      "excercisePrice": {
+        "type": "actual",
+        "value": 35.46,
+        "currency": "CHF"
+      }
+    },
+    {
+      "type": "equity",
+      "name": "Stadler Rail AG",
+      "identificationList": [
+        {
+          "type": "isin",
+          "identifier": "CH0002178181"
+        },
+        {
+          "type": "valoren",
+          "identifier": "217818"
+        }
+      ],
+      "currencyOfDenomination": "CHF",
+      "initialLevel": {
+        "type": "actual",
+        "value": 25.95,
+        "currency": "CHF"
+      },
+      "barrier": {
+        "price": {
+          "type": "actual",
+          "value": 14.2725,
+          "currency": "CHF"
+        },
+        "barrierEvent": "atOrBelow",
+        "observationType": "continuous"
+      },
+      "excercisePrice": {
+        "type": "actual",
+        "value": 25.95,
+        "currency": "CHF"
+      }
+    },
+    {
+      "type": "equity",
+      "name": "Sika Ltd",
+      "identificationList": [
+        {
+          "type": "isin",
+          "identifier": "CH0418792922"
+        },
+        {
+          "type": "valoren",
+          "identifier": "41879292"
+        }
+      ],
+      "currencyOfDenomination": "CHF",
+      "initialLevel": {
+        "type": "actual",
+        "value": 265.20,
+        "currency": "CHF"
+      },
+      "barrier": {
+        "price": {
+          "type": "actual",
+          "value": 145.86,
+          "currency": "CHF"
+        },
+        "barrierEvent": "atOrBelow",
+        "observationType": "continuous"
+      },
+      "excercisePrice": {
+        "type": "actual",
+        "value": 265.20,
+        "currency": "CHF"
+      }
+    }
+  ],
+  "additionalDetails": "CONTINUOUS BARRIER OBSERVATION - CASH SETTLEMENT - CHF - MONTHLY CALLABLE"
+}

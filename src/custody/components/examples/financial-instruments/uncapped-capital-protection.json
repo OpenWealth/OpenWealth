@@ -1,0 +1,61 @@
+{
+  "type": "structuredProduct",
+  "structuredProductType": "uncappedCapitalProtection",
+  "sspaCode": "1100",
+  "eusipaCode": "1100",
+  "name": "2Y JB 100.00% Capital Protection Note with Participation (140%) on Swiss Market® Index",
+  "identificationList": [
+    {
+      "type": "isin",
+      "identifier": "CH1349306741"
+    },
+    {
+      "type": "valoren",
+      "identifier": "134930674"
+    },
+    {
+      "type": "tickerSymbol",
+      "identifier": "SACCJB"
+    }
+  ],
+  "initialFixingDate": "2024-06-28",
+  "issuer": "Bank Julius Baer & Co. Ltd., Guernsey",
+  "issueDate": "2024-07-05",
+  "issuePrice": {
+    "type": "percent",
+    "value": 100
+  },
+  "currencyOfDenomination": "USD",
+  "capitalProtection": 100,
+  "participationFactor": 140,
+  "quanto": true,
+  "excercisePrice": {
+    "type": "percent",
+    "value": 100
+  },
+  "maturityDate": "2026-06-29",
+  "underlyingFinancialInstrument": {
+    "type": "index",
+    "name": "Swiss Market Index (SMI®)",
+    "identificationList": [
+      {
+        "type": "isin",
+        "identifier": "CH0009980894"
+      },
+      {
+        "type": "valoren",
+        "identifier": "998089"
+      }
+    ],
+    "initialLevel": {
+      "type": "actual",
+      "value": 11993.83,
+      "currency": "CHF"
+    },
+    "excercisePrice": {
+      "type": "actual",
+      "value": 11993.83,
+      "currency": "CHF"
+    }
+  }
+}
