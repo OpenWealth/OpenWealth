@@ -18,10 +18,11 @@ properties:
       - upAndIn
       - downAndIn
       - upAndOut
-      - downAndIn
+      - downAndOut
   observationType:
-    description: How the barrier event is observed
+    description: How the barrier event is observed.
     type: string
+    example: continuous
     enum:
       - continuous
       - atObservationDate
@@ -31,8 +32,9 @@ properties:
       type: string
       format: date
   barrierEvent:
-    description: TBD
+    description: TBD.
     type: string
+    example: atOrBelow
     enum:
       - atOrBelow
       - atOrAbove
@@ -43,4 +45,5 @@ properties:
       - allOf
       - worstOf
       - bestOf
+    example: worstOf
 ## TODO: barrier observation dates, period

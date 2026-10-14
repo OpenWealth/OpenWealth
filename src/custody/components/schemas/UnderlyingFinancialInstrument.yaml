@@ -4,25 +4,26 @@ allOf:
   - $ref: 'FinancialInstrumentBase.yaml'
   - properties:
       initialLevel:
-        decription: |
+        description: |
           with respect to each Underlying, the relevant Initial Level, which is equal to
           100% of its Level on the Initial Fixing Date, as determined by the Calculation Agent.
-        $ref: '../../Types/Price.yaml'
+        $ref: 'Price.yaml'
       excercisePrice:
         description: |
           An option's strike refers to the investor's buying price (call option) or selling price (put option) of the underlying.
           For participation and yield enhancement products, the strike defines
           the reference price of the underlyings of the relevant Structured Product.
           Barriers, bonus levels and cap levels are based on the reference price.
-        $ref: '../../Types/Price.yaml'
+        $ref: 'Price.yaml'
       barrier:
-        $ref: '../../Types/Barrier.yaml'
+        $ref: 'Barrier.yaml'
       upperBarrier:
-        $ref: '../../Types/Barrier.yaml'
+        $ref: 'Barrier.yaml'
       lowerBarrier:
-        $ref: '../../Types/Barrier.yaml'
+        $ref: 'Barrier.yaml'
       weight:
         type: number
+        example: 0.25
       relevantNumber:
         description: |
           With respect to each Underlying, the number of such Underlying contained in the Basket on the
@@ -30,5 +31,6 @@ allOf:
           table above of such Underlying contained in the Basket and as may be adjusted due to the
           Reinvested Dividend Payments during the term of the Products by the Calculation Agent.
         type: number
+        example: 1
 # valuation time?
 

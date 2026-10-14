@@ -1,7 +1,7 @@
 title: StructuredProductType
 type: string
 description: TBD.
-example: capialProtectionNoteWithParticipation
+example: barrierReverseConvertible
 enum:
   - uncappedCapitalProtection ## Kapitalschutz-Zertifikat mit Partizipation
   - cappedCapitalProtection ## nicht in CH Liste
