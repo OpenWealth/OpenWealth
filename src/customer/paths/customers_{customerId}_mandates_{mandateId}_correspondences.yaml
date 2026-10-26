@@ -12,15 +12,15 @@ get:
     - $ref: ../../generics/components/parameters/path_mandateId.yaml
     - $ref: ../../generics/components/parameters/cursor.yaml
     - $ref: ../../generics/components/parameters/limit.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '200':
       description: Correspondence List.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
-        nextCursor:
-          $ref: ../../generics/components/headers/X-Next-Cursor.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
+        Next-Cursor:
+          $ref: ../../generics/components/headers/Next-Cursor.yaml
       content:
         application/json:
           schema:
@@ -52,7 +52,7 @@ post:
   parameters:
     - $ref: ../../generics/components/parameters/path_customerId.yaml
     - $ref: ../../generics/components/parameters/path_mandateId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   requestBody:
     content:
       application/json:
@@ -62,8 +62,8 @@ post:
     '201':
       description: Correspondence successfully created.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:

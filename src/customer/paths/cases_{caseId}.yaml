@@ -6,13 +6,13 @@ get:
   operationId: getCaseById
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '200':
       description: Case.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
@@ -37,11 +37,13 @@ put:
   tags:
     - cases
   summary: Updates a case by id
-  description: Updates an existing case by id.
+  description: |
+    Updates an existing case by id. A case can only be updated while it is in status `draft` or
+    `actionRequired`; otherwise `409` is returned. The case `type` cannot be changed after creation.
   operationId: updateCaseById
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   requestBody:
     content:
       application/json:
@@ -51,8 +53,8 @@ put:
     '200':
       description: Case successfully updated.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
@@ -67,6 +69,8 @@ put:
       $ref: ../../generics/components/responses/404.yaml
     '405':
       $ref: ../../generics/components/responses/405.yaml
+    '409':
+      $ref: ../../generics/components/responses/409.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '501':
@@ -77,17 +81,19 @@ delete:
   tags:
     - cases
   summary: Deletes a case by id
-  description: Deletes a specific case by id.
+  description: |
+    Deletes a specific case by id. A case can only be deleted while it is in status `draft`, i.e.
+    before it has been submitted; otherwise `409` is returned and the case must be cancelled instead.
   operationId: deleteCaseById
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '204':
       description: Case successfully deleted (empty response).
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -98,6 +104,8 @@ delete:
       $ref: ../../generics/components/responses/404.yaml
     '405':
       $ref: ../../generics/components/responses/405.yaml
+    '409':
+      $ref: ../../generics/components/responses/409.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '501':

@@ -1,6 +1,7 @@
 get:
   operationId: getDocument
   summary: Get the Metadata of a Document
+  description: Returns the metadata of a specific document of a case.
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../../generics/components/parameters/path_documentId.yaml
@@ -32,6 +33,9 @@ get:
 patch:
   operationId: patchDocument
   summary: Amend the metadata of a document
+  description: |
+    Amends the metadata of a document. Documents can only be changed while the case is in status
+    `draft` or `actionRequired`; otherwise `409` is returned.
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../../generics/components/parameters/path_documentId.yaml
@@ -44,7 +48,7 @@ patch:
         schema:
           $ref: ../components/schemas/Document.yaml
   responses:
-    '204':
+    '200':
       description: Amendment accepted.
       headers:
         Correlation-Id:
@@ -61,6 +65,8 @@ patch:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
+    '409':
+      $ref: ../../generics/components/responses/409.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '503':

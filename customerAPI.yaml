@@ -49,15 +49,15 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Cases List.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -87,7 +87,7 @@ paths:
       description: Creates a new case (lifecycle process).
       operationId: createCase
       parameters:
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -97,8 +97,8 @@ paths:
         '201':
           description: Case successfully created.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -128,13 +128,13 @@ paths:
       operationId: getCaseById
       parameters:
         - $ref: '#/components/parameters/path_caseId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Case.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -159,11 +159,13 @@ paths:
       tags:
         - cases
       summary: Updates a case by id
-      description: Updates an existing case by id.
+      description: |
+        Updates an existing case by id. A case can only be updated while it is in status `draft` or
+        `actionRequired`; otherwise `409` is returned. The case `type` cannot be changed after creation.
       operationId: updateCaseById
       parameters:
         - $ref: '#/components/parameters/path_caseId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -173,8 +175,8 @@ paths:
         '200':
           description: Case successfully updated.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -189,6 +191,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -199,17 +203,19 @@ paths:
       tags:
         - cases
       summary: Deletes a case by id
-      description: Deletes a specific case by id.
+      description: |
+        Deletes a specific case by id. A case can only be deleted while it is in status `draft`, i.e.
+        before it has been submitted; otherwise `409` is returned and the case must be cancelled instead.
       operationId: deleteCaseById
       parameters:
         - $ref: '#/components/parameters/path_caseId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '204':
           description: Case successfully deleted (empty response).
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -220,6 +226,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -231,7 +239,13 @@ paths:
       tags:
         - cases
       summary: Action on a specific case
-      description: Places an action request for a specific case.
+      description: |
+        Places an action request for a specific case. The allowed actions depend on the status of the case;
+        an action that is not allowed in the current status returns `409`.
+          * `submit` - Allowed in `draft` and `actionRequired`. Moves the case to `submitted`.
+          * `cancel` - Allowed in `submitted` and `actionRequired`, where the case moves to `cancelled`.
+            In `inProgress` and `pendingApproval` the cancellation is a request that the bank may accept
+            (case moves to `cancelled`) or decline (status is unchanged, reason in `statusReasonList`).
       operationId: actionOnCase
       parameters:
         - $ref: '#/components/parameters/path_caseId'
@@ -257,6 +271,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -287,6 +303,7 @@ paths:
           content:
             application/json:
               schema:
+                type: array
                 items:
                   $ref: '#/components/schemas/Document'
         '400':
@@ -295,13 +312,17 @@ paths:
           $ref: '#/components/responses/401'
         '403':
           $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
         '503':
           $ref: '#/components/responses/503'
     post:
       summary: Add a New Document
-      description: Upload the metadata for a new file.
+      description: |
+        Upload the metadata for a new file. Documents can only be added while the case is in status
+        `draft` or `actionRequired`; otherwise `409` is returned.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/correlation_id'
@@ -329,6 +350,10 @@ paths:
           $ref: '#/components/responses/401'
         '403':
           $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '503':
@@ -337,6 +362,7 @@ paths:
     get:
       operationId: getDocument
       summary: Get the Metadata of a Document
+      description: Returns the metadata of a specific document of a case.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -368,6 +394,9 @@ paths:
     patch:
       operationId: patchDocument
       summary: Amend the metadata of a document
+      description: |
+        Amends the metadata of a document. Documents can only be changed while the case is in status
+        `draft` or `actionRequired`; otherwise `409` is returned.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -380,7 +409,7 @@ paths:
             schema:
               $ref: '#/components/schemas/Document'
       responses:
-        '204':
+        '200':
           description: Amendment accepted.
           headers:
             Correlation-Id:
@@ -397,6 +426,8 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '503':
@@ -404,6 +435,9 @@ paths:
   /cases/{caseId}/documents/{documentId}/content:
     put:
       summary: Upload binary document content
+      description: |
+        Uploads the binary content of a document. Content can only be uploaded while the case is in status
+        `draft` or `actionRequired`; otherwise `409` is returned.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -439,6 +473,8 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '503':
@@ -446,6 +482,7 @@ paths:
     get:
       operationId: getDocumentContent
       summary: Download Document Content
+      description: Returns the binary content of a specific document of a case.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -486,15 +523,15 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Returns a list with all customers.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -526,13 +563,13 @@ paths:
       operationId: getCustomersByCustomerId
       parameters:
         - $ref: '#/components/parameters/path_customerId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Returns a the specified customer.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -567,15 +604,15 @@ paths:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Mandates List.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -608,13 +645,13 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_mandateId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Mandate.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -650,15 +687,15 @@ paths:
         - $ref: '#/components/parameters/path_mandateId'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Powers of Attorney List.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -690,7 +727,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_mandateId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -700,8 +737,8 @@ paths:
         '201':
           description: Power of Attorney successfully created.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -733,13 +770,13 @@ paths:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_mandateId'
         - $ref: '#/components/parameters/path_powerOfAttorneyId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Power of Attorney.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -770,7 +807,7 @@ paths:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_mandateId'
         - $ref: '#/components/parameters/path_powerOfAttorneyId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -780,8 +817,8 @@ paths:
         '200':
           description: Power of Attorney successfully updated.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -812,13 +849,13 @@ paths:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_mandateId'
         - $ref: '#/components/parameters/path_powerOfAttorneyId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '204':
           description: Power of Attorney successfully deleted (empty response).
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -850,15 +887,15 @@ paths:
         - $ref: '#/components/parameters/path_mandateId'
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Correspondence List.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -890,7 +927,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_mandateId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -900,8 +937,8 @@ paths:
         '201':
           description: Correspondence successfully created.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -933,13 +970,13 @@ paths:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_mandateId'
         - $ref: '#/components/parameters/path_correspondenceId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Correspondence.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -970,7 +1007,7 @@ paths:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_mandateId'
         - $ref: '#/components/parameters/path_correspondenceId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       requestBody:
         content:
           application/json:
@@ -980,8 +1017,8 @@ paths:
         '200':
           description: Correspondence successfully updated.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -1012,13 +1049,13 @@ paths:
         - $ref: '#/components/parameters/path_customerId'
         - $ref: '#/components/parameters/path_mandateId'
         - $ref: '#/components/parameters/path_correspondenceId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '204':
           description: Correspondence successfully deleted (empty response).
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -1048,15 +1085,15 @@ paths:
       parameters:
         - $ref: '#/components/parameters/cursor'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Returns a list with all persons.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
-            nextCursor:
-              $ref: '#/components/headers/X-Next-Cursor'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
+            Next-Cursor:
+              $ref: '#/components/headers/Next-Cursor'
           content:
             application/json:
               schema:
@@ -1088,13 +1125,13 @@ paths:
       operationId: getPersonsByPersonId
       parameters:
         - $ref: '#/components/parameters/path_personId'
-        - $ref: '#/components/parameters/x_correlation_id_in_header'
+        - $ref: '#/components/parameters/correlation_id'
       responses:
         '200':
           description: Returns a the specified person.
           headers:
-            X-Correlation-ID:
-              $ref: '#/components/headers/X-Correlation-Id'
+            Correlation-Id:
+              $ref: '#/components/headers/Correlation-Id'
           content:
             application/json:
               schema:
@@ -2212,7 +2249,8 @@ components:
       type: object
       readOnly: true
       description: |
-        This object represents a resource that is related to the document, such as a case, customer, or mandate.
+        This object represents a resource that is related to a case or document, such as a customer, mandate,
+        document or questionnaire.
         It provides the necessary information to identify and retrieve the related resource through the API.
       required:
         - id
@@ -2220,19 +2258,21 @@ components:
       properties:
         id:
           type: string
-          description: The unique ID of the created or modified resource.
+          description: The unique ID of the related resource.
           maxLength: 128
           example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
         type:
           type: string
-          description: The type of resource that was created or modified.
+          description: The type of the related resource.
           enum:
+            - case
             - customer
             - person
             - mandate
             - powerOfAttorney
             - correspondence
             - document
+            - questionnaire
             - other
           example: customer
         uri:
@@ -2351,17 +2391,30 @@ components:
           example: customProcess
         status:
           type: string
-          description: Indicates the current status of the case in its lifecycle.
+          description: |
+            Indicates the current status of the case in its lifecycle. The status is changed by the bank or
+            through the actions on the case; it cannot be set directly by the API consumer.
+              * `draft` - Created by the API consumer and not yet submitted. Can be updated, deleted and submitted.
+              * `submitted` - Submitted by the API consumer and waiting to be picked up by the bank.
+              * `actionRequired` - Returned by the bank because further information or documents are needed
+                (see `statusReasonList` and `outputList`). Can be updated and submitted again.
+              * `inProgress` - Being processed by the bank.
+              * `pendingApproval` - Processed by the bank and waiting for internal approval.
+              * `approved` - Approved by the bank; the resulting resources are being set up.
+              * `rejected` - Final. Declined by the bank (see `statusReasonList`).
+              * `completed` - Final. Processing finished; created or modified resources are listed in `outputList`.
+              * `cancelled` - Final. Withdrawn by the API consumer.
           enum:
             - draft
-            - open
+            - submitted
+            - actionRequired
             - inProgress
             - pendingApproval
             - approved
             - rejected
             - completed
             - cancelled
-          example: open
+          example: submitted
           readOnly: true
         title:
           type: string
@@ -2418,7 +2471,10 @@ components:
             $ref: '#/components/schemas/RelatedResource'
         documentList:
           type: array
-          description: List of documents associated with this case added by the API consumer (EAM).
+          description: |
+            List of documents associated with this case, added by the API consumer (EAM). Documents can only
+            be added or changed while the case is in status `draft` or `actionRequired`. Documents provided
+            by the bank are referenced in `outputList`.
           items:
             $ref: '#/components/schemas/Document'
     CommonErrorType:
@@ -2533,6 +2589,19 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+    '409':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Conflict - The request conflicts with the current state of the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
     '500':
       headers:
         Content-Type:
@@ -2589,9 +2658,9 @@ components:
         format: int32
         minimum: 1
       description: Maximum number of items to return.
-    x_correlation_id_in_header:
+    correlation_id:
       in: header
-      name: X-Correlation-ID
+      name: Correlation-Id
       required: true
       schema:
         type: string
@@ -2617,13 +2686,6 @@ components:
           - submit
           - cancel
       description: Parameter for the action requested for a given case.
-    correlation_id:
-      in: header
-      name: Correlation-Id
-      required: true
-      schema:
-        type: string
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
     path_documentId:
       name: documentId
       in: path
@@ -2687,12 +2749,12 @@ components:
         description: Unique and unambiguous identification used by the bank for the person.
       description: Person ID Parameter.
   headers:
-    X-Correlation-Id:
+    Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
       schema:
         type: string
         example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    X-Next-Cursor:
+    Next-Cursor:
       description: An opaque string value, or an empty string if there are no more results.
       required: false
       schema:
@@ -2707,14 +2769,4 @@ components:
       schema:
         type: string
         example: en
-    Correlation-Id:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    Next-Cursor:
-      description: An opaque string value, or an empty string if there are no more results.
-      required: false
-      schema:
-        type: string
   securitySchemes: {}

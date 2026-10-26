@@ -1,7 +1,8 @@
 type: object
 readOnly: true
 description: |
-  This object represents a resource that is related to the document, such as a case, customer, or mandate.
+  This object represents a resource that is related to a case or document, such as a customer, mandate,
+  document or questionnaire.
   It provides the necessary information to identify and retrieve the related resource through the API.
 required:
   - id
@@ -9,19 +10,21 @@ required:
 properties:
   id:
     type: string
-    description: The unique ID of the created or modified resource.
+    description: The unique ID of the related resource.
     maxLength: 128
     example: 3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
   type:
     type: string
-    description: The type of resource that was created or modified.
+    description: The type of the related resource.
     enum:
+      - case
       - customer
       - person
       - mandate
       - powerOfAttorney
       - correspondence
       - document
+      - questionnaire
       - other
     example: customer
   uri:

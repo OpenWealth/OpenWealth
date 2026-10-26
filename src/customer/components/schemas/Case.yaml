@@ -37,17 +37,30 @@ properties:
     example: customProcess
   status:
     type: string
-    description: Indicates the current status of the case in its lifecycle.
+    description: |
+      Indicates the current status of the case in its lifecycle. The status is changed by the bank or
+      through the actions on the case; it cannot be set directly by the API consumer.
+        * `draft` - Created by the API consumer and not yet submitted. Can be updated, deleted and submitted.
+        * `submitted` - Submitted by the API consumer and waiting to be picked up by the bank.
+        * `actionRequired` - Returned by the bank because further information or documents are needed
+          (see `statusReasonList` and `outputList`). Can be updated and submitted again.
+        * `inProgress` - Being processed by the bank.
+        * `pendingApproval` - Processed by the bank and waiting for internal approval.
+        * `approved` - Approved by the bank; the resulting resources are being set up.
+        * `rejected` - Final. Declined by the bank (see `statusReasonList`).
+        * `completed` - Final. Processing finished; created or modified resources are listed in `outputList`.
+        * `cancelled` - Final. Withdrawn by the API consumer.
     enum:
       - draft
-      - open
+      - submitted
+      - actionRequired
       - inProgress
       - pendingApproval
       - approved
       - rejected
       - completed
       - cancelled
-    example: open
+    example: submitted
     readOnly: true
   title:
     type: string
@@ -106,6 +119,9 @@ properties:
       $ref: './RelatedResource.yaml'
   documentList:
     type: array
-    description: List of documents associated with this case added by the API consumer (EAM).
+    description: |
+      List of documents associated with this case, added by the API consumer (EAM). Documents can only
+      be added or changed while the case is in status `draft` or `actionRequired`. Documents provided
+      by the bank are referenced in `outputList`.
     items:
       $ref: './Document.yaml'

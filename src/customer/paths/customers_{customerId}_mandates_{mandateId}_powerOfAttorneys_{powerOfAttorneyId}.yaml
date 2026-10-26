@@ -8,13 +8,13 @@ get:
     - $ref: ../../generics/components/parameters/path_customerId.yaml
     - $ref: ../../generics/components/parameters/path_mandateId.yaml
     - $ref: ../../generics/components/parameters/path_powerOfAttorneyId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '200':
       description: Power of Attorney.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
@@ -45,7 +45,7 @@ put:
     - $ref: ../../generics/components/parameters/path_customerId.yaml
     - $ref: ../../generics/components/parameters/path_mandateId.yaml
     - $ref: ../../generics/components/parameters/path_powerOfAttorneyId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   requestBody:
     content:
       application/json:
@@ -55,8 +55,8 @@ put:
     '200':
       description: Power of Attorney successfully updated.
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/json:
           schema:
@@ -87,13 +87,13 @@ delete:
     - $ref: ../../generics/components/parameters/path_customerId.yaml
     - $ref: ../../generics/components/parameters/path_mandateId.yaml
     - $ref: ../../generics/components/parameters/path_powerOfAttorneyId.yaml
-    - $ref: ../../generics/components/parameters/x_correlation_id_in_header.yaml
+    - $ref: ../../generics/components/parameters/correlation_id.yaml
   responses:
     '204':
       description: Power of Attorney successfully deleted (empty response).
       headers:
-        X-Correlation-ID:
-          $ref: ../../generics/components/headers/X-Correlation-Id.yaml
+        Correlation-Id:
+          $ref: ../../generics/components/headers/Correlation-Id.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
