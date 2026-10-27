@@ -26,8 +26,37 @@ Uploading documents follows a structured sequence:
 3. **Upload binary content** (`PUT /cases/{caseId}/documents/{documentId}/content`)
    For each document, upload the raw file content as `application/octet-stream`. Chunked uploads are not supported.
 
-4. **Submit the case** (`POST /cases/{caseId}/actions/{action}`)
-   Once all documents have been uploaded, trigger the `submit` action to advance the case in its lifecycle. The action endpoint also supports `cancel` to abort the case.
+4. **Submit the case** (`POST /cases/{caseId}/actions/submit`)
+   Once all documents have been uploaded, trigger the `submit` action to hand the case over to the bank. The action endpoint also supports `cancel` to withdraw the case.
+
+### Case Lifecycle
+
+The case `status` is read-only. It changes only through the bank's workflow or through the `submit` and `cancel` actions.
+
+| Status | Description |
+|--------|-------------|
+| `draft` | Created by the API consumer and not yet submitted. |
+| `submitted` | Submitted by the API consumer and waiting to be picked up by the bank. |
+| `actionRequired` | Returned by the bank because further information or documents are needed (see `statusReasonList` and `outputList`). |
+| `inProgress` | Being processed by the bank. |
+| `pendingApproval` | Processed by the bank and waiting for internal approval. |
+| `approved` | Approved by the bank; the resulting resources are being set up. |
+| `rejected` | Final. Declined by the bank (see `statusReasonList`). |
+| `completed` | Final. Processing finished; created or modified resources are listed in `outputList`. |
+| `cancelled` | Final. Withdrawn by the API consumer. |
+
+The status determines which operations are allowed:
+
+| Status | Update case | Add / change documents | `submit` | `cancel` |
+|--------|-------------|------------------------|----------|----------|
+| `draft` | ✅ | ✅ | ✅ | – |
+| `submitted` | – | – | – | ✅ |
+| `actionRequired` | ✅ | ✅ | ✅ | ✅ |
+| `inProgress` | – | – | – | request |
+| `pendingApproval` | – | – | – | request |
+| `approved`, `rejected`, `completed`, `cancelled` | – | – | – | – |
+
+A `cancel` in `inProgress` or `pendingApproval` is a request the bank may decline; the status is then unchanged and the reason is given in `statusReasonList`. Operations that are not allowed in the current status are answered with `409 Conflict`.
 
 ---
 
@@ -41,7 +70,7 @@ Uploading documents follows a structured sequence:
 | `POST` | `/cases` | `createCase` | Create a new case. |
 | `GET` | `/cases/{caseId}` | `getCaseById` | Retrieve a specific case by ID. |
 | `PUT` | `/cases/{caseId}` | `updateCaseById` | Update an existing case. |
-| `POST` | `/cases/{caseId}/actions/{action}` | `actionOnCase` | Trigger a lifecycle action on a case (e.g. submit, approve). Returns `202 Accepted`. |
+| `POST` | `/cases/{caseId}/actions/{action}` | `actionOnCase` | Trigger a lifecycle action on a case (`submit` or `cancel`). Returns `202 Accepted`. |
 
 ### Documents
 
@@ -50,9 +79,11 @@ Uploading documents follows a structured sequence:
 | `GET` | `/cases/{caseId}/documents` | `getDocuments` | List documents for a case, each including its metadata. Supports cursor-based pagination. |
 | `POST` | `/cases/{caseId}/documents` | `addDocument` | Upload metadata for a new document. The binary content is uploaded separately. |
 | `GET` | `/cases/{caseId}/documents/{documentId}` | `getDocument` | Retrieve the metadata of a specific document. |
-| `PATCH` | `/cases/{caseId}/documents/{documentId}` | `patchDocument` | Amend the metadata of an existing document. Returns `204` on success. |
-| `PUT` | `/cases/{caseId}/documents/{documentId}/content` | `uploadDocumentContent` | Upload the binary content of a document. |
+| `PUT` | `/cases/{caseId}/documents/{documentId}` | `updateDocument` | Replace the metadata of an existing document. Returns the updated document. |
+| `PUT` | `/cases/{caseId}/documents/{documentId}/content` | `uploadDocumentContent` | Upload the binary content of a document, replacing any existing content. |
 | `GET` | `/cases/{caseId}/documents/{documentId}/content` | `getDocumentContent` | Download the binary content of a document as `application/octet-stream`. |
+
+Updates use `PUT` with full replacement semantics: the complete metadata must be sent, and properties that are omitted are removed. Read-only properties (`id`, timestamps, `relatedResource`) are ignored.
 
 ---
 
@@ -76,11 +107,20 @@ List endpoints (`GET /cases`, `GET /cases/{caseId}/documents`) use cursor-based 
 ```
 src/documents/
 ├── API.yaml                                              # OpenAPI entry point
+├── components/
+│   ├── examples/                                         # Request and response examples
+│   ├── parameters/
+│   │   └── action.yaml                                   # Case actions (submit, cancel)
+│   └── schemas/
+│       ├── Case.yaml
+│       ├── Document.yaml
+│       ├── RelatedResource.yaml
+│       └── StatusReason.yaml
 └── paths/
     ├── cases.yaml                                        # GET /cases, POST /cases
     ├── cases_{caseId}.yaml                               # GET/PUT /cases/{caseId}
     ├── cases_{caseId}_actions_{action}.yaml              # POST /cases/{caseId}/actions/{action}
     ├── cases_{caseId}_documents.yaml                     # GET/POST /cases/{caseId}/documents
-    ├── cases_{caseId}_documents_{documentId}.yaml        # GET/PATCH /cases/{caseId}/documents/{documentId}
+    ├── cases_{caseId}_documents_{documentId}.yaml        # GET/PUT /cases/{caseId}/documents/{documentId}
     └── cases_{caseId}_documents_{documentId}_content.yaml # GET/PUT /cases/{caseId}/documents/{documentId}/content
 ```
