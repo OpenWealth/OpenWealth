@@ -2,7 +2,13 @@ post:
   tags:
     - cases
   summary: Action on a specific case
-  description: Places an action request for a specific case.
+  description: |
+    Places an action request for a specific case. The allowed actions depend on the status of the case;
+    an action that is not allowed in the current status returns `409`.
+      * `submit` - Allowed in `draft` and `actionRequired`. Moves the case to `submitted`.
+      * `cancel` - Allowed in `submitted` and `actionRequired`, where the case moves to `cancelled`.
+        In `inProgress` and `pendingApproval` the cancellation is a request that the bank may accept
+        (case moves to `cancelled`) or decline (status is unchanged, reason in `statusReasonList`).
   operationId: actionOnCase
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
@@ -28,6 +34,8 @@ post:
       $ref: ../../generics/components/responses/404.yaml
     '405':
       $ref: ../../generics/components/responses/405.yaml
+    '409':
+      $ref: ../../generics/components/responses/409.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '501':

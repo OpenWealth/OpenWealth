@@ -138,7 +138,9 @@ paths:
       tags:
         - cases
       summary: Updates a case by id
-      description: Updates an existing case by id.
+      description: |
+        Updates an existing case by id. A case can only be updated while it is in status `draft` or
+        `actionRequired`; otherwise `409` is returned. The case `type` cannot be changed after creation.
       operationId: updateCaseById
       parameters:
         - $ref: '#/components/parameters/path_caseId'
@@ -168,6 +170,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -179,7 +183,13 @@ paths:
       tags:
         - cases
       summary: Action on a specific case
-      description: Places an action request for a specific case.
+      description: |
+        Places an action request for a specific case. The allowed actions depend on the status of the case;
+        an action that is not allowed in the current status returns `409`.
+          * `submit` - Allowed in `draft` and `actionRequired`. Moves the case to `submitted`.
+          * `cancel` - Allowed in `submitted` and `actionRequired`, where the case moves to `cancelled`.
+            In `inProgress` and `pendingApproval` the cancellation is a request that the bank may accept
+            (case moves to `cancelled`) or decline (status is unchanged, reason in `statusReasonList`).
       operationId: actionOnCase
       parameters:
         - $ref: '#/components/parameters/path_caseId'
@@ -205,6 +215,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -256,7 +268,9 @@ paths:
           $ref: '#/components/responses/503'
     post:
       summary: Add a New Document
-      description: Upload the metadata for a new file.
+      description: |
+        Upload the metadata for a new file. Documents can only be added while the case is in status
+        `draft` or `actionRequired`; otherwise `409` is returned.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/correlation_id'
@@ -294,6 +308,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -339,9 +355,13 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-    patch:
-      operationId: patchDocument
-      summary: Amend the metadata of a document
+    put:
+      operationId: updateDocument
+      summary: Update the metadata of a document
+      description: |
+        Replaces the metadata of a document. The complete metadata must be sent; properties that are omitted
+        are removed. Documents can only be changed while the case is in status `draft` or `actionRequired`;
+        otherwise `409` is returned.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -357,11 +377,18 @@ paths:
               PDFStatement:
                 $ref: '#/components/examples/PdfStatement'
       responses:
-        '204':
-          description: Amendment accepted (empty response).
+        '200':
+          description: Document metadata successfully updated.
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+              examples:
+                PDFStatement:
+                  $ref: '#/components/examples/PdfStatement'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -372,6 +399,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -381,6 +410,9 @@ paths:
   /cases/{caseId}/documents/{documentId}/content:
     put:
       summary: Upload binary document content
+      description: |
+        Uploads the binary content of a document. Existing content is replaced. Content can only be uploaded
+        while the case is in status `draft` or `actionRequired`; otherwise `409` is returned.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -410,6 +442,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -602,17 +636,30 @@ components:
           example: mandateOpening
         status:
           type: string
+          description: |
+            Indicates the current status of the case in its lifecycle. The status is changed by the bank or
+            through the actions on the case; it cannot be set directly by the API consumer.
+              * `draft` - Created by the API consumer and not yet submitted. Can be updated and submitted.
+              * `submitted` - Submitted by the API consumer and waiting to be picked up by the bank.
+              * `actionRequired` - Returned by the bank because further information or documents are needed
+                (see `statusReasonList` and `outputList`). Can be updated and submitted again.
+              * `inProgress` - Being processed by the bank.
+              * `pendingApproval` - Processed by the bank and waiting for internal approval.
+              * `approved` - Approved by the bank; the resulting resources are being set up.
+              * `rejected` - Final. Declined by the bank (see `statusReasonList`).
+              * `completed` - Final. Processing finished; created or modified resources are listed in `outputList`.
+              * `cancelled` - Final. Withdrawn by the API consumer.
           enum:
             - draft
-            - open
+            - submitted
+            - actionRequired
             - inProgress
             - pendingApproval
             - approved
             - rejected
             - completed
             - cancelled
-          description: Indicates the current status of the case in its lifecycle.
-          example: open
+          example: submitted
           readOnly: true
         title:
           type: string
@@ -847,6 +894,19 @@ components:
       description: |
         Method Not Allowed - The method received in the request-line is known by the origin server
         but not supported by the target resource.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+    '409':
+      headers:
+        Content-Type:
+          $ref: '#/components/headers/Problem-Content-Type'
+        Content-Language:
+          $ref: '#/components/headers/Content-Language'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: Conflict - The request conflicts with the current state of the target resource.
       content:
         application/problem+json:
           schema:
