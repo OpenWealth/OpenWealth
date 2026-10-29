@@ -569,6 +569,7 @@ components:
           readOnly: true
         type:
           type: string
+          maxLength: 70
           description: Indicates the type of lifecycle process this case represents.
           example: mandateOpening
         status:
@@ -936,12 +937,16 @@ components:
           - cancel
       description: Parameter for the action requested for a given case.
     path_documentId:
-      name: documentId
       in: path
+      name: documentId
       required: true
-      description: The document's ID.
       schema:
         type: string
+        minLength: 1
+        maxLength: 70
+        example: 9876-5af5wa5-e14a-fw5
+        description: Unique and unambiguous identification for the document.
+      description: Document ID Parameter.
   headers:
     Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.

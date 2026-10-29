@@ -17,6 +17,7 @@ properties:
     readOnly: true
   type:
     type: string
+    maxLength: 70
     description: Indicates the type of lifecycle process this case represents.
     example: mandateOpening
   status:
