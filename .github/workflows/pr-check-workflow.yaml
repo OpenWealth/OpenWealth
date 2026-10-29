@@ -19,6 +19,7 @@ jobs:
         spec-folder:
           - src/custody
           - src/customer
+          - src/documents
           - src/trading
     steps:
       - name: Checkout
@@ -48,6 +49,7 @@ jobs:
         spec-folder:
           - src/custody
           - src/customer
+          - src/documents
           - src/trading
     steps:
       - name: Checkout
