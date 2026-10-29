@@ -1,0 +1,12 @@
+type: string
+description: |
+  Defines the level of rights of the authorised signatory and indicates if the person has
+  the right to sign individually or collectively (in twos, etc.).
+enum:
+  - individually
+  - inTwos
+  - inThrees
+  - fourway
+  - none
+  - other
+example: individually

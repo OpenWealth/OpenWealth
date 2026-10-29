@@ -17,7 +17,7 @@ erDiagram
         *string name
         string segment
         string mainAddress
-        object[] personRelationList "function, signature etc."
+        object[] personRelationList "contractual role, beneficial role, signature etc."
     }
 
     Mandate {
@@ -55,8 +55,10 @@ erDiagram
     }
 
     customerToPersonRelation {
-        string function
-        string signature
+        string contractualRole "contractingPartner, statutoryRepresentative, etc."
+        string beneficialRole "beneficialOwner, controllingPerson, etc."
+        number ownershipPercentage
+        string signatoryRight
         object person
     }
 

@@ -1,4 +1,5 @@
 type: object
+additionalProperties: true
 required:
   - type
 properties:
@@ -42,8 +43,8 @@ properties:
   languageCode:
     type: string
     description: Unique identifier for a language used in the document.
-    minLength: 2
-    maxLength: 2
+    minLength: 1
+    maxLength: 5
     example: en
   format:
     type: string
@@ -64,12 +65,12 @@ properties:
   createdDateTime:
     type: string
     format: date-time
-    description: The date time when the case was created.
+    description: The date time when the document was created.
     example: 2023-12-06T11:36:08.033Z
     readOnly: true
   updatedDateTime:
     type: string
     format: date-time
-    description: The date time when the case was last updated.
+    description: The date time when the document was last updated.
     example: 2023-12-06T11:36:08.033Z
     readOnly: true

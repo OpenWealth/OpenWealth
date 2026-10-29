@@ -26,16 +26,21 @@ get:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml
-patch:
-  operationId: patchDocument
-  summary: Amend the metadata of a document
+put:
+  operationId: updateDocument
+  summary: Update the metadata of a document
   description: |
-    Amends the metadata of a document. Documents can only be changed while the case is in status
-    `draft` or `actionRequired`; otherwise `409` is returned.
+    Replaces the metadata of a document. The complete metadata must be sent; properties that are omitted
+    are removed. Documents can only be changed while the case is in status `draft` or `actionRequired`;
+    otherwise `409` is returned.
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../../generics/components/parameters/path_documentId.yaml
@@ -49,7 +54,7 @@ patch:
           $ref: ../components/schemas/Document.yaml
   responses:
     '200':
-      description: Amendment accepted.
+      description: Document metadata successfully updated.
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
@@ -65,9 +70,13 @@ patch:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '409':
       $ref: ../../generics/components/responses/409.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml

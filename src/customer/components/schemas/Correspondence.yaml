@@ -1,6 +1,6 @@
 type: object
 required:
-  ##- type  to be checked
+  - type
   - salutation
 properties:
   id:

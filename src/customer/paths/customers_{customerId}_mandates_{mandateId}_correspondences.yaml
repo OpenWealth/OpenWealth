@@ -4,7 +4,7 @@ get:
   summary: Returns the correspondence for a specific mandate
   description: |
     Returns all correspondence associated with a specific mandate accessible to the querying user.
-    Paging is done based on the return object, i.e. if limit is set to 1,
+    Paging is done based on the correspondence object, i.e. if limit is set to 1,
     then 1 correspondence entry will be returned per page.
   operationId: getCorrespondenceByMandateId
   parameters:
@@ -78,6 +78,8 @@ post:
       $ref: ../../generics/components/responses/404.yaml
     '405':
       $ref: ../../generics/components/responses/405.yaml
+    '409':
+      $ref: ../../generics/components/responses/409.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '501':

@@ -31,9 +31,6 @@ properties:
       - groupOfIndividuals
       - legalEntity
       - foundation
-      - insuranceCompany
-      - institutionalInvestor
-      - bank
       - other
     example: individual
   mainAdress:

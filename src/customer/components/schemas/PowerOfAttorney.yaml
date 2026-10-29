@@ -1,6 +1,10 @@
 type: object
+description: |
+  Represents a power of attorney voluntarily granted by the account holder to a person on a mandate.
+  Statutory representation (e.g. parental authority, guardianship or executorship) is not a power of
+  attorney and is expressed as a relation between the person and the customer.
 required:
-  - type
+  - scope
 properties:
   id:
     type: string
@@ -14,18 +18,6 @@ properties:
     maxLength: 128
     example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
     readOnly: true
-  type:
-    type: string
-    description: Indicates the kind of PoA the person has on this mandate.
-    enum:
-      - general
-      - limited
-      - informationOnly
-      - durable
-      - nonDurable
-      - springing
-      - other
-    example: general
   personId:
     type: string
     description: Unique and unambiguous identification used by the bank for the person.
@@ -34,10 +26,49 @@ properties:
     readOnly: true
   person:
     $ref: Person.yaml
-  personFunction:
+  scope:
     type: string
-    description: Indicates the function of the person in relation to the mandate.
+    description: |
+      Extent of the authority granted by the account holder.
+        * `information` - Receive information and documents only; no instructions can be given.
+        * `management` - Manage the assets within the mandate (e.g. trading); no transfers of assets
+          out of the mandate.
+        * `general` - Full authority, including withdrawals and transfers to third parties.
+        * `other` - Bank-specific scope (see `scopeOverride`).
     enum:
-      - tbd
+      - information
+      - management
+      - general
       - other
-    example: tbd
+    example: management
+  scopeOverride:
+    type: string
+    description: |
+      Indicates the specific scope of the power of attorney.
+      Should only be used when the scope enum value is 'other'.
+    maxLength: 70
+    example: Payments to own accounts only
+  signatoryRight:
+    $ref: SignatoryRight.yaml
+  validFrom:
+    description: Date from which the power of attorney is effective.
+    type: string
+    format: date
+    example: 2026-04-13
+  validUntil:
+    description: Date until which the power of attorney is effective. If omitted, it is valid until revoked.
+    type: string
+    format: date
+    example: 2027-04-13
+  validBeyondIncapacity:
+    type: boolean
+    description: |
+      Denotes if the power of attorney remains valid if the account holder loses legal capacity.
+      If omitted, the terms of the bank's power of attorney apply.
+    example: true
+  validBeyondDeath:
+    type: boolean
+    description: |
+      Denotes if the power of attorney remains valid after the death of the account holder.
+      If omitted, the terms of the bank's power of attorney apply.
+    example: true

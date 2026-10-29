@@ -56,10 +56,10 @@ paths:
     $ref: paths/customers_{customerId}_mandates.yaml
   /customers/{customerId}/mandates/{mandateId}:
     $ref: paths/customers_{customerId}_mandates_{mandateId}.yaml
-  /customers/{customerId}/mandates/{mandateId}/powerofattorneys:
-    $ref: paths/customers_{customerId}_mandates_{mandateId}_powerOfAttorneys.yaml
-  /customers/{customerId}/mandates/{mandateId}/powerofattorneys/{powerOfAttorneyId}:
-    $ref: paths/customers_{customerId}_mandates_{mandateId}_powerOfAttorneys_{powerOfAttorneyId}.yaml
+  /customers/{customerId}/mandates/{mandateId}/power-of-attorneys:
+    $ref: paths/customers_{customerId}_mandates_{mandateId}_power-of-attorneys.yaml
+  /customers/{customerId}/mandates/{mandateId}/power-of-attorneys/{powerOfAttorneyId}:
+    $ref: paths/customers_{customerId}_mandates_{mandateId}_power-of-attorneys_{powerOfAttorneyId}.yaml
   /customers/{customerId}/mandates/{mandateId}/correspondences:
     $ref: paths/customers_{customerId}_mandates_{mandateId}_correspondences.yaml
   /customers/{customerId}/mandates/{mandateId}/correspondences/{correspondenceId}:

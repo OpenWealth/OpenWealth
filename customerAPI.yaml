@@ -43,7 +43,7 @@ paths:
       summary: Returns the cases
       description: |
         Returns all cases accessible to the querying user.
-        Paging is done based on the return object, i.e. if limit is set to 1,
+        Paging is done based on the case object, i.e. if limit is set to 1,
         then 1 case will be returned per page.
       operationId: getCases
       parameters:
@@ -74,6 +74,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '429':
+          $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -149,6 +151,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '429':
+          $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -181,41 +185,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Case'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '409':
-          $ref: '#/components/responses/409'
-        '500':
-          $ref: '#/components/responses/500'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
-    delete:
-      tags:
-        - cases
-      summary: Deletes a case by id
-      description: |
-        Deletes a specific case by id. A case can only be deleted while it is in status `draft`, i.e.
-        before it has been submitted; otherwise `409` is returned and the case must be cancelled instead.
-      operationId: deleteCaseById
-      parameters:
-        - $ref: '#/components/parameters/path_caseId'
-        - $ref: '#/components/parameters/correlation_id'
-      responses:
-        '204':
-          description: Case successfully deleted (empty response).
-          headers:
-            Correlation-Id:
-              $ref: '#/components/headers/Correlation-Id'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -289,6 +258,8 @@ paths:
       summary: Get the List of Documents
       description: |
         Get a list of all documents related to a case.
+        Paging is done based on the document object, i.e. if limit is set to 1,
+        then 1 document will be returned per page.
       operationId: getDocuments
       tags:
         - documents
@@ -314,8 +285,12 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
     post:
@@ -352,10 +327,14 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '409':
           $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
   /cases/{caseId}/documents/{documentId}:
@@ -387,16 +366,21 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-    patch:
-      operationId: patchDocument
-      summary: Amend the metadata of a document
+    put:
+      operationId: updateDocument
+      summary: Update the metadata of a document
       description: |
-        Amends the metadata of a document. Documents can only be changed while the case is in status
-        `draft` or `actionRequired`; otherwise `409` is returned.
+        Replaces the metadata of a document. The complete metadata must be sent; properties that are omitted
+        are removed. Documents can only be changed while the case is in status `draft` or `actionRequired`;
+        otherwise `409` is returned.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -410,7 +394,7 @@ paths:
               $ref: '#/components/schemas/Document'
       responses:
         '200':
-          description: Amendment accepted.
+          description: Document metadata successfully updated.
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
@@ -426,18 +410,22 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '409':
           $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
   /cases/{caseId}/documents/{documentId}/content:
     put:
       summary: Upload binary document content
       description: |
-        Uploads the binary content of a document. Content can only be uploaded while the case is in status
-        `draft` or `actionRequired`; otherwise `409` is returned.
+        Uploads the binary content of a document. Existing content is replaced. Content can only be uploaded
+        while the case is in status `draft` or `actionRequired`; otherwise `409` is returned.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -452,19 +440,11 @@ paths:
               type: string
               format: binary
       responses:
-        '200':
-          description: Successful upload of the document content.
+        '204':
+          description: Successful upload of the document content (empty response).
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: true
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -473,10 +453,14 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '409':
           $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
     get:
@@ -497,7 +481,9 @@ paths:
               $ref: '#/components/headers/Correlation-Id'
           content:
             application/octet-stream:
-              example: ''
+              schema:
+                type: string
+                format: binary
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -506,8 +492,12 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
         '500':
           $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
   /customers:
@@ -597,7 +587,7 @@ paths:
       summary: Returns the mandates for a specific customer
       description: |
         Returns all mandates for a specific customer accessible to the querying user.
-        Paging is done based on the return object, i.e. if limit is set to 1,
+        Paging is done based on the mandate object, i.e. if limit is set to 1,
         then 1 mandate will be returned per page.
       operationId: getMandatesByCustomerId
       parameters:
@@ -672,14 +662,14 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-  /customers/{customerId}/mandates/{mandateId}/powerofattorneys:
+  /customers/{customerId}/mandates/{mandateId}/power-of-attorneys:
     get:
       tags:
         - powerOfAttorneys
       summary: Returns the powers of attorney for a specific mandate
       description: |
         Returns all powers of attorney associated with a specific mandate accessible to the querying user.
-        Paging is done based on the return object, i.e. if limit is set to 1,
+        Paging is done based on the power of attorney object, i.e. if limit is set to 1,
         then 1 power of attorney will be returned per page.
       operationId: getPowerOfAttorneysByMandateId
       parameters:
@@ -753,13 +743,15 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
-  /customers/{customerId}/mandates/{mandateId}/powerofattorneys/{powerOfAttorneyId}:
+  /customers/{customerId}/mandates/{mandateId}/power-of-attorneys/{powerOfAttorneyId}:
     get:
       tags:
         - powerOfAttorneys
@@ -833,6 +825,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -866,6 +860,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -879,7 +875,7 @@ paths:
       summary: Returns the correspondence for a specific mandate
       description: |
         Returns all correspondence associated with a specific mandate accessible to the querying user.
-        Paging is done based on the return object, i.e. if limit is set to 1,
+        Paging is done based on the correspondence object, i.e. if limit is set to 1,
         then 1 correspondence entry will be returned per page.
       operationId: getCorrespondenceByMandateId
       parameters:
@@ -953,6 +949,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -1033,6 +1031,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -1066,6 +1066,8 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
+        '409':
+          $ref: '#/components/responses/409'
         '500':
           $ref: '#/components/responses/500'
         '501':
@@ -1154,18 +1156,6 @@ paths:
           $ref: '#/components/responses/503'
 components:
   schemas:
-    Date:
-      title: Date
-      type: string
-      description: Date according to ISO 8601.
-      format: date
-      example: '2018-04-13'
-    DateTime:
-      title: DateTime
-      type: string
-      description: DateTime according to ISO 8601.
-      format: date-time
-      example: '2018-04-13T16:00:00Z'
     Country:
       type: string
       pattern: '[A-Z]{2}'
@@ -1217,6 +1207,12 @@ components:
       description: ISO 4217 code.
       pattern: ^[A-Z]{3}$
       example: CHF
+    Date:
+      title: Date
+      type: string
+      description: Date according to ISO 8601.
+      format: date
+      example: '2018-04-13'
     Salutation:
       type: string
       description: Salutation of the person.
@@ -1738,14 +1734,35 @@ components:
         - $ref: '#/components/schemas/LegalPerson'
       discriminator:
         propertyName: type
+    SignatoryRight:
+      type: string
+      description: |
+        Defines the level of rights of the authorised signatory and indicates if the person has
+        the right to sign individually or collectively (in twos, etc.).
+      enum:
+        - individually
+        - inTwos
+        - inThrees
+        - fourway
+        - none
+        - other
+      example: individually
     PersonToCustomerRelation:
       type: object
-      required:
-        - relationType
+      description: |
+        Relation of a person to the customer relationship: their position in the contract with the bank and/or
+        their beneficial ownership of the assets. At least one of `contractualRole` and `beneficialRole` must be
+        provided. Voluntary authority (power of attorney) is not a relation to the customer; it is granted on the
+        mandate.
+      anyOf:
+        - required:
+            - contractualRole
+        - required:
+            - beneficialRole
       properties:
         id:
           type: string
-          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the person.
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the relation.
           maxLength: 128
           example: 6c4e1b92-5f7a-4d3c-8e9b-2a1f6d7c0e54
           readOnly: true
@@ -1758,38 +1775,55 @@ components:
         personId:
           type: string
           description: Unique and unambiguous identification used by the bank for the person.
+          maxLength: 128
           example: c7a0f4d3-5b28-4e91-9f44-8a1c2e7b33aa
           readOnly: true
         person:
           $ref: '#/components/schemas/Person'
-        relationType:
-          type: string
-          description: Indicates the kind of relation the person has to this customer relationship.
-          enum:
-            - beneficialOwner
-            - externalAssetManagerFirm
-            - externalAssetManagerEmployee
-            - accountOwner
-            - registeredOwner
-            - authorisedSignatoryIndividual
-            - beneficiary
-            - authorisedSignatoryCollective
-            - ownerParentalAuthority
-            - other
-          example: accountOwner
-        signatoryRight:
+        contractualRole:
           type: string
           description: |
-            Defines the level of rights of the authorised signatory and indicates if the person has
-            the right to sign individually or collectively (in twos, etc.).
+            Position of the person in the contract with the bank.
+              * `contractingPartner` - Holder of the customer relationship. Joint holders each have their own entry.
+              * `statutoryRepresentative` - Represents a holder who lacks legal capacity, by law or by decision of
+                an authority (parental authority, guardianship, executorship).
+              * `authorisedSignatory` - Represents a holder that is a legal entity, through its governing body or a
+                signatory registered in the commercial register.
+              * `other` - Any other contractual position.
           enum:
-            - individually
-            - inTwos
-            - inThrees
-            - fourway
-            - none
+            - contractingPartner
+            - statutoryRepresentative
+            - authorisedSignatory
             - other
-          example: individually
+          example: contractingPartner
+        beneficialRole:
+          type: string
+          description: |
+            Beneficial ownership of the assets, as identified under anti-money-laundering due diligence.
+              * `beneficialOwner` - Natural person economically entitled to the assets.
+              * `controllingPerson` - Controls an operating legal entity (25% or more of capital or votes, or otherwise).
+              * `settlor` - Settlor of a trust or founder of a foundation.
+              * `trustee` - Trustee of a trust or member of the foundation board.
+              * `protector` - Protector of a trust or foundation.
+              * `beneficiary` - Beneficiary of a trust or foundation.
+              * `other` - Any other beneficial role.
+          enum:
+            - beneficialOwner
+            - controllingPerson
+            - settlor
+            - trustee
+            - protector
+            - beneficiary
+            - other
+          example: beneficialOwner
+        ownershipPercentage:
+          type: number
+          description: Share of capital or votes held by the person in percent. Only used for `controllingPerson`.
+          minimum: 0
+          maximum: 100
+          example: 60
+        signatoryRight:
+          $ref: '#/components/schemas/SignatoryRight'
     Contact:
       type: object
       required:
@@ -1842,9 +1876,6 @@ components:
             - groupOfIndividuals
             - legalEntity
             - foundation
-            - insuranceCompany
-            - institutionalInvestor
-            - bank
             - other
           example: individual
         mainAdress:
@@ -1886,6 +1917,7 @@ components:
     Correspondence:
       type: object
       required:
+        - type
         - salutation
       properties:
         id:
@@ -1945,8 +1977,12 @@ components:
           $ref: '#/components/schemas/Medium'
     PowerOfAttorney:
       type: object
+      description: |
+        Represents a power of attorney voluntarily granted by the account holder to a person on a mandate.
+        Statutory representation (e.g. parental authority, guardianship or executorship) is not a power of
+        attorney and is expressed as a relation between the person and the customer.
       required:
-        - type
+        - scope
       properties:
         id:
           type: string
@@ -1960,18 +1996,6 @@ components:
           maxLength: 128
           example: 7f3c2c4e-9c8a-4b0a-9c1e-2e4f6b0d2a11
           readOnly: true
-        type:
-          type: string
-          description: Indicates the kind of PoA the person has on this mandate.
-          enum:
-            - general
-            - limited
-            - informationOnly
-            - durable
-            - nonDurable
-            - springing
-            - other
-          example: general
         personId:
           type: string
           description: Unique and unambiguous identification used by the bank for the person.
@@ -1980,13 +2004,52 @@ components:
           readOnly: true
         person:
           $ref: '#/components/schemas/Person'
-        personFunction:
+        scope:
           type: string
-          description: Indicates the function of the person in relation to the mandate.
+          description: |
+            Extent of the authority granted by the account holder.
+              * `information` - Receive information and documents only; no instructions can be given.
+              * `management` - Manage the assets within the mandate (e.g. trading); no transfers of assets
+                out of the mandate.
+              * `general` - Full authority, including withdrawals and transfers to third parties.
+              * `other` - Bank-specific scope (see `scopeOverride`).
           enum:
-            - tbd
+            - information
+            - management
+            - general
             - other
-          example: tbd
+          example: management
+        scopeOverride:
+          type: string
+          description: |
+            Indicates the specific scope of the power of attorney.
+            Should only be used when the scope enum value is 'other'.
+          maxLength: 70
+          example: Payments to own accounts only
+        signatoryRight:
+          $ref: '#/components/schemas/SignatoryRight'
+        validFrom:
+          description: Date from which the power of attorney is effective.
+          type: string
+          format: date
+          example: '2026-04-13'
+        validUntil:
+          description: Date until which the power of attorney is effective. If omitted, it is valid until revoked.
+          type: string
+          format: date
+          example: '2027-04-13'
+        validBeyondIncapacity:
+          type: boolean
+          description: |
+            Denotes if the power of attorney remains valid if the account holder loses legal capacity.
+            If omitted, the terms of the bank's power of attorney apply.
+          example: true
+        validBeyondDeath:
+          type: boolean
+          description: |
+            Denotes if the power of attorney remains valid after the death of the account holder.
+            If omitted, the terms of the bank's power of attorney apply.
+          example: true
     ExpectedFundFlow:
       type: object
       required:
@@ -2234,7 +2297,7 @@ components:
             - notAllowedValue
             - missingDocument
             - other
-          example: missingValue
+          example: notAllowedValue
         description:
           type: string
           description: Reason of error related to object.
@@ -2244,7 +2307,7 @@ components:
           type: string
           description: JsonPointer (RFC 6901) to affected property.
           maxLength: 2048
-          example: /businessContext/customer/customerToPersonRelationList/0/person/countryOfDomicile
+          example: /content/customer/customerToPersonRelationList/0/person/countryOfDomicile
     RelatedResource:
       type: object
       readOnly: true
@@ -2280,8 +2343,171 @@ components:
           maxLength: 256
           description: Relative API path to the resource, allowing the initiator to retrieve it directly.
           example: /customers/3f1c6a3e-9b7e-4f8b-a7c9-1d2e4a8c6b5f
+    Case:
+      type: object
+      description: |
+        Represents a case (process) in the customer lifecycle management, such as mandate opening, address change,
+        account closure, or any other structured workflow. A case tracks the type, status, and type-specific content
+        of a lifecycle process.
+      required:
+        - type
+        - status
+        - title
+      properties:
+        id:
+          type: string
+          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the case.
+          maxLength: 128
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          readOnly: true
+        type:
+          type: string
+          description: Indicates the type of lifecycle process this case represents.
+          enum:
+            - addCustomer
+            - addPerson
+            - addMandate
+            - addPowerOfAttorney
+            - addCorrespondence
+            - modifyObject
+            - removeObject
+            - other
+          example: addMandate
+        typeOverride:
+          type: string
+          description: Indicates the specific case type. Attribute shall only be used if the case type is not already part of the ENUM of the attribute "type" hence in exceptional cases (in case of type "other").
+          maxLength: 70
+          example: customProcess
+        status:
+          type: string
+          description: |
+            Indicates the current status of the case in its lifecycle. The status is changed by the bank or
+            through the actions on the case; it cannot be set directly by the API consumer.
+              * `draft` - Created by the API consumer and not yet submitted. Can be updated and submitted.
+              * `submitted` - Submitted by the API consumer and waiting to be picked up by the bank.
+              * `actionRequired` - Returned by the bank because further information or documents are needed
+                (see `statusReasonList` and `outputList`). Can be updated and submitted again.
+              * `inProgress` - Being processed by the bank.
+              * `pendingApproval` - Processed by the bank and waiting for internal approval.
+              * `approved` - Approved by the bank; the resulting resources are being set up.
+              * `rejected` - Final. Declined by the bank (see `statusReasonList`).
+              * `completed` - Final. Processing finished; created or modified resources are listed in `outputList`.
+              * `cancelled` - Final. Withdrawn by the API consumer.
+          enum:
+            - draft
+            - submitted
+            - actionRequired
+            - inProgress
+            - pendingApproval
+            - approved
+            - rejected
+            - completed
+            - cancelled
+          example: submitted
+          readOnly: true
+        title:
+          type: string
+          description: A short descriptive title for the case.
+          maxLength: 140
+          example: Mandate Opening for Client Stark
+        description:
+          type: string
+          description: A detailed description providing additional context for the case.
+          maxLength: 500
+          example: Opening a new discretionary mandate for the client.
+        dueDate:
+          description: Target completion date for the case.
+          type: string
+          format: date
+          example: '2018-04-13'
+        createdDateTime:
+          description: The date time when the case was created.
+          type: string
+          format: date-time
+          example: '2018-04-13T16:00:00Z'
+          readOnly: true
+        updatedDateTime:
+          description: The date time when the case was last updated.
+          type: string
+          format: date-time
+          example: '2018-04-13T16:00:00Z'
+          readOnly: true
+        completedDateTime:
+          description: Date when the case was completed or closed.
+          type: string
+          format: date-time
+          example: '2018-04-13T16:00:00Z'
+          readOnly: true
+        content:
+          oneOf:
+            - $ref: '#/components/schemas/Customer'
+            - $ref: '#/components/schemas/Person'
+            - $ref: '#/components/schemas/Mandate'
+            - $ref: '#/components/schemas/PowerOfAttorney'
+            - $ref: '#/components/schemas/Correspondence'
+            - $ref: '#/components/schemas/ModifyContent'
+            - $ref: '#/components/schemas/RemoveContent'
+            - $ref: '#/components/schemas/OtherContent'
+          description: |
+            Type-specific content of the case. The structure of this object depends on the case type
+            and allows for flexible, type-specific data to be attached to the case. The content schema
+            used for a specific case is determined by the case type and the operation performed (add,
+            modify, remove).
+        statusReasonList:
+          type: array
+          description: List of reasons explaining the current status of the case, such as errors or missing information.
+          items:
+            $ref: '#/components/schemas/StatusReason'
+          readOnly: true
+        outputList:
+          type: array
+          description: Resources created or modified as a result of processing this case. Populated by the bank as the case progresses.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/RelatedResource'
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for CommonErrorResponse.
+      type: string
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+        - /problems/TOO_MANY_REQUESTS
+      example: /problems/TECHNICAL_ERROR
+    CommonErrorResponse:
+      title: CommonErrorResponse
+      type: object
+      description: Common error response.
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
+          type: string
+          description: Title of the error response.
+          example: This is the general problem description
+        detail:
+          type: string
+          description: Detailed description of the error response.
+          example: Detailed problem description with respect to the current request
+        instance:
+          type: string
+          description: Entity instance that threw the error.
+          example: path/to/corresponding/resource
     Document:
       type: object
+      additionalProperties: true
       required:
         - type
       properties:
@@ -2325,8 +2551,8 @@ components:
         languageCode:
           type: string
           description: Unique identifier for a language used in the document.
-          minLength: 2
-          maxLength: 2
+          minLength: 1
+          maxLength: 5
           example: en
         format:
           type: string
@@ -2347,176 +2573,15 @@ components:
         createdDateTime:
           type: string
           format: date-time
-          description: The date time when the case was created.
+          description: The date time when the document was created.
           example: '2023-12-06T11:36:08.033Z'
           readOnly: true
         updatedDateTime:
           type: string
           format: date-time
-          description: The date time when the case was last updated.
+          description: The date time when the document was last updated.
           example: '2023-12-06T11:36:08.033Z'
           readOnly: true
-    Case:
-      type: object
-      description: |
-        Represents a case (process) in the customer lifecycle management, such as mandate opening, address change,
-        account closure, or any other structured workflow. A case tracks the type, status, and type-specific content
-        of a lifecycle process.
-      required:
-        - type
-      properties:
-        id:
-          type: string
-          description: Unique and unambiguous identification (i.e. UUID) used by the bank for the case.
-          maxLength: 128
-          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-          readOnly: true
-        type:
-          type: string
-          description: Indicates the type of lifecycle process this case represents.
-          enum:
-            - addCustomer
-            - addPerson
-            - addMandate
-            - addPowerOfAttorney
-            - addCorrespondence
-            - modifyObject
-            - removeObject
-            - other
-          example: addMandate
-        typeOverride:
-          type: string
-          description: Indicates the specific case type. Attribute shall only be used if the case type is not already part of the ENUM of the attribute "type" hence in exceptional cases (in case of type "other").
-          maxLength: 70
-          example: customProcess
-        status:
-          type: string
-          description: |
-            Indicates the current status of the case in its lifecycle. The status is changed by the bank or
-            through the actions on the case; it cannot be set directly by the API consumer.
-              * `draft` - Created by the API consumer and not yet submitted. Can be updated, deleted and submitted.
-              * `submitted` - Submitted by the API consumer and waiting to be picked up by the bank.
-              * `actionRequired` - Returned by the bank because further information or documents are needed
-                (see `statusReasonList` and `outputList`). Can be updated and submitted again.
-              * `inProgress` - Being processed by the bank.
-              * `pendingApproval` - Processed by the bank and waiting for internal approval.
-              * `approved` - Approved by the bank; the resulting resources are being set up.
-              * `rejected` - Final. Declined by the bank (see `statusReasonList`).
-              * `completed` - Final. Processing finished; created or modified resources are listed in `outputList`.
-              * `cancelled` - Final. Withdrawn by the API consumer.
-          enum:
-            - draft
-            - submitted
-            - actionRequired
-            - inProgress
-            - pendingApproval
-            - approved
-            - rejected
-            - completed
-            - cancelled
-          example: submitted
-          readOnly: true
-        title:
-          type: string
-          description: A short descriptive title for the case.
-          maxLength: 140
-          example: Mandate Opening for Client Stark
-        description:
-          type: string
-          description: A detailed description providing additional context for the case.
-          maxLength: 500
-          example: Opening a new discretionary mandate for the client.
-        dueDate:
-          description: Target completion date for the case.
-          $ref: '#/components/schemas/Date'
-        createdDateTime:
-          description: Date when the case was created.
-          $ref: '#/components/schemas/DateTime'
-        updatedDateTime:
-          description: Date when the case was updated.
-          $ref: '#/components/schemas/DateTime'
-        completedDateTime:
-          description: Date when the case was completed or closed.
-          $ref: '#/components/schemas/DateTime'
-        content:
-          oneOf:
-            - $ref: '#/components/schemas/Customer'
-            - $ref: '#/components/schemas/Person'
-            - $ref: '#/components/schemas/Mandate'
-            - $ref: '#/components/schemas/PowerOfAttorney'
-            - $ref: '#/components/schemas/Correspondence'
-            - $ref: '#/components/schemas/ModifyContent'
-            - $ref: '#/components/schemas/RemoveContent'
-            - $ref: '#/components/schemas/OtherContent'
-          description: |
-            Type-specific content of the case. The structure of this object depends on the case type
-            and allows for flexible, type-specific data to be attached to the case. The content schema
-            used for a specific case is determined by the case type and the operation performed (add,
-            modify, remove).
-        statusReasonList:
-          type: array
-          description: List of reasons explaining the current status of the case, such as errors or missing information.
-          items:
-            $ref: '#/components/schemas/StatusReason'
-          readOnly: true
-        outputList:
-          type: array
-          description: |
-            Resources created or modified as a result of processing this case.
-            Populated by the bank as the case progresses.
-            This also includes documents handled by the bank as part of the case
-            processing, and associated to a different resource than the case itself.
-          readOnly: true
-          items:
-            $ref: '#/components/schemas/RelatedResource'
-        documentList:
-          type: array
-          description: |
-            List of documents associated with this case, added by the API consumer (EAM). Documents can only
-            be added or changed while the case is in status `draft` or `actionRequired`. Documents provided
-            by the bank are referenced in `outputList`.
-          items:
-            $ref: '#/components/schemas/Document'
-    CommonErrorType:
-      title: Common Error Type
-      description: Error Types for CommonErrorResponse.
-      type: string
-      enum:
-        - /problems/INVALID_PAYLOAD
-        - /problems/MALFORMED_PAYLOAD
-        - /problems/INVALID_TOKEN
-        - /problems/EXPIRED_TOKEN
-        - /problems/INSUFFICIENT_PRIVILEGES
-        - /problems/NO_ACCESS_TO_RESOURCE
-        - /problems/RESOURCE_DOES_NOT_EXIST
-        - /problems/RESOURCE_NOT_READY
-        - /problems/RESOURCE_TOO_LARGE
-        - /problems/WRONG_METHOD
-        - /problems/OPERATION_NOT_ALLOWED
-        - /problems/TECHNICAL_ERROR
-        - /problems/NOT_IMPLEMENTED
-        - /problems/SERVICE_UNAVAILABLE
-        - /problems/TOO_MANY_REQUESTS
-      example: /problems/TECHNICAL_ERROR
-    CommonErrorResponse:
-      title: CommonErrorResponse
-      type: object
-      description: Common error response.
-      properties:
-        type:
-          $ref: '#/components/schemas/CommonErrorType'
-        title:
-          type: string
-          description: Title of the error response.
-          example: This is the general problem description
-        detail:
-          type: string
-          description: Detailed description of the error response.
-          example: Detailed problem description with respect to the current request
-        instance:
-          type: string
-          description: Entity instance that threw the error.
-          example: path/to/corresponding/resource
   responses:
     '400':
       headers:
@@ -2602,6 +2667,23 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+    '429':
+      headers:
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
+      description: |
+        Too Many Requests - The client has sent too many requests (e.g. lookup or polling requests) in a given
+        amount of time. The response may contain a Retry-After header indicating how long the client must wait
+        before making a new request (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+          example:
+            type: /problems/TOO_MANY_REQUESTS
+            title: Too many requests
+            detail: The request rate limit has been exceeded.
+            instance: path/to/corresponding/resource
     '500':
       headers:
         Content-Type:

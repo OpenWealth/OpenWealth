@@ -2,16 +2,15 @@ headers:
   Correlation-Id:
     $ref: ../headers/Correlation-Id.yaml
 description: |
-  When an SU sends too many lookup or polling requests in a given amount of time
-  the SP shall respond with HTTP 429 (Too many requests). This response may contain a
-  Retry-After header indicating how long the SU must wait before making a new request.
-  (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429).
+  Too Many Requests - The client has sent too many requests (e.g. lookup or polling requests) in a given
+  amount of time. The response may contain a Retry-After header indicating how long the client must wait
+  before making a new request (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429).
 content:
   application/problem+json:
     schema:
       $ref: CommonErrorResponse.yaml
     example:
       type: /problems/TOO_MANY_REQUESTS
-      title: resource not found
-      detail: ...
+      title: Too many requests
+      detail: The request rate limit has been exceeded.
       instance: path/to/corresponding/resource

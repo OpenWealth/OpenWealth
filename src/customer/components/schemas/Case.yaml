@@ -5,6 +5,8 @@ description: |
   of a lifecycle process.
 required:
   - type
+  - status
+  - title
 properties:
   id:
     type: string
@@ -40,7 +42,7 @@ properties:
     description: |
       Indicates the current status of the case in its lifecycle. The status is changed by the bank or
       through the actions on the case; it cannot be set directly by the API consumer.
-        * `draft` - Created by the API consumer and not yet submitted. Can be updated, deleted and submitted.
+        * `draft` - Created by the API consumer and not yet submitted. Can be updated and submitted.
         * `submitted` - Submitted by the API consumer and waiting to be picked up by the bank.
         * `actionRequired` - Returned by the bank because further information or documents are needed
           (see `statusReasonList` and `outputList`). Can be updated and submitted again.
@@ -74,16 +76,27 @@ properties:
     example: Opening a new discretionary mandate for the client.
   dueDate:
     description: Target completion date for the case.
-    $ref: '../../../generics/components/schemas/Date.yaml'
+    type: string
+    format: date
+    example: 2018-04-13
   createdDateTime:
-    description: Date when the case was created.
-    $ref: '../../../generics/components/schemas/DateTime.yaml'
+    description: The date time when the case was created.
+    type: string
+    format: date-time
+    example: 2018-04-13T16:00:00Z
+    readOnly: true
   updatedDateTime:
-    description: Date when the case was updated.
-    $ref: '../../../generics/components/schemas/DateTime.yaml'
+    description: The date time when the case was last updated.
+    type: string
+    format: date-time
+    example: 2018-04-13T16:00:00Z
+    readOnly: true
   completedDateTime:
     description: Date when the case was completed or closed.
-    $ref: '../../../generics/components/schemas/DateTime.yaml'
+    type: string
+    format: date-time
+    example: 2018-04-13T16:00:00Z
+    readOnly: true
   content:
     oneOf:
       - $ref: './Customer.yaml'
@@ -109,19 +122,9 @@ properties:
     readOnly: true
   outputList:
     type: array
-    description: |
+    description:
       Resources created or modified as a result of processing this case.
       Populated by the bank as the case progresses.
-      This also includes documents handled by the bank as part of the case
-      processing, and associated to a different resource than the case itself.
     readOnly: true
     items:
       $ref: './RelatedResource.yaml'
-  documentList:
-    type: array
-    description: |
-      List of documents associated with this case, added by the API consumer (EAM). Documents can only
-      be added or changed while the case is in status `draft` or `actionRequired`. Documents provided
-      by the bank are referenced in `outputList`.
-    items:
-      $ref: './Document.yaml'

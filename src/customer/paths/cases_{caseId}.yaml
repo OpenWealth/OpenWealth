@@ -27,6 +27,8 @@ get:
       $ref: ../../generics/components/responses/404.yaml
     '405':
       $ref: ../../generics/components/responses/405.yaml
+    '429':
+      $ref: ../../generics/components/responses/429.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
     '501':
@@ -59,41 +61,6 @@ put:
         application/json:
           schema:
             $ref: ../components/schemas/Case.yaml
-    '400':
-      $ref: ../../generics/components/responses/400.yaml
-    '401':
-      $ref: ../../generics/components/responses/401.yaml
-    '403':
-      $ref: ../../generics/components/responses/403.yaml
-    '404':
-      $ref: ../../generics/components/responses/404.yaml
-    '405':
-      $ref: ../../generics/components/responses/405.yaml
-    '409':
-      $ref: ../../generics/components/responses/409.yaml
-    '500':
-      $ref: ../../generics/components/responses/500.yaml
-    '501':
-      $ref: ../../generics/components/responses/501.yaml
-    '503':
-      $ref: ../../generics/components/responses/503.yaml
-delete:
-  tags:
-    - cases
-  summary: Deletes a case by id
-  description: |
-    Deletes a specific case by id. A case can only be deleted while it is in status `draft`, i.e.
-    before it has been submitted; otherwise `409` is returned and the case must be cancelled instead.
-  operationId: deleteCaseById
-  parameters:
-    - $ref: ../../generics/components/parameters/path_caseId.yaml
-    - $ref: ../../generics/components/parameters/correlation_id.yaml
-  responses:
-    '204':
-      description: Case successfully deleted (empty response).
-      headers:
-        Correlation-Id:
-          $ref: ../../generics/components/headers/Correlation-Id.yaml
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':

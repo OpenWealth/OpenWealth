@@ -103,7 +103,8 @@
             "isPep": false,
             "isFatca": false
           },
-          "relationType": "accountOwner",
+          "contractualRole": "contractingPartner",
+          "beneficialRole": "beneficialOwner",
           "signatoryRight": "individually"
         }
       ]
@@ -130,7 +131,11 @@
     ],
     "powerOfAttorneyList": [
       {
-        "type": "limited",
+        "scope": "management",
+        "signatoryRight": "individually",
+        "validFrom": "2026-04-13",
+        "validBeyondIncapacity": true,
+        "validBeyondDeath": true,
         "person": {
           "type": "legalPerson",
           "organisationName": "Muster AG",

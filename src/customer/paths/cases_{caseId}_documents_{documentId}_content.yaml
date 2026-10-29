@@ -1,8 +1,8 @@
 put:
   summary: Upload binary document content
   description: |
-    Uploads the binary content of a document. Content can only be uploaded while the case is in status
-    `draft` or `actionRequired`; otherwise `409` is returned.
+    Uploads the binary content of a document. Existing content is replaced. Content can only be uploaded
+    while the case is in status `draft` or `actionRequired`; otherwise `409` is returned.
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../../generics/components/parameters/path_documentId.yaml
@@ -17,19 +17,11 @@ put:
           type: string
           format: binary
   responses:
-    '200':
-      description: Successful upload of the document content.
+    '204':
+      description: Successful upload of the document content (empty response).
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: true
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -38,10 +30,14 @@ put:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '409':
       $ref: ../../generics/components/responses/409.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml
 get:
@@ -62,7 +58,9 @@ get:
           $ref: ../../generics/components/headers/Correlation-Id.yaml
       content:
         application/octet-stream:
-          example: ''
+          schema:
+            type: string
+            format: binary
     '400':
       $ref: ../../generics/components/responses/400.yaml
     '401':
@@ -71,7 +69,11 @@ get:
       $ref: ../../generics/components/responses/403.yaml
     '404':
       $ref: ../../generics/components/responses/404.yaml
+    '405':
+      $ref: ../../generics/components/responses/405.yaml
     '500':
       $ref: ../../generics/components/responses/500.yaml
+    '501':
+      $ref: ../../generics/components/responses/501.yaml
     '503':
       $ref: ../../generics/components/responses/503.yaml

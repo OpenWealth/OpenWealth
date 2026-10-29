@@ -16,7 +16,7 @@ properties:
       - notAllowedValue
       - missingDocument
       - other
-    example: missingValue
+    example: notAllowedValue
   description:
     type: string
     description: Reason of error related to object.
@@ -26,4 +26,4 @@ properties:
     type: string
     description: JsonPointer (RFC 6901) to affected property.
     maxLength: 2048
-    example: /businessContext/customer/customerToPersonRelationList/0/person/countryOfDomicile
+    example: /content/customer/customerToPersonRelationList/0/person/countryOfDomicile

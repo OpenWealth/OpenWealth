@@ -21,7 +21,9 @@
   },
   "personToCustomerRelationList": [
     {
-      "relationType": "accountOwner",
+      "contractualRole": "contractingPartner",
+      "beneficialRole": "beneficialOwner",
+      "signatoryRight": "individually",
       "personId": "person-1"
     }
   ]
