@@ -1,6 +1,7 @@
 get:
   operationId: getDocument
   summary: Get the Metadata of a Document
+  description: Returns the metadata of a specific document of a case.
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../../generics/components/parameters/path_documentId.yaml
@@ -9,7 +10,7 @@ get:
     - documents
   responses:
     '200':
-      description: Got the document corresponding to the id
+      description: Got the document corresponding to the id.
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml

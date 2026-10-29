@@ -13,6 +13,14 @@ info:
 servers:
   - description: Your Server URL.
     url: https://example.org
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
+tags:
+  - name: cases
+    description: Operations for managing cases and their lifecycle.
+  - name: documents
+    description: Operations for managing documents of a case.
 security: []
 paths:
   /cases:
@@ -27,3 +35,9 @@ paths:
     $ref: paths/cases_{caseId}_documents_{documentId}.yaml
   /cases/{caseId}/documents/{documentId}/content:
     $ref: paths/cases_{caseId}_documents_{documentId}_content.yaml
+components:
+  schemas: {}
+  responses: {}
+  parameters: {}
+  headers: {}
+  securitySchemes: {}

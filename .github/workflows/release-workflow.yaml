@@ -17,6 +17,7 @@ on:
           - custody
           - trading
           - customer
+          - documents
       commit_sha:
         description: 'The commit SHA to create the release from'
         required: true

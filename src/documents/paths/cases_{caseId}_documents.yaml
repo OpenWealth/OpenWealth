@@ -61,7 +61,7 @@ post:
             $ref: ../components/examples/PdfStatement.yaml
   responses:
     '201':
-      description: Document was accepted
+      description: Document was accepted.
       headers:
         Correlation-Id:
           $ref: ../../generics/components/headers/Correlation-Id.yaml

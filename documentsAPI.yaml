@@ -14,6 +14,14 @@ servers:
   - description: Your Server URL.
     url: https://example.org
 security: []
+tags:
+  - name: cases
+    description: Operations for managing cases and their lifecycle.
+  - name: documents
+    description: Operations for managing documents of a case.
+externalDocs:
+  description: Find out more about OpenWealth API specifications.
+  url: https://openwealth.ch
 paths:
   /cases:
     get:
@@ -287,7 +295,7 @@ paths:
                 $ref: '#/components/examples/PdfStatement'
       responses:
         '201':
-          description: Document was accepted
+          description: Document was accepted.
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
@@ -320,6 +328,7 @@ paths:
     get:
       operationId: getDocument
       summary: Get the Metadata of a Document
+      description: Returns the metadata of a specific document of a case.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -328,7 +337,7 @@ paths:
         - documents
       responses:
         '200':
-          description: Got the document corresponding to the id
+          description: Got the document corresponding to the id.
           headers:
             Correlation-Id:
               $ref: '#/components/headers/Correlation-Id'
@@ -453,6 +462,7 @@ paths:
     get:
       operationId: getDocumentContent
       summary: Download Document Content
+      description: Returns the binary content of a specific document of a case.
       parameters:
         - $ref: '#/components/parameters/path_caseId'
         - $ref: '#/components/parameters/path_documentId'
@@ -487,79 +497,6 @@ paths:
         '503':
           $ref: '#/components/responses/503'
 components:
-  parameters:
-    cursor:
-      in: query
-      name: cursor
-      required: false
-      schema:
-        type: string
-      description: An opaque string value used for pagination.
-    limit:
-      in: query
-      name: limit
-      required: false
-      schema:
-        type: integer
-        format: int32
-        minimum: 1
-      description: Maximum number of items to return.
-    correlation_id:
-      in: header
-      name: Correlation-Id
-      required: true
-      schema:
-        type: string
-      description: Unique ID (defined by the caller) which will be reflected back in the response.
-    path_caseId:
-      in: path
-      name: caseId
-      required: true
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 128
-        example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-        description: Unique and unambiguous identification used by the bank for the case.
-      description: Case ID Parameter.
-    action:
-      in: path
-      required: true
-      name: action
-      schema:
-        type: string
-        enum:
-          - submit
-          - cancel
-      description: Parameter for the action requested for a given case.
-    path_documentId:
-      name: documentId
-      in: path
-      required: true
-      description: The document's ID
-      schema:
-        type: string
-  headers:
-    Correlation-Id:
-      description: Client defined ID from request to correlates HTTP requests between a client and server.
-      schema:
-        type: string
-        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
-    Next-Cursor:
-      description: An opaque string value, or an empty string if there are no more results.
-      required: false
-      schema:
-        type: string
-    Problem-Content-Type:
-      description: application/problem+json; charset=utf-8 according to RFC7807.
-      schema:
-        type: string
-        example: application/problem+json
-    Content-Language:
-      description: Response language - always en.
-      schema:
-        type: string
-        example: en
   schemas:
     StatusReason:
       type: object
@@ -581,12 +518,12 @@ components:
           example: notAllowedValue
         description:
           type: string
-          maxLength: 256
+          maxLength: 2048
           description: Reason of error related to object.
           example: Country of domicile missing on person object.
         objectPath:
           type: string
-          maxLength: 256
+          maxLength: 2048
           description: JsonPointer (RFC 6901) to affected property.
           example: /content/customer/customerToPersonRelationList/0/person/countryOfDomicile
     RelatedResource:
@@ -762,7 +699,7 @@ components:
           type: string
           maxLength: 70
           example: 9876-5af5wa5-e14a-fw5
-          description: Unique and unambiguous identification for the document
+          description: Unique and unambiguous identification for the document.
           readOnly: true
         relatedResource:
           $ref: '#/components/schemas/RelatedResource'
@@ -778,6 +715,7 @@ components:
           description: Identification of the document or template.
           type: string
           maxLength: 70
+          example: DOC-2023-000123
         issueDate:
           description: Issue date of the document.
           type: string
@@ -793,6 +731,7 @@ components:
           type: string
           minLength: 1
           maxLength: 140
+          example: Tax invoice
         languageCode:
           description: Unique identifier for a language used in the document.
           type: string
@@ -814,14 +753,15 @@ components:
           description: Technical name of the file.
           type: string
           maxLength: 140
+          example: tax-invoice.pdf
         createdDateTime:
-          description: The date time when the case was created.
+          description: The date time when the document was created.
           type: string
           format: date-time
           example: '2023-12-06T11:36:08.033Z'
           readOnly: true
         updatedDateTime:
-          description: The date time when the case was last updated.
+          description: The date time when the document was last updated.
           type: string
           format: date-time
           example: '2023-12-06T11:36:08.033Z'
@@ -950,6 +890,80 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
+  parameters:
+    cursor:
+      in: query
+      name: cursor
+      required: false
+      schema:
+        type: string
+      description: An opaque string value used for pagination.
+    limit:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+      description: Maximum number of items to return.
+    correlation_id:
+      in: header
+      name: Correlation-Id
+      required: true
+      schema:
+        type: string
+      description: Unique ID (defined by the caller) which will be reflected back in the response.
+    path_caseId:
+      in: path
+      name: caseId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+        example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        description: Unique and unambiguous identification used by the bank for the case.
+      description: Case ID Parameter.
+    action:
+      in: path
+      required: true
+      name: action
+      schema:
+        type: string
+        enum:
+          - submit
+          - cancel
+      description: Parameter for the action requested for a given case.
+    path_documentId:
+      name: documentId
+      in: path
+      required: true
+      description: The document's ID.
+      schema:
+        type: string
+  headers:
+    Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
+    Next-Cursor:
+      description: An opaque string value, or an empty string if there are no more results.
+      required: false
+      schema:
+        type: string
+    Problem-Content-Type:
+      description: application/problem+json; charset=utf-8 according to RFC7807.
+      schema:
+        type: string
+        example: application/problem+json
+    Content-Language:
+      description: Response language - always en.
+      schema:
+        type: string
+        example: en
+  securitySchemes: {}
   examples:
     PdfStatement:
       value:

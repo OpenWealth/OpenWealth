@@ -43,6 +43,7 @@ put:
 get:
   operationId: getDocumentContent
   summary: Download Document Content
+  description: Returns the binary content of a specific document of a case.
   parameters:
     - $ref: ../../generics/components/parameters/path_caseId.yaml
     - $ref: ../../generics/components/parameters/path_documentId.yaml
