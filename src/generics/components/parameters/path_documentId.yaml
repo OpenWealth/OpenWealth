@@ -1,6 +1,10 @@
-name: documentId
 in: path
+name: documentId
 required: true
-description: The document's ID.
 schema:
   type: string
+  minLength: 1
+  maxLength: 70
+  example: 9876-5af5wa5-e14a-fw5
+  description: Unique and unambiguous identification for the document.
+description: Document ID Parameter.
