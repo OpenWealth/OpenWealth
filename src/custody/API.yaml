@@ -23,6 +23,10 @@ tags:
     description: Accounts operations.
   - name: customers
     description: Customer operations.
+  - name: event-notification
+    description: Event notification operations.
+  - name: event-subscription
+    description: Event subscription operations.
   - name: positions
     description: Position operations.
   - name: transactions
@@ -49,6 +53,12 @@ paths:
     $ref: paths/customers_{customerId}_transactions.yaml
   /customers/{customerId}/transactions/{transactionId}:
     $ref: paths/customers_{customerId}_transactions_{transactionId}.yaml
+  /event-subscriptions:
+    $ref: paths/event-subscriptions.yaml
+  /event-subscriptions/{eventSubscriptionId}:
+    $ref: paths/event-subscriptions_{eventSubscriptionId}.yaml
+  /event-subscriptions/{eventSubscriptionId}/event-notifications:
+    $ref: paths/event-subscriptions_{eventSubscriptionId}_event-notifications.yaml
 components:
   schemas: {}
   responses: {}

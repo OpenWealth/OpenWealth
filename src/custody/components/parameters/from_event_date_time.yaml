@@ -1,0 +1,8 @@
+in: query
+name: from_event_date_time
+required: false
+schema:
+  type: string
+  format: date-time
+  example: 2022-10-26T07:58:30.996+0100
+description: Date and time from which events are considered.
