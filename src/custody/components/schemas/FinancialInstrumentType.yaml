@@ -24,4 +24,5 @@ enum:
   - totalReturnSwap
   - creditDefaultSwap
   - cryptoAsset
+  - structuredProduct
   - other

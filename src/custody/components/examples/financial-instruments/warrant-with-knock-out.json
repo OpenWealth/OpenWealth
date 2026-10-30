@@ -1,0 +1,74 @@
+{
+  "type": "structuredProduct",
+  "structuredProductType": "knockOutWarrant",
+  "sspaCode": "2200",
+  "eusipaCode": "2200",
+  "name": "CALL WARRANT WITH KNOCK-OUT ON SWISS RE LTD",
+  "identificationList": [
+    {
+      "type": "isin",
+      "identifier": "CH1381544241"
+    },
+    {
+      "type": "valoren",
+      "identifier": "138154424"
+    },
+    {
+      "type": "tickerSymbol",
+      "identifier": "KSRFJB"
+    }
+  ],
+  "initialFixingDate": "2024-10-04",
+  "issuer": "Bank Julius Baer & Co. Ltd., Guernsey",
+  "issueDate": "2024-10-07",
+  "issuePrice": {
+    "type": "actual",
+    "value": 0.33
+  },
+  "currencyOfDenomination": "CHF",
+  "exercisePrice": {
+    "type": "actual",
+    "value": 105.00,
+    "currency": "CHF"
+  },
+  "settlementType": "physical",
+  "conversionRatio": 40,
+  "exerciseStyle": "european",
+  "expiryDate": "2025-03-21",
+  "barrier": {
+    "price": {
+      "type": "actual",
+      "value": 105.00,
+      "currency": "CHF"
+    },
+    "barrierEvent": "atOrBelow",
+    "observationType": "continuous"
+  },
+  "underlyingFinancialInstrumentList": [
+    {
+      "type": "equity",
+      "name": "Swiss Re Ltd",
+      "identificationList": [
+        {
+          "type": "isin",
+          "identifier": "CH0126881561"
+        },
+        {
+          "type": "valoren",
+          "identifier": "12688156"
+        }
+      ],
+      "initialLevel": {
+        "type": "actual",
+        "value": 114.20,
+        "currency": "CHF"
+      },
+      "exercisePrice": {
+        "type": "actual",
+        "value": 105.00,
+        "currency": "CHF"
+      }
+    }
+  ],
+  "additionalDetails": "EUROPEAN STYLE - PHYSICAL SETTLEMENT - BARRIER CHF 105.00 (91.94%)"
+}

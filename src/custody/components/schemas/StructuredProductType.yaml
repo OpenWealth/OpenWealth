@@ -1,0 +1,29 @@
+title: StructuredProductType
+type: string
+description: Type of structured product, based on the SSPA and EUSIPA product categorization.
+example: barrierReverseConvertible
+enum:
+  - uncappedCapitalProtection
+  - cappedCapitalProtection
+  - capitalProtectionWithKnockOut
+  - capitalProtectionNoteWithTwinWin
+  - capitalProtectionWithCoupon
+  - discountCertificate
+  - barrierDiscountCertificate
+  - reverseConvertible
+  - barrierReverseConvertible
+  - cappedOutperformanceCertificate
+  - cappedBonusCertificate
+  - expressCertificate
+  - trackerCertificate
+  - outperformanceCertificate
+  - bonusCertificate
+  - outperformanceBonusCertificate
+  - twinWinCertificate
+  - warrant
+  - spreadWarrant
+  - knockOutWarrant
+  - openEndKnockOutWarrant
+  - miniFuture
+  - constantLeverageCertificate
+  - otherStructuredProduct
