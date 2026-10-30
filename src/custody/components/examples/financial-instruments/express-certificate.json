@@ -1,0 +1,115 @@
+{
+  "type": "structuredProduct",
+  "structuredProductType": "expressCertificate",
+  "sspaCode": "1260",
+  "eusipaCode": "1260",
+  "name": "JB MULTI CONDITIONAL COUPON BARRIER REVERSE CONVERTIBLE ON SWISS RE AG, NESTLE SA, ROCHE HOLDING AG, NOVARTIS AG",
+  "identificationList": [
+    {
+      "type": "isin",
+      "identifier": "CH1238078039"
+    },
+    {
+      "type": "valoren",
+      "identifier": "123807803"
+    }
+  ],
+  "initialFixingDate": "2022-12-21",
+  "issuer": "Bank Julius Baer & Co. Ltd., Guernsey",
+  "issueDate": "2023-01-04",
+  "issuePrice": {
+    "type": "percentage",
+    "value": 100
+  },
+  "currencyOfDenomination": "EUR",
+  "denomination": {
+    "amount": 1000,
+    "currency": "EUR"
+  },
+  "conditionalCoupon": true,
+  "coupon": {
+    "type": "fixed",
+    "value": 0.06004,
+    "paymentFrequency": "quarterly"
+  },
+  "quanto": true,
+  "settlementType": "physical",
+  "barrier": {
+    "price": {
+      "type": "percentage",
+      "value": 70
+    },
+    "barrierEvent": "atOrBelow",
+    "observationType": "continuous",
+    "underlyingWatchType": "worstOf"
+  },
+  "triggerBarrier": {
+    "price": {
+      "type": "percentage",
+      "value": 95
+    },
+    "barrierEvent": "atOrAbove",
+    "observationType": "atObservationDate",
+    "underlyingWatchType": "allOf",
+    "observationDates": [
+      "2023-03-28",
+      "2023-06-28",
+      "2023-09-28",
+      "2023-12-28",
+      "2024-03-28",
+      "2024-06-28",
+      "2024-09-30",
+      "2024-12-30",
+      "2025-03-28",
+      "2025-06-30",
+      "2025-09-30"
+    ]
+  },
+  "exercisePrice": {
+    "type": "percentage",
+    "value": 70
+  },
+  "maturityDate": "2026-01-05",
+  "underlyingFinancialInstrumentList": [
+    {
+      "type": "equity",
+      "name": "Swiss Re Ltd",
+      "identificationList": [
+        {
+          "type": "isin",
+          "identifier": "CH0126881561"
+        },
+        {
+          "type": "valoren",
+          "identifier": "12688156"
+        }
+      ],
+      "currencyOfDenomination": "CHF",
+      "initialLevel": {
+        "type": "actual",
+        "value": 87.00,
+        "currency": "CHF"
+      },
+      "barrier": {
+        "price": {
+          "type": "actual",
+          "value": 60.90,
+          "currency": "CHF"
+        }
+      },
+      "triggerBarrier": {
+        "price": {
+          "type": "actual",
+          "value": 82.65,
+          "currency": "CHF"
+        }
+      },
+      "exercisePrice": {
+        "type": "actual",
+        "value": 60.90,
+        "currency": "CHF"
+      }
+    }
+  ],
+  "additionalDetails": "QUARTERLY AUTOCALLABLE (TRIGGER 95%) - MEMORY EFFECT - QUANTO EUR"
+}

@@ -1,0 +1,56 @@
+title: Barrier
+type: object
+description: |
+  Barriers denote a threshold for the price of the underlying. Outperforming or failing to reach
+  the barrier changes the Structured Product's repayment conditions (payoff).
+required:
+  - price
+properties:
+  price:
+    description: |
+      Barriers denote a threshold for the price of the underlying.
+      Outperforming or failing to reach the barrier changes the Structured Product's repayment conditions (payoff).
+    $ref: 'Price.yaml'
+  barrierType:
+    description: |
+      The barrier type determines whether the option becomes active or inactive based on the underlying asset's price movement.
+    type: string
+    example: downAndIn
+    enum:
+      - upAndIn
+      - downAndIn
+      - upAndOut
+      - downAndOut
+  observationType:
+    description: How the barrier event is observed.
+    type: string
+    example: continuous
+    enum:
+      - continuous
+      - atObservationDate
+  observationDates:
+    description: Dates on which the barrier is observed, if observationType is atObservationDate.
+    type: array
+    items:
+      type: string
+      format: date
+      example: '2025-03-28'
+  barrierEvent:
+    description: Whether the barrier is hit when the underlying price is at or below, or at or above, the barrier price.
+    type: string
+    example: atOrBelow
+    enum:
+      - atOrBelow
+      - atOrAbove
+  underlyingWatchType:
+    description: |
+      Which underlyings are observed for the barrier event, where
+      - 'allOf' denotes that all underlyings must hit the barrier.
+      - 'worstOf' denotes that the worst performing underlying is observed.
+      - 'bestOf' denotes that the best performing underlying is observed.
+    type: string
+    enum:
+      - allOf
+      - worstOf
+      - bestOf
+    example: worstOf

@@ -493,6 +493,7 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
+        - /problems/TOO_MANY_REQUESTS
       example: /problems/TECHNICAL_ERROR
     CommonErrorResponse:
       title: CommonErrorResponse
@@ -664,7 +665,7 @@ components:
             optionType:
               $ref: '#/components/schemas/OptionType'
             optionStyle:
-              $ref: '#/components/schemas/OptionStyle'
+              $ref: '#/components/schemas/ExerciseStyle'
             underlyingFinancialInstrument:
               $ref: '#/components/schemas/FinancialInstrument'
     Future:
@@ -779,7 +780,7 @@ components:
             optionType:
               $ref: '#/components/schemas/OptionType'
             optionStyle:
-              $ref: '#/components/schemas/OptionStyle'
+              $ref: '#/components/schemas/ExerciseStyle'
     Mortgage:
       title: Mortgage
       description: A mortgage is a type of loan used to purchase or maintain a home, plot of land, or other types of real estate.
@@ -917,6 +918,143 @@ components:
       description: Crypto Asset.
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
+    StructuredProduct:
+      title: StructuredProduct
+      description: |
+        A structured product is a financial instrument whose payoff is derived from one or more underlying
+        financial instruments, typically combining features such as capital protection, coupons, barriers or caps.
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - structuredProductType
+            - underlyingFinancialInstrumentList
+          properties:
+            structuredProductType:
+              $ref: '#/components/schemas/StructuredProductType'
+            sspaCode:
+              description: The SSPA (Swiss Structure Product Association) categorization of a structured product.
+              type: string
+              example: '1230'
+            eusipaCode:
+              description: The EUSIPA (European Structure Investment Product Association) categorization of a structured product.
+              type: string
+              example: '1230'
+            nominalAmount:
+              description: |
+                The nominal is a Structured Product's nominal value.
+                Repayment of the product refers to this amount.
+              $ref: '#/components/schemas/CurrencyAmount'
+            denomination:
+              description: This is the minimum amount that an investor must commit to purchase the structured product.
+              $ref: '#/components/schemas/CurrencyAmount'
+            initialFixingDate:
+              description: The date on which the Initial Level and the Strike etc. are fixed.
+              $ref: '#/components/schemas/Date'
+            issuer:
+              description: Company who issued the Product.
+              type: string
+              example: Bank Julius Baer & Co. Ltd., Guernsey
+            issueDate:
+              description: The date on which the Products are issued and the Issue Price is paid.
+              $ref: '#/components/schemas/Date'
+            issuePrice:
+              description: Price of issuance (typically in percent - 100%).
+              $ref: '#/components/schemas/Price'
+            maturityDate:
+              description: |
+                Planned date, at the time of issuance, on which an interest bearing financial instrument becomes due and principal
+                is repaid by the issuer to the investor.
+              $ref: '#/components/schemas/Date'
+            expiryDate:
+              description: Date on which an order, a privilege, an entitlement or an offer terminates.
+              $ref: '#/components/schemas/Date'
+            exercisePrice:
+              description: |
+                An option's strike/exercise Price refers to the investor's buying price (call option)
+                or selling price (put option) of the underlying.
+                For participation and yield enhancement products, the strike defines
+                the reference price of the underlyings of the relevant Structured Product.
+                Barriers, bonus levels and cap levels are based on the reference price.
+              $ref: '#/components/schemas/Price'
+            exerciseStyle:
+              description: Specifies how the product can be exercised, e.g. for warrants.
+              $ref: '#/components/schemas/ExerciseStyle'
+            capPrice:
+              description: |
+                Some Structured Products are equipped with a cap. On the one hand, the cap limits the
+                investor's profit potential, but on the other, it allows more attractive conditions with a
+                sideways trend of prices or only slightly rising prices.
+              $ref: '#/components/schemas/Price'
+            barrier:
+              $ref: '#/components/schemas/Barrier'
+            upperBarrier:
+              $ref: '#/components/schemas/Barrier'
+            lowerBarrier:
+              $ref: '#/components/schemas/Barrier'
+            stopLossBarrier:
+              description: |
+                When the price of the underlying drops below the financing level,
+                which is the amount of the underlying financed by the issuer, the issuer can no longer fully recover the investment.
+              $ref: '#/components/schemas/Barrier'
+            triggerBarrier:
+              description: |
+                Barrier that triggers an early redemption (autocall) of the product when it is reached
+                on an observation date.
+              $ref: '#/components/schemas/Barrier'
+            conditionalCoupon:
+              description: Designates if the coupon payment is bound to conditions.
+              type: boolean
+              example: false
+            coupon:
+              description: A coupon is the annual interest rate paid on an investment, expressed as a percentage of the face value and paid.
+              $ref: '#/components/schemas/InterestRate'
+            conversionRatio:
+              description: |
+                The number of warrants held by the warrant holder in order to be entitled for one underlying stock.
+              type: number
+              example: 10
+            rebate:
+              description: |
+                The payouts made when a barrier has been breached are referred to as rebates, with the
+                amounts expressed as a percentage of the nominal.
+              type: number
+              example: 0
+            capitalProtectionFactor:
+              description: Percentage of the nominal that is protected (e.g. 100).
+              type: number
+              example: 100
+            participationFactor:
+              description: |
+                This indicates to what proportion in percent the investor profits
+                from the price performance of the underlying asset. This
+                can be 1:1, over- or underproportional.
+              type: number
+              example: 140
+            quanto:
+              description: |
+                A quanto is a type of derivative in which the underlying is denominated in one currency,
+                but the instrument itself is settled in another currency at some rate.
+                Such products are attractive for speculators and investors who wish to have exposure to a foreign asset,
+                but without the corresponding exchange rate risk.
+              type: boolean
+              example: false
+            settlementType:
+              description: |
+                If a Structured Product reaches the end of its term, it is redeemed in accordance with the
+                payoff diagram defined in the term sheet. The issuer can make the repayment in accordance
+                with the product description (final terms) by physical delivery of the underlying or by cash
+                settlement. In the case of cash settlement, the investor receives the value of the product (at
+                the time of final fixing) in cash on the redemption date.
+              type: string
+              enum:
+                - cash
+                - physical
+              example: cash
+            underlyingFinancialInstrumentList:
+              type: array
+              items:
+                $ref: '#/components/schemas/UnderlyingFinancialInstrument'
     OtherFinancialInstrument:
       title: Other
       type: object
@@ -954,6 +1092,7 @@ components:
         - totalReturnSwap
         - creditDefaultSwap
         - cryptoAsset
+        - structuredProduct
         - other
     FinancialInstrumentIdentification:
       title: FinancialInstrumentIdentification
@@ -1156,6 +1295,7 @@ components:
         - $ref: '#/components/schemas/TotalReturnSwap'
         - $ref: '#/components/schemas/CreditDefaultSwap'
         - $ref: '#/components/schemas/CryptoAsset'
+        - $ref: '#/components/schemas/StructuredProduct'
         - $ref: '#/components/schemas/OtherFinancialInstrument'
       discriminator:
         propertyName: type
@@ -1181,6 +1321,7 @@ components:
           totalReturnSwap: '#/components/schemas/TotalReturnSwap'
           creditDefaultSwap: '#/components/schemas/CreditDefaultSwap'
           cryptoAsset: '#/components/schemas/CryptoAsset'
+          structuredProduct: '#/components/schemas/StructuredProduct'
           other: '#/components/schemas/OtherFinancialInstrument'
     ContractSize:
       title: ContractSize
@@ -1197,8 +1338,8 @@ components:
       enum:
         - call
         - put
-    OptionStyle:
-      title: OptionStyle
+    ExerciseStyle:
+      title: ExerciseStyle
       type: string
       description: Specifies how an option can be exercised.
       example: american
@@ -1227,6 +1368,131 @@ components:
       description: DateTime according to ISO 8601.
       format: date-time
       example: '2018-04-13T16:00:00Z'
+    StructuredProductType:
+      title: StructuredProductType
+      type: string
+      description: Type of structured product, based on the SSPA and EUSIPA product categorization.
+      example: barrierReverseConvertible
+      enum:
+        - uncappedCapitalProtection
+        - cappedCapitalProtection
+        - capitalProtectionWithKnockOut
+        - capitalProtectionNoteWithTwinWin
+        - capitalProtectionWithCoupon
+        - discountCertificate
+        - barrierDiscountCertificate
+        - reverseConvertible
+        - barrierReverseConvertible
+        - cappedOutperformanceCertificate
+        - cappedBonusCertificate
+        - expressCertificate
+        - trackerCertificate
+        - outperformanceCertificate
+        - bonusCertificate
+        - outperformanceBonusCertificate
+        - twinWinCertificate
+        - warrant
+        - spreadWarrant
+        - knockOutWarrant
+        - openEndKnockOutWarrant
+        - miniFuture
+        - constantLeverageCertificate
+        - otherStructuredProduct
+    Barrier:
+      title: Barrier
+      type: object
+      description: |
+        Barriers denote a threshold for the price of the underlying. Outperforming or failing to reach
+        the barrier changes the Structured Product's repayment conditions (payoff).
+      required:
+        - price
+      properties:
+        price:
+          description: |
+            Barriers denote a threshold for the price of the underlying.
+            Outperforming or failing to reach the barrier changes the Structured Product's repayment conditions (payoff).
+          $ref: '#/components/schemas/Price'
+        barrierType:
+          description: |
+            The barrier type determines whether the option becomes active or inactive based on the underlying asset's price movement.
+          type: string
+          example: downAndIn
+          enum:
+            - upAndIn
+            - downAndIn
+            - upAndOut
+            - downAndOut
+        observationType:
+          description: How the barrier event is observed.
+          type: string
+          example: continuous
+          enum:
+            - continuous
+            - atObservationDate
+        observationDates:
+          description: Dates on which the barrier is observed, if observationType is atObservationDate.
+          type: array
+          items:
+            type: string
+            format: date
+            example: '2025-03-28'
+        barrierEvent:
+          description: Whether the barrier is hit when the underlying price is at or below, or at or above, the barrier price.
+          type: string
+          example: atOrBelow
+          enum:
+            - atOrBelow
+            - atOrAbove
+        underlyingWatchType:
+          description: |
+            Which underlyings are observed for the barrier event, where
+            - 'allOf' denotes that all underlyings must hit the barrier.
+            - 'worstOf' denotes that the worst performing underlying is observed.
+            - 'bestOf' denotes that the best performing underlying is observed.
+          type: string
+          enum:
+            - allOf
+            - worstOf
+            - bestOf
+          example: worstOf
+    UnderlyingFinancialInstrument:
+      title: UnderlyingFinancialInstrument
+      description: Underlying financial instrument of a structured product.
+      allOf:
+        - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - properties:
+            initialLevel:
+              description: |
+                with respect to each Underlying, the relevant Initial Level, which is equal to
+                100% of its Level on the Initial Fixing Date, as determined by the Calculation Agent.
+              $ref: '#/components/schemas/Price'
+            exercisePrice:
+              description: |
+                An option's strike refers to the investor's buying price (call option) or selling price (put option) of the underlying.
+                For participation and yield enhancement products, the strike defines
+                the reference price of the underlyings of the relevant Structured Product.
+                Barriers, bonus levels and cap levels are based on the reference price.
+              $ref: '#/components/schemas/Price'
+            barrier:
+              $ref: '#/components/schemas/Barrier'
+            upperBarrier:
+              $ref: '#/components/schemas/Barrier'
+            lowerBarrier:
+              $ref: '#/components/schemas/Barrier'
+            triggerBarrier:
+              description: Early redemption (autocall) trigger level for this underlying.
+              $ref: '#/components/schemas/Barrier'
+            weight:
+              type: number
+              example: 0.25
+            relevantNumber:
+              description: |
+                With respect to each Underlying, the number of such Underlying contained in the Basket on the
+                Final Fixing Date, as determined by the Calculation Agent based on the number specified in the
+                table above of such Underlying contained in the Basket and as may be adjusted due to the
+                Reinvested Dividend Payments during the term of the Products by the Calculation Agent.
+              type: number
+              example: 1
     Position:
       title: Position
       type: object
@@ -1659,8 +1925,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
         as malformed request syntax.
@@ -1674,8 +1940,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
       content:
         application/problem+json:
@@ -1687,8 +1953,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Forbidden - The server understood the request but refuses to authorize it.
       content:
         application/problem+json:
@@ -1700,8 +1966,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Not Found - The origin server did not find a current representation for the target resource
         or is not willing to disclose that one exists.
@@ -1715,8 +1981,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Method Not Allowed - The method received in the request-line is known by the origin server
         but not supported by the target resource.
@@ -1730,8 +1996,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
@@ -1743,8 +2009,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Not Implemented - The server does not support the functionality required to fulfill the request.
       content:
         application/problem+json:
@@ -1756,8 +2022,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
       content:
         application/problem+json:
@@ -1870,4 +2136,9 @@ components:
       schema:
         type: string
         example: en
+    Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   securitySchemes: {}
