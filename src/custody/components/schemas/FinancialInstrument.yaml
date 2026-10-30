@@ -19,7 +19,7 @@ oneOf:
   - $ref: 'InterestRateSwap.yaml'
   - $ref: 'TotalReturnSwap.yaml'
   - $ref: 'CreditDefaultSwap.yaml'
-  - $ref: 'CryptoAsset.yaml'
+  - $ref: 'DigitalAsset.yaml'
   - $ref: 'OtherFinancialInstrument.yaml'
 discriminator:
   propertyName: type
@@ -44,5 +44,5 @@ discriminator:
     interestRateSwap: 'InterestRateSwap.yaml'
     totalReturnSwap: 'TotalReturnSwap.yaml'
     creditDefaultSwap: 'CreditDefaultSwap.yaml'
-    cryptoAsset: 'CryptoAsset.yaml'
+    digitalAsset: 'DigitalAsset.yaml'
     other: 'OtherFinancialInstrument.yaml'

@@ -1,0 +1,24 @@
+title: DigitalAsset
+description: Digital asset, such as a cryptocurrency or another token on a distributed ledger.
+allOf:
+  - $ref: 'FinancialInstrumentBase.yaml'
+  - type: object
+    required:
+      - tokenType
+    properties:
+      tokenType:
+        type: string
+        description: Type of digital asset or token.
+        example: paymentToken
+        enum:
+          - paymentToken
+          - utilityToken
+          - securityToken
+          - nonFungibleToken
+          - platformToken
+          - rewardToken
+          - governanceToken
+          - fanToken
+          - gamingToken
+          - socialToken
+          - otherToken

@@ -493,6 +493,7 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
+        - /problems/TOO_MANY_REQUESTS
       example: /problems/TECHNICAL_ERROR
     CommonErrorResponse:
       title: CommonErrorResponse
@@ -912,11 +913,31 @@ components:
               $ref: '#/components/schemas/Date'
             underlyingFinancialInstrument:
               $ref: '#/components/schemas/FinancialInstrument'
-    CryptoAsset:
-      title: CryptoAsset
-      description: Crypto Asset.
+    DigitalAsset:
+      title: DigitalAsset
+      description: Digital asset, such as a cryptocurrency or another token on a distributed ledger.
       allOf:
         - $ref: '#/components/schemas/FinancialInstrumentBase'
+        - type: object
+          required:
+            - tokenType
+          properties:
+            tokenType:
+              type: string
+              description: Type of digital asset or token.
+              example: paymentToken
+              enum:
+                - paymentToken
+                - utilityToken
+                - securityToken
+                - nonFungibleToken
+                - platformToken
+                - rewardToken
+                - governanceToken
+                - fanToken
+                - gamingToken
+                - socialToken
+                - otherToken
     OtherFinancialInstrument:
       title: Other
       type: object
@@ -953,7 +974,7 @@ components:
         - interestRateSwap
         - totalReturnSwap
         - creditDefaultSwap
-        - cryptoAsset
+        - digitalAsset
         - other
     FinancialInstrumentIdentification:
       title: FinancialInstrumentIdentification
@@ -1155,7 +1176,7 @@ components:
         - $ref: '#/components/schemas/InterestRateSwap'
         - $ref: '#/components/schemas/TotalReturnSwap'
         - $ref: '#/components/schemas/CreditDefaultSwap'
-        - $ref: '#/components/schemas/CryptoAsset'
+        - $ref: '#/components/schemas/DigitalAsset'
         - $ref: '#/components/schemas/OtherFinancialInstrument'
       discriminator:
         propertyName: type
@@ -1180,7 +1201,7 @@ components:
           interestRateSwap: '#/components/schemas/InterestRateSwap'
           totalReturnSwap: '#/components/schemas/TotalReturnSwap'
           creditDefaultSwap: '#/components/schemas/CreditDefaultSwap'
-          cryptoAsset: '#/components/schemas/CryptoAsset'
+          digitalAsset: '#/components/schemas/DigitalAsset'
           other: '#/components/schemas/OtherFinancialInstrument'
     ContractSize:
       title: ContractSize
@@ -1408,6 +1429,7 @@ components:
         - assignment
         - assimilation
         - bonus
+        - burning
         - buy
         - buyToClose
         - capitalIncrease
@@ -1426,6 +1448,7 @@ components:
         - expiration
         - fees
         - finalLiquidationPayment
+        - forking
         - fxSpot
         - increasePrincipal
         - inflowCash
@@ -1434,6 +1457,7 @@ components:
         - internalTransfer
         - liquidationPayment
         - merger
+        - minting
         - openContract
         - other
         - outflowCash
@@ -1446,10 +1470,12 @@ components:
         - redemptionPrior
         - reductionOfNominal
         - resetPayment
+        - reward
         - rightDistribution
         - sell
         - sellToOpen
         - spinOff
+        - staking
         - stockSplit
         - subscription
         - taxCorrections
@@ -1659,8 +1685,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
         as malformed request syntax.
@@ -1674,8 +1700,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
       content:
         application/problem+json:
@@ -1687,8 +1713,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Forbidden - The server understood the request but refuses to authorize it.
       content:
         application/problem+json:
@@ -1700,8 +1726,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Not Found - The origin server did not find a current representation for the target resource
         or is not willing to disclose that one exists.
@@ -1715,8 +1741,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Method Not Allowed - The method received in the request-line is known by the origin server
         but not supported by the target resource.
@@ -1730,8 +1756,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
@@ -1743,8 +1769,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Not Implemented - The server does not support the functionality required to fulfill the request.
       content:
         application/problem+json:
@@ -1756,8 +1782,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
       content:
         application/problem+json:
@@ -1870,4 +1896,9 @@ components:
       schema:
         type: string
         example: en
+    Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   securitySchemes: {}
