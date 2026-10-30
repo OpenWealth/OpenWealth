@@ -1,0 +1,50 @@
+title: CreditLimit
+type: object
+description: Schema of a credit limit.
+required:
+  - id
+  - type
+  - referenceCurrency
+  - limit
+properties:
+  id:
+    type: string
+    maxLength: 128
+    example: TElNLTAwMDE
+    description: Unique and unambiguous identification for the credit limit.
+  type:
+    type: string
+    description: |
+      Type of credit limit, where
+      - 'lombard' denotes a limit secured by pledged assets such as securities or account balances.
+      - 'mortgage' denotes a limit secured by real estate.
+      - 'unsecured' denotes a limit granted without collateral.
+      - 'guarantee' denotes a limit for guarantees issued on behalf of the customer.
+      - 'other' denotes any other type of credit limit.
+    example: lombard
+    enum:
+      - lombard
+      - mortgage
+      - unsecured
+      - guarantee
+      - other
+  referenceCurrency:
+    description: Currency associated to the amounts defined by the credit limit.
+    $ref: '../../../generics/components/schemas/Currency.yaml'
+  limit:
+    description: Maximum principal amount allowed by the credit contract.
+    type: number
+    example: 100000
+  lendingValue:
+    description: The maximum amount the lender is willing to lend based on the collateral's value.
+    type: number
+    example: 100000
+  usage:
+    description: Amount of the credit limit currently in use.
+    type: number
+    example: 25000
+  collateralList:
+    description: The actual asset(s) provided by the borrower to secure the loan.
+    type: array
+    items:
+      $ref: Collateral.yaml

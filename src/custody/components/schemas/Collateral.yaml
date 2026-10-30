@@ -1,0 +1,47 @@
+title: Collateral
+type: object
+description: Schema of a collateral item.
+required:
+  - type
+  - name
+  - quantity
+  - marketValue
+  - lendingValueRatio
+properties:
+  type:
+    type: string
+    description: |
+      Type of collateral, where
+      - 'account' denotes an account balance, referenced in account.
+      - 'instrument' denotes a financial instrument position, referenced in financialInstrument.
+      - 'other' denotes any other asset.
+    example: instrument
+    enum:
+      - account
+      - instrument
+      - other
+  name:
+    type: string
+    description: Name of the collateral item in free format text.
+    example: Novartis AG
+  quantity:
+    description: Number of units of the associated asset.
+    $ref: Quantity.yaml
+  marketValue:
+    description: Current market value of the associated asset, in the reference currency of the credit limit.
+    type: number
+    example: 50000
+  lendingValueRatio:
+    description: Maximum loan amount as a percentage of the asset's current market value.
+    type: number
+    example: 70
+  positionId:
+    description: Unique identification of the associated position.
+    type: string
+    example: ODc2LTU0MzIxOQ
+  account:
+    description: The single account (position) that is part of the pledge/collateral.
+    $ref: 'Account.yaml'
+  financialInstrument:
+    description: The single instrument (position) that is part of the pledge/collateral.
+    $ref: 'FinancialInstrument.yaml'

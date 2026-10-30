@@ -21,6 +21,8 @@ tags:
     description: Accounts operations.
   - name: customers
     description: Customer operations.
+  - name: limits
+    description: Credit limit operations.
   - name: positions
     description: Position operations.
   - name: transactions
@@ -447,6 +449,88 @@ paths:
           $ref: '#/components/responses/501'
         '503':
           $ref: '#/components/responses/503'
+  /customers/{customerId}/limits:
+    get:
+      tags:
+        - limits
+      summary: Returns the credit limits for a specific customer
+      description: |
+        Returns all credit limits for a specific customer accessible to the querying user.
+        Paging is done based on the limit object, i.e. if limit is set to 1,
+        then 1 limit will be returned per page.
+      operationId: getCreditLimitsByCustomerId
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/cursor'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Credit limit List.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+            nextCursor:
+              $ref: '#/components/headers/X-Next-Cursor'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditLimit'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /customers/{customerId}/limits/{limitId}:
+    get:
+      tags:
+        - limits
+      summary: Returns a credit limit by id
+      description: Returns a credit limit by id for a specific customer.
+      operationId: getCreditLimitById
+      parameters:
+        - $ref: '#/components/parameters/path_customerId'
+        - $ref: '#/components/parameters/path_limitId'
+        - $ref: '#/components/parameters/x_correlation_id_in_header'
+      responses:
+        '200':
+          description: Credit limit.
+          headers:
+            X-Correlation-ID:
+              $ref: '#/components/headers/X-Correlation-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditLimit'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
 components:
   schemas:
     Currency:
@@ -493,6 +577,7 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
+        - /problems/TOO_MANY_REQUESTS
       example: /problems/TECHNICAL_ERROR
     CommonErrorResponse:
       title: CommonErrorResponse
@@ -812,12 +897,11 @@ components:
               $ref: '#/components/schemas/CurrencyAmount'
             interestRate:
               $ref: '#/components/schemas/InterestRate'
-            limit:
-              type: number
-              example: 100000
-              description: Maximum principal amount allowed by the credit contract.
-            underlyingFinancialInstrument:
-              $ref: '#/components/schemas/FinancialInstrument'
+            limitId:
+              type: string
+              maxLength: 128
+              example: TElNLTAwMDE
+              description: Unique and unambiguous identification of the associated credit limit.
     MoneyMarket:
       title: MoneyMarket
       description: The money market schema covers both fixed and callable loans and deposits.
@@ -1652,6 +1736,105 @@ components:
           maxLength: 70
           description: Provides additional details on the transaction which can not be included within the structured fields of the message.
           example: Replaces transaction nr. 12234567489
+    Collateral:
+      title: Collateral
+      type: object
+      description: Schema of a collateral item.
+      required:
+        - type
+        - name
+        - quantity
+        - marketValue
+        - lendingValueRatio
+      properties:
+        type:
+          type: string
+          description: |
+            Type of collateral, where
+            - 'account' denotes an account balance, referenced in account.
+            - 'instrument' denotes a financial instrument position, referenced in financialInstrument.
+            - 'other' denotes any other asset.
+          example: instrument
+          enum:
+            - account
+            - instrument
+            - other
+        name:
+          type: string
+          description: Name of the collateral item in free format text.
+          example: Novartis AG
+        quantity:
+          description: Number of units of the associated asset.
+          $ref: '#/components/schemas/Quantity'
+        marketValue:
+          description: Current market value of the associated asset, in the reference currency of the credit limit.
+          type: number
+          example: 50000
+        lendingValueRatio:
+          description: Maximum loan amount as a percentage of the asset's current market value.
+          type: number
+          example: 70
+        positionId:
+          description: Unique identification of the associated position.
+          type: string
+          example: ODc2LTU0MzIxOQ
+        account:
+          description: The single account (position) that is part of the pledge/collateral.
+          $ref: '#/components/schemas/Account'
+        financialInstrument:
+          description: The single instrument (position) that is part of the pledge/collateral.
+          $ref: '#/components/schemas/FinancialInstrument'
+    CreditLimit:
+      title: CreditLimit
+      type: object
+      description: Schema of a credit limit.
+      required:
+        - id
+        - type
+        - referenceCurrency
+        - limit
+      properties:
+        id:
+          type: string
+          maxLength: 128
+          example: TElNLTAwMDE
+          description: Unique and unambiguous identification for the credit limit.
+        type:
+          type: string
+          description: |
+            Type of credit limit, where
+            - 'lombard' denotes a limit secured by pledged assets such as securities or account balances.
+            - 'mortgage' denotes a limit secured by real estate.
+            - 'unsecured' denotes a limit granted without collateral.
+            - 'guarantee' denotes a limit for guarantees issued on behalf of the customer.
+            - 'other' denotes any other type of credit limit.
+          example: lombard
+          enum:
+            - lombard
+            - mortgage
+            - unsecured
+            - guarantee
+            - other
+        referenceCurrency:
+          description: Currency associated to the amounts defined by the credit limit.
+          $ref: '#/components/schemas/Currency'
+        limit:
+          description: Maximum principal amount allowed by the credit contract.
+          type: number
+          example: 100000
+        lendingValue:
+          description: The maximum amount the lender is willing to lend based on the collateral's value.
+          type: number
+          example: 100000
+        usage:
+          description: Amount of the credit limit currently in use.
+          type: number
+          example: 25000
+        collateralList:
+          description: The actual asset(s) provided by the borrower to secure the loan.
+          type: array
+          items:
+            $ref: '#/components/schemas/Collateral'
   responses:
     '400':
       headers:
@@ -1659,8 +1842,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Bad Request - The server cannot or will not process the request due to something that is perceived to be a client error
         as malformed request syntax.
@@ -1674,8 +1857,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Unauthorized - The request has not been applied because it lacks valid authentication credentials for the target resource.
       content:
         application/problem+json:
@@ -1687,8 +1870,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Forbidden - The server understood the request but refuses to authorize it.
       content:
         application/problem+json:
@@ -1700,8 +1883,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Not Found - The origin server did not find a current representation for the target resource
         or is not willing to disclose that one exists.
@@ -1715,8 +1898,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: |
         Method Not Allowed - The method received in the request-line is known by the origin server
         but not supported by the target resource.
@@ -1730,8 +1913,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
@@ -1743,8 +1926,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Not Implemented - The server does not support the functionality required to fulfill the request.
       content:
         application/problem+json:
@@ -1756,8 +1939,8 @@ components:
           $ref: '#/components/headers/Problem-Content-Type'
         Content-Language:
           $ref: '#/components/headers/Content-Language'
-        X-Correlation-Id:
-          $ref: '#/components/headers/X-Correlation-Id'
+        Correlation-Id:
+          $ref: '#/components/headers/Correlation-Id'
       description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
       content:
         application/problem+json:
@@ -1849,6 +2032,15 @@ components:
         description: Identification for the transaction given by the bank.
         example: 1234566-12-7
       description: Transaction ID.
+    path_limitId:
+      in: path
+      name: limitId
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        description: The customer's credit limit identification.
+      description: Credit limit Id parameter.
   headers:
     X-Correlation-Id:
       description: Client defined ID from request to correlates HTTP requests between a client and server.
@@ -1870,4 +2062,9 @@ components:
       schema:
         type: string
         example: en
+    Correlation-Id:
+      description: Client defined ID from request to correlates HTTP requests between a client and server.
+      schema:
+        type: string
+        example: f058ebd6-02f7-4d3f-942e-904344e8cde5
   securitySchemes: {}
