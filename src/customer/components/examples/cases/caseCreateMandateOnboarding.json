@@ -114,6 +114,7 @@
     "referenceCurrency": "CHF",
     "correspondenceList": [
       {
+        "type": "letter",
         "salutation": "other",
         "salutationOverride": "Anna Muster",
         "careOf": "c/o Anthony Stark",
@@ -140,8 +141,7 @@
           "type": "legalPerson",
           "organisationName": "Muster AG",
           "additionalInformation": "The Muster AG is a family office managing the wealth of the Muster family"
-        },
-        "personFunction": "other"
+        }
       }
     ],
     "expectedFundFlowList": [

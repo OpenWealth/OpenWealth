@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenWealth Customer API — Onboarding a Swiss Client</title>
+  <style>
+    :root {
+      --navy: #1D262C;
+      --navy-light: #253038;
+      --orange: #F37321;
+      --blue: #7FADBF;
+      --coral: #FFCFBF;
+      --green: #33CA21;
+      --white: #fff;
+      --grey: #9fb0b8;
+      --line: rgba(127, 173, 191, .22)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased
+    }
+
+    a {
+      color: var(--orange);
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 28px 64px
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 50
+    }
+
+    .hdr-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap
+    }
+
+    .logo {
+      display: flex;
+      align-items: center
+    }
+
+    .logo svg {
+      display: block;
+      height: 30px;
+      width: auto
+    }
+
+    .hdr-title {
+      font-size: 13px;
+      color: var(--grey);
+      border-left: 1px solid var(--line);
+      padding-left: 18px
+    }
+
+    .hdr-spacer {
+      flex: 1
+    }
+
+    .hdr-link {
+      font-size: 12.5px;
+      color: var(--grey);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5px 11px
+    }
+
+    .hdr-link:hover {
+      color: var(--white);
+      border-color: var(--blue);
+      text-decoration: none
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 12.5px;
+      color: var(--grey);
+      cursor: pointer;
+      user-select: none
+    }
+
+    .switch {
+      width: 40px;
+      height: 22px;
+      border-radius: 99px;
+      background: var(--navy-light);
+      border: 1px solid var(--line);
+      position: relative;
+      transition: .18s
+    }
+
+    .switch:after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--grey);
+      transition: .18s
+    }
+
+    .toggle.on .switch {
+      background: rgba(243, 115, 33, .28);
+      border-color: var(--orange)
+    }
+
+    .toggle.on .switch:after {
+      left: 20px;
+      background: var(--orange)
+    }
+
+    .toggle.on {
+      color: var(--white)
+    }
+
+    .rail {
+      display: flex;
+      gap: 6px;
+      margin: 26px 0 22px;
+      flex-wrap: wrap
+    }
+
+    .rail button {
+      flex: 1;
+      min-width: 118px;
+      text-align: left;
+      cursor: pointer;
+      background: var(--navy-light);
+      border: 1px solid transparent;
+      border-radius: 7px;
+      padding: 10px 12px;
+      color: var(--grey);
+      font-family: inherit;
+      font-size: 12px;
+      transition: .15s
+    }
+
+    .rail button:hover {
+      border-color: var(--line);
+      color: var(--white)
+    }
+
+    .rail button .rl {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      opacity: .75
+    }
+
+    .rail button .rt {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500
+    }
+
+    .rail button.done {
+      color: #cfe0e6
+    }
+
+    .rail button.done .rl {
+      color: var(--green)
+    }
+
+    .rail button.active {
+      background: rgba(243, 115, 33, .13);
+      border-color: var(--orange);
+      color: var(--white)
+    }
+
+    .rail button.active .rl {
+      color: var(--orange)
+    }
+
+    .rail button.opt {
+      border-style: dashed;
+      border-color: var(--line)
+    }
+
+    h1.stage-title {
+      font-size: 25px;
+      font-weight: 400;
+      margin: 0 0 6px
+    }
+
+    .stage-sub {
+      color: var(--grey);
+      font-size: 14.5px;
+      margin: 0 0 22px;
+      max-width: 900px
+    }
+
+    .panes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start
+    }
+
+    @media (max-width:900px) {
+      .panes {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .pane {
+      background: var(--navy-light);
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      overflow: hidden
+    }
+
+    .pane-hd {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 11px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      color: var(--grey)
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue)
+    }
+
+    .dot.o {
+      background: var(--orange)
+    }
+
+    .pane-bd {
+      padding: 18px 16px;
+      min-height: 264px
+    }
+
+    .field {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 7px 0;
+      border-bottom: 1px dashed rgba(159, 176, 184, .16);
+      font-size: 13.5px
+    }
+
+    .field:last-child {
+      border-bottom: 0
+    }
+
+    .field span:first-child {
+      color: var(--grey)
+    }
+
+    .field span:last-child {
+      text-align: right
+    }
+
+    .muted {
+      color: var(--grey)
+    }
+
+    .small {
+      font-size: 12.5px
+    }
+
+    .checklist {
+      list-style: none;
+      margin: 0;
+      padding: 0
+    }
+
+    .checklist li {
+      display: flex;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 13.3px;
+      color: var(--grey);
+      transition: .25s
+    }
+
+    .checklist li .bx {
+      flex: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: transparent;
+      transition: .25s
+    }
+
+    .checklist li.ok {
+      color: var(--white)
+    }
+
+    .checklist li.ok .bx {
+      background: var(--green);
+      border-color: var(--green);
+      color: var(--navy);
+      font-weight: 700
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 99px;
+      padding: 5px 13px;
+      font-size: 12px;
+      font-weight: 600
+    }
+
+    .badge.draft {
+      background: rgba(159, 176, 184, .16);
+      color: #cfe0e6
+    }
+
+    .badge.prog {
+      background: rgba(127, 173, 191, .2);
+      color: var(--blue)
+    }
+
+    .badge.wait {
+      background: rgba(243, 115, 33, .18);
+      color: var(--orange)
+    }
+
+    .badge.done {
+      background: rgba(51, 202, 33, .16);
+      color: var(--green)
+    }
+
+    .badge .pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor
+    }
+
+    .badge.prog .pulse,
+    .badge.wait .pulse {
+      animation: pl 1.4s infinite
+    }
+
+    @keyframes pl {
+      50% {
+        opacity: .25
+      }
+    }
+
+    .case-card {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 14px;
+      background: rgba(29, 38, 44, .55);
+      margin-bottom: 14px
+    }
+
+    .case-id {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 12px;
+      color: var(--blue)
+    }
+
+    .callout {
+      border-left: 3px solid var(--orange);
+      background: rgba(243, 115, 33, .09);
+      padding: 11px 14px;
+      border-radius: 0 7px 7px 0;
+      font-size: 13.3px;
+      margin-top: 14px
+    }
+
+    .callout b {
+      color: var(--orange)
+    }
+
+    .callout.q {
+      border-left-color: var(--blue);
+      background: rgba(127, 173, 191, .1)
+    }
+
+    .callout.q b {
+      color: var(--blue)
+    }
+
+    .empty {
+      color: var(--grey);
+      font-size: 13px;
+      font-style: italic;
+      padding: 34px 6px;
+      text-align: center;
+      opacity: .6
+    }
+
+    .takeaway {
+      margin-top: 20px;
+      background: var(--navy-light);
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      padding: 16px 20px
+    }
+
+    .takeaway .lbl {
+      font-size: 10.5px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px
+    }
+
+    .takeaway p {
+      margin: 0;
+      font-size: 14.5px
+    }
+
+    /* tech */
+    .tech {
+      margin-top: 18px;
+      display: none
+    }
+
+    .tech.show {
+      display: block
+    }
+
+    .tech-hd {
+      font-size: 10.5px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px
+    }
+
+    .spec-note {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 12.8px;
+      color: #cfe0e6;
+      background: rgba(127, 173, 191, .08);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin-bottom: 14px
+    }
+
+    .spec-note .i {
+      flex: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px
+    }
+
+    .call {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      background: #141b20
+    }
+
+    .call-hd {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 12.5px
+    }
+
+    .verb {
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      letter-spacing: .5px
+    }
+
+    .verb.POST {
+      background: rgba(51, 202, 33, .15);
+      color: var(--green)
+    }
+
+    .verb.GET {
+      background: rgba(127, 173, 191, .18);
+      color: var(--blue)
+    }
+
+    .verb.PUT {
+      background: rgba(243, 115, 33, .18);
+      color: var(--orange)
+    }
+
+    .verb.PATCH {
+      background: rgba(255, 207, 191, .15);
+      color: var(--coral)
+    }
+
+    .call-title {
+      color: var(--grey);
+      font-family: "Segoe UI", sans-serif;
+      font-size: 12px;
+      margin-left: auto
+    }
+
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr
+    }
+
+    @media (max-width:1000px) {
+      .cols {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .col {
+      min-width: 0
+    }
+
+    .col+.col {
+      border-left: 1px solid var(--line)
+    }
+
+    .col-hd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 14px;
+      font-size: 10.5px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--grey);
+      border-bottom: 1px dashed var(--line)
+    }
+
+    .status {
+      font-family: "Cascadia Mono", Consolas, monospace;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--green)
+    }
+
+    .copy {
+      background: none;
+      border: 1px solid var(--line);
+      color: var(--grey);
+      border-radius: 5px;
+      font-size: 10.5px;
+      padding: 2px 8px;
+      cursor: pointer;
+      font-family: inherit
+    }
+
+    .copy:hover {
+      color: var(--white);
+      border-color: var(--blue)
+    }
+
+    pre {
+      margin: 0;
+      padding: 12px 14px;
+      overflow: auto;
+      max-height: 520px;
+      font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #d6e3e8
+    }
+
+    pre .k {
+      color: var(--blue)
+    }
+
+    pre .s {
+      color: #b9e6a8
+    }
+
+    pre .n {
+      color: var(--coral)
+    }
+
+    pre .c {
+      color: #6d8590;
+      font-style: italic
+    }
+
+    pre .hl {
+      background: rgba(243, 115, 33, .2);
+      outline: 1px solid rgba(243, 115, 33, .5);
+      border-radius: 3px
+    }
+
+    .note {
+      font-size: 12.3px;
+      color: var(--grey);
+      padding: 9px 14px;
+      border-top: 1px solid var(--line)
+    }
+
+    .note b {
+      color: var(--orange)
+    }
+
+    .nav {
+      display: flex;
+      gap: 11px;
+      margin-top: 26px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: 7px;
+      padding: 11px 22px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: .15s
+    }
+
+    .btn.primary {
+      background: var(--orange);
+      color: var(--navy);
+      font-weight: 600
+    }
+
+    .btn.primary:hover {
+      filter: brightness(1.09)
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--grey)
+    }
+
+    .btn.ghost:hover {
+      color: var(--white);
+      border-color: var(--blue)
+    }
+
+    .btn:disabled {
+      opacity: .32;
+      cursor: not-allowed
+    }
+
+    .nav .hint {
+      font-size: 12.5px;
+      color: var(--grey)
+    }
+
+    /* resources */
+    .resources {
+      margin-top: 40px;
+      background: var(--navy-light);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--orange);
+      border-radius: 11px;
+      padding: 20px 22px
+    }
+
+    .resources h2 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 600
+    }
+
+    .resources .lead {
+      margin: 0 0 16px;
+      font-size: 13.3px;
+      color: var(--grey)
+    }
+
+    .res-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px
+    }
+
+    @media (max-width:1000px) {
+      .res-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    @media (max-width:560px) {
+      .res-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .res {
+      display: block;
+      background: rgba(29, 38, 44, .6);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 13px 14px;
+      color: var(--white);
+      transition: .15s
+    }
+
+    .res:hover {
+      border-color: var(--orange);
+      text-decoration: none
+    }
+
+    .res .rk {
+      font-size: 10px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 4px
+    }
+
+    .res .rt {
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 3px
+    }
+
+    .res .rd {
+      font-size: 12px;
+      color: var(--grey);
+      word-break: break-word
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 28px;
+      padding-top: 16px;
+      font-size: 11.5px;
+      color: var(--grey)
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="logo"><svg width="132" height="33" viewBox="0 0 481 120" fill="none"
+          xmlns="http://www.w3.org/2000/svg" class="ow-logo">
+          <path
+            d="M164.663 60.675C164.663 71.655 157.118 76.38 150.555 76.38C142.95 76.38 137.055 70.4325 137.055 61.23C137.055 51.165 143.678 45.585 150.975 45.585C159.143 45.585 164.663 51.75 164.663 60.675ZM140.003 61.0425C140.003 68.4075 144.728 73.9275 150.743 73.9275C156.878 73.9275 161.723 68.4075 161.723 60.8625C161.723 55.4625 158.723 48.0375 150.923 48.0375C143.378 48.0375 140.003 54.75 140.003 61.0425Z"
+            fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.75" />
+          <path
+            d="M178.223 55.6425C178.223 51.96 178.163 49.08 177.975 46.26H180.795L180.983 51.84H181.103C182.142 49.8742 183.718 48.2433 185.647 47.1363C187.575 46.0292 189.778 45.4914 192 45.585C199.613 45.585 204.698 51.84 204.698 60.4875C204.698 70.9875 198.443 76.38 191.325 76.38C187.095 76.38 183.353 74.475 181.328 70.92H181.208V87.855H178.26L178.223 55.6425ZM181.17 64.11C181.145 65.4163 181.386 66.7141 181.878 67.9245C182.37 69.1348 183.103 70.2325 184.033 71.1507C184.962 72.069 186.069 72.7887 187.285 73.266C188.501 73.7434 189.802 73.9684 191.108 73.9275C197.858 73.9275 201.72 68.4675 201.72 60.615C201.72 53.985 198.038 48.0375 191.348 48.0375C189.09 48.0785 186.91 48.865 185.146 50.2745C183.383 51.684 182.135 53.6373 181.598 55.83C181.364 56.6495 181.221 57.492 181.17 58.3425V64.11Z"
+            fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.75" />
+          <path
+            d="M218.708 60.675C218.708 70.0575 223.8 73.8 229.958 73.8C234.255 73.8 236.46 72.945 238.118 72.15L238.868 74.4C237.765 75.015 234.758 76.305 229.605 76.305C221.138 76.305 215.865 70.17 215.865 61.515C215.865 51.705 221.505 45.57 229.118 45.57C238.748 45.57 240.585 54.645 240.585 58.8825C240.614 59.4777 240.574 60.0741 240.465 60.66L218.708 60.675ZM237.458 58.3425C237.518 54.2325 235.8 48.0375 228.69 48.0375C222.188 48.0375 219.36 53.805 218.813 58.3425H237.458Z"
+            fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.75" />
+          <path
+            d="M254.167 53.31C254.167 50.6175 254.107 48.5925 253.92 46.26H256.68L256.867 51.5925H256.987C257.946 49.7461 259.402 48.2053 261.192 47.1447C262.982 46.0842 265.033 45.5465 267.112 45.5925C269.932 45.5925 277.417 47.0025 277.417 58.0425V75.7125H274.5V58.2825C274.5 52.9425 272.415 48.0975 266.34 48.0975C264.344 48.1471 262.416 48.8268 260.83 50.0393C259.245 51.2517 258.083 52.9348 257.512 54.8475C257.286 55.7098 257.162 56.5961 257.145 57.4875V75.705H254.197L254.167 53.31Z"
+            fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.75" />
+          <path
+            d="M292.02 46.26L297 63C297.983 66.435 298.845 69.375 299.52 72.2025H299.64C300.39 69.5025 301.418 66.375 302.588 63L308.475 46.2525H311.25L316.89 62.8725C318.12 66.435 319.043 69.4425 319.778 72.2025H319.898C320.513 69.4425 321.435 66.495 322.598 62.94L327.848 46.2525H330.848L321 75.705H318.488L312.878 59.325C311.648 55.77 310.628 52.575 309.81 49.2675H309.683C308.8 52.6941 307.736 56.0713 306.495 59.385L300.668 75.705H298.088L289.013 46.26H292.02Z"
+            fill="#F37321" stroke="#F37321" stroke-width="0.75" />
+          <path
+            d="M342.998 60.675C342.998 70.0575 348.09 73.8 354.248 73.8C358.538 73.8 360.75 72.945 362.4 72.15L363.15 74.4C362.04 75.015 359.04 76.305 353.888 76.305C345.42 76.305 340.14 70.17 340.14 61.515C340.14 51.705 345.788 45.57 353.393 45.57C363.023 45.57 364.868 54.645 364.868 58.8825C364.898 59.478 364.855 60.075 364.74 60.66L342.998 60.675ZM361.748 58.3425C361.808 54.2325 360.09 48.0375 352.973 48.0375C346.47 48.0375 343.65 53.805 343.095 58.3425H361.748Z"
+            fill="#F37321" stroke="#F37321" stroke-width="0.75" />
+          <path
+            d="M396.795 68.715C396.753 71.0526 396.896 73.3899 397.222 75.705H394.5L394.072 71.475H393.952C392.905 73.0093 391.493 74.2603 389.844 75.1162C388.195 75.9721 386.36 76.4063 384.502 76.38C378.555 76.38 375.855 72.21 375.855 68.28C375.855 61.47 381.802 57.36 393.855 57.4875V56.685C393.855 53.805 393.307 47.9775 386.31 48.0375C383.666 47.9944 381.074 48.7669 378.885 50.25L378 48.0975C380.589 46.4645 383.586 45.5937 386.647 45.585C395.175 45.585 396.832 51.96 396.832 57.18L396.795 68.715ZM393.847 59.94C387.412 59.7525 378.945 60.735 378.945 67.7925C378.945 72.0225 381.765 73.9275 384.832 73.9275C389.737 73.9275 392.565 70.9275 393.547 68.04C393.754 67.4679 393.856 66.8632 393.847 66.255V59.94Z"
+            fill="#F37321" stroke="#F37321" stroke-width="0.75" />
+          <path d="M412.44 32.145H415.38V75.705H412.44V32.145Z" fill="#F37321" stroke="#F37321" stroke-width="0.75" />
+          <path
+            d="M435.622 39.75V46.2525H444V48.645H435.622V67.7925C435.622 71.5425 436.792 73.8675 439.92 73.8675C441.061 73.901 442.2 73.7542 443.295 73.4325L443.662 75.6825C442.358 76.2105 440.959 76.4657 439.552 76.4325C437.407 76.4325 435.622 75.7575 434.52 74.3475C433.17 72.8475 432.682 70.2975 432.682 67.29V48.6525H427.71V46.26H432.682V40.86L435.622 39.75Z"
+            fill="#F37321" stroke="#F37321" stroke-width="0.75" />
+          <path
+            d="M456.667 32.145H459.607V51.5325H459.75C460.655 49.775 462.038 48.3088 463.74 47.3025C465.515 46.1671 467.581 45.5705 469.687 45.585C472.447 45.585 479.932 46.995 479.932 57.975V75.705H477V58.2825C477 52.9425 474.915 48.1575 468.907 48.1575C464.73 48.1575 461.295 51.1575 460.012 54.7875C459.717 55.7382 459.59 56.7331 459.637 57.7275V75.7275H456.697L456.667 32.145Z"
+            fill="#F37321" stroke="#F37321" stroke-width="0.75" />
+          <path
+            d="M44.5952 6.9675L61.7702 60.7425L105.938 51.4275L61.9652 63.8475L37.6352 110.895L56.4527 63.8475L3.61523 42.3225L57.5852 60.555L44.5952 6.9675Z"
+            fill="#F37321" />
+          <path d="M13.9951 75.045L12.5176 74.4225L43.6576 4.20749L43.1926 5.93999L13.9951 75.045Z" fill="#F37321" />
+          <path
+            d="M104.4 51.8775L75.2701 19.2825L3.84014 40.95L3.39014 39.405L75.6451 18.375L105.938 51.4275L104.4 51.8775Z"
+            fill="#F37321" />
+          <path d="M13.2598 79.02L86.1148 92.9475L85.1998 95.49L13.2598 79.02Z" fill="#F37321" />
+          <path d="M90.1352 95.49L86.1152 92.9475L74.8652 17.9475L90.1352 95.49Z" fill="#F37321" />
+          <path d="M39.5098 112.23L90.1348 95.49L88.7923 98.0325L39.5098 112.23Z" fill="#F37321" />
+          <circle cx="37.6352" cy="112.23" r="7.77" fill="#F37321" />
+          <circle cx="43.6577" cy="5.625" r="5.625" fill="#F37321" />
+          <circle cx="75.2698" cy="19.2825" r="3.615" fill="#F37321" />
+          <circle cx="104.73" cy="52.5" r="3.615" fill="#F37321" />
+          <circle cx="3.615" cy="41.385" r="3.615" fill="#F37321" />
+          <circle cx="88.1251" cy="95.49" r="4.755" fill="#F37321" />
+          <circle cx="11.9851" cy="77.4075" r="4.8225" fill="#F37321" />
+        </svg></div>
+      <div class="hdr-title">Customer API · Mandate opening for a Swiss private client</div>
+      <div class="hdr-spacer"></div>
+      <a class="hdr-link" href="#resources">Spec &amp; contact ↓</a>
+      <div class="toggle" id="techToggle">
+        <div class="switch"></div><span>Show technical details</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="rail" id="rail"></div>
+    <h1 class="stage-title" id="title"></h1>
+    <p class="stage-sub" id="sub"></p>
+    <div class="panes">
+      <div class="pane">
+        <div class="pane-hd"><span class="dot"></span><span>EAM — portfolio management system</span></div>
+        <div class="pane-bd" id="left"></div>
+      </div>
+      <div class="pane">
+        <div class="pane-hd"><span class="dot o"></span><span>Custodian bank — case cockpit</span></div>
+        <div class="pane-bd" id="right"></div>
+      </div>
+    </div>
+    <div class="takeaway">
+      <div class="lbl">What just happened</div>
+      <p id="takeaway"></p>
+    </div>
+    <div class="tech" id="tech">
+      <div class="tech-hd">Behind the scenes — the actual API calls (full payloads)</div>
+      <div class="spec-note"><span class="i">i</span><span>Illustrative calls for this use case only. The binding,
+          complete specification is the <b>customerAPI</b> in the <a href="https://github.com/OpenWealth/OpenWealth"
+            target="_blank" rel="noopener noreferrer">OpenWealth GitHub repository</a>, documented in the <a
+            href="https://github.com/OpenWealth/OpenWealth/wiki/customer-api" target="_blank"
+            rel="noopener noreferrer">Customer API wiki</a>.</span></div>
+      <div id="techBody"></div>
+    </div>
+    <div class="nav">
+      <button class="btn ghost" id="back">← Back</button>
+      <button class="btn primary" id="next"></button>
+      <span class="hint" id="hint"></span>
+    </div>
+
+    <section class="resources" id="resources">
+      <h2>Full specification &amp; questions</h2>
+      <p class="lead">This prototype simplifies the flow for discussion purposes. The full API specification is
+        available under <b>customerAPI</b> in the OpenWealth repository, together with its documentation wiki.
+        For further questions, reach out by email or raise a question in the GitHub discussions.</p>
+      <div class="res-grid">
+        <a class="res" href="https://github.com/OpenWealth/OpenWealth" target="_blank" rel="noopener noreferrer">
+          <div class="rk">Specification</div>
+          <div class="rt">OpenWealth on GitHub</div>
+          <div class="rd">Specification, documentation and samples for all OpenWealth APIs — see
+            <i>customerAPI</i>
+          </div>
+        </a>
+        <a class="res" href="https://github.com/OpenWealth/OpenWealth/wiki/customer-api" target="_blank"
+          rel="noopener noreferrer">
+          <div class="rk">Documentation</div>
+          <div class="rt">Customer API wiki</div>
+          <div class="rd">Concepts, use cases and guidance for the Customer API</div>
+        </a>
+        <a class="res" href="https://github.com/OpenWealth/OpenWealth/discussions" target="_blank"
+          rel="noopener noreferrer">
+          <div class="rk">Community</div>
+          <div class="rt">GitHub Discussions</div>
+          <div class="rd">Ask a question or start a discussion with the community</div>
+        </a>
+        <a class="res" href="mailto:openwealth@synpulse.com?subject=OpenWealth%20Customer%20API">
+          <div class="rk">Contact</div>
+          <div class="rt">openwealth@synpulse.com</div>
+          <div class="rd">Questions about the Customer API or OpenWealth</div>
+        </a>
+      </div>
+    </section>
+
+    <footer>Illustrative prototype of the OpenWealth Customer API mandate-opening flow. Payloads based on the
+      OpenWealth sample <i>caseCreateMandateOnboarding.json</i> (branch add-draft-customer-v3). Example client
+      "Anna Muster" — natural person, Swiss citizenship, Swiss domicile. All data fictitious. In case of
+      deviations, the specification on GitHub prevails.</footer>
+  </div>
+
+  <script>
+    const CREATE = {
+      "type": "addMandate",
+      "title": "Mandate Opening for Client Anna Muster",
+      "description": "Opening a new discretionary mandate for the client.",
+      "content": {
+        "customer": {
+          "name": "Anna Muster",
+          "type": "individual",
+          "referenceCurrency": "CHF",
+          "mainAdress": {
+            "streetLine1": "Langasse 12",
+            "postalCode": "8048",
+            "city": "Zürich",
+            "stateProvince": "ZH",
+            "country": "CH",
+            "countryName": "Switzerland"
+          },
+          "salutation": "ms",
+          "language": "de",
+          "personToCustomerRelationList": [
+            {
+              "person": {
+                "type": "naturalPerson",
+                "openingDate": "2018-04-13",
+                "language": "de",
+                "givenName": "Anna",
+                "lastName": "Muster",
+                "title": "PhD",
+                "dateOfBirth": "1981-04-13",
+                "gender": "female",
+                "nationalityList": [
+                  "CH"
+                ],
+                "civilStatus": "married",
+                "tinList": [
+                  {
+                    "number": "123-12-1234",
+                    "country": "CH"
+                  }
+                ],
+                "placeOfBirth": "CH",
+                "income": {
+                  "estimatedYearlyIncome": {
+                    "value": 200000,
+                    "currency": "CHF"
+                  },
+                  "sourceOfIncomeList": [
+                    {
+                      "type": "salaryOrBonuses",
+                      "amount": {
+                        "value": 200000,
+                        "currency": "CHF"
+                      },
+                      "industry": "Financial Services",
+                      "countryOfOrigin": "US"
+                    }
+                  ]
+                },
+                "wealth": {
+                  "estimatedTotalWealth": {
+                    "value": 100000,
+                    "currency": "CHF"
+                  },
+                  "sourceOfWealthList": [
+                    {
+                      "sourceType": "incomeFromEmployment",
+                      "amount": {
+                        "value": 100000,
+                        "currency": "CHF"
+                      },
+                      "countryOfOrigin": "CH"
+                    }
+                  ]
+                },
+                "employment": {
+                  "status": "employed",
+                  "profession": "Economist",
+                  "employmentItemList": [
+                    {
+                      "position": "CEO",
+                      "company": {
+                        "name": "Beispiel AG",
+                        "countryOfDomicile": "CH",
+                        "description": "The Beispiel AG trades with commodities (mainly crude oil). Noga Code \"661200\".",
+                        "size": 5145,
+                        "industry": "Financial Services"
+                      },
+                      "period": "15.05.2011 - current"
+                    }
+                  ]
+                },
+                "education": {
+                  "highestDiploma": "Master of Science",
+                  "educationItemList": [
+                    {
+                      "diploma": "Master of Science",
+                      "graduationYear": "2001",
+                      "institute": "University of Berlin",
+                      "studyProgramme": "Economics"
+                    }
+                  ]
+                },
+                "isPep": false,
+                "isFatca": false
+              },
+              "contractualRole": "contractingPartner",
+              "beneficialRole": "beneficialOwner",
+              "signatoryRight": "individually"
+            }
+          ]
+        },
+        "type": "discretionary",
+        "name": "Discretionary mandate for private investments",
+        "referenceCurrency": "CHF",
+        "correspondenceList": [
+          {
+            "type": "letter",
+            "salutation": "other",
+            "salutationOverride": "Anna Muster",
+            "careOf": "c/o Anthony Stark",
+            "receptionRestriction": "confidential",
+            "address": {
+              "streetLine1": "Bahnhofstrasse 12",
+              "streetLine2": "Apt 4B",
+              "postalCode": "8001",
+              "city": "Zürich",
+              "stateProvince": "ZH",
+              "country": "CH",
+              "countryName": "Switzerland"
+            }
+          }
+        ],
+        "powerOfAttorneyList": [
+          {
+            "scope": "management",
+            "signatoryRight": "individually",
+            "validFrom": "2026-04-13",
+            "validBeyondIncapacity": true,
+            "validBeyondDeath": true,
+            "person": {
+              "type": "legalPerson",
+              "organisationName": "Muster AG",
+              "additionalInformation": "The Muster AG is a family office managing the wealth of the Muster family"
+            }
+          }
+        ],
+        "expectedFundFlowList": [
+          {
+            "type": "inflow",
+            "amount": {
+              "value": 500000,
+              "currency": "CHF"
+            },
+            "dateReceivedOrSent": "2026-04-13",
+            "counterparty": "Muster AG",
+            "purpose": "Cash In for mandate investment",
+            "frequency": "oneTime",
+            "countryOfOrigin": "CH",
+            "accountOfOrigin": "CH89370400440532013000",
+            "nameOfBank": "ZKB",
+            "domicileOfBank": "CH"
+          }
+        ]
+      }
+    };
+
+    const clone = o => JSON.parse(JSON.stringify(o));
+    const ENV = { id: "case-123", type: CREATE.type, title: CREATE.title, description: CREATE.description };
+    const PERSON_PATH = "/content/customer/personToCustomerRelationList/0/person/countryOfDomicile";
+    const CREATED = "2026-04-10T09:30:00Z";
+
+    function caseBody(status, updated, extra = {}, contentFn) {
+      const content = clone(CREATE.content);
+      if (contentFn) contentFn(content);
+      return Object.assign({ id: ENV.id, type: ENV.type, status, title: ENV.title, description: ENV.description, createdDateTime: CREATED, updatedDateTime: updated }, extra, { content });
+    }
+    const withDomicile = c => { c.customer.personToCustomerRelationList[0].person.countryOfDomicile = "CH"; };
+    const UPDATE = (() => { const b = clone(CREATE); withDomicile(b.content); return b; })();
+    const REASON = [{ type: "missingValue", description: "Country of domicile missing on person object.", objectPath: PERSON_PATH }];
+
+    function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+    function hl(obj, mark) {
+      let txt = typeof obj === "string" ? obj : JSON.stringify(obj, null, 2);
+      let h = esc(txt).replace(/("(?:[^"\\]|\\.)*")(\s*:)?|\b(true|false|null)\b|-?\b\d+(?:\.\d+)?\b/g, (m, str, colon) => {
+        if (str) return colon ? `<span class="k">${str}</span>${colon}` : `<span class="s">${str}</span>`;
+        return `<span class="n">${m}</span>`;
+      });
+      if (mark) mark.forEach(m => { h = h.split(m).join(`<span class="hl">${m}</span>`); });
+      return h;
+    }
+    function markKey(key) { return `<span class="k">"${key}"</span>`; }
+
+    let BODIES = {};
+    function call(id, verb, path, title, req, resStatus, res, note, opts = {}) {
+      BODIES[id + "-req"] = req == null ? "" : (typeof req === "string" ? req : JSON.stringify(req, null, 2));
+      BODIES[id + "-res"] = res == null ? "" : JSON.stringify(res, null, 2);
+      const reqHtml = req == null ? `<pre><span class="c">// no request body</span></pre>`
+        : `<pre>${typeof req === "string" ? `<span class="c">${esc(req)}</span>` : hl(req, opts.markReq)}</pre>`;
+      const resHtml = res == null ? `<pre><span class="c">// no response body</span></pre>` : `<pre>${hl(res, opts.markRes)}</pre>`;
+      return `<div class="call">
+    <div class="call-hd"><span class="verb ${verb}">${verb}</span><span>${path}</span><span class="call-title">${title}</span></div>
+    <div class="cols">
+      <div class="col"><div class="col-hd"><span>Request · ${opts.ct || "application/json"}</span>${req == null ? "" : `<button class="copy" data-c="${id}-req">Copy</button>`}</div>${reqHtml}</div>
+      <div class="col"><div class="col-hd"><span>Response <span class="status">${resStatus}</span></span>${res == null ? "" : `<button class="copy" data-c="${id}-res">Copy</button>`}</div>${resHtml}</div>
+    </div>
+    ${note ? `<div class="note">${note}</div>` : ""}
+  </div>`;
+    }
+
+    const DOCS = ["Certified proof of identity (passport copy)", "Declaration of beneficial ownership", "Source of funds evidence (salary, wealth from employment)", "Asset management agreement", "Power of attorney (Muster AG)", "Tax self-certification incl. Swiss TIN"];
+    const DOC_META = { type: "CONT", name: "Asset management agreement", languageCode: "de", format: "DPDF", fileName: "AssetManagementAgreementAnnaMuster.pdf" };
+
+    const steps = [
+      {
+        label: "Start", short: "Start", title: "The situation",
+        sub: "An external asset manager has won a new client: Anna Muster, a natural person with Swiss citizenship and Swiss domicile. To manage her portfolio, the assets have to sit at a custodian bank — and the bank must know exactly who she is before it opens anything.",
+        left: `<div class="case-card">
+    <div class="field"><span>Client</span><span>Dr. Anna Muster</span></div>
+    <div class="field"><span>Type</span><span>Natural person</span></div>
+    <div class="field"><span>Nationality / domicile</span><span>Switzerland · Zürich</span></div>
+    <div class="field"><span>Mandate</span><span>Discretionary · CHF</span></div>
+    <div class="field"><span>Expected inflow</span><span>CHF 500,000 (one-time)</span></div>
+  </div>
+  <div class="callout q"><b>Today, without a standard:</b> the EAM fills in the bank's own forms, prints, scans and emails them. Every bank does it differently.</div>`,
+        right: `<div class="empty">The bank has not heard about this client yet.</div>`,
+        takeaway: "Swiss KYC and anti-money-laundering rules require the custodian bank to verify identity, beneficial ownership, source of funds and the purpose of the relationship — before the mandate goes live and continuously afterwards. The OpenWealth Customer API standardises how that package is delivered.",
+        cta: "Start the onboarding →"
+      },
+
+      {
+        label: "Step 1", short: "Create case", title: "Create the case",
+        sub: "Instead of a form, the EAM's system opens a shared <b>case</b> at the bank and fills it with structured data: the customer, the person behind it, and the mandate.",
+        left: `<div class="case-card">
+    <div class="field"><span>Case type</span><span>Add mandate</span></div>
+    <div class="field"><span>Customer</span><span>Anna Muster · individual</span></div>
+    <div class="field"><span>Relation</span><span>Contracting partner · beneficial owner · signs individually</span></div>
+    <div class="field"><span>Income / wealth</span><span>Salary · employment · CHF</span></div>
+    <div class="field"><span>Power of attorney</span><span>Asset management · Muster AG</span></div>
+    <div class="field"><span>Mandate</span><span>Discretionary · CHF</span></div>
+  </div>
+  <div class="callout"><b>Sent.</b> No PDFs yet — just clean, machine-readable client data.</div>`,
+        right: `<div class="case-card"><div class="case-id">case-123</div>
+    <div style="margin:10px 0 4px"><span class="badge draft"><span class="pulse"></span>Draft</span></div>
+    <div class="small muted">Received and parked. The bank is not reviewing anything yet.</div></div>
+    <div class="small muted">Documents attached: 0 of 6</div>`,
+        takeaway: "The case is the shared workspace between the two parties. Both sides now point at the same object — <b>case-123</b> — for everything that follows. Nothing is under review yet; the case is still a draft the EAM controls.",
+        tech: () => call("s1", "POST", "/cases", "Create case with structured data", CREATE, "201 Created", caseBody("draft", CREATED),
+          "Request body = OpenWealth sample <i>caseCreateMandateOnboarding.json</i>, unchanged. The response echoes the case with the read-only <b>id</b>, <b>status</b> and timestamps set by the bank."),
+        cta: "Upload the documents →"
+      },
+
+      {
+        label: "Step 2", short: "Upload docs", title: "Attach the evidence",
+        sub: "The KYC paperwork is attached to the very same case — each document first announced (what it is), then uploaded (the actual file).",
+        leftDocs: true,
+        right: `<div class="case-card"><div class="case-id">case-123</div>
+    <div style="margin:10px 0 4px"><span class="badge draft"><span class="pulse"></span>Draft</span></div>
+    <div class="small muted">Documents attached: <b>6 of 6</b></div></div>
+    <div class="small muted">Still a draft. The bank starts nothing until the EAM says the package is complete.</div>`,
+        takeaway: "Every certified copy, agreement and proof of funds hangs off case-123. Nothing lives in an inbox or on a shared drive, and there is a single audit trail on both sides.",
+        tech: () => call("s2a", "POST", "/cases/case-123/documents", "① Create document resource (metadata)",
+          DOC_META, "201 Created",
+          Object.assign({ id: "document-123" }, DOC_META, { createdDateTime: "2026-04-10T09:34:00Z", updatedDateTime: "2026-04-10T09:34:00Z" }),
+          "<b>type</b> and <b>format</b> are ISO 20022 external codes (here CONT = contract, DPDF = PDF).")
+          + call("s2b", "PUT", "/cases/case-123/documents/document-123/content", "② Upload binary content",
+            `<binary PDF content of ${DOC_META.fileName}>`, "204 No Content", null,
+            "Both calls follow the OpenWealth Document API convention and are <b>repeated for every document</b> in scope.", { ct: "application/octet-stream" }),
+        cta: "Submit the case →"
+      },
+
+      {
+        label: "Step 3", short: "Submit", title: "Submit",
+        sub: "One click hands the package over. The EAM declares the file complete and the bank's compliance review begins.",
+        left: `<div class="case-card">
+    <div class="field"><span>Structured data</span><span style="color:var(--green)">Complete</span></div>
+    <div class="field"><span>Documents</span><span style="color:var(--green)">6 of 6</span></div>
+    <div class="field"><span>Submitted</span><span>Today, 09:41</span></div></div>
+  <div class="callout"><b>Handed over.</b> The EAM can keep working; no one is waiting on a phone call.</div>`,
+        right: `<div class="case-card"><div class="case-id">case-123</div>
+    <div style="margin:10px 0 4px"><span class="badge prog"><span class="pulse"></span>Submitted</span></div>
+    <div class="small muted">Queued for KYC and AML review by the bank's onboarding team.</div></div>`,
+        takeaway: "Submission is a deliberate act, not a side effect of uploading. Up to this point the EAM can still correct things; afterwards the bank owns the next move.",
+        tech: () => call("s3", "POST", "/cases/case-123/actions/submit", "Action: submit case", null, "202 Accepted", caseBody("submitted", "2026-04-10T09:41:00Z"),
+          "Action endpoint without body, allowed in <b>draft</b> and <b>actionRequired</b>. <b>202</b> signals that processing continues asynchronously.", { markRes: [`<span class="s">"submitted"</span>`] }),
+        cta: "Wait for the bank →"
+      },
+
+      {
+        label: "Step 4", short: "Await clearing", title: "Wait for clearing",
+        sub: "Bank reviews take hours or days, not milliseconds. So the EAM's system either subscribes for a notification or simply checks the case now and then.",
+        left: `<div class="case-card">
+    <div class="field"><span>Watching</span><span>case-123</span></div>
+    <div class="field"><span>Method</span><span>Webhook, or polling at an interval</span></div></div>
+  <div class="callout"><b>A question came back.</b> The bank is missing the country of domicile on the person record.</div>`,
+        right: `<div class="case-card"><div class="case-id">case-123</div>
+    <div style="margin:10px 0 4px"><span class="badge wait"><span class="pulse"></span>Action required</span></div>
+    <div class="field"><span>Reason</span><span>Missing value</span></div>
+    <div class="field"><span>Detail</span><span>Country of domicile missing<br>on person object</span></div></div>
+  <div class="small muted">The reviewer flagged it precisely. No email, no phone call.</div>`,
+        takeaway: "The case carries the bank's answer back, including <i>exactly</i> which field is missing. This is where the standard pays off: a precise, machine-readable request instead of \"please see attached, something's not right\".",
+        tech: () => call("s4", "GET", "/cases/case-123", "Poll case status", null, "200 OK", caseBody("actionRequired", "2026-04-11T14:05:00Z", { statusReasonList: REASON }),
+          "The <b>objectPath</b> in statusReasonList is a JSON Pointer into the case — the EAM system can map it directly to the field it needs to fix.",
+          { markRes: [`<span class="s">"actionRequired"</span>`, markKey("statusReasonList")] }),
+        cta: "Answer the question →"
+      },
+
+      {
+        label: "Optional", short: "Add missing data", title: "Fill the gap", opt: true,
+        sub: "The EAM adds the one missing value. The same loop handles a rejected document, an extra proof of funds, or a follow-up questionnaire.",
+        left: `<div class="case-card">
+    <div class="field"><span>Field</span><span>Country of domicile</span></div>
+    <div class="field"><span>New value</span><span style="color:var(--green)">CH — Switzerland</span></div>
+    <div class="field"><span>Rest of the case</span><span>Untouched</span></div></div>
+  <div class="callout"><b>One field, not a new application.</b> Everything already supplied stays where it is.</div>`,
+        right: `<div class="case-card"><div class="case-id">case-123</div>
+    <div style="margin:10px 0 4px"><span class="badge prog"><span class="pulse"></span>Back in review</span></div>
+    <div class="small muted">The missing value has arrived; the reviewer continues.</div></div>
+  <div class="small muted">This loop can repeat as often as needed — more documents, a form, a clarification.</div>`,
+        takeaway: "This back-and-forth is the normal case in Swiss onboarding, not the exception. Because it runs through the case object, both sides always see the same status and the same open points.",
+        tech: () => call("s5a", "PUT", "/cases/case-123", "① Update structured data",
+          UPDATE, "200 OK",
+          caseBody("actionRequired", "2026-04-12T08:15:00Z", { statusReasonList: REASON }, withDomicile),
+          "PUT replaces the case content, so the complete case is sent with the missing value added. Updates are only allowed in <b>draft</b> and <b>actionRequired</b>; the status stays unchanged.",
+          { markReq: [markKey("countryOfDomicile")], markRes: [markKey("countryOfDomicile")] })
+          + call("s5b", "POST", "/cases/case-123/actions/submit", "② Re-submit case", null, "202 Accepted",
+            caseBody("submitted", "2026-04-12T08:16:00Z", {}, withDomicile),
+            "Re-submitting moves the case from <b>actionRequired</b> back to <b>submitted</b> and hands it back to the bank.",
+            { markRes: [`<span class="s">"submitted"</span>`] }),
+        cta: "See the result →"
+      },
+
+      {
+        label: "Step 5", short: "Read output", title: "Client is live",
+        sub: "The bank accepts the case, creates the client, the mandate and the accounts in its core system — and writes the resulting identifiers back into the case.",
+        left: `<div class="case-card">
+    <div class="field"><span>Customer ID</span><span class="case-id">customer-123</span></div>
+    <div class="field"><span>Mandate ID</span><span class="case-id">mandate-123</span></div>
+    <div class="field"><span>Person ID</span><span class="case-id">person-123</span></div></div>
+  <div class="callout"><b>Straight into the PMS.</b> The EAM can now work with the bank against these IDs.</div>`,
+        right: `<div class="case-card"><div class="case-id">case-123</div>
+    <div style="margin:10px 0 4px"><span class="badge done"><span class="pulse"></span>Completed</span></div>
+    <div class="small muted">Client, mandate and accounts booked in the core banking system.</div></div>`,
+        takeaway: "The identifiers only exist once the bank has actually booked the client — so the case hands them back at the end. From here the same client flows into the other OpenWealth APIs without manual re-entry.",
+        tech: () => call("s6", "GET", "/cases/case-123", "Read output resources", null, "200 OK",
+          Object.assign(caseBody("completed", "2026-04-13T10:00:00Z", { completedDateTime: "2026-04-13T10:00:00Z" }, withDomicile), {
+            outputList: [
+              { id: "customer-123", type: "customer", uri: "/customers/customer-123" },
+              { id: "mandate-123", type: "mandate", uri: "/customers/customer-123/mandates/mandate-123" },
+              { id: "person-123", type: "person", uri: "/persons/person-123" }]
+          }),
+          "Final IDs are only known after the custodian has persisted the entities in its core system; they are exposed via <b>outputList</b>.",
+          { markRes: [`<span class="s">"completed"</span>`, markKey("outputList")] }),
+        cta: "Restart the demo ↺"
+      }
+    ];
+
+    let cur = 0, techOn = false;
+    const el = id => document.getElementById(id);
+
+    function render(scroll = true) {
+      const s = steps[cur];
+      el('rail').innerHTML = steps.map((x, i) => `<button data-i="${i}" class="${x.opt ? 'opt ' : ''}${i === cur ? 'active' : (i < cur ? 'done' : '')}"><span class="rl">${x.label}</span><span class="rt">${x.short}</span></button>`).join('');
+      el('rail').querySelectorAll('button').forEach(b => b.onclick = () => { cur = +b.dataset.i; render(); });
+      el('title').innerHTML = s.title; el('sub').innerHTML = s.sub;
+      if (s.leftDocs) {
+        el('left').innerHTML = '<ul class="checklist">' + DOCS.map(d => `<li><span class="bx">✓</span><span>${d}</span></li>`).join('') + '</ul>';
+        el('left').querySelectorAll('li').forEach((li, i) => setTimeout(() => li.classList.add('ok'), 200 + i * 270));
+      } else el('left').innerHTML = s.left;
+      el('right').innerHTML = s.right; el('takeaway').innerHTML = s.takeaway;
+      if (s.tech) { BODIES = {}; el('techBody').innerHTML = s.tech(); el('tech').classList.toggle('show', techOn); }
+      else { el('techBody').innerHTML = ''; el('tech').classList.remove('show'); }
+      el('techBody').querySelectorAll('.copy').forEach(b => b.onclick = () => {
+        navigator.clipboard.writeText(BODIES[b.dataset.c]).then(() => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1200); });
+      });
+      el('back').disabled = cur === 0; el('next').textContent = s.cta;
+      el('hint').textContent = cur === 0 ? '' : `${cur} of ${steps.length - 1}`;
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    el('next').onclick = () => { cur = (cur + 1) % steps.length; render(); };
+    el('back').onclick = () => { if (cur > 0) { cur--; render(); } };
+    el('techToggle').onclick = () => { techOn = !techOn; el('techToggle').classList.toggle('on', techOn); render(false); };
+    render(false);
+  </script>
+</body>
+
+</html>
