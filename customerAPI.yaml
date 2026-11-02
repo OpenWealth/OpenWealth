@@ -1379,7 +1379,7 @@ components:
           example: 12000
         currency:
           $ref: '#/components/schemas/Currency'
-    sourceOfIncome:
+    SourceOfIncome:
       type: object
       required:
         - type
@@ -1430,7 +1430,7 @@ components:
           type: array
           description: List of sources of income of the person.
           items:
-            $ref: '#/components/schemas/sourceOfIncome'
+            $ref: '#/components/schemas/SourceOfIncome'
     SourceOfWealth:
       type: object
       required:

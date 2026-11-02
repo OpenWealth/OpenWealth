@@ -13,4 +13,4 @@ properties:
     type: array
     description: List of sources of income of the person.
     items:
-      $ref: 'sourceOfIncome.yaml'
+      $ref: 'SourceOfIncome.yaml'
