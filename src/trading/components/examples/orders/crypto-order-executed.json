@@ -11,7 +11,7 @@
       "index": 0,
       "side": "buy",
       "quantity": 0.001,
-      "quantityType": "unit",
+      "quantityType": "digitalTokenUnit",
       "baseInstrument": {
         "name": "Ether",
         "identification": {
@@ -26,7 +26,8 @@
           "type": "digitalAssetTicker"
         }
       },
-      "unitReference": "baseInstrument"
+      "unitReference": "baseInstrument",
+      "executedQuantity": 0.001
     }
   ],
   "allocationList": [
@@ -38,7 +39,7 @@
           "debitAccountId": "safekeeping-account-1",
           "creditAccountId": "safekeeping-account-1",
           "quantity": 0.001,
-          "quantityType": "unit",
+          "quantityType": "digitalTokenUnit",
           "executedQuantity": 0.001,
           "averagePrice": 0.019,
           "averagePriceType": "actual",

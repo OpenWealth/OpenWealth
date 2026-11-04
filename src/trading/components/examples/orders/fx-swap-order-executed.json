@@ -1,12 +1,12 @@
 {
   "id": "order-fxswap-1",
   "clientReference": "123-123125",
-  "orderDateTime": "2025-04-27T11:11:11Z",
+  "orderDateTime": "2025-04-28T11:11:11Z",
   "executionType": "market",
   "timeInForce": "goodTillCancel",
   "quoteId": "quote-fxswap-1",
   "status": "executed",
-  "statusDateTime": "2025-04-27T12:10:00Z",
+  "statusDateTime": "2025-04-28T12:10:00Z",
   "legList": [
     {
       "index": 0,
@@ -27,7 +27,8 @@
           "type": "iso4217"
         }
       },
-      "unitReference": "baseInstrument"
+      "unitReference": "baseInstrument",
+      "executedQuantity": 100000
     },
     {
       "index": 1,
@@ -49,7 +50,8 @@
         }
       },
       "unitReference": "baseInstrument",
-      "settlementDate": "2025-07-31"
+      "settlementDate": "2025-07-31",
+      "executedQuantity": 100000
     }
   ],
   "allocationList": [
@@ -96,7 +98,7 @@
           "quantity": 100000,
           "quantityType": "unit",
           "executedQuantity": 100000,
-          "averagePrice": 0.9745,
+          "averagePrice": 0.9834,
           "averagePriceType": "actual",
           "executionAllocationList": [
             {
@@ -118,7 +120,7 @@
               },
               "transactionId": "transaction-4",
               "bookingDate": "2025-07-31",
-              "valueDate": "2025-08-01"
+              "valueDate": "2025-07-31"
             }
           ]
         }

@@ -3,5 +3,5 @@
   "eventTypes": [
     "order:statusUpdated"
   ],
-  "callbackUrl": "https://my-ttp-url.com/API/notifications/"
+  "callbackUrl": "https://my-tpp-url.com/API/notifications/"
 }
