@@ -45,8 +45,9 @@ jobs:
     strategy:
       fail-fast: false # ensures all matrix jobs run even if one fails
       matrix:
-        spec-folder: # src/customer has no example files and is covered by lint_api
+        spec-folder:
           - src/custody
+          - src/customer
           - src/trading
     steps:
       - name: Checkout
