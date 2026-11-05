@@ -1,5 +1,5 @@
 {
-  "id": "equity-order-1",
+  "id": "order-equity-1",
   "clientReference": "123-123123",
   "orderDateTime": "2025-04-10T11:11:11Z",
   "executionType": "market",
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "id": "allocation-1-order-equity-1",
+      "id": "allocation-2-order-equity-1",
       "legList": [
         {
           "orderLegIndex": 0,
@@ -87,7 +87,7 @@
           "quantity": 2,
           "quantityType": "unit",
           "executedQuantity": 1,
-          "averagePrice": 114100,
+          "averagePrice": 114000,
           "averagePriceType": "actual",
           "executionAllocationList": [
             {

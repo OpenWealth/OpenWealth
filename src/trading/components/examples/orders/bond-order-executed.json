@@ -1,11 +1,11 @@
 {
   "id": "order-bond-1",
-  "clientReference": "123-123124",
-  "orderDateTime": "2025-04-13T11:11:11Z",
+  "clientReference": "123-123128",
+  "orderDateTime": "2025-04-14T11:11:11Z",
   "executionType": "limit",
   "timeInForce": "goodTillCancel",
   "status": "executed",
-  "statusDateTime": "2025-04-13T12:10:00Z",
+  "statusDateTime": "2025-04-14T12:10:00Z",
   "legList": [
     {
       "index": 0,
@@ -55,15 +55,15 @@
               ],
               "billingDetails": {
                 "grossTradeAmount": {
-                  "value": -40000,
+                  "value": -40142,
                   "currency": "CHF"
                 },
                 "settlementAmount": {
-                  "value": -40430,
+                  "value": -40332,
                   "currency": "CHF"
                 },
                 "accruedInterest": {
-                  "value": -400,
+                  "value": -160,
                   "currency": "CHF"
                 },
                 "stampDuty": {
@@ -72,8 +72,8 @@
                 }
               },
               "transactionId": "transaction-1",
-              "bookingDate": "2025-04-13",
-              "valueDate": "2025-04-13"
+              "bookingDate": "2025-04-14",
+              "valueDate": "2025-04-14"
             }
           ]
         }
@@ -93,7 +93,7 @@
           "averagePriceType": "percentage",
           "executionAllocationList": [
             {
-              "quantity": 40000,
+              "quantity": 60000,
               "price": 100.355,
               "priceType": "percentage",
               "executionIds": [
@@ -101,15 +101,15 @@
               ],
               "billingDetails": {
                 "grossTradeAmount": {
-                  "value": -60000,
+                  "value": -60213,
                   "currency": "CHF"
                 },
                 "settlementAmount": {
-                  "value": -60645,
+                  "value": -60498,
                   "currency": "CHF"
                 },
                 "accruedInterest": {
-                  "value": -600,
+                  "value": -240,
                   "currency": "CHF"
                 },
                 "stampDuty": {
@@ -118,8 +118,8 @@
                 }
               },
               "transactionId": "transaction-2",
-              "bookingDate": "2025-04-13",
-              "valueDate": "2025-04-13"
+              "bookingDate": "2025-04-14",
+              "valueDate": "2025-04-14"
             }
           ]
         }

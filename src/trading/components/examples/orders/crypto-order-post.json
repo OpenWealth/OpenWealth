@@ -7,7 +7,7 @@
       "index": 0,
       "side": "buy",
       "quantity": 0.001,
-      "quantityType": "unit",
+      "quantityType": "digitalTokenUnit",
       "baseInstrument": {
         "name": "Ether",
         "identification": {
@@ -33,7 +33,7 @@
           "debitAccountId": "safekeeping-account-1",
           "creditAccountId": "safekeeping-account-1",
           "quantity": 0.001,
-          "quantityType": "unit"
+          "quantityType": "digitalTokenUnit"
         }
       ]
     }

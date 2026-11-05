@@ -4,8 +4,9 @@
   "orderLegIndex": 0,
   "reference": "market-ref-exec-1",
   "quantity": 100000,
-  "executionDateTime": "2025-04-13T11:30:00Z",
-  "price": 100.335,
+  "quantityType": "faceAmount",
+  "executionDateTime": "2025-04-14T11:30:00Z",
+  "price": 100.355,
   "priceType": "percentage",
   "placeOfTrade": {
     "marketIdentificationCode": "XSWX"

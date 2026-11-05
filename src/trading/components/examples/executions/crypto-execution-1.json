@@ -4,6 +4,7 @@
   "orderLegIndex": 0,
   "reference": "market-ref-crypto-exec-1",
   "quantity": 0.001,
+  "quantityType": "digitalTokenUnit",
   "executionDateTime": "2025-04-27T11:30:00Z",
   "price": 0.019,
   "priceType": "actual"
