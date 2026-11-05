@@ -45,9 +45,8 @@ jobs:
     strategy:
       fail-fast: false # ensures all matrix jobs run even if one fails
       matrix:
-        spec-folder:
+        spec-folder: # src/customer has no example files and is covered by lint_api
           - src/custody
-          - src/customer
           - src/trading
     steps:
       - name: Checkout
@@ -90,7 +89,12 @@ jobs:
 
       - name: Lint API
         run: |
-          echo "🔍 Linting ${{ matrix.spec-folder }}/API.yaml"
-          redocly lint "${{ matrix.spec-folder }}/API.yaml" \
+          echo "🔍 Linting ${{ matrix.spec-folder }}/API.yaml with its examples"
+          # Lint only reads the examples once bundling has inlined their externalValue files.
+          redocly bundle "${{ matrix.spec-folder }}/API.yaml" \
             --config=.github/redocly.yaml \
+            -o bundled.yaml
+          redocly lint bundled.yaml \
+            --config=.github/redocly.yaml \
+            --skip-rule=sfti/root-object-order \
             --format=stylish
