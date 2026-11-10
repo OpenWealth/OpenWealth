@@ -142,6 +142,10 @@ Results are available at two levels:
 - An **execution** is a single trade in the market for one order leg, returned by `GET /orders/{orderId}/executions`.
 - An **execution allocation** is the part of those executions assigned to an allocation leg, with its price, billing details and booking information. Use `expand_order=allocationList.executionAllocationList` to include these when querying an order.
 
+An execution allocation is a settlement and booking for one client, not a single trade. It refers to the trades it covers through `executionIds`, and one execution allocation can combine several of them. For example, if the confirming party settles partial executions once per trading day, an order filled over two days has two execution allocations per allocation leg. Each has its own booking date, transaction and billing details, so fees charged per day appear on the execution allocation of that day.
+
+The allocation leg itself always keeps the requested `quantity` and adds up the result in `executedQuantity`, `cancelledQuantity` and `averagePrice`. The quantity still open is `quantity` minus `executedQuantity` minus `cancelledQuantity`.
+
 # Polling or events
 
 You can follow orders by polling, or subscribe to events to reduce the number of requests. A subscription names the event types of interest (`heartbeat`, `order:doneForDay` or `order:statusUpdated`) and a `callbackUrl`.

@@ -1,5 +1,7 @@
 type: object
-description: Schema of the billing details object associated to each allocation of an order.
+description: |
+  Schema of the billing details object associated to each execution allocation of an order.
+  It covers the quantity settled and booked with that execution allocation.
 properties:
   grossTradeAmount:
     description: Principal amount of a trade (price multiplied by quantity).

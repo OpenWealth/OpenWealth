@@ -2,6 +2,11 @@ type: object
 description: |
   Schema of an allocation leg.
   It describes how much of the associated order leg is allocated to a given client/account.
+  An allocation has exactly one allocation leg per order leg, and this does not change when the order is executed.
+  The allocation leg holds the requested quantity (quantity) and the cumulative state of its execution
+  (executedQuantity, cancelledQuantity, averagePrice). The individual settlements and bookings,
+  e.g. one per trading day, are provided in executionAllocationList.
+  The quantity still open is quantity minus executedQuantity minus cancelledQuantity.
 required:
   - orderLegIndex
   - creditAccountId
@@ -32,6 +37,7 @@ properties:
   executedQuantity:
     description: |
       Quantity of the baseInstrument that has been executed and allocated to specific account.
+      It is the sum of the quantities in executionAllocationList.
       The unit type of this field is defined by the quantityType property.
     type: number
     example: 500
@@ -45,7 +51,7 @@ properties:
     readOnly: true
   averagePrice:
     description: |
-      The average price for quantity that was traded.
+      The average price for quantity that was traded, over all execution allocations of the allocation leg.
       Type of price (actual or percentage) is defined py the priceType property.
     type: number
     example: 157.25
@@ -62,7 +68,9 @@ properties:
     readOnly: true
   executionAllocationList:
     type: array
-    description: List of allocated executions associated to the allocation leg.
+    description: |
+      List of allocated executions associated to the allocation leg.
+      Each item is one settlement and booking for the client, which can combine several market executions.
     items:
       $ref: ExecutionAllocation.yaml
     readOnly: true

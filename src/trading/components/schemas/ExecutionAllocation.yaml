@@ -1,14 +1,28 @@
 type: object
-description: Schema of an execution allocation.
+description: |
+  Schema of an execution allocation.
+  An execution allocation is the part of the executed quantity that is allocated and booked
+  to the client of the parent allocation leg. It is the unit of settlement and booking, and
+  carries its own transaction, booking date, value date and billing details.
+  It is not a single market execution: market executions are provided as separate Execution
+  entities and referenced through executionIds.
+  One execution allocation can combine several market executions, for example all partial
+  executions of a trading day that are settled together. One market execution can contribute
+  to the execution allocations of several clients in a bulk order.
+  If an order is executed over several days, the allocation leg holds one execution allocation
+  per settlement, e.g. one per trading day. How executions are grouped into execution
+  allocations is up to the confirming party.
 properties:
   quantity:
     description: |
-      Executed quantity allocated to the given client.
-      The unit type of this field is defined by the quantityType property of the root order.
+      Executed quantity allocated to the given client with this execution allocation.
+      The unit type of this field is defined by the quantityType property of the allocation leg.
     type: number
     example: 500
   price:
-    description: The price for the executed and allocated quantity.
+    description: |
+      The price for the executed and allocated quantity.
+      If several market executions are combined, this is their average price weighted by quantity.
     type: number
     example: 157.50
   priceType:
@@ -22,6 +36,10 @@ properties:
       maxLength: 128
       example: 2f66d2c4-9575-4e16-a9ea-7eec3c7e382a
   billingDetails:
+    description: |
+      Amounts, fees and taxes charged for the quantity booked with this execution allocation.
+      When several market executions are settled together (e.g. per trading day),
+      fees are calculated once for the combined quantity.
     $ref: BillingDetails.yaml
   transactionId:
     type: string
